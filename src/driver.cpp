@@ -8,13 +8,16 @@
 #include <optix_function_table_definition.h>
 #include <optix_stubs.h>
 
-#include "assert_macros.h"
+#include "assert_macros.hpp"
+#include "kernel.hpp"
 
 namespace moana {
 
 struct OptixState {
-    OptixDeviceContext context;
-    OptixTraversableHandle gasHandle;
+    OptixDeviceContext context = 0;
+    OptixTraversableHandle gasHandle = {};
+    OptixPipelineCompileOptions pipelineCompileOptions = {};
+    OptixModule module = 0;
 };
 
 static void contextLogCallback(
@@ -114,12 +117,49 @@ static void createGeometry(OptixState &state)
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
 }
 
+static void createModule(OptixState &state)
+{
+    OptixModuleCompileOptions moduleCompileOptions = {};
+    moduleCompileOptions.maxRegisterCount = OPTIX_COMPILE_DEFAULT_MAX_REGISTER_COUNT;
+    moduleCompileOptions.optLevel = OPTIX_COMPILE_OPTIMIZATION_DEFAULT;
+    moduleCompileOptions.debugLevel = OPTIX_COMPILE_DEBUG_LEVEL_LINEINFO;
+
+    state.pipelineCompileOptions.usesMotionBlur = false;
+    state.pipelineCompileOptions.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_GAS;
+    state.pipelineCompileOptions.numPayloadValues = 3;
+    state.pipelineCompileOptions.numAttributeValues = 3;
+#ifdef DEBUG
+    state.pipelineCompileOptions.exceptionFlags = OPTIX_EXCEPTION_FLAG_DEBUG | OPTIX_EXCEPTION_FLAG_TRACE_DEPTH | OPTIX_EXCEPTION_FLAG_STACK_OVERFLOW;
+#else
+    state.pipelineCompileOptions.exceptionFlags = OPTIX_EXCEPTION_FLAG_NONE;
+#endif
+    state.pipelineCompileOptions.pipelineLaunchParamsVariableName = "params";
+    state.pipelineCompileOptions.usesPrimitiveTypeFlags = OPTIX_PRIMITIVE_TYPE_FLAGS_TRIANGLE;
+
+    std::string ptx(ptxSource);
+
+    char log[2048];
+    size_t sizeofLog = sizeof(log);
+
+    CHECK_OPTIX(optixModuleCreateFromPTX(
+        state.context,
+        &moduleCompileOptions,
+        &state.pipelineCompileOptions,
+        ptx.c_str(),
+        ptx.size(),
+        log,
+        &sizeofLog,
+        &state.module
+    ));
+}
+
 void Driver::init()
 {
     OptixState state;
 
     createContext(state);
     createGeometry(state);
+    createModule(state);
 }
 
 }

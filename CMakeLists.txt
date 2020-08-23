@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18)
-project(moana LANGUAGES CXX C)
+project(moana LANGUAGES CUDA CXX C)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,5 +14,8 @@ add_library(moana src/driver.cpp)
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
 target_link_libraries(moana CUDA::cudart dl)
+
+add_subdirectory(optix)
+add_dependencies(moana ptx_headers)
 
 add_subdirectory(app)
