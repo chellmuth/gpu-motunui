@@ -9,6 +9,9 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 find_package(OptiX REQUIRED)
 
-add_executable(moana src/main.cpp)
-target_include_directories(moana PRIVATE "${OptiX_INCLUDE}")
-target_include_directories(moana PRIVATE "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+add_library(libmoana src/driver.cpp)
+target_include_directories(libmoana PUBLIC include)
+target_include_directories(libmoana PUBLIC "${OptiX_INCLUDE}")
+target_include_directories(libmoana PUBLIC "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+
+add_subdirectory(app)
