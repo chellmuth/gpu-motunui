@@ -1,6 +1,5 @@
 #pragma once
 
-#include <optix.h>
 
 namespace moana {
 
