@@ -15,6 +15,9 @@ add_library(moana
 
   src/core/camera.cpp
   src/core/transform.cpp
+
+  src/parsers/obj_parser.cpp
+  src/parsers/string_util.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
