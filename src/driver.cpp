@@ -10,6 +10,7 @@
 #include <optix_stubs.h>
 
 #include "assert_macros.hpp"
+#include "enumerate.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 
@@ -431,8 +432,8 @@ void Driver::launch()
     );
     params.camera = camera;
 
-    for (int i = 0; i < m_state.gasHandles.size(); i++) {
-        params.handle = m_state.gasHandles[i];
+    for (auto [i, handle] : enumerate(m_state.gasHandles)) {
+        params.handle = handle;
 
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(m_state.gasOutputBuffer),
