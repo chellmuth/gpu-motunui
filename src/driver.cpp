@@ -68,9 +68,22 @@ static void createGeometry(OptixState &state)
         -1.f, -1.f, -3.f,
         0.f, 0.f, -3.f,
     };
+    std::vector<float> largeGeometry;
+    for (int i = 0; i < 10000000; i++) {
+        largeGeometry.insert(
+            largeGeometry.end(),
+            {
+                0.f, 0.f, -3.f,
+                0.f, 1.f, -3.f,
+                1.f, 0.f, -3.f,
+            }
+        );
+    }
+
     std::vector<std::vector<float> > geometries = {
         geometry1,
-        geometry2
+        largeGeometry,
+        geometry2,
     };
 
     OptixAccelBuildOptions accelOptions = {};
@@ -113,7 +126,11 @@ static void createGeometry(OptixState &state)
             &gasBufferSizes
         ));
 
-        std::cout << "Buffer sizes: temp=" << gasBufferSizes.tempSizeInBytes << " output=" << gasBufferSizes.outputSizeInBytes << std::endl;
+        std::cout << "Buffer sizes:"
+                  << " temp=" << (gasBufferSizes.tempSizeInBytes / (1024.f * 1024.f))
+                  << " output(mb)=" << (gasBufferSizes.outputSizeInBytes / (1024.f * 1024.f))
+                  << std::endl;
+
         maxTempSizeInBytes = std::max(
             gasBufferSizes.tempSizeInBytes,
             maxTempSizeInBytes
@@ -126,7 +143,10 @@ static void createGeometry(OptixState &state)
         CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
     }
 
-    std::cout << "Final buffer sizes: temp=" << maxTempSizeInBytes << " output=" << maxOutputSizeInBytes << std::endl;
+    std::cout << "Final buffer sizes:"
+              << " temp(mb)=" << (maxTempSizeInBytes / (1024.f * 1024.f))
+              << " output(mb)=" << (maxOutputSizeInBytes / (1024.f * 1024.f))
+              << std::endl;
 
     // Allocate enough for biggest structure
     state.outputBufferSizeInBytes = maxOutputSizeInBytes;
@@ -135,6 +155,7 @@ static void createGeometry(OptixState &state)
         reinterpret_cast<void **>(&d_tempBufferGas),
         maxTempSizeInBytes
     ));
+
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&state.gasOutputBuffer),
         state.outputBufferSizeInBytes
@@ -158,7 +179,7 @@ static void createGeometry(OptixState &state)
         OptixBuildInput triangleInput = {};
         triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
         triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
-        triangleInput.triangleArray.numVertices = static_cast<uint32_t>(geometry.size());
+        triangleInput.triangleArray.numVertices = static_cast<uint32_t>(geometry.size() / 3);
         triangleInput.triangleArray.vertexBuffers = &d_vertices;
         triangleInput.triangleArray.flags = inputFlags;
         triangleInput.triangleArray.numSbtRecords = 1;
@@ -187,7 +208,6 @@ static void createGeometry(OptixState &state)
             cudaMemcpyDeviceToHost
         ));
         state.gasOutputs.push_back(gasOutput);
-
         CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
     }
 
@@ -399,6 +419,7 @@ void Driver::init()
     createShaderBindingTable(m_state);
 
     CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_params), sizeof(Params)));
+    CHECK_CUDA(cudaDeviceSynchronize());
 }
 
 void Driver::launch()
