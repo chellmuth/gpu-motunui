@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <optix.h>
 
 #include "moana/core/camera.hpp"
@@ -19,7 +21,7 @@ struct Params {
 
 struct OptixState {
     OptixDeviceContext context = 0;
-    OptixTraversableHandle gasHandle = {};
+    std::vector<OptixTraversableHandle> gasHandles = {};
     OptixPipelineCompileOptions pipelineCompileOptions = {};
     OptixModule module = 0;
     OptixProgramGroup raygenProgramGroup;

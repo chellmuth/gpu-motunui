@@ -74,9 +74,6 @@ extern "C" __global__ void __raygen__rg()
     const int pixelIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
         params.outputBuffer[pixelIndex + 0] = 1.f;
-    } else {
-        params.outputBuffer[pixelIndex + 0] = 0.f;
     }
     params.outputBuffer[pixelIndex + 1] = 1.f;
-
 }

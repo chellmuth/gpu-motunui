@@ -53,73 +53,93 @@ static void createContext(OptixState &state)
 
 static void createGeometry(OptixState &state)
 {
-    OptixAccelBuildOptions accelOptions = {};
-    accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE; // no build flags
-    accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
-
-    // Setup geometry buffer
-    float vertices[] = {
+    std::vector<float> geometry1 = {
         0.f, 0.f, -3.f,
         0.f, 1.f, -3.f,
         1.f, 0.f, -3.f,
     };
+    std::vector<float> geometry2 = {
+        0.f, 0.f, -3.f,
+        0.f, -1.f, -3.f,
+        1.f, 0.f, -3.f,
+        -1.f, 0.f, -3.f,
+        -1.f, -1.f, -3.f,
+        0.f, 0.f, -3.f,
+    };
+    std::vector<std::vector<float> > geometries = {
+        geometry1,
+        geometry2
+    };
 
-    CUdeviceptr d_vertices = 0;
-    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_vertices), sizeof(vertices)));
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(d_vertices),
-        vertices,
-        sizeof(vertices),
-        cudaMemcpyHostToDevice
-    ));
+    OptixAccelBuildOptions accelOptions = {};
+    accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE; // no build flags
+    accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
 
-    // Setup build input
-    uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
-    OptixBuildInput triangleInput = {};
-    triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
-    triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
-    triangleInput.triangleArray.numVertices = static_cast<uint32_t>(3);
-    triangleInput.triangleArray.vertexBuffers = &d_vertices;
-    triangleInput.triangleArray.flags = inputFlags;
-    triangleInput.triangleArray.numSbtRecords = 1;
+    for (const auto &geometry : geometries) {
+        CUdeviceptr d_vertices = 0;
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_vertices),
+            geometry.size() * sizeof(float)
+        ));
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_vertices),
+            geometry.data(),
+            geometry.size() * sizeof(float),
+            cudaMemcpyHostToDevice
+        ));
 
-    // Calculate, allocate, and copy to device memory
-    OptixAccelBufferSizes gasBufferSizes;
-    CHECK_OPTIX(optixAccelComputeMemoryUsage(
-        state.context,
-        &accelOptions,
-        &triangleInput,
-        1, // build input count
-        &gasBufferSizes
-    ));
+        // Setup build input
+        uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
+        OptixBuildInput triangleInput = {};
+        triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
+        triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
+        triangleInput.triangleArray.numVertices = static_cast<uint32_t>(geometry.size());
+        triangleInput.triangleArray.vertexBuffers = &d_vertices;
+        triangleInput.triangleArray.flags = inputFlags;
+        triangleInput.triangleArray.numSbtRecords = 1;
 
-    CUdeviceptr d_tempBufferGas;
-    CUdeviceptr d_gasOutputBuffer;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_tempBufferGas),
-        gasBufferSizes.tempSizeInBytes
-    ));
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_gasOutputBuffer),
-        gasBufferSizes.outputSizeInBytes
-    ));
+        // Calculate, allocate, and copy to device memory
+        OptixAccelBufferSizes gasBufferSizes;
+        CHECK_OPTIX(optixAccelComputeMemoryUsage(
+            state.context,
+            &accelOptions,
+            &triangleInput,
+            1, // build input count
+            &gasBufferSizes
+        ));
 
-    CHECK_OPTIX(optixAccelBuild(
-        state.context,
-        0, // default CUDA stream
-        &accelOptions,
-        &triangleInput,
-        1, // build input count
-        d_tempBufferGas,
-        gasBufferSizes.tempSizeInBytes,
-        d_gasOutputBuffer,
-        gasBufferSizes.outputSizeInBytes,
-        &state.gasHandle,
-        nullptr, 0 // emitted property params
-    ));
+        std::cout << "Buffer sizes: temp=" << gasBufferSizes.tempSizeInBytes << " output=" << gasBufferSizes.outputSizeInBytes << std::endl;
 
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
+        CUdeviceptr d_tempBufferGas;
+        CUdeviceptr d_gasOutputBuffer;
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_tempBufferGas),
+            gasBufferSizes.tempSizeInBytes
+        ));
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_gasOutputBuffer),
+            gasBufferSizes.outputSizeInBytes
+        ));
+
+        OptixTraversableHandle handle;
+        CHECK_OPTIX(optixAccelBuild(
+            state.context,
+            0, // default CUDA stream
+            &accelOptions,
+            &triangleInput,
+            1, // build input count
+            d_tempBufferGas,
+            gasBufferSizes.tempSizeInBytes,
+            d_gasOutputBuffer,
+            gasBufferSizes.outputSizeInBytes,
+            &handle,
+            nullptr, 0 // emitted property params
+        ));
+        state.gasHandles.push_back(handle);
+
+        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
+        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
+    }
 }
 
 static void createModule(OptixState &state)
@@ -338,11 +358,16 @@ void Driver::launch()
     const int height = 10;
 
     Params params;
-    params.handle = m_state.gasHandle;
 
+    const size_t outputBufferSizeInBytes = width * height * 3 * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.outputBuffer),
-        width * height * 3 * sizeof(float)
+        outputBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.outputBuffer),
+        0,
+        outputBufferSizeInBytes
     ));
 
     Camera camera(
@@ -355,31 +380,35 @@ void Driver::launch()
     );
     params.camera = camera;
 
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(d_params),
-        &params,
-        sizeof(params),
-        cudaMemcpyHostToDevice
-    ));
+    for (auto &handle : m_state.gasHandles) {
+        params.handle = handle;
 
-    CHECK_OPTIX(optixLaunch(
-        m_state.pipeline,
-        stream,
-        d_params,
-        sizeof(Params),
-        &m_state.sbt,
-        width,
-        height,
-        /*depth=*/1
-    ));
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_params),
+            &params,
+            sizeof(params),
+            cudaMemcpyHostToDevice
+        ));
 
-    CHECK_CUDA(cudaDeviceSynchronize());
+        CHECK_OPTIX(optixLaunch(
+            m_state.pipeline,
+            stream,
+            d_params,
+            sizeof(Params),
+            &m_state.sbt,
+            width,
+            height,
+            /*depth=*/1
+        ));
 
-    float *outputBuffer = (float *)malloc(width * height * 3 * sizeof(float));
+        CHECK_CUDA(cudaDeviceSynchronize());
+    }
+
+    float *outputBuffer = (float *)malloc(outputBufferSizeInBytes);
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(outputBuffer),
         params.outputBuffer,
-        width * height * 3 * sizeof(float),
+        outputBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 
