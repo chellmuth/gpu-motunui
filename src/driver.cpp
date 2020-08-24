@@ -6,6 +6,7 @@
 #include <cuda_runtime.h>
 #include <optix.h>
 #include <optix_function_table_definition.h>
+#include <optix_stack_size.h>
 #include <optix_stubs.h>
 
 #include "assert_macros.hpp"
@@ -18,7 +19,23 @@ struct OptixState {
     OptixTraversableHandle gasHandle = {};
     OptixPipelineCompileOptions pipelineCompileOptions = {};
     OptixModule module = 0;
+    OptixProgramGroup raygenProgramGroup;
+    OptixProgramGroup missProgramGroup;
+    OptixProgramGroup hitgroupProgramGroup;
+    OptixPipeline pipeline = 0;
+    OptixShaderBindingTable sbt = {};
 };
+
+template <typename T>
+struct SbtRecord
+{
+    __align__(OPTIX_SBT_RECORD_ALIGNMENT) char header[OPTIX_SBT_RECORD_HEADER_SIZE];
+    T data;
+};
+
+typedef SbtRecord<RayGenData> RayGenSbtRecord;
+typedef SbtRecord<MissData> MissSbtRecord;
+typedef SbtRecord<HitGroupData> HitGroupSbtRecord;
 
 static void contextLogCallback(
     unsigned int level,
@@ -153,6 +170,165 @@ static void createModule(OptixState &state)
     ));
 }
 
+static void createProgramGroups(OptixState &state)
+{
+    OptixProgramGroupOptions programGroupOptions = {};
+
+    OptixProgramGroupDesc raygenProgramGroupDesc = {};
+    raygenProgramGroupDesc.kind = OPTIX_PROGRAM_GROUP_KIND_RAYGEN;
+    raygenProgramGroupDesc.raygen.module = state.module;
+    raygenProgramGroupDesc.raygen.entryFunctionName = "__raygen__rg";
+
+    char log[2048];
+    size_t sizeofLog = sizeof(log);
+
+    CHECK_OPTIX(optixProgramGroupCreate(
+        state.context,
+        &raygenProgramGroupDesc,
+        1, // program group count
+        &programGroupOptions,
+        log,
+        &sizeofLog,
+        &state.raygenProgramGroup
+    ));
+
+    OptixProgramGroupDesc missProgramGroupDesc = {};
+    missProgramGroupDesc.kind = OPTIX_PROGRAM_GROUP_KIND_MISS;
+    missProgramGroupDesc.miss.module = state.module;
+    missProgramGroupDesc.miss.entryFunctionName = "__miss__ms";
+
+    CHECK_OPTIX(optixProgramGroupCreate(
+        state.context,
+        &missProgramGroupDesc,
+        1, // program group count
+        &programGroupOptions,
+        log,
+        &sizeofLog,
+        &state.missProgramGroup
+    ));
+
+    OptixProgramGroupDesc hitgroupProgramGroupDesc = {};
+    hitgroupProgramGroupDesc.kind = OPTIX_PROGRAM_GROUP_KIND_HITGROUP;
+    hitgroupProgramGroupDesc.hitgroup.moduleCH = state.module;
+    hitgroupProgramGroupDesc.hitgroup.entryFunctionNameCH = "__closesthit__ch";
+
+    CHECK_OPTIX(optixProgramGroupCreate(
+        state.context,
+        &hitgroupProgramGroupDesc,
+        1, // program group count
+        &programGroupOptions,
+        log,
+        &sizeofLog,
+        &state.hitgroupProgramGroup
+    ));
+}
+
+static void linkPipeline(OptixState &state)
+{
+    const uint32_t maxTraceDepth = 1;
+    OptixProgramGroup programGroups[] = {
+        state.raygenProgramGroup,
+        state.missProgramGroup,
+        state.hitgroupProgramGroup
+    };
+
+    OptixPipelineLinkOptions pipelineLinkOptions = {};
+    pipelineLinkOptions.maxTraceDepth = maxTraceDepth;
+    pipelineLinkOptions.debugLevel = OPTIX_COMPILE_DEBUG_LEVEL_FULL;
+
+    char log[2048];
+    size_t sizeofLog = sizeof(log);
+
+    CHECK_OPTIX(optixPipelineCreate(
+        state.context,
+        &state.pipelineCompileOptions,
+        &pipelineLinkOptions,
+        programGroups,
+        sizeof(programGroups) / sizeof(programGroups[0]),
+        log,
+        &sizeofLog,
+        &state.pipeline
+    ));
+
+    OptixStackSizes stackSizes = {};
+    for(const auto &progGroup : programGroups) {
+        CHECK_OPTIX(optixUtilAccumulateStackSizes(progGroup, &stackSizes));
+    }
+
+    uint32_t directCallableStackSizeFromTraversal;
+    uint32_t directCallableStackSizeFromState;
+    uint32_t continuationStackSize;
+    CHECK_OPTIX(optixUtilComputeStackSizes(
+        &stackSizes,
+        maxTraceDepth,
+        0, // maxCCDepth
+        0, // maxDCDEpth
+        &directCallableStackSizeFromTraversal,
+        &directCallableStackSizeFromState,
+        &continuationStackSize
+    ));
+    CHECK_OPTIX(optixPipelineSetStackSize(
+        state.pipeline,
+        directCallableStackSizeFromTraversal,
+        directCallableStackSizeFromState,
+        continuationStackSize,
+        1 // maxTraversableDepth
+    ));
+}
+
+static void createShaderBindingTable(OptixState &state)
+{
+    CUdeviceptr raygenRecord;
+    const size_t raygenRecordSize = sizeof(RayGenSbtRecord);
+    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&raygenRecord), raygenRecordSize));
+
+    RayGenSbtRecord raygenSbt;
+    CHECK_OPTIX(optixSbtRecordPackHeader(state.raygenProgramGroup, &raygenSbt));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(raygenRecord),
+        &raygenSbt,
+        raygenRecordSize,
+        cudaMemcpyHostToDevice
+    ));
+
+    CUdeviceptr missRecord;
+    size_t missRecordSize = sizeof(MissSbtRecord);
+    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&missRecord), missRecordSize));
+
+    MissSbtRecord missSbt;
+    CHECK_OPTIX(optixSbtRecordPackHeader(state.missProgramGroup, &missSbt));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(missRecord),
+        &missSbt,
+        missRecordSize,
+        cudaMemcpyHostToDevice
+    ));
+
+    CUdeviceptr hitgroupRecord;
+    size_t hitgroupRecordSize = sizeof(HitGroupSbtRecord);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&hitgroupRecord),
+        hitgroupRecordSize
+    ));
+
+    HitGroupSbtRecord hitgroupSbt;
+    CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(hitgroupRecord),
+        &hitgroupSbt,
+        hitgroupRecordSize,
+        cudaMemcpyHostToDevice
+    ));
+
+    state.sbt.raygenRecord = raygenRecord;
+    state.sbt.missRecordBase = missRecord;
+    state.sbt.missRecordStrideInBytes = sizeof(MissSbtRecord);
+    state.sbt.missRecordCount = 1;
+    state.sbt.hitgroupRecordBase = hitgroupRecord;
+    state.sbt.hitgroupRecordStrideInBytes = sizeof(HitGroupSbtRecord);
+    state.sbt.hitgroupRecordCount = 1;
+}
+
 void Driver::init()
 {
     OptixState state;
@@ -160,6 +336,9 @@ void Driver::init()
     createContext(state);
     createGeometry(state);
     createModule(state);
+    createProgramGroups(state);
+    linkPipeline(state);
+    createShaderBindingTable(state);
 }
 
 }

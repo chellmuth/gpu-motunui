@@ -3,8 +3,11 @@
 
 namespace moana {
 
-struct Params {
-};
+struct RayGenData {};
+struct MissData {};
+struct HitGroupData {};
+
+struct Params {};
 
 class Driver {
 public:
