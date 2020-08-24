@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 
     moana::Driver driver;
     driver.init();
+    driver.launch();
 
     exit(0);
 }

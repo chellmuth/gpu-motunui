@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include <cuda_runtime.h>
-#include <optix.h>
 #include <optix_function_table_definition.h>
 #include <optix_stack_size.h>
 #include <optix_stubs.h>
@@ -13,18 +12,6 @@
 #include "kernel.hpp"
 
 namespace moana {
-
-struct OptixState {
-    OptixDeviceContext context = 0;
-    OptixTraversableHandle gasHandle = {};
-    OptixPipelineCompileOptions pipelineCompileOptions = {};
-    OptixModule module = 0;
-    OptixProgramGroup raygenProgramGroup;
-    OptixProgramGroup missProgramGroup;
-    OptixProgramGroup hitgroupProgramGroup;
-    OptixPipeline pipeline = 0;
-    OptixShaderBindingTable sbt = {};
-};
 
 template <typename T>
 struct SbtRecord
@@ -331,14 +318,39 @@ static void createShaderBindingTable(OptixState &state)
 
 void Driver::init()
 {
-    OptixState state;
+    createContext(m_state);
+    createGeometry(m_state);
+    createModule(m_state);
+    createProgramGroups(m_state);
+    linkPipeline(m_state);
+    createShaderBindingTable(m_state);
 
-    createContext(state);
-    createGeometry(state);
-    createModule(state);
-    createProgramGroups(state);
-    linkPipeline(state);
-    createShaderBindingTable(state);
+    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_params), sizeof(Params)));
+}
+
+void Driver::launch()
+{
+    CUstream stream;
+    CHECK_CUDA(cudaStreamCreate(&stream));
+
+    Params params;
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(d_params),
+        &params,
+        sizeof(params),
+        cudaMemcpyHostToDevice
+    ));
+
+    CHECK_OPTIX(optixLaunch(
+        m_state.pipeline,
+        stream,
+        d_params,
+        sizeof(Params),
+        &m_state.sbt,
+        100,
+        100,
+        /*depth=*/1
+    ));
 }
 
 }
