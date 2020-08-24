@@ -1,5 +1,6 @@
 #include "moana/driver.hpp"
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 
@@ -75,6 +76,9 @@ static void createGeometry(OptixState &state)
     accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE; // no build flags
     accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
 
+    size_t maxTempSizeInBytes = 0;
+    size_t maxOutputSizeInBytes = 0;
+
     for (const auto &geometry : geometries) {
         CUdeviceptr d_vertices = 0;
         CHECK_CUDA(cudaMalloc(
@@ -98,7 +102,7 @@ static void createGeometry(OptixState &state)
         triangleInput.triangleArray.flags = inputFlags;
         triangleInput.triangleArray.numSbtRecords = 1;
 
-        // Calculate, allocate, and copy to device memory
+        // Calculate max memory size
         OptixAccelBufferSizes gasBufferSizes;
         CHECK_OPTIX(optixAccelComputeMemoryUsage(
             state.context,
@@ -109,17 +113,54 @@ static void createGeometry(OptixState &state)
         ));
 
         std::cout << "Buffer sizes: temp=" << gasBufferSizes.tempSizeInBytes << " output=" << gasBufferSizes.outputSizeInBytes << std::endl;
+        maxTempSizeInBytes = std::max(
+            gasBufferSizes.tempSizeInBytes,
+            maxTempSizeInBytes
+        );
+        maxOutputSizeInBytes = std::max(
+            gasBufferSizes.outputSizeInBytes,
+            maxOutputSizeInBytes
+        );
 
-        CUdeviceptr d_tempBufferGas;
-        CUdeviceptr d_gasOutputBuffer;
+        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
+    }
+
+    std::cout << "Final buffer sizes: temp=" << maxTempSizeInBytes << " output=" << maxOutputSizeInBytes << std::endl;
+
+    // Allocate enough for biggest structure
+    state.outputBufferSizeInBytes = maxOutputSizeInBytes;
+    CUdeviceptr d_tempBufferGas;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_tempBufferGas),
+        maxTempSizeInBytes
+    ));
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&state.gasOutputBuffer),
+        state.outputBufferSizeInBytes
+    ));
+
+    for (const auto &geometry : geometries) {
+        CUdeviceptr d_vertices = 0;
         CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_tempBufferGas),
-            gasBufferSizes.tempSizeInBytes
+            reinterpret_cast<void **>(&d_vertices),
+            geometry.size() * sizeof(float)
         ));
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_gasOutputBuffer),
-            gasBufferSizes.outputSizeInBytes
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_vertices),
+            geometry.data(),
+            geometry.size() * sizeof(float),
+            cudaMemcpyHostToDevice
         ));
+
+        // Setup build input
+        uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
+        OptixBuildInput triangleInput = {};
+        triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
+        triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
+        triangleInput.triangleArray.numVertices = static_cast<uint32_t>(geometry.size());
+        triangleInput.triangleArray.vertexBuffers = &d_vertices;
+        triangleInput.triangleArray.flags = inputFlags;
+        triangleInput.triangleArray.numSbtRecords = 1;
 
         OptixTraversableHandle handle;
         CHECK_OPTIX(optixAccelBuild(
@@ -129,17 +170,27 @@ static void createGeometry(OptixState &state)
             &triangleInput,
             1, // build input count
             d_tempBufferGas,
-            gasBufferSizes.tempSizeInBytes,
-            d_gasOutputBuffer,
-            gasBufferSizes.outputSizeInBytes,
+            maxTempSizeInBytes,
+            state.gasOutputBuffer,
+            state.outputBufferSizeInBytes,
             &handle,
             nullptr, 0 // emitted property params
         ));
         state.gasHandles.push_back(handle);
 
-        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
+        void *gasOutput = malloc(state.outputBufferSizeInBytes);
+        CHECK_CUDA(cudaMemcpy(
+            gasOutput,
+            reinterpret_cast<void *>(state.gasOutputBuffer),
+            state.outputBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+        state.gasOutputs.push_back(gasOutput);
+
         CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
     }
+
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
 }
 
 static void createModule(OptixState &state)
@@ -380,8 +431,15 @@ void Driver::launch()
     );
     params.camera = camera;
 
-    for (auto &handle : m_state.gasHandles) {
-        params.handle = handle;
+    for (int i = 0; i < m_state.gasHandles.size(); i++) {
+        params.handle = m_state.gasHandles[i];
+
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(m_state.gasOutputBuffer),
+            m_state.gasOutputs[i],
+            m_state.outputBufferSizeInBytes,
+            cudaMemcpyHostToDevice
+        ));
 
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_params),
@@ -424,6 +482,7 @@ void Driver::launch()
         std::cout << std::endl;
     }
 
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));
     free(outputBuffer);
 }

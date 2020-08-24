@@ -29,6 +29,10 @@ struct OptixState {
     OptixProgramGroup hitgroupProgramGroup;
     OptixPipeline pipeline = 0;
     OptixShaderBindingTable sbt = {};
+
+    CUdeviceptr gasOutputBuffer;
+    size_t outputBufferSizeInBytes;
+    std::vector<void *> gasOutputs;
 };
 
 class Driver {
