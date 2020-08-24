@@ -10,7 +10,12 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(CUDAToolkit REQUIRED)
 find_package(OptiX REQUIRED)
 
-add_library(moana src/driver.cpp)
+add_library(moana
+  src/driver.cpp
+
+  src/core/camera.cpp
+  src/core/transform.cpp
+)
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
 target_link_libraries(moana CUDA::cudart dl)

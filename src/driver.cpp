@@ -10,6 +10,7 @@
 
 #include "assert_macros.hpp"
 #include "kernel.hpp"
+#include "moana/core/vec3.hpp"
 
 namespace moana {
 
@@ -58,9 +59,9 @@ static void createGeometry(OptixState &state)
 
     // Setup geometry buffer
     float vertices[] = {
-        0.f, 0.f, 0.f,
-        0.f, 1.f, 0.f,
-        1.f, 0.f, 0.f,
+        0.f, 0.f, -3.f,
+        0.f, 1.f, -3.f,
+        1.f, 0.f, -3.f,
     };
 
     CUdeviceptr d_vertices = 0;
@@ -333,7 +334,27 @@ void Driver::launch()
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
+    const int width = 10;
+    const int height = 10;
+
     Params params;
+    params.handle = m_state.gasHandle;
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.outputBuffer),
+        width * height * 3 * sizeof(float)
+    ));
+
+    Camera camera(
+        Vec3(0.f, 0.f, 0.f),
+        Vec3(0.f, 0.f, -1.f),
+        Vec3(0.f, 1.f, 0.f),
+        35.f / 180.f * M_PI,
+        Resolution{ width, height },
+        false
+    );
+    params.camera = camera;
+
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(d_params),
         &params,
@@ -347,10 +368,35 @@ void Driver::launch()
         d_params,
         sizeof(Params),
         &m_state.sbt,
-        100,
-        100,
+        width,
+        height,
         /*depth=*/1
     ));
+
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    float *outputBuffer = (float *)malloc(width * height * 3 * sizeof(float));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(outputBuffer),
+        params.outputBuffer,
+        width * height * 3 * sizeof(float),
+        cudaMemcpyDeviceToHost
+    ));
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            const int index = 3 * (y * width + x);
+            if (outputBuffer[index + 0] > 0) {
+                std::cout << "X ";
+            } else {
+                std::cout << ". ";
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    CHECK_CUDA(cudaFree(params.outputBuffer));
+    free(outputBuffer);
 }
 
 }

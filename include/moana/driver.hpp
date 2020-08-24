@@ -2,13 +2,20 @@
 
 #include <optix.h>
 
+#include "moana/core/camera.hpp"
+
 namespace moana {
 
 struct RayGenData {};
 struct MissData {};
 struct HitGroupData {};
 
-struct Params {};
+struct Params {
+    OptixTraversableHandle handle;
+
+    float *outputBuffer;
+    Camera camera;
+};
 
 struct OptixState {
     OptixDeviceContext context = 0;
