@@ -15,6 +15,7 @@
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
+#include "scene.hpp"
 
 namespace moana {
 
@@ -639,7 +640,7 @@ void Driver::launch()
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 1200;
+    const int width = 952;
     const int height = 400;
 
     Params params;
@@ -664,26 +665,8 @@ void Driver::launch()
     //     false
     // );
 
-    Camera camera(
-        Vec3(
-            3.5526606717518376f,
-            850.6418895294337f,
-            747.5497754610369f
-        ),
-        Vec3(
-            237.07531671546286f,
-            52.9718477246937f,
-            -263.9479752910547f
-        ),
-        Vec3(
-            0.1370609562125062f,
-            0.7929456689992689f,
-            -0.5936762251407878f
-        ),
-        24.386729394448643f / 180.f * M_PI,
-        Resolution{ width, height },
-        false
-    );
+    Scene scene(Cam::ShotCam);
+    Camera camera = scene.getCamera(width, height);
 
     params.camera = camera;
 
@@ -727,6 +710,7 @@ void Driver::launch()
     ));
     CHECK_CUDA(cudaDeviceSynchronize());
 
+    outputBuffer[0] = 1.f;
     Image::save(
         width,
         height,

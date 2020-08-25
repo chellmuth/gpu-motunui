@@ -13,6 +13,7 @@ find_package(OptiX REQUIRED)
 add_library(moana
   src/driver.cpp
   src/hibiscus_geometry.cpp
+  src/scene.cpp
 
   src/core/camera.cpp
   src/core/transform.cpp

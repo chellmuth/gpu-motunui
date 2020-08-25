@@ -5,6 +5,7 @@
 
 namespace moana { namespace Image {
 
+// radiances[0] == top-left red
 void save(
     int width,
     int height,
