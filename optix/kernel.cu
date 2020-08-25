@@ -98,7 +98,7 @@ extern "C" __global__ void __raygen__rg()
 
     const int pixelIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
-        const float cosTheta = fmaxf(0.f, -dot(prd.normal, direction));
+        const float cosTheta = fabs(-dot(prd.normal, direction));
         params.outputBuffer[pixelIndex + 0] = cosTheta;
         params.outputBuffer[pixelIndex + 1] = cosTheta;
         params.outputBuffer[pixelIndex + 2] = cosTheta;

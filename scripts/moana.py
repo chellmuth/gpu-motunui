@@ -32,21 +32,7 @@ def write_transforms(filename, transforms):
         transform_bin = struct.pack("12f", *transform)
         output_file.write(transform_bin)
 
-def process(object_name, object_path, archive_path):
-    instance_digest = json.load(open(MoanaPath / archive_path))
-    archives = instance_digest.keys()
-
-    for archive in archives:
-        instance_transforms = instance_digest[archive].values()
-
-        archive_stem = Path(archive).stem
-        output_filename = ScenePath / f"{object_name}-{archive_stem}.bin"
-
-        write_transforms(
-            output_filename,
-            [ corrected_transform(t) for t in instance_transforms ]
-        )
-
+def process(object_name, object_path, archive_paths):
     object_digest = json.load(open(MoanaPath / object_path))
     instanced_copies = [
         copy["transformMatrix"]
@@ -59,16 +45,34 @@ def process(object_name, object_path, archive_path):
         [ corrected_transform(t) for t in instanced_copies ]
     )
 
+    for archive_path in archive_paths:
+        instance_digest = json.load(open(MoanaPath / archive_path))
+        archives = instance_digest.keys()
+
+        for archive in archives:
+            instance_transforms = instance_digest[archive].values()
+
+            archive_stem = Path(archive).stem
+            output_filename = ScenePath / f"{object_name}-{archive_stem}.bin"
+
+            write_transforms(
+                output_filename,
+                [ corrected_transform(t) for t in instance_transforms ]
+            )
+
 def run():
     process(
         "hibiscus",
         "json/isHibiscus/isHibiscus.json",
-        "json/isHibiscus/isHibiscus_xgBonsai.json"
+        [ "json/isHibiscus/isHibiscus_xgBonsai.json" ]
     )
     process(
         "mountainA",
         "json/isMountainA/isMountainA.json",
-        "json/isMountainA/isMountainA_xgBreadFruit.json"
+        [
+            "json/isMountainA/isMountainA_xgBreadFruit.json",
+            "json/isMountainA/isMountainA_xgCocoPalms.json",
+        ]
     )
 
 if __name__ == "__main__":
