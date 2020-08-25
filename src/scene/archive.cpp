@@ -9,6 +9,7 @@
 #include "assert_macros.hpp"
 #include "moana/parsers/obj_parser.hpp"
 #include "scene/gas.hpp"
+#include "scene/ias.hpp"
 #include "scene/instances_bin.hpp"
 #include "scene/types.hpp"
 
@@ -20,31 +21,6 @@ Archive::Archive(
 ) : m_binPaths(binPaths),
     m_objPaths(objPaths)
 {}
-
-static void createOptixInstanceRecords(
-    OptixDeviceContext context,
-    std::vector<OptixInstance> &records,
-    const Instances &instances,
-    const OptixTraversableHandle &traversableHandle
-) {
-    int offset = records.size();
-    for (int i = 0; i < instances.count; i++) {
-        OptixInstance instance;
-        memcpy(
-            instance.transform,
-            &instances.transforms[i * 12],
-            sizeof(float) * 12
-        );
-
-        instance.instanceId = offset + i;
-        instance.visibilityMask = 255;
-        instance.sbtOffset = 0;
-        instance.flags = OPTIX_INSTANCE_FLAG_NONE;
-        instance.traversableHandle = traversableHandle;
-
-        records.push_back(instance);
-    }
-}
 
 void Archive::processRecords(
     OptixDeviceContext context,
@@ -75,7 +51,7 @@ void Archive::processRecords(
         const Instances instancesResult = InstancesBin::parse(binPath);
         std::cout << "    Count: " << instancesResult.count << std::endl;
 
-        createOptixInstanceRecords(
+        IAS::createOptixInstanceRecords(
             context,
             records,
             instancesResult,

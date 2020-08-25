@@ -25,6 +25,7 @@ add_library(moana
   src/scene/archive.cpp
   src/scene/gas.cpp
   src/scene/hibiscus_geometry.cpp
+  src/scene/ias.cpp
   src/scene/instances_bin.cpp
   src/scene/mountain_a_geometry.cpp
 )
