@@ -15,6 +15,7 @@
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
+#include "moana/parsers/obj_parser.hpp"
 #include "scene.hpp"
 
 namespace moana {
@@ -616,7 +617,7 @@ static void createShaderBindingTable(OptixState &state)
     state.sbt.hitgroupRecordCount = 1;
 }
 
-void Driver::init(const ObjResult &model)
+void Driver::init()
 {
     createContext(m_state);
 
