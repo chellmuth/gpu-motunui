@@ -44,7 +44,7 @@ static Instances parseInstances(const std::string filepath)
 static GASInfo gasFromObj(OptixDeviceContext context, const ObjResult &model)
 {
     OptixAccelBuildOptions accelOptions = {};
-    accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE; // no build flags
+    accelOptions.buildFlags = OPTIX_BUILD_FLAG_ALLOW_RANDOM_VERTEX_ACCESS; // fixme; use user data
     accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
 
     CUdeviceptr d_vertices = 0;

@@ -11,6 +11,7 @@ using namespace moana;
 
 struct PerRayData {
     bool isHit;
+    Vec3 normal;
 };
 
 extern "C" {
@@ -28,6 +29,30 @@ extern "C" __global__ void __closesthit__ch()
 {
     PerRayData *prd = getPRD();
     prd->isHit = true;
+
+    OptixTraversableHandle gas = optixGetGASTraversableHandle();
+    unsigned int primitiveIndex = optixGetPrimitiveIndex();
+    unsigned int sbtIndex = optixGetSbtGASIndex();
+    float time = optixGetRayTime();
+
+    float3 vertices[3];
+    optixGetTriangleVertexData(
+        gas,
+        primitiveIndex,
+        sbtIndex,
+        time,
+        vertices
+    );
+
+    const Vec3 p0(vertices[0].x, vertices[0].y, vertices[0].z);
+    const Vec3 p1(vertices[1].x, vertices[1].y, vertices[1].z);
+    const Vec3 p2(vertices[2].x, vertices[2].y, vertices[2].z);
+
+    const Vec3 e1 = p1 - p0;
+    const Vec3 e2 = p2 - p0;
+    const Vec3 normal = normalized(cross(e1, e2));
+
+    prd->normal = normal;
 }
 
 extern "C" __global__ void __miss__ms()
@@ -73,7 +98,9 @@ extern "C" __global__ void __raygen__rg()
 
     const int pixelIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
-        params.outputBuffer[pixelIndex + 0] = 1.f;
+        const float cosTheta = fmaxf(0.f, -dot(prd.normal, direction));
+        params.outputBuffer[pixelIndex + 0] = cosTheta;
+        params.outputBuffer[pixelIndex + 1] = cosTheta;
+        params.outputBuffer[pixelIndex + 2] = cosTheta;
     }
-    params.outputBuffer[pixelIndex + 1] = 1.f;
 }

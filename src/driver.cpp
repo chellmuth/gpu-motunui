@@ -656,8 +656,8 @@ void Driver::launch()
     ));
 
     Camera camera(
-        Vec3(0.f, 0.f, 700.f),
-        Vec3(0.f, 50.f, 0.f),
+        Vec3(60.f, 0.f, 700.f),
+        Vec3(0.f, 80.f, 0.f),
         Vec3(0.f, 1.f, 0.f),
         33.f / 180.f * M_PI,
         Resolution{ width, height },
