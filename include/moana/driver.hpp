@@ -5,6 +5,7 @@
 #include <optix.h>
 
 #include "moana/core/camera.hpp"
+#include "moana/parsers/obj_parser.hpp"
 
 namespace moana {
 
@@ -37,7 +38,7 @@ struct OptixState {
 
 class Driver {
 public:
-    void init();
+    void init(const ObjResult &model);
     void launch();
 
 private:

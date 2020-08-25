@@ -53,39 +53,8 @@ static void createContext(OptixState &state)
     CHECK_OPTIX(optixDeviceContextCreate(cuContext, &options, &state.context));
 }
 
-static void createGeometry(OptixState &state)
+static void createGeometry(OptixState &state, const ObjResult &model)
 {
-    std::vector<float> geometry1 = {
-        0.f, 0.f, -3.f,
-        0.f, 1.f, -3.f,
-        1.f, 0.f, -3.f,
-    };
-    std::vector<float> geometry2 = {
-        0.f, 0.f, -3.f,
-        0.f, -1.f, -3.f,
-        1.f, 0.f, -3.f,
-        -1.f, 0.f, -3.f,
-        -1.f, -1.f, -3.f,
-        0.f, 0.f, -3.f,
-    };
-    std::vector<float> largeGeometry;
-    for (int i = 0; i < 10000000; i++) {
-        largeGeometry.insert(
-            largeGeometry.end(),
-            {
-                0.f, 0.f, -3.f,
-                0.f, 1.f, -3.f,
-                1.f, 0.f, -3.f,
-            }
-        );
-    }
-
-    std::vector<std::vector<float> > geometries = {
-        geometry1,
-        largeGeometry,
-        geometry2,
-    };
-
     OptixAccelBuildOptions accelOptions = {};
     accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE; // no build flags
     accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
@@ -93,16 +62,29 @@ static void createGeometry(OptixState &state)
     size_t maxTempSizeInBytes = 0;
     size_t maxOutputSizeInBytes = 0;
 
-    for (const auto &geometry : geometries) {
+    std::vector<ObjResult> models = { model };
+    for (const auto &model : models) {
         CUdeviceptr d_vertices = 0;
         CHECK_CUDA(cudaMalloc(
             reinterpret_cast<void **>(&d_vertices),
-            geometry.size() * sizeof(float)
+            model.vertexCount * 3 * sizeof(float)
         ));
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_vertices),
-            geometry.data(),
-            geometry.size() * sizeof(float),
+            model.vertices.data(),
+            model.vertexCount * 3 * sizeof(float),
+            cudaMemcpyHostToDevice
+        ));
+
+        CUdeviceptr d_indices = 0;
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_indices),
+            model.indexTripletCount * 3 * sizeof(int)
+        ));
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_indices),
+            model.indices.data(),
+            model.indexTripletCount * 3 * sizeof(int),
             cudaMemcpyHostToDevice
         ));
 
@@ -110,9 +92,15 @@ static void createGeometry(OptixState &state)
         uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
         OptixBuildInput triangleInput = {};
         triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
+
         triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
-        triangleInput.triangleArray.numVertices = static_cast<uint32_t>(geometry.size());
+        triangleInput.triangleArray.numVertices = model.vertexCount;
         triangleInput.triangleArray.vertexBuffers = &d_vertices;
+
+        triangleInput.triangleArray.numIndexTriplets = model.indexTripletCount;
+        triangleInput.triangleArray.indexFormat = OPTIX_INDICES_FORMAT_UNSIGNED_INT3;
+        triangleInput.triangleArray.indexBuffer = d_indices;
+
         triangleInput.triangleArray.flags = inputFlags;
         triangleInput.triangleArray.numSbtRecords = 1;
 
@@ -161,16 +149,28 @@ static void createGeometry(OptixState &state)
         state.outputBufferSizeInBytes
     ));
 
-    for (const auto &geometry : geometries) {
+    for (const auto &model : models) {
         CUdeviceptr d_vertices = 0;
         CHECK_CUDA(cudaMalloc(
             reinterpret_cast<void **>(&d_vertices),
-            geometry.size() * sizeof(float)
+            model.vertexCount * 3 * sizeof(float)
         ));
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_vertices),
-            geometry.data(),
-            geometry.size() * sizeof(float),
+            model.vertices.data(),
+            model.vertexCount * 3 * sizeof(float),
+            cudaMemcpyHostToDevice
+        ));
+
+        CUdeviceptr d_indices = 0;
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_indices),
+            model.indexTripletCount * 3 * sizeof(int)
+        ));
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_indices),
+            model.indices.data(),
+            model.indexTripletCount * 3 * sizeof(int),
             cudaMemcpyHostToDevice
         ));
 
@@ -178,9 +178,15 @@ static void createGeometry(OptixState &state)
         uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
         OptixBuildInput triangleInput = {};
         triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
+
         triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
-        triangleInput.triangleArray.numVertices = static_cast<uint32_t>(geometry.size() / 3);
+        triangleInput.triangleArray.numVertices = model.vertexCount;
         triangleInput.triangleArray.vertexBuffers = &d_vertices;
+
+        triangleInput.triangleArray.numIndexTriplets = model.indexTripletCount;
+        triangleInput.triangleArray.indexFormat = OPTIX_INDICES_FORMAT_UNSIGNED_INT3;
+        triangleInput.triangleArray.indexBuffer = d_indices;
+
         triangleInput.triangleArray.flags = inputFlags;
         triangleInput.triangleArray.numSbtRecords = 1;
 
@@ -409,10 +415,10 @@ static void createShaderBindingTable(OptixState &state)
     state.sbt.hitgroupRecordCount = 1;
 }
 
-void Driver::init()
+void Driver::init(const ObjResult &model)
 {
     createContext(m_state);
-    createGeometry(m_state);
+    createGeometry(m_state, model);
     createModule(m_state);
     createProgramGroups(m_state);
     linkPipeline(m_state);
