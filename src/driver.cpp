@@ -16,7 +16,6 @@
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
 #include "moana/parsers/obj_parser.hpp"
-#include "scene.hpp"
 
 namespace moana {
 
@@ -636,7 +635,7 @@ void Driver::init()
     CHECK_CUDA(cudaDeviceSynchronize());
 }
 
-void Driver::launch()
+void Driver::launch(Cam cam, const std::string &exrFilename)
 {
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
@@ -666,7 +665,7 @@ void Driver::launch()
     //     false
     // );
 
-    Scene scene(Cam::ShotCam);
+    Scene scene(cam);
     Camera camera = scene.getCamera(width, height);
 
     params.camera = camera;
@@ -711,12 +710,17 @@ void Driver::launch()
     ));
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    outputBuffer[0] = 1.f;
     Image::save(
         width,
         height,
         outputBuffer,
         "out.exr"
+    );
+    Image::save(
+        width,
+        height,
+        outputBuffer,
+        exrFilename
     );
 
     // CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));

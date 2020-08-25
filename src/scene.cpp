@@ -1,4 +1,4 @@
-#include "scene.hpp"
+#include "moana/scene.hpp"
 
 #include "moana/core/vec3.hpp"
 

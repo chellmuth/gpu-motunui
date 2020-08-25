@@ -1,10 +1,12 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
 #include <optix.h>
 
 #include "moana/core/camera.hpp"
+#include "moana/scene.hpp"
 
 namespace moana {
 
@@ -40,7 +42,7 @@ struct OptixState {
 class Driver {
 public:
     void init();
-    void launch();
+    void launch(Cam cam, const std::string &exrFilename);
 
 private:
     OptixState m_state;
