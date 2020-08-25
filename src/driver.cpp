@@ -618,9 +618,12 @@ static void createShaderBindingTable(OptixState &state)
 void Driver::init(const ObjResult &model)
 {
     createContext(m_state);
+
     HibiscusGeometry hibiscus;
     auto result = hibiscus.buildAcceleration(m_state.context);
-    createGeometry(m_state, model);
+    // createGeometry(m_state, model);
+    m_state.gasHandles.push_back(result.handle);
+
     createInstances(m_state);
     createModule(m_state);
     createProgramGroups(m_state);
@@ -636,7 +639,7 @@ void Driver::launch()
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 1200;
+    const int width = 600;
     const int height = 400;
 
     Params params;
@@ -653,38 +656,46 @@ void Driver::launch()
     ));
 
     Camera camera(
-        Vec3(
-            3.5526606717518376f,
-            850.6418895294337f,
-            747.5497754610369f
-        ),
-        Vec3(
-            237.07531671546286f,
-            52.9718477246937f,
-            -263.9479752910547f
-        ),
-        Vec3(
-            0.1370609562125062f,
-            0.7929456689992689f,
-            -0.5936762251407878f
-        ),
-        24.386729394448643f / 180.f * M_PI,
+        Vec3(0.f, 0.f, 700.f),
+        Vec3(0.f, 50.f, 0.f),
+        Vec3(0.f, 1.f, 0.f),
+        33.f / 180.f * M_PI,
         Resolution{ width, height },
         false
     );
+
+    // Camera camera(
+    //     Vec3(
+    //         3.5526606717518376f,
+    //         850.6418895294337f,
+    //         747.5497754610369f
+    //     ),
+    //     Vec3(
+    //         237.07531671546286f,
+    //         52.9718477246937f,
+    //         -263.9479752910547f
+    //     ),
+    //     Vec3(
+    //         0.1370609562125062f,
+    //         0.7929456689992689f,
+    //         -0.5936762251407878f
+    //     ),
+    //     24.386729394448643f / 180.f * M_PI,
+    //     Resolution{ width, height },
+    //     false
+    // );
+
     params.camera = camera;
 
-    OptixTraversableHandle fakeHandles[] = { m_state.iasHandle };
-    // for (auto [i, handle] : enumerate(m_state.gasHandles)) {
-    for (auto [i, handle] : enumerate(fakeHandles)) {
+    for (auto [i, handle] : enumerate(m_state.gasHandles)) {
         params.handle = handle;
 
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(m_state.gasOutputBuffer),
-            m_state.gasOutputs[i],
-            m_state.outputBufferSizeInBytes,
-            cudaMemcpyHostToDevice
-        ));
+        // CHECK_CUDA(cudaMemcpy(
+        //     reinterpret_cast<void *>(m_state.gasOutputBuffer),
+        //     m_state.gasOutputs[i],
+        //     m_state.outputBufferSizeInBytes,
+        //     cudaMemcpyHostToDevice
+        // ));
 
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_params),
@@ -723,7 +734,7 @@ void Driver::launch()
         "out.exr"
     );
 
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
+    // CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));
 }
 

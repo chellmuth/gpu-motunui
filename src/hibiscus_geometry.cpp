@@ -1,5 +1,6 @@
 #include "hibiscus_geometry.hpp"
 
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -134,6 +135,99 @@ static GASInfo gasFromObj(OptixDeviceContext context, const ObjResult &model)
     };
 }
 
+static void createOptixInstanceRecords(
+    OptixDeviceContext context,
+    std::vector<OptixInstance> &records,
+    const Instances &instances,
+    const GASInfo &gasInfo
+) {
+    int offset = records.size();
+    for (int i = 0; i < instances.count; i++) {
+        OptixInstance instance;
+        memcpy(
+            instance.transform,
+            &instances.transforms[i * 12],
+            sizeof(float) * 12
+        );
+
+        instance.instanceId = offset + i;
+        instance.visibilityMask = 255;
+        instance.sbtOffset = 0;
+        instance.flags = OPTIX_INSTANCE_FLAG_NONE;
+        instance.traversableHandle = gasInfo.handle;
+
+        records.push_back(instance);
+    }
+}
+
+static OptixTraversableHandle iasFromInstanceRecords(
+    OptixDeviceContext context,
+    const std::vector<OptixInstance> &records
+) {
+    CUdeviceptr d_instances;
+    const size_t instancesSizeInBytes = sizeof(OptixInstance) * records.size();
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_instances),
+        instancesSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(d_instances),
+        records.data(),
+        instancesSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+
+    OptixBuildInput instanceInput = {};
+    instanceInput.type = OPTIX_BUILD_INPUT_TYPE_INSTANCES;
+    instanceInput.instanceArray.instances = d_instances;
+    instanceInput.instanceArray.numInstances = records.size();
+
+    OptixAccelBuildOptions accelOptions = {};
+    accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE;
+    accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD;
+
+    OptixAccelBufferSizes iasBufferSizes;
+    CHECK_OPTIX(optixAccelComputeMemoryUsage(
+        context,
+        &accelOptions,
+        &instanceInput,
+        1, // num build inputs
+        &iasBufferSizes
+    ));
+
+    CUdeviceptr d_tempBuffer;
+    CUdeviceptr d_iasOutputBuffer; // fixme (free)
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_tempBuffer),
+        iasBufferSizes.tempSizeInBytes
+    ));
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_iasOutputBuffer),
+        iasBufferSizes.outputSizeInBytes
+    ));
+
+    OptixTraversableHandle handle;
+    CHECK_OPTIX(optixAccelBuild(
+        context,
+        0, // CUDA stream
+        &accelOptions,
+        &instanceInput,
+        1, // num build inputs
+        d_tempBuffer,
+        iasBufferSizes.tempSizeInBytes,
+        d_iasOutputBuffer,
+        iasBufferSizes.outputSizeInBytes,
+        &handle,
+        nullptr,
+        0
+    ));
+
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBuffer)));
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_instances)));
+
+    return handle;
+}
+
 GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
 {
     const std::string moanaRoot = MOANA_ROOT;
@@ -151,9 +245,10 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
         "../scene/hibiscus-archiveHibiscusLeaf0003_mod.bin",
     };
 
+    std::vector<OptixInstance> records;
+
     for (int i = 0; i < 4; i++) {
         const std::string archive = archives[i];
-        const std::string instance = instances[i];
 
         std::cout << "Processing " << archive << std::endl;
 
@@ -169,12 +264,27 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
                   << (gasInfo.outputBufferSizeInBytes / (1024. * 1024.))
                   << std::endl;
 
+
         std::cout << "  Instances:" << std::endl;
+        const std::string instance = instances[i];
         const Instances instancesResult = parseInstances(instances[i]);
         std::cout << "    Count: " << instancesResult.count << std::endl;
+
+        createOptixInstanceRecords(
+            context,
+            records,
+            instancesResult,
+            gasInfo
+        );
     }
 
-    return GeometryResult{};
+    OptixTraversableHandle iasHandle = iasFromInstanceRecords(context, records);
+
+    return GeometryResult{
+        iasHandle,
+        {}
+    };
+
 }
 
 }
