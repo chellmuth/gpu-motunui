@@ -621,11 +621,11 @@ void Driver::init()
 {
     createContext(m_state);
 
-    // HibiscusGeometry hibiscus;
-    // auto result = hibiscus.buildAcceleration(m_state.context);
+    HibiscusGeometry hibiscus;
+    auto result = hibiscus.buildAcceleration(m_state.context);
 
-    MountainAGeometry mountainA;
-    auto result = mountainA.buildAcceleration(m_state.context);
+    // MountainAGeometry mountainA;
+    // auto result = mountainA.buildAcceleration(m_state.context);
 
     // createGeometry(m_state, model);
     m_state.gasHandles.push_back(result.handle);

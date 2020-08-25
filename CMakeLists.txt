@@ -22,7 +22,10 @@ add_library(moana
   src/parsers/obj_parser.cpp
   src/parsers/string_util.cpp
 
+  src/scene/archive.cpp
+  src/scene/gas.cpp
   src/scene/hibiscus_geometry.cpp
+  src/scene/instances_bin.cpp
   src/scene/mountain_a_geometry.cpp
 )
 target_include_directories(moana PUBLIC include)
