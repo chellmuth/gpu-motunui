@@ -13,6 +13,7 @@
 #include "enumerate.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
+#include "moana/io/image.hpp"
 
 namespace moana {
 
@@ -490,29 +491,24 @@ void Driver::launch()
         CHECK_CUDA(cudaDeviceSynchronize());
     }
 
-    float *outputBuffer = (float *)malloc(outputBufferSizeInBytes);
+    std::vector<float> outputBuffer(width * height);
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(outputBuffer),
+        reinterpret_cast<void *>(outputBuffer.data()),
         params.outputBuffer,
         outputBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
+    CHECK_CUDA(cudaDeviceSynchronize());
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            const int index = 3 * (y * width + x);
-            if (outputBuffer[index + 0] > 0) {
-                std::cout << "X ";
-            } else {
-                std::cout << ". ";
-            }
-        }
-        std::cout << std::endl;
-    }
+    Image::save(
+        width,
+        height,
+        outputBuffer,
+        "out.exr"
+    );
 
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));
-    free(outputBuffer);
 }
 
 }

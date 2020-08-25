@@ -16,11 +16,14 @@ add_library(moana
   src/core/camera.cpp
   src/core/transform.cpp
 
+  src/io/image.cpp
+
   src/parsers/obj_parser.cpp
   src/parsers/string_util.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
+target_include_directories(moana PRIVATE ext/tinyexr)
 target_link_libraries(moana CUDA::cudart dl)
 
 add_subdirectory(optix)
