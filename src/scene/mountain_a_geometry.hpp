@@ -6,7 +6,7 @@
 
 namespace moana {
 
-class HibiscusGeometry {
+class MountainAGeometry {
 public:
     GeometryResult buildAcceleration(OptixDeviceContext context);
 };

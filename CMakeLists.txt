@@ -23,6 +23,7 @@ add_library(moana
   src/parsers/string_util.cpp
 
   src/scene/hibiscus_geometry.cpp
+  src/scene/mountain_a_geometry.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
