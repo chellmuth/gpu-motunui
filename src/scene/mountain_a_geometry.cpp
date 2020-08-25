@@ -54,22 +54,16 @@ GeometryResult MountainAGeometry::buildAcceleration(OptixDeviceContext context)
         );
     }
 
-    // const std::vector<std::string> objPaths = {
-    //     moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
-    //     moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
-    //     moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
-    //     moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj"
-    // };
+    const std::vector<std::string> objPaths = {
+        moanaRoot + "/island/obj/isMountainA/archives/xgBreadFruit_archiveBreadFruitBaked.obj"
+    };
 
-    // const std::vector<std::string> binPaths = {
-    //     "../scene/hibiscus-archiveHibiscusLeaf0001_mod.bin",
-    //     "../scene/hibiscus-archiveHibiscusFlower0001_mod.bin",
-    //     "../scene/hibiscus-archiveHibiscusLeaf0002_mod.bin",
-    //     "../scene/hibiscus-archiveHibiscusLeaf0003_mod.bin",
-    // };
+    const std::vector<std::string> binPaths = {
+        "../scene/mountainA-xgBreadFruit_archiveBreadFruitBaked.bin"
+    };
 
-    // Archive archive(binPaths, objPaths);
-    // archive.processRecords(context, records);
+    Archive archive(binPaths, objPaths);
+    archive.processRecords(context, records);
 
     OptixTraversableHandle iasObjectHandle = IAS::iasFromInstanceRecords(context, records);
 
