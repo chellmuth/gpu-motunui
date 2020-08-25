@@ -28,6 +28,7 @@ add_library(moana
   src/scene/ias.cpp
   src/scene/instances_bin.cpp
   src/scene/mountain_a_geometry.cpp
+  src/scene/mountain_b_geometry.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")

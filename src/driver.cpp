@@ -17,6 +17,7 @@
 #include "moana/parsers/obj_parser.hpp"
 #include "scene/hibiscus_geometry.hpp"
 #include "scene/mountain_a_geometry.hpp"
+#include "scene/mountain_b_geometry.hpp"
 
 namespace moana {
 
@@ -624,8 +625,11 @@ void Driver::init()
     // HibiscusGeometry hibiscus;
     // auto result = hibiscus.buildAcceleration(m_state.context);
 
-    MountainAGeometry mountainA;
-    auto result = mountainA.buildAcceleration(m_state.context);
+    // MountainAGeometry mountainA;
+    // auto result = mountainA.buildAcceleration(m_state.context);
+
+    MountainBGeometry mountainB;
+    auto result = mountainB.buildAcceleration(m_state.context);
 
     // createGeometry(m_state, model);
     m_state.gasHandles.push_back(result.handle);
