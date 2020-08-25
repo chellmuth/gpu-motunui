@@ -11,11 +11,11 @@
 
 #include "assert_macros.hpp"
 #include "enumerate.hpp"
-#include "hibiscus_geometry.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
 #include "moana/parsers/obj_parser.hpp"
+#include "scene/hibiscus_geometry.hpp"
 
 namespace moana {
 

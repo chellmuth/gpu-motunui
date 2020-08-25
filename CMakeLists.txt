@@ -12,7 +12,6 @@ find_package(OptiX REQUIRED)
 
 add_library(moana
   src/driver.cpp
-  src/hibiscus_geometry.cpp
   src/scene.cpp
 
   src/core/camera.cpp
@@ -22,9 +21,12 @@ add_library(moana
 
   src/parsers/obj_parser.cpp
   src/parsers/string_util.cpp
+
+  src/scene/hibiscus_geometry.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
+target_include_directories(moana PRIVATE src)
 target_include_directories(moana PRIVATE ext/tinyexr)
 target_compile_definitions(moana PRIVATE MOANA_ROOT="${MOANA_ROOT}")
 target_link_libraries(moana CUDA::cudart dl)
