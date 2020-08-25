@@ -112,6 +112,16 @@ def run():
             "json/isMountainB/isMountainB_xgCocoPalms.json",
             "json/isMountainB/isMountainB_xgFern.json"
         ],
+    )
+    process(
+        "dunesA",
+        "json/isDunesA/isDunesA.json",
+        [
+            "json/isDunesA/isDunesA_xgPalmDebris.json",
+            "json/isDunesA/isDunesA_xgDebris.json",
+            "json/isDunesA/isDunesA_xgHibiscusFlower.json",
+            "json/isDunesA/isDunesA_xgMuskFern.json",
+        ],
         output_cpp=True
     )
 
