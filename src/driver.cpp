@@ -434,8 +434,8 @@ void Driver::launch()
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 10;
-    const int height = 10;
+    const int width = 400;
+    const int height = 400;
 
     Params params;
 
@@ -451,8 +451,8 @@ void Driver::launch()
     ));
 
     Camera camera(
-        Vec3(0.f, 0.f, 0.f),
-        Vec3(0.f, 0.f, -1.f),
+        Vec3(0.f, 0.f, 700.f),
+        Vec3(50.f, 100.f, 0.f),
         Vec3(0.f, 1.f, 0.f),
         35.f / 180.f * M_PI,
         Resolution{ width, height },
@@ -491,7 +491,7 @@ void Driver::launch()
         CHECK_CUDA(cudaDeviceSynchronize());
     }
 
-    std::vector<float> outputBuffer(width * height);
+    std::vector<float> outputBuffer(width * height * 3);
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(outputBuffer.data()),
         params.outputBuffer,

@@ -117,8 +117,8 @@ bool ObjParser::processDoubleFaceVertexAndNormal(const std::string &faceArgs)
         normalIndex0, normalIndex1, normalIndex2
     );
     processTriangle(
-        vertexIndex2, vertexIndex1, vertexIndex3,
-        normalIndex2, normalIndex1, normalIndex3
+        vertexIndex0, vertexIndex2, vertexIndex3,
+        normalIndex0, normalIndex2, normalIndex3
     );
 
     return true;
