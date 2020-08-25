@@ -231,6 +231,9 @@ static OptixTraversableHandle iasFromInstanceRecords(
 GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
 {
     const std::string moanaRoot = MOANA_ROOT;
+
+    const std::string baseObj = moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj";
+
     const std::vector<std::string> archives = {
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
@@ -246,6 +249,38 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
     };
 
     std::vector<OptixInstance> records;
+
+    {
+        std::cout << "Processing base obj: " << baseObj << std::endl;
+
+        std::cout << "  Geometry:" << std::endl;
+        ObjParser objParser(baseObj);
+        auto model = objParser.parse();
+        std::cout << "    Vertex count: " << model.vertexCount << std::endl
+                  << "    Index triplet count: " << model.indexTripletCount << std::endl;
+
+        std::cout << "  GAS:" << std::endl;
+        const GASInfo gasInfo = gasFromObj(context, model);
+        std::cout << "    Output Buffer size(mb): "
+                  << (gasInfo.outputBufferSizeInBytes / (1024. * 1024.))
+                  << std::endl;
+
+        float transform[12] = {
+            1.f, 0.f, 0.f, 0.f,
+            0.f, 1.f, 0.f, 0.f,
+            0.f, 0.f, 1.f, 0.f
+        };
+        Instances instancesResult;
+        instancesResult.transforms = transform;
+        instancesResult.count = 1;
+
+        createOptixInstanceRecords(
+            context,
+            records,
+            instancesResult,
+            gasInfo
+        );
+    }
 
     for (int i = 0; i < 4; i++) {
         const std::string archive = archives[i];
@@ -263,7 +298,6 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
         std::cout << "    Output Buffer size(mb): "
                   << (gasInfo.outputBufferSizeInBytes / (1024. * 1024.))
                   << std::endl;
-
 
         std::cout << "  Instances:" << std::endl;
         const std::string instance = instances[i];
