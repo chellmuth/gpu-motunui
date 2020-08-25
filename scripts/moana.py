@@ -6,6 +6,32 @@ from pathlib import Path
 MoanaPath = Path(os.environ["MOANA_ROOT"]) / "island"
 ScenePath = Path("../scene")
 
+def corrected_transform(transform):
+    return [
+        transform[0],
+        transform[4],
+        transform[8],
+        transform[12],
+        transform[1],
+        transform[5],
+        transform[9],
+        transform[13],
+        transform[2],
+        transform[6],
+        transform[10],
+        transform[14],
+    ]
+
+def write_transforms(filename, transforms):
+    output_file = open(filename, "wb")
+
+    count_bin = struct.pack("i", len(transforms))
+    output_file.write(count_bin)
+
+    for transform in transforms:
+        transform_bin = struct.pack("12f", *transform)
+        output_file.write(transform_bin)
+
 def run():
     instance_digest = json.load(open(MoanaPath / "json/isHibiscus/isHibiscus_xgBonsai.json"))
     archives = instance_digest.keys()
@@ -14,29 +40,24 @@ def run():
         instance_transforms = instance_digest[archive].values()
 
         archive_stem = Path(archive).stem
-        output_file = open(ScenePath / f"hibiscus-{archive_stem}.bin", "wb")
+        output_filename = ScenePath / f"hibiscus-{archive_stem}.bin"
 
-        count_bin = struct.pack("i", len(instance_transforms))
-        output_file.write(count_bin)
+        write_transforms(
+            output_filename,
+            [ corrected_transform(t) for t in instance_transforms ]
+        )
 
-        for instance_transform in instance_transforms:
-            transform_row_major = [
-                instance_transform[0],
-                instance_transform[4],
-                instance_transform[8],
-                instance_transform[12],
-                instance_transform[1],
-                instance_transform[5],
-                instance_transform[9],
-                instance_transform[13],
-                instance_transform[2],
-                instance_transform[6],
-                instance_transform[10],
-                instance_transform[14],
-            ]
+    object_digest = json.load(open(MoanaPath / "json/isHibiscus/isHibiscus.json"))
+    instanced_copies = [
+        copy["transformMatrix"]
+        for copy
+        in object_digest["instancedCopies"].values()
+    ] + [ object_digest["transformMatrix"] ]
 
-            transform_bin = struct.pack("12f", *transform_row_major)
-            output_file.write(transform_bin)
+    write_transforms(
+        ScenePath / "hibiscus-root.bin",
+        [ corrected_transform(t) for t in instanced_copies ]
+    )
 
 if __name__ == "__main__":
     run()

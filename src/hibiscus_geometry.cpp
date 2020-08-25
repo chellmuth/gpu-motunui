@@ -139,7 +139,7 @@ static void createOptixInstanceRecords(
     OptixDeviceContext context,
     std::vector<OptixInstance> &records,
     const Instances &instances,
-    const GASInfo &gasInfo
+    const OptixTraversableHandle &traversableHandle
 ) {
     int offset = records.size();
     for (int i = 0; i < instances.count; i++) {
@@ -154,7 +154,7 @@ static void createOptixInstanceRecords(
         instance.visibilityMask = 255;
         instance.sbtOffset = 0;
         instance.flags = OPTIX_INSTANCE_FLAG_NONE;
-        instance.traversableHandle = gasInfo.handle;
+        instance.traversableHandle = traversableHandle;
 
         records.push_back(instance);
     }
@@ -278,7 +278,7 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
             context,
             records,
             instancesResult,
-            gasInfo
+            gasInfo.handle
         );
     }
 
@@ -308,11 +308,29 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
             context,
             records,
             instancesResult,
-            gasInfo
+            gasInfo.handle
         );
     }
+    OptixTraversableHandle iasObjectHandle = iasFromInstanceRecords(context, records);
 
-    OptixTraversableHandle iasHandle = iasFromInstanceRecords(context, records);
+    std::vector<OptixInstance> rootRecords;
+    {
+        std::cout << "Processing: root" << std::endl;
+
+        std::cout << "  Instances:" << std::endl;
+        const std::string rootInstances = "../scene/hibiscus-root.bin";
+        const Instances instancesResult = parseInstances(rootInstances);
+        std::cout << "    Count: " << instancesResult.count << std::endl;
+
+        createOptixInstanceRecords(
+            context,
+            rootRecords,
+            instancesResult,
+            iasObjectHandle
+        );
+
+    }
+    OptixTraversableHandle iasHandle = iasFromInstanceRecords(context, rootRecords);
 
     return GeometryResult{
         iasHandle,

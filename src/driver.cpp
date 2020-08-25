@@ -428,7 +428,7 @@ static void createModule(OptixState &state)
     moduleCompileOptions.debugLevel = OPTIX_COMPILE_DEBUG_LEVEL_LINEINFO;
 
     state.pipelineCompileOptions.usesMotionBlur = false;
-    state.pipelineCompileOptions.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_LEVEL_INSTANCING;
+    state.pipelineCompileOptions.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY;
     state.pipelineCompileOptions.numPayloadValues = 3;
     state.pipelineCompileOptions.numAttributeValues = 3;
 #ifdef DEBUG
@@ -558,7 +558,7 @@ static void linkPipeline(OptixState &state)
         directCallableStackSizeFromTraversal,
         directCallableStackSizeFromState,
         continuationStackSize,
-        2 // maxTraversableDepth
+        3 // maxTraversableDepth
     ));
 }
 
@@ -639,7 +639,7 @@ void Driver::launch()
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 600;
+    const int width = 1200;
     const int height = 400;
 
     Params params;
@@ -655,35 +655,35 @@ void Driver::launch()
         outputBufferSizeInBytes
     ));
 
-    Camera camera(
-        Vec3(60.f, 0.f, 700.f),
-        Vec3(0.f, 80.f, 0.f),
-        Vec3(0.f, 1.f, 0.f),
-        33.f / 180.f * M_PI,
-        Resolution{ width, height },
-        false
-    );
-
     // Camera camera(
-    //     Vec3(
-    //         3.5526606717518376f,
-    //         850.6418895294337f,
-    //         747.5497754610369f
-    //     ),
-    //     Vec3(
-    //         237.07531671546286f,
-    //         52.9718477246937f,
-    //         -263.9479752910547f
-    //     ),
-    //     Vec3(
-    //         0.1370609562125062f,
-    //         0.7929456689992689f,
-    //         -0.5936762251407878f
-    //     ),
-    //     24.386729394448643f / 180.f * M_PI,
+    //     Vec3(60.f, 0.f, 700.f),
+    //     Vec3(0.f, 80.f, 0.f),
+    //     Vec3(0.f, 1.f, 0.f),
+    //     33.f / 180.f * M_PI,
     //     Resolution{ width, height },
     //     false
     // );
+
+    Camera camera(
+        Vec3(
+            3.5526606717518376f,
+            850.6418895294337f,
+            747.5497754610369f
+        ),
+        Vec3(
+            237.07531671546286f,
+            52.9718477246937f,
+            -263.9479752910547f
+        ),
+        Vec3(
+            0.1370609562125062f,
+            0.7929456689992689f,
+            -0.5936762251407878f
+        ),
+        24.386729394448643f / 180.f * M_PI,
+        Resolution{ width, height },
+        false
+    );
 
     params.camera = camera;
 
