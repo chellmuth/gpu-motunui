@@ -7,7 +7,7 @@
 
 namespace moana {
 
-ObjParser::ObjParser(std::string &objFilename)
+ObjParser::ObjParser(const std::string &objFilename)
     : m_objFilename(objFilename)
 {}
 
@@ -82,13 +82,13 @@ void ObjParser::processNormal(std::string &normalArgs)
 
 void ObjParser::processFace(std::string &faceArgs)
 {
-    if (processSingleFaceVertexAndNormal(faceArgs)) { return; }
-    throw std::runtime_error("Unsupported face pattern");
+    if (processDoubleFaceVertexAndNormal(faceArgs)) { return; }
+    throw std::runtime_error("Unsupported face pattern: " + faceArgs);
 }
 
-bool ObjParser::processSingleFaceVertexAndNormal(const std::string &faceArgs)
+bool ObjParser::processDoubleFaceVertexAndNormal(const std::string &faceArgs)
 {
-    static std::regex expression("(-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+)\\s*");
+    static std::regex expression("(-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+)\\s*");
     std::smatch match;
     std::regex_match(faceArgs, match, expression);
 
@@ -99,14 +99,20 @@ bool ObjParser::processSingleFaceVertexAndNormal(const std::string &faceArgs)
     int vertexIndex0 = std::stoi(match[1]);
     int vertexIndex1 = std::stoi(match[3]);
     int vertexIndex2 = std::stoi(match[5]);
+    int vertexIndex3 = std::stoi(match[7]);
 
     int normalIndex0 = std::stoi(match[2]);
     int normalIndex1 = std::stoi(match[4]);
     int normalIndex2 = std::stoi(match[6]);
+    int normalIndex3 = std::stoi(match[8]);
 
     processTriangle(
         vertexIndex0, vertexIndex1, vertexIndex2,
         normalIndex0, normalIndex1, normalIndex2
+    );
+    processTriangle(
+        vertexIndex2, vertexIndex1, vertexIndex3,
+        normalIndex2, normalIndex1, normalIndex3
     );
 
     return true;

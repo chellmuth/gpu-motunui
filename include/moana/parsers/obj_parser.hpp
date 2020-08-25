@@ -16,7 +16,7 @@ struct ObjResult {
 
 class ObjParser {
 public:
-    ObjParser(std::string &objFilename);
+    ObjParser(const std::string &objFilename);
 
     ObjResult parse();
 
@@ -27,7 +27,7 @@ private:
     void processNormal(std::string &normalArgs);
     void processFace(std::string &faceArgs);
 
-    bool processSingleFaceVertexAndNormal(const std::string &faceArgs);
+    bool processDoubleFaceVertexAndNormal(const std::string &faceArgs);
 
     void processTriangle(
         int vertexIndex0, int vertexIndex1, int vertexIndex2,
