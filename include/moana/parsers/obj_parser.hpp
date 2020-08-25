@@ -4,14 +4,14 @@
 #include <string>
 #include <vector>
 
-#include "moana/parsers/types.hpp"
-
 namespace moana {
 
 struct ObjResult {
-    std::vector<Point> vertices;
-    std::vector<Point> normals;
-    std::vector<Face> faces;
+    std::vector<float> vertices;
+    std::vector<int> indices;
+
+    int vertexCount;
+    int indexTripletCount;
 };
 
 class ObjParser {
@@ -47,9 +47,8 @@ private:
 
     std::string m_objFilename;
 
-    std::vector<Point> m_vertices;
-    std::vector<Point> m_normals;
-    std::vector<Face> m_faces;
+    std::vector<float> m_vertices;
+    std::vector<int> m_indices;
 };
 
 }

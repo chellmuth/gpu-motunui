@@ -22,7 +22,10 @@ ObjResult ObjParser::parse()
 
     ObjResult result;
     result.vertices = m_vertices;
-    result.faces = m_faces;
+    result.vertexCount = m_vertices.size() / 3.f;
+
+    result.indices = m_indices;
+    result.indexTripletCount = m_indices.size() / 3.f;
 
     return result;
 }
@@ -61,7 +64,10 @@ void ObjParser::processVertex(std::string &vertexArgs)
     rest = rest.substr(index);
     float z = std::stof(rest, &index);
 
-    m_vertices.push_back(Point(x, y, z));
+    m_vertices.insert(
+        m_vertices.end(),
+        { x, y, z }
+    );
 }
 
 void ObjParser::processNormal(std::string &normalArgs)
@@ -77,7 +83,7 @@ void ObjParser::processNormal(std::string &normalArgs)
     rest = rest.substr(index);
     float z = std::stof(rest, &index);
 
-    m_normals.push_back(Point(x, y, z));
+    // m_normals.push_back(Point(x, y, z));
 }
 
 void ObjParser::processFace(std::string &faceArgs)
@@ -123,18 +129,12 @@ void ObjParser::processTriangle(
     int normalIndex0, int normalIndex1, int normalIndex2
 ) {
     correctIndices(m_vertices, &vertexIndex0, &vertexIndex1, &vertexIndex2);
-    correctIndices(m_normals, &normalIndex0, &normalIndex1, &normalIndex2);
+    // correctIndices(m_normals, &normalIndex0, &normalIndex1, &normalIndex2);
 
-    const Face face(
-        vertexIndex0,
-        vertexIndex1,
-        vertexIndex2,
-        normalIndex0,
-        normalIndex1,
-        normalIndex2
+    m_indices.insert(
+        m_indices.end(),
+        { vertexIndex0, vertexIndex1, vertexIndex2 }
     );
-
-    m_faces.push_back(face);
 }
 
 template <class T>
