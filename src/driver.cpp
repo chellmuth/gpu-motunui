@@ -221,6 +221,204 @@ static void createGeometry(OptixState &state, const ObjResult &model)
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
 }
 
+static void createInstances(OptixState &state)
+{
+    std::vector<float> transform1 = {
+        0.515481612437928,
+        0.08516036166090636,
+        0.85265844277775,
+        0.0,
+        0.009029136474629525,
+        0.9944543262499203,
+        -0.10478104646041478,
+        0.0,
+        -0.8568530690456307,
+        0.06171147222843346,
+        0.511853995063517,
+        0.0,
+        183.44022,
+        30.927343,
+        -174.708914,
+        1.0
+    };
+    std::vector<float> transform2 = {
+        -0.8205686666791795,
+        -0.010472159890024308,
+        0.36953673312891555,
+        0.0,
+        0.016643853165337303,
+        0.8976801022670159,
+        0.062397244696305885,
+        0.0,
+        -0.369310229233045,
+        0.06372415445588704,
+        -0.8182598528112679,
+        0.0,
+        5383.439475,
+        13.468052,
+        641.810391,
+        1.0
+    };
+    std::vector<float> transform3 = {
+        0.5832246199874493,
+        -0.010472159890024306,
+        0.6853753544647874,
+        0.0,
+        0.055303979870151725,
+        0.8976801022670159,
+        -0.033345221612726364,
+        0.0,
+        -0.6832206908832731,
+        0.06372415445588704,
+        0.5823647651496999,
+        0.0,
+        1117.658295,
+        13.468052,
+        -148.996174,
+        1.0
+    };
+    std::vector<float> transform4 = {
+        -0.8051486219209945,
+        0.08516036166090636,
+        0.5869270903787858,
+        0.0,
+        0.10516935220464743,
+        0.9944543262499203,
+        -1.896501794359726e-05,
+        0.0,
+        -0.5836737992882484,
+        0.061711472228433456,
+        -0.8096397904128854,
+        0.0,
+        -435.311899,
+        30.927343,
+        -174.708914,
+        1.0
+    };
+    std::vector<float> transform5 = {
+        -0.35487126530357416,
+        0.0,
+        0.988213734503746,
+        0.0,
+        0.0,
+        1.05,
+        0.0,
+        0.0,
+        -0.988213734503746,
+        0.0,
+        -0.35487126530357416,
+        0.0,
+        4023.078545,
+        25.852035,
+        -331.751723,
+        1.0
+    };
+
+    constexpr int numInstances = 5;
+
+    CUdeviceptr d_instances;
+    size_t instanceSizeInBytes = sizeof(OptixInstance) * numInstances;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_instances),
+        instanceSizeInBytes
+    ));
+
+    OptixBuildInput instanceInput = {};
+    instanceInput.type = OPTIX_BUILD_INPUT_TYPE_INSTANCES;
+    instanceInput.instanceArray.instances = d_instances;
+    instanceInput.instanceArray.numInstances = numInstances;
+
+    OptixAccelBuildOptions accelOptions = {};
+    accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE;
+    accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD;
+
+    OptixAccelBufferSizes iasBufferSizes;
+    CHECK_OPTIX(optixAccelComputeMemoryUsage(
+        state.context,
+        &accelOptions,
+        &instanceInput,
+        1, // num build inputs
+        &iasBufferSizes
+    ));
+
+    CUdeviceptr d_tempBuffer;
+    CUdeviceptr d_iasOutputBuffer; // fixme (free)
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_tempBuffer),
+        iasBufferSizes.tempSizeInBytes
+    ));
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&d_iasOutputBuffer),
+        iasBufferSizes.outputSizeInBytes
+    ));
+
+    float identity[12] = {
+        1.f, 0.f, 0.f, 0.f,
+        0.f, 1.f, 0.f, 0.f,
+        0.f, 0.f, 1.f, 0.f
+    };
+
+    OptixInstance optixInstances[numInstances];
+    memset(optixInstances, 0, instanceSizeInBytes);
+
+    std::vector<std::vector<float> > transforms = {
+        transform1,
+        transform2,
+        transform3,
+        transform4,
+        transform5
+    };
+
+    for (auto [i, transformColMajor] : enumerate(transforms)) {
+        optixInstances[i].traversableHandle = state.gasHandles[0];
+        optixInstances[i].flags = OPTIX_INSTANCE_FLAG_NONE;
+        optixInstances[i].instanceId = 0;
+        optixInstances[i].sbtOffset = 0;
+        optixInstances[i].visibilityMask = 255;
+
+        float transform[12] = {
+            transformColMajor[0],
+            transformColMajor[4],
+            transformColMajor[8],
+            transformColMajor[12],
+            transformColMajor[1],
+            transformColMajor[5],
+            transformColMajor[9],
+            transformColMajor[13],
+            transformColMajor[2],
+            transformColMajor[6],
+            transformColMajor[10],
+            transformColMajor[14],
+        };
+        memcpy(optixInstances[i].transform, transform, sizeof(float) * 12);
+    }
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(d_instances),
+        &optixInstances,
+        instanceSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+
+    CHECK_OPTIX(optixAccelBuild(
+        state.context,
+        0, // CUDA stream
+        &accelOptions,
+        &instanceInput,
+        1, // num build inputs
+        d_tempBuffer,
+        iasBufferSizes.tempSizeInBytes,
+        d_iasOutputBuffer,
+        iasBufferSizes.outputSizeInBytes,
+        &state.iasHandle,
+        nullptr,
+        0
+    ));
+
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBuffer)));
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_instances)));
+}
+
 static void createModule(OptixState &state)
 {
     OptixModuleCompileOptions moduleCompileOptions = {};
@@ -229,7 +427,7 @@ static void createModule(OptixState &state)
     moduleCompileOptions.debugLevel = OPTIX_COMPILE_DEBUG_LEVEL_LINEINFO;
 
     state.pipelineCompileOptions.usesMotionBlur = false;
-    state.pipelineCompileOptions.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_GAS;
+    state.pipelineCompileOptions.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_LEVEL_INSTANCING;
     state.pipelineCompileOptions.numPayloadValues = 3;
     state.pipelineCompileOptions.numAttributeValues = 3;
 #ifdef DEBUG
@@ -359,7 +557,7 @@ static void linkPipeline(OptixState &state)
         directCallableStackSizeFromTraversal,
         directCallableStackSizeFromState,
         continuationStackSize,
-        1 // maxTraversableDepth
+        2 // maxTraversableDepth
     ));
 }
 
@@ -420,6 +618,7 @@ void Driver::init(const ObjResult &model)
 {
     createContext(m_state);
     createGeometry(m_state, model);
+    createInstances(m_state);
     createModule(m_state);
     createProgramGroups(m_state);
     linkPipeline(m_state);
@@ -434,7 +633,7 @@ void Driver::launch()
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 400;
+    const int width = 1200;
     const int height = 400;
 
     Params params;
@@ -451,16 +650,30 @@ void Driver::launch()
     ));
 
     Camera camera(
-        Vec3(0.f, 0.f, 700.f),
-        Vec3(50.f, 100.f, 0.f),
-        Vec3(0.f, 1.f, 0.f),
-        35.f / 180.f * M_PI,
+        Vec3(
+            3.5526606717518376f,
+            850.6418895294337f,
+            747.5497754610369f
+        ),
+        Vec3(
+            237.07531671546286f,
+            52.9718477246937f,
+            -263.9479752910547f
+        ),
+        Vec3(
+            0.1370609562125062f,
+            0.7929456689992689f,
+            -0.5936762251407878f
+        ),
+        24.386729394448643f / 180.f * M_PI,
         Resolution{ width, height },
         false
     );
     params.camera = camera;
 
-    for (auto [i, handle] : enumerate(m_state.gasHandles)) {
+    OptixTraversableHandle fakeHandles[] = { m_state.iasHandle };
+    // for (auto [i, handle] : enumerate(m_state.gasHandles)) {
+    for (auto [i, handle] : enumerate(fakeHandles)) {
         params.handle = handle;
 
         CHECK_CUDA(cudaMemcpy(

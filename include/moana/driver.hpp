@@ -34,6 +34,8 @@ struct OptixState {
     CUdeviceptr gasOutputBuffer;
     size_t outputBufferSizeInBytes;
     std::vector<void *> gasOutputs;
+
+    OptixTraversableHandle iasHandle;
 };
 
 class Driver {
