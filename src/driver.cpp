@@ -11,6 +11,7 @@
 
 #include "assert_macros.hpp"
 #include "enumerate.hpp"
+#include "hibiscus_geometry.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
@@ -617,6 +618,8 @@ static void createShaderBindingTable(OptixState &state)
 void Driver::init(const ObjResult &model)
 {
     createContext(m_state);
+    HibiscusGeometry hibiscus;
+    auto result = hibiscus.buildAcceleration(m_state.context);
     createGeometry(m_state, model);
     createInstances(m_state);
     createModule(m_state);
