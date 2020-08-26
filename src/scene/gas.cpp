@@ -1,6 +1,7 @@
 #include "scene/gas.hpp"
 
 #include <cuda_runtime.h>
+#include <optix_stubs.h>
 
 #include "assert_macros.hpp"
 
