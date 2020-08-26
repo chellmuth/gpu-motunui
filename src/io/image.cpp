@@ -27,7 +27,7 @@ void save(
     for (int row = 0; row < height; row++) {
         for (int col = 0; col < width; col++) {
             const int pixelIndex = row * width + col;
-            const int exrIndex = row * width + col;
+            const int exrIndex = (height - row - 1) * width + col;
 
             images[0][exrIndex] = radiances[3 * pixelIndex + 0];
             images[1][exrIndex] = radiances[3 * pixelIndex + 1];

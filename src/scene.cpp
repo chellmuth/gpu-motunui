@@ -153,7 +153,7 @@ Camera Scene::getCamera(int width, int height) const
         params.origin,
         params.target,
         params.up,
-        24.386729394448643f,
+        32.503438547851374f / 180.f * M_PI,
         { width, height },
         false
     );
