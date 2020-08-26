@@ -23,6 +23,7 @@ add_library(moana
   src/parsers/string_util.cpp
 
   src/scene/archive.cpp
+  src/scene/container.cpp
   src/scene/dunes_a_geometry.cpp
   src/scene/gas.cpp
   src/scene/hibiscus_geometry.cpp
