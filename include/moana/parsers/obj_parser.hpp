@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace moana {
@@ -21,13 +22,13 @@ public:
     ObjResult parse();
 
 private:
-    void parseLine(std::string &line);
+    void parseLine(std::string_view &line);
 
-    void processVertex(std::string &vertexArgs);
+    void processVertex(std::string_view &vertexArgs);
     void processNormal(std::string &normalArgs);
-    void processFace(std::string &faceArgs);
+    void processFace(std::string_view &faceArgs);
 
-    bool processDoubleFaceVertexAndNormal(const std::string &faceArgs);
+    bool processDoubleFaceVertexAndNormal(std::string_view &faceArgs);
 
     void processTriangle(
         int vertexIndex0, int vertexIndex1, int vertexIndex2,

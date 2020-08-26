@@ -1,7 +1,7 @@
 #include "moana/parsers/obj_parser.hpp"
 
 #include <fstream>
-#include <regex>
+#include <optional>
 
 #include "moana/parsers/string_util.hpp"
 
@@ -17,7 +17,8 @@ ObjResult ObjParser::parse()
 
     std::string line;
     while(std::getline(objFile, line)) {
-        parseLine(line);
+        std::string_view lineView(line);
+        parseLine(lineView);
     }
 
     ObjResult result;
@@ -30,39 +31,40 @@ ObjResult ObjParser::parse()
     return result;
 }
 
-void ObjParser::parseLine(std::string &line)
+void ObjParser::parseLine(std::string_view &line)
 {
     if (line.empty()) { return; }
 
     std::string::size_type spaceIndex = line.find_first_of(" \t");
     if (spaceIndex == std::string::npos) { return; }
 
-    std::string command = line.substr(0, spaceIndex);
+    std::string_view command = line.substr(0, spaceIndex);
     if (command[0] == '#') { return; }
 
-    std::string rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
+    std::optional<std::string_view> rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
+    if (!rest) { return; }
 
     if (command == "v") {
-        processVertex(rest);
-    } else if (command == "vn") {
-        processNormal(rest);
+        processVertex(rest.value());
+    // } else if (command == "vn") {
+    //     processNormal(rest);
     } else if (command == "f") {
-        processFace(rest);
+        processFace(rest.value());
     }
 }
 
-void ObjParser::processVertex(std::string &vertexArgs)
+void ObjParser::processVertex(std::string_view &vertexArgs)
 {
     std::string::size_type index = 0;
-    std::string rest = vertexArgs;
+    std::string_view rest = vertexArgs;
 
-    float x = std::stof(rest, &index);
-
-    rest = rest.substr(index);
-    float y = std::stof(rest, &index);
+    float x = std::stof(rest.data(), &index);
 
     rest = rest.substr(index);
-    float z = std::stof(rest, &index);
+    float y = std::stof(rest.data(), &index);
+
+    rest = rest.substr(index);
+    float z = std::stof(rest.data(), &index);
 
     m_vertices.insert(
         m_vertices.end(),
@@ -86,39 +88,40 @@ void ObjParser::processNormal(std::string &normalArgs)
     // m_normals.push_back(Point(x, y, z));
 }
 
-void ObjParser::processFace(std::string &faceArgs)
+void ObjParser::processFace(std::string_view &faceArgs)
 {
     if (processDoubleFaceVertexAndNormal(faceArgs)) { return; }
-    throw std::runtime_error("Unsupported face pattern: " + faceArgs);
+    throw std::runtime_error("Unsupported face pattern: " + std::string(faceArgs));
 }
 
-bool ObjParser::processDoubleFaceVertexAndNormal(const std::string &faceArgs)
-{
-    static std::regex expression("(-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+)\\s*");
-    std::smatch match;
-    std::regex_match(faceArgs, match, expression);
 
-    if (match.empty()) {
-        return false;
+bool ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
+{
+    int vertexIndices[4];
+    int normalIndices[4];
+
+    std::size_t pos;
+    for (int i = 0; i < 4; i++) {
+        vertexIndices[i] = std::stoi(faceArgs.data(), &pos);
+        faceArgs = faceArgs.substr(pos);
+
+        const std::string::size_type firstSlash = faceArgs.find_first_of("/");
+        faceArgs = faceArgs.substr(firstSlash + 1);
+
+        const std::string::size_type secondSlash = faceArgs.find_first_of("/");
+        faceArgs = faceArgs.substr(secondSlash + 1);
+
+        normalIndices[i] = std::stoi(faceArgs.data(), &pos);
+        faceArgs = faceArgs.substr(pos);
     }
 
-    int vertexIndex0 = std::stoi(match[1]);
-    int vertexIndex1 = std::stoi(match[3]);
-    int vertexIndex2 = std::stoi(match[5]);
-    int vertexIndex3 = std::stoi(match[7]);
-
-    int normalIndex0 = std::stoi(match[2]);
-    int normalIndex1 = std::stoi(match[4]);
-    int normalIndex2 = std::stoi(match[6]);
-    int normalIndex3 = std::stoi(match[8]);
-
     processTriangle(
-        vertexIndex0, vertexIndex1, vertexIndex2,
-        normalIndex0, normalIndex1, normalIndex2
+        vertexIndices[0], vertexIndices[1], vertexIndices[2],
+        normalIndices[0], normalIndices[1], normalIndices[2]
     );
     processTriangle(
-        vertexIndex0, vertexIndex2, vertexIndex3,
-        normalIndex0, normalIndex2, normalIndex3
+        vertexIndices[0], vertexIndices[2], vertexIndices[3],
+        normalIndices[0], normalIndices[2], normalIndices[3]
     );
 
     return true;

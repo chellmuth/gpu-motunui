@@ -1,11 +1,10 @@
 #pragma once
 
-#include <string>
-#include <queue>
+#include <optional>
+#include <string_view>
 
 namespace moana { namespace StringUtil {
 
-std::queue<std::string> tokenize(const std::string &line);
-std::string lTrim(const std::string &token);
+std::optional<std::string_view> lTrim(const std::string_view &token);
 
 } }

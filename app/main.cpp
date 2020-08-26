@@ -21,5 +21,5 @@ int main(int argc, char *argv[])
     driver.launch(Cam::PalmsCam, "palms.exr");
     driver.launch(Cam::RootsCam, "roots.exr");
 
-    exit(0);
+    return 0;
 }
