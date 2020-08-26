@@ -37,7 +37,7 @@ public:
         const float xCanonical = (col + samples.x) / m_resolution.x;
         const float yCanonical = (row + samples.y) / m_resolution.y;
 
-        const float y = yCanonical * height - top;
+        const float y = top - yCanonical * height;
         const float x = xCanonical * width - right;
 
         const Vec3 direction = normalized(Vec3(x, y, -1));
