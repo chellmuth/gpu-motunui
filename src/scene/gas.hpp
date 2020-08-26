@@ -3,10 +3,14 @@
 #include <optix.h>
 
 #include "moana/parsers/obj_parser.hpp"
-#include "scene/types.hpp"
+#include "moana/scene/as_arena.hpp"
 
 namespace moana { namespace GAS {
 
-GASInfo gasInfoFromObjResult(OptixDeviceContext context, const ObjResult &model);
+OptixTraversableHandle gasInfoFromObjResult(
+    OptixDeviceContext context,
+    ASArena &arena,
+    const ObjResult &model
+);
 
 } }

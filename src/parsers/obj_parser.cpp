@@ -1,5 +1,6 @@
 #include "moana/parsers/obj_parser.hpp"
 
+#include <iostream>
 #include <fstream>
 #include <optional>
 
@@ -27,6 +28,10 @@ ObjResult ObjParser::parse()
 
     result.indices = m_indices;
     result.indexTripletCount = m_indices.size() / 3.f;
+
+    std::cout << "  Geometry:" << std::endl
+              << "    Vertex count: " << result.vertexCount << std::endl
+              << "    Index triplet count: " << result.indexTripletCount << std::endl;
 
     return result;
 }
@@ -93,7 +98,6 @@ void ObjParser::processFace(std::string_view &faceArgs)
     if (processDoubleFaceVertexAndNormal(faceArgs)) { return; }
     throw std::runtime_error("Unsupported face pattern: " + std::string(faceArgs));
 }
-
 
 bool ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
 {

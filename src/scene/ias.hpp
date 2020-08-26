@@ -4,7 +4,8 @@
 
 #include <optix.h>
 
-#include "scene/types.hpp"
+#include "moana/scene/as_arena.hpp"
+#include "moana/scene/types.hpp"
 
 namespace moana { namespace IAS {
 
@@ -17,6 +18,7 @@ void createOptixInstanceRecords(
 
 OptixTraversableHandle iasFromInstanceRecords(
     OptixDeviceContext context,
+    ASArena &arena,
     const std::vector<OptixInstance> &records
 );
 

@@ -1,5 +1,7 @@
 #include "scene/gas.hpp"
 
+#include <iostream>
+
 #include <cuda_runtime.h>
 #include <optix_stubs.h>
 
@@ -7,8 +9,11 @@
 
 namespace moana { namespace GAS {
 
-GASInfo gasInfoFromObjResult(OptixDeviceContext context, const ObjResult &model)
-{
+OptixTraversableHandle gasInfoFromObjResult(
+    OptixDeviceContext context,
+    ASArena &arena,
+    const ObjResult &model
+) {
     OptixAccelBuildOptions accelOptions = {};
     accelOptions.buildFlags = OPTIX_BUILD_FLAG_ALLOW_RANDOM_VERTEX_ACCESS; // fixme; use user data
     accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
@@ -63,17 +68,18 @@ GASInfo gasInfoFromObjResult(OptixDeviceContext context, const ObjResult &model)
         &gasBufferSizes
     ));
 
+    std::cout << "  GAS:" << std::endl;
+    std::cout << "    Output Buffer size(mb): "
+              << (gasBufferSizes.outputSizeInBytes / (1024. * 1024.))
+              << std::endl;
+
     CUdeviceptr d_tempBufferGas;
-    CUdeviceptr d_gasOutputBuffer;
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&d_tempBufferGas),
         gasBufferSizes.tempSizeInBytes
     ));
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_gasOutputBuffer),
-        gasBufferSizes.outputSizeInBytes
-    ));
+    CUdeviceptr d_gasOutputBuffer = arena.allocOutput(gasBufferSizes.outputSizeInBytes);
 
     OptixTraversableHandle handle;
     CHECK_OPTIX(optixAccelBuild(
@@ -94,11 +100,7 @@ GASInfo gasInfoFromObjResult(OptixDeviceContext context, const ObjResult &model)
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_indices)));
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
 
-    return GASInfo{
-        handle,
-        d_gasOutputBuffer,
-        gasBufferSizes.outputSizeInBytes
-    };
+    return handle;
 }
 
 } }

@@ -5,6 +5,8 @@
 
 #include <optix.h>
 
+#include "moana/scene/as_arena.hpp"
+
 namespace moana {
 
 class Archive {
@@ -16,6 +18,7 @@ public:
 
     void processRecords(
         OptixDeviceContext context,
+        ASArena &arena,
         std::vector<OptixInstance> &records
     ) const;
 

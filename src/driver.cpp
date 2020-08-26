@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 
 #include <cuda_runtime.h>
 #include <optix_function_table_definition.h>
@@ -54,173 +55,6 @@ static void createContext(OptixState &state)
 
     CUcontext cuContext = 0; // current context
     CHECK_OPTIX(optixDeviceContextCreate(cuContext, &options, &state.context));
-}
-
-static void createGeometry(OptixState &state, const ObjResult &model)
-{
-    OptixAccelBuildOptions accelOptions = {};
-    accelOptions.buildFlags = OPTIX_BUILD_FLAG_NONE; // no build flags
-    accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
-
-    size_t maxTempSizeInBytes = 0;
-    size_t maxOutputSizeInBytes = 0;
-
-    std::vector<ObjResult> models = { model };
-    for (const auto &model : models) {
-        CUdeviceptr d_vertices = 0;
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_vertices),
-            model.vertexCount * 3 * sizeof(float)
-        ));
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(d_vertices),
-            model.vertices.data(),
-            model.vertexCount * 3 * sizeof(float),
-            cudaMemcpyHostToDevice
-        ));
-
-        CUdeviceptr d_indices = 0;
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_indices),
-            model.indexTripletCount * 3 * sizeof(int)
-        ));
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(d_indices),
-            model.indices.data(),
-            model.indexTripletCount * 3 * sizeof(int),
-            cudaMemcpyHostToDevice
-        ));
-
-        // Setup build input
-        uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
-        OptixBuildInput triangleInput = {};
-        triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
-
-        triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
-        triangleInput.triangleArray.numVertices = model.vertexCount;
-        triangleInput.triangleArray.vertexBuffers = &d_vertices;
-
-        triangleInput.triangleArray.numIndexTriplets = model.indexTripletCount;
-        triangleInput.triangleArray.indexFormat = OPTIX_INDICES_FORMAT_UNSIGNED_INT3;
-        triangleInput.triangleArray.indexBuffer = d_indices;
-
-        triangleInput.triangleArray.flags = inputFlags;
-        triangleInput.triangleArray.numSbtRecords = 1;
-
-        // Calculate max memory size
-        OptixAccelBufferSizes gasBufferSizes;
-        CHECK_OPTIX(optixAccelComputeMemoryUsage(
-            state.context,
-            &accelOptions,
-            &triangleInput,
-            1, // build input count
-            &gasBufferSizes
-        ));
-
-        std::cout << "Buffer sizes:"
-                  << " temp=" << (gasBufferSizes.tempSizeInBytes / (1024.f * 1024.f))
-                  << " output(mb)=" << (gasBufferSizes.outputSizeInBytes / (1024.f * 1024.f))
-                  << std::endl;
-
-        maxTempSizeInBytes = std::max(
-            gasBufferSizes.tempSizeInBytes,
-            maxTempSizeInBytes
-        );
-        maxOutputSizeInBytes = std::max(
-            gasBufferSizes.outputSizeInBytes,
-            maxOutputSizeInBytes
-        );
-
-        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
-    }
-
-    std::cout << "Final buffer sizes:"
-              << " temp(mb)=" << (maxTempSizeInBytes / (1024.f * 1024.f))
-              << " output(mb)=" << (maxOutputSizeInBytes / (1024.f * 1024.f))
-              << std::endl;
-
-    // Allocate enough for biggest structure
-    state.outputBufferSizeInBytes = maxOutputSizeInBytes;
-    CUdeviceptr d_tempBufferGas;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_tempBufferGas),
-        maxTempSizeInBytes
-    ));
-
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&state.gasOutputBuffer),
-        state.outputBufferSizeInBytes
-    ));
-
-    for (const auto &model : models) {
-        CUdeviceptr d_vertices = 0;
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_vertices),
-            model.vertexCount * 3 * sizeof(float)
-        ));
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(d_vertices),
-            model.vertices.data(),
-            model.vertexCount * 3 * sizeof(float),
-            cudaMemcpyHostToDevice
-        ));
-
-        CUdeviceptr d_indices = 0;
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_indices),
-            model.indexTripletCount * 3 * sizeof(int)
-        ));
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(d_indices),
-            model.indices.data(),
-            model.indexTripletCount * 3 * sizeof(int),
-            cudaMemcpyHostToDevice
-        ));
-
-        // Setup build input
-        uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
-        OptixBuildInput triangleInput = {};
-        triangleInput.type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
-
-        triangleInput.triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
-        triangleInput.triangleArray.numVertices = model.vertexCount;
-        triangleInput.triangleArray.vertexBuffers = &d_vertices;
-
-        triangleInput.triangleArray.numIndexTriplets = model.indexTripletCount;
-        triangleInput.triangleArray.indexFormat = OPTIX_INDICES_FORMAT_UNSIGNED_INT3;
-        triangleInput.triangleArray.indexBuffer = d_indices;
-
-        triangleInput.triangleArray.flags = inputFlags;
-        triangleInput.triangleArray.numSbtRecords = 1;
-
-        OptixTraversableHandle handle;
-        CHECK_OPTIX(optixAccelBuild(
-            state.context,
-            0, // default CUDA stream
-            &accelOptions,
-            &triangleInput,
-            1, // build input count
-            d_tempBufferGas,
-            maxTempSizeInBytes,
-            state.gasOutputBuffer,
-            state.outputBufferSizeInBytes,
-            &handle,
-            nullptr, 0 // emitted property params
-        ));
-        state.gasHandles.push_back(handle);
-
-        void *gasOutput = malloc(state.outputBufferSizeInBytes);
-        CHECK_CUDA(cudaMemcpy(
-            gasOutput,
-            reinterpret_cast<void *>(state.gasOutputBuffer),
-            state.outputBufferSizeInBytes,
-            cudaMemcpyDeviceToHost
-        ));
-        state.gasOutputs.push_back(gasOutput);
-        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
-    }
-
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
 }
 
 static void createModule(OptixState &state)
@@ -361,12 +195,10 @@ static void linkPipeline(OptixState &state)
         directCallableStackSizeFromTraversal,
         directCallableStackSizeFromState,
         continuationStackSize,
-        // fixme:
         // 1 = obj for small details
-        // 2 = instanced details yields full object
-        // 3 = instanced full object yields scene placement
-        // 4 = container <= Should be unneccesary
-        4 // maxTraversableDepth
+        // 2 = instanced details yields element
+        // 3 = instanced element yields scene object
+        3 // maxTraversableDepth
     ));
 }
 
@@ -427,9 +259,9 @@ void Driver::init()
 {
     createContext(m_state);
 
-    m_state.gasHandles.push_back(Container::createHandle(m_state.context));
-
-    // createGeometry(m_state, model);
+    size_t gb = 1024 * 1024 * 1024;
+    m_state.arena.init(6 * gb);
+    m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 
     createModule(m_state);
     createProgramGroups(m_state);
@@ -461,6 +293,20 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         outputBufferSizeInBytes
     ));
 
+    const size_t depthBufferSizeInBytes = width * height * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.depthBuffer),
+        depthBufferSizeInBytes
+    ));
+
+    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.depthBuffer),
+        depthBuffer.data(),
+        depthBufferSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+
     // Camera camera(
     //     Vec3(60.f, 0.f, 700.f),
     //     Vec3(0.f, 80.f, 0.f),
@@ -475,16 +321,10 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     params.camera = camera;
 
-    for (auto [i, handle] : enumerate(m_state.gasHandles)) {
-        params.handle = handle;
+    for (auto [i, geometry] : enumerate(m_state.geometries)) {
+        m_state.arena.restoreSnapshot(geometry.snapshot);
 
-        // CHECK_CUDA(cudaMemcpy(
-        //     reinterpret_cast<void *>(m_state.gasOutputBuffer),
-        //     m_state.gasOutputs[i],
-        //     m_state.outputBufferSizeInBytes,
-        //     cudaMemcpyHostToDevice
-        // ));
-
+        params.handle = geometry.handle;
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_params),
             &params,

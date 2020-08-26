@@ -7,6 +7,8 @@
 
 #include "moana/core/camera.hpp"
 #include "moana/scene.hpp"
+#include "moana/scene/as_arena.hpp"
+#include "moana/scene/types.hpp"
 
 namespace moana {
 
@@ -18,6 +20,7 @@ struct Params {
     OptixTraversableHandle handle;
 
     float *outputBuffer;
+    float *depthBuffer;
     Camera camera;
 };
 
@@ -36,7 +39,8 @@ struct OptixState {
     size_t outputBufferSizeInBytes;
     std::vector<void *> gasOutputs;
 
-    OptixTraversableHandle iasHandle;
+    ASArena arena;
+    std::vector<GeometryResult> geometries;
 };
 
 class Driver {

@@ -11,6 +11,7 @@ using namespace moana;
 
 struct PerRayData {
     bool isHit;
+    float t;
     Vec3 normal;
 };
 
@@ -53,6 +54,7 @@ extern "C" __global__ void __closesthit__ch()
     const Vec3 normal = normalized(cross(e1, e2));
 
     prd->normal = normal;
+    prd->t = optixGetRayTmax();
 }
 
 extern "C" __global__ void __miss__ms()
@@ -81,6 +83,9 @@ extern "C" __global__ void __raygen__rg()
     PerRayData prd;
     prd.isHit = false;
 
+    const int depthIndex = index.y * dim.x + index.x;
+    const float tMax = params.depthBuffer[depthIndex];
+
     unsigned int p0, p1;
     util::packPointer(&prd, p0, p1);
     optixTrace(
@@ -88,7 +93,7 @@ extern "C" __global__ void __raygen__rg()
         float3{ origin.x(), origin.y(), origin.z() },
         float3{ direction.x(), direction.y(), direction.z() },
         0.f,
-        1e16f,
+        tMax,
         0.f,
         OptixVisibilityMask(255),
         OPTIX_RAY_FLAG_NONE,
@@ -98,6 +103,8 @@ extern "C" __global__ void __raygen__rg()
 
     const int pixelIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
+        params.depthBuffer[depthIndex] = prd.t;
+
         const float cosTheta = fabs(-dot(prd.normal, direction));
         params.outputBuffer[pixelIndex + 0] = cosTheta;
         params.outputBuffer[pixelIndex + 1] = cosTheta;

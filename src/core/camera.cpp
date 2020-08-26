@@ -1,7 +1,6 @@
 #include "moana/core/camera.hpp"
 
 #include <cmath>
-#include <iostream> // fixme
 
 namespace moana {
 

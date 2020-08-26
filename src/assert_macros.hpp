@@ -10,9 +10,9 @@ namespace moana {
 inline void cudaAssert(cudaError_t code, const char *file, int line, bool abort = true)
 {
     if (code != cudaSuccess) {
-        std::cerr << "CUDA error: " <<  cudaGetErrorString(code)
-                  << " file: " << file << " line: " << line
-                  << std::endl;
+        std::cerr << "CUDA error: " <<  cudaGetErrorString(code) << std::endl
+                  << "      file: " << file << std::endl
+                  << "      line: " << line << std::endl;
 
         if (abort) { exit(code); }
     }

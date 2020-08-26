@@ -2,13 +2,14 @@
 
 #include <optix.h>
 
-#include "scene/geometry_result.hpp"
+#include "moana/scene/as_arena.hpp"
+#include "moana/scene/types.hpp"
 
 namespace moana {
 
 class HibiscusGeometry {
 public:
-    GeometryResult buildAcceleration(OptixDeviceContext context);
+    GeometryResult buildAcceleration(OptixDeviceContext context, ASArena &arena);
 };
 
 }

@@ -36,6 +36,7 @@ void createOptixInstanceRecords(
 
 OptixTraversableHandle iasFromInstanceRecords(
     OptixDeviceContext context,
+    ASArena &arena,
     const std::vector<OptixInstance> &records
 ) {
     CUdeviceptr d_instances;
@@ -70,15 +71,12 @@ OptixTraversableHandle iasFromInstanceRecords(
     ));
 
     CUdeviceptr d_tempBuffer;
-    CUdeviceptr d_iasOutputBuffer; // fixme (free)
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&d_tempBuffer),
         iasBufferSizes.tempSizeInBytes
     ));
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_iasOutputBuffer),
-        iasBufferSizes.outputSizeInBytes
-    ));
+
+    CUdeviceptr d_iasOutputBuffer = arena.allocOutput(iasBufferSizes.outputSizeInBytes);
 
     OptixTraversableHandle handle;
     CHECK_OPTIX(optixAccelBuild(

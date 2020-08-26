@@ -11,12 +11,13 @@
 #include "scene/gas.hpp"
 #include "scene/ias.hpp"
 #include "scene/instances_bin.hpp"
-#include "scene/types.hpp"
 
 namespace moana {
 
-GeometryResult MountainBGeometry::buildAcceleration(OptixDeviceContext context)
-{
+GeometryResult MountainBGeometry::buildAcceleration(
+    OptixDeviceContext context,
+    ASArena &arena
+) {
     const std::string moanaRoot = MOANA_ROOT;
 
     const std::string baseObj = moanaRoot + "/island/obj/isMountainB/isMountainB.obj";
@@ -25,17 +26,10 @@ GeometryResult MountainBGeometry::buildAcceleration(OptixDeviceContext context)
     {
         std::cout << "Processing base obj: " << baseObj << std::endl;
 
-        std::cout << "  Geometry:" << std::endl;
         ObjParser objParser(baseObj);
         auto model = objParser.parse();
-        std::cout << "    Vertex count: " << model.vertexCount << std::endl
-                  << "    Index triplet count: " << model.indexTripletCount << std::endl;
 
-        std::cout << "  GAS:" << std::endl;
-        const GASInfo gasInfo = GAS::gasInfoFromObjResult(context, model);
-        std::cout << "    Output Buffer size(mb): "
-                  << (gasInfo.outputBufferSizeInBytes / (1024. * 1024.))
-                  << std::endl;
+        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
 
         float transform[12] = {
             1.f, 0.f, 0.f, 0.f,
@@ -50,7 +44,7 @@ GeometryResult MountainBGeometry::buildAcceleration(OptixDeviceContext context)
             context,
             records,
             instancesResult,
-            gasInfo.handle
+            gasHandle
         );
     }
 
@@ -123,13 +117,15 @@ GeometryResult MountainBGeometry::buildAcceleration(OptixDeviceContext context)
     };
 
     Archive archive(binPaths, objPaths);
-    archive.processRecords(context, records);
+    archive.processRecords(context, arena, records);
 
-    OptixTraversableHandle iasObjectHandle = IAS::iasFromInstanceRecords(context, records);
+    auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records);
 
+    Snapshot snapshot = arena.createSnapshot();
+    arena.releaseAll();
     return GeometryResult{
         iasObjectHandle,
-        {}
+        snapshot
     };
 }
 

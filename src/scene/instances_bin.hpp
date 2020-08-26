@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "scene/types.hpp"
+#include "moana/scene/types.hpp"
 
 namespace moana { namespace InstancesBin {
 

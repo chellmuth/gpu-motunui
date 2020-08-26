@@ -6,116 +6,46 @@
 #include "scene/ironwood_a1_geometry.hpp"
 #include "scene/mountain_a_geometry.hpp"
 #include "scene/mountain_b_geometry.hpp"
-#include "scene/types.hpp"
 
 namespace moana { namespace Container {
 
-OptixTraversableHandle createHandle(OptixDeviceContext context)
-{
-    std::vector<OptixInstance> records;
-
-    {
-        DunesAGeometry geometry;
-        auto result = geometry.buildAcceleration(context);
-
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances instance;
-        instance.transforms = transform;
-        instance.count = 1;
-
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            instance,
-            result.handle
-        );
-    }
+std::vector<GeometryResult> createGeometryResults(
+    OptixDeviceContext context,
+    ASArena &arena
+) {
+    std::vector<GeometryResult> geometries;
     {
         HibiscusGeometry geometry;
-        auto result = geometry.buildAcceleration(context);
+        auto result = geometry.buildAcceleration(context, arena);
 
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances instance;
-        instance.transforms = transform;
-        instance.count = 1;
+        geometries.push_back(result);
+    }
+    {
+        DunesAGeometry geometry;
+        auto result = geometry.buildAcceleration(context, arena);
 
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            instance,
-            result.handle
-        );
+        geometries.push_back(result);
     }
     {
         MountainAGeometry geometry;
-        auto result = geometry.buildAcceleration(context);
+        auto result = geometry.buildAcceleration(context, arena);
 
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances instance;
-        instance.transforms = transform;
-        instance.count = 1;
-
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            instance,
-            result.handle
-        );
+        geometries.push_back(result);
     }
     {
         MountainBGeometry geometry;
-        auto result = geometry.buildAcceleration(context);
+        auto result = geometry.buildAcceleration(context, arena);
 
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances instance;
-        instance.transforms = transform;
-        instance.count = 1;
-
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            instance,
-            result.handle
-        );
+        geometries.push_back(result);
     }
-    // {
-    //     IronwoodA1Geometry geometry;
-    //     auto result = geometry.buildAcceleration(context);
+    {
+        IronwoodA1Geometry geometry;
+        auto result = geometry.buildAcceleration(context, arena);
 
-    //     float transform[12] = {
-    //         1.f, 0.f, 0.f, 0.f,
-    //         0.f, 1.f, 0.f, 0.f,
-    //         0.f, 0.f, 1.f, 0.f
-    //     };
-    //     Instances instance;
-    //     instance.transforms = transform;
-    //     instance.count = 1;
+        geometries.push_back(result);
+    }
 
-    //     IAS::createOptixInstanceRecords(
-    //         context,
-    //         records,
-    //         instance,
-    //         result.handle
-    //     );
-    // }
-
-    return IAS::iasFromInstanceRecords(context, records);
+    return geometries;
 }
 
 } }
