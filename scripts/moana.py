@@ -22,6 +22,7 @@ def corrected_transform(transform):
     ]
 
 def write_transforms(filename, transforms):
+    print("Writing:", filename)
     output_file = open(filename, "wb")
 
     count_bin = struct.pack("i", len(transforms))
@@ -42,7 +43,7 @@ def process(object_name, object_path, archive_paths, output_cpp=False):
     ] + [ object_digest["transformMatrix"] ]
 
     write_transforms(
-        ScenePath / "hibiscus-root.bin",
+        ScenePath / f"{object_name}-root.bin",
         [ corrected_transform(t) for t in instanced_copies ]
     )
 
@@ -121,7 +122,6 @@ def run():
             "json/isDunesA/isDunesA_xgHibiscusFlower.json",
             "json/isDunesA/isDunesA_xgMuskFern.json",
         ],
-        output_cpp=True
     )
 
 if __name__ == "__main__":
