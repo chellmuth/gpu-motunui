@@ -1,4 +1,4 @@
-#include "scene/hibiscus_geometry.hpp"
+#include "scene/ironwood_a1_geometry.hpp"
 
 #include <iostream>
 #include <string>
@@ -15,11 +15,11 @@
 
 namespace moana {
 
-GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
+GeometryResult IronwoodA1Geometry::buildAcceleration(OptixDeviceContext context)
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    const std::string baseObj = moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj";
+    const std::string baseObj = moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1.obj";
 
     std::vector<OptixInstance> records;
     {
@@ -55,17 +55,11 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
     }
 
     const std::vector<std::string> objPaths = {
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj"
+        moanaRoot + "/island/obj/isIronwoodA1/archives/archiveseedpodb_mod.obj",
     };
 
     const std::vector<std::string> binPaths = {
-        "../scene/hibiscus-archiveHibiscusLeaf0001_mod.bin",
-        "../scene/hibiscus-archiveHibiscusFlower0001_mod.bin",
-        "../scene/hibiscus-archiveHibiscusLeaf0002_mod.bin",
-        "../scene/hibiscus-archiveHibiscusLeaf0003_mod.bin",
+        "../scene/ironwoodA1-archiveseedpodb_mod.bin",
     };
 
     Archive archive(binPaths, objPaths);
@@ -73,27 +67,8 @@ GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context)
 
     OptixTraversableHandle iasObjectHandle = IAS::iasFromInstanceRecords(context, records);
 
-    std::vector<OptixInstance> rootRecords;
-    {
-        std::cout << "Processing: root" << std::endl;
-
-        std::cout << "  Instances:" << std::endl;
-        const std::string rootInstances = "../scene/hibiscus-root.bin";
-        const Instances instancesResult = InstancesBin::parse(rootInstances);
-        std::cout << "    Count: " << instancesResult.count << std::endl;
-
-        IAS::createOptixInstanceRecords(
-            context,
-            rootRecords,
-            instancesResult,
-            iasObjectHandle
-        );
-
-    }
-    OptixTraversableHandle iasHandle = IAS::iasFromInstanceRecords(context, rootRecords);
-
     return GeometryResult{
-        iasHandle,
+        iasObjectHandle,
         {}
     };
 }

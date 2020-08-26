@@ -1,4 +1,4 @@
-#include "dunes_a_geometry.hpp"
+#include "scene/dunes_a_geometry.hpp"
 
 #include <iostream>
 #include <string>

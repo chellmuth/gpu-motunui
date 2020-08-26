@@ -123,6 +123,14 @@ def run():
             "json/isDunesA/isDunesA_xgMuskFern.json",
         ],
     )
+    process(
+        "ironwoodA1",
+        "json/isIronwoodA1/isIronwoodA1.json",
+        [
+            "json/isIronwoodA1/isIronwoodA1_xgBonsai.json",
+        ],
+        output_cpp=True
+    )
 
 if __name__ == "__main__":
     run()

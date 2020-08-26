@@ -1,4 +1,4 @@
-#include "mountain_b_geometry.hpp"
+#include "scene/mountain_b_geometry.hpp"
 
 #include <iostream>
 #include <string>
