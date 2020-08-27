@@ -16,7 +16,6 @@ NaupakaAElement::NaupakaAElement()
         "../scene/isNaupakaA-xgBonsai_isNaupakaBon_bon_hero_ALL.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isNaupakaA-root.bin";
 }
 

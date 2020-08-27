@@ -22,7 +22,6 @@ HibiscusYoungElement::HibiscusYoungElement()
         "../scene/isHibiscusYoung-archiveHibiscusFlower0001_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isHibiscusYoung-root.bin";
 }
 

@@ -22,7 +22,6 @@ HibiscusElement::HibiscusElement()
         "../scene/isHibiscus-archiveHibiscusLeaf0002_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isHibiscus-root.bin";
 }
 

@@ -48,7 +48,6 @@ MountainAElement::MountainAElement()
         "../scene/isMountainA-xgCocoPalms_isPalmRig17.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isMountainA-root.bin";
 }
 

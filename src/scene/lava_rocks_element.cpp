@@ -16,7 +16,6 @@ LavaRocksElement::LavaRocksElement()
 
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isLavaRocks-root.bin";
 }
 

@@ -49,40 +49,31 @@ GeometryResult Element::buildAcceleration(
     archive.processRecords(context, arena, records);
 
     auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records);
-    if (m_hasElementInstances) {
-        std::vector<OptixInstance> rootRecords;
-        std::cout << "Processing: root" << std::endl;
 
-        std::cout << "  Instances:" << std::endl;
-        const std::string rootInstances = m_elementInstancesBinPath;
-        const Instances instancesResult = InstancesBin::parse(rootInstances);
-        std::cout << "    Count: " << instancesResult.count << std::endl;
+    std::vector<OptixInstance> rootRecords;
+    std::cout << "Processing: root" << std::endl;
 
-        IAS::createOptixInstanceRecords(
-            context,
-            rootRecords,
-            instancesResult,
-            iasObjectHandle
-        );
+    std::cout << "  Instances:" << std::endl;
+    const std::string rootInstances = m_elementInstancesBinPath;
+    const Instances instancesResult = InstancesBin::parse(rootInstances);
+    std::cout << "    Count: " << instancesResult.count << std::endl;
 
-        auto iasHandle = IAS::iasFromInstanceRecords(context, arena, rootRecords);
+    IAS::createOptixInstanceRecords(
+        context,
+        rootRecords,
+        instancesResult,
+        iasObjectHandle
+    );
 
-        Snapshot snapshot = arena.createSnapshot();
-        arena.releaseAll();
+    auto iasHandle = IAS::iasFromInstanceRecords(context, arena, rootRecords);
 
-        return GeometryResult{
-            iasHandle,
-            snapshot
-        };
-    } else {
-        Snapshot snapshot = arena.createSnapshot();
-        arena.releaseAll();
+    Snapshot snapshot = arena.createSnapshot();
+    arena.releaseAll();
 
-        return GeometryResult{
-            iasObjectHandle,
-            snapshot
-        };
-    }
+    return GeometryResult{
+        iasHandle,
+        snapshot
+    };
 }
 
 }

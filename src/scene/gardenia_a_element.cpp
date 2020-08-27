@@ -38,7 +38,6 @@ GardeniaAElement::GardeniaAElement()
         "../scene/isGardeniaA-archivegardeniaflw0003_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isGardeniaA-root.bin";
 }
 

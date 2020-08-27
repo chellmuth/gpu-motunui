@@ -22,7 +22,6 @@ protected:
     std::vector<std::string> m_objPaths;
     std::vector<std::string> m_binPaths;
 
-    bool m_hasElementInstances;
     std::string m_elementInstancesBinPath;
 };
 

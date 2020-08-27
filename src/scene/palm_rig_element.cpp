@@ -16,7 +16,6 @@ PalmRigElement::PalmRigElement()
 
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isPalmRig-root.bin";
 }
 

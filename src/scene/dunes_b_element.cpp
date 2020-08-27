@@ -50,7 +50,6 @@ DunesBElement::DunesBElement()
         "../scene/isDunesB-xgRoots_archiveroot0008_geo.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isDunesB-root.bin";
 }
 

@@ -16,7 +16,6 @@ KavaElement::KavaElement()
         "../scene/isKava-archive_kava0001_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isKava-root.bin";
 }
 

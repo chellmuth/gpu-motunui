@@ -72,7 +72,6 @@ CoralElement::CoralElement()
         "../scene/isCoral-xgStaghorn_archivecoral_staghorn0003_geo.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isCoral-root.bin";
 }
 

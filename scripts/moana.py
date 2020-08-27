@@ -1,6 +1,7 @@
 import json
 import struct
 import os
+import sys
 from pathlib import Path
 
 import code
@@ -90,34 +91,47 @@ def process(element_name, output_cpp=False):
             f = open(code_path, "w")
             f.write(code_str)
 
-def run():
-    elements = [
-        "isBayCedarA1",
-        # "isBeach",
-        "isCoastline",
-        "isCoral",
-        "isDunesA",
-        "isDunesB",
-        "isGardeniaA",
-        "isHibiscus",
-        "isHibiscusYoung",
-        "isIronwoodA1",
-        "isIronwoodB",
-        "isKava",
-        "isLavaRocks",
-        "isMountainA",
-        "isMountainB",
-        "isNaupakaA",
-        "isPalmDead",
-        "isPalmRig",
-        "isPandanusA",
-        "osOcean",
-    ]
+elements = [
+    "isBayCedarA1",
+    # "isBeach",
+    "isCoastline",
+    "isCoral",
+    "isDunesA",
+    "isDunesB",
+    "isGardeniaA",
+    "isHibiscus",
+    "isHibiscusYoung",
+    "isIronwoodA1",
+    "isIronwoodB",
+    "isKava",
+    "isLavaRocks",
+    "isMountainA",
+    "isMountainB",
+    "isNaupakaA",
+    "isPalmDead",
+    "isPalmRig",
+    "isPandanusA",
+    "osOcean",
+]
 
+def run():
     # process("isBeach", output_cpp=True)
 
     for element in elements:
         process(element, output_cpp=True)
 
+def list_element_jsons():
+    for element_name in elements:
+        json_path = MoanaPath / f"json/{element_name}/{element_name}.json"
+        print(json_path)
+
 if __name__ == "__main__":
-    run()
+    if len(sys.argv) > 1:
+        if sys.argv[-1] == "--list":
+            list_element_jsons()
+        else:
+            print("Unknown argument:", sys.argv[-1])
+            exit(1)
+    else:
+        run()
+

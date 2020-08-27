@@ -78,7 +78,6 @@ namespace moana {{
 {bin_path_items}
     }};
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "{element_instances_bin_path}";
 }}
 

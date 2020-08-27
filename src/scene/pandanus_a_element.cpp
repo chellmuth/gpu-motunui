@@ -16,7 +16,6 @@ PandanusAElement::PandanusAElement()
 
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isPandanusA-root.bin";
 }
 

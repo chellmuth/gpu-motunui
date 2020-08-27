@@ -16,7 +16,6 @@ IronwoodA1Element::IronwoodA1Element()
         "../scene/isIronwoodA1-archiveseedpodb_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isIronwoodA1-root.bin";
 }
 

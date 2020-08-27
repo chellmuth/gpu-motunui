@@ -16,7 +16,6 @@ BayCedarA1Element::BayCedarA1Element()
         "../scene/isBayCedarA1-archivebaycedar0001_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isBayCedarA1-root.bin";
 }
 

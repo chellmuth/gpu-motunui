@@ -186,7 +186,6 @@ BeachElement::BeachElement()
         "../scene/isBeach-xgGroundCover_archiveRock0003_geo.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isBeach-root.bin";
 }
 

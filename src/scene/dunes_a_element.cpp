@@ -80,7 +80,6 @@ DunesAElement::DunesAElement()
         "../scene/isDunesA-xgMuskFern_fern0014_mod.bin",
     };
 
-    m_hasElementInstances = true;
     m_elementInstancesBinPath = "../scene/isDunesA-root.bin";
 }
 
