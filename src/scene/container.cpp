@@ -4,6 +4,7 @@
 
 #include "scene/bay_cedar_a1_element.hpp"
 #include "scene/coastline_element.hpp"
+#include "scene/coral_element.hpp"
 #include "scene/dunes_a_element.hpp"
 #include "scene/element.hpp"
 #include "scene/hibiscus_element.hpp"
@@ -21,13 +22,14 @@ std::vector<GeometryResult> createGeometryResults(
     std::vector<GeometryResult> geometries;
 
     std::unique_ptr<Element> elementPtrs[] = {
-        std::make_unique<BayCedarA1Element>(),
-        std::make_unique<CoastlineElement>(),
-        std::make_unique<DunesAElement>(),
-        std::make_unique<HibiscusElement>(),
-        std::make_unique<IronwoodA1Element>(),
-        std::make_unique<MountainAElement>(),
-        std::make_unique<MountainBElement>(),
+        // std::make_unique<BayCedarA1Element>(),
+        // std::make_unique<CoastlineElement>(),
+        std::make_unique<CoralElement>(),
+        // std::make_unique<DunesAElement>(),
+        // std::make_unique<HibiscusElement>(),
+        // std::make_unique<IronwoodA1Element>(),
+        // std::make_unique<MountainAElement>(),
+        // std::make_unique<MountainBElement>(),
     };
 
     for (const auto &elementPtr : elementPtrs) {

@@ -3,6 +3,8 @@ import struct
 import os
 from pathlib import Path
 
+import code
+
 MoanaPath = Path(os.environ["MOANA_ROOT"]) / "island"
 ScenePath = Path("../scene")
 
@@ -49,6 +51,10 @@ def process(element_name, output_cpp=False):
         [ corrected_transform(t) for t in instanced_copies ]
     )
 
+    has_element_instances = False
+    if len(instanced_copies) > 1:
+        has_element_instances = True
+
     obj_paths = []
     bin_paths = []
 
@@ -78,24 +84,14 @@ def process(element_name, output_cpp=False):
             )
 
     if output_cpp:
-        print(f"{' '*4}m_objPaths = {{")
-        print("\n".join([
-            f"{' ' * 8}moanaRoot + \"/island/{obj_path}\","
-            for obj_path in obj_paths
-        ]))
-        print(f"{' '*4}}};")
-        print()
-        print(f"{' '*4}m_binPaths = {{")
-        print("\n".join([
-            f"{' ' * 8}\"{bin_path}\","
-            for bin_path in bin_paths
-        ]))
-        print(f"{' '*4}}};")
+        print(code.generate_header(element_name))
+        print(code.generate_src(element_name, obj_paths, bin_paths, has_element_instances))
 
 
 def run():
     elements = [
         "isBayCedarA1",
+        # "isBeach",
         "isCoastline",
         "isDunesA",
         "isHibiscus",
@@ -103,8 +99,9 @@ def run():
         "isMountainA",
         "isMountainB",
     ]
-    for element in elements:
-        process(element)
+    process("isCoral", output_cpp=True)
+    # for element in elements:
+    #     process(element)
 
 if __name__ == "__main__":
     run()

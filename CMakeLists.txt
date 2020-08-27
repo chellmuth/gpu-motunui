@@ -27,6 +27,7 @@ add_library(moana
   src/scene/bay_cedar_a1_element.cpp
   src/scene/coastline_element.cpp
   src/scene/container.cpp
+  src/scene/coral_element.cpp
   src/scene/dunes_a_element.cpp
   src/scene/element.cpp
   src/scene/gas.cpp
