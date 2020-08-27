@@ -19,6 +19,7 @@
 #include "scene/mountain_a_element.hpp"
 #include "scene/mountain_b_element.hpp"
 #include "scene/naupaka_a_element.hpp"
+#include "scene/ocean_element.hpp"
 #include "scene/palm_dead_element.hpp"
 #include "scene/palm_rig_element.hpp"
 #include "scene/pandanus_a_element.hpp"
@@ -49,7 +50,8 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<NaupakaAElement>(),
         // std::make_unique<PalmDeadElement>(),
         // std::make_unique<PalmRigElement>(),
-        std::make_unique<PandanusAElement>(),
+        // std::make_unique<PandanusAElement>(),
+        std::make_unique<OceanElement>(),
     };
 
     for (const auto &elementPtr : elementPtrs) {

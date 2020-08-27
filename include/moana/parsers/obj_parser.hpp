@@ -15,6 +15,12 @@ struct ObjResult {
     int indexTripletCount;
 };
 
+enum class ObjFaceFormat {
+    DoubleFaceVertexAndNormal,
+    SingleFaceVertexAndNormal,
+    Unknown
+};
+
 class ObjParser {
 public:
     ObjParser(const std::string &objFilename);
@@ -28,7 +34,8 @@ private:
     void processNormal(std::string &normalArgs);
     void processFace(std::string_view &faceArgs);
 
-    bool processDoubleFaceVertexAndNormal(std::string_view &faceArgs);
+    void processSingleFaceVertexAndNormal(std::string_view &faceArgs);
+    void processDoubleFaceVertexAndNormal(std::string_view &faceArgs);
 
     void processTriangle(
         int vertexIndex0, int vertexIndex1, int vertexIndex2,
@@ -48,6 +55,7 @@ private:
 
     std::string m_objFilename;
 
+    ObjFaceFormat m_faceFormat;
     std::vector<float> m_vertices;
     std::vector<int> m_indices;
 };

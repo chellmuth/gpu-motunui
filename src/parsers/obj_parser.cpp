@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <regex>
 #include <optional>
 
 #include "moana/parsers/string_util.hpp"
@@ -9,7 +10,8 @@
 namespace moana {
 
 ObjParser::ObjParser(const std::string &objFilename)
-    : m_objFilename(objFilename)
+    : m_objFilename(objFilename),
+      m_faceFormat(ObjFaceFormat::Unknown)
 {}
 
 ObjResult ObjParser::parse()
@@ -93,13 +95,77 @@ void ObjParser::processNormal(std::string &normalArgs)
     // m_normals.push_back(Point(x, y, z));
 }
 
+static ObjFaceFormat identityFaceFormat(std::string faceArgs)
+{
+    {
+        static std::regex expression("^(-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+)\\s*");
+        std::smatch match;
+        std::regex_match(faceArgs, match, expression);
+
+        if (!match.empty()) {
+            return ObjFaceFormat::SingleFaceVertexAndNormal;
+        }
+    }
+    {
+        static std::regex expression("^(-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+)\\s*");
+        std::smatch match;
+        std::regex_match(faceArgs, match, expression);
+
+        if (!match.empty()) {
+            return ObjFaceFormat::DoubleFaceVertexAndNormal;
+        }
+    }
+
+    throw std::runtime_error("Unsupported face format: " + faceArgs);
+}
+
 void ObjParser::processFace(std::string_view &faceArgs)
 {
-    if (processDoubleFaceVertexAndNormal(faceArgs)) { return; }
+    if (m_faceFormat == ObjFaceFormat::Unknown) {
+        m_faceFormat = identityFaceFormat(std::string(faceArgs));
+    }
+
+    switch(m_faceFormat) {
+    case ObjFaceFormat::SingleFaceVertexAndNormal: {
+        processSingleFaceVertexAndNormal(faceArgs);
+        return;
+    }
+    case ObjFaceFormat::DoubleFaceVertexAndNormal: {
+        processDoubleFaceVertexAndNormal(faceArgs);
+        return;
+    }
+    }
+
     throw std::runtime_error("Unsupported face pattern: " + std::string(faceArgs));
 }
 
-bool ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
+void ObjParser::processSingleFaceVertexAndNormal(std::string_view &faceArgs)
+{
+    int vertexIndices[3];
+    int normalIndices[3];
+
+    std::size_t pos;
+    for (int i = 0; i < 3; i++) {
+        vertexIndices[i] = std::stoi(faceArgs.data(), &pos);
+        faceArgs = faceArgs.substr(pos);
+
+        const std::string::size_type firstSlash = faceArgs.find_first_of("/");
+        faceArgs = faceArgs.substr(firstSlash + 1);
+
+        const std::string::size_type secondSlash = faceArgs.find_first_of("/");
+        faceArgs = faceArgs.substr(secondSlash + 1);
+
+        normalIndices[i] = std::stoi(faceArgs.data(), &pos);
+        faceArgs = faceArgs.substr(pos);
+    }
+
+    processTriangle(
+        vertexIndices[0], vertexIndices[1], vertexIndices[2],
+        normalIndices[0], normalIndices[1], normalIndices[2]
+    );
+}
+
+void ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
 {
     int vertexIndices[4];
     int normalIndices[4];
@@ -127,8 +193,6 @@ bool ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
         vertexIndices[0], vertexIndices[2], vertexIndices[3],
         normalIndices[0], normalIndices[2], normalIndices[3]
     );
-
-    return true;
 }
 
 void ObjParser::processTriangle(
