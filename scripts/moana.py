@@ -114,7 +114,7 @@ def run():
         "osOcean",
     ]
 
-    # process("isPalmDead", output_cpp=True)
+    # process("isBeach", output_cpp=True)
 
     for element in elements:
         process(element, output_cpp=True)
