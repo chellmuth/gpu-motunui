@@ -45,6 +45,7 @@ add_library(moana
   src/scene/mountain_b_element.cpp
   src/scene/naupaka_a_element.cpp
   src/scene/palm_dead_element.cpp
+  src/scene/palm_rig_element.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
