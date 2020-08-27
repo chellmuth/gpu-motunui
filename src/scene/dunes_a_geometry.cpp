@@ -14,7 +14,7 @@
 
 namespace moana {
 
-GeometryResult DunesAGeometry::buildAcceleration(OptixDeviceContext context, ASArena &arena)
+GeometryResult DunesAElement::buildAcceleration(OptixDeviceContext context, ASArena &arena)
 {
     const std::string moanaRoot = MOANA_ROOT;
 

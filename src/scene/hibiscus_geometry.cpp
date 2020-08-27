@@ -14,7 +14,7 @@
 
 namespace moana {
 
-GeometryResult HibiscusGeometry::buildAcceleration(OptixDeviceContext context, ASArena &arena)
+GeometryResult HibiscusElement::buildAcceleration(OptixDeviceContext context, ASArena &arena)
 {
     const std::string moanaRoot = MOANA_ROOT;
 

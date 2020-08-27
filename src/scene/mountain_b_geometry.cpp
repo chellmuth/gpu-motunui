@@ -14,7 +14,7 @@
 
 namespace moana {
 
-GeometryResult MountainBGeometry::buildAcceleration(
+GeometryResult MountainBElement::buildAcceleration(
     OptixDeviceContext context,
     ASArena &arena
 ) {

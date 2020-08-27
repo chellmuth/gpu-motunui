@@ -1,6 +1,9 @@
 #include "scene/container.hpp"
 
+#include <memory>
+
 #include "scene/dunes_a_geometry.hpp"
+#include "scene/element.hpp"
 #include "scene/hibiscus_geometry.hpp"
 #include "scene/ias.hpp"
 #include "scene/ironwood_a1_geometry.hpp"
@@ -14,33 +17,17 @@ std::vector<GeometryResult> createGeometryResults(
     ASArena &arena
 ) {
     std::vector<GeometryResult> geometries;
-    {
-        HibiscusGeometry geometry;
-        auto result = geometry.buildAcceleration(context, arena);
 
-        geometries.push_back(result);
-    }
-    {
-        DunesAGeometry geometry;
-        auto result = geometry.buildAcceleration(context, arena);
+    std::unique_ptr<Element> elementPtrs[] = {
+        std::make_unique<HibiscusElement>(),
+        std::make_unique<MountainAElement>(),
+        std::make_unique<MountainBElement>(),
+        std::make_unique<DunesAElement>(),
+        std::make_unique<IronwoodA1Element>(),
+    };
 
-        geometries.push_back(result);
-    }
-    {
-        MountainAGeometry geometry;
-        auto result = geometry.buildAcceleration(context, arena);
-
-        geometries.push_back(result);
-    }
-    {
-        MountainBGeometry geometry;
-        auto result = geometry.buildAcceleration(context, arena);
-
-        geometries.push_back(result);
-    }
-    {
-        IronwoodA1Geometry geometry;
-        auto result = geometry.buildAcceleration(context, arena);
+    for (const auto &elementPtr : elementPtrs) {
+        auto result = elementPtr->buildAcceleration(context, arena);
 
         geometries.push_back(result);
     }

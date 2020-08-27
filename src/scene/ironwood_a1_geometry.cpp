@@ -14,7 +14,7 @@
 
 namespace moana {
 
-GeometryResult IronwoodA1Geometry::buildAcceleration(
+GeometryResult IronwoodA1Element::buildAcceleration(
     OptixDeviceContext context,
     ASArena &arena
 ) {
