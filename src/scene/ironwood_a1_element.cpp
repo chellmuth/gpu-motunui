@@ -6,17 +6,28 @@ IronwoodA1Element::IronwoodA1Element()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1.obj";
+    m_elementName = "isIronwoodA1";
 
-    m_objPaths = {
+    m_baseObjs = {
+        moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1.obj",
+    };
+
+    m_objArchivePaths = {
         moanaRoot + "/island/obj/isIronwoodA1/archives/archiveseedpodb_mod.obj",
     };
 
-    m_binPaths = {
-        "../scene/isIronwoodA1-archiveseedpodb_mod.bin",
+    m_elementInstancesBinPaths = {
+        "../scene/isIronwoodA1.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/isIronwoodA1-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {"../scene/isIronwoodA1_xgBonsai--archiveseedpodb_mod.bin"},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {0},
+    };
+
+    }
 
 }

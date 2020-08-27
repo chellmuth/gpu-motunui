@@ -1,6 +1,6 @@
 import json
-import struct
 import os
+import struct
 import sys
 from pathlib import Path
 
@@ -26,6 +26,7 @@ def corrected_transform(transform):
 
 def write_transforms(filename, transforms):
     print("Writing:", filename)
+    print("  Transform count:", len(transforms))
     output_file = open(filename, "wb")
 
     count_bin = struct.pack("i", len(transforms))
@@ -35,55 +36,144 @@ def write_transforms(filename, transforms):
         transform_bin = struct.pack("12f", *transform)
         output_file.write(transform_bin)
 
+def find_all_archives(element_digest):
+    archive_obj_files = set()
+
+    instanced_copies = element_digest.get("instancedCopies", {}).values()
+    instanced_primitives_by_copy = [
+        # .values() discards name, eg "xgCabbage"
+        search_root["instancedPrimitiveJsonFiles"].values()
+        for search_root
+        in [ element_digest ] + list(instanced_copies)
+        if "instancedPrimitiveJsonFiles" in search_root
+    ]
+
+    for instanced_primitives in instanced_primitives_by_copy:
+        archive_primitives_in_copy = [
+            instanced_primitive
+            for instanced_primitive
+            in instanced_primitives
+            if instanced_primitive["type"] == "archive"
+        ]
+
+        for archive_primitives in archive_primitives_in_copy:
+            archive_obj_files.update(archive_primitives["archives"])
+
+    return sorted(archive_obj_files)
+
+def find_archive_digest_filenames(instanced_primitives_digest):
+    return [
+        instanced_primitives["jsonFile"]
+        for instanced_primitives
+        in instanced_primitives_digest.values()
+        if instanced_primitives["type"] == "archive"
+    ]
+
+def process_archive_digest(digest_filename, copy_info):
+    print(f"Processing archive digest: {digest_filename}")
+
+    archive_digest = json.load(open(MoanaPath / digest_filename))
+
+    for obj_filename, transform_items in archive_digest.items():
+        transforms = transform_items.values()
+
+        digest_stem = Path(digest_filename).stem
+        obj_stem = Path(obj_filename).stem
+        bin_filename = ScenePath / f"{digest_stem}--{obj_stem}.bin"
+
+        write_transforms(
+            bin_filename,
+            [ corrected_transform(t) for t in transforms ]
+        )
+        copy_info.transform_bins.append((obj_filename, bin_filename))
+
+class ElementCopyInfo:
+    def __init__(self, transform):
+        self.transforms = [ transform ]
+        self.transform_bins = []
+
 def process(element_name, output_cpp=False):
     print(f"Processing: {element_name}")
 
     element_path = f"json/{element_name}/{element_name}.json"
 
     element_digest = json.load(open(MoanaPath / element_path))
-    instanced_copies = [
-        copy["transformMatrix"]
-        for copy
-        in element_digest.get("instancedCopies", {}).values()
-    ] + [ element_digest["transformMatrix"] ]
+    root_geom_file = element_digest["geomObjFile"]
+    element_copy_infos = {
+        root_geom_file: ElementCopyInfo(element_digest["transformMatrix"])
+    }
 
-    write_transforms(
-        ScenePath / f"{element_name}-root.bin",
-        [ corrected_transform(t) for t in instanced_copies ]
-    )
+    instanced_primitives_digest = element_digest.get("instancedPrimitiveJsonFiles", {})
+    archive_digest_filenames = find_archive_digest_filenames(instanced_primitives_digest)
+    for archive_digest_filename in archive_digest_filenames:
+        process_archive_digest(
+            archive_digest_filename,
+            element_copy_infos[root_geom_file]
+        )
 
-    obj_paths = []
-    bin_paths = []
+    instanced_copies = element_digest.get("instancedCopies", {}).values()
 
-    archive_paths = []
-    instanced_primitives = element_digest.get("instancedPrimitiveJsonFiles", {})
-    for _, instanced_primitive in instanced_primitives.items():
-        if instanced_primitive["type"] == "archive":
-            archive_paths.append(instanced_primitive["jsonFile"])
 
-    # All the archive instanced primitives for the element
-    for archive_path in archive_paths:
-        instance_digest = json.load(open(MoanaPath / archive_path))
-        archives = instance_digest.keys()
+    for instanced_copy in instanced_copies:
+        transform_matrix = instanced_copy["transformMatrix"]
+        geom_obj_file = instanced_copy.get("geomObjFile", None)
+        if geom_obj_file:
+            assert geom_obj_file not in element_copy_infos
+            element_copy_infos[geom_obj_file] = ElementCopyInfo(transform_matrix)
+            current_copy_info = element_copy_infos[geom_obj_file]
+        else:
+            element_copy_infos[root_geom_file].transforms.append(transform_matrix)
+            current_copy_info = element_copy_infos[root_geom_file]
 
-        # Instances grouped by obj inside an archive
-        for archive in archives:
-            instance_transforms = instance_digest[archive].values()
-
-            archive_stem = Path(archive).stem
-            output_filename = ScenePath / f"{element_name}-{archive_stem}.bin"
-
-            obj_paths.append(archive)
-            bin_paths.append(output_filename)
-
-            write_transforms(
-                output_filename,
-                [ corrected_transform(t) for t in instance_transforms ]
+        instanced_primitives_digest = instanced_copy.get("instancedPrimitiveJsonFiles", {})
+        archive_digest_filenames = find_archive_digest_filenames(instanced_primitives_digest)
+        for archive_digest_filename in archive_digest_filenames:
+            process_archive_digest(
+                archive_digest_filename,
+                current_copy_info
             )
+
+    obj_archives = find_all_archives(element_digest)
+
+    base_obj_paths = []
+    element_instances_bin_paths = []
+    primitive_instances_bin_paths = []
+    primitive_instances_handle_indices = []
+    for geom_obj_file, copy_info in element_copy_infos.items():
+        obj_stem = Path(geom_obj_file).stem
+        bin_path = ScenePath / f"{obj_stem}.bin"
+        write_transforms(
+            bin_path,
+            [ corrected_transform(t) for t in copy_info.transforms ]
+        )
+
+        base_obj_paths.append(geom_obj_file)
+        element_instances_bin_paths.append(bin_path)
+
+        primitive_instance_bin_paths = [
+            bin_path
+            for _, bin_path
+            in copy_info.transform_bins
+        ]
+        primitive_instances_bin_paths.append(primitive_instance_bin_paths)
+
+        primitive_instance_handle_indices = [
+            obj_archives.index(obj_path)
+            for obj_path, _
+            in copy_info.transform_bins
+        ]
+        primitive_instances_handle_indices.append(primitive_instance_handle_indices)
 
     if output_cpp:
         print("Writing code:")
-        code_dict = code.generate_code(element_name, obj_paths, bin_paths)
+        code_dict = code.generate_code(
+            element_name,
+            base_obj_paths,
+            element_instances_bin_paths,
+            obj_archives,
+            primitive_instances_bin_paths,
+            primitive_instances_handle_indices
+        )
         for filename, code_str in code_dict.items():
             code_path = Path("../src/") / filename
             print(f"  {code_path}")
@@ -115,8 +205,6 @@ elements = [
 ]
 
 def run():
-    # process("isBeach", output_cpp=True)
-
     for element in elements:
         process(element, output_cpp=True)
 
@@ -134,4 +222,3 @@ if __name__ == "__main__":
             exit(1)
     else:
         run()
-

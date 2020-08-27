@@ -6,17 +6,28 @@ OceanElement::OceanElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/osOcean/osOcean.obj";
+    m_elementName = "osOcean";
 
-    m_objPaths = {
+    m_baseObjs = {
+        moanaRoot + "/island/obj/osOcean/osOcean.obj",
+    };
+
+    m_objArchivePaths = {
 
     };
 
-    m_binPaths = {
-
+    m_elementInstancesBinPaths = {
+        "../scene/osOcean.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/osOcean-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {},
+    };
+
+    }
 
 }

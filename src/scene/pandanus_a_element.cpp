@@ -6,17 +6,28 @@ PandanusAElement::PandanusAElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/isPandanusA/isPandanusA.obj";
+    m_elementName = "isPandanusA";
 
-    m_objPaths = {
+    m_baseObjs = {
+        moanaRoot + "/island/obj/isPandanusA/isPandanusA.obj",
+    };
+
+    m_objArchivePaths = {
 
     };
 
-    m_binPaths = {
-
+    m_elementInstancesBinPaths = {
+        "../scene/isPandanusA.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/isPandanusA-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {},
+    };
+
+    }
 
 }

@@ -19,26 +19,28 @@ OptixTraversableHandle gasInfoFromObjResult(
     accelOptions.operation = OPTIX_BUILD_OPERATION_BUILD; // no updates
 
     CUdeviceptr d_vertices = 0;
+    size_t verticesSizeInBytes = model.vertexCount * 3 * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&d_vertices),
-        model.vertexCount * 3 * sizeof(float)
+        verticesSizeInBytes
     ));
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(d_vertices),
         model.vertices.data(),
-        model.vertexCount * 3 * sizeof(float),
+        verticesSizeInBytes,
         cudaMemcpyHostToDevice
     ));
 
     CUdeviceptr d_indices = 0;
+    size_t indicesSizeInBytes = model.indexTripletCount * 3 * sizeof(int);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&d_indices),
-        model.indexTripletCount * 3 * sizeof(int)
+        indicesSizeInBytes
     ));
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(d_indices),
         model.indices.data(),
-        model.indexTripletCount * 3 * sizeof(int),
+        indicesSizeInBytes,
         cudaMemcpyHostToDevice
     ));
 
@@ -71,6 +73,15 @@ OptixTraversableHandle gasInfoFromObjResult(
     std::cout << "  GAS:" << std::endl;
     std::cout << "    Output Buffer size(mb): "
               << (gasBufferSizes.outputSizeInBytes / (1024. * 1024.))
+              << std::endl
+              << "    Temp Buffer size(mb): "
+              << (gasBufferSizes.tempSizeInBytes / (1024. * 1024.))
+              << std::endl
+              << "    Vertices size(mb): "
+              << (verticesSizeInBytes / (1024. * 1024.))
+              << std::endl
+              << "    Indices size(mb): "
+              << (indicesSizeInBytes / (1024. * 1024.))
               << std::endl;
 
     CUdeviceptr d_tempBufferGas;

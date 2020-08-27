@@ -6,17 +6,28 @@ KavaElement::KavaElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/isKava/isKava.obj";
+    m_elementName = "isKava";
 
-    m_objPaths = {
+    m_baseObjs = {
+        moanaRoot + "/island/obj/isKava/isKava.obj",
+    };
+
+    m_objArchivePaths = {
         moanaRoot + "/island/obj/isKava/archives/archive_kava0001_mod.obj",
     };
 
-    m_binPaths = {
-        "../scene/isKava-archive_kava0001_mod.bin",
+    m_elementInstancesBinPaths = {
+        "../scene/isKava.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/isKava-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {"../scene/isKava_xgBonsai--archive_kava0001_mod.bin"},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {0},
+    };
+
+    }
 
 }

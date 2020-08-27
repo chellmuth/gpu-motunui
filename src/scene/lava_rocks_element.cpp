@@ -6,17 +6,32 @@ LavaRocksElement::LavaRocksElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/isLavaRocks/isLavaRocks.obj";
+    m_elementName = "isLavaRocks";
 
-    m_objPaths = {
+    m_baseObjs = {
+        moanaRoot + "/island/obj/isLavaRocks/isLavaRocks.obj",
+        moanaRoot + "/island/obj/isLavaRocks/isLavaRocks1.obj",
+    };
+
+    m_objArchivePaths = {
 
     };
 
-    m_binPaths = {
-
+    m_elementInstancesBinPaths = {
+        "../scene/isLavaRocks.bin",
+        "../scene/isLavaRocks1.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/isLavaRocks-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {},
+        {},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {},
+        {},
+    };
+
+    }
 
 }

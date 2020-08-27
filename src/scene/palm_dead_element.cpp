@@ -6,17 +6,28 @@ PalmDeadElement::PalmDeadElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/isPalmDead/isPalmDead.obj";
+    m_elementName = "isPalmDead";
 
-    m_objPaths = {
+    m_baseObjs = {
+        moanaRoot + "/island/obj/isPalmDead/isPalmDead.obj",
+    };
+
+    m_objArchivePaths = {
 
     };
 
-    m_binPaths = {
-
+    m_elementInstancesBinPaths = {
+        "../scene/isPalmDead.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/isPalmDead-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {},
+    };
+
+    }
 
 }

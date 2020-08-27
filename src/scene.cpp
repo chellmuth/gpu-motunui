@@ -16,6 +16,8 @@ Camera Scene::getCamera(int width, int height) const
         Vec3 up;
     };
 
+    float fovDegrees = 24.386729394448643f;
+
     CameraParams params;
     switch (m_cam) {
     case Cam::BeachCam: {
@@ -142,6 +144,8 @@ Camera Scene::getCamera(int width, int height) const
             0.9916909792130254f,
             0.07118990669600059f
         );
+
+        fovDegrees = 32.503438547851374f;
         break;
     }
     default: {
@@ -153,7 +157,7 @@ Camera Scene::getCamera(int width, int height) const
         params.origin,
         params.target,
         params.up,
-        32.503438547851374f / 180.f * M_PI,
+        fovDegrees / 180.f * M_PI,
         { width, height },
         false
     );

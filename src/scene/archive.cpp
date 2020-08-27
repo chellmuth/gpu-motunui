@@ -16,9 +16,11 @@ namespace moana {
 
 Archive::Archive(
     const std::vector<std::string> &binPaths,
-    const std::vector<std::string> &objPaths
+    const std::vector<int> &handleIndices,
+    const std::vector<OptixTraversableHandle> &handles
 ) : m_binPaths(binPaths),
-    m_objPaths(objPaths)
+    m_handleIndices(handleIndices),
+    m_handles(handles)
 {}
 
 void Archive::processRecords(
@@ -26,29 +28,24 @@ void Archive::processRecords(
     ASArena &arena,
     std::vector<OptixInstance> &records
 ) const {
-    assert(m_binPaths.size() == m_objPaths.size());
+    assert(m_binPaths.size() == m_handleIndices.size());
 
     const int archivesSize = m_binPaths.size();
     for (int i = 0; i < archivesSize; i++) {
-        const std::string objPath = m_objPaths[i];
+        const std::string binPath = m_binPaths[i];
 
-        std::cout << "Processing " << objPath << std::endl;
-
-        ObjParser objParser(objPath);
-        auto model = objParser.parse();
-
-        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
+        std::cout << "Processing " << binPath << std::endl;
 
         std::cout << "  Instances:" << std::endl;
-        const std::string binPath = m_binPaths[i];
         const Instances instancesResult = InstancesBin::parse(binPath);
         std::cout << "    Count: " << instancesResult.count << std::endl;
 
+        const int handleIndex = m_handleIndices[i];
         IAS::createOptixInstanceRecords(
             context,
             records,
             instancesResult,
-            gasHandle
+            m_handles[handleIndex]
         );
     }
 }

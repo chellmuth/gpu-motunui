@@ -6,23 +6,31 @@ HibiscusElement::HibiscusElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    m_baseObj = moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj";
+    m_elementName = "isHibiscus";
 
-    m_objPaths = {
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
+    m_baseObjs = {
+        moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj",
+    };
+
+    m_objArchivePaths = {
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj",
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
     };
 
-    m_binPaths = {
-        "../scene/isHibiscus-archiveHibiscusLeaf0001_mod.bin",
-        "../scene/isHibiscus-archiveHibiscusFlower0001_mod.bin",
-        "../scene/isHibiscus-archiveHibiscusLeaf0003_mod.bin",
-        "../scene/isHibiscus-archiveHibiscusLeaf0002_mod.bin",
+    m_elementInstancesBinPaths = {
+        "../scene/isHibiscus.bin",
     };
 
-    m_elementInstancesBinPath = "../scene/isHibiscus-root.bin";
-}
+    m_primitiveInstancesBinPaths = {
+        {"../scene/isHibiscus_xgBonsai--archiveHibiscusLeaf0001_mod.bin", "../scene/isHibiscus_xgBonsai--archiveHibiscusFlower0001_mod.bin", "../scene/isHibiscus_xgBonsai--archiveHibiscusLeaf0003_mod.bin", "../scene/isHibiscus_xgBonsai--archiveHibiscusLeaf0002_mod.bin"},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {1, 0, 3, 2},
+    };
+
+    }
 
 }

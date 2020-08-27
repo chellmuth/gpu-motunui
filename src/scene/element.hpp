@@ -18,9 +18,13 @@ public:
     );
 
 protected:
-    std::string m_baseObj;
-    std::vector<std::string> m_objPaths;
-    std::vector<std::string> m_binPaths;
+    std::string m_elementName;
+
+    std::vector<std::string> m_baseObjs;
+    std::vector<std::string> m_elementInstancesBinPaths;
+    std::vector<std::string> m_objArchivePaths;
+    std::vector<std::vector<std::string> > m_primitiveInstancesBinPaths;
+    std::vector<std::vector<int> > m_primitiveInstancesHandleIndices;
 
     std::string m_elementInstancesBinPath;
 };
