@@ -39,6 +39,7 @@ add_library(moana
   src/scene/instances_bin.cpp
   src/scene/ironwood_a1_element.cpp
   src/scene/ironwood_b_element.cpp
+  src/scene/kava_element.cpp
   src/scene/mountain_a_element.cpp
   src/scene/mountain_b_element.cpp
 )
