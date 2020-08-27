@@ -32,25 +32,25 @@ def write_transforms(filename, transforms):
         transform_bin = struct.pack("12f", *transform)
         output_file.write(transform_bin)
 
-def process(object_name, object_path, archive_paths, output_cpp=False):
-    print(f"Processing: {object_name}")
+def process(element_name, element_path, archive_paths, output_cpp=False):
+    print(f"Processing: {element_name}")
 
-    object_digest = json.load(open(MoanaPath / object_path))
+    element_digest = json.load(open(MoanaPath / element_path))
     instanced_copies = [
         copy["transformMatrix"]
         for copy
-        in object_digest.get("instancedCopies", {}).values()
-    ] + [ object_digest["transformMatrix"] ]
+        in element_digest.get("instancedCopies", {}).values()
+    ] + [ element_digest["transformMatrix"] ]
 
     write_transforms(
-        ScenePath / f"{object_name}-root.bin",
+        ScenePath / f"{element_name}-root.bin",
         [ corrected_transform(t) for t in instanced_copies ]
     )
 
     obj_paths = []
     bin_paths = []
 
-    # All the archives for the object
+    # All the archives for the element
     for archive_path in archive_paths:
         instance_digest = json.load(open(MoanaPath / archive_path))
         archives = instance_digest.keys()
@@ -60,7 +60,7 @@ def process(object_name, object_path, archive_paths, output_cpp=False):
             instance_transforms = instance_digest[archive].values()
 
             archive_stem = Path(archive).stem
-            output_filename = ScenePath / f"{object_name}-{archive_stem}.bin"
+            output_filename = ScenePath / f"{element_name}-{archive_stem}.bin"
 
             obj_paths.append(archive)
             bin_paths.append(output_filename)
