@@ -10,6 +10,7 @@
 #include "scene/element.hpp"
 #include "scene/gardenia_a_element.hpp"
 #include "scene/hibiscus_element.hpp"
+#include "scene/hibiscus_young_element.hpp"
 #include "scene/ias.hpp"
 #include "scene/ironwood_a1_element.hpp"
 #include "scene/mountain_a_element.hpp"
@@ -29,8 +30,9 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<CoralElement>(),
         // std::make_unique<DunesAElement>(),
         // std::make_unique<DunesBElement>(),
-        std::make_unique<GardeniaAElement>(),
+        // std::make_unique<GardeniaAElement>(),
         // std::make_unique<HibiscusElement>(),
+        std::make_unique<HibiscusYoungElement>(),
         // std::make_unique<IronwoodA1Element>(),
         // std::make_unique<MountainAElement>(),
         // std::make_unique<MountainBElement>(),

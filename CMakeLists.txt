@@ -34,6 +34,7 @@ add_library(moana
   src/scene/gardenia_a_element.cpp
   src/scene/gas.cpp
   src/scene/hibiscus_element.cpp
+  src/scene/hibiscus_young_element.cpp
   src/scene/ias.cpp
   src/scene/instances_bin.cpp
   src/scene/ironwood_a1_element.cpp
