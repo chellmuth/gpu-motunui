@@ -29,6 +29,7 @@ add_library(moana
   src/scene/container.cpp
   src/scene/coral_element.cpp
   src/scene/dunes_a_element.cpp
+  src/scene/dunes_b_element.cpp
   src/scene/element.cpp
   src/scene/gas.cpp
   src/scene/hibiscus_element.cpp

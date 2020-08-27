@@ -93,13 +93,15 @@ def run():
         "isBayCedarA1",
         # "isBeach",
         "isCoastline",
+        "isCoral",
         "isDunesA",
+        "isDunesB",
         "isHibiscus",
         "isIronwoodA1",
         "isMountainA",
         "isMountainB",
     ]
-    process("isCoral", output_cpp=True)
+    process("isDunesB", output_cpp=True)
     # for element in elements:
     #     process(element)
 
