@@ -129,6 +129,14 @@ def run():
         [
             "json/isIronwoodA1/isIronwoodA1_xgBonsai.json",
         ],
+    )
+    process(
+        "coastline",
+        "json/isCoastline/isCoastline.json",
+        [
+            "json/isCoastline/isCoastline_xgPalmDebris.json",
+            "json/isCoastline/isCoastline_xgFibers.json",
+        ],
         output_cpp=True
     )
 

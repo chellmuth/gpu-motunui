@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "scene/coastline_geometry.hpp"
 #include "scene/dunes_a_geometry.hpp"
 #include "scene/element.hpp"
 #include "scene/hibiscus_geometry.hpp"
@@ -19,11 +20,12 @@ std::vector<GeometryResult> createGeometryResults(
     std::vector<GeometryResult> geometries;
 
     std::unique_ptr<Element> elementPtrs[] = {
+        std::make_unique<CoastlineElement>(),
+        std::make_unique<DunesAElement>(),
         std::make_unique<HibiscusElement>(),
+        std::make_unique<IronwoodA1Element>(),
         std::make_unique<MountainAElement>(),
         std::make_unique<MountainBElement>(),
-        std::make_unique<DunesAElement>(),
-        std::make_unique<IronwoodA1Element>(),
     };
 
     for (const auto &elementPtr : elementPtrs) {

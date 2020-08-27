@@ -24,6 +24,7 @@ add_library(moana
 
   src/scene/archive.cpp
   src/scene/as_arena.cpp
+  src/scene/coastline_geometry.cpp
   src/scene/container.cpp
   src/scene/dunes_a_geometry.cpp
   src/scene/gas.cpp
