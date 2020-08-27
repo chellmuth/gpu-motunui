@@ -1,54 +1,14 @@
 #include "scene/mountain_b_element.hpp"
 
-#include <iostream>
-#include <string>
-
-#include <cuda_runtime.h>
-
-#include "assert_macros.hpp"
-#include "moana/parsers/obj_parser.hpp"
-#include "scene/archive.hpp"
-#include "scene/gas.hpp"
-#include "scene/ias.hpp"
-#include "scene/instances_bin.hpp"
-
 namespace moana {
 
-GeometryResult MountainBElement::buildAcceleration(
-    OptixDeviceContext context,
-    ASArena &arena
-) {
+MountainBElement::MountainBElement()
+{
     const std::string moanaRoot = MOANA_ROOT;
 
-    const std::string baseObj = moanaRoot + "/island/obj/isMountainB/isMountainB.obj";
+    m_baseObj = moanaRoot + "/island/obj/isMountainB/isMountainB.obj";
 
-    std::vector<OptixInstance> records;
-    {
-        std::cout << "Processing base obj: " << baseObj << std::endl;
-
-        ObjParser objParser(baseObj);
-        auto model = objParser.parse();
-
-        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
-
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances instancesResult;
-        instancesResult.transforms = transform;
-        instancesResult.count = 1;
-
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            instancesResult,
-            gasHandle
-        );
-    }
-
-    const std::vector<std::string> objPaths = {
+    m_objPaths = {
         moanaRoot + "/island/obj/isMountainB/archives/xgFoliageB_treeMadronaBaked_canopyOnly_lo.obj",
         moanaRoot + "/island/obj/isMountainB/archives/xgFoliageC_treeMadronaBaked_canopyOnly_lo.obj",
         moanaRoot + "/island/obj/isMountainB/archives/xgFoliageA_treeMadronaBaked_canopyOnly_lo.obj",
@@ -82,7 +42,7 @@ GeometryResult MountainBElement::buildAcceleration(
         moanaRoot + "/island/obj/isMountainB/archives/xgFern_fern0003_mod.obj",
     };
 
-    const std::vector<std::string> binPaths = {
+    m_binPaths = {
         "../scene/mountainB-xgFoliageB_treeMadronaBaked_canopyOnly_lo.bin",
         "../scene/mountainB-xgFoliageC_treeMadronaBaked_canopyOnly_lo.bin",
         "../scene/mountainB-xgFoliageA_treeMadronaBaked_canopyOnly_lo.bin",
@@ -116,17 +76,8 @@ GeometryResult MountainBElement::buildAcceleration(
         "../scene/mountainB-xgFern_fern0003_mod.bin",
     };
 
-    Archive archive(binPaths, objPaths);
-    archive.processRecords(context, arena, records);
-
-    auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records);
-
-    Snapshot snapshot = arena.createSnapshot();
-    arena.releaseAll();
-    return GeometryResult{
-        iasObjectHandle,
-        snapshot
-    };
+    m_hasElementInstances = false;
+    m_elementInstancesBinPath = "";
 }
 
 }

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 #include <optix.h>
 
 #include "moana/scene/as_arena.hpp"
@@ -12,7 +15,15 @@ public:
     virtual GeometryResult buildAcceleration(
         OptixDeviceContext context,
         ASArena &arena
-    ) = 0;
+    );
+
+protected:
+    std::string m_baseObj;
+    std::vector<std::string> m_objPaths;
+    std::vector<std::string> m_binPaths;
+
+    bool m_hasElementInstances;
+    std::string m_elementInstancesBinPath;
 };
 
 }

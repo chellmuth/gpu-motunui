@@ -1,52 +1,14 @@
 #include "scene/dunes_a_element.hpp"
 
-#include <iostream>
-#include <string>
-
-#include <cuda_runtime.h>
-
-#include "assert_macros.hpp"
-#include "moana/parsers/obj_parser.hpp"
-#include "scene/archive.hpp"
-#include "scene/gas.hpp"
-#include "scene/ias.hpp"
-#include "scene/instances_bin.hpp"
-
 namespace moana {
 
-GeometryResult DunesAElement::buildAcceleration(OptixDeviceContext context, ASArena &arena)
+DunesAElement::DunesAElement()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
-    const std::string baseObj = moanaRoot + "/island/obj/isDunesA/isDunesA.obj";
+    m_baseObj = moanaRoot + "/island/obj/isDunesA/isDunesA.obj";
 
-    std::vector<OptixInstance> records;
-    {
-        std::cout << "Processing base obj: " << baseObj << std::endl;
-
-        ObjParser objParser(baseObj);
-        auto model = objParser.parse();
-
-        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
-
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances instancesResult;
-        instancesResult.transforms = transform;
-        instancesResult.count = 1;
-
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            instancesResult,
-            gasHandle
-        );
-    }
-
-    const std::vector<std::string> objPaths = {
+    m_objPaths = {
         moanaRoot + "/island/obj/isDunesA/archives/xgPalmDebris_archivePalmdead0004_mod.obj",
         moanaRoot + "/island/obj/isDunesA/archives/xgPalmDebris_archiveLeaflet0124_geo.obj",
         moanaRoot + "/island/obj/isDunesA/archives/xgPalmDebris_archiveLeaflet0126_geo.obj",
@@ -82,7 +44,7 @@ GeometryResult DunesAElement::buildAcceleration(OptixDeviceContext context, ASAr
         moanaRoot + "/island/obj/isDunesA/archives/xgMuskFern_fern0014_mod.obj",
     };
 
-    const std::vector<std::string> binPaths = {
+    m_binPaths = {
         "../scene/dunesA-xgPalmDebris_archivePalmdead0004_mod.bin",
         "../scene/dunesA-xgPalmDebris_archiveLeaflet0124_geo.bin",
         "../scene/dunesA-xgPalmDebris_archiveLeaflet0126_geo.bin",
@@ -118,17 +80,8 @@ GeometryResult DunesAElement::buildAcceleration(OptixDeviceContext context, ASAr
         "../scene/dunesA-xgMuskFern_fern0014_mod.bin",
     };
 
-    Archive archive(binPaths, objPaths);
-    archive.processRecords(context, arena, records);
-
-    auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records);
-
-    Snapshot snapshot = arena.createSnapshot();
-    arena.releaseAll();
-    return GeometryResult{
-        iasObjectHandle,
-        snapshot
-    };
+    m_hasElementInstances = false;
+    m_elementInstancesBinPath = "";
 }
 
 }
