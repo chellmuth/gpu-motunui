@@ -1,4 +1,4 @@
-#include "scene/coastline_geometry.hpp"
+#include "scene/coastline_element.hpp"
 
 #include <iostream>
 #include <string>

@@ -1,4 +1,4 @@
-#include "scene/ironwood_a1_geometry.hpp"
+#include "scene/hibiscus_element.hpp"
 
 #include <iostream>
 #include <string>
@@ -14,13 +14,11 @@
 
 namespace moana {
 
-GeometryResult IronwoodA1Element::buildAcceleration(
-    OptixDeviceContext context,
-    ASArena &arena
-) {
+GeometryResult HibiscusElement::buildAcceleration(OptixDeviceContext context, ASArena &arena)
+{
     const std::string moanaRoot = MOANA_ROOT;
 
-    const std::string baseObj = moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1.obj";
+    const std::string baseObj = moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj";
 
     std::vector<OptixInstance> records;
     {
@@ -49,11 +47,17 @@ GeometryResult IronwoodA1Element::buildAcceleration(
     }
 
     const std::vector<std::string> objPaths = {
-        moanaRoot + "/island/obj/isIronwoodA1/archives/archiveseedpodb_mod.obj",
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj"
     };
 
     const std::vector<std::string> binPaths = {
-        "../scene/ironwoodA1-archiveseedpodb_mod.bin",
+        "../scene/hibiscus-archiveHibiscusLeaf0001_mod.bin",
+        "../scene/hibiscus-archiveHibiscusFlower0001_mod.bin",
+        "../scene/hibiscus-archiveHibiscusLeaf0002_mod.bin",
+        "../scene/hibiscus-archiveHibiscusLeaf0003_mod.bin",
     };
 
     Archive archive(binPaths, objPaths);
@@ -66,7 +70,7 @@ GeometryResult IronwoodA1Element::buildAcceleration(
         std::cout << "Processing: root" << std::endl;
 
         std::cout << "  Instances:" << std::endl;
-        const std::string rootInstances = "../scene/ironwoodA1-root.bin";
+        const std::string rootInstances = "../scene/hibiscus-root.bin";
         const Instances instancesResult = InstancesBin::parse(rootInstances);
         std::cout << "    Count: " << instancesResult.count << std::endl;
 

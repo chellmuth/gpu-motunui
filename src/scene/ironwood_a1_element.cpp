@@ -1,4 +1,4 @@
-#include "scene/hibiscus_geometry.hpp"
+#include "scene/ironwood_a1_element.hpp"
 
 #include <iostream>
 #include <string>
@@ -14,11 +14,13 @@
 
 namespace moana {
 
-GeometryResult HibiscusElement::buildAcceleration(OptixDeviceContext context, ASArena &arena)
-{
+GeometryResult IronwoodA1Element::buildAcceleration(
+    OptixDeviceContext context,
+    ASArena &arena
+) {
     const std::string moanaRoot = MOANA_ROOT;
 
-    const std::string baseObj = moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj";
+    const std::string baseObj = moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1.obj";
 
     std::vector<OptixInstance> records;
     {
@@ -47,17 +49,11 @@ GeometryResult HibiscusElement::buildAcceleration(OptixDeviceContext context, AS
     }
 
     const std::vector<std::string> objPaths = {
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj"
+        moanaRoot + "/island/obj/isIronwoodA1/archives/archiveseedpodb_mod.obj",
     };
 
     const std::vector<std::string> binPaths = {
-        "../scene/hibiscus-archiveHibiscusLeaf0001_mod.bin",
-        "../scene/hibiscus-archiveHibiscusFlower0001_mod.bin",
-        "../scene/hibiscus-archiveHibiscusLeaf0002_mod.bin",
-        "../scene/hibiscus-archiveHibiscusLeaf0003_mod.bin",
+        "../scene/ironwoodA1-archiveseedpodb_mod.bin",
     };
 
     Archive archive(binPaths, objPaths);
@@ -70,7 +66,7 @@ GeometryResult HibiscusElement::buildAcceleration(OptixDeviceContext context, AS
         std::cout << "Processing: root" << std::endl;
 
         std::cout << "  Instances:" << std::endl;
-        const std::string rootInstances = "../scene/hibiscus-root.bin";
+        const std::string rootInstances = "../scene/ironwoodA1-root.bin";
         const Instances instancesResult = InstancesBin::parse(rootInstances);
         std::cout << "    Count: " << instancesResult.count << std::endl;
 

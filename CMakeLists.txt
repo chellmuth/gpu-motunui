@@ -24,16 +24,16 @@ add_library(moana
 
   src/scene/archive.cpp
   src/scene/as_arena.cpp
-  src/scene/coastline_geometry.cpp
+  src/scene/coastline_element.cpp
   src/scene/container.cpp
-  src/scene/dunes_a_geometry.cpp
+  src/scene/dunes_a_element.cpp
   src/scene/gas.cpp
-  src/scene/hibiscus_geometry.cpp
+  src/scene/hibiscus_element.cpp
   src/scene/ias.cpp
   src/scene/instances_bin.cpp
-  src/scene/ironwood_a1_geometry.cpp
-  src/scene/mountain_a_geometry.cpp
-  src/scene/mountain_b_geometry.cpp
+  src/scene/ironwood_a1_element.cpp
+  src/scene/mountain_a_element.cpp
+  src/scene/mountain_b_element.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")

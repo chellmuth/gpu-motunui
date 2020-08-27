@@ -2,14 +2,14 @@
 
 #include <memory>
 
-#include "scene/coastline_geometry.hpp"
-#include "scene/dunes_a_geometry.hpp"
+#include "scene/coastline_element.hpp"
+#include "scene/dunes_a_element.hpp"
 #include "scene/element.hpp"
-#include "scene/hibiscus_geometry.hpp"
+#include "scene/hibiscus_element.hpp"
 #include "scene/ias.hpp"
-#include "scene/ironwood_a1_geometry.hpp"
-#include "scene/mountain_a_geometry.hpp"
-#include "scene/mountain_b_geometry.hpp"
+#include "scene/ironwood_a1_element.hpp"
+#include "scene/mountain_a_element.hpp"
+#include "scene/mountain_b_element.hpp"
 
 namespace moana { namespace Container {
 
