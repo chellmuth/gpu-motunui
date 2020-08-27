@@ -1,15 +1,29 @@
 def _class_name_from_element_name(element_name):
     return f"{element_name[2:]}Element"
 
-def _header_filename_from_element_name(element_name):
-    stem = "".join([
+def _file_stem_from_element_name(element_name):
+    return "".join([
         "_" + letter.lower() if letter.isupper() else letter
         for letter in element_name[2:]
     ]).lstrip("_") + "_element"
 
+def _header_filename_from_element_name(element_name):
+    stem = _file_stem_from_element_name(element_name)
     return f"scene/{stem}.hpp"
 
-def generate_header(element_name):
+def _source_filename_from_element_name(element_name):
+    stem = _file_stem_from_element_name(element_name)
+    return f"scene/{stem}.cpp"
+
+def generate_code(element_name, obj_paths, bin_paths):
+    header_filename = _header_filename_from_element_name(element_name)
+    source_filename = _source_filename_from_element_name(element_name)
+    return {
+        header_filename: _generate_header(element_name),
+        source_filename: _generate_src(element_name, obj_paths, bin_paths)
+    }
+
+def _generate_header(element_name):
     class_name = _class_name_from_element_name(element_name)
 
     return f"""\
@@ -27,7 +41,7 @@ public:
 }}
 """
 
-def generate_src(element_name, obj_paths, bin_paths, has_element_instances):
+def _generate_src(element_name, obj_paths, bin_paths):
     class_name = _class_name_from_element_name(element_name)
     header_filename = _header_filename_from_element_name(element_name)
 
@@ -43,12 +57,7 @@ def generate_src(element_name, obj_paths, bin_paths, has_element_instances):
         in bin_paths
     ])
 
-    if has_element_instances:
-        element_instances_boolean = "true"
-        element_instances_bin_path = f"../scene/{element_name}-root.bin"
-    else:
-        element_instances_boolean = "false"
-        element_instances_bin_path = ""
+    element_instances_bin_path = f"../scene/{element_name}-root.bin"
 
     return f"""\
 #include "{header_filename}"
@@ -69,7 +78,7 @@ namespace moana {{
 {bin_path_items}
     }};
 
-    m_hasElementInstances = {element_instances_boolean};
+    m_hasElementInstances = true;
     m_elementInstancesBinPath = "{element_instances_bin_path}";
 }}
 

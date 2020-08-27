@@ -16,8 +16,8 @@ PalmDeadElement::PalmDeadElement()
 
     };
 
-    m_hasElementInstances = false;
-    m_elementInstancesBinPath = "";
+    m_hasElementInstances = true;
+    m_elementInstancesBinPath = "../scene/isPalmDead-root.bin";
 }
 
 }

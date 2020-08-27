@@ -48,10 +48,10 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<MountainAElement>(),
         // std::make_unique<MountainBElement>(),
         // std::make_unique<NaupakaAElement>(),
-        // std::make_unique<PalmDeadElement>(),
+        std::make_unique<PalmDeadElement>(),
         // std::make_unique<PalmRigElement>(),
         // std::make_unique<PandanusAElement>(),
-        std::make_unique<OceanElement>(),
+        // std::make_unique<OceanElement>(),
     };
 
     for (const auto &elementPtr : elementPtrs) {

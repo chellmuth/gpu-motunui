@@ -51,10 +51,6 @@ def process(element_name, output_cpp=False):
         [ corrected_transform(t) for t in instanced_copies ]
     )
 
-    has_element_instances = False
-    if len(instanced_copies) > 1:
-        has_element_instances = True
-
     obj_paths = []
     bin_paths = []
 
@@ -85,9 +81,14 @@ def process(element_name, output_cpp=False):
             )
 
     if output_cpp:
-        print(code.generate_header(element_name))
-        print(code.generate_src(element_name, obj_paths, bin_paths, has_element_instances))
+        print("Writing code:")
+        code_dict = code.generate_code(element_name, obj_paths, bin_paths)
+        for filename, code_str in code_dict.items():
+            code_path = Path("../src/") / filename
+            print(f"  {code_path}")
 
+            f = open(code_path, "w")
+            f.write(code_str)
 
 def run():
     elements = [
@@ -112,7 +113,7 @@ def run():
         "isPandanusA",
         "osOcean",
     ]
-    process("osOcean", output_cpp=True)
+    process("isPalmDead", output_cpp=True)
     # for element in elements:
     #     process(element)
 
