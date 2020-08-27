@@ -16,8 +16,8 @@ IronwoodBElement::IronwoodBElement()
         "../scene/isIronwoodB-archiveseedpodb_mod.bin",
     };
 
-    m_hasElementInstances = false;
-    m_elementInstancesBinPath = "";
+    m_hasElementInstances = true;
+    m_elementInstancesBinPath = "../scene/isIronwoodB-root.bin";
 }
 
 }

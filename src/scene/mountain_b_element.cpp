@@ -76,8 +76,8 @@ MountainBElement::MountainBElement()
         "../scene/isMountainB-xgFern_fern0003_mod.bin",
     };
 
-    m_hasElementInstances = false;
-    m_elementInstancesBinPath = "";
+    m_hasElementInstances = true;
+    m_elementInstancesBinPath = "../scene/isMountainB-root.bin";
 }
 
 }

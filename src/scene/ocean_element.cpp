@@ -16,8 +16,8 @@ OceanElement::OceanElement()
 
     };
 
-    m_hasElementInstances = false;
-    m_elementInstancesBinPath = "";
+    m_hasElementInstances = true;
+    m_elementInstancesBinPath = "../scene/osOcean-root.bin";
 }
 
 }

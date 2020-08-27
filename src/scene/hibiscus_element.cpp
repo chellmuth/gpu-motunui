@@ -12,14 +12,14 @@ HibiscusElement::HibiscusElement()
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0001_mod.obj",
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusFlower0001_mod.obj",
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
-        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj"
+        moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0002_mod.obj",
     };
 
     m_binPaths = {
         "../scene/isHibiscus-archiveHibiscusLeaf0001_mod.bin",
         "../scene/isHibiscus-archiveHibiscusFlower0001_mod.bin",
-        "../scene/isHibiscus-archiveHibiscusLeaf0002_mod.bin",
         "../scene/isHibiscus-archiveHibiscusLeaf0003_mod.bin",
+        "../scene/isHibiscus-archiveHibiscusLeaf0002_mod.bin",
     };
 
     m_hasElementInstances = true;

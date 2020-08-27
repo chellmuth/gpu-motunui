@@ -32,8 +32,8 @@ CoastlineElement::CoastlineElement()
         "../scene/isCoastline-xgFibers_archivepineneedle0001_mod.bin",
     };
 
-    m_hasElementInstances = false;
-    m_elementInstancesBinPath = "";
+    m_hasElementInstances = true;
+    m_elementInstancesBinPath = "../scene/isCoastline-root.bin";
 }
 
 }

@@ -113,9 +113,11 @@ def run():
         "isPandanusA",
         "osOcean",
     ]
-    process("isPalmDead", output_cpp=True)
-    # for element in elements:
-    #     process(element)
+
+    # process("isPalmDead", output_cpp=True)
+
+    for element in elements:
+        process(element, output_cpp=True)
 
 if __name__ == "__main__":
     run()
