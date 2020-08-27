@@ -71,14 +71,14 @@ def process(object_name, object_path, archive_paths, output_cpp=False):
             )
 
     if output_cpp:
-        print(f"{' '*4}const std::vector<std::string> objPaths = {{")
+        print(f"{' '*4}m_objPaths = {{")
         print("\n".join([
             f"{' ' * 8}moanaRoot + \"/island/{obj_path}\","
             for obj_path in obj_paths
         ]))
         print(f"{' '*4}}};")
         print()
-        print(f"{' '*4}const std::vector<std::string> binPaths = {{")
+        print(f"{' '*4}m_binPaths = {{")
         print("\n".join([
             f"{' ' * 8}\"{bin_path}\","
             for bin_path in bin_paths
@@ -136,6 +136,13 @@ def run():
         [
             "json/isCoastline/isCoastline_xgPalmDebris.json",
             "json/isCoastline/isCoastline_xgFibers.json",
+        ],
+    )
+    process(
+        "bayCedarA1",
+        "json/isBayCedarA1/isBayCedarA1.json",
+        [
+            "json/isBayCedarA1/isBayCedarA1_xgBonsai.json",
         ],
         output_cpp=True
     )
