@@ -32,7 +32,7 @@ def write_transforms(filename, transforms):
         transform_bin = struct.pack("12f", *transform)
         output_file.write(transform_bin)
 
-def process(element_name, archive_paths, output_cpp=False):
+def process(element_name, output_cpp=False):
     print(f"Processing: {element_name}")
 
     element_path = f"json/{element_name}/{element_name}.json"
@@ -52,7 +52,12 @@ def process(element_name, archive_paths, output_cpp=False):
     obj_paths = []
     bin_paths = []
 
-    # All the archives for the element
+    archive_paths = []
+    for _, instanced_primitive in element_digest["instancedPrimitiveJsonFiles"].items():
+        if instanced_primitive["type"] == "archive":
+            archive_paths.append(instanced_primitive["jsonFile"])
+
+    # All the archive instanced primitives for the element
     for archive_path in archive_paths:
         instance_digest = json.load(open(MoanaPath / archive_path))
         archives = instance_digest.keys()
@@ -89,58 +94,17 @@ def process(element_name, archive_paths, output_cpp=False):
 
 
 def run():
-    process(
-        "isHibiscus",
-        [ "json/isHibiscus/isHibiscus_xgBonsai.json" ],
-    )
-    process(
-        "isMountainA",
-        [
-            "json/isMountainA/isMountainA_xgBreadFruit.json",
-            "json/isMountainA/isMountainA_xgCocoPalms.json",
-        ],
-    )
-    process(
-        "isMountainB",
-        [
-            "json/isMountainB/isMountainB_xgFoliageB.json",
-            "json/isMountainB/isMountainB_xgFoliageC.json",
-            "json/isMountainB/isMountainB_xgFoliageA.json",
-            "json/isMountainB/isMountainB_xgFoliageAd.json",
-            "json/isMountainB/isMountainB_xgBreadFruit.json",
-            "json/isMountainB/isMountainB_xgCocoPalms.json",
-            "json/isMountainB/isMountainB_xgFern.json"
-        ],
-    )
-    process(
-        "isDunesA",
-        [
-            "json/isDunesA/isDunesA_xgPalmDebris.json",
-            "json/isDunesA/isDunesA_xgDebris.json",
-            "json/isDunesA/isDunesA_xgHibiscusFlower.json",
-            "json/isDunesA/isDunesA_xgMuskFern.json",
-        ],
-    )
-    process(
-        "isIronwoodA1",
-        [
-            "json/isIronwoodA1/isIronwoodA1_xgBonsai.json",
-        ],
-    )
-    process(
-        "isCoastline",
-        [
-            "json/isCoastline/isCoastline_xgPalmDebris.json",
-            "json/isCoastline/isCoastline_xgFibers.json",
-        ],
-    )
-    process(
+    elements = [
         "isBayCedarA1",
-        [
-            "json/isBayCedarA1/isBayCedarA1_xgBonsai.json",
-        ],
-        output_cpp=True
-    )
+        "isCoastline",
+        "isDunesA",
+        "isHibiscus",
+        "isIronwoodA1",
+        "isMountainA",
+        "isMountainB",
+    ]
+    for element in elements:
+        process(element)
 
 if __name__ == "__main__":
     run()
