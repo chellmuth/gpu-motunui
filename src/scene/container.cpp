@@ -15,6 +15,7 @@
 #include "scene/ironwood_a1_element.hpp"
 #include "scene/ironwood_b_element.hpp"
 #include "scene/kava_element.hpp"
+#include "scene/lava_rocks_element.hpp"
 #include "scene/mountain_a_element.hpp"
 #include "scene/mountain_b_element.hpp"
 
@@ -37,7 +38,8 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<HibiscusYoungElement>(),
         // std::make_unique<IronwoodA1Element>(),
         // std::make_unique<IronwoodBElement>(),
-        std::make_unique<KavaElement>(),
+        // std::make_unique<KavaElement>(),
+        std::make_unique<LavaRocksElement>(),
         // std::make_unique<MountainAElement>(),
         // std::make_unique<MountainBElement>(),
     };

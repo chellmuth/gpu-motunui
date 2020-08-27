@@ -59,7 +59,8 @@ def process(element_name, output_cpp=False):
     bin_paths = []
 
     archive_paths = []
-    for _, instanced_primitive in element_digest["instancedPrimitiveJsonFiles"].items():
+    instanced_primitives = element_digest.get("instancedPrimitiveJsonFiles", {})
+    for _, instanced_primitive in instanced_primitives.items():
         if instanced_primitive["type"] == "archive":
             archive_paths.append(instanced_primitive["jsonFile"])
 
@@ -102,10 +103,11 @@ def run():
         "isIronwoodA1",
         "isIronwoodB",
         "isKava",
+        "isLavaRocks",
         "isMountainA",
         "isMountainB",
     ]
-    process("isKava", output_cpp=True)
+    process("isLavaRocks", output_cpp=True)
     # for element in elements:
     #     process(element)
 
