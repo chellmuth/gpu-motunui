@@ -28,6 +28,10 @@ IronwoodBElement::IronwoodBElement()
         {0},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

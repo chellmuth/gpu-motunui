@@ -60,6 +60,10 @@ DunesAElement::DunesAElement()
         {32, 28, 30, 27, 31, 29, 4, 3, 2, 1, 0, 12, 8, 11, 7, 10, 9, 6, 5, 23, 14, 24, 16, 17, 22, 18, 20, 21, 19, 15, 25, 13, 26},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {"../scene/curves__isDunesA_xgRoots.bin", "../scene/curves__isDunesA_xgShootRoots.bin"},
+    };
+
     }
 
 }

@@ -19,6 +19,7 @@ add_library(moana
 
   src/io/image.cpp
 
+  src/parsers/curve_parser.cpp
   src/parsers/obj_parser.cpp
   src/parsers/string_util.cpp
 

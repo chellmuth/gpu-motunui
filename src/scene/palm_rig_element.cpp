@@ -156,6 +156,42 @@ PalmRigElement::PalmRigElement()
         {},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {"../scene/curves__isPalmRig_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig18_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig19_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig16_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig17_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig14_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig15_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig12_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig13_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig10_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig11_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig30_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig31_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig32_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig33_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig8_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig9_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig4_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig5_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig6_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig7_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig2_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig3_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig27_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig26_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig25_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig24_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig23_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig22_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig21_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig20_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig29_xgFrondsA.bin"},
+        {"../scene/curves__isPalmRig28_xgFrondsA.bin"},
+    };
+
     }
 
 }

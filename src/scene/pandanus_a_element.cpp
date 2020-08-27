@@ -28,6 +28,10 @@ PandanusAElement::PandanusAElement()
         {},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {"../scene/curves__isPandanusA_xgLeavesH.bin", "../scene/curves__isPandanusA_xgLeavesI.bin", "../scene/curves__isPandanusA_xgLeavesLower.bin", "../scene/curves__isPandanusA_xgLeavesA.bin", "../scene/curves__isPandanusA_xgLeavesB.bin", "../scene/curves__isPandanusA_xgLeavesC.bin", "../scene/curves__isPandanusA_xgLeavesD.bin", "../scene/curves__isPandanusA_xgLeavesE.bin", "../scene/curves__isPandanusA_xgLeavesF.bin", "../scene/curves__isPandanusA_xgLeavesG.bin"},
+    };
+
     }
 
 }

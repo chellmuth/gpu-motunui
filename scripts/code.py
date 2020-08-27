@@ -22,6 +22,7 @@ def generate_code(
     obj_archives,
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
+    curve_bin_paths_by_element_instance,
 ):
     header_filename = _header_filename_from_element_name(element_name)
     source_filename = _source_filename_from_element_name(element_name)
@@ -34,6 +35,7 @@ def generate_code(
             obj_archives,
             primitive_instances_bin_paths,
             primitive_instances_handle_indices,
+            curve_bin_paths_by_element_instance,
         )
     }
 
@@ -62,6 +64,7 @@ def _generate_src(
     obj_archives,
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
+    curve_bin_paths_by_element_instance,
 ):
     class_name = _class_name_from_element_name(element_name)
     header_filename = _header_filename_from_element_name(element_name)
@@ -104,6 +107,16 @@ def _generate_src(
         in primitive_instances_handle_indices
     ])
 
+    curve_bin_paths_items = "\n".join([
+        f"{' ' * 8}{{" + ", ".join([
+            f"\"{curve_bin_path}\""
+            for curve_bin_path
+            in curve_bin_paths
+        ]) + "},"
+        for curve_bin_paths
+        in curve_bin_paths_by_element_instance
+    ])
+
     return f"""\
 #include "{header_filename}"
 
@@ -133,6 +146,10 @@ namespace moana {{
 
     m_primitiveInstancesHandleIndices = {{
 {primitive_instances_handle_indices_items}
+    }};
+
+    m_curveBinPathsByElementInstance = {{
+{curve_bin_paths_items}
     }};
 
     }}

@@ -44,6 +44,10 @@ MountainAElement::MountainAElement()
         {16, 0, 12, 13, 4, 5, 10, 2, 7, 6, 11, 1, 3, 15, 9, 14, 8},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

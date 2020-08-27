@@ -28,6 +28,10 @@ BayCedarA1Element::BayCedarA1Element()
         {0},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

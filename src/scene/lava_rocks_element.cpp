@@ -32,6 +32,11 @@ LavaRocksElement::LavaRocksElement()
         {},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+        {},
+    };
+
     }
 
 }

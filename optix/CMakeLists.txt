@@ -1,7 +1,8 @@
 add_library(ptx_files OBJECT kernel.cu)
-target_include_directories(ptx_files PUBLIC "${PROJECT_SOURCE_DIR}/include")
-target_include_directories(ptx_files PUBLIC "${OptiX_INCLUDE}")
-target_include_directories(ptx_files PUBLIC "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+target_include_directories(ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/include")
+target_include_directories(ptx_files PRIVATE "${OptiX_INCLUDE}")
+target_include_directories(ptx_files PRIVATE "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+target_include_directories(ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/ext/optix_sdk")
 set_property(TARGET ptx_files PROPERTY CUDA_PTX_COMPILATION ON)
 set_property(TARGET ptx_files PROPERTY POSITION_INDEPENDENT_CODE ON)
 

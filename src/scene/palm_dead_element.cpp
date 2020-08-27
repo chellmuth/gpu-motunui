@@ -28,6 +28,10 @@ PalmDeadElement::PalmDeadElement()
         {},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

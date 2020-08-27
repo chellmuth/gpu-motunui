@@ -59,10 +59,10 @@ static void createContext(OptixState &state)
 
 static void createModule(OptixState &state)
 {
-    OptixModuleCompileOptions moduleCompileOptions = {};
-    moduleCompileOptions.maxRegisterCount = OPTIX_COMPILE_DEFAULT_MAX_REGISTER_COUNT;
-    moduleCompileOptions.optLevel = OPTIX_COMPILE_OPTIMIZATION_DEFAULT;
-    moduleCompileOptions.debugLevel = OPTIX_COMPILE_DEBUG_LEVEL_LINEINFO;
+    state.moduleCompileOptions = {};
+    state.moduleCompileOptions.maxRegisterCount = OPTIX_COMPILE_DEFAULT_MAX_REGISTER_COUNT;
+    state.moduleCompileOptions.optLevel = OPTIX_COMPILE_OPTIMIZATION_DEFAULT;
+    state.moduleCompileOptions.debugLevel = OPTIX_COMPILE_DEBUG_LEVEL_LINEINFO;
 
     state.pipelineCompileOptions.usesMotionBlur = false;
     state.pipelineCompileOptions.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY;
@@ -74,7 +74,9 @@ static void createModule(OptixState &state)
     state.pipelineCompileOptions.exceptionFlags = OPTIX_EXCEPTION_FLAG_NONE;
 #endif
     state.pipelineCompileOptions.pipelineLaunchParamsVariableName = "params";
-    state.pipelineCompileOptions.usesPrimitiveTypeFlags = OPTIX_PRIMITIVE_TYPE_FLAGS_TRIANGLE;
+    state.pipelineCompileOptions.usesPrimitiveTypeFlags =
+        OPTIX_PRIMITIVE_TYPE_FLAGS_TRIANGLE |
+        OPTIX_PRIMITIVE_TYPE_FLAGS_ROUND_CUBIC_BSPLINE;
 
     std::string ptx(ptxSource);
 
@@ -83,7 +85,7 @@ static void createModule(OptixState &state)
 
     CHECK_OPTIX(optixModuleCreateFromPTX(
         state.context,
-        &moduleCompileOptions,
+        &state.moduleCompileOptions,
         &state.pipelineCompileOptions,
         ptx.c_str(),
         ptx.size(),
@@ -130,10 +132,24 @@ static void createProgramGroups(OptixState &state)
         &state.missProgramGroup
     ));
 
+    OptixBuiltinISOptions builtinISOptions = {};
+    OptixModule geometryModule = nullptr;
+
+    builtinISOptions.builtinISModuleType = OPTIX_PRIMITIVE_TYPE_ROUND_CUBIC_BSPLINE;
+    CHECK_OPTIX(optixBuiltinISModuleGet(
+        state.context,
+        &state.moduleCompileOptions,
+        &state.pipelineCompileOptions,
+        &builtinISOptions,
+        &geometryModule
+    ));
+
     OptixProgramGroupDesc hitgroupProgramGroupDesc = {};
     hitgroupProgramGroupDesc.kind = OPTIX_PROGRAM_GROUP_KIND_HITGROUP;
     hitgroupProgramGroupDesc.hitgroup.moduleCH = state.module;
     hitgroupProgramGroupDesc.hitgroup.entryFunctionNameCH = "__closesthit__ch";
+    hitgroupProgramGroupDesc.hitgroup.moduleIS = geometryModule;
+    hitgroupProgramGroupDesc.hitgroup.entryFunctionNameIS = 0;
 
     CHECK_OPTIX(optixProgramGroupCreate(
         state.context,
@@ -261,6 +277,7 @@ void Driver::init()
 
     size_t gb = 1024 * 1024 * 1024;
     m_state.arena.init(6 * gb);
+
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 
     createModule(m_state);

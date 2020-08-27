@@ -44,6 +44,10 @@ DunesBElement::DunesBElement()
         {15, 16, 0, 15, 1, 12, 3, 2, 14, 7, 9, 4, 6, 10, 5, 13, 11, 8},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

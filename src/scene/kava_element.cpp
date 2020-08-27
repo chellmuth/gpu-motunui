@@ -28,6 +28,10 @@ KavaElement::KavaElement()
         {0},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

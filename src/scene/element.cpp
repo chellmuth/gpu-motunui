@@ -7,6 +7,7 @@
 #include "assert_macros.hpp"
 #include "enumerate.hpp"
 #include "moana/parsers/obj_parser.hpp"
+#include "parsers/curve_parser.hpp"
 #include "scene/archive.hpp"
 #include "scene/gas.hpp"
 #include "scene/ias.hpp"
@@ -24,6 +25,8 @@ GeometryResult Element::buildAcceleration(
     std::vector<OptixInstance> rootRecords;
 
     std::cout << "  Processing primitive archives" << std::endl;
+
+    // Process the objs needed for archive instancing later
     std::vector<OptixTraversableHandle> archiveHandles;
     for (auto [i, objArchivePath] : enumerate(m_objArchivePaths)) {
         std::cout << "    Processing: " << objArchivePath << std::endl;
@@ -35,6 +38,7 @@ GeometryResult Element::buildAcceleration(
         archiveHandles.push_back(gasHandle);
     }
 
+    // Loop over element instances with unique geometry
     const int uniqueElementCopyCount = m_baseObjs.size();
     for (int i = 0; i < uniqueElementCopyCount; i++) {
         std::vector<OptixInstance> records;
@@ -47,22 +51,26 @@ GeometryResult Element::buildAcceleration(
 
         const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
 
-        float transform[12] = {
-            1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f
-        };
-        Instances elementGeometryInstances;
-        elementGeometryInstances.transforms = transform;
-        elementGeometryInstances.count = 1;
+        // Process element instance geometry
+        {
+            float transform[12] = {
+                1.f, 0.f, 0.f, 0.f,
+                0.f, 1.f, 0.f, 0.f,
+                0.f, 0.f, 1.f, 0.f
+            };
+            Instances elementGeometryInstances;
+            elementGeometryInstances.transforms = transform;
+            elementGeometryInstances.count = 1;
 
-        IAS::createOptixInstanceRecords(
-            context,
-            records,
-            elementGeometryInstances,
-            gasHandle
-        );
+            IAS::createOptixInstanceRecords(
+                context,
+                records,
+                elementGeometryInstances,
+                gasHandle
+            );
+        }
 
+        // Process element instance archives
         Archive archive(
             m_primitiveInstancesBinPaths[i],
             m_primitiveInstancesHandleIndices[i],
@@ -70,6 +78,33 @@ GeometryResult Element::buildAcceleration(
         );
         archive.processRecords(context, arena, records);
 
+        // Process element instance curves
+        const auto &curveBinPaths = m_curveBinPathsByElementInstance[i];
+        for (const auto &curveBinPath : curveBinPaths) {
+            std::cout << "Processing " << curveBinPath << std::endl;
+
+            Curve curve(curveBinPath);
+            auto curveHandle = curve.gasFromCurve(context, arena);
+            {
+                float transform[12] = {
+                    1.f, 0.f, 0.f, 0.f,
+                    0.f, 1.f, 0.f, 0.f,
+                    0.f, 0.f, 1.f, 0.f
+                };
+                Instances curveInstances;
+                curveInstances.transforms = transform;
+                curveInstances.count = 1;
+
+                IAS::createOptixInstanceRecords(
+                    context,
+                    records,
+                    curveInstances,
+                    curveHandle
+                );
+            }
+        }
+
+        // Build IAS records for each instance with this geometry
         auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records);
 
         std::cout << "  Processing element instances" << std::endl;
@@ -84,9 +119,9 @@ GeometryResult Element::buildAcceleration(
             instancesResult,
             iasObjectHandle
         );
-
     }
 
+    // Generate and return the top-level IAS handle that will be snapshotted
     auto iasHandle = IAS::iasFromInstanceRecords(context, arena, rootRecords);
 
     Snapshot snapshot = arena.createSnapshot();

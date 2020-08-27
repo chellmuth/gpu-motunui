@@ -5,6 +5,7 @@
 #include "moana/driver.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/core/ray.hpp"
+#include "optix_sdk.hpp"
 #include "util.hpp"
 
 using namespace moana;
@@ -30,31 +31,37 @@ extern "C" __global__ void __closesthit__ch()
 {
     PerRayData *prd = getPRD();
     prd->isHit = true;
-
-    OptixTraversableHandle gas = optixGetGASTraversableHandle();
-    unsigned int primitiveIndex = optixGetPrimitiveIndex();
-    unsigned int sbtIndex = optixGetSbtGASIndex();
-    float time = optixGetRayTime();
-
-    float3 vertices[3];
-    optixGetTriangleVertexData(
-        gas,
-        primitiveIndex,
-        sbtIndex,
-        time,
-        vertices
-    );
-
-    const Vec3 p0(vertices[0].x, vertices[0].y, vertices[0].z);
-    const Vec3 p1(vertices[1].x, vertices[1].y, vertices[1].z);
-    const Vec3 p2(vertices[2].x, vertices[2].y, vertices[2].z);
-
-    const Vec3 e1 = p1 - p0;
-    const Vec3 e2 = p2 - p0;
-    const Vec3 normal = normalized(cross(e1, e2));
-
-    prd->normal = normal;
     prd->t = optixGetRayTmax();
+
+    if (optixIsTriangleHit()) {
+        OptixTraversableHandle gas = optixGetGASTraversableHandle();
+        unsigned int primitiveIndex = optixGetPrimitiveIndex();
+        unsigned int sbtIndex = optixGetSbtGASIndex();
+        float time = optixGetRayTime();
+
+        float3 vertices[3];
+        optixGetTriangleVertexData(
+            gas,
+            primitiveIndex,
+            sbtIndex,
+            time,
+            vertices
+        );
+
+        const Vec3 p0(vertices[0].x, vertices[0].y, vertices[0].z);
+        const Vec3 p1(vertices[1].x, vertices[1].y, vertices[1].z);
+        const Vec3 p2(vertices[2].x, vertices[2].y, vertices[2].z);
+
+        const Vec3 e1 = p1 - p0;
+        const Vec3 e2 = p2 - p0;
+        const Vec3 normal = normalized(cross(e1, e2));
+
+        prd->normal = normal;
+    } else {
+        const unsigned int primitiveIndex = optixGetPrimitiveIndex();
+        const float3 normal = normalCubic(primitiveIndex);
+        prd->normal = normalized(Vec3(normal.x, normal.y, normal.z));
+    }
 }
 
 extern "C" __global__ void __miss__ms()

@@ -31,6 +31,10 @@ HibiscusElement::HibiscusElement()
         {1, 0, 3, 2},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

@@ -40,6 +40,13 @@ NaupakaAElement::NaupakaAElement()
         {0},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+        {},
+        {},
+        {},
+    };
+
     }
 
 }

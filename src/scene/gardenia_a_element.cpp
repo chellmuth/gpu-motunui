@@ -39,6 +39,10 @@ GardeniaAElement::GardeniaAElement()
         {7, 5, 6, 1, 2, 4, 9, 0, 3, 8, 10, 11},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

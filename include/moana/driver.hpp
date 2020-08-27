@@ -41,6 +41,8 @@ struct OptixState {
 
     ASArena arena;
     std::vector<GeometryResult> geometries;
+
+    OptixModuleCompileOptions moduleCompileOptions = {};
 };
 
 class Driver {

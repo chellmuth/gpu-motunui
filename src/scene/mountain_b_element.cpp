@@ -58,6 +58,10 @@ MountainBElement::MountainBElement()
         {29, 30, 27, 28, 0, 10, 5, 8, 12, 3, 1, 9, 2, 7, 6, 11, 4, 18, 25, 17, 19, 21, 16, 13, 23, 24, 26, 20, 22, 14, 15},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

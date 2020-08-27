@@ -36,6 +36,10 @@ CoastlineElement::CoastlineElement()
         {6, 8, 5, 4, 7, 3, 1, 2, 0},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {"../scene/curves__isCoastline_xgGrass.bin"},
+    };
+
     }
 
 }

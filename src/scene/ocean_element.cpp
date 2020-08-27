@@ -28,6 +28,10 @@ OceanElement::OceanElement()
         {},
     };
 
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
     }
 
 }

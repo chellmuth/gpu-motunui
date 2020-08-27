@@ -23,8 +23,10 @@ protected:
     std::vector<std::string> m_baseObjs;
     std::vector<std::string> m_elementInstancesBinPaths;
     std::vector<std::string> m_objArchivePaths;
+
     std::vector<std::vector<std::string> > m_primitiveInstancesBinPaths;
     std::vector<std::vector<int> > m_primitiveInstancesHandleIndices;
+    std::vector<std::vector<std::string> > m_curveBinPathsByElementInstance;
 
     std::string m_elementInstancesBinPath;
 };
