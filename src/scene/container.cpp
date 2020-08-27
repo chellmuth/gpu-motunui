@@ -21,6 +21,7 @@
 #include "scene/naupaka_a_element.hpp"
 #include "scene/palm_dead_element.hpp"
 #include "scene/palm_rig_element.hpp"
+#include "scene/pandanus_a_element.hpp"
 
 namespace moana { namespace Container {
 
@@ -47,7 +48,8 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<MountainBElement>(),
         // std::make_unique<NaupakaAElement>(),
         // std::make_unique<PalmDeadElement>(),
-        std::make_unique<PalmRigElement>(),
+        // std::make_unique<PalmRigElement>(),
+        std::make_unique<PandanusAElement>(),
     };
 
     for (const auto &elementPtr : elementPtrs) {

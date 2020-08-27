@@ -109,8 +109,9 @@ def run():
         "isNaupakaA",
         "isPalmDead",
         "isPalmRig",
+        "isPandanusA",
     ]
-    process("isPalmRig", output_cpp=True)
+    process("isPandanusA", output_cpp=True)
     # for element in elements:
     #     process(element)
 
