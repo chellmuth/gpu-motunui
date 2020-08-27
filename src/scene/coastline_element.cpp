@@ -21,15 +21,15 @@ CoastlineElement::CoastlineElement()
     };
 
     m_binPaths = {
-        "../scene/coastline-xgPalmDebris_archiveLeaflet0125_geo.bin",
-        "../scene/coastline-xgPalmDebris_archiveLeaflet0127_geo.bin",
-        "../scene/coastline-xgPalmDebris_archiveLeaflet0124_geo.bin",
-        "../scene/coastline-xgPalmDebris_archiveLeaflet0123_geo.bin",
-        "../scene/coastline-xgPalmDebris_archiveLeaflet0126_geo.bin",
-        "../scene/coastline-xgFibers_archiveseedpodb_mod.bin",
-        "../scene/coastline-xgFibers_archivepineneedle0002_mod.bin",
-        "../scene/coastline-xgFibers_archivepineneedle0003_mod.bin",
-        "../scene/coastline-xgFibers_archivepineneedle0001_mod.bin",
+        "../scene/isCoastline-xgPalmDebris_archiveLeaflet0125_geo.bin",
+        "../scene/isCoastline-xgPalmDebris_archiveLeaflet0127_geo.bin",
+        "../scene/isCoastline-xgPalmDebris_archiveLeaflet0124_geo.bin",
+        "../scene/isCoastline-xgPalmDebris_archiveLeaflet0123_geo.bin",
+        "../scene/isCoastline-xgPalmDebris_archiveLeaflet0126_geo.bin",
+        "../scene/isCoastline-xgFibers_archiveseedpodb_mod.bin",
+        "../scene/isCoastline-xgFibers_archivepineneedle0002_mod.bin",
+        "../scene/isCoastline-xgFibers_archivepineneedle0003_mod.bin",
+        "../scene/isCoastline-xgFibers_archivepineneedle0001_mod.bin",
     };
 
     m_hasElementInstances = false;

@@ -13,11 +13,11 @@ BayCedarA1Element::BayCedarA1Element()
     };
 
     m_binPaths = {
-        "../scene/bayCedarA1-archivebaycedar0001_mod.bin",
+        "../scene/isBayCedarA1-archivebaycedar0001_mod.bin",
     };
 
     m_hasElementInstances = true;
-    m_elementInstancesBinPath = "../scene/bayCedarA1-root.bin";
+    m_elementInstancesBinPath = "../scene/isBayCedarA1-root.bin";
 }
 
 }

@@ -32,8 +32,10 @@ def write_transforms(filename, transforms):
         transform_bin = struct.pack("12f", *transform)
         output_file.write(transform_bin)
 
-def process(element_name, element_path, archive_paths, output_cpp=False):
+def process(element_name, archive_paths, output_cpp=False):
     print(f"Processing: {element_name}")
+
+    element_path = f"json/{element_name}/{element_name}.json"
 
     element_digest = json.load(open(MoanaPath / element_path))
     instanced_copies = [
@@ -88,21 +90,18 @@ def process(element_name, element_path, archive_paths, output_cpp=False):
 
 def run():
     process(
-        "hibiscus",
-        "json/isHibiscus/isHibiscus.json",
+        "isHibiscus",
         [ "json/isHibiscus/isHibiscus_xgBonsai.json" ],
     )
     process(
-        "mountainA",
-        "json/isMountainA/isMountainA.json",
+        "isMountainA",
         [
             "json/isMountainA/isMountainA_xgBreadFruit.json",
             "json/isMountainA/isMountainA_xgCocoPalms.json",
         ],
     )
     process(
-        "mountainB",
-        "json/isMountainB/isMountainB.json",
+        "isMountainB",
         [
             "json/isMountainB/isMountainB_xgFoliageB.json",
             "json/isMountainB/isMountainB_xgFoliageC.json",
@@ -114,8 +113,7 @@ def run():
         ],
     )
     process(
-        "dunesA",
-        "json/isDunesA/isDunesA.json",
+        "isDunesA",
         [
             "json/isDunesA/isDunesA_xgPalmDebris.json",
             "json/isDunesA/isDunesA_xgDebris.json",
@@ -124,23 +122,20 @@ def run():
         ],
     )
     process(
-        "ironwoodA1",
-        "json/isIronwoodA1/isIronwoodA1.json",
+        "isIronwoodA1",
         [
             "json/isIronwoodA1/isIronwoodA1_xgBonsai.json",
         ],
     )
     process(
-        "coastline",
-        "json/isCoastline/isCoastline.json",
+        "isCoastline",
         [
             "json/isCoastline/isCoastline_xgPalmDebris.json",
             "json/isCoastline/isCoastline_xgFibers.json",
         ],
     )
     process(
-        "bayCedarA1",
-        "json/isBayCedarA1/isBayCedarA1.json",
+        "isBayCedarA1",
         [
             "json/isBayCedarA1/isBayCedarA1_xgBonsai.json",
         ],

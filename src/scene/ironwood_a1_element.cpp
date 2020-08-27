@@ -13,11 +13,11 @@ IronwoodA1Element::IronwoodA1Element()
     };
 
     m_binPaths = {
-        "../scene/ironwoodA1-archiveseedpodb_mod.bin",
+        "../scene/isIronwoodA1-archiveseedpodb_mod.bin",
     };
 
     m_hasElementInstances = true;
-    m_elementInstancesBinPath = "../scene/ironwoodA1-root.bin";
+    m_elementInstancesBinPath = "../scene/isIronwoodA1-root.bin";
 }
 
 }

@@ -30,23 +30,23 @@ MountainAElement::MountainAElement()
 
 
     m_binPaths = {
-        "../scene/mountainA-xgCocoPalms_isPalmRig8.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig4.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig1.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig12.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig3.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig7.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig15.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig16.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig14.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig17.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig6.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig5.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig13.bin",
-        "../scene/mountainA-xgCocoPalms_isPalmRig2.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig8.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig4.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig1.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig12.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig3.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig7.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig15.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig16.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig14.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig17.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig6.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig5.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig13.bin",
+        "../scene/isMountainA-xgCocoPalms_isPalmRig2.bin",
 
-        "../scene/mountainA-xgBreadFruit_archiveBreadFruitBaked.bin",
+        "../scene/isMountainA-xgBreadFruit_archiveBreadFruitBaked.bin",
     };
 
     m_hasElementInstances = false;

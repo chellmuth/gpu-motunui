@@ -16,14 +16,14 @@ HibiscusElement::HibiscusElement()
     };
 
     m_binPaths = {
-        "../scene/hibiscus-archiveHibiscusLeaf0001_mod.bin",
-        "../scene/hibiscus-archiveHibiscusFlower0001_mod.bin",
-        "../scene/hibiscus-archiveHibiscusLeaf0002_mod.bin",
-        "../scene/hibiscus-archiveHibiscusLeaf0003_mod.bin",
+        "../scene/isHibiscus-archiveHibiscusLeaf0001_mod.bin",
+        "../scene/isHibiscus-archiveHibiscusFlower0001_mod.bin",
+        "../scene/isHibiscus-archiveHibiscusLeaf0002_mod.bin",
+        "../scene/isHibiscus-archiveHibiscusLeaf0003_mod.bin",
     };
 
     m_hasElementInstances = true;
-    m_elementInstancesBinPath = "../scene/hibiscus-root.bin";
+    m_elementInstancesBinPath = "../scene/isHibiscus-root.bin";
 }
 
 }
