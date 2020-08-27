@@ -18,6 +18,8 @@
 #include "scene/lava_rocks_element.hpp"
 #include "scene/mountain_a_element.hpp"
 #include "scene/mountain_b_element.hpp"
+#include "scene/naupaka_a_element.hpp"
+#include "scene/palm_dead_element.hpp"
 
 namespace moana { namespace Container {
 
@@ -39,9 +41,11 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<IronwoodA1Element>(),
         // std::make_unique<IronwoodBElement>(),
         // std::make_unique<KavaElement>(),
-        std::make_unique<LavaRocksElement>(),
+        // std::make_unique<LavaRocksElement>(),
         // std::make_unique<MountainAElement>(),
         // std::make_unique<MountainBElement>(),
+        // std::make_unique<NaupakaAElement>(),
+        std::make_unique<PalmDeadElement>(),
     };
 
     for (const auto &elementPtr : elementPtrs) {
