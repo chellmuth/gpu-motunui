@@ -8,6 +8,13 @@ PalmDeadElement::PalmDeadElement()
 
     m_elementName = "isPalmDead";
 
+    m_sbtOffset = 95;
+
+    m_mtlLookup = {
+        "roots",
+        "trunk",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isPalmDead/isPalmDead.obj",
     };
@@ -29,6 +36,10 @@ PalmDeadElement::PalmDeadElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

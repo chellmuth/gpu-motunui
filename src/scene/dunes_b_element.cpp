@@ -8,6 +8,22 @@ DunesBElement::DunesBElement()
 
     m_elementName = "isDunesB";
 
+    m_sbtOffset = 37;
+
+    m_mtlLookup = {
+        "isBayCedar_bark",
+        "isBayCedar_barkSimple",
+        "isBayCedar_leaves",
+        "isIronwoodA_archive_bark",
+        "isIronwoodA_barkSimple",
+        "isIronwoodA_leaves",
+        "isPandanus_leavesLower",
+        "isPandanus_leavesSimple",
+        "isPandanus_trunk",
+        "soilSimple",
+        "xgRoots",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isDunesB/isDunesB.obj",
     };
@@ -45,6 +61,10 @@ DunesBElement::DunesBElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

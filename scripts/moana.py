@@ -7,6 +7,7 @@ from pathlib import Path
 
 import code
 import curves
+import materials
 import transforms as transform_util
 
 MoanaPath = Path(os.environ["MOANA_ROOT"]) / "island"
@@ -16,7 +17,7 @@ class ElementInstanceInfo:
     def __init__(self, transform):
         self.transforms = [ transform ]
         self.transform_bins = []
-        self.curve_bins = []
+        self.curve_records = []
 
 CurveInfo = collections.namedtuple(
     "CurveInfo",
@@ -24,6 +25,15 @@ CurveInfo = collections.namedtuple(
         "json_path",
         "width_root",
         "width_tip",
+        "assignment_name",
+    ]
+)
+
+CurveRecord = collections.namedtuple(
+    "CurveRecord",
+    [
+        "assignment_name",
+        "bin_path",
     ]
 )
 
@@ -85,9 +95,10 @@ def find_curve_infos(primitives_json):
             MoanaPath / instanced_primitives["jsonFile"],
             instanced_primitives["widthRoot"],
             instanced_primitives["widthTip"],
+            assignment_name
         )
-        for instanced_primitives
-        in primitives_json.values()
+        for assignment_name, instanced_primitives
+        in primitives_json.items()
         if instanced_primitives["type"] == "curve"
         and instanced_primitives["jsonFile"] not in CurveDigestBlacklist
     ]
@@ -110,7 +121,13 @@ def process_archive_digest(digest_filename, element_instance_info):
 def process_curve_info(curve_info, element_instance_info):
     bin_path = ScenePath / f"curves__{curve_info.json_path.stem}.bin"
     curves.write_curve_bin(curve_info, bin_path)
-    element_instance_info.curve_bins.append(bin_path)
+
+    curve_record = CurveRecord(
+        curve_info.assignment_name,
+        bin_path,
+    )
+
+    element_instance_info.curve_records.append(curve_record)
 
 def process_element_instance_json(instance_digest, instance_infos, root_geom_file):
     # Store the transform in table indexed by the instance's geometry
@@ -141,8 +158,8 @@ def process_element_instance_json(instance_digest, instance_infos, root_geom_fil
             current_instance_info
         )
 
-def process(element_name, output_cpp=False):
-    print(f"Processing: {element_name}")
+def process_element(element_name, sbt_manager, output_cpp=False):
+    print(f"Processing geometry: {element_name}")
 
     element_path = f"json/{element_name}/{element_name}.json"
     element_json = json.load(open(MoanaPath / element_path))
@@ -179,7 +196,7 @@ def process(element_name, output_cpp=False):
     element_instances_bin_paths = []
     primitive_instances_bin_paths = []
     primitive_instances_handle_indices = []
-    curve_bin_paths_by_element_instance = []
+    curve_records_by_element_instance = []
 
     for geom_obj_file, instance_info in instance_infos.items():
         obj_stem = Path(geom_obj_file).stem
@@ -202,19 +219,20 @@ def process(element_name, output_cpp=False):
         ]
         primitive_instances_handle_indices.append(primitive_instance_handle_indices)
 
-        curve_bin_paths_by_element_instance.append(instance_info.curve_bins[:])
+        curve_records_by_element_instance.append(instance_info.curve_records[:])
 
     # Codegen
     if output_cpp:
         print("Writing code:")
         code_dict = code.generate_code(
             element_name,
+            sbt_manager,
             base_obj_paths,
             element_instances_bin_paths,
             obj_archives,
             primitive_instances_bin_paths,
             primitive_instances_handle_indices,
-            curve_bin_paths_by_element_instance
+            curve_records_by_element_instance,
         )
         for filename, code_str in code_dict.items():
             code_path = Path("../src/") / filename
@@ -223,9 +241,28 @@ def process(element_name, output_cpp=False):
             f = open(code_path, "w")
             f.write(code_str)
 
+def build_sbt_manager(elements, output_cpp=False):
+    print("Processing materials:")
+
+    # Collect material information for SBT
+    sbt_manager = materials.SBTManager()
+    for element_name in elements:
+        print(f"Processing: {element_name}")
+
+        element_path = f"json/{element_name}/{element_name}.json"
+        element_json = json.load(open(MoanaPath / element_path))
+
+        material_digest_path = MoanaPath / element_json["matFile"]
+        sbt_manager.add_material_digest(element_name, material_digest_path)
+
+    if output_cpp:
+        print(code.generate_sbt_array(sbt_manager))
+
+    return sbt_manager
+
 elements = [
     "isBayCedarA1",
-    # "isBeach",
+    "isBeach",
     "isCoastline",
     "isCoral",
     "isDunesA",
@@ -246,11 +283,18 @@ elements = [
     "osOcean",
 ]
 
+skip_list = [
+    "isBeach"
+]
+
 def run():
-    # process("isMountainB", output_cpp=True)
+    sbt_manager = build_sbt_manager(elements, output_cpp=True)
+
+    # process_element("isBeach", sbt_manager, output_cpp=True)
 
     for element in elements:
-        process(element, output_cpp=True)
+        if element not in skip_list:
+            process_element(element, sbt_manager, output_cpp=True)
 
 def list_element_jsons():
     for element_name in elements:

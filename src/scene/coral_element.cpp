@@ -8,6 +8,16 @@ CoralElement::CoralElement()
 
     m_elementName = "isCoral";
 
+    m_sbtOffset = 21;
+
+    m_mtlLookup = {
+        "coral",
+        "xgAntler",
+        "xgCabbage",
+        "xgFlutes",
+        "xgStaghorn",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isCoral/isCoral.obj",
         moanaRoot + "/island/obj/isCoral/isCoral5.obj",
@@ -77,6 +87,15 @@ CoralElement::CoralElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
         {},
         {},

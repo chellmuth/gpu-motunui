@@ -8,6 +8,14 @@ BayCedarA1Element::BayCedarA1Element()
 
     m_elementName = "isBayCedarA1";
 
+    m_sbtOffset = 1;
+
+    m_mtlLookup = {
+        "bark",
+        "barkSimple",
+        "leaves",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isBayCedarA1/isBayCedarA1.obj",
     };
@@ -29,6 +37,10 @@ BayCedarA1Element::BayCedarA1Element()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

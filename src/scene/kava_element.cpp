@@ -8,6 +8,14 @@ KavaElement::KavaElement()
 
     m_elementName = "isKava";
 
+    m_sbtOffset = 72;
+
+    m_mtlLookup = {
+        "bark",
+        "barkSimple",
+        "leaves",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isKava/isKava.obj",
     };
@@ -29,6 +37,10 @@ KavaElement::KavaElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

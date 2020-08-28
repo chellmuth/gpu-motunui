@@ -8,6 +8,14 @@ CoastlineElement::CoastlineElement()
 
     m_elementName = "isCoastline";
 
+    m_sbtOffset = 18;
+
+    m_mtlLookup = {
+        "archiveFibers",
+        "archiveLeaflet",
+        "sandSimple",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isCoastline/isCoastline.obj",
     };
@@ -38,6 +46,10 @@ CoastlineElement::CoastlineElement()
 
     m_curveBinPathsByElementInstance = {
         {"../scene/curves__isCoastline_xgGrass.bin"},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
+        {0},
     };
 
     }

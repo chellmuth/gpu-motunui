@@ -13,7 +13,8 @@ void createOptixInstanceRecords(
     OptixDeviceContext context,
     std::vector<OptixInstance> &records,
     const Instances &instances,
-    const OptixTraversableHandle &traversableHandle
+    const OptixTraversableHandle &traversableHandle,
+    int sbtOffset
 ) {
     int offset = records.size();
     for (int i = 0; i < instances.count; i++) {
@@ -26,7 +27,7 @@ void createOptixInstanceRecords(
 
         instance.instanceId = offset + i;
         instance.visibilityMask = 255;
-        instance.sbtOffset = 0;
+        instance.sbtOffset = sbtOffset;
         instance.flags = OPTIX_INSTANCE_FLAG_NONE;
         instance.traversableHandle = traversableHandle;
 

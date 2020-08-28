@@ -8,6 +8,20 @@ MountainBElement::MountainBElement()
 
     m_elementName = "isMountainB";
 
+    m_sbtOffset = 83;
+
+    m_mtlLookup = {
+        "branches",
+        "breadFruit",
+        "ferns",
+        "fronds",
+        "leavesOnHillside",
+        "loGrowth",
+        "mountainLo",
+        "trunk",
+        "trunkDetailed",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isMountainB/isMountainB.obj",
     };
@@ -59,6 +73,10 @@ MountainBElement::MountainBElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

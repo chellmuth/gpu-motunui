@@ -17,6 +17,7 @@
 #include "moana/io/image.hpp"
 #include "moana/parsers/obj_parser.hpp"
 #include "scene/container.hpp"
+#include "scene/materials.hpp"
 
 namespace moana {
 
@@ -246,18 +247,26 @@ static void createShaderBindingTable(OptixState &state)
         cudaMemcpyHostToDevice
     ));
 
-    CUdeviceptr hitgroupRecord;
-    size_t hitgroupRecordSize = sizeof(HitGroupSbtRecord);
+    CUdeviceptr d_hitgroupRecords;
+
+    std::vector<HitGroupSbtRecord> hitgroupRecords;
+    for (float3 baseColor : Materials::baseColors) {
+        HitGroupSbtRecord hitgroupSbt;
+        CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
+        hitgroupSbt.data.baseColor = baseColor;
+        hitgroupRecords.push_back(hitgroupSbt);
+    }
+
+    size_t hitgroupRecordSize = sizeof(HitGroupSbtRecord) * hitgroupRecords.size();
+
     CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&hitgroupRecord),
+        reinterpret_cast<void **>(&d_hitgroupRecords),
         hitgroupRecordSize
     ));
 
-    HitGroupSbtRecord hitgroupSbt;
-    CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(hitgroupRecord),
-        &hitgroupSbt,
+        reinterpret_cast<void *>(d_hitgroupRecords),
+        hitgroupRecords.data(),
         hitgroupRecordSize,
         cudaMemcpyHostToDevice
     ));
@@ -266,9 +275,9 @@ static void createShaderBindingTable(OptixState &state)
     state.sbt.missRecordBase = missRecord;
     state.sbt.missRecordStrideInBytes = sizeof(MissSbtRecord);
     state.sbt.missRecordCount = 1;
-    state.sbt.hitgroupRecordBase = hitgroupRecord;
+    state.sbt.hitgroupRecordBase = d_hitgroupRecords;
     state.sbt.hitgroupRecordStrideInBytes = sizeof(HitGroupSbtRecord);
-    state.sbt.hitgroupRecordCount = 1;
+    state.sbt.hitgroupRecordCount = hitgroupRecords.size();
 }
 
 void Driver::init()

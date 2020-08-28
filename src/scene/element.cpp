@@ -31,7 +31,7 @@ GeometryResult Element::buildAcceleration(
     for (auto [i, objArchivePath] : enumerate(m_objArchivePaths)) {
         std::cout << "    Processing: " << objArchivePath << std::endl;
 
-        ObjParser objParser(objArchivePath);
+        ObjParser objParser(objArchivePath, m_mtlLookup);
         auto model = objParser.parse();
 
         const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
@@ -46,7 +46,7 @@ GeometryResult Element::buildAcceleration(
         const std::string baseObj = m_baseObjs[i];
         std::cout << "  Processing base obj: " << baseObj << std::endl;
 
-        ObjParser objParser(baseObj);
+        ObjParser objParser(baseObj, m_mtlLookup);
         auto model = objParser.parse();
 
         const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
@@ -66,7 +66,8 @@ GeometryResult Element::buildAcceleration(
                 context,
                 records,
                 elementGeometryInstances,
-                gasHandle
+                gasHandle,
+                m_sbtOffset
             );
         }
 
@@ -76,11 +77,12 @@ GeometryResult Element::buildAcceleration(
             m_primitiveInstancesHandleIndices[i],
             archiveHandles
         );
-        archive.processRecords(context, arena, records);
+        archive.processRecords(context, arena, records, m_sbtOffset);
 
         // Process element instance curves
         const auto &curveBinPaths = m_curveBinPathsByElementInstance[i];
-        for (const auto &curveBinPath : curveBinPaths) {
+        const auto &curveMtlIndices = m_curveMtlIndicesByElementInstance[i];
+        for (const auto &[j, curveBinPath] : enumerate(curveBinPaths)) {
             std::cout << "Processing " << curveBinPath << std::endl;
 
             Curve curve(curveBinPath);
@@ -99,7 +101,8 @@ GeometryResult Element::buildAcceleration(
                     context,
                     records,
                     curveInstances,
-                    curveHandle
+                    curveHandle,
+                    m_sbtOffset + curveMtlIndices[j]
                 );
             }
         }

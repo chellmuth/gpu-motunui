@@ -8,6 +8,12 @@ OceanElement::OceanElement()
 
     m_elementName = "osOcean";
 
+    m_sbtOffset = 103;
+
+    m_mtlLookup = {
+        "water",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/osOcean/osOcean.obj",
     };
@@ -29,6 +35,10 @@ OceanElement::OceanElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

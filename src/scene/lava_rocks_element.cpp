@@ -8,6 +8,13 @@ LavaRocksElement::LavaRocksElement()
 
     m_elementName = "isLavaRocks";
 
+    m_sbtOffset = 75;
+
+    m_mtlLookup = {
+        "default",
+        "volcanicRock",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isLavaRocks/isLavaRocks.obj",
         moanaRoot + "/island/obj/isLavaRocks/isLavaRocks1.obj",
@@ -33,6 +40,11 @@ LavaRocksElement::LavaRocksElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
         {},
     };

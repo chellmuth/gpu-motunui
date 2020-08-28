@@ -26,7 +26,8 @@ Archive::Archive(
 void Archive::processRecords(
     OptixDeviceContext context,
     ASArena &arena,
-    std::vector<OptixInstance> &records
+    std::vector<OptixInstance> &records,
+    int sbtOffset
 ) const {
     assert(m_binPaths.size() == m_handleIndices.size());
 
@@ -45,7 +46,8 @@ void Archive::processRecords(
             context,
             records,
             instancesResult,
-            m_handles[handleIndex]
+            m_handles[handleIndex],
+            sbtOffset
         );
     }
 }

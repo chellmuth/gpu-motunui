@@ -7,12 +7,16 @@
 
 namespace moana {
 
+struct BuildInputResult {
+    std::vector<int> indices;
+    int indexTripletCount;
+};
+
 struct ObjResult {
     std::vector<float> vertices;
-    std::vector<int> indices;
+    std::vector<BuildInputResult> buildInputResults;
 
     int vertexCount;
-    int indexTripletCount;
 };
 
 enum class ObjFaceFormat {
@@ -23,7 +27,10 @@ enum class ObjFaceFormat {
 
 class ObjParser {
 public:
-    ObjParser(const std::string &objFilename);
+    ObjParser(
+        const std::string &objFilename,
+        const std::vector<std::string> &mtlLookup
+    );
 
     ObjResult parse();
 
@@ -57,7 +64,10 @@ private:
 
     ObjFaceFormat m_faceFormat;
     std::vector<float> m_vertices;
-    std::vector<int> m_indices;
+    std::vector<std::vector<int> > m_nestedIndices;
+
+    int m_currentMtlIndex = -1;
+    const std::vector<std::string> m_mtlLookup;
 };
 
 }

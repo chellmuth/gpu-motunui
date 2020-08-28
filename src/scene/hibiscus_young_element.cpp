@@ -8,6 +8,15 @@ HibiscusYoungElement::HibiscusYoungElement()
 
     m_elementName = "isHibiscusYoung";
 
+    m_sbtOffset = 56;
+
+    m_mtlLookup = {
+        "branches",
+        "flowerHibiscus",
+        "leafHibiscus",
+        "trunk",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isHibiscusYoung/isHibiscusYoung.obj",
     };
@@ -32,6 +41,10 @@ HibiscusYoungElement::HibiscusYoungElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

@@ -14,7 +14,9 @@ namespace moana {
 
 struct RayGenData {};
 struct MissData {};
-struct HitGroupData {};
+struct HitGroupData {
+    float3 baseColor;
+};
 
 struct Params {
     OptixTraversableHandle handle;

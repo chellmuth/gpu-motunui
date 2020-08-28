@@ -8,6 +8,22 @@ DunesAElement::DunesAElement()
 
     m_elementName = "isDunesA";
 
+    m_sbtOffset = 26;
+
+    m_mtlLookup = {
+        "archiveHibiscusFlower",
+        "archiveLeaflet",
+        "archiveMuskFern",
+        "archivePalm",
+        "base",
+        "shoots",
+        "soil",
+        "underDunes",
+        "xgDebris",
+        "xgRoots",
+        "xgShootRoots",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isDunesA/isDunesA.obj",
     };
@@ -62,6 +78,10 @@ DunesAElement::DunesAElement()
 
     m_curveBinPathsByElementInstance = {
         {"../scene/curves__isDunesA_xgRoots.bin", "../scene/curves__isDunesA_xgShootRoots.bin"},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
+        {9, 10},
     };
 
     }

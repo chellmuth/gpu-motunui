@@ -20,7 +20,8 @@ public:
     void processRecords(
         OptixDeviceContext context,
         ASArena &arena,
-        std::vector<OptixInstance> &records
+        std::vector<OptixInstance> &records,
+        int sbtOffset
     ) const;
 
 private:

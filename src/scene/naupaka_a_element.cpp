@@ -8,6 +8,14 @@ NaupakaAElement::NaupakaAElement()
 
     m_elementName = "isNaupakaA";
 
+    m_sbtOffset = 92;
+
+    m_mtlLookup = {
+        "hidden",
+        "leaves",
+        "stem",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isNaupakaA/isNaupakaA.obj",
         moanaRoot + "/island/obj/isNaupakaA/isNaupakaA1.obj",
@@ -41,6 +49,13 @@ NaupakaAElement::NaupakaAElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+        {},
+        {},
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
         {},
         {},

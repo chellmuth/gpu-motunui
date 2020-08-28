@@ -9,14 +9,25 @@
 
 namespace moana {
 
-ObjParser::ObjParser(const std::string &objFilename)
+ObjParser::ObjParser(
+    const std::string &objFilename,
+    const std::vector<std::string> &mtlLookup
+)
     : m_objFilename(objFilename),
+      m_mtlLookup(mtlLookup),
       m_faceFormat(ObjFaceFormat::Unknown)
 {}
 
 ObjResult ObjParser::parse()
 {
     std::ifstream objFile(m_objFilename);
+
+    for (const auto &mtlName : m_mtlLookup) {
+        m_nestedIndices.push_back({});
+    }
+    if (m_nestedIndices.empty()) {
+        m_nestedIndices.push_back({}); // fixme: catch-all material
+    }
 
     std::string line;
     while(std::getline(objFile, line)) {
@@ -26,14 +37,24 @@ ObjResult ObjParser::parse()
 
     ObjResult result;
     result.vertices = m_vertices;
-    result.vertexCount = m_vertices.size() / 3.f;
+    result.vertexCount = m_vertices.size() / 3;
 
-    result.indices = m_indices;
-    result.indexTripletCount = m_indices.size() / 3.f;
+    result.buildInputResults = {};
+
+    int totalIndexTripletCount = 0;
+    for (const auto &indices : m_nestedIndices) {
+        BuildInputResult buildInputResult;
+        buildInputResult.indices = indices;
+        buildInputResult.indexTripletCount = indices.size() / 3;
+        totalIndexTripletCount += buildInputResult.indexTripletCount;
+
+        result.buildInputResults.push_back(buildInputResult);
+    }
 
     std::cout << "  Geometry:" << std::endl
               << "    Vertex count: " << result.vertexCount << std::endl
-              << "    Index triplet count: " << result.indexTripletCount << std::endl;
+              << "    Build Inputs count: " << result.buildInputResults.size() << std::endl
+              << "    Index triplet count: " << totalIndexTripletCount << std::endl;
 
     return result;
 }
@@ -55,6 +76,16 @@ void ObjParser::parseLine(std::string_view &line)
         processVertex(rest.value());
     // } else if (command == "vn") {
     //     processNormal(rest);
+    } else if (command == "usemtl") {
+        const std::string key = rest.value().data();
+        const auto iter = std::find(m_mtlLookup.begin(), m_mtlLookup.end(), key);
+        if (iter == m_mtlLookup.end()) {
+            m_currentMtlIndex = 0;
+        } else {
+            int index = std::distance(m_mtlLookup.begin(), iter);
+            m_currentMtlIndex = index;
+        }
+
     } else if (command == "f") {
         processFace(rest.value());
     }
@@ -202,8 +233,9 @@ void ObjParser::processTriangle(
     correctIndices(m_vertices, &vertexIndex0, &vertexIndex1, &vertexIndex2);
     // correctIndices(m_normals, &normalIndex0, &normalIndex1, &normalIndex2);
 
-    m_indices.insert(
-        m_indices.end(),
+    std::vector<int> &indices = m_nestedIndices[m_currentMtlIndex];
+    indices.insert(
+        indices.end(),
         { vertexIndex0, vertexIndex1, vertexIndex2 }
     );
 }

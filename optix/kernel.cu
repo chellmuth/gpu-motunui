@@ -14,6 +14,7 @@ struct PerRayData {
     bool isHit;
     float t;
     Vec3 normal;
+    float3 baseColor;
 };
 
 extern "C" {
@@ -32,6 +33,9 @@ extern "C" __global__ void __closesthit__ch()
     PerRayData *prd = getPRD();
     prd->isHit = true;
     prd->t = optixGetRayTmax();
+
+    HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
+    prd->baseColor = hitgroupData->baseColor;
 
     if (optixIsTriangleHit()) {
         OptixTraversableHandle gas = optixGetGASTraversableHandle();
@@ -113,8 +117,9 @@ extern "C" __global__ void __raygen__rg()
         params.depthBuffer[depthIndex] = prd.t;
 
         const float cosTheta = fabs(-dot(prd.normal, direction));
-        params.outputBuffer[pixelIndex + 0] = cosTheta;
-        params.outputBuffer[pixelIndex + 1] = cosTheta;
-        params.outputBuffer[pixelIndex + 2] = cosTheta;
+        const float3 baseColor = prd.baseColor;
+        params.outputBuffer[pixelIndex + 0] = cosTheta * baseColor.x;
+        params.outputBuffer[pixelIndex + 1] = cosTheta * baseColor.y;
+        params.outputBuffer[pixelIndex + 2] = cosTheta * baseColor.z;
     }
 }

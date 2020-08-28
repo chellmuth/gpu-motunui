@@ -8,6 +8,15 @@ GardeniaAElement::GardeniaAElement()
 
     m_elementName = "isGardeniaA";
 
+    m_sbtOffset = 48;
+
+    m_mtlLookup = {
+        "bark",
+        "barkSimple",
+        "instances",
+        "leaves",
+    };
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isGardeniaA/isGardeniaA.obj",
     };
@@ -40,6 +49,10 @@ GardeniaAElement::GardeniaAElement()
     };
 
     m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
         {},
     };
 

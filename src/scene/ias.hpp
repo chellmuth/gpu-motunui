@@ -13,7 +13,8 @@ void createOptixInstanceRecords(
     OptixDeviceContext context,
     std::vector<OptixInstance> &records,
     const Instances &instances,
-    const OptixTraversableHandle &traversableHandle
+    const OptixTraversableHandle &traversableHandle,
+    int sbtOffset = 0 // not needed when traversableHandle is an IAS
 );
 
 OptixTraversableHandle iasFromInstanceRecords(
