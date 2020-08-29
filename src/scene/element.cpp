@@ -43,34 +43,6 @@ GeometryResult Element::buildAcceleration(
     for (int i = 0; i < uniqueElementCopyCount; i++) {
         std::vector<OptixInstance> records;
 
-        const std::string baseObj = m_baseObjs[i];
-        std::cout << "  Processing base obj: " << baseObj << std::endl;
-
-        ObjParser objParser(baseObj, m_mtlLookup);
-        auto model = objParser.parse();
-
-        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
-
-        // Process element instance geometry
-        {
-            float transform[12] = {
-                1.f, 0.f, 0.f, 0.f,
-                0.f, 1.f, 0.f, 0.f,
-                0.f, 0.f, 1.f, 0.f
-            };
-            Instances elementGeometryInstances;
-            elementGeometryInstances.transforms = transform;
-            elementGeometryInstances.count = 1;
-
-            IAS::createOptixInstanceRecords(
-                context,
-                records,
-                elementGeometryInstances,
-                gasHandle,
-                m_sbtOffset
-            );
-        }
-
         // Process element instance archives
         Archive archive(
             m_primitiveInstancesBinPaths[i],
@@ -105,6 +77,34 @@ GeometryResult Element::buildAcceleration(
                     m_sbtOffset + curveMtlIndices[j]
                 );
             }
+        }
+
+        const std::string baseObj = m_baseObjs[i];
+        std::cout << "  Processing base obj: " << baseObj << std::endl;
+
+        ObjParser objParser(baseObj, m_mtlLookup);
+        auto model = objParser.parse();
+
+        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
+
+        // Process element instance geometry
+        {
+            float transform[12] = {
+                1.f, 0.f, 0.f, 0.f,
+                0.f, 1.f, 0.f, 0.f,
+                0.f, 0.f, 1.f, 0.f
+            };
+            Instances elementGeometryInstances;
+            elementGeometryInstances.transforms = transform;
+            elementGeometryInstances.count = 1;
+
+            IAS::createOptixInstanceRecords(
+                context,
+                records,
+                elementGeometryInstances,
+                gasHandle,
+                m_sbtOffset
+            );
         }
 
         // Build IAS records for each instance with this geometry
