@@ -70,7 +70,15 @@ void ObjParser::parseLine(std::string_view &line)
     if (command[0] == '#') { return; }
 
     std::optional<std::string_view> rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
-    if (!rest) { return; }
+    if (!rest) {
+        if (command == "usemtl") {
+            // fixme: isIronwoodA1 .obj file has an empty usemtl command
+            // Correctly assign its material
+            rest = "archive_seedPod";
+        } else {
+            return;
+        }
+    }
 
     if (command == "v") {
         processVertex(rest.value());
