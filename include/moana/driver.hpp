@@ -37,10 +37,6 @@ struct OptixState {
     OptixPipeline pipeline = 0;
     OptixShaderBindingTable sbt = {};
 
-    CUdeviceptr gasOutputBuffer;
-    size_t outputBufferSizeInBytes;
-    std::vector<void *> gasOutputs;
-
     ASArena arena;
     std::vector<GeometryResult> geometries;
 
