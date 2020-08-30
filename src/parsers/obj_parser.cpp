@@ -72,20 +72,24 @@ void ObjParser::parseLine(std::string_view &line)
     std::optional<std::string_view> rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
     if (!rest) {
         if (command == "usemtl") {
-            // fixme: isIronwoodA1 .obj file has an empty usemtl command
-            // Correctly assign its material
-            rest = "archive_seedPod";
-        } else {
-            return;
+            // // fixme: isIronwoodA1 .obj file has an empty usemtl command
+            // // Correctly assign its material
+            // rest = "archive_seedPod";
+
+            m_skipFaces = true;
         }
+
+        return;
     }
 
     if (command == "v") {
         processVertex(rest.value());
-    // } else if (command == "vn") {
-    //     processNormal(rest);
     } else if (command == "usemtl") {
         const std::string key = rest.value().data();
+        m_skipFaces = (key == "hidden");
+
+        // Search for the index of the material key
+        // If unfound, use the special 0 material
         const auto iter = std::find(m_mtlLookup.begin(), m_mtlLookup.end(), key);
         if (iter == m_mtlLookup.end()) {
             m_currentMtlIndex = 0;
@@ -95,7 +99,9 @@ void ObjParser::parseLine(std::string_view &line)
         }
 
     } else if (command == "f") {
-        processFace(rest.value());
+        if (!m_skipFaces) {
+            processFace(rest.value());
+        }
     }
 }
 

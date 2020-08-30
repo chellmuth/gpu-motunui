@@ -10,7 +10,8 @@ namespace moana { namespace GAS {
 OptixTraversableHandle gasInfoFromObjResult(
     OptixDeviceContext context,
     ASArena &arena,
-    const ObjResult &model
+    const ObjResult &model,
+    int primitiveIndexOffset = 0
 );
 
 } }

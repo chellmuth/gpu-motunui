@@ -48,6 +48,14 @@ DunesBElement::DunesBElement()
         moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1_variantB_lo.obj",
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isDunesB.bin",
     };

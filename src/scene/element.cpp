@@ -5,7 +5,7 @@
 #include <cuda_runtime.h>
 
 #include "assert_macros.hpp"
-#include "enumerate.hpp"
+#include "util/enumerate.hpp"
 #include "moana/parsers/obj_parser.hpp"
 #include "parsers/curve_parser.hpp"
 #include "scene/archive.hpp"
@@ -34,7 +34,12 @@ GeometryResult Element::buildAcceleration(
         ObjParser objParser(objArchivePath, m_mtlLookup);
         auto model = objParser.parse();
 
-        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
+        const auto gasHandle = GAS::gasInfoFromObjResult(
+            context,
+            arena,
+            model,
+            m_archivePrimitiveIndexOffsets[i]
+        );
         archiveHandles.push_back(gasHandle);
     }
 
@@ -43,6 +48,8 @@ GeometryResult Element::buildAcceleration(
     for (int i = 0; i < uniqueElementCopyCount; i++) {
         std::vector<OptixInstance> records;
 
+        // fixme
+        if (m_elementName != "isBeach") {
         // Process element instance archives
         Archive archive(
             m_primitiveInstancesBinPaths[i],
@@ -50,6 +57,7 @@ GeometryResult Element::buildAcceleration(
             archiveHandles
         );
         archive.processRecords(context, arena, records, m_sbtOffset);
+        }
 
         // Process element instance curves
         const auto &curveBinPaths = m_curveBinPathsByElementInstance[i];
@@ -85,7 +93,12 @@ GeometryResult Element::buildAcceleration(
         ObjParser objParser(baseObj, m_mtlLookup);
         auto model = objParser.parse();
 
-        const auto gasHandle = GAS::gasInfoFromObjResult(context, arena, model);
+        const auto gasHandle = GAS::gasInfoFromObjResult(
+            context,
+            arena,
+            model,
+            m_baseObjPrimitiveIndexOffsets[i]
+        );
 
         // Process element instance geometry
         {

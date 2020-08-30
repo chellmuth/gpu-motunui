@@ -15,6 +15,10 @@ struct PerRayData {
     float t;
     Vec3 normal;
     float3 baseColor;
+    int materialID;
+    int primitiveID;
+    bool useTexture;
+    float2 barycentrics;
 };
 
 extern "C" {
@@ -36,6 +40,11 @@ extern "C" __global__ void __closesthit__ch()
 
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
+    prd->materialID = hitgroupData->materialID;
+    prd->useTexture = hitgroupData->useTexture;
+
+    const unsigned int primitiveIndex = optixGetPrimitiveIndex();
+    prd->primitiveID = primitiveIndex;
 
     if (optixIsTriangleHit()) {
         OptixTraversableHandle gas = optixGetGASTraversableHandle();
@@ -61,10 +70,13 @@ extern "C" __global__ void __closesthit__ch()
         const Vec3 normal = normalized(cross(e1, e2));
 
         prd->normal = normal;
+        prd->barycentrics = optixGetTriangleBarycentrics();
+
     } else {
         const unsigned int primitiveIndex = optixGetPrimitiveIndex();
         const float3 normal = normalCubic(primitiveIndex);
         prd->normal = normalized(Vec3(normal.x, normal.y, normal.z));
+        prd->barycentrics = float2{0.f, 0.f};
     }
 }
 
@@ -73,6 +85,7 @@ extern "C" __global__ void __miss__ms()
     float3 direction = optixGetWorldRayDirection();
     PerRayData *prd = getPRD();
     prd->isHit = false;
+    prd->materialID = -1;
 }
 
 extern "C" __global__ void __raygen__rg()
@@ -112,14 +125,28 @@ extern "C" __global__ void __raygen__rg()
         p0, p1
     );
 
-    const int pixelIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
+        const int pixelIndex = 3 * (index.y * dim.x + index.x);
         params.depthBuffer[depthIndex] = prd.t;
 
         const float cosTheta = fabs(-dot(prd.normal, direction));
         const float3 baseColor = prd.baseColor;
-        params.outputBuffer[pixelIndex + 0] = cosTheta * baseColor.x;
-        params.outputBuffer[pixelIndex + 1] = cosTheta * baseColor.y;
-        params.outputBuffer[pixelIndex + 2] = cosTheta * baseColor.z;
+        params.outputBuffer[pixelIndex + 0] = cosTheta;
+        params.outputBuffer[pixelIndex + 1] = cosTheta;
+        params.outputBuffer[pixelIndex + 2] = cosTheta;
+
+        const int colorIndex = 3 * (index.y * dim.x + index.x);
+        params.colorBuffer[colorIndex + 0] = baseColor.x;
+        params.colorBuffer[colorIndex + 1] = baseColor.y;
+        params.colorBuffer[colorIndex + 2] = baseColor.z;
+
+        const int barycentricIndex = 2 * (index.y * dim.x + index.x);
+        params.barycentricBuffer[barycentricIndex + 0] = prd.barycentrics.x;
+        params.barycentricBuffer[barycentricIndex + 1] = prd.barycentrics.y;
+
+        const int idIndex = 3 * (index.y * dim.x + index.x);
+        params.idBuffer[idIndex + 0] = prd.primitiveID;
+        params.idBuffer[idIndex + 1] = prd.materialID;
+        params.idBuffer[idIndex + 2] = prd.useTexture ? 1 : 0;
     }
 }

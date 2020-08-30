@@ -1,3 +1,6 @@
 [submodule "ext/tinyexr"]
 	path = ext/tinyexr
 	url = https://github.com/syoyo/tinyexr.git
+[submodule "ext/ptex"]
+	path = ext/ptex
+	url = https://github.com/wdas/ptex.git

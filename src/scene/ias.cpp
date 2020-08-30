@@ -94,6 +94,7 @@ OptixTraversableHandle iasFromInstanceRecords(
         nullptr,
         0
     ));
+    CHECK_CUDA(cudaDeviceSynchronize());
 
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBuffer)));
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_instances)));

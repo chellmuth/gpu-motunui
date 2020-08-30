@@ -1,6 +1,5 @@
 import collections
 import json
-import os
 import struct
 import sys
 from pathlib import Path
@@ -8,10 +7,9 @@ from pathlib import Path
 import code
 import curves
 import materials
+import obj
 import transforms as transform_util
-
-MoanaPath = Path(os.environ["MOANA_ROOT"]) / "island"
-ScenePath = Path("../scene")
+from params import MoanaPath, ScenePath, elements, skip_list
 
 class ElementInstanceInfo:
     def __init__(self, transform):
@@ -241,60 +239,37 @@ def process_element(element_name, sbt_manager, output_cpp=False):
             f = open(code_path, "w")
             f.write(code_str)
 
-def build_sbt_manager(elements, output_cpp=False):
-    print("Processing materials:")
-
-    # Collect material information for SBT
-    sbt_manager = materials.SBTManager()
-    for element_name in elements:
-        print(f"Processing: {element_name}")
-
-        element_path = f"json/{element_name}/{element_name}.json"
-        element_json = json.load(open(MoanaPath / element_path))
-
-        material_digest_path = MoanaPath / element_json["matFile"]
-        sbt_manager.add_material_digest(element_name, material_digest_path)
-
-    if output_cpp:
-        print(code.generate_sbt_array(sbt_manager))
-
-    return sbt_manager
-
-elements = [
-    "isBayCedarA1",
-    "isBeach",
-    "isCoastline",
-    "isCoral",
-    "isDunesA",
-    "isDunesB",
-    "isGardeniaA",
-    "isHibiscus",
-    "isHibiscusYoung",
-    "isIronwoodA1",
-    "isIronwoodB",
-    "isKava",
-    "isLavaRocks",
-    "isMountainA",
-    "isMountainB",
-    "isNaupakaA",
-    "isPalmDead",
-    "isPalmRig",
-    "isPandanusA",
-    "osOcean",
-]
-
-skip_list = [
-    "isBeach"
-]
-
 def run():
-    sbt_manager = build_sbt_manager(elements, output_cpp=True)
+    sbt_manager = materials.build_sbt_manager(elements)
+    if True:
+        print(code.generate_sbt_array(sbt_manager))
 
     # process_element("isBeach", sbt_manager, output_cpp=True)
 
-    for element in elements:
+    temp_elements = [
+        "isPalmRig",
+        "isHibiscus",
+        "isGardeniaA",
+        "isHibiscusYoung",
+        "isKava",
+        "isLavaRocks",
+        "isNaupakaA",
+        "isPalmDead",
+        "isPandanusA",
+        "isMountainA",
+        "isMountainB",
+        "isDunesA",
+        "isDunesB",
+        "isCoastline",
+        "isBayCedarA1",
+        "isCoral",
+        "isBeach",
+    ]
+    for element in temp_elements:
         if element not in skip_list:
             process_element(element, sbt_manager, output_cpp=True)
+
+    obj.process_texture_offsets(temp_elements)
 
 def list_element_jsons():
     for element_name in elements:

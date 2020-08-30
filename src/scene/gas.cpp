@@ -7,14 +7,15 @@
 #include <optix_stubs.h>
 
 #include "assert_macros.hpp"
-#include "enumerate.hpp"
+#include "util/enumerate.hpp"
 
 namespace moana { namespace GAS {
 
 OptixTraversableHandle gasInfoFromObjResult(
     OptixDeviceContext context,
     ASArena &arena,
-    const ObjResult &model
+    const ObjResult &model,
+    int primitiveIndexOffset
 ) {
     OptixAccelBuildOptions accelOptions = {};
     accelOptions.buildFlags = OPTIX_BUILD_FLAG_ALLOW_RANDOM_VERTEX_ACCESS; // fixme; use user data
@@ -68,6 +69,7 @@ OptixTraversableHandle gasInfoFromObjResult(
         triangleInputs[i].triangleArray.indexBuffer = d_indices;
 
         triangleInputs[i].triangleArray.flags = inputFlags;
+        triangleInputs[i].triangleArray.primitiveIndexOffset = primitiveIndexOffset;
         triangleInputs[i].triangleArray.numSbtRecords = 1;
     }
 

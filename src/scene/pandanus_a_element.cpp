@@ -24,6 +24,14 @@ PandanusAElement::PandanusAElement()
 
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isPandanusA.bin",
     };

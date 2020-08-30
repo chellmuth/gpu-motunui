@@ -43,6 +43,14 @@ MountainAElement::MountainAElement()
         moanaRoot + "/island/obj/isMountainA/archives/xgFoliageC_treeMadronaBaked_canopyOnly_lo.obj",
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isMountainA.bin",
     };
