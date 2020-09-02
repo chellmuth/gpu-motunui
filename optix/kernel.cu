@@ -61,6 +61,10 @@ extern "C" __global__ void __closesthit__ch()
             vertices
         );
 
+        vertices[0] = optixTransformPointFromObjectToWorldSpace(vertices[0]);
+        vertices[1] = optixTransformPointFromObjectToWorldSpace(vertices[1]);
+        vertices[2] = optixTransformPointFromObjectToWorldSpace(vertices[2]);
+
         const Vec3 p0(vertices[0].x, vertices[0].y, vertices[0].z);
         const Vec3 p1(vertices[1].x, vertices[1].y, vertices[1].z);
         const Vec3 p2(vertices[2].x, vertices[2].y, vertices[2].z);
