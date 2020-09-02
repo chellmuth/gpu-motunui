@@ -1,3 +1,5 @@
+import hardcoded_data
+
 def _class_name_from_element_name(element_name):
     return f"{element_name[2:]}Element"
 
@@ -92,6 +94,18 @@ def _generate_src(
         in obj_archives
     )
 
+    archive_primitive_index_offsets_items = " " * 8 + ", ".join(
+        str(hardcoded_data.primitive_index_offsets.get(obj_archive, 0))
+        for obj_archive
+        in obj_archives
+    )
+
+    base_obj_primitive_index_offsets_items = " " * 8 + ", ".join(
+        str(hardcoded_data.primitive_index_offsets.get(base_obj, 0))
+        for base_obj
+        in base_objs
+    )
+
     element_instances_bin_path_items = "\n".join(
         f"{' ' * 8}\"{element_instances_bin_path}\","
         for element_instances_bin_path
@@ -163,6 +177,14 @@ namespace moana {{
 {obj_archives_items}
     }};
 
+    m_archivePrimitiveIndexOffsets = {{
+{archive_primitive_index_offsets_items}
+    }};
+
+    m_baseObjPrimitiveIndexOffsets = {{
+{base_obj_primitive_index_offsets_items}
+    }};
+
     m_elementInstancesBinPaths = {{
 {element_instances_bin_path_items}
     }};
@@ -200,3 +222,48 @@ std::vector<float3> baseColors = {{
 {color_items}
 }};
 """
+
+
+def generate_texture_offets(offsets_by_material_index, ptx_lookup):
+    def offset_str(offset):
+        return f"""{' ' * 12}TextureOffset{{ {offset.start}, {offset.end}, {offset.texture_index}, \"{offset.name}\" }},"""
+
+    def offsets_list_str(offsets):
+        if not offsets:
+            return f"""{' ' * 8}{{}},"""
+
+        items = "\n".join(offset_str(o) for o in offsets)
+
+        return f"""\
+        {{
+{items}
+        }},\
+"""
+
+    items = "\n".join(
+        offsets_list_str(offsets)
+        for offsets in offsets_by_material_index
+    )
+
+    texture_items = "\n".join(
+        f"{' ' * 8}\"{ptx}\","
+        for ptx in ptx_lookup.filename_list()
+    )
+
+    code = f"""\
+#include "scene/texture_offsets.hpp"
+
+namespace moana {{ namespace Textures {{
+
+    std::vector<std::string> textureFilenames = {{
+{texture_items}
+    }};
+
+    std::vector<std::vector<TextureOffset> > offsets = {{
+{items}
+    }};
+
+}} }}
+"""
+
+    return code

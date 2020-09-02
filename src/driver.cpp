@@ -11,13 +11,16 @@
 #include <optix_stubs.h>
 
 #include "assert_macros.hpp"
-#include "enumerate.hpp"
+#include "core/ptex_texture.hpp"
+#include "util/enumerate.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
 #include "moana/parsers/obj_parser.hpp"
 #include "scene/container.hpp"
 #include "scene/materials.hpp"
+#include "scene/texture_offsets.hpp"
+#include "util/color_map.hpp"
 
 namespace moana {
 
@@ -250,10 +253,12 @@ static void createShaderBindingTable(OptixState &state)
     CUdeviceptr d_hitgroupRecords;
 
     std::vector<HitGroupSbtRecord> hitgroupRecords;
-    for (float3 baseColor : Materials::baseColors) {
+    for (auto [i, baseColor] : enumerate(Materials::baseColors)) { // todo: better interface
         HitGroupSbtRecord hitgroupSbt;
         CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
         hitgroupSbt.data.baseColor = baseColor;
+        hitgroupSbt.data.useTexture = Textures::offsets[i].size() > 0;
+        hitgroupSbt.data.materialID = i;
         hitgroupRecords.push_back(hitgroupSbt);
     }
 
@@ -300,11 +305,17 @@ void Driver::init()
 
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
+    std::vector<PtexTexture> textures;
+    for (const auto &filename : Textures::textureFilenames) {
+        PtexTexture texture(MOANA_ROOT + std::string("/island/") + filename);
+        textures.push_back(texture);
+    }
+
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 952;
-    const int height = 400;
+    const int width = 1024;
+    const int height = 429;
 
     Params params;
 
@@ -317,6 +328,39 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         reinterpret_cast<void *>(params.outputBuffer),
         0,
         outputBufferSizeInBytes
+    ));
+
+    const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.barycentricBuffer),
+        barycentricBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.barycentricBuffer),
+        0,
+        barycentricBufferSizeInBytes
+    ));
+
+    const size_t idBufferSizeInBytes = width * height * sizeof(int) * 3;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.idBuffer),
+        idBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.idBuffer),
+        0,
+        idBufferSizeInBytes
+    ));
+
+    const size_t colorBufferSizeInBytes = width * height * sizeof(float) * 3;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.colorBuffer),
+        colorBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.colorBuffer),
+        0,
+        colorBufferSizeInBytes
     ));
 
     const size_t depthBufferSizeInBytes = width * height * sizeof(float);
@@ -381,18 +425,137 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     ));
     CHECK_CUDA(cudaDeviceSynchronize());
 
+    std::vector<float> barycentricBuffer(width * height * 2);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(barycentricBuffer.data()),
+        params.barycentricBuffer,
+        barycentricBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    std::vector<int> idBuffer(width * height * 3);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(idBuffer.data()),
+        params.idBuffer,
+        idBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    std::vector<float> colorBuffer(width * height * 3);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(colorBuffer.data()),
+        params.colorBuffer,
+        colorBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    ColorMap faceMap;
+    ColorMap materialMap;
+    std::vector<float> textureImage(width * height * 3, 0.f);
+    std::vector<float> faceImage(width * height * 3, 0.f);
+    std::vector<float> uvImage(width * height * 3, 0.f);
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
+
+            const int idIndex = 3 * (row * width + col);
+            const int primitiveID = idBuffer[idIndex + 0];
+            const int materialID = idBuffer[idIndex + 1];
+            const bool useTexture = idBuffer[idIndex + 2];
+            const int faceID = primitiveID / 2;
+
+            const int barycentricIndex = 2 * (row * width + col);
+            const float alpha = barycentricBuffer[barycentricIndex + 0];
+            const float beta = barycentricBuffer[barycentricIndex + 1];
+
+            float u, v;
+            if (primitiveID % 2 == 0) {
+                u = alpha + beta;
+                v = beta;
+            } else {
+                u = alpha;
+                v = alpha + beta;
+            }
+            uvImage[pixelIndex + 0] = u;
+            uvImage[pixelIndex + 1] = v;
+            uvImage[pixelIndex + 2] = materialID;
+
+            if (materialID > 0) {
+                float3 color = faceMap.get(faceID);
+                faceImage[pixelIndex + 0] = color.x;
+                faceImage[pixelIndex + 1] = color.y;
+                faceImage[pixelIndex + 2] = color.z;
+            }
+
+            if (useTexture) {
+                std::vector<TextureOffset> &offsetList = Textures::offsets[materialID];
+                TextureOffset offset;
+                bool found = false;
+                for (const auto &offsetCandidate : offsetList) {
+                    if (primitiveID <= offsetCandidate.endIndex) {
+                        offset = offsetCandidate;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    std::cout << "no texture? faceID: " << faceID << std::endl;
+                }
+
+                PtexTexture texture = textures[offset.textureIndex];
+
+                int faceOffset = offset.startIndex / 2;
+                Vec3 color = texture.lookup(
+                    float2{ u, v },
+                    faceID - faceOffset
+                );
+                textureImage[pixelIndex + 0] = color.x();
+                textureImage[pixelIndex + 1] = color.y();
+                textureImage[pixelIndex + 2] = color.z();
+            } else if (materialID > 0) {
+                float3 color = materialMap.get(materialID);
+
+                textureImage[pixelIndex + 0] = colorBuffer[pixelIndex + 0];
+                textureImage[pixelIndex + 1] = colorBuffer[pixelIndex + 1];
+                textureImage[pixelIndex + 2] = colorBuffer[pixelIndex + 2];
+            }
+
+            textureImage[pixelIndex + 0] *= outputBuffer[pixelIndex + 0];
+            textureImage[pixelIndex + 1] *= outputBuffer[pixelIndex + 1];
+            textureImage[pixelIndex + 2] *= outputBuffer[pixelIndex + 2];
+        }
+    }
+
+    // Image::save(
+    //     width,
+    //     height,
+    //     outputBuffer,
+    //     exrFilename
+    // );
+
+    // Image::save(
+    //     width,
+    //     height,
+    //     faceImage,
+    //     "face-buffer_" + exrFilename
+    // );
+
     Image::save(
         width,
         height,
-        outputBuffer,
-        "out.exr"
+        textureImage,
+        "texture-buffer_" + exrFilename
     );
-    Image::save(
-        width,
-        height,
-        outputBuffer,
-        exrFilename
-    );
+
+    // Image::save(
+    //     width,
+    //     height,
+    //     uvImage,
+    //     "uv-buffer_" + exrFilename
+    // );
 
     // CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));

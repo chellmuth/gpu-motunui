@@ -23,6 +23,14 @@ PalmDeadElement::PalmDeadElement()
 
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isPalmDead.bin",
     };

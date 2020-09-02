@@ -16,6 +16,8 @@ struct RayGenData {};
 struct MissData {};
 struct HitGroupData {
     float3 baseColor;
+    bool useTexture;
+    int materialID;
 };
 
 struct Params {
@@ -23,6 +25,10 @@ struct Params {
 
     float *outputBuffer;
     float *depthBuffer;
+    float *barycentricBuffer;
+    int *idBuffer;
+    float *colorBuffer;
+
     Camera camera;
 };
 
@@ -36,10 +42,6 @@ struct OptixState {
     OptixProgramGroup hitgroupProgramGroup;
     OptixPipeline pipeline = 0;
     OptixShaderBindingTable sbt = {};
-
-    CUdeviceptr gasOutputBuffer;
-    size_t outputBufferSizeInBytes;
-    std::vector<void *> gasOutputs;
 
     ASArena arena;
     std::vector<GeometryResult> geometries;

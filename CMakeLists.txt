@@ -10,11 +10,16 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(CUDAToolkit REQUIRED)
 find_package(OptiX REQUIRED)
 
+# ptex
+SET(PTEX_BUILD_SHARED_LIBS OFF CACHE BOOL " " FORCE)
+ADD_SUBDIRECTORY(ext/ptex)
+
 add_library(moana
   src/driver.cpp
   src/scene.cpp
 
   src/core/camera.cpp
+  src/core/ptex_texture.cpp
   src/core/transform.cpp
 
   src/io/image.cpp
@@ -25,8 +30,8 @@ add_library(moana
 
   src/scene/archive.cpp
   src/scene/as_arena.cpp
-  src/scene/beach_element.cpp
   src/scene/bay_cedar_a1_element.cpp
+  src/scene/beach_element.cpp
   src/scene/coastline_element.cpp
   src/scene/container.cpp
   src/scene/coral_element.cpp
@@ -47,17 +52,21 @@ add_library(moana
   src/scene/mountain_a_element.cpp
   src/scene/mountain_b_element.cpp
   src/scene/naupaka_a_element.cpp
+  src/scene/ocean_element.cpp
   src/scene/palm_dead_element.cpp
   src/scene/palm_rig_element.cpp
   src/scene/pandanus_a_element.cpp
-  src/scene/ocean_element.cpp
+  src/scene/texture_offsets.cpp
+
+  src/util/color_map.cpp
 )
 target_include_directories(moana PUBLIC include)
 target_include_directories(moana PUBLIC "${OptiX_INCLUDE}")
 target_include_directories(moana PRIVATE src)
 target_include_directories(moana PRIVATE ext/tinyexr)
+target_include_directories(moana PRIVATE ext/ptex/src/ptex)
 target_compile_definitions(moana PRIVATE MOANA_ROOT="${MOANA_ROOT}")
-target_link_libraries(moana CUDA::cudart dl)
+target_link_libraries(moana CUDA::cudart Ptex_static dl)
 
 add_subdirectory(optix)
 add_dependencies(moana ptx_headers)

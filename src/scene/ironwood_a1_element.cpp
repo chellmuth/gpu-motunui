@@ -27,6 +27,14 @@ IronwoodA1Element::IronwoodA1Element()
         moanaRoot + "/island/obj/isIronwoodA1/archives/archiveseedpodb_mod.obj",
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        0
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isIronwoodA1.bin",
     };

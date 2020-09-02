@@ -48,6 +48,9 @@ protected:
 
     // Curve materials aren't defined in the obj like archives, store them here
     std::vector<std::vector<int> > m_curveMtlIndicesByElementInstance;
+
+    std::vector<int> m_archivePrimitiveIndexOffsets;
+    std::vector<int> m_baseObjPrimitiveIndexOffsets;
 };
 
 }

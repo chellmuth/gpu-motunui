@@ -56,6 +56,14 @@ PalmRigElement::PalmRigElement()
 
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isPalmRig.bin",
         "../scene/isPalmRig18.bin",

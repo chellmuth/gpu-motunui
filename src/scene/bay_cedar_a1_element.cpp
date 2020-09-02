@@ -24,6 +24,14 @@ BayCedarA1Element::BayCedarA1Element()
         moanaRoot + "/island/obj/isBayCedarA1/archives/archivebaycedar0001_mod.obj",
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        0
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isBayCedarA1.bin",
     };

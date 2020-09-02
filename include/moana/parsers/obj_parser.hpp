@@ -68,6 +68,8 @@ private:
 
     int m_currentMtlIndex = -1;
     const std::vector<std::string> m_mtlLookup;
+
+    bool m_skipFaces;
 };
 
 }

@@ -64,6 +64,14 @@ DunesAElement::DunesAElement()
         moanaRoot + "/island/obj/isDunesA/archives/xgPalmDebris_archivePalmdead0004_mod.obj",
     };
 
+    m_archivePrimitiveIndexOffsets = {
+        0, 0, 0, 0, 0, 0, 3888, 7776, 11664, 15552, 23328, 27216, 31104, 0, 3364, 6728, 10092, 13456, 16820, 20184, 23548, 26912, 30276, 33640, 37004, 40368, 43732, 0, 112, 208, 312, 416, 0
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
+    };
+
     m_elementInstancesBinPaths = {
         "../scene/isDunesA.bin",
     };

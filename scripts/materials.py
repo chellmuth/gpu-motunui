@@ -2,7 +2,25 @@ import collections
 import json
 import pprint
 
+from params import MoanaPath
+
 SBTRecord = collections.namedtuple("SBTRecord", [ "name", "base_color"])
+
+def build_sbt_manager(elements):
+    print("Processing materials:")
+
+    # Collect material information for SBT
+    sbt_manager = SBTManager()
+    for element_name in elements:
+        print(f"Processing: {element_name}")
+
+        element_path = f"json/{element_name}/{element_name}.json"
+        element_json = json.load(open(MoanaPath / element_path))
+
+        material_digest_path = MoanaPath / element_json["matFile"]
+        sbt_manager.add_material_digest(element_name, material_digest_path)
+
+    return sbt_manager
 
 class SBTManager:
     def __init__(self):
@@ -66,3 +84,14 @@ class SBTManager:
             assert element_name == "isCoastline"
             assert curve_name == "xgGrass"
             return 0
+
+    # Items are (element_name, material_name) tuples
+    def get_material_list(self):
+        nested_materials = [
+            (element, material)
+            for element in sorted(self.records_by_element.keys())
+            for material in self.get_names(element)
+        ]
+
+        # account for default material
+        return [()] + nested_materials
