@@ -38,7 +38,7 @@ private:
     void parseLine(std::string_view &line);
 
     void processVertex(std::string_view &vertexArgs);
-    void processNormal(std::string &normalArgs);
+    void processNormal(std::string_view &normalArgs);
     void processFace(std::string_view &faceArgs);
 
     void processSingleFaceVertexAndNormal(std::string_view &faceArgs);
@@ -64,6 +64,7 @@ private:
 
     ObjFaceFormat m_faceFormat;
     std::vector<float> m_vertices;
+    std::vector<float> m_normals;
     std::vector<std::vector<int> > m_nestedIndices;
 
     int m_currentMtlIndex = -1;

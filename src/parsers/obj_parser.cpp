@@ -84,6 +84,8 @@ void ObjParser::parseLine(std::string_view &line)
 
     if (command == "v") {
         processVertex(rest.value());
+    } else if (command == "vn") {
+        processNormal(rest.value());
     } else if (command == "usemtl") {
         const std::string key = rest.value().data();
         m_skipFaces = (key == "hidden");
@@ -124,20 +126,23 @@ void ObjParser::processVertex(std::string_view &vertexArgs)
     );
 }
 
-void ObjParser::processNormal(std::string &normalArgs)
+void ObjParser::processNormal(std::string_view &normalArgs)
 {
     std::string::size_type index = 0;
-    std::string rest = normalArgs;
+    std::string_view rest = normalArgs;
 
-    float x = std::stof(rest, &index);
-
-    rest = rest.substr(index);
-    float y = std::stof(rest, &index);
+    float x = std::stof(rest.data(), &index);
 
     rest = rest.substr(index);
-    float z = std::stof(rest, &index);
+    float y = std::stof(rest.data(), &index);
 
-    // m_normals.push_back(Point(x, y, z));
+    rest = rest.substr(index);
+    float z = std::stof(rest.data(), &index);
+
+    m_normals.insert(
+        m_normals.end(),
+        { x, y, z }
+    );
 }
 
 static ObjFaceFormat identityFaceFormat(std::string faceArgs)
