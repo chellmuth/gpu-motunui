@@ -82,10 +82,22 @@ void ObjParser::parseLine(std::string_view &line)
         return;
     }
 
+    if (m_checkForShadowMesh) {
+        m_checkForShadowMesh = false;
+
+        if (command != "usemtl") {
+            m_skipFaces = true;
+        }
+    }
+
     if (command == "v") {
         processVertex(rest.value());
     } else if (command == "vn") {
         processNormal(rest.value());
+    } else if (command == "g") {
+        if (rest.value().data() == "default") { return; }
+
+        m_checkForShadowMesh = true;
     } else if (command == "usemtl") {
         const std::string key = rest.value().data();
         m_skipFaces = (key == "hidden");
