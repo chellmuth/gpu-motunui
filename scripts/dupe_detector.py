@@ -6,7 +6,7 @@ import params
 def obj_tokens(obj_filename):
     with open(obj_filename, "r") as obj:
         for line in obj:
-            tokens = line.strip().split()
+            tokens = line.strip().split(" ", 1)
             if not tokens: continue
 
             command = tokens[0]
@@ -58,6 +58,40 @@ def check_default_mesh_on_all_geometry(obj_filename):
 
     return True
 
+def check_independent_meshes(obj_filename):
+    vertex_offset = 0
+    normal_offset = 0
+
+    vertex_count = 0
+    normal_count = 0
+
+    for command, rest in obj_tokens(obj_filename):
+        if command == "v":
+            vertex_count += 1
+        elif command == "n":
+            normal_count += 1
+        elif command == "g":
+            if rest.startswith("default"):
+                vertex_offset = vertex_count
+                normal_offset = normal_count
+        elif command == "f":
+            v0, n0, v1, n1, v2, n2, v3, n3 = [
+                int(num)
+                for num in rest.replace("/", " ").split(" ")
+                if num
+            ]
+
+            valid_indices = [
+                v0 - vertex_offset >= 1,
+                v1 - vertex_offset >= 1,
+                v2 - vertex_offset >= 1,
+                n0 - normal_offset >= 1,
+                n1 - normal_offset >= 1,
+                n2 - normal_offset >= 1,
+            ]
+
+            if not all(valid_indices):
+                print(obj_filename)
 
 if __name__ == "__main__":
     for element_name in params.elements:
@@ -77,3 +111,8 @@ if __name__ == "__main__":
                 valid = False
         if valid:
             print("OK!")
+
+    for element_name in params.elements:
+        print(f"Checking independent meshes {element_name}:")
+        for obj_filename in files.find_obj_files(element_name):
+            check_independent_meshes(obj_filename)
