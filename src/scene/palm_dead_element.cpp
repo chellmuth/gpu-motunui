@@ -8,12 +8,12 @@ PalmDeadElement::PalmDeadElement()
 
     m_elementName = "isPalmDead";
 
-    m_sbtOffset = 95;
-
     m_mtlLookup = {
         "roots",
         "trunk",
     };
+
+    m_materialOffset = 95;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isPalmDead/isPalmDead.obj",

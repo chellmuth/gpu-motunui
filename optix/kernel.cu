@@ -17,7 +17,7 @@ struct PerRayData {
     float3 baseColor;
     int materialID;
     int primitiveID;
-    bool useTexture;
+    int textureIndex;
     float2 barycentrics;
 };
 
@@ -41,7 +41,7 @@ extern "C" __global__ void __closesthit__ch()
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
     prd->materialID = hitgroupData->materialID;
-    prd->useTexture = hitgroupData->useTexture;
+    prd->textureIndex = hitgroupData->textureIndex;
 
     const unsigned int primitiveIndex = optixGetPrimitiveIndex();
     prd->primitiveID = primitiveIndex;
@@ -65,17 +65,54 @@ extern "C" __global__ void __closesthit__ch()
         vertices[1] = optixTransformPointFromObjectToWorldSpace(vertices[1]);
         vertices[2] = optixTransformPointFromObjectToWorldSpace(vertices[2]);
 
-        const Vec3 p0(vertices[0].x, vertices[0].y, vertices[0].z);
-        const Vec3 p1(vertices[1].x, vertices[1].y, vertices[1].z);
-        const Vec3 p2(vertices[2].x, vertices[2].y, vertices[2].z);
+        int normalIndex0 = hitgroupData->normalIndices[primitiveIndex * 3 + 0];
+        int normalIndex1 = hitgroupData->normalIndices[primitiveIndex * 3 + 1];
+        int normalIndex2 = hitgroupData->normalIndices[primitiveIndex * 3 + 2];
 
-        const Vec3 e1 = p1 - p0;
-        const Vec3 e2 = p2 - p0;
-        const Vec3 normal = normalized(cross(e1, e2));
+        float n0x = hitgroupData->normals[normalIndex0 * 3 + 0];
+        float n0y = hitgroupData->normals[normalIndex0 * 3 + 1];
+        float n0z = hitgroupData->normals[normalIndex0 * 3 + 2];
 
-        prd->normal = normal;
+        float n1x = hitgroupData->normals[normalIndex1 * 3 + 0];
+        float n1y = hitgroupData->normals[normalIndex1 * 3 + 1];
+        float n1z = hitgroupData->normals[normalIndex1 * 3 + 2];
+
+        float n2x = hitgroupData->normals[normalIndex2 * 3 + 0];
+        float n2y = hitgroupData->normals[normalIndex2 * 3 + 1];
+        float n2z = hitgroupData->normals[normalIndex2 * 3 + 2];
+
+        float3 n0Object{n0x, n0y, n0z};
+        float3 n1Object{n1x, n1y, n1z};
+        float3 n2Object{n2x, n2y, n2z};
+
+        float3 n0World = optixTransformNormalFromObjectToWorldSpace(n0Object);
+        float3 n1World = optixTransformNormalFromObjectToWorldSpace(n1Object);
+        float3 n2World = optixTransformNormalFromObjectToWorldSpace(n2Object);
+
+        const Vec3 n0 = normalized(Vec3(n0World.x, n0World.y, n0World.z));
+        const Vec3 n1 = normalized(Vec3(n1World.x, n1World.y, n1World.z));
+        const Vec3 n2 = normalized(Vec3(n2World.x, n2World.y, n2World.z));
+
+        const float2 barycentrics = optixGetTriangleBarycentrics();
+        const float alpha = barycentrics.x;
+        const float beta = barycentrics.y;
+        const float gamma = 1.f - alpha - beta;
+
+        const Vec3 normal = gamma * n0
+            + alpha * n1
+            + beta * n2;
+
+        // const Vec3 p0(vertices[0].x, vertices[0].y, vertices[0].z);
+        // const Vec3 p1(vertices[1].x, vertices[1].y, vertices[1].z);
+        // const Vec3 p2(vertices[2].x, vertices[2].y, vertices[2].z);
+
+        // // Debug: face normals
+        // const Vec3 e1 = p1 - p0;
+        // const Vec3 e2 = p2 - p0;
+        // const Vec3 normal = normalized(cross(e1, e2));
+
+        prd->normal = normalized(normal);
         prd->barycentrics = optixGetTriangleBarycentrics();
-
     } else {
         const unsigned int primitiveIndex = optixGetPrimitiveIndex();
         const float3 normal = normalCubic(primitiveIndex);
@@ -144,6 +181,11 @@ extern "C" __global__ void __raygen__rg()
         params.colorBuffer[colorIndex + 1] = baseColor.y;
         params.colorBuffer[colorIndex + 2] = baseColor.z;
 
+        const int normalIndex = 3 * (index.y * dim.x + index.x);
+        params.normalBuffer[normalIndex + 0] = (1.f + prd.normal.x()) * 0.5f;
+        params.normalBuffer[normalIndex + 1] = (1.f + prd.normal.y()) * 0.5f;
+        params.normalBuffer[normalIndex + 2] = (1.f + prd.normal.z()) * 0.5f;
+
         const int barycentricIndex = 2 * (index.y * dim.x + index.x);
         params.barycentricBuffer[barycentricIndex + 0] = prd.barycentrics.x;
         params.barycentricBuffer[barycentricIndex + 1] = prd.barycentrics.y;
@@ -151,6 +193,6 @@ extern "C" __global__ void __raygen__rg()
         const int idIndex = 3 * (index.y * dim.x + index.x);
         params.idBuffer[idIndex + 0] = prd.primitiveID;
         params.idBuffer[idIndex + 1] = prd.materialID;
-        params.idBuffer[idIndex + 2] = prd.useTexture ? 1 : 0;
+        params.idBuffer[idIndex + 2] = prd.textureIndex;
     }
 }

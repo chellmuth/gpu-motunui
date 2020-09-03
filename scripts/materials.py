@@ -58,6 +58,20 @@ class SBTManager:
 
         return result
 
+    def get_base_colors_annotated(self):
+        result = [ ((0., 0., 0.), "missing material") ]
+        for element_name in sorted(self.records_by_element.keys()):
+            element_records = sorted(
+                self.records_by_element[element_name],
+                key=lambda r: r.name
+            )
+
+            for i, record in enumerate(element_records):
+                comment = f"{element_name}: {record.name}"
+                result.append((record.base_color, comment))
+
+        return result
+
     def get_names(self, search_element):
         records = self.records_by_element[search_element]
         return sorted(
@@ -65,7 +79,7 @@ class SBTManager:
             for record in records
         )
 
-    def get_sbt_offset(self, search_element):
+    def get_material_offset(self, search_element):
         offset = 1 # account for default material
         for element_name in sorted(self.records_by_element.keys()):
             if element_name == search_element:

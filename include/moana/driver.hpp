@@ -16,8 +16,11 @@ struct RayGenData {};
 struct MissData {};
 struct HitGroupData {
     float3 baseColor;
-    bool useTexture;
+    int textureIndex;
     int materialID;
+
+    float *normals;
+    int *normalIndices;
 };
 
 struct Params {
@@ -25,9 +28,10 @@ struct Params {
 
     float *outputBuffer;
     float *depthBuffer;
+    float *colorBuffer;
+    float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
-    float *colorBuffer;
 
     Camera camera;
 };

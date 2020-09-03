@@ -80,7 +80,7 @@ def _generate_src(
         in base_objs
     ])
 
-    sbt_offset = sbt_manager.get_sbt_offset(element_name)
+    material_offset = sbt_manager.get_material_offset(element_name)
 
     mtl_lookup_items = "\n".join(
         f"{' ' * 8}\"{material_name}\","
@@ -163,11 +163,11 @@ namespace moana {{
 
     m_elementName = "{element_name}";
 
-    m_sbtOffset = {sbt_offset};
-
     m_mtlLookup = {{
 {mtl_lookup_items}
     }};
+
+    m_materialOffset = {material_offset};
 
     m_baseObjs = {{
 {base_obj_items}
@@ -211,10 +211,10 @@ namespace moana {{
 """
 
 def generate_sbt_array(sbt_manager):
-    colors = sbt_manager.get_base_colors()
+    colors_annotated = sbt_manager.get_base_colors_annotated()
     color_items = "\n".join(
-        f"{' '*4}float3{{ {c[0]}, {c[1]}, {c[2]} }},"
-        for c in colors
+        f"{' '*4}float3{{ {c[0]}, {c[1]}, {c[2]} }}, // {comment} [{i}]"
+        for i, (c, comment) in enumerate(colors_annotated)
     )
 
     return f"""\
@@ -223,31 +223,10 @@ std::vector<float3> baseColors = {{
 }};
 """
 
-
-def generate_texture_offets(offsets_by_material_index, ptx_lookup):
-    def offset_str(offset):
-        return f"""{' ' * 12}TextureOffset{{ {offset.start}, {offset.end}, {offset.texture_index}, \"{offset.name}\" }},"""
-
-    def offsets_list_str(offsets):
-        if not offsets:
-            return f"""{' ' * 8}{{}},"""
-
-        items = "\n".join(offset_str(o) for o in offsets)
-
-        return f"""\
-        {{
-{items}
-        }},\
-"""
-
-    items = "\n".join(
-        offsets_list_str(offsets)
-        for offsets in offsets_by_material_index
-    )
-
+def generate_texture_filenames(ptx_files):
     texture_items = "\n".join(
-        f"{' ' * 8}\"{ptx}\","
-        for ptx in ptx_lookup.filename_list()
+        f"{' ' * 4}\"{ptx}\", // [{i}]"
+        for i, ptx in enumerate(ptx_files)
     )
 
     code = f"""\
@@ -255,14 +234,9 @@ def generate_texture_offets(offsets_by_material_index, ptx_lookup):
 
 namespace moana {{ namespace Textures {{
 
-    std::vector<std::string> textureFilenames = {{
+std::vector<std::string> textureFilenames = {{
 {texture_items}
-    }};
-
-    std::vector<std::vector<TextureOffset> > offsets = {{
-{items}
-    }};
-
+}};
 }} }}
 """
 

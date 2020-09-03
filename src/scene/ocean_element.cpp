@@ -8,8 +8,6 @@ OceanElement::OceanElement()
 
     m_elementName = "osOcean";
 
-    m_sbtOffset = 103;
-
     m_mtlLookup = {
         "water",
     };

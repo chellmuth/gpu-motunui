@@ -8,8 +8,6 @@ MountainBElement::MountainBElement()
 
     m_elementName = "isMountainB";
 
-    m_sbtOffset = 83;
-
     m_mtlLookup = {
         "branches",
         "breadFruit",
@@ -21,6 +19,8 @@ MountainBElement::MountainBElement()
         "trunk",
         "trunkDetailed",
     };
+
+    m_materialOffset = 83;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isMountainB/isMountainB.obj",

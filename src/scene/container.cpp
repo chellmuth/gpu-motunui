@@ -25,6 +25,9 @@
 #include "scene/palm_rig_element.hpp"
 #include "scene/pandanus_a_element.hpp"
 
+#include <map>
+#include <utility>
+
 namespace moana { namespace Container {
 
 std::vector<GeometryResult> createGeometryResults(
@@ -37,7 +40,7 @@ std::vector<GeometryResult> createGeometryResults(
         std::make_unique<BayCedarA1Element>(),
         std::make_unique<BeachElement>(),
         std::make_unique<CoastlineElement>(),
-        std::make_unique<CoralElement>(),
+        // std::make_unique<CoralElement>(),
         std::make_unique<DunesAElement>(),
         std::make_unique<DunesBElement>(),
         std::make_unique<GardeniaAElement>(),
@@ -56,8 +59,10 @@ std::vector<GeometryResult> createGeometryResults(
         // std::make_unique<OceanElement>(),
     };
 
+    int elementSBTOffset = 0;
     for (const auto &elementPtr : elementPtrs) {
-        auto result = elementPtr->buildAcceleration(context, arena);
+        auto result = elementPtr->buildAcceleration(context, arena, elementSBTOffset);
+        elementSBTOffset += result.hostSBTRecords.size();
 
         geometries.push_back(result);
     }

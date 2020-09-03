@@ -27,51 +27,6 @@ ObjParser::ObjParser(
     )
 {}
 
-
-// fixme: throw away
-ObjResult ObjParser::parse()
-{
-    ObjResult result;
-    result.buildInputResults.resize(m_mtlLookup.size());
-
-    std::vector<MeshRecord> records = parseMeshes();
-    for (const auto &record : records) {
-        if (!record.hidden) {
-            int offset = result.vertices.size() / 3;
-            std::vector<int> indices = record.vertexIndices;
-            for (int i = 0; i < indices.size(); i++) {
-                indices[i] += offset;
-            }
-
-            BuildInputResult &input = result.buildInputResults[record.materialIndex];
-            input.indices.insert(
-                input.indices.end(),
-                indices.begin(),
-                indices.end()
-            );
-            input.indexTripletCount = input.indices.size() / 3;
-        }
-
-        result.vertices.insert(
-            result.vertices.end(),
-            record.vertices.begin(),
-            record.vertices.end()
-        );
-    }
-    result.vertexCount = result.vertices.size() / 3;
-
-    int totalIndexTripletCount = 0;
-    for (const auto &buildInput : result.buildInputResults) {
-        totalIndexTripletCount += buildInput.indexTripletCount;
-    }
-
-    std::cout << "  Geometry:" << std::endl
-              << "    Vertex count: " << result.vertexCount << std::endl
-              << "    Build Inputs count: " << result.buildInputResults.size() << std::endl
-              << "    Index triplet count: " << totalIndexTripletCount << std::endl;
-    return result;
-}
-
 ParseState ObjParser::parseHeader(
     std::string_view command,
     std::string_view rest,
@@ -80,7 +35,7 @@ ParseState ObjParser::parseHeader(
     if (command == "g") {
         assert(rest == "default");
 
-        // don't return the new state until you
+        // don't return the new state until we
         // hit the first unprocessable line
         return ParseState::Header;
     } else if (command == "v") {
@@ -124,6 +79,8 @@ ParseState ObjParser::parseMeshName(
     MeshRecord &record
 ) {
     if (command == "g") {
+        record.name = rest.data();
+
         return ParseState::Material;
     } else {
         return ParseState::MeshName;
@@ -169,11 +126,13 @@ ParseState ObjParser::parseFaces(
     }
 }
 
-std::vector<MeshRecord> ObjParser::parseMeshes()
+std::vector<MeshRecord> ObjParser::parse()
 {
     std::vector<MeshRecord> records;
     while (m_objFilePtr->good()) {
         MeshRecord record = parseMesh();
+        if (record.hidden) { continue; }
+
         records.push_back(record);
 
         assert(record.vertices.size() % 3 == 0);
@@ -237,10 +196,13 @@ MeshRecord ObjParser::parseMesh()
     assert(record.vertexIndices.size() % 3 == 0);
     record.indexTripletCount = record.vertexIndices.size() / 3;
 
-    // std::cout << "  Geometry:" << std::endl
-    //           << "    Vertex count: " << result.vertexCount << std::endl
-    //           << "    Build Inputs count: " << result.buildInputResults.size() << std::endl
-    //           << "    Index triplet count: " << totalIndexTripletCount << std::endl;
+    std::cout << "  Mesh Geometry:" << std::endl
+              << "    Vertex count: " << record.vertices.size() / 3 << std::endl
+              << "    Vertex indices count: " << record.vertexIndices.size() / 3 << std::endl
+              << "    Normal count: " << record.normals.size() / 3 << std::endl
+              << "    Normal indices count: " << record.normalIndices.size() / 3 << std::endl
+              << "    Material index: " << record.materialIndex << std::endl
+              << "    Hidden: " << record.hidden << std::endl;
 
     return record;
 }

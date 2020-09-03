@@ -8,13 +8,13 @@ NaupakaAElement::NaupakaAElement()
 
     m_elementName = "isNaupakaA";
 
-    m_sbtOffset = 92;
-
     m_mtlLookup = {
         "hidden",
         "leaves",
         "stem",
     };
+
+    m_materialOffset = 92;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isNaupakaA/isNaupakaA.obj",

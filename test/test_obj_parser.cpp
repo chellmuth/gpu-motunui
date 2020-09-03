@@ -1,4 +1,3 @@
-#include <iostream> // fixme
 #include <memory>
 #include <sstream>
 #include <string>
@@ -34,7 +33,7 @@ TEST_CASE("parse a simple obj", "[obj]") {
         mtlLookup
     );
 
-    auto records = parser.parseMeshes();
+    auto records = parser.parse();
     REQUIRE(records.size() == 1);
 
     auto record = records[0];
@@ -108,7 +107,7 @@ TEST_CASE("parse an obj with two meshes", "[obj]") {
         mtlLookup
     );
 
-    auto records = parser.parseMeshes();
+    auto records = parser.parse();
     REQUIRE(records.size() == 2);
 
     {
@@ -197,7 +196,7 @@ usemtl hidden
 f 1//4 2//3 3//2 4//1
 )";
 
-TEST_CASE("mark a hidden mesh", "[obj]") {
+TEST_CASE("skip hidden meshes", "[obj]") {
     const std::vector<std::string> mtlLookup = {};
 
     ObjParser parser(
@@ -205,9 +204,8 @@ TEST_CASE("mark a hidden mesh", "[obj]") {
         mtlLookup
     );
 
-    auto records = parser.parseMeshes();
-    REQUIRE(records.size() == 1);
-    REQUIRE(records[0].hidden);
+    auto records = parser.parse();
+    REQUIRE(records.size() == 0);
 }
 
 static std::string obj4 = R"(
@@ -233,7 +231,6 @@ TEST_CASE("mark shadow meshes hidden (no usemtl)", "[obj]") {
         mtlLookup
     );
 
-    auto records = parser.parseMeshes();
-    REQUIRE(records.size() == 1);
-    REQUIRE(records[0].hidden);
+    auto records = parser.parse();
+    REQUIRE(records.size() == 0);
 }

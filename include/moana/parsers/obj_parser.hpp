@@ -9,11 +9,6 @@
 
 namespace moana {
 
-struct BuildInputResult {
-    std::vector<int> indices = {};
-    int indexTripletCount = 0;
-};
-
 struct MeshRecord {
     std::vector<float> vertices = {};
     std::vector<int> vertexIndices = {};
@@ -25,13 +20,8 @@ struct MeshRecord {
 
     int materialIndex = 0;
     bool hidden = true;
-};
 
-struct ObjResult {
-    std::vector<float> vertices;
-    std::vector<BuildInputResult> buildInputResults;
-
-    int vertexCount;
+    std::string name;
 };
 
 enum class ObjFaceFormat {
@@ -63,15 +53,15 @@ public:
         const std::vector<std::string> &mtlLookup
     );
 
-    ObjResult parse();
-    std::vector<MeshRecord> parseMeshes(); // fixme
-    MeshRecord parseMesh(); // fixme
+    std::vector<MeshRecord> parse();
 
 private:
     struct GeometryOffsets {
         int verticesOffset = 0;
         int normalsOffset = 0;
     };
+
+    MeshRecord parseMesh();
 
     void parseLine(std::string_view &line);
 

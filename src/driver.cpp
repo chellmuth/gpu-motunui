@@ -16,7 +16,6 @@
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
-#include "moana/parsers/obj_parser.hpp"
 #include "scene/container.hpp"
 #include "scene/materials.hpp"
 #include "scene/texture_offsets.hpp"
@@ -253,13 +252,18 @@ static void createShaderBindingTable(OptixState &state)
     CUdeviceptr d_hitgroupRecords;
 
     std::vector<HitGroupSbtRecord> hitgroupRecords;
-    for (auto [i, baseColor] : enumerate(Materials::baseColors)) { // todo: better interface
-        HitGroupSbtRecord hitgroupSbt;
-        CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
-        hitgroupSbt.data.baseColor = baseColor;
-        hitgroupSbt.data.useTexture = Textures::offsets[i].size() > 0;
-        hitgroupSbt.data.materialID = i;
-        hitgroupRecords.push_back(hitgroupSbt);
+    for (const auto &geometryResult : state.geometries) {
+        for (const auto &record : geometryResult.hostSBTRecords) {
+            HitGroupSbtRecord hitgroupSbt;
+            CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
+            hitgroupSbt.data.baseColor = Materials::baseColors[record.materialID];
+            hitgroupSbt.data.textureIndex = record.textureIndex;
+            hitgroupSbt.data.materialID = record.materialID;
+            hitgroupSbt.data.normals = reinterpret_cast<float *>(record.d_normals);
+            hitgroupSbt.data.normalIndices = reinterpret_cast<int *>(record.d_normalIndices);
+
+            hitgroupRecords.push_back(hitgroupSbt);
+        }
     }
 
     size_t hitgroupRecordSize = sizeof(HitGroupSbtRecord) * hitgroupRecords.size();
@@ -363,6 +367,17 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         colorBufferSizeInBytes
     ));
 
+    const size_t normalBufferSizeInBytes = width * height * sizeof(float) * 3;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.normalBuffer),
+        normalBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.normalBuffer),
+        0,
+        normalBufferSizeInBytes
+    ));
+
     const size_t depthBufferSizeInBytes = width * height * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.depthBuffer),
@@ -452,6 +467,15 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     ));
     CHECK_CUDA(cudaDeviceSynchronize());
 
+    std::vector<float> normalImage(width * height * 3);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(normalImage.data()),
+        params.normalBuffer,
+        normalBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+    CHECK_CUDA(cudaDeviceSynchronize());
+
     ColorMap faceMap;
     ColorMap materialMap;
     std::vector<float> textureImage(width * height * 3, 0.f);
@@ -464,7 +488,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             const int idIndex = 3 * (row * width + col);
             const int primitiveID = idBuffer[idIndex + 0];
             const int materialID = idBuffer[idIndex + 1];
-            const bool useTexture = idBuffer[idIndex + 2];
+            const int textureIndex = idBuffer[idIndex + 2];
             const int faceID = primitiveID / 2;
 
             const int barycentricIndex = 2 * (row * width + col);
@@ -490,27 +514,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                 faceImage[pixelIndex + 2] = color.z;
             }
 
-            if (useTexture) {
-                std::vector<TextureOffset> &offsetList = Textures::offsets[materialID];
-                TextureOffset offset;
-                bool found = false;
-                for (const auto &offsetCandidate : offsetList) {
-                    if (primitiveID <= offsetCandidate.endIndex) {
-                        offset = offsetCandidate;
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    std::cout << "no texture? faceID: " << faceID << std::endl;
-                }
+            if (textureIndex >= 0) {
+                PtexTexture texture = textures[textureIndex];
 
-                PtexTexture texture = textures[offset.textureIndex];
-
-                int faceOffset = offset.startIndex / 2;
                 Vec3 color = texture.lookup(
                     float2{ u, v },
-                    faceID - faceOffset
+                    faceID
                 );
                 textureImage[pixelIndex + 0] = color.x();
                 textureImage[pixelIndex + 1] = color.y();
@@ -529,12 +538,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         }
     }
 
-    // Image::save(
-    //     width,
-    //     height,
-    //     outputBuffer,
-    //     exrFilename
-    // );
+    Image::save(
+        width,
+        height,
+        outputBuffer,
+        exrFilename
+    );
 
     Image::save(
         width,
@@ -550,12 +559,19 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         "texture-buffer_" + exrFilename
     );
 
-    // Image::save(
-    //     width,
-    //     height,
-    //     uvImage,
-    //     "uv-buffer_" + exrFilename
-    // );
+    Image::save(
+        width,
+        height,
+        normalImage,
+        "normals-buffer_" + exrFilename
+    );
+
+    Image::save(
+        width,
+        height,
+        uvImage,
+        "uv-buffer_" + exrFilename
+    );
 
     // CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));

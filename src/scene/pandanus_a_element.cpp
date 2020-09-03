@@ -8,13 +8,13 @@ PandanusAElement::PandanusAElement()
 
     m_elementName = "isPandanusA";
 
-    m_sbtOffset = 100;
-
     m_mtlLookup = {
         "leaves",
         "leavesLower",
         "trunk",
     };
+
+    m_materialOffset = 100;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isPandanusA/isPandanusA.obj",

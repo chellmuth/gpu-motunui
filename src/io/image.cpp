@@ -68,7 +68,7 @@ void save(
         fprintf(stderr, "Save EXR err: %s\n", err);
         return;
     }
-    printf("Saved exr file. [ %s ] \n", outputExr.c_str());
+    // printf("Saved exr file. [ %s ] \n", outputExr.c_str());
 
     free(header.channels);
     free(header.pixel_types);
