@@ -536,12 +536,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     //     exrFilename
     // );
 
-    // Image::save(
-    //     width,
-    //     height,
-    //     faceImage,
-    //     "face-buffer_" + exrFilename
-    // );
+    Image::save(
+        width,
+        height,
+        faceImage,
+        "face-buffer_" + exrFilename
+    );
 
     Image::save(
         width,

@@ -117,6 +117,9 @@ OptixTraversableHandle gasInfoFromObjResult(
         nullptr, 0 // emitted property params
     ));
 
+    // fixme
+    CHECK_CUDA(cudaDeviceSynchronize());
+
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
     for (auto indices : indicesToFree) {
         CHECK_CUDA(cudaFree(reinterpret_cast<void *>(indices)));

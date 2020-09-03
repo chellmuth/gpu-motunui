@@ -72,3 +72,4 @@ add_subdirectory(optix)
 add_dependencies(moana ptx_headers)
 
 add_subdirectory(app)
+add_subdirectory(test)
