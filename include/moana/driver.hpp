@@ -5,6 +5,7 @@
 
 #include <optix.h>
 
+#include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/scene.hpp"
 #include "moana/scene/as_arena.hpp"
@@ -29,6 +30,7 @@ struct Params {
     float *outputBuffer;
     float *depthBuffer;
     float *xiBuffer;
+    BSDFSampleRecord *sampleRecordBuffer;
     float *colorBuffer;
     float *normalBuffer;
     float *barycentricBuffer;

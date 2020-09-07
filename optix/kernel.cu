@@ -3,10 +3,13 @@
 #include <stdio.h>
 
 #include "moana/driver.hpp"
+#include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
+#include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
+#include "sample.hpp"
 #include "util.hpp"
 
 using namespace moana;
@@ -14,6 +17,7 @@ using namespace moana;
 struct PerRayData {
     bool isHit;
     float t;
+    float3 point;
     Vec3 normal;
     float3 baseColor;
     int materialID;
@@ -24,6 +28,22 @@ struct PerRayData {
 
 extern "C" {
     __constant__ Params params;
+}
+
+__forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
+    const PerRayData &prd
+) {
+    const Vec3 wiLocal = Sample::uniformHemisphere(0.5f, 0.5f);
+    const Frame frame(prd.normal);
+
+    const BSDFSampleRecord record = {
+        .point = prd.point,
+        .wiLocal = wiLocal,
+        .normal = prd.normal,
+        .frame = frame,
+    };
+
+    return record;
 }
 
 __forceinline__ __device__ static PerRayData *getPRD()
@@ -38,6 +58,7 @@ extern "C" __global__ void __closesthit__ch()
     PerRayData *prd = getPRD();
     prd->isHit = true;
     prd->t = optixGetRayTmax();
+    prd->point = getHitPoint();
 
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
@@ -182,6 +203,10 @@ extern "C" __global__ void __raygen__rg()
     if (prd.isHit) {
         const int pixelIndex = 3 * (index.y * dim.x + index.x);
         params.depthBuffer[depthIndex] = prd.t;
+
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
+        const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+        params.sampleRecordBuffer[sampleRecordIndex] = sampleRecord;
 
         const float cosTheta = fabs(-dot(prd.normal, direction));
         const float3 baseColor = prd.baseColor;

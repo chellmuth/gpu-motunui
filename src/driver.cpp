@@ -347,6 +347,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> xiBuffer(width * height * 2, -1.f);
 
+    const size_t sampleRecordBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.sampleRecordBuffer),
+        sampleRecordBufferSizeInBytes
+    ));
+
     const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.barycentricBuffer),
@@ -408,6 +414,11 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             xiBuffer.data(),
             xiBufferSizeInBytes,
             cudaMemcpyHostToDevice
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.sampleRecordBuffer),
+            0,
+            sampleRecordBufferSizeInBytes
         ));
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.barycentricBuffer),
