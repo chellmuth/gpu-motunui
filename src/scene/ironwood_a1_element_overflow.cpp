@@ -1,8 +1,8 @@
-#include "scene/ironwood_a1_element.hpp"
+#include "scene/ironwood_a1_element_overflow.hpp"
 
 namespace moana {
 
-IronwoodA1Element::IronwoodA1Element()
+IronwoodA1ElementOverflow::IronwoodA1ElementOverflow()
 {
     const std::string moanaRoot = MOANA_ROOT;
 
@@ -20,19 +20,16 @@ IronwoodA1Element::IronwoodA1Element()
     m_materialOffset = 60;
 
     m_baseObjs = {
-        "../scene/isIronwoodA1-1.obj",
+        "../scene/isIronwoodA1-2.obj",
     };
 
     m_objArchivePaths = {
-        moanaRoot + "/island/obj/isIronwoodA1/archives/archiveseedpodb_mod.obj",
     };
 
     m_archivePrimitiveIndexOffsets = {
-        0
     };
 
     m_baseObjPrimitiveIndexOffsets = {
-        0
     };
 
     m_elementInstancesBinPaths = {
@@ -40,11 +37,11 @@ IronwoodA1Element::IronwoodA1Element()
     };
 
     m_primitiveInstancesBinPaths = {
-        {"../scene/isIronwoodA1_xgBonsai--archiveseedpodb_mod.bin"},
+        {},
     };
 
     m_primitiveInstancesHandleIndices = {
-        {0},
+        {},
     };
 
     m_curveBinPathsByElementInstance = {

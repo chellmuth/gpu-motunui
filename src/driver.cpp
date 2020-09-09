@@ -294,7 +294,7 @@ void Driver::init()
     createContext(m_state);
 
     size_t gb = 1024 * 1024 * 1024;
-    m_state.arena.init(6 * gb);
+    m_state.arena.init(4 * gb);
 
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 

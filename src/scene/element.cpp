@@ -24,6 +24,9 @@ static std::vector<HostSBTRecord> createSBTRecords(
 ) {
     std::vector<HostSBTRecord> sbtRecords;
 
+    size_t totalNormalBuffersSizeInBytes = 0;
+
+    std::cout << "Processing " << meshRecords.size() << " mesh records" << std::endl;
     for (const auto &meshRecord : meshRecords) {
         CUdeviceptr d_normals;
         size_t normalsSizeInBytes = meshRecord.normals.size() * sizeof(float);
@@ -53,6 +56,8 @@ static std::vector<HostSBTRecord> createSBTRecords(
             cudaMemcpyHostToDevice
         ));
 
+        totalNormalBuffersSizeInBytes += normalsSizeInBytes + normalIndicesSizeInBytes;
+
         const int textureIndex = TextureLookup::indexForMesh(
             element,
             mtlLookup[meshRecord.materialIndex],
@@ -66,6 +71,10 @@ static std::vector<HostSBTRecord> createSBTRecords(
         };
         sbtRecords.push_back(sbtRecord);
     }
+
+    std::cout << "    Cumulative normal buffers size(mb): "
+              << (totalNormalBuffersSizeInBytes / (1024. * 1024.))
+              << std::endl;
 
     return sbtRecords;
 }

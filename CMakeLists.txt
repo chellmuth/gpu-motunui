@@ -45,6 +45,7 @@ add_library(moana
   src/scene/ias.cpp
   src/scene/instances_bin.cpp
   src/scene/ironwood_a1_element.cpp
+  src/scene/ironwood_a1_element_overflow.cpp
   src/scene/ironwood_b_element.cpp
   src/scene/kava_element.cpp
   src/scene/lava_rocks_element.cpp
