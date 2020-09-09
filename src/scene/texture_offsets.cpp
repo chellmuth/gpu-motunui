@@ -2,7559 +2,3630 @@
 
 namespace moana { namespace Textures {
 
-    std::vector<std::string> textureFilenames = {
-        "textures/isBayCedarA1/Color/archivebaycedar0001_geo.ptx",
-        "textures/isBayCedarA1/Color/trunk_base_geo.ptx",
-        "textures/isBayCedarA1/Displacement/trunk_base_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0001_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0002_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0003_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0004_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0005_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0006_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0007_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0008_geo.ptx",
-        "textures/isBeach/Color/archiveCoral0009_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusAnthers0002_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusAnthers0003_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusAnthers0005_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusAnthers0007_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusAnthers0008_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0006_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0007_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0008_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0009_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0010_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0011_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0012_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0013_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0014_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0015_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0021_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0022_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0023_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0024_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0025_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0031_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0032_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0033_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0034_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0035_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0036_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0037_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0038_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0039_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusPetal0040_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0003_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0004_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0005_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0006_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0009_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0010_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0013_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0014_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0015_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusSepals0016_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStigma0002_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStigma0003_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStigma0005_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStigma0007_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStigma0008_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStyle0002_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStyle0003_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStyle0005_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStyle0007_geo.ptx",
-        "textures/isBeach/Color/archiveHibiscusStyle0008_geo.ptx",
-        "textures/isBeach/Color/archiveLeaflet0123_geo.ptx",
-        "textures/isBeach/Color/archiveLeaflet0124_geo.ptx",
-        "textures/isBeach/Color/archiveLeaflet0125_geo.ptx",
-        "textures/isBeach/Color/archiveLeaflet0126_geo.ptx",
-        "textures/isBeach/Color/archiveLeaflet0127_geo.ptx",
-        "textures/isBeach/Color/archiveRock0001_geo.ptx",
-        "textures/isBeach/Color/archiveRock0002_geo.ptx",
-        "textures/isBeach/Color/archiveRock0003_geo.ptx",
-        "textures/isBeach/Color/archiveRock0004_geo.ptx",
-        "textures/isBeach/Color/archiveRock0005_geo.ptx",
-        "textures/isBeach/Color/archiveRock0006_geo.ptx",
-        "textures/isBeach/Color/archiveRock0007_geo.ptx",
-        "textures/isBeach/Color/archiveSeaweed0063_geo.ptx",
-        "textures/isBeach/Color/archiveSeaweed0064_geo.ptx",
-        "textures/isBeach/Color/archiveSeaweed0065_geo.ptx",
-        "textures/isBeach/Color/archiveShell0001_geo.ptx",
-        "textures/isBeach/Color/archiveShell0002_geo.ptx",
-        "textures/isBeach/Color/archiveShell0003_geo.ptx",
-        "textures/isBeach/Color/archiveShell0004_geo.ptx",
-        "textures/isBeach/Color/archiveShell0005_geo.ptx",
-        "textures/isBeach/Color/archiveShell0006_geo.ptx",
-        "textures/isBeach/Color/archiveShell0007_geo.ptx",
-        "textures/isBeach/Color/archiveShell0008_geo.ptx",
-        "textures/isBeach/Color/beach_geo.ptx",
-        "textures/isBeach/Color/seaweed0001_geo.ptx",
-        "textures/isBeach/Color/seaweed0002_geo.ptx",
-        "textures/isBeach/Color/seaweed0003_geo.ptx",
-        "textures/isBeach/Color/seaweed0004_geo.ptx",
-        "textures/isBeach/Color/seaweed0005_geo.ptx",
-        "textures/isBeach/Color/seaweed0006_geo.ptx",
-        "textures/isBeach/Color/seaweed0007_geo.ptx",
-        "textures/isBeach/Color/seaweed0008_geo.ptx",
-        "textures/isBeach/Color/seaweed0009_geo.ptx",
-        "textures/isBeach/Color/seaweed0010_geo.ptx",
-        "textures/isBeach/Color/seaweed0011_geo.ptx",
-        "textures/isBeach/Color/seaweed0012_geo.ptx",
-        "textures/isBeach/Color/seaweed0013_geo.ptx",
-        "textures/isBeach/Color/seaweed0014_geo.ptx",
-        "textures/isBeach/Color/seaweed0015_geo.ptx",
-        "textures/isBeach/Color/seaweed0016_geo.ptx",
-        "textures/isBeach/Color/seaweed0017_geo.ptx",
-        "textures/isBeach/Color/seaweed0018_geo.ptx",
-        "textures/isBeach/Color/seaweed0019_geo.ptx",
-        "textures/isBeach/Color/seaweed0020_geo.ptx",
-        "textures/isBeach/Color/seaweed0021_geo.ptx",
-        "textures/isBeach/Color/seaweed0022_geo.ptx",
-        "textures/isBeach/Color/seaweed0023_geo.ptx",
-        "textures/isBeach/Color/seaweed0024_geo.ptx",
-        "textures/isBeach/Color/seaweed0025_geo.ptx",
-        "textures/isBeach/Color/seaweed0026_geo.ptx",
-        "textures/isBeach/Color/seaweed0027_geo.ptx",
-        "textures/isBeach/Color/seaweed0028_geo.ptx",
-        "textures/isBeach/Color/seaweed0029_geo.ptx",
-        "textures/isBeach/Color/seaweed0030_geo.ptx",
-        "textures/isBeach/Color/seaweed0031_geo.ptx",
-        "textures/isBeach/Color/seaweed0032_geo.ptx",
-        "textures/isBeach/Color/seaweed0033_geo.ptx",
-        "textures/isBeach/Color/seaweed0034_geo.ptx",
-        "textures/isBeach/Color/seaweed0035_geo.ptx",
-        "textures/isBeach/Color/seaweed0036_geo.ptx",
-        "textures/isBeach/Color/seaweed0037_geo.ptx",
-        "textures/isBeach/Color/seaweed0038_geo.ptx",
-        "textures/isBeach/Color/seaweed0039_geo.ptx",
-        "textures/isBeach/Color/seaweed0040_geo.ptx",
-        "textures/isBeach/Color/seaweed0041_geo.ptx",
-        "textures/isBeach/Color/seaweed0042_geo.ptx",
-        "textures/isBeach/Color/seaweed0043_geo.ptx",
-        "textures/isBeach/Color/seaweed0044_geo.ptx",
-        "textures/isBeach/Color/seaweed0045_geo.ptx",
-        "textures/isBeach/Color/seaweed0046_geo.ptx",
-        "textures/isBeach/Color/seaweed0047_geo.ptx",
-        "textures/isBeach/Color/seaweed0048_geo.ptx",
-        "textures/isBeach/Color/seaweed0049_geo.ptx",
-        "textures/isBeach/Color/seaweed0050_geo.ptx",
-        "textures/isBeach/Color/seaweed0051_geo.ptx",
-        "textures/isBeach/Color/seaweed0052_geo.ptx",
-        "textures/isBeach/Color/seaweed0053_geo.ptx",
-        "textures/isBeach/Color/seaweed0054_geo.ptx",
-        "textures/isBeach/Color/seaweed0055_geo.ptx",
-        "textures/isBeach/Color/seaweed0056_geo.ptx",
-        "textures/isBeach/Color/seaweed0057_geo.ptx",
-        "textures/isBeach/Color/seaweed0058_geo.ptx",
-        "textures/isBeach/Color/seaweed0059_geo.ptx",
-        "textures/isBeach/Color/seaweed0060_geo.ptx",
-        "textures/isBeach/Color/seaweed0061_geo.ptx",
-        "textures/isBeach/Color/seaweed0062_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0001_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0002_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0003_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0004_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0005_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0006_geo.ptx",
-        "textures/isBeach/Displacement/archiveRock0007_geo.ptx",
-        "textures/isBeach/Displacement/beach_geo.ptx",
-        "textures/isBeach/Sand_Color_Hi/beach_geo.ptx",
-        "textures/isBeach/Sand_Color_Lo/beach_geo.ptx",
-        "textures/isCoastline/Color/archiveLeaflet0123_geo.ptx",
-        "textures/isCoastline/Color/archiveLeaflet0124_geo.ptx",
-        "textures/isCoastline/Color/archiveLeaflet0125_geo.ptx",
-        "textures/isCoastline/Color/archiveLeaflet0126_geo.ptx",
-        "textures/isCoastline/Color/archiveLeaflet0127_geo.ptx",
-        "textures/isCoral/Color/antler0001_geo.ptx",
-        "textures/isCoral/Color/antler0002_geo.ptx",
-        "textures/isCoral/Color/antler0003_geo.ptx",
-        "textures/isCoral/Color/antler0004_geo.ptx",
-        "textures/isCoral/Color/antler0005_geo.ptx",
-        "textures/isCoral/Color/antler0006_geo.ptx",
-        "textures/isCoral/Color/antler0007_geo.ptx",
-        "textures/isCoral/Color/antler0008_geo.ptx",
-        "textures/isCoral/Color/antler0009_geo.ptx",
-        "textures/isCoral/Color/antler0010_geo.ptx",
-        "textures/isCoral/Color/antler0011_geo.ptx",
-        "textures/isCoral/Color/antler0012_geo.ptx",
-        "textures/isCoral/Color/antler0013_geo.ptx",
-        "textures/isCoral/Color/antler0014_geo.ptx",
-        "textures/isCoral/Color/antler0015_geo.ptx",
-        "textures/isCoral/Color/antler0016_geo.ptx",
-        "textures/isCoral/Color/antler0017_geo.ptx",
-        "textures/isCoral/Color/antler0018_geo.ptx",
-        "textures/isCoral/Color/antler0019_geo.ptx",
-        "textures/isCoral/Color/antler0020_geo.ptx",
-        "textures/isCoral/Color/antler0021_geo.ptx",
-        "textures/isCoral/Color/antler0022_geo.ptx",
-        "textures/isCoral/Color/antler0023_geo.ptx",
-        "textures/isCoral/Color/antler0024_geo.ptx",
-        "textures/isCoral/Color/antler0025_geo.ptx",
-        "textures/isCoral/Color/antler0026_geo.ptx",
-        "textures/isCoral/Color/antler0027_geo.ptx",
-        "textures/isCoral/Color/antler0028_geo.ptx",
-        "textures/isCoral/Color/antler0029_geo.ptx",
-        "textures/isCoral/Color/antler0030_geo.ptx",
-        "textures/isCoral/Color/antler0031_geo.ptx",
-        "textures/isCoral/Color/antler0032_geo.ptx",
-        "textures/isCoral/Color/antler0033_geo.ptx",
-        "textures/isCoral/Color/antler0034_geo.ptx",
-        "textures/isCoral/Color/antler0035_geo.ptx",
-        "textures/isCoral/Color/antler0036_geo.ptx",
-        "textures/isCoral/Color/antler0037_geo.ptx",
-        "textures/isCoral/Color/antler0038_geo.ptx",
-        "textures/isCoral/Color/antler0039_geo.ptx",
-        "textures/isCoral/Color/antler0040_geo.ptx",
-        "textures/isCoral/Color/antler0041_geo.ptx",
-        "textures/isCoral/Color/antler0042_geo.ptx",
-        "textures/isCoral/Color/antler0043_geo.ptx",
-        "textures/isCoral/Color/antler0044_geo.ptx",
-        "textures/isCoral/Color/antler0045_geo.ptx",
-        "textures/isCoral/Color/antler0046_geo.ptx",
-        "textures/isCoral/Color/antler0047_geo.ptx",
-        "textures/isCoral/Color/antler0048_geo.ptx",
-        "textures/isCoral/Color/antler0049_geo.ptx",
-        "textures/isCoral/Color/antler0050_geo.ptx",
-        "textures/isCoral/Color/antler0051_geo.ptx",
-        "textures/isCoral/Color/antler0052_geo.ptx",
-        "textures/isCoral/Color/antler0053_geo.ptx",
-        "textures/isCoral/Color/antler0054_geo.ptx",
-        "textures/isCoral/Color/antler0055_geo.ptx",
-        "textures/isCoral/Color/antler0056_geo.ptx",
-        "textures/isCoral/Color/antler0057_geo.ptx",
-        "textures/isCoral/Color/antler0058_geo.ptx",
-        "textures/isCoral/Color/antler0059_geo.ptx",
-        "textures/isCoral/Color/antler0060_geo.ptx",
-        "textures/isCoral/Color/antler0061_geo.ptx",
-        "textures/isCoral/Color/antler0062_geo.ptx",
-        "textures/isCoral/Color/antler0063_geo.ptx",
-        "textures/isCoral/Color/antler0064_geo.ptx",
-        "textures/isCoral/Color/antler0065_geo.ptx",
-        "textures/isCoral/Color/antler0066_geo.ptx",
-        "textures/isCoral/Color/antler0067_geo.ptx",
-        "textures/isCoral/Color/antler0068_geo.ptx",
-        "textures/isCoral/Color/antler0069_geo.ptx",
-        "textures/isCoral/Color/antler0070_geo.ptx",
-        "textures/isCoral/Color/antler0071_geo.ptx",
-        "textures/isCoral/Color/antler0072_geo.ptx",
-        "textures/isCoral/Color/antler0073_geo.ptx",
-        "textures/isCoral/Color/antler0074_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0001_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0002_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0003_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0004_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0005_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0006_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0007_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0008_geo.ptx",
-        "textures/isCoral/Color/archivecoral_antler0009_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0001_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0002_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0003_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0004_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0005_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0006_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0007_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0008_geo.ptx",
-        "textures/isCoral/Color/archivecoral_cabbage0009_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0001_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0002_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0003_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0004_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0005_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0006_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0007_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0008_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0009_geo.ptx",
-        "textures/isCoral/Color/archivecoral_staghorn0010_geo.ptx",
-        "textures/isCoral/Color/archivecoralflute0001_geo.ptx",
-        "textures/isCoral/Color/barnacle0001_geo.ptx",
-        "textures/isCoral/Color/barnacle0002_geo.ptx",
-        "textures/isCoral/Color/barnacle0003_geo.ptx",
-        "textures/isCoral/Color/barnacle0004_geo.ptx",
-        "textures/isCoral/Color/barnacle0005_geo.ptx",
-        "textures/isCoral/Color/barnacle0006_geo.ptx",
-        "textures/isCoral/Color/barnacle0007_geo.ptx",
-        "textures/isCoral/Color/barnacle0008_geo.ptx",
-        "textures/isCoral/Color/barnacle0009_geo.ptx",
-        "textures/isCoral/Color/barnacle0010_geo.ptx",
-        "textures/isCoral/Color/barnacle0011_geo.ptx",
-        "textures/isCoral/Color/barnacle0012_geo.ptx",
-        "textures/isCoral/Color/barnacle0013_geo.ptx",
-        "textures/isCoral/Color/barnacle0014_geo.ptx",
-        "textures/isCoral/Color/barnacle0015_geo.ptx",
-        "textures/isCoral/Color/barnacle0016_geo.ptx",
-        "textures/isCoral/Color/barnacle0017_geo.ptx",
-        "textures/isCoral/Color/barnacle0018_geo.ptx",
-        "textures/isCoral/Color/barnacle0019_geo.ptx",
-        "textures/isCoral/Color/barnacle0020_geo.ptx",
-        "textures/isCoral/Color/barnacle0021_geo.ptx",
-        "textures/isCoral/Color/barnacle0022_geo.ptx",
-        "textures/isCoral/Color/barnacle0023_geo.ptx",
-        "textures/isCoral/Color/barnacle0024_geo.ptx",
-        "textures/isCoral/Color/barnacle0025_geo.ptx",
-        "textures/isCoral/Color/barnacle0026_geo.ptx",
-        "textures/isCoral/Color/barnacle0027_geo.ptx",
-        "textures/isCoral/Color/barnacle0028_geo.ptx",
-        "textures/isCoral/Color/barnacle0029_geo.ptx",
-        "textures/isCoral/Color/barnacle0030_geo.ptx",
-        "textures/isCoral/Color/barnacle0031_geo.ptx",
-        "textures/isCoral/Color/barnacle0032_geo.ptx",
-        "textures/isCoral/Color/barnacle0033_geo.ptx",
-        "textures/isCoral/Color/barnacle0034_geo.ptx",
-        "textures/isCoral/Color/barnacle0035_geo.ptx",
-        "textures/isCoral/Color/barnacle0036_geo.ptx",
-        "textures/isCoral/Color/barnacle0037_geo.ptx",
-        "textures/isCoral/Color/barnacle0038_geo.ptx",
-        "textures/isCoral/Color/barnacle0039_geo.ptx",
-        "textures/isCoral/Color/barnacle0040_geo.ptx",
-        "textures/isCoral/Color/barnacle0041_geo.ptx",
-        "textures/isCoral/Color/barnacle0042_geo.ptx",
-        "textures/isCoral/Color/barnacle0043_geo.ptx",
-        "textures/isCoral/Color/barnacle0044_geo.ptx",
-        "textures/isCoral/Color/barnacle0045_geo.ptx",
-        "textures/isCoral/Color/barnacle0046_geo.ptx",
-        "textures/isCoral/Color/barnacle0047_geo.ptx",
-        "textures/isCoral/Color/barnacle0048_geo.ptx",
-        "textures/isCoral/Color/barnacle0049_geo.ptx",
-        "textures/isCoral/Color/barnacle0050_geo.ptx",
-        "textures/isCoral/Color/barnacle0051_geo.ptx",
-        "textures/isCoral/Color/barnacle0052_geo.ptx",
-        "textures/isCoral/Color/barnacle0053_geo.ptx",
-        "textures/isCoral/Color/barnacle0054_geo.ptx",
-        "textures/isCoral/Color/barnacle0055_geo.ptx",
-        "textures/isCoral/Color/barnacle0056_geo.ptx",
-        "textures/isCoral/Color/barnacle0057_geo.ptx",
-        "textures/isCoral/Color/barnacle0058_geo.ptx",
-        "textures/isCoral/Color/barnacle0059_geo.ptx",
-        "textures/isCoral/Color/barnacle0060_geo.ptx",
-        "textures/isCoral/Color/barnacle0061_geo.ptx",
-        "textures/isCoral/Color/barnacle0062_geo.ptx",
-        "textures/isCoral/Color/barnacle0063_geo.ptx",
-        "textures/isCoral/Color/barnacle0064_geo.ptx",
-        "textures/isCoral/Color/barnacle0065_geo.ptx",
-        "textures/isCoral/Color/barnacle0066_geo.ptx",
-        "textures/isCoral/Color/barnacle0067_geo.ptx",
-        "textures/isCoral/Color/barnacle0068_geo.ptx",
-        "textures/isCoral/Color/barnacle0069_geo.ptx",
-        "textures/isCoral/Color/barnacle0070_geo.ptx",
-        "textures/isCoral/Color/barnacle0071_geo.ptx",
-        "textures/isCoral/Color/barnacle0072_geo.ptx",
-        "textures/isCoral/Color/barnacle0073_geo.ptx",
-        "textures/isCoral/Color/barnacle0074_geo.ptx",
-        "textures/isCoral/Color/barnacle0075_geo.ptx",
-        "textures/isCoral/Color/barnacle0076_geo.ptx",
-        "textures/isCoral/Color/barnacle0077_geo.ptx",
-        "textures/isCoral/Color/barnacle0078_geo.ptx",
-        "textures/isCoral/Color/barnacle0079_geo.ptx",
-        "textures/isCoral/Color/barnacle0080_geo.ptx",
-        "textures/isCoral/Color/barnacle0081_geo.ptx",
-        "textures/isCoral/Color/barnacle0082_geo.ptx",
-        "textures/isCoral/Color/barnacle0083_geo.ptx",
-        "textures/isCoral/Color/barnacle0084_geo.ptx",
-        "textures/isCoral/Color/barnacle0085_geo.ptx",
-        "textures/isCoral/Color/barnacle0086_geo.ptx",
-        "textures/isCoral/Color/barnacle0087_geo.ptx",
-        "textures/isCoral/Color/barnacle0088_geo.ptx",
-        "textures/isCoral/Color/barnacle0089_geo.ptx",
-        "textures/isCoral/Color/barnacle0090_geo.ptx",
-        "textures/isCoral/Color/barnacle0091_geo.ptx",
-        "textures/isCoral/Color/barnacle0092_geo.ptx",
-        "textures/isCoral/Color/barnacle0093_geo.ptx",
-        "textures/isCoral/Color/barnacle0094_geo.ptx",
-        "textures/isCoral/Color/barnacle0095_geo.ptx",
-        "textures/isCoral/Color/barnacle0096_geo.ptx",
-        "textures/isCoral/Color/barnacle0097_geo.ptx",
-        "textures/isCoral/Color/barnacle0098_geo.ptx",
-        "textures/isCoral/Color/barnacle0099_geo.ptx",
-        "textures/isCoral/Color/barnacle0100_geo.ptx",
-        "textures/isCoral/Color/barnacle0101_geo.ptx",
-        "textures/isCoral/Color/barnacle0102_geo.ptx",
-        "textures/isCoral/Color/barnacle0103_geo.ptx",
-        "textures/isCoral/Color/barnacle0104_geo.ptx",
-        "textures/isCoral/Color/barnacle0105_geo.ptx",
-        "textures/isCoral/Color/barnacle0106_geo.ptx",
-        "textures/isCoral/Color/barnacle0107_geo.ptx",
-        "textures/isCoral/Color/barnacle0108_geo.ptx",
-        "textures/isCoral/Color/barnacle0109_geo.ptx",
-        "textures/isCoral/Color/barnacle0110_geo.ptx",
-        "textures/isCoral/Color/barnacle0111_geo.ptx",
-        "textures/isCoral/Color/barnacle0112_geo.ptx",
-        "textures/isCoral/Color/cauliflower0001_geo.ptx",
-        "textures/isCoral/Color/cauliflower0002_geo.ptx",
-        "textures/isCoral/Color/cauliflower0003_geo.ptx",
-        "textures/isCoral/Color/cauliflower0004_geo.ptx",
-        "textures/isCoral/Color/cauliflower0005_geo.ptx",
-        "textures/isCoral/Color/cauliflower0006_geo.ptx",
-        "textures/isCoral/Color/cauliflower0007_geo.ptx",
-        "textures/isCoral/Color/cauliflower0008_geo.ptx",
-        "textures/isCoral/Color/cauliflower0009_geo.ptx",
-        "textures/isCoral/Color/cauliflower0010_geo.ptx",
-        "textures/isCoral/Color/cauliflower0011_geo.ptx",
-        "textures/isCoral/Color/cauliflower0012_geo.ptx",
-        "textures/isCoral/Color/cauliflower0013_geo.ptx",
-        "textures/isCoral/Color/cauliflower0014_geo.ptx",
-        "textures/isCoral/Color/cauliflower0015_geo.ptx",
-        "textures/isCoral/Color/cauliflower0016_geo.ptx",
-        "textures/isCoral/Color/cauliflower0017_geo.ptx",
-        "textures/isCoral/Color/cauliflower0018_geo.ptx",
-        "textures/isCoral/Color/cauliflower0019_geo.ptx",
-        "textures/isCoral/Color/cauliflower0020_geo.ptx",
-        "textures/isCoral/Color/cauliflower0021_geo.ptx",
-        "textures/isCoral/Color/cauliflower0022_geo.ptx",
-        "textures/isCoral/Color/cauliflower0023_geo.ptx",
-        "textures/isCoral/Color/cauliflower0024_geo.ptx",
-        "textures/isCoral/Color/cauliflower0025_geo.ptx",
-        "textures/isCoral/Color/cauliflower0026_geo.ptx",
-        "textures/isCoral/Color/cauliflower0027_geo.ptx",
-        "textures/isCoral/Color/cauliflower0028_geo.ptx",
-        "textures/isCoral/Color/cauliflower0029_geo.ptx",
-        "textures/isCoral/Color/cauliflower0030_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0001_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0002_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0003_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0004_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0005_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0006_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0007_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0009_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0010_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0011_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0012_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0013_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0014_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0015_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0017_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0018_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0019_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0020_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0021_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0022_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0023_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0024_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0025_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0026_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0027_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0028_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0029_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0030_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0031_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0032_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0033_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0034_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0035_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0037_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0038_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0039_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0041_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0042_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0043_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0045_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0046_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0047_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0048_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0049_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0050_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0051_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0053_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0054_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0055_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0057_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0058_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0059_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0061_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0062_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0063_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0064_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0065_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0066_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0067_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0068_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0069_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0070_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0071_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0073_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0074_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0075_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0077_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0078_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0079_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0081_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0082_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0083_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0084_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0085_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0086_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0087_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0088_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0089_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0090_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0091_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0092_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0093_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0094_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0095_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0096_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0097_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0098_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0099_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0100_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0101_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0102_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0103_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0104_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0105_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0106_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0107_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0108_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0109_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0110_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0111_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0112_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0113_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0114_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0115_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0116_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0117_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0118_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0119_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0120_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0121_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0122_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0123_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0124_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0125_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0126_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0127_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0128_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0129_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0130_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0131_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0132_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0133_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0134_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0135_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0136_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0137_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0138_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0139_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0140_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0141_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0142_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0143_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0144_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0145_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0146_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0147_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0148_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0149_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0150_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0151_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0152_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0153_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0154_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0155_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0157_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0158_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0159_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0161_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0162_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0163_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0165_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0166_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0167_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0168_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0169_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0170_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0171_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0172_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0173_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0174_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0175_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0176_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0177_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0178_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0179_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0180_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0181_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0182_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0183_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0184_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0185_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0186_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0187_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0188_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0189_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0190_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0191_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0192_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0193_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0194_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0195_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0196_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0197_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0198_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0199_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0200_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0201_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0202_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0203_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0204_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0205_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0206_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0207_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0208_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0209_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0210_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0211_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0212_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0213_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0214_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0215_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0216_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0217_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0218_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0219_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0220_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0221_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0222_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0223_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0224_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0225_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0226_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0227_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0228_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0229_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0230_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0231_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0233_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0234_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0235_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0236_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0237_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0238_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0239_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0240_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0241_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0242_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0243_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0244_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0245_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0246_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0247_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0248_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0249_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0250_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0251_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0252_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0253_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0254_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0255_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0256_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0257_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0258_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0259_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0260_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0261_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0262_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0263_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0264_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0265_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0266_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0267_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0268_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0269_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0270_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0271_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0272_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0273_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0274_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0275_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0276_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0277_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0278_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0279_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0280_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0281_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0282_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0283_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0284_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0285_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0286_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0287_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0288_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0289_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0290_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0291_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0292_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0293_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0294_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0295_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0296_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0297_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0298_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0299_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0300_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0301_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0302_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0303_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0304_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0305_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0306_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0307_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0308_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0309_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0310_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0311_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0312_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0313_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0314_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0315_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0316_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0317_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0318_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0319_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0320_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0321_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0322_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0323_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0324_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0325_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0326_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0327_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0328_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0329_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0330_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0331_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0332_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0333_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0334_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0335_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0336_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0337_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0338_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0339_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0340_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0341_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0342_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0343_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0344_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0345_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0346_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0347_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0348_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0349_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0350_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0351_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0352_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0353_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0354_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0355_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0356_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0357_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0358_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0359_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0360_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0361_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0362_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0363_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0364_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0365_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0366_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0367_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0368_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0369_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0370_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0371_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0372_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0373_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0374_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0375_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0376_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0377_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0378_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0379_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0380_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0381_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0382_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0383_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0384_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0385_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0386_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0387_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0388_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0389_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0390_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0391_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0392_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0393_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0394_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0395_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0396_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0397_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0398_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0399_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0400_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0401_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0402_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0403_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0404_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0405_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0406_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0407_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0408_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0409_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0410_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0411_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0412_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0413_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0414_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0415_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0416_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0417_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0418_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0419_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0420_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0421_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0423_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0424_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0425_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0426_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0427_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0428_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0429_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0431_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0432_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0433_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0434_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0435_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0436_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0437_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0438_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0439_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0440_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0441_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0443_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0444_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0445_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0446_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0447_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0448_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0449_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0450_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0451_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0452_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0453_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0454_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0455_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0456_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0457_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0458_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0459_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0460_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0461_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0462_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0463_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0464_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0465_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0467_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0468_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0469_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0470_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0471_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0472_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0473_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0474_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0475_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0476_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0477_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0478_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0479_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0480_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0481_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0482_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0483_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0484_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0485_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0486_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0487_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0488_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0489_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0490_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0491_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0492_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0493_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0494_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0495_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0496_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0497_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0498_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0499_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0500_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0501_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0502_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0503_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0504_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0505_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0506_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0507_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0508_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0509_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0510_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0511_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0512_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0513_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0514_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0515_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0516_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0517_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0518_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0519_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0520_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0521_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0522_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0523_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0524_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0525_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0526_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0527_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0528_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0529_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0530_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0531_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0532_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0533_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0534_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0535_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0536_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0537_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0538_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0539_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0540_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0541_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0542_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0543_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0544_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0545_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0546_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0547_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0548_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0549_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0550_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0551_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0552_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0553_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0554_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0555_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0556_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0557_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0558_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0559_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0560_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0561_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0562_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0563_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0564_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0565_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0566_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0567_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0568_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0569_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0570_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0571_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0572_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0573_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0574_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0575_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0576_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0577_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0578_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0579_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0580_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0581_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0582_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0583_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0584_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0585_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0586_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0587_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0588_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0589_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0590_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0591_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0592_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0593_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0594_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0595_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0596_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0597_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0598_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0599_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0600_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0601_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0602_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0603_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0604_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0605_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0606_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0607_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0608_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0609_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0610_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0611_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0612_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0613_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0614_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0615_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0616_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0617_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0618_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0619_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0620_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0621_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0622_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0623_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0624_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0625_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0626_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0627_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0628_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0629_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0630_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0631_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0632_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0633_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0634_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0635_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0636_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0637_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0638_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0639_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0640_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0641_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0642_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0643_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0644_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0645_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0646_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0647_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0648_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0649_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0650_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0651_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0652_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0653_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0654_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0655_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0656_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0657_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0658_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0659_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0660_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0661_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0662_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0663_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0664_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0665_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0666_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0667_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0668_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0669_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0670_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0671_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0672_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0673_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0674_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0675_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0676_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0677_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0678_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0679_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0680_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0681_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0682_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0683_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0684_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0685_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0686_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0687_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0688_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0689_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0690_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0691_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0692_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0693_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0694_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0695_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0696_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0697_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0698_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0699_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0700_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0701_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0702_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0703_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0704_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0705_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0706_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0707_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0708_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0709_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0710_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0711_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0712_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0713_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0714_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0715_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0716_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0717_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0718_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0719_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0720_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0721_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0722_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0723_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0724_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0725_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0726_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0727_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0728_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0729_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0730_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0731_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0732_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0733_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0734_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0735_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0736_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0737_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0738_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0739_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0740_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0741_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0742_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0743_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0744_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0745_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0746_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0747_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0748_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0749_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0750_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0751_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0752_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0753_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0754_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0755_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0756_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0757_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0758_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0759_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0760_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0761_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0762_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0763_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0764_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0765_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0766_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0767_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0768_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0769_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0770_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0771_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0772_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0773_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0774_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0775_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0776_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0777_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0778_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0779_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0780_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0781_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0782_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0783_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0784_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0785_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0786_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0787_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0788_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0789_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0790_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0791_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0792_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0793_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0794_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0795_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0796_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0797_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0798_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0799_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0800_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0801_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0802_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0803_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0804_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0805_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0806_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0807_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0808_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0809_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0810_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0811_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0812_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0813_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0814_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0815_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0816_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0817_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0818_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0819_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0820_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0821_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0822_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0823_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0824_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0825_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0826_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0827_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0828_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0829_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0830_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0831_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0832_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0833_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0834_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0835_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0836_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0837_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0838_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0839_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0840_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0841_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0842_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0843_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0844_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0845_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0846_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0847_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0848_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0849_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0850_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0851_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0852_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0853_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0854_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0855_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0856_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0857_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0858_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0859_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0860_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger0861_geo.ptx",
-        "textures/isCoral/Color/clubbedfinger2323_geo.ptx",
-        "textures/isCoral/Color/clubbedthumb_a0001_geo.ptx",
-        "textures/isCoral/Color/clubbedthumb_b0001_geo.ptx",
-        "textures/isCoral/Color/clubbedthumb_d0001_geo.ptx",
-        "textures/isCoral/Color/clubbedtthumb_c0001_geo.ptx",
-        "textures/isCoral/Color/coralmoss0001_geo.ptx",
-        "textures/isCoral/Color/coralmoss0002_geo.ptx",
-        "textures/isCoral/Color/coralmoss0003_geo.ptx",
-        "textures/isCoral/Color/coralmoss0004_geo.ptx",
-        "textures/isCoral/Color/coralmoss0005_geo.ptx",
-        "textures/isCoral/Color/coralmoss0006_geo.ptx",
-        "textures/isCoral/Color/coralmoss0007_geo.ptx",
-        "textures/isCoral/Color/coralmoss0008_geo.ptx",
-        "textures/isCoral/Color/coralmoss0009_geo.ptx",
-        "textures/isCoral/Color/coralmoss0010_geo.ptx",
-        "textures/isCoral/Color/coralmoss0011_geo.ptx",
-        "textures/isCoral/Color/coralmoss0012_geo.ptx",
-        "textures/isCoral/Color/coralrock0001_geo.ptx",
-        "textures/isCoral/Color/coralrock0002_geo.ptx",
-        "textures/isCoral/Color/coralrock0003_geo.ptx",
-        "textures/isCoral/Color/coralrock0004_geo.ptx",
-        "textures/isCoral/Color/coralrock0005_geo.ptx",
-        "textures/isCoral/Color/coralrock0006_geo.ptx",
-        "textures/isCoral/Color/coralrock0007_geo.ptx",
-        "textures/isCoral/Color/coralrock0008_geo.ptx",
-        "textures/isCoral/Color/coralrock0009_geo.ptx",
-        "textures/isCoral/Color/coralrock0010_geo.ptx",
-        "textures/isCoral/Color/coralrock0011_geo.ptx",
-        "textures/isCoral/Color/coralrock0012_geo.ptx",
-        "textures/isCoral/Color/coralrock0013_geo.ptx",
-        "textures/isCoral/Color/coralrock0014_geo.ptx",
-        "textures/isCoral/Color/coralrock0015_geo.ptx",
-        "textures/isCoral/Color/coralrock0016_geo.ptx",
-        "textures/isCoral/Color/coralrock0017_geo.ptx",
-        "textures/isCoral/Color/coralrock0018_geo.ptx",
-        "textures/isCoral/Color/coralrock0019_geo.ptx",
-        "textures/isCoral/Color/coralrock0020_geo.ptx",
-        "textures/isCoral/Color/coralrock0021_geo.ptx",
-        "textures/isCoral/Color/coralrock0022_geo.ptx",
-        "textures/isCoral/Color/coralrock0023_geo.ptx",
-        "textures/isCoral/Color/coralrock0024_geo.ptx",
-        "textures/isCoral/Color/coralrock0025_geo.ptx",
-        "textures/isCoral/Color/coralrock0026_geo.ptx",
-        "textures/isCoral/Color/coralrock0027_geo.ptx",
-        "textures/isCoral/Color/coralrock0028_geo.ptx",
-        "textures/isCoral/Color/coralrock0029_geo.ptx",
-        "textures/isCoral/Color/coralrock0030_geo.ptx",
-        "textures/isCoral/Color/coralrock0031_geo.ptx",
-        "textures/isCoral/Color/coralrock0032_geo.ptx",
-        "textures/isCoral/Color/coralrock0033_geo.ptx",
-        "textures/isCoral/Color/coralrock0034_geo.ptx",
-        "textures/isCoral/Color/coralrock0035_geo.ptx",
-        "textures/isCoral/Color/coralrock0036_geo.ptx",
-        "textures/isCoral/Color/coralrock0037_geo.ptx",
-        "textures/isCoral/Color/coralrock0038_geo.ptx",
-        "textures/isCoral/Color/coralrock0039_geo.ptx",
-        "textures/isCoral/Color/coralrock0040_geo.ptx",
-        "textures/isCoral/Color/coralrock0041_geo.ptx",
-        "textures/isCoral/Color/coralrock0042_geo.ptx",
-        "textures/isCoral/Color/coralrock0043_geo.ptx",
-        "textures/isCoral/Color/coralrock0044_geo.ptx",
-        "textures/isCoral/Color/coralrock0045_geo.ptx",
-        "textures/isCoral/Color/coralrock0046_geo.ptx",
-        "textures/isCoral/Color/coralrock0047_geo.ptx",
-        "textures/isCoral/Color/coralrock0048_geo.ptx",
-        "textures/isCoral/Color/coralrock0049_geo.ptx",
-        "textures/isCoral/Color/coralrock0050_geo.ptx",
-        "textures/isCoral/Color/coralrock0051_geo.ptx",
-        "textures/isCoral/Color/coralrock0052_geo.ptx",
-        "textures/isCoral/Color/coralrock0053_geo.ptx",
-        "textures/isCoral/Color/coralrock0054_geo.ptx",
-        "textures/isCoral/Color/coralrock0055_geo.ptx",
-        "textures/isCoral/Color/coralrock0056_geo.ptx",
-        "textures/isCoral/Color/coralrock0057_geo.ptx",
-        "textures/isCoral/Color/coralrock0058_geo.ptx",
-        "textures/isCoral/Color/coralrock0059_geo.ptx",
-        "textures/isCoral/Color/coralrock0060_geo.ptx",
-        "textures/isCoral/Color/coralrock0061_geo.ptx",
-        "textures/isCoral/Color/coralrock0062_geo.ptx",
-        "textures/isCoral/Color/coralrock0063_geo.ptx",
-        "textures/isCoral/Color/coralrock0064_geo.ptx",
-        "textures/isCoral/Color/coralrock0065_geo.ptx",
-        "textures/isCoral/Color/coralrock0066_geo.ptx",
-        "textures/isCoral/Color/coralrock0067_geo.ptx",
-        "textures/isCoral/Color/coralrock0068_geo.ptx",
-        "textures/isCoral/Color/coralrock0069_geo.ptx",
-        "textures/isCoral/Color/coralrock0070_geo.ptx",
-        "textures/isCoral/Color/coralrock0071_geo.ptx",
-        "textures/isCoral/Color/coralrock0072_geo.ptx",
-        "textures/isCoral/Color/coralrock0073_geo.ptx",
-        "textures/isCoral/Color/coralstone0001_geo.ptx",
-        "textures/isCoral/Color/coralstone0002_geo.ptx",
-        "textures/isCoral/Color/coralstone0003_geo.ptx",
-        "textures/isCoral/Color/coralstone0004_geo.ptx",
-        "textures/isCoral/Color/coralstone0005_geo.ptx",
-        "textures/isCoral/Color/coralstone0006_geo.ptx",
-        "textures/isCoral/Color/coralstone0007_geo.ptx",
-        "textures/isCoral/Color/coralstone0008_geo.ptx",
-        "textures/isCoral/Color/coralstone0009_geo.ptx",
-        "textures/isCoral/Color/coralstone0010_geo.ptx",
-        "textures/isCoral/Color/coralstone0011_geo.ptx",
-        "textures/isCoral/Color/coralstone0012_geo.ptx",
-        "textures/isCoral/Color/coralstone0014_geo.ptx",
-        "textures/isCoral/Color/coralstone0015_geo.ptx",
-        "textures/isCoral/Color/coralstone0016_geo.ptx",
-        "textures/isCoral/Color/coralstone0017_geo.ptx",
-        "textures/isCoral/Color/coralstone0018_geo.ptx",
-        "textures/isCoral/Color/coralstone0019_geo.ptx",
-        "textures/isCoral/Color/coralstone0020_geo.ptx",
-        "textures/isCoral/Color/coralstone0021_geo.ptx",
-        "textures/isCoral/Color/coralstone0022_geo.ptx",
-        "textures/isCoral/Color/coralstone0023_geo.ptx",
-        "textures/isCoral/Color/coralstone0024_geo.ptx",
-        "textures/isCoral/Color/fingercoral0001_geo.ptx",
-        "textures/isCoral/Color/fingercoral0002_geo.ptx",
-        "textures/isCoral/Color/fingercoral0003_geo.ptx",
-        "textures/isCoral/Color/fingercoral0004_geo.ptx",
-        "textures/isCoral/Color/fingercoral0005_geo.ptx",
-        "textures/isCoral/Color/fingercoral0006_geo.ptx",
-        "textures/isCoral/Color/fingercoral0007_geo.ptx",
-        "textures/isCoral/Color/fingercoral0008_geo.ptx",
-        "textures/isCoral/Color/fingercoral0009_geo.ptx",
-        "textures/isCoral/Color/fingercoral0010_geo.ptx",
-        "textures/isCoral/Color/fingercoral0011_geo.ptx",
-        "textures/isCoral/Color/fingercoral0012_geo.ptx",
-        "textures/isCoral/Color/fingercoral0013_geo.ptx",
-        "textures/isCoral/Color/fingercoral0014_geo.ptx",
-        "textures/isCoral/Color/fingercoral0015_geo.ptx",
-        "textures/isCoral/Color/fingercoral0016_geo.ptx",
-        "textures/isCoral/Color/fingercoral0017_geo.ptx",
-        "textures/isCoral/Color/fingercoral0018_geo.ptx",
-        "textures/isCoral/Color/fingercoral0019_geo.ptx",
-        "textures/isCoral/Color/fingercoral0020_geo.ptx",
-        "textures/isCoral/Color/fingercoral0021_geo.ptx",
-        "textures/isCoral/Color/fingercoral0022_geo.ptx",
-        "textures/isCoral/Color/fingercoral0023_geo.ptx",
-        "textures/isCoral/Color/fingercoral0024_geo.ptx",
-        "textures/isCoral/Color/fingercoral0025_geo.ptx",
-        "textures/isCoral/Color/fingercoral0026_geo.ptx",
-        "textures/isCoral/Color/fingercoral0027_geo.ptx",
-        "textures/isCoral/Color/fingercoral0028_geo.ptx",
-        "textures/isCoral/Color/fingercoral0029_geo.ptx",
-        "textures/isCoral/Color/fingercoral0030_geo.ptx",
-        "textures/isCoral/Color/fingercoral0031_geo.ptx",
-        "textures/isCoral/Color/fingercoral0032_geo.ptx",
-        "textures/isCoral/Color/fingercoral0033_geo.ptx",
-        "textures/isCoral/Color/fingercoral0034_geo.ptx",
-        "textures/isCoral/Color/fingercoral0035_geo.ptx",
-        "textures/isCoral/Color/fingercoral0036_geo.ptx",
-        "textures/isCoral/Color/fingercoral0037_geo.ptx",
-        "textures/isCoral/Color/fingercoral0038_geo.ptx",
-        "textures/isCoral/Color/fingercoral0039_geo.ptx",
-        "textures/isCoral/Color/fingercoral0040_geo.ptx",
-        "textures/isCoral/Color/fingercoral0041_geo.ptx",
-        "textures/isCoral/Color/fingercoral0042_geo.ptx",
-        "textures/isCoral/Color/fingercoral0043_geo.ptx",
-        "textures/isCoral/Color/fingercoral0044_geo.ptx",
-        "textures/isCoral/Color/fingercoral0045_geo.ptx",
-        "textures/isCoral/Color/fingercoral0046_geo.ptx",
-        "textures/isCoral/Color/fingercoral0047_geo.ptx",
-        "textures/isCoral/Color/fingercoral0048_geo.ptx",
-        "textures/isCoral/Color/fingercoral0049_geo.ptx",
-        "textures/isCoral/Color/fingercoral0050_geo.ptx",
-        "textures/isCoral/Color/fingercoral0051_geo.ptx",
-        "textures/isCoral/Color/fingercoral0052_geo.ptx",
-        "textures/isCoral/Color/fingercoral0053_geo.ptx",
-        "textures/isCoral/Color/fingercoral0054_geo.ptx",
-        "textures/isCoral/Color/fingercoral0055_geo.ptx",
-        "textures/isCoral/Color/fingercoral0056_geo.ptx",
-        "textures/isCoral/Color/fingercoral0057_geo.ptx",
-        "textures/isCoral/Color/fingercoral0058_geo.ptx",
-        "textures/isCoral/Color/fingercoral0059_geo.ptx",
-        "textures/isCoral/Color/fingercoral0060_geo.ptx",
-        "textures/isCoral/Color/fingercoral0061_geo.ptx",
-        "textures/isCoral/Color/fingercoral0062_geo.ptx",
-        "textures/isCoral/Color/fingercoral0063_geo.ptx",
-        "textures/isCoral/Color/fingercoral0064_geo.ptx",
-        "textures/isCoral/Color/fingercoral0065_geo.ptx",
-        "textures/isCoral/Color/fingercoral0066_geo.ptx",
-        "textures/isCoral/Color/fingercoral0067_geo.ptx",
-        "textures/isCoral/Color/fingercoral0068_geo.ptx",
-        "textures/isCoral/Color/fingercoral0069_geo.ptx",
-        "textures/isCoral/Color/fingercoral0070_geo.ptx",
-        "textures/isCoral/Color/fingercoral0071_geo.ptx",
-        "textures/isCoral/Color/fingercoral0072_geo.ptx",
-        "textures/isCoral/Color/fingercoral0073_geo.ptx",
-        "textures/isCoral/Color/fingercoral0074_geo.ptx",
-        "textures/isCoral/Color/fingercoral0075_geo.ptx",
-        "textures/isCoral/Color/fingercoral0076_geo.ptx",
-        "textures/isCoral/Color/fingercoral0077_geo.ptx",
-        "textures/isCoral/Color/fingercoral0078_geo.ptx",
-        "textures/isCoral/Color/fingercoral0079_geo.ptx",
-        "textures/isCoral/Color/fingercoral0080_geo.ptx",
-        "textures/isCoral/Color/fingercoral0081_geo.ptx",
-        "textures/isCoral/Color/fingercoral0082_geo.ptx",
-        "textures/isCoral/Color/fingercoral0083_geo.ptx",
-        "textures/isCoral/Color/fingercoral0084_geo.ptx",
-        "textures/isCoral/Color/fingercoral0085_geo.ptx",
-        "textures/isCoral/Color/fingercoral0086_geo.ptx",
-        "textures/isCoral/Color/fingercoral0087_geo.ptx",
-        "textures/isCoral/Color/fingercoral0088_geo.ptx",
-        "textures/isCoral/Color/fingercoral0089_geo.ptx",
-        "textures/isCoral/Color/fingercoral0090_geo.ptx",
-        "textures/isCoral/Color/fingercoral0091_geo.ptx",
-        "textures/isCoral/Color/fingercoral0092_geo.ptx",
-        "textures/isCoral/Color/fingercoral0093_geo.ptx",
-        "textures/isCoral/Color/fingercoral0094_geo.ptx",
-        "textures/isCoral/Color/fingercoral0095_geo.ptx",
-        "textures/isCoral/Color/fingercoral0096_geo.ptx",
-        "textures/isCoral/Color/fingercoral0097_geo.ptx",
-        "textures/isCoral/Color/fingercoral0098_geo.ptx",
-        "textures/isCoral/Color/fingercoral0099_geo.ptx",
-        "textures/isCoral/Color/fingercoral0100_geo.ptx",
-        "textures/isCoral/Color/fingercoral0101_geo.ptx",
-        "textures/isCoral/Color/fingercoral0102_geo.ptx",
-        "textures/isCoral/Color/fingercoral0103_geo.ptx",
-        "textures/isCoral/Color/fingercoral0104_geo.ptx",
-        "textures/isCoral/Color/fingercoral0105_geo.ptx",
-        "textures/isCoral/Color/fingercoral0106_geo.ptx",
-        "textures/isCoral/Color/fingercoral0107_geo.ptx",
-        "textures/isCoral/Color/fingercoral0108_geo.ptx",
-        "textures/isCoral/Color/fingercoral0109_geo.ptx",
-        "textures/isCoral/Color/fingercoral0110_geo.ptx",
-        "textures/isCoral/Color/fingercoral0111_geo.ptx",
-        "textures/isCoral/Color/fingercoral0112_geo.ptx",
-        "textures/isCoral/Color/fingercoral0113_geo.ptx",
-        "textures/isCoral/Color/fingercoral0114_geo.ptx",
-        "textures/isCoral/Color/fingercoral0115_geo.ptx",
-        "textures/isCoral/Color/fingercoral0116_geo.ptx",
-        "textures/isCoral/Color/fingercoral0117_geo.ptx",
-        "textures/isCoral/Color/fingercoral0118_geo.ptx",
-        "textures/isCoral/Color/fingercoral0119_geo.ptx",
-        "textures/isCoral/Color/fingercoral0120_geo.ptx",
-        "textures/isCoral/Color/fingercoral0121_geo.ptx",
-        "textures/isCoral/Color/fingercoral0122_geo.ptx",
-        "textures/isCoral/Color/fingercoral0123_geo.ptx",
-        "textures/isCoral/Color/fingercoral0124_geo.ptx",
-        "textures/isCoral/Color/fingercoral0125_geo.ptx",
-        "textures/isCoral/Color/fingercoral0126_geo.ptx",
-        "textures/isCoral/Color/fingercoral0127_geo.ptx",
-        "textures/isCoral/Color/fingercoral0128_geo.ptx",
-        "textures/isCoral/Color/fingercoral0129_geo.ptx",
-        "textures/isCoral/Color/fingercoral0130_geo.ptx",
-        "textures/isCoral/Color/fingercoral0131_geo.ptx",
-        "textures/isCoral/Color/fingercoral0132_geo.ptx",
-        "textures/isCoral/Color/fingercoral0133_geo.ptx",
-        "textures/isCoral/Color/fingercoral0134_geo.ptx",
-        "textures/isCoral/Color/fingercoral0135_geo.ptx",
-        "textures/isCoral/Color/fingercoral0136_geo.ptx",
-        "textures/isCoral/Color/fingercoral0137_geo.ptx",
-        "textures/isCoral/Color/fingercoral0138_geo.ptx",
-        "textures/isCoral/Color/fingercoral0139_geo.ptx",
-        "textures/isCoral/Color/fingercoral0140_geo.ptx",
-        "textures/isCoral/Color/fingercoral0141_geo.ptx",
-        "textures/isCoral/Color/fingercoral0142_geo.ptx",
-        "textures/isCoral/Color/fingercoral0143_geo.ptx",
-        "textures/isCoral/Color/fingercoral0144_geo.ptx",
-        "textures/isCoral/Color/fingercoral0145_geo.ptx",
-        "textures/isCoral/Color/fingercoral0146_geo.ptx",
-        "textures/isCoral/Color/fingercoral0147_geo.ptx",
-        "textures/isCoral/Color/fingercoral0148_geo.ptx",
-        "textures/isCoral/Color/fingercoral0149_geo.ptx",
-        "textures/isCoral/Color/fingercoral0150_geo.ptx",
-        "textures/isCoral/Color/fingercoral0151_geo.ptx",
-        "textures/isCoral/Color/fingercoral0152_geo.ptx",
-        "textures/isCoral/Color/fingercoral0153_geo.ptx",
-        "textures/isCoral/Color/fingercoral0154_geo.ptx",
-        "textures/isCoral/Color/fingercoral0155_geo.ptx",
-        "textures/isCoral/Color/fingercoral0156_geo.ptx",
-        "textures/isCoral/Color/fingercoral0157_geo.ptx",
-        "textures/isCoral/Color/fingercoral0158_geo.ptx",
-        "textures/isCoral/Color/fingercoral0159_geo.ptx",
-        "textures/isCoral/Color/fingercoral0160_geo.ptx",
-        "textures/isCoral/Color/fingercoral0161_geo.ptx",
-        "textures/isCoral/Color/fingercoral0162_geo.ptx",
-        "textures/isCoral/Color/fingercoral0163_geo.ptx",
-        "textures/isCoral/Color/fingercoral0164_geo.ptx",
-        "textures/isCoral/Color/fingercoral0165_geo.ptx",
-        "textures/isCoral/Color/fingercoral0166_geo.ptx",
-        "textures/isCoral/Color/fingercoral0167_geo.ptx",
-        "textures/isCoral/Color/fingercoral0168_geo.ptx",
-        "textures/isCoral/Color/fingercoral0169_geo.ptx",
-        "textures/isCoral/Color/fingercoral0170_geo.ptx",
-        "textures/isCoral/Color/fingercoral0171_geo.ptx",
-        "textures/isCoral/Color/fingercoral0172_geo.ptx",
-        "textures/isCoral/Color/fingercoral0173_geo.ptx",
-        "textures/isCoral/Color/fingercoral0174_geo.ptx",
-        "textures/isCoral/Color/fingercoral0175_geo.ptx",
-        "textures/isCoral/Color/fingercoral0176_geo.ptx",
-        "textures/isCoral/Color/fingercoral0177_geo.ptx",
-        "textures/isCoral/Color/fingercoral0178_geo.ptx",
-        "textures/isCoral/Color/fingercoral0179_geo.ptx",
-        "textures/isCoral/Color/fingercoral0180_geo.ptx",
-        "textures/isCoral/Color/fingercoral0181_geo.ptx",
-        "textures/isCoral/Color/fingercoral0182_geo.ptx",
-        "textures/isCoral/Color/fingercoral0183_geo.ptx",
-        "textures/isCoral/Color/fingercoral0184_geo.ptx",
-        "textures/isCoral/Color/fingercoral0185_geo.ptx",
-        "textures/isCoral/Color/fingercoral0186_geo.ptx",
-        "textures/isCoral/Color/fingercoral0187_geo.ptx",
-        "textures/isCoral/Color/fingercoral0188_geo.ptx",
-        "textures/isCoral/Color/fingercoral0189_geo.ptx",
-        "textures/isCoral/Color/fingercoral0190_geo.ptx",
-        "textures/isCoral/Color/fingercoral0191_geo.ptx",
-        "textures/isCoral/Color/fingercoral0192_geo.ptx",
-        "textures/isCoral/Color/fingercoral0193_geo.ptx",
-        "textures/isCoral/Color/fingercoral0194_geo.ptx",
-        "textures/isCoral/Color/fingercoral0195_geo.ptx",
-        "textures/isCoral/Color/fingercoral0196_geo.ptx",
-        "textures/isCoral/Color/fingercoral0197_geo.ptx",
-        "textures/isCoral/Color/fingercoral0198_geo.ptx",
-        "textures/isCoral/Color/fingercoral0199_geo.ptx",
-        "textures/isCoral/Color/fingercoral0200_geo.ptx",
-        "textures/isCoral/Color/fingercoral0201_geo.ptx",
-        "textures/isCoral/Color/fingercoral0202_geo.ptx",
-        "textures/isCoral/Color/fingercoral0203_geo.ptx",
-        "textures/isCoral/Color/fingercoral0204_geo.ptx",
-        "textures/isCoral/Color/fingercoral0205_geo.ptx",
-        "textures/isCoral/Color/fingercoral0206_geo.ptx",
-        "textures/isCoral/Color/fingercoral0207_geo.ptx",
-        "textures/isCoral/Color/fingercoral0208_geo.ptx",
-        "textures/isCoral/Color/fingercoral0209_geo.ptx",
-        "textures/isCoral/Color/fingercoral0210_geo.ptx",
-        "textures/isCoral/Color/fingercoral0211_geo.ptx",
-        "textures/isCoral/Color/fingercoral0212_geo.ptx",
-        "textures/isCoral/Color/fingercoral0213_geo.ptx",
-        "textures/isCoral/Color/fingercoral0214_geo.ptx",
-        "textures/isCoral/Color/fingercoral0215_geo.ptx",
-        "textures/isCoral/Color/fingercoral0216_geo.ptx",
-        "textures/isCoral/Color/fingercoral0217_geo.ptx",
-        "textures/isCoral/Color/fingercoral0218_geo.ptx",
-        "textures/isCoral/Color/fingercoral0219_geo.ptx",
-        "textures/isCoral/Color/fingercoral0220_geo.ptx",
-        "textures/isCoral/Color/fingercoral0221_geo.ptx",
-        "textures/isCoral/Color/fingercoral0222_geo.ptx",
-        "textures/isCoral/Color/fingercoral0223_geo.ptx",
-        "textures/isCoral/Color/fingercoral0224_geo.ptx",
-        "textures/isCoral/Color/fingercoral0225_geo.ptx",
-        "textures/isCoral/Color/fingercoral0226_geo.ptx",
-        "textures/isCoral/Color/fingercoral0227_geo.ptx",
-        "textures/isCoral/Color/fingercoral0228_geo.ptx",
-        "textures/isCoral/Color/fingercoral0229_geo.ptx",
-        "textures/isCoral/Color/fingercoral0230_geo.ptx",
-        "textures/isCoral/Color/fingercoral0231_geo.ptx",
-        "textures/isCoral/Color/fingercoral0232_geo.ptx",
-        "textures/isCoral/Color/fingercoral0233_geo.ptx",
-        "textures/isCoral/Color/fingercoral0234_geo.ptx",
-        "textures/isCoral/Color/fingercoral0235_geo.ptx",
-        "textures/isCoral/Color/fingercoral0236_geo.ptx",
-        "textures/isCoral/Color/fingercoral0237_geo.ptx",
-        "textures/isCoral/Color/fingercoral0238_geo.ptx",
-        "textures/isCoral/Color/fingercoral0239_geo.ptx",
-        "textures/isCoral/Color/fingercoral0240_geo.ptx",
-        "textures/isCoral/Color/fingercoral0241_geo.ptx",
-        "textures/isCoral/Color/fingercoral0242_geo.ptx",
-        "textures/isCoral/Color/fingercoral0243_geo.ptx",
-        "textures/isCoral/Color/fingercoral0244_geo.ptx",
-        "textures/isCoral/Color/fingercoral0245_geo.ptx",
-        "textures/isCoral/Color/fingercoral0246_geo.ptx",
-        "textures/isCoral/Color/fingercoral0247_geo.ptx",
-        "textures/isCoral/Color/fingercoral0248_geo.ptx",
-        "textures/isCoral/Color/fingercoral0249_geo.ptx",
-        "textures/isCoral/Color/fingercoral0250_geo.ptx",
-        "textures/isCoral/Color/fingercoral0251_geo.ptx",
-        "textures/isCoral/Color/fingercoral0252_geo.ptx",
-        "textures/isCoral/Color/fingercoral0253_geo.ptx",
-        "textures/isCoral/Color/fingercoral0254_geo.ptx",
-        "textures/isCoral/Color/fingercoral0255_geo.ptx",
-        "textures/isCoral/Color/fingercoral0256_geo.ptx",
-        "textures/isCoral/Color/fingercoral0257_geo.ptx",
-        "textures/isCoral/Color/fingercoral0258_geo.ptx",
-        "textures/isCoral/Color/fingercoral0259_geo.ptx",
-        "textures/isCoral/Color/fingercoral0260_geo.ptx",
-        "textures/isCoral/Color/fingercoral0261_geo.ptx",
-        "textures/isCoral/Color/fingercoral0262_geo.ptx",
-        "textures/isCoral/Color/fingercoral0263_geo.ptx",
-        "textures/isCoral/Color/fingercoral0264_geo.ptx",
-        "textures/isCoral/Color/fingercoral0265_geo.ptx",
-        "textures/isCoral/Color/fingercoral0266_geo.ptx",
-        "textures/isCoral/Color/fingercoral0267_geo.ptx",
-        "textures/isCoral/Color/fingercoral0268_geo.ptx",
-        "textures/isCoral/Color/fingercoral0269_geo.ptx",
-        "textures/isCoral/Color/fingercoral0270_geo.ptx",
-        "textures/isCoral/Color/fingercoral0271_geo.ptx",
-        "textures/isCoral/Color/fingercoral0272_geo.ptx",
-        "textures/isCoral/Color/fingercoral0273_geo.ptx",
-        "textures/isCoral/Color/fingercoral0274_geo.ptx",
-        "textures/isCoral/Color/fingercoral0275_geo.ptx",
-        "textures/isCoral/Color/fingercoral0276_geo.ptx",
-        "textures/isCoral/Color/fingercoral0277_geo.ptx",
-        "textures/isCoral/Color/fingercoral0278_geo.ptx",
-        "textures/isCoral/Color/fingercoral0279_geo.ptx",
-        "textures/isCoral/Color/fingercoral0280_geo.ptx",
-        "textures/isCoral/Color/fingercoral0281_geo.ptx",
-        "textures/isCoral/Color/fingercoral0282_geo.ptx",
-        "textures/isCoral/Color/fingercoral0283_geo.ptx",
-        "textures/isCoral/Color/fingercoral0284_geo.ptx",
-        "textures/isCoral/Color/fingercoral0285_geo.ptx",
-        "textures/isCoral/Color/fingercoral0286_geo.ptx",
-        "textures/isCoral/Color/fingercoral0287_geo.ptx",
-        "textures/isCoral/Color/fingercoral0288_geo.ptx",
-        "textures/isCoral/Color/fingercoral0289_geo.ptx",
-        "textures/isCoral/Color/fingercoral0290_geo.ptx",
-        "textures/isCoral/Color/fingercoral0291_geo.ptx",
-        "textures/isCoral/Color/fingercoral0292_geo.ptx",
-        "textures/isCoral/Color/fingercoral0293_geo.ptx",
-        "textures/isCoral/Color/fingercoral0294_geo.ptx",
-        "textures/isCoral/Color/fingercoral0295_geo.ptx",
-        "textures/isCoral/Color/fingercoral0296_geo.ptx",
-        "textures/isCoral/Color/fingercoral0297_geo.ptx",
-        "textures/isCoral/Color/fingercoral0298_geo.ptx",
-        "textures/isCoral/Color/fingercoral0299_geo.ptx",
-        "textures/isCoral/Color/fingercoral0300_geo.ptx",
-        "textures/isCoral/Color/fingercoral0301_geo.ptx",
-        "textures/isCoral/Color/fingercoral0302_geo.ptx",
-        "textures/isCoral/Color/fingercoral0303_geo.ptx",
-        "textures/isCoral/Color/fingercoral0304_geo.ptx",
-        "textures/isCoral/Color/fingercoral0305_geo.ptx",
-        "textures/isCoral/Color/fingercoral0306_geo.ptx",
-        "textures/isCoral/Color/fingercoral0307_geo.ptx",
-        "textures/isCoral/Color/fingercoral0308_geo.ptx",
-        "textures/isCoral/Color/fingercoral0309_geo.ptx",
-        "textures/isCoral/Color/fingercoral0310_geo.ptx",
-        "textures/isCoral/Color/fingercoral0311_geo.ptx",
-        "textures/isCoral/Color/fingercoral0312_geo.ptx",
-        "textures/isCoral/Color/fingercoral0313_geo.ptx",
-        "textures/isCoral/Color/fingercoral0314_geo.ptx",
-        "textures/isCoral/Color/fingercoral0315_geo.ptx",
-        "textures/isCoral/Color/fingercoral0316_geo.ptx",
-        "textures/isCoral/Color/fingercoral0317_geo.ptx",
-        "textures/isCoral/Color/fingercoral0318_geo.ptx",
-        "textures/isCoral/Color/fingercoral0319_geo.ptx",
-        "textures/isCoral/Color/fingercoral0320_geo.ptx",
-        "textures/isCoral/Color/fingercoral0321_geo.ptx",
-        "textures/isCoral/Color/fingercoral0322_geo.ptx",
-        "textures/isCoral/Color/fingercoral0323_geo.ptx",
-        "textures/isCoral/Color/fingercoral0324_geo.ptx",
-        "textures/isCoral/Color/fingercoral0325_geo.ptx",
-        "textures/isCoral/Color/fingercoral0326_geo.ptx",
-        "textures/isCoral/Color/fingercoral0327_geo.ptx",
-        "textures/isCoral/Color/fingercoral0328_geo.ptx",
-        "textures/isCoral/Color/fingercoral0329_geo.ptx",
-        "textures/isCoral/Color/fingercoral0330_geo.ptx",
-        "textures/isCoral/Color/fingercoral0331_geo.ptx",
-        "textures/isCoral/Color/fingercoral0332_geo.ptx",
-        "textures/isCoral/Color/fingercoral0333_geo.ptx",
-        "textures/isCoral/Color/fingercoral0334_geo.ptx",
-        "textures/isCoral/Color/fingercoral0335_geo.ptx",
-        "textures/isCoral/Color/fingercoral0336_geo.ptx",
-        "textures/isCoral/Color/fingercoral0337_geo.ptx",
-        "textures/isCoral/Color/fingercoral0338_geo.ptx",
-        "textures/isCoral/Color/fingercoral0339_geo.ptx",
-        "textures/isCoral/Color/fingercoral0340_geo.ptx",
-        "textures/isCoral/Color/fingercoral0341_geo.ptx",
-        "textures/isCoral/Color/fingercoral0342_geo.ptx",
-        "textures/isCoral/Color/fingercoral0343_geo.ptx",
-        "textures/isCoral/Color/fingercoral0344_geo.ptx",
-        "textures/isCoral/Color/fingercoral0345_geo.ptx",
-        "textures/isCoral/Color/fingercoral0346_geo.ptx",
-        "textures/isCoral/Color/fingercoral0347_geo.ptx",
-        "textures/isCoral/Color/fingercoral0348_geo.ptx",
-        "textures/isCoral/Color/fingercoral0349_geo.ptx",
-        "textures/isCoral/Color/fingercoral0350_geo.ptx",
-        "textures/isCoral/Color/fingercoral0351_geo.ptx",
-        "textures/isCoral/Color/fingercoral0352_geo.ptx",
-        "textures/isCoral/Color/fingercoral0353_geo.ptx",
-        "textures/isCoral/Color/fingercoral0354_geo.ptx",
-        "textures/isCoral/Color/fingercoral0355_geo.ptx",
-        "textures/isCoral/Color/fingercoral0356_geo.ptx",
-        "textures/isCoral/Color/fingercoral0357_geo.ptx",
-        "textures/isCoral/Color/fingercoral0358_geo.ptx",
-        "textures/isCoral/Color/fingercoral0359_geo.ptx",
-        "textures/isCoral/Color/fingercoral0360_geo.ptx",
-        "textures/isCoral/Color/fingercoral0361_geo.ptx",
-        "textures/isCoral/Color/fingercoral0362_geo.ptx",
-        "textures/isCoral/Color/fingercoral0363_geo.ptx",
-        "textures/isCoral/Color/fingercoral0364_geo.ptx",
-        "textures/isCoral/Color/fingercoral0365_geo.ptx",
-        "textures/isCoral/Color/fingercoral0366_geo.ptx",
-        "textures/isCoral/Color/fingercoral0367_geo.ptx",
-        "textures/isCoral/Color/fingercoral0368_geo.ptx",
-        "textures/isCoral/Color/fingercoral0369_geo.ptx",
-        "textures/isCoral/Color/fingercoral0370_geo.ptx",
-        "textures/isCoral/Color/fingercoral0371_geo.ptx",
-        "textures/isCoral/Color/fingercoral0372_geo.ptx",
-        "textures/isCoral/Color/fingercoral0373_geo.ptx",
-        "textures/isCoral/Color/fingercoral0374_geo.ptx",
-        "textures/isCoral/Color/fingercoral0375_geo.ptx",
-        "textures/isCoral/Color/fingercoral0376_geo.ptx",
-        "textures/isCoral/Color/fingercoral0377_geo.ptx",
-        "textures/isCoral/Color/fingercoral0378_geo.ptx",
-        "textures/isCoral/Color/fingercoral0379_geo.ptx",
-        "textures/isCoral/Color/fingercoral0380_geo.ptx",
-        "textures/isCoral/Color/fingercoral0381_geo.ptx",
-        "textures/isCoral/Color/fingercoral0382_geo.ptx",
-        "textures/isCoral/Color/fingercoral0383_geo.ptx",
-        "textures/isCoral/Color/fingercoral0384_geo.ptx",
-        "textures/isCoral/Color/fingercoral0385_geo.ptx",
-        "textures/isCoral/Color/fingercoral0386_geo.ptx",
-        "textures/isCoral/Color/fingercoral0387_geo.ptx",
-        "textures/isCoral/Color/fingercoral0388_geo.ptx",
-        "textures/isCoral/Color/fingercoral0389_geo.ptx",
-        "textures/isCoral/Color/fingercoral0390_geo.ptx",
-        "textures/isCoral/Color/fingercoral0391_geo.ptx",
-        "textures/isCoral/Color/fingercoral0392_geo.ptx",
-        "textures/isCoral/Color/fingercoral0393_geo.ptx",
-        "textures/isCoral/Color/fingercoral0394_geo.ptx",
-        "textures/isCoral/Color/fingercoral0395_geo.ptx",
-        "textures/isCoral/Color/fingercoral0396_geo.ptx",
-        "textures/isCoral/Color/fingercoral0397_geo.ptx",
-        "textures/isCoral/Color/fingercoral0398_geo.ptx",
-        "textures/isCoral/Color/fingercoral0399_geo.ptx",
-        "textures/isCoral/Color/fingercoral0400_geo.ptx",
-        "textures/isCoral/Color/fingercoral0401_geo.ptx",
-        "textures/isCoral/Color/fingercoral0402_geo.ptx",
-        "textures/isCoral/Color/fingercoral0403_geo.ptx",
-        "textures/isCoral/Color/fingercoral0404_geo.ptx",
-        "textures/isCoral/Color/fingercoral0405_geo.ptx",
-        "textures/isCoral/Color/fingercoral0406_geo.ptx",
-        "textures/isCoral/Color/fingercoral0407_geo.ptx",
-        "textures/isCoral/Color/fingercoral0408_geo.ptx",
-        "textures/isCoral/Color/fingercoral0409_geo.ptx",
-        "textures/isCoral/Color/fingercoral0410_geo.ptx",
-        "textures/isCoral/Color/fingercoral0411_geo.ptx",
-        "textures/isCoral/Color/fingercoral0412_geo.ptx",
-        "textures/isCoral/Color/fingercoral0413_geo.ptx",
-        "textures/isCoral/Color/fingercoral0414_geo.ptx",
-        "textures/isCoral/Color/fingercoral0415_geo.ptx",
-        "textures/isCoral/Color/fingercoral0416_geo.ptx",
-        "textures/isCoral/Color/fingercoral0417_geo.ptx",
-        "textures/isCoral/Color/fingercoral0418_geo.ptx",
-        "textures/isCoral/Color/fingercoral0419_geo.ptx",
-        "textures/isCoral/Color/fingercoral0420_geo.ptx",
-        "textures/isCoral/Color/fingercoral0421_geo.ptx",
-        "textures/isCoral/Color/fingercoral0422_geo.ptx",
-        "textures/isCoral/Color/fingercoral0423_geo.ptx",
-        "textures/isCoral/Color/fingercoral0424_geo.ptx",
-        "textures/isCoral/Color/fingercoral0425_geo.ptx",
-        "textures/isCoral/Color/fingercoral0426_geo.ptx",
-        "textures/isCoral/Color/fingercoral0427_geo.ptx",
-        "textures/isCoral/Color/fingercoral0428_geo.ptx",
-        "textures/isCoral/Color/fingercoral0429_geo.ptx",
-        "textures/isCoral/Color/fingercoral0430_geo.ptx",
-        "textures/isCoral/Color/fingercoral0431_geo.ptx",
-        "textures/isCoral/Color/fingercoral0432_geo.ptx",
-        "textures/isCoral/Color/fingercoral0433_geo.ptx",
-        "textures/isCoral/Color/fingercoral0434_geo.ptx",
-        "textures/isCoral/Color/fingercoral0435_geo.ptx",
-        "textures/isCoral/Color/fingercoral0436_geo.ptx",
-        "textures/isCoral/Color/fingercoral0437_geo.ptx",
-        "textures/isCoral/Color/fingercoral0438_geo.ptx",
-        "textures/isCoral/Color/fingercoral0439_geo.ptx",
-        "textures/isCoral/Color/fingercoral0440_geo.ptx",
-        "textures/isCoral/Color/fingercoral0441_geo.ptx",
-        "textures/isCoral/Color/fingercoral0442_geo.ptx",
-        "textures/isCoral/Color/fingercoral0443_geo.ptx",
-        "textures/isCoral/Color/fingercoral0444_geo.ptx",
-        "textures/isCoral/Color/fingercoral0445_geo.ptx",
-        "textures/isCoral/Color/fingercoral0446_geo.ptx",
-        "textures/isCoral/Color/fingercoral0447_geo.ptx",
-        "textures/isCoral/Color/fingercoral0448_geo.ptx",
-        "textures/isCoral/Color/fingercoral0449_geo.ptx",
-        "textures/isCoral/Color/fingercoral0450_geo.ptx",
-        "textures/isCoral/Color/fingercoral0451_geo.ptx",
-        "textures/isCoral/Color/fingercoral0452_geo.ptx",
-        "textures/isCoral/Color/fingercoral0453_geo.ptx",
-        "textures/isCoral/Color/fingercoral0454_geo.ptx",
-        "textures/isCoral/Color/fingercoral0455_geo.ptx",
-        "textures/isCoral/Color/fingercoral0456_geo.ptx",
-        "textures/isCoral/Color/fingercoral0457_geo.ptx",
-        "textures/isCoral/Color/fingercoral0458_geo.ptx",
-        "textures/isCoral/Color/fingercoral0459_geo.ptx",
-        "textures/isCoral/Color/fingercoral0460_geo.ptx",
-        "textures/isCoral/Color/fingercoral0461_geo.ptx",
-        "textures/isCoral/Color/fingercoral0462_geo.ptx",
-        "textures/isCoral/Color/fingercoral0463_geo.ptx",
-        "textures/isCoral/Color/fingercoral0464_geo.ptx",
-        "textures/isCoral/Color/fingercoral0465_geo.ptx",
-        "textures/isCoral/Color/fingercoral0466_geo.ptx",
-        "textures/isCoral/Color/fingercoral0467_geo.ptx",
-        "textures/isCoral/Color/fingercoral0468_geo.ptx",
-        "textures/isCoral/Color/fingercoral0469_geo.ptx",
-        "textures/isCoral/Color/fingercoral0470_geo.ptx",
-        "textures/isCoral/Color/fingercoral0471_geo.ptx",
-        "textures/isCoral/Color/fingercoral0472_geo.ptx",
-        "textures/isCoral/Color/fingercoral0473_geo.ptx",
-        "textures/isCoral/Color/fingercoral0474_geo.ptx",
-        "textures/isCoral/Color/fingercoral0475_geo.ptx",
-        "textures/isCoral/Color/fingercoral0476_geo.ptx",
-        "textures/isCoral/Color/fingercoral0477_geo.ptx",
-        "textures/isCoral/Color/fingercoral0478_geo.ptx",
-        "textures/isCoral/Color/fingercoral0479_geo.ptx",
-        "textures/isCoral/Color/fingercoral0480_geo.ptx",
-        "textures/isCoral/Color/fingercoral0481_geo.ptx",
-        "textures/isCoral/Color/fingercoral0482_geo.ptx",
-        "textures/isCoral/Color/fingercoral0483_geo.ptx",
-        "textures/isCoral/Color/fingercoral0484_geo.ptx",
-        "textures/isCoral/Color/fingercoral0485_geo.ptx",
-        "textures/isCoral/Color/fingercoral0486_geo.ptx",
-        "textures/isCoral/Color/fingercoral0487_geo.ptx",
-        "textures/isCoral/Color/fingercoral0488_geo.ptx",
-        "textures/isCoral/Color/fingercoral0489_geo.ptx",
-        "textures/isCoral/Color/fingercoral0490_geo.ptx",
-        "textures/isCoral/Color/fingercoral0491_geo.ptx",
-        "textures/isCoral/Color/fingercoral0492_geo.ptx",
-        "textures/isCoral/Color/fingercoral0493_geo.ptx",
-        "textures/isCoral/Color/fingercoral0494_geo.ptx",
-        "textures/isCoral/Color/fingercoral0495_geo.ptx",
-        "textures/isCoral/Color/fingercoral0496_geo.ptx",
-        "textures/isCoral/Color/fingercoral0497_geo.ptx",
-        "textures/isCoral/Color/fingercoral0498_geo.ptx",
-        "textures/isCoral/Color/fingercoral0499_geo.ptx",
-        "textures/isCoral/Color/fingercoral0500_geo.ptx",
-        "textures/isCoral/Color/fingercoral0501_geo.ptx",
-        "textures/isCoral/Color/fingercoral0502_geo.ptx",
-        "textures/isCoral/Color/fingercoral0503_geo.ptx",
-        "textures/isCoral/Color/fingercoral0504_geo.ptx",
-        "textures/isCoral/Color/fingercoral0505_geo.ptx",
-        "textures/isCoral/Color/fingercoral0506_geo.ptx",
-        "textures/isCoral/Color/fingercoral0507_geo.ptx",
-        "textures/isCoral/Color/fingercoral0508_geo.ptx",
-        "textures/isCoral/Color/fingercoral0509_geo.ptx",
-        "textures/isCoral/Color/fingercoral0510_geo.ptx",
-        "textures/isCoral/Color/fingercoral0511_geo.ptx",
-        "textures/isCoral/Color/fingercoral0512_geo.ptx",
-        "textures/isCoral/Color/fingercoral0513_geo.ptx",
-        "textures/isCoral/Color/fingercoral0514_geo.ptx",
-        "textures/isCoral/Color/fingercoral0515_geo.ptx",
-        "textures/isCoral/Color/fingercoral0516_geo.ptx",
-        "textures/isCoral/Color/fingercoral0517_geo.ptx",
-        "textures/isCoral/Color/fingercoral0518_geo.ptx",
-        "textures/isCoral/Color/fingercoral0519_geo.ptx",
-        "textures/isCoral/Color/fingercoral0520_geo.ptx",
-        "textures/isCoral/Color/fingercoral0521_geo.ptx",
-        "textures/isCoral/Color/fingercoral0522_geo.ptx",
-        "textures/isCoral/Color/fingercoral0523_geo.ptx",
-        "textures/isCoral/Color/fingercoral0524_geo.ptx",
-        "textures/isCoral/Color/fingercoral0525_geo.ptx",
-        "textures/isCoral/Color/fingercoral0526_geo.ptx",
-        "textures/isCoral/Color/fingercoral0527_geo.ptx",
-        "textures/isCoral/Color/fingercoral0528_geo.ptx",
-        "textures/isCoral/Color/fingercoral0529_geo.ptx",
-        "textures/isCoral/Color/fingercoral0530_geo.ptx",
-        "textures/isCoral/Color/fingercoral0531_geo.ptx",
-        "textures/isCoral/Color/fingercoral0532_geo.ptx",
-        "textures/isCoral/Color/fingercoral0533_geo.ptx",
-        "textures/isCoral/Color/fingercoral0534_geo.ptx",
-        "textures/isCoral/Color/fingercoral0535_geo.ptx",
-        "textures/isCoral/Color/fingercoral0536_geo.ptx",
-        "textures/isCoral/Color/fingercoral0537_geo.ptx",
-        "textures/isCoral/Color/fingercoral0538_geo.ptx",
-        "textures/isCoral/Color/fingercoral0539_geo.ptx",
-        "textures/isCoral/Color/fingercoral0540_geo.ptx",
-        "textures/isCoral/Color/fingercoral0541_geo.ptx",
-        "textures/isCoral/Color/fingercoral0542_geo.ptx",
-        "textures/isCoral/Color/fingercoral0543_geo.ptx",
-        "textures/isCoral/Color/fingercoral0544_geo.ptx",
-        "textures/isCoral/Color/fingercoral0545_geo.ptx",
-        "textures/isCoral/Color/fingercoral0546_geo.ptx",
-        "textures/isCoral/Color/fingercoral0547_geo.ptx",
-        "textures/isCoral/Color/fingercoral0548_geo.ptx",
-        "textures/isCoral/Color/fingercoral0549_geo.ptx",
-        "textures/isCoral/Color/fingercoral0550_geo.ptx",
-        "textures/isCoral/Color/fingercoral0551_geo.ptx",
-        "textures/isCoral/Color/fingercoral0552_geo.ptx",
-        "textures/isCoral/Color/fingercoral0553_geo.ptx",
-        "textures/isCoral/Color/fingercoral0554_geo.ptx",
-        "textures/isCoral/Color/fingercoral0555_geo.ptx",
-        "textures/isCoral/Color/fingercoral0556_geo.ptx",
-        "textures/isCoral/Color/fingercoral0557_geo.ptx",
-        "textures/isCoral/Color/fingercoral0558_geo.ptx",
-        "textures/isCoral/Color/fingercoral0559_geo.ptx",
-        "textures/isCoral/Color/fingercoral0560_geo.ptx",
-        "textures/isCoral/Color/fingercoral0561_geo.ptx",
-        "textures/isCoral/Color/fingercoral0562_geo.ptx",
-        "textures/isCoral/Color/fingercoral0563_geo.ptx",
-        "textures/isCoral/Color/fingercoral0564_geo.ptx",
-        "textures/isCoral/Color/fingercoral0565_geo.ptx",
-        "textures/isCoral/Color/fingercoral0566_geo.ptx",
-        "textures/isCoral/Color/fingercoral0567_geo.ptx",
-        "textures/isCoral/Color/fingercoral0568_geo.ptx",
-        "textures/isCoral/Color/fingercoral0569_geo.ptx",
-        "textures/isCoral/Color/fingercoral0570_geo.ptx",
-        "textures/isCoral/Color/fingercoral0571_geo.ptx",
-        "textures/isCoral/Color/fingercoral0572_geo.ptx",
-        "textures/isCoral/Color/fingercoral0573_geo.ptx",
-        "textures/isCoral/Color/fingercoral0574_geo.ptx",
-        "textures/isCoral/Color/fingercoral0575_geo.ptx",
-        "textures/isCoral/Color/fingercoral0576_geo.ptx",
-        "textures/isCoral/Color/fingercoral0577_geo.ptx",
-        "textures/isCoral/Color/fingercoral0578_geo.ptx",
-        "textures/isCoral/Color/fingercoral0579_geo.ptx",
-        "textures/isCoral/Color/fingercoral0580_geo.ptx",
-        "textures/isCoral/Color/fingercoral0581_geo.ptx",
-        "textures/isCoral/Color/fingercoral0582_geo.ptx",
-        "textures/isCoral/Color/fingercoral0583_geo.ptx",
-        "textures/isCoral/Color/fingercoral0584_geo.ptx",
-        "textures/isCoral/Color/fingercoral0585_geo.ptx",
-        "textures/isCoral/Color/fingercoral0586_geo.ptx",
-        "textures/isCoral/Color/fingercoral0587_geo.ptx",
-        "textures/isCoral/Color/fingercoral0588_geo.ptx",
-        "textures/isCoral/Color/fingercoral0589_geo.ptx",
-        "textures/isCoral/Color/fingercoral0590_geo.ptx",
-        "textures/isCoral/Color/fingercoral0591_geo.ptx",
-        "textures/isCoral/Color/fingercoral0592_geo.ptx",
-        "textures/isCoral/Color/fingercoral0593_geo.ptx",
-        "textures/isCoral/Color/fingercoral0594_geo.ptx",
-        "textures/isCoral/Color/fingercoral0595_geo.ptx",
-        "textures/isCoral/Color/fingercoral0596_geo.ptx",
-        "textures/isCoral/Color/fingercoral0597_geo.ptx",
-        "textures/isCoral/Color/fingercoral0598_geo.ptx",
-        "textures/isCoral/Color/fingercoral0599_geo.ptx",
-        "textures/isCoral/Color/fingercoral0600_geo.ptx",
-        "textures/isCoral/Color/fingercoral0601_geo.ptx",
-        "textures/isCoral/Color/fingercoral0602_geo.ptx",
-        "textures/isCoral/Color/fingercoral0603_geo.ptx",
-        "textures/isCoral/Color/fingercoral0604_geo.ptx",
-        "textures/isCoral/Color/fingercoral0605_geo.ptx",
-        "textures/isCoral/Color/fingercoral0606_geo.ptx",
-        "textures/isCoral/Color/fingercoral0607_geo.ptx",
-        "textures/isCoral/Color/fingercoral0608_geo.ptx",
-        "textures/isCoral/Color/fingercoral0609_geo.ptx",
-        "textures/isCoral/Color/fingercoral0610_geo.ptx",
-        "textures/isCoral/Color/fingercoral0611_geo.ptx",
-        "textures/isCoral/Color/fingercoral0612_geo.ptx",
-        "textures/isCoral/Color/fingercoral0613_geo.ptx",
-        "textures/isCoral/Color/fingercoral0614_geo.ptx",
-        "textures/isCoral/Color/fingercoral0615_geo.ptx",
-        "textures/isCoral/Color/fingercoral0616_geo.ptx",
-        "textures/isCoral/Color/fingercoral0617_geo.ptx",
-        "textures/isCoral/Color/fingercoral0618_geo.ptx",
-        "textures/isCoral/Color/fingercoral0619_geo.ptx",
-        "textures/isCoral/Color/fingercoral0620_geo.ptx",
-        "textures/isCoral/Color/fingercoral0621_geo.ptx",
-        "textures/isCoral/Color/fingercoral0622_geo.ptx",
-        "textures/isCoral/Color/fingercoral0623_geo.ptx",
-        "textures/isCoral/Color/fingercoral0624_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0002_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0004_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0005_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0006_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0007_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0008_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0009_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0010_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0011_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0012_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0013_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0014_geo.ptx",
-        "textures/isCoral/Color/knobbybrain0015_geo.ptx",
-        "textures/isCoral/Color/ricecoral0001_geo.ptx",
-        "textures/isCoral/Color/ricecoral0002_geo.ptx",
-        "textures/isCoral/Color/ricecoral0003_geo.ptx",
-        "textures/isCoral/Color/ricecoral0004_geo.ptx",
-        "textures/isCoral/Color/ricecoral0005_geo.ptx",
-        "textures/isCoral/Color/ricecoral0006_geo.ptx",
-        "textures/isCoral/Color/ricecoral0007_geo.ptx",
-        "textures/isCoral/Color/ricecoral0008_geo.ptx",
-        "textures/isCoral/Color/ricecoral0009_geo.ptx",
-        "textures/isCoral/Color/ricecoral0010_geo.ptx",
-        "textures/isCoral/Color/ricecoral0011_geo.ptx",
-        "textures/isCoral/Color/ricecoral0012_geo.ptx",
-        "textures/isCoral/Color/ricecoral0013_geo.ptx",
-        "textures/isCoral/Color/ricecoral0014_geo.ptx",
-        "textures/isCoral/Color/ricecoral0015_geo.ptx",
-        "textures/isCoral/Color/ricecoral0016_geo.ptx",
-        "textures/isCoral/Color/seaweed0001_geo.ptx",
-        "textures/isCoral/Color/seaweed0002_geo.ptx",
-        "textures/isCoral/Color/seaweed0003_geo.ptx",
-        "textures/isCoral/Color/seaweed0004_geo.ptx",
-        "textures/isCoral/Color/seaweed0005_geo.ptx",
-        "textures/isCoral/Color/seaweed0006_geo.ptx",
-        "textures/isCoral/Color/seaweed0007_geo.ptx",
-        "textures/isCoral/Color/seaweed0008_geo.ptx",
-        "textures/isCoral/Color/seaweed0009_geo.ptx",
-        "textures/isCoral/Color/seaweed0010_geo.ptx",
-        "textures/isCoral/Color/seaweed0011_geo.ptx",
-        "textures/isCoral/Color/seaweed0012_geo.ptx",
-        "textures/isCoral/Color/seaweed0013_geo.ptx",
-        "textures/isCoral/Color/seaweed0014_geo.ptx",
-        "textures/isCoral/Color/seaweed0015_geo.ptx",
-        "textures/isCoral/Color/seaweed0016_geo.ptx",
-        "textures/isCoral/Color/seaweed0017_geo.ptx",
-        "textures/isCoral/Color/seaweed0018_geo.ptx",
-        "textures/isCoral/Color/seaweed0019_geo.ptx",
-        "textures/isCoral/Color/seaweed0020_geo.ptx",
-        "textures/isCoral/Color/seaweed0021_geo.ptx",
-        "textures/isCoral/Color/seaweed0022_geo.ptx",
-        "textures/isCoral/Color/seaweed0023_geo.ptx",
-        "textures/isCoral/Color/seaweed0024_geo.ptx",
-        "textures/isCoral/Color/seaweed0025_geo.ptx",
-        "textures/isCoral/Color/seaweed0026_geo.ptx",
-        "textures/isCoral/Color/seaweed0027_geo.ptx",
-        "textures/isCoral/Color/seaweed0028_geo.ptx",
-        "textures/isCoral/Color/seaweed0029_geo.ptx",
-        "textures/isCoral/Color/seaweed0030_geo.ptx",
-        "textures/isCoral/Color/seaweed0031_geo.ptx",
-        "textures/isCoral/Color/seaweed0032_geo.ptx",
-        "textures/isCoral/Color/seaweed0033_geo.ptx",
-        "textures/isCoral/Color/seaweed0034_geo.ptx",
-        "textures/isCoral/Color/seaweed0035_geo.ptx",
-        "textures/isCoral/Color/seaweed0036_geo.ptx",
-        "textures/isCoral/Color/seaweed0037_geo.ptx",
-        "textures/isCoral/Color/seaweed0038_geo.ptx",
-        "textures/isCoral/Color/seaweed0039_geo.ptx",
-        "textures/isCoral/Color/seaweed0040_geo.ptx",
-        "textures/isCoral/Color/seaweed0041_geo.ptx",
-        "textures/isCoral/Color/seaweed0042_geo.ptx",
-        "textures/isCoral/Color/seaweed0043_geo.ptx",
-        "textures/isCoral/Color/seaweed0044_geo.ptx",
-        "textures/isCoral/Color/seaweed0045_geo.ptx",
-        "textures/isCoral/Color/seaweed0046_geo.ptx",
-        "textures/isCoral/Color/seaweed0047_geo.ptx",
-        "textures/isCoral/Color/seaweed0048_geo.ptx",
-        "textures/isCoral/Color/seaweed0049_geo.ptx",
-        "textures/isCoral/Color/seaweed0050_geo.ptx",
-        "textures/isCoral/Color/seaweed0051_geo.ptx",
-        "textures/isCoral/Color/seaweed0052_geo.ptx",
-        "textures/isCoral/Color/seaweed0053_geo.ptx",
-        "textures/isCoral/Color/seaweed0054_geo.ptx",
-        "textures/isCoral/Color/seaweed0055_geo.ptx",
-        "textures/isCoral/Color/seaweed0056_geo.ptx",
-        "textures/isCoral/Color/seaweed0057_geo.ptx",
-        "textures/isCoral/Color/seaweed0058_geo.ptx",
-        "textures/isCoral/Color/seaweed0059_geo.ptx",
-        "textures/isCoral/Color/seaweed0060_geo.ptx",
-        "textures/isCoral/Color/seaweed0061_geo.ptx",
-        "textures/isCoral/Color/seaweed0062_geo.ptx",
-        "textures/isCoral/Color/seaweed0063_geo.ptx",
-        "textures/isCoral/Color/seaweed0064_geo.ptx",
-        "textures/isCoral/Color/seaweed0065_geo.ptx",
-        "textures/isCoral/Color/seaweed0066_geo.ptx",
-        "textures/isCoral/Color/seaweed0067_geo.ptx",
-        "textures/isCoral/Color/seaweed0068_geo.ptx",
-        "textures/isCoral/Color/seaweed0069_geo.ptx",
-        "textures/isCoral/Color/seaweed0070_geo.ptx",
-        "textures/isCoral/Color/seaweed0071_geo.ptx",
-        "textures/isCoral/Color/seaweed0072_geo.ptx",
-        "textures/isCoral/Color/seaweed0073_geo.ptx",
-        "textures/isCoral/Color/seaweed0074_geo.ptx",
-        "textures/isCoral/Color/seaweed0075_geo.ptx",
-        "textures/isCoral/Color/seaweed0076_geo.ptx",
-        "textures/isCoral/Color/seaweed0077_geo.ptx",
-        "textures/isCoral/Color/seaweed0078_geo.ptx",
-        "textures/isCoral/Color/seaweed0079_geo.ptx",
-        "textures/isCoral/Color/seaweed0080_geo.ptx",
-        "textures/isCoral/Color/seaweed0081_geo.ptx",
-        "textures/isCoral/Color/seaweed0082_geo.ptx",
-        "textures/isCoral/Color/seaweed0083_geo.ptx",
-        "textures/isCoral/Color/seaweed0084_geo.ptx",
-        "textures/isCoral/Color/seaweed0085_geo.ptx",
-        "textures/isCoral/Color/seaweed0086_geo.ptx",
-        "textures/isCoral/Color/seaweed0087_geo.ptx",
-        "textures/isCoral/Color/seaweed0088_geo.ptx",
-        "textures/isCoral/Color/seaweed0089_geo.ptx",
-        "textures/isCoral/Color/seaweed0090_geo.ptx",
-        "textures/isCoral/Color/seaweed0091_geo.ptx",
-        "textures/isCoral/Color/seaweed0092_geo.ptx",
-        "textures/isCoral/Color/seaweed0093_geo.ptx",
-        "textures/isCoral/Color/seaweed0094_geo.ptx",
-        "textures/isCoral/Color/seaweed0095_geo.ptx",
-        "textures/isCoral/Color/seaweed0096_geo.ptx",
-        "textures/isCoral/Color/seaweed0097_geo.ptx",
-        "textures/isCoral/Color/seaweed0098_geo.ptx",
-        "textures/isCoral/Color/seaweed0099_geo.ptx",
-        "textures/isCoral/Color/seaweed0100_geo.ptx",
-        "textures/isCoral/Color/seaweed0101_geo.ptx",
-        "textures/isCoral/Color/seaweed0102_geo.ptx",
-        "textures/isCoral/Color/seaweed0103_geo.ptx",
-        "textures/isCoral/Color/seaweed0104_geo.ptx",
-        "textures/isCoral/Color/seaweed0105_geo.ptx",
-        "textures/isCoral/Color/seaweed0106_geo.ptx",
-        "textures/isCoral/Color/seaweed0107_geo.ptx",
-        "textures/isCoral/Color/seaweed0108_geo.ptx",
-        "textures/isCoral/Color/seaweed0109_geo.ptx",
-        "textures/isCoral/Color/seaweed0110_geo.ptx",
-        "textures/isCoral/Color/seaweed0111_geo.ptx",
-        "textures/isCoral/Color/seaweed0112_geo.ptx",
-        "textures/isCoral/Color/seaweed0113_geo.ptx",
-        "textures/isCoral/Color/seaweed0114_geo.ptx",
-        "textures/isCoral/Color/seaweed0115_geo.ptx",
-        "textures/isCoral/Color/seaweed0116_geo.ptx",
-        "textures/isCoral/Color/seaweed0117_geo.ptx",
-        "textures/isCoral/Color/seaweed0118_geo.ptx",
-        "textures/isCoral/Color/seaweed0119_geo.ptx",
-        "textures/isCoral/Color/seaweed0120_geo.ptx",
-        "textures/isCoral/Color/seaweed0121_geo.ptx",
-        "textures/isCoral/Color/seaweed0122_geo.ptx",
-        "textures/isCoral/Color/seaweed0123_geo.ptx",
-        "textures/isCoral/Color/seaweed0124_geo.ptx",
-        "textures/isCoral/Color/seaweed0125_geo.ptx",
-        "textures/isCoral/Color/seaweed0126_geo.ptx",
-        "textures/isCoral/Color/seaweed0127_geo.ptx",
-        "textures/isCoral/Color/seaweed0128_geo.ptx",
-        "textures/isCoral/Color/seaweed0129_geo.ptx",
-        "textures/isCoral/Color/seaweed0130_geo.ptx",
-        "textures/isCoral/Color/seaweed0131_geo.ptx",
-        "textures/isCoral/Color/seaweed0132_geo.ptx",
-        "textures/isCoral/Color/seaweed0133_geo.ptx",
-        "textures/isCoral/Color/seaweed0134_geo.ptx",
-        "textures/isCoral/Color/seaweed0135_geo.ptx",
-        "textures/isCoral/Color/seaweed0136_geo.ptx",
-        "textures/isCoral/Color/seaweed0137_geo.ptx",
-        "textures/isCoral/Color/seaweed0138_geo.ptx",
-        "textures/isCoral/Color/seaweed0139_geo.ptx",
-        "textures/isCoral/Color/seaweed0140_geo.ptx",
-        "textures/isCoral/Color/seaweed0141_geo.ptx",
-        "textures/isCoral/Color/seaweed0142_geo.ptx",
-        "textures/isCoral/Color/seaweed0143_geo.ptx",
-        "textures/isCoral/Color/seaweed0144_geo.ptx",
-        "textures/isCoral/Color/seaweed0145_geo.ptx",
-        "textures/isCoral/Color/seaweed0146_geo.ptx",
-        "textures/isCoral/Color/seaweed0147_geo.ptx",
-        "textures/isCoral/Color/seaweed0148_geo.ptx",
-        "textures/isCoral/Color/seaweed0149_geo.ptx",
-        "textures/isCoral/Color/seaweed0150_geo.ptx",
-        "textures/isCoral/Color/seaweed0151_geo.ptx",
-        "textures/isCoral/Color/seaweed0152_geo.ptx",
-        "textures/isCoral/Color/seaweed0153_geo.ptx",
-        "textures/isCoral/Color/seaweed0154_geo.ptx",
-        "textures/isCoral/Color/seaweed0155_geo.ptx",
-        "textures/isCoral/Color/seaweed0156_geo.ptx",
-        "textures/isCoral/Color/seaweed0157_geo.ptx",
-        "textures/isCoral/Color/seaweed0158_geo.ptx",
-        "textures/isCoral/Color/seaweed0159_geo.ptx",
-        "textures/isCoral/Color/seaweed0160_geo.ptx",
-        "textures/isCoral/Color/seaweed0161_geo.ptx",
-        "textures/isCoral/Color/seaweed0162_geo.ptx",
-        "textures/isCoral/Color/seaweed0163_geo.ptx",
-        "textures/isCoral/Color/seaweed0164_geo.ptx",
-        "textures/isCoral/Color/seaweed0165_geo.ptx",
-        "textures/isCoral/Color/seaweed0166_geo.ptx",
-        "textures/isCoral/Color/seaweed0167_geo.ptx",
-        "textures/isCoral/Color/seaweed0168_geo.ptx",
-        "textures/isCoral/Color/seaweed0169_geo.ptx",
-        "textures/isCoral/Color/seaweed0170_geo.ptx",
-        "textures/isCoral/Color/seaweed0171_geo.ptx",
-        "textures/isCoral/Color/seaweed0172_geo.ptx",
-        "textures/isCoral/Color/seaweed0173_geo.ptx",
-        "textures/isCoral/Color/seaweed0174_geo.ptx",
-        "textures/isCoral/Color/seaweed0175_geo.ptx",
-        "textures/isCoral/Color/seaweed0176_geo.ptx",
-        "textures/isCoral/Color/seaweed0177_geo.ptx",
-        "textures/isCoral/Color/seaweed0178_geo.ptx",
-        "textures/isCoral/Color/seaweed0179_geo.ptx",
-        "textures/isCoral/Color/seaweed0180_geo.ptx",
-        "textures/isCoral/Color/seaweed0181_geo.ptx",
-        "textures/isCoral/Color/seaweed0182_geo.ptx",
-        "textures/isCoral/Color/seaweed0183_geo.ptx",
-        "textures/isCoral/Color/seaweed0184_geo.ptx",
-        "textures/isCoral/Color/seaweed0185_geo.ptx",
-        "textures/isCoral/Color/seaweed0186_geo.ptx",
-        "textures/isCoral/Color/seaweed0187_geo.ptx",
-        "textures/isCoral/Color/seaweed0188_geo.ptx",
-        "textures/isCoral/Color/seaweed0189_geo.ptx",
-        "textures/isCoral/Color/seaweed0190_geo.ptx",
-        "textures/isCoral/Color/seaweed0191_geo.ptx",
-        "textures/isCoral/Color/seaweed0192_geo.ptx",
-        "textures/isCoral/Color/seaweed0193_geo.ptx",
-        "textures/isCoral/Color/seaweed0194_geo.ptx",
-        "textures/isCoral/Color/seaweed0195_geo.ptx",
-        "textures/isCoral/Color/seaweed0196_geo.ptx",
-        "textures/isCoral/Color/seaweed0197_geo.ptx",
-        "textures/isCoral/Color/seaweed0198_geo.ptx",
-        "textures/isCoral/Color/seaweed0199_geo.ptx",
-        "textures/isCoral/Color/seaweed0200_geo.ptx",
-        "textures/isCoral/Color/seaweed0201_geo.ptx",
-        "textures/isCoral/Color/seaweed0202_geo.ptx",
-        "textures/isCoral/Color/seaweed0203_geo.ptx",
-        "textures/isCoral/Color/seaweed0204_geo.ptx",
-        "textures/isCoral/Color/seaweed0205_geo.ptx",
-        "textures/isCoral/Color/seaweed0206_geo.ptx",
-        "textures/isCoral/Color/seaweed0207_geo.ptx",
-        "textures/isCoral/Color/seaweed0208_geo.ptx",
-        "textures/isCoral/Color/seaweed0209_geo.ptx",
-        "textures/isCoral/Color/seaweed0210_geo.ptx",
-        "textures/isCoral/Color/seaweed0211_geo.ptx",
-        "textures/isCoral/Color/seaweed0212_geo.ptx",
-        "textures/isCoral/Color/seaweed0213_geo.ptx",
-        "textures/isCoral/Color/seaweed0214_geo.ptx",
-        "textures/isCoral/Color/seaweed0215_geo.ptx",
-        "textures/isCoral/Color/seaweed0216_geo.ptx",
-        "textures/isCoral/Color/seaweed0217_geo.ptx",
-        "textures/isCoral/Color/seaweed0218_geo.ptx",
-        "textures/isCoral/Color/seaweed0219_geo.ptx",
-        "textures/isCoral/Color/seaweed0220_geo.ptx",
-        "textures/isCoral/Color/seaweed0221_geo.ptx",
-        "textures/isCoral/Color/seaweed0222_geo.ptx",
-        "textures/isCoral/Color/seaweed0223_geo.ptx",
-        "textures/isCoral/Color/seaweed0224_geo.ptx",
-        "textures/isCoral/Color/seaweed0225_geo.ptx",
-        "textures/isCoral/Color/seaweed0226_geo.ptx",
-        "textures/isCoral/Color/seaweed0227_geo.ptx",
-        "textures/isCoral/Color/seaweed0228_geo.ptx",
-        "textures/isCoral/Color/seaweed0229_geo.ptx",
-        "textures/isCoral/Color/seaweed0230_geo.ptx",
-        "textures/isCoral/Color/seaweed0231_geo.ptx",
-        "textures/isCoral/Color/seaweed0232_geo.ptx",
-        "textures/isCoral/Color/seaweed0233_geo.ptx",
-        "textures/isCoral/Color/seaweed0234_geo.ptx",
-        "textures/isCoral/Color/seaweed0235_geo.ptx",
-        "textures/isCoral/Color/seaweed0236_geo.ptx",
-        "textures/isCoral/Color/seaweed0237_geo.ptx",
-        "textures/isCoral/Color/seaweed0238_geo.ptx",
-        "textures/isCoral/Color/seaweed0239_geo.ptx",
-        "textures/isCoral/Color/seaweed0240_geo.ptx",
-        "textures/isCoral/Color/seaweed0241_geo.ptx",
-        "textures/isCoral/Color/seaweed0242_geo.ptx",
-        "textures/isCoral/Color/seaweed0243_geo.ptx",
-        "textures/isCoral/Color/seaweed0244_geo.ptx",
-        "textures/isCoral/Color/seaweed0245_geo.ptx",
-        "textures/isCoral/Color/seaweed0246_geo.ptx",
-        "textures/isCoral/Color/seaweed0247_geo.ptx",
-        "textures/isCoral/Color/seaweed0248_geo.ptx",
-        "textures/isCoral/Color/seaweed0249_geo.ptx",
-        "textures/isCoral/Color/seaweed0250_geo.ptx",
-        "textures/isCoral/Color/seaweed0251_geo.ptx",
-        "textures/isCoral/Color/seaweed0252_geo.ptx",
-        "textures/isCoral/Color/seaweed0253_geo.ptx",
-        "textures/isCoral/Color/seaweed0254_geo.ptx",
-        "textures/isCoral/Color/seaweed0255_geo.ptx",
-        "textures/isCoral/Color/seaweed0256_geo.ptx",
-        "textures/isCoral/Color/seaweed0257_geo.ptx",
-        "textures/isCoral/Color/seaweed0258_geo.ptx",
-        "textures/isCoral/Color/seaweed0259_geo.ptx",
-        "textures/isCoral/Color/seaweed0260_geo.ptx",
-        "textures/isCoral/Color/seaweed0261_geo.ptx",
-        "textures/isCoral/Color/seaweed0262_geo.ptx",
-        "textures/isCoral/Color/seaweed0263_geo.ptx",
-        "textures/isCoral/Color/seaweed0264_geo.ptx",
-        "textures/isCoral/Color/seaweed0265_geo.ptx",
-        "textures/isCoral/Color/seaweed0266_geo.ptx",
-        "textures/isCoral/Color/seaweed0267_geo.ptx",
-        "textures/isCoral/Color/seaweed0268_geo.ptx",
-        "textures/isCoral/Color/seaweed0269_geo.ptx",
-        "textures/isCoral/Color/seaweed0270_geo.ptx",
-        "textures/isCoral/Color/seaweed0271_geo.ptx",
-        "textures/isCoral/Color/seaweed0272_geo.ptx",
-        "textures/isCoral/Color/seaweed0273_geo.ptx",
-        "textures/isCoral/Color/seaweed0274_geo.ptx",
-        "textures/isCoral/Color/seaweed0275_geo.ptx",
-        "textures/isCoral/Color/seaweed0276_geo.ptx",
-        "textures/isCoral/Color/seaweed0277_geo.ptx",
-        "textures/isCoral/Color/seaweed0278_geo.ptx",
-        "textures/isCoral/Color/seaweed0279_geo.ptx",
-        "textures/isCoral/Color/seaweed0280_geo.ptx",
-        "textures/isCoral/Color/seaweed0281_geo.ptx",
-        "textures/isCoral/Color/seaweed0282_geo.ptx",
-        "textures/isCoral/Color/seaweed0283_geo.ptx",
-        "textures/isCoral/Color/seaweed0284_geo.ptx",
-        "textures/isCoral/Color/seaweed0285_geo.ptx",
-        "textures/isCoral/Color/seaweed0286_geo.ptx",
-        "textures/isCoral/Color/seaweed0287_geo.ptx",
-        "textures/isCoral/Color/seaweed0288_geo.ptx",
-        "textures/isCoral/Color/seaweed0289_geo.ptx",
-        "textures/isCoral/Color/seaweed0290_geo.ptx",
-        "textures/isCoral/Color/seaweed0291_geo.ptx",
-        "textures/isCoral/Color/seaweed0292_geo.ptx",
-        "textures/isCoral/Color/seaweed0293_geo.ptx",
-        "textures/isCoral/Color/seaweed0294_geo.ptx",
-        "textures/isCoral/Color/seaweed0295_geo.ptx",
-        "textures/isCoral/Color/seaweed0296_geo.ptx",
-        "textures/isCoral/Color/seaweed0297_geo.ptx",
-        "textures/isCoral/Color/seaweed0298_geo.ptx",
-        "textures/isCoral/Color/seaweed0299_geo.ptx",
-        "textures/isCoral/Color/seaweed0300_geo.ptx",
-        "textures/isCoral/Color/seaweed0301_geo.ptx",
-        "textures/isCoral/Color/seaweed0302_geo.ptx",
-        "textures/isCoral/Color/seaweed0303_geo.ptx",
-        "textures/isCoral/Color/seaweed0304_geo.ptx",
-        "textures/isCoral/Color/seaweed0305_geo.ptx",
-        "textures/isCoral/Color/seaweed0306_geo.ptx",
-        "textures/isCoral/Color/seaweed0307_geo.ptx",
-        "textures/isCoral/Color/seaweed0308_geo.ptx",
-        "textures/isCoral/Color/seaweed0309_geo.ptx",
-        "textures/isCoral/Color/seaweed0310_geo.ptx",
-        "textures/isCoral/Color/seaweed0311_geo.ptx",
-        "textures/isCoral/Color/seaweed0312_geo.ptx",
-        "textures/isCoral/Color/seaweed0313_geo.ptx",
-        "textures/isCoral/Color/seaweed0314_geo.ptx",
-        "textures/isCoral/Color/seaweed0315_geo.ptx",
-        "textures/isCoral/Color/seaweed0316_geo.ptx",
-        "textures/isCoral/Color/seaweed0317_geo.ptx",
-        "textures/isCoral/Color/seaweed0318_geo.ptx",
-        "textures/isCoral/Color/seaweed0319_geo.ptx",
-        "textures/isCoral/Color/seaweed0320_geo.ptx",
-        "textures/isCoral/Color/seaweed0321_geo.ptx",
-        "textures/isCoral/Color/seaweed0322_geo.ptx",
-        "textures/isCoral/Color/seaweed0323_geo.ptx",
-        "textures/isCoral/Color/seaweed0324_geo.ptx",
-        "textures/isCoral/Color/seaweed0325_geo.ptx",
-        "textures/isCoral/Color/starhornplate0001_geo.ptx",
-        "textures/isCoral/Color/starhornplate0002_geo.ptx",
-        "textures/isCoral/Color/starhornplate0003_geo.ptx",
-        "textures/isCoral/Color/starhornplate0004_geo.ptx",
-        "textures/isCoral/Color/starhornplate0005_geo.ptx",
-        "textures/isCoral/Color/starhornplate0006_geo.ptx",
-        "textures/isCoral/Color/starhornplate0007_geo.ptx",
-        "textures/isCoral/Color/starhornplate0008_geo.ptx",
-        "textures/isCoral/Color/starhornplate0009_geo.ptx",
-        "textures/isCoral/Color/starhornplate0010_geo.ptx",
-        "textures/isCoral/Color/starhornplate0011_geo.ptx",
-        "textures/isCoral/Color/starhornplate0012_geo.ptx",
-        "textures/isCoral/Color/starhornplate0013_geo.ptx",
-        "textures/isCoral/Color/starhornplate0014_geo.ptx",
-        "textures/isCoral/Color/starhornplate0015_geo.ptx",
-        "textures/isCoral/Color/starhornplate0016_geo.ptx",
-        "textures/isCoral/Color/starhornplate0017_geo.ptx",
-        "textures/isCoral/Color/starhornplate0018_geo.ptx",
-        "textures/isCoral/Color/starhornplate0019_geo.ptx",
-        "textures/isCoral/Color/starhornplate0020_geo.ptx",
-        "textures/isCoral/Color/starhornplate0021_geo.ptx",
-        "textures/isCoral/Color/starhornplate0022_geo.ptx",
-        "textures/isCoral/Color/starhornplate0023_geo.ptx",
-        "textures/isCoral/Color/starhornplate0024_geo.ptx",
-        "textures/isCoral/Color/starhornplate0025_geo.ptx",
-        "textures/isCoral/Color/starhornplate0026_geo.ptx",
-        "textures/isCoral/Color/starhornplate0027_geo.ptx",
-        "textures/isCoral/Color/starhornplate0028_geo.ptx",
-        "textures/isCoral/Color/starhornplate0029_geo.ptx",
-        "textures/isCoral/Color/starhornplate0030_geo.ptx",
-        "textures/isCoral/Color/starhornplate0031_geo.ptx",
-        "textures/isCoral/Color/starhornplate0032_geo.ptx",
-        "textures/isCoral/Color/starhornplate0033_geo.ptx",
-        "textures/isCoral/Color/starhornplate0034_geo.ptx",
-        "textures/isCoral/Color/starhornplate0035_geo.ptx",
-        "textures/isCoral/Color/starhornplate0036_geo.ptx",
-        "textures/isCoral/Color/starhornplate0037_geo.ptx",
-        "textures/isCoral/Color/starhornplate0038_geo.ptx",
-        "textures/isCoral/Color/starhornplate0039_geo.ptx",
-        "textures/isCoral/Color/starhornplate0040_geo.ptx",
-        "textures/isCoral/Color/starhornplate0041_geo.ptx",
-        "textures/isCoral/Color/starhornplate0042_geo.ptx",
-        "textures/isCoral/Color/starhornplate0043_geo.ptx",
-        "textures/isCoral/Color/starhornplate0044_geo.ptx",
-        "textures/isCoral/Color/starhornplate0045_geo.ptx",
-        "textures/isCoral/Color/starhornplate0046_geo.ptx",
-        "textures/isCoral/Color/starhornplate0047_geo.ptx",
-        "textures/isCoral/Color/starhornplate0048_geo.ptx",
-        "textures/isCoral/Color/starhornplate0049_geo.ptx",
-        "textures/isCoral/Color/starhornplate0050_geo.ptx",
-        "textures/isCoral/Color/starhornplate0051_geo.ptx",
-        "textures/isCoral/Color/starhornplate0052_geo.ptx",
-        "textures/isCoral/Color/starhornplate0053_geo.ptx",
-        "textures/isCoral/Color/starhornplate0054_geo.ptx",
-        "textures/isCoral/Color/starhornplate0055_geo.ptx",
-        "textures/isCoral/Color/starhornplate0056_geo.ptx",
-        "textures/isCoral/Color/starhornplate0057_geo.ptx",
-        "textures/isCoral/Color/starhornplate0058_geo.ptx",
-        "textures/isCoral/Color/starhornplate0059_geo.ptx",
-        "textures/isCoral/Color/starhornplate0060_geo.ptx",
-        "textures/isCoral/Color/starhornplate0061_geo.ptx",
-        "textures/isCoral/Color/starhornplate0062_geo.ptx",
-        "textures/isCoral/Color/starhornplate0063_geo.ptx",
-        "textures/isCoral/Color/starhornplate0064_geo.ptx",
-        "textures/isCoral/Color/starhornplate0065_geo.ptx",
-        "textures/isCoral/Color/starhornplate0066_geo.ptx",
-        "textures/isCoral/Color/starhornplate0067_geo.ptx",
-        "textures/isCoral/Color/starhornplate0068_geo.ptx",
-        "textures/isCoral/Color/starhornplate0069_geo.ptx",
-        "textures/isCoral/Color/starhornplate0070_geo.ptx",
-        "textures/isCoral/Color/starhornplate0071_geo.ptx",
-        "textures/isCoral/Color/starhornplate0072_geo.ptx",
-        "textures/isCoral/Color/starhornplate0073_geo.ptx",
-        "textures/isCoral/Color/starhornplate0074_geo.ptx",
-        "textures/isCoral/Color/starhornplate0075_geo.ptx",
-        "textures/isCoral/Color/starhornplate0076_geo.ptx",
-        "textures/isCoral/Color/starhornplate0077_geo.ptx",
-        "textures/isCoral/Color/starhornplate0078_geo.ptx",
-        "textures/isCoral/Color/starhornplate0079_geo.ptx",
-        "textures/isCoral/Color/starhornplate0080_geo.ptx",
-        "textures/isCoral/Color/starhornplate0081_geo.ptx",
-        "textures/isCoral/Color/starhornplate0082_geo.ptx",
-        "textures/isCoral/Color/starhornplate0083_geo.ptx",
-        "textures/isCoral/Color/starhornplate0084_geo.ptx",
-        "textures/isCoral/Color/starhornplate0085_geo.ptx",
-        "textures/isCoral/Color/starhornplate0086_geo.ptx",
-        "textures/isCoral/Color/starhornplate0087_geo.ptx",
-        "textures/isCoral/Color/starhornplate0088_geo.ptx",
-        "textures/isCoral/Color/starhornplate0089_geo.ptx",
-        "textures/isCoral/Color/starhornplate0090_geo.ptx",
-        "textures/isCoral/Color/starhornplate0091_geo.ptx",
-        "textures/isCoral/Color/starhornplate0092_geo.ptx",
-        "textures/isCoral/Color/starhornplate0093_geo.ptx",
-        "textures/isCoral/Color/starhornplate0094_geo.ptx",
-        "textures/isCoral/Color/starhornplate0095_geo.ptx",
-        "textures/isCoral/Color/starhornplate0096_geo.ptx",
-        "textures/isCoral/Color/starhornplate0097_geo.ptx",
-        "textures/isCoral/Color/starhornplate0098_geo.ptx",
-        "textures/isCoral/Color/starhornplate0099_geo.ptx",
-        "textures/isCoral/Color/starhornplate0100_geo.ptx",
-        "textures/isCoral/Color/starhornplate0101_geo.ptx",
-        "textures/isCoral/Color/starhornplate0102_geo.ptx",
-        "textures/isCoral/Color/starhornplate0103_geo.ptx",
-        "textures/isCoral/Color/starhornplate0104_geo.ptx",
-        "textures/isCoral/Color/starhornplate0105_geo.ptx",
-        "textures/isCoral/Color/starhornplate0106_geo.ptx",
-        "textures/isCoral/Color/starhornplate0107_geo.ptx",
-        "textures/isCoral/Color/starhornplate0108_geo.ptx",
-        "textures/isCoral/Color/starhornplate0109_geo.ptx",
-        "textures/isCoral/Color/starhornplate0110_geo.ptx",
-        "textures/isCoral/Color/starhornplate0111_geo.ptx",
-        "textures/isCoral/Color/starhornplate0112_geo.ptx",
-        "textures/isCoral/Color/starhornplate0113_geo.ptx",
-        "textures/isCoral/Color/starhornplate0114_geo.ptx",
-        "textures/isCoral/Color/starhornplate0115_geo.ptx",
-        "textures/isCoral/Color/starhornplate0116_geo.ptx",
-        "textures/isCoral/Color/starhornplate0117_geo.ptx",
-        "textures/isCoral/Color/starhornplate0118_geo.ptx",
-        "textures/isCoral/Color/starhornplate0119_geo.ptx",
-        "textures/isCoral/Color/starhornplate0120_geo.ptx",
-        "textures/isCoral/Color/starhornstem0001_geo.ptx",
-        "textures/isCoral/Color/starhornstem0002_geo.ptx",
-        "textures/isCoral/Color/starhornstem0003_geo.ptx",
-        "textures/isCoral/Color/starhornstem0004_geo.ptx",
-        "textures/isDunesA/Color/archiveLeaflet0123_geo.ptx",
-        "textures/isDunesA/Color/archiveLeaflet0124_geo.ptx",
-        "textures/isDunesA/Color/archiveLeaflet0125_geo.ptx",
-        "textures/isDunesA/Color/archiveLeaflet0126_geo.ptx",
-        "textures/isDunesA/Color/archiveLeaflet0127_geo.ptx",
-        "textures/isDunesA/Color/dirt0001_geo.ptx",
-        "textures/isDunesA/Color/dirt0002_geo.ptx",
-        "textures/isDunesA/Color/frond0001_geo.ptx",
-        "textures/isDunesA/Color/frond0002_geo.ptx",
-        "textures/isDunesA/Color/frond0003_geo.ptx",
-        "textures/isDunesA/Color/frond0004_geo.ptx",
-        "textures/isDunesA/Color/frond0005_geo.ptx",
-        "textures/isDunesA/Color/frond0006_geo.ptx",
-        "textures/isDunesA/Color/frond0007_geo.ptx",
-        "textures/isDunesA/Color/frond0008_geo.ptx",
-        "textures/isDunesA/Color/frond0009_geo.ptx",
-        "textures/isDunesA/Color/frond0010_geo.ptx",
-        "textures/isDunesA/Color/frond0011_geo.ptx",
-        "textures/isDunesA/Color/frond0012_geo.ptx",
-        "textures/isDunesA/Color/frond0013_geo.ptx",
-        "textures/isDunesA/Color/frond0014_geo.ptx",
-        "textures/isDunesA/Color/leaflet0094_geo.ptx",
-        "textures/isDunesA/Color/leaflet0095_geo.ptx",
-        "textures/isDunesA/Color/leaflet0096_geo.ptx",
-        "textures/isDunesA/Color/leaflet0097_geo.ptx",
-        "textures/isDunesA/Color/leaflet0098_geo.ptx",
-        "textures/isDunesA/Color/leaflet0099_geo.ptx",
-        "textures/isDunesA/Color/leaflet0100_geo.ptx",
-        "textures/isDunesA/Color/leaflet0101_geo.ptx",
-        "textures/isDunesA/Color/leaflet0102_geo.ptx",
-        "textures/isDunesA/Color/leaflet0103_geo.ptx",
-        "textures/isDunesA/Color/leaflet0104_geo.ptx",
-        "textures/isDunesA/Color/leaflet0105_geo.ptx",
-        "textures/isDunesA/Color/leaflet0106_geo.ptx",
-        "textures/isDunesA/Color/leaflet0107_geo.ptx",
-        "textures/isDunesA/Color/leaflet0108_geo.ptx",
-        "textures/isDunesA/Color/leaflet0109_geo.ptx",
-        "textures/isDunesA/Color/leaflet0110_geo.ptx",
-        "textures/isDunesA/Color/leaflet0111_geo.ptx",
-        "textures/isDunesA/Color/leaflet0112_geo.ptx",
-        "textures/isDunesA/Color/leaflet0113_geo.ptx",
-        "textures/isDunesA/Color/leaflet0114_geo.ptx",
-        "textures/isDunesA/Color/leaflet0115_geo.ptx",
-        "textures/isDunesA/Color/leaflet0116_geo.ptx",
-        "textures/isDunesA/Color/leaflet0117_geo.ptx",
-        "textures/isDunesA/Color/leaflet0118_geo.ptx",
-        "textures/isDunesA/Color/leaflet0119_geo.ptx",
-        "textures/isDunesA/Color/leaflet0120_geo.ptx",
-        "textures/isDunesA/Color/leaflet0121_geo.ptx",
-        "textures/isDunesA/Color/leaflet0122_geo.ptx",
-        "textures/isDunesA/Color/roots0001_geo.ptx",
-        "textures/isDunesA/Color/roots0002_geo.ptx",
-        "textures/isDunesA/Color/roots0003_geo.ptx",
-        "textures/isDunesA/Color/roots0004_geo.ptx",
-        "textures/isDunesA/Color/roots0005_geo.ptx",
-        "textures/isDunesA/Color/roots0006_geo.ptx",
-        "textures/isDunesA/Color/roots0007_geo.ptx",
-        "textures/isDunesA/Color/roots0008_geo.ptx",
-        "textures/isDunesA/Color/roots0009_geo.ptx",
-        "textures/isDunesA/Color/roots0010_geo.ptx",
-        "textures/isDunesA/Color/roots0011_geo.ptx",
-        "textures/isDunesA/Color/roots0012_geo.ptx",
-        "textures/isDunesA/Color/roots0013_geo.ptx",
-        "textures/isDunesA/Color/roots0014_geo.ptx",
-        "textures/isDunesA/Color/roots0015_geo.ptx",
-        "textures/isDunesA/Color/roots0016_geo.ptx",
-        "textures/isDunesA/Color/roots0017_geo.ptx",
-        "textures/isDunesA/Color/roots0018_geo.ptx",
-        "textures/isDunesA/Color/roots0019_geo.ptx",
-        "textures/isDunesA/Color/roots0020_geo.ptx",
-        "textures/isDunesA/Color/roots0021_geo.ptx",
-        "textures/isDunesA/Color/roots0022_geo.ptx",
-        "textures/isDunesA/Color/roots0023_geo.ptx",
-        "textures/isDunesA/Color/roots0024_geo.ptx",
-        "textures/isDunesA/Color/roots0025_geo.ptx",
-        "textures/isDunesA/Color/roots0026_geo.ptx",
-        "textures/isDunesA/Color/roots0027_geo.ptx",
-        "textures/isDunesA/Color/roots0028_geo.ptx",
-        "textures/isDunesA/Color/roots0029_geo.ptx",
-        "textures/isDunesA/Color/roots0030_geo.ptx",
-        "textures/isDunesA/Color/roots0031_geo.ptx",
-        "textures/isDunesA/Color/roots0032_geo.ptx",
-        "textures/isDunesA/Color/roots0033_geo.ptx",
-        "textures/isDunesA/Color/roots0034_geo.ptx",
-        "textures/isDunesA/Color/roots0035_geo.ptx",
-        "textures/isDunesA/Color/roots0036_geo.ptx",
-        "textures/isDunesA/Color/roots0037_geo.ptx",
-        "textures/isDunesA/Color/roots0038_geo.ptx",
-        "textures/isDunesA/Color/roots0039_geo.ptx",
-        "textures/isDunesA/Color/roots0040_geo.ptx",
-        "textures/isDunesA/Color/roots0041_geo.ptx",
-        "textures/isDunesA/Color/roots0042_geo.ptx",
-        "textures/isDunesA/Color/roots0043_geo.ptx",
-        "textures/isDunesA/Color/roots0044_geo.ptx",
-        "textures/isDunesA/Color/roots0045_geo.ptx",
-        "textures/isDunesA/Color/roots0046_geo.ptx",
-        "textures/isDunesA/Color/roots0047_geo.ptx",
-        "textures/isDunesA/Color/roots0048_geo.ptx",
-        "textures/isDunesA/Color/roots0049_geo.ptx",
-        "textures/isDunesA/Color/roots0050_geo.ptx",
-        "textures/isDunesA/Color/roots0051_geo.ptx",
-        "textures/isDunesA/Color/roots0052_geo.ptx",
-        "textures/isDunesA/Color/roots0053_geo.ptx",
-        "textures/isDunesA/Color/roots0054_geo.ptx",
-        "textures/isDunesA/Color/roots0055_geo.ptx",
-        "textures/isDunesA/Color/roots0056_geo.ptx",
-        "textures/isDunesA/Color/roots0057_geo.ptx",
-        "textures/isDunesA/Color/roots0058_geo.ptx",
-        "textures/isDunesA/Color/roots0059_geo.ptx",
-        "textures/isDunesA/Color/roots0060_geo.ptx",
-        "textures/isDunesA/Color/roots0061_geo.ptx",
-        "textures/isDunesA/Color/roots0062_geo.ptx",
-        "textures/isDunesA/Color/roots0063_geo.ptx",
-        "textures/isDunesA/Color/roots0064_geo.ptx",
-        "textures/isDunesA/Color/roots0065_geo.ptx",
-        "textures/isDunesA/Color/roots0066_geo.ptx",
-        "textures/isDunesA/Color/roots0067_geo.ptx",
-        "textures/isDunesA/Color/roots0068_geo.ptx",
-        "textures/isDunesA/Color/roots0069_geo.ptx",
-        "textures/isDunesA/Color/roots0070_geo.ptx",
-        "textures/isDunesA/Color/roots0071_geo.ptx",
-        "textures/isDunesA/Color/roots0072_geo.ptx",
-        "textures/isDunesA/Color/roots0073_geo.ptx",
-        "textures/isDunesA/Color/roots0074_geo.ptx",
-        "textures/isDunesA/Color/roots0075_geo.ptx",
-        "textures/isDunesA/Color/roots0076_geo.ptx",
-        "textures/isDunesA/Color/roots0077_geo.ptx",
-        "textures/isDunesA/Color/roots0078_geo.ptx",
-        "textures/isDunesA/Color/roots0079_geo.ptx",
-        "textures/isDunesA/Color/roots0080_geo.ptx",
-        "textures/isDunesA/Color/roots0081_geo.ptx",
-        "textures/isDunesA/Color/roots0082_geo.ptx",
-        "textures/isDunesA/Color/roots0083_geo.ptx",
-        "textures/isDunesA/Color/roots0084_geo.ptx",
-        "textures/isDunesA/Color/roots0085_geo.ptx",
-        "textures/isDunesA/Color/roots0086_geo.ptx",
-        "textures/isDunesA/Color/roots0087_geo.ptx",
-        "textures/isDunesA/Color/roots0088_geo.ptx",
-        "textures/isDunesA/Color/roots0089_geo.ptx",
-        "textures/isDunesA/Color/roots0090_geo.ptx",
-        "textures/isDunesA/Color/roots0091_geo.ptx",
-        "textures/isDunesA/Color/roots0092_geo.ptx",
-        "textures/isDunesA/Color/roots0093_geo.ptx",
-        "textures/isDunesA/Color/roots0094_geo.ptx",
-        "textures/isDunesA/Color/roots0095_geo.ptx",
-        "textures/isDunesA/Color/roots0096_geo.ptx",
-        "textures/isDunesA/Color/roots0097_geo.ptx",
-        "textures/isDunesA/Color/roots0098_geo.ptx",
-        "textures/isDunesA/Color/roots0099_geo.ptx",
-        "textures/isDunesA/Color/roots0100_geo.ptx",
-        "textures/isDunesA/Color/roots0101_geo.ptx",
-        "textures/isDunesA/Color/roots0102_geo.ptx",
-        "textures/isDunesA/Color/roots0103_geo.ptx",
-        "textures/isDunesA/Color/roots0104_geo.ptx",
-        "textures/isDunesA/Color/roots0105_geo.ptx",
-        "textures/isDunesA/Color/roots0106_geo.ptx",
-        "textures/isDunesA/Color/roots0107_geo.ptx",
-        "textures/isDunesA/Color/roots0108_geo.ptx",
-        "textures/isDunesA/Color/roots0109_geo.ptx",
-        "textures/isDunesA/Color/roots0110_geo.ptx",
-        "textures/isDunesA/Color/roots0111_geo.ptx",
-        "textures/isDunesA/Color/roots0112_geo.ptx",
-        "textures/isDunesA/Color/roots0113_geo.ptx",
-        "textures/isDunesA/Color/roots0114_geo.ptx",
-        "textures/isDunesA/Color/roots0115_geo.ptx",
-        "textures/isDunesA/Color/roots0116_geo.ptx",
-        "textures/isDunesA/Color/roots0117_geo.ptx",
-        "textures/isDunesA/Color/roots0118_geo.ptx",
-        "textures/isDunesA/Color/roots0119_geo.ptx",
-        "textures/isDunesA/Color/roots0120_geo.ptx",
-        "textures/isDunesA/Color/roots0121_geo.ptx",
-        "textures/isDunesA/Color/roots0122_geo.ptx",
-        "textures/isDunesA/Color/roots0123_geo.ptx",
-        "textures/isDunesA/Color/roots0124_geo.ptx",
-        "textures/isDunesA/Color/roots0125_geo.ptx",
-        "textures/isDunesA/Color/roots0126_geo.ptx",
-        "textures/isDunesA/Color/roots0127_geo.ptx",
-        "textures/isDunesA/Color/roots0128_geo.ptx",
-        "textures/isDunesA/Color/roots0129_geo.ptx",
-        "textures/isDunesA/Color/roots0130_geo.ptx",
-        "textures/isDunesA/Color/roots0131_geo.ptx",
-        "textures/isDunesA/Color/roots0132_geo.ptx",
-        "textures/isDunesA/Color/roots0133_geo.ptx",
-        "textures/isDunesA/Color/roots0134_geo.ptx",
-        "textures/isDunesA/Color/roots0135_geo.ptx",
-        "textures/isDunesA/Color/roots0136_geo.ptx",
-        "textures/isDunesA/Color/roots0137_geo.ptx",
-        "textures/isDunesA/Color/roots0138_geo.ptx",
-        "textures/isDunesA/Color/roots0139_geo.ptx",
-        "textures/isDunesA/Color/roots0140_geo.ptx",
-        "textures/isDunesA/Color/roots0141_geo.ptx",
-        "textures/isDunesA/Color/roots0142_geo.ptx",
-        "textures/isDunesA/Color/roots0143_geo.ptx",
-        "textures/isDunesA/Color/roots0144_geo.ptx",
-        "textures/isDunesA/Color/roots0145_geo.ptx",
-        "textures/isDunesA/Color/roots0146_geo.ptx",
-        "textures/isDunesA/Color/roots0147_geo.ptx",
-        "textures/isDunesA/Color/roots0148_geo.ptx",
-        "textures/isDunesA/Color/roots0149_geo.ptx",
-        "textures/isDunesA/Color/roots0150_geo.ptx",
-        "textures/isDunesA/Color/roots0151_geo.ptx",
-        "textures/isDunesA/Color/roots0152_geo.ptx",
-        "textures/isDunesA/Color/roots0153_geo.ptx",
-        "textures/isDunesA/Color/roots0154_geo.ptx",
-        "textures/isDunesA/Color/roots0155_geo.ptx",
-        "textures/isDunesA/Color/roots0156_geo.ptx",
-        "textures/isDunesA/Color/roots0157_geo.ptx",
-        "textures/isDunesA/Color/roots0158_geo.ptx",
-        "textures/isDunesA/Color/roots0159_geo.ptx",
-        "textures/isDunesA/Color/roots0160_geo.ptx",
-        "textures/isDunesA/Color/roots0161_geo.ptx",
-        "textures/isDunesA/Color/roots0162_geo.ptx",
-        "textures/isDunesA/Color/roots0163_geo.ptx",
-        "textures/isDunesA/Color/roots0164_geo.ptx",
-        "textures/isDunesA/Color/roots0165_geo.ptx",
-        "textures/isDunesA/Color/roots0166_geo.ptx",
-        "textures/isDunesA/Color/roots0167_geo.ptx",
-        "textures/isDunesA/Color/roots0168_geo.ptx",
-        "textures/isDunesA/Color/roots0169_geo.ptx",
-        "textures/isDunesA/Color/roots0170_geo.ptx",
-        "textures/isDunesA/Color/roots0171_geo.ptx",
-        "textures/isDunesA/Color/roots0172_geo.ptx",
-        "textures/isDunesA/Color/roots0173_geo.ptx",
-        "textures/isDunesA/Color/roots0174_geo.ptx",
-        "textures/isDunesA/Color/roots0175_geo.ptx",
-        "textures/isDunesA/Color/roots0176_geo.ptx",
-        "textures/isDunesA/Color/roots0177_geo.ptx",
-        "textures/isDunesA/Color/roots0178_geo.ptx",
-        "textures/isDunesA/Color/roots0179_geo.ptx",
-        "textures/isDunesA/Color/roots0180_geo.ptx",
-        "textures/isDunesA/Color/roots0181_geo.ptx",
-        "textures/isDunesA/Color/roots0182_geo.ptx",
-        "textures/isDunesA/Color/roots0183_geo.ptx",
-        "textures/isDunesA/Color/roots0184_geo.ptx",
-        "textures/isDunesA/Color/roots0185_geo.ptx",
-        "textures/isDunesA/Color/roots0186_geo.ptx",
-        "textures/isDunesA/Color/roots0187_geo.ptx",
-        "textures/isDunesA/Color/roots0188_geo.ptx",
-        "textures/isDunesA/Color/roots0189_geo.ptx",
-        "textures/isDunesA/Color/roots0190_geo.ptx",
-        "textures/isDunesA/Color/roots0191_geo.ptx",
-        "textures/isDunesA/Color/roots0192_geo.ptx",
-        "textures/isDunesA/Color/roots0193_geo.ptx",
-        "textures/isDunesA/Color/roots0194_geo.ptx",
-        "textures/isDunesA/Color/roots0195_geo.ptx",
-        "textures/isDunesA/Color/roots0196_geo.ptx",
-        "textures/isDunesA/Color/roots0197_geo.ptx",
-        "textures/isDunesA/Color/roots0198_geo.ptx",
-        "textures/isDunesA/Color/roots0199_geo.ptx",
-        "textures/isDunesA/Color/roots0200_geo.ptx",
-        "textures/isDunesA/Color/roots0201_geo.ptx",
-        "textures/isDunesA/Color/roots0202_geo.ptx",
-        "textures/isDunesA/Color/roots0203_geo.ptx",
-        "textures/isDunesA/Color/roots0204_geo.ptx",
-        "textures/isDunesA/Color/roots0205_geo.ptx",
-        "textures/isDunesA/Color/roots0206_geo.ptx",
-        "textures/isDunesA/Color/roots0207_geo.ptx",
-        "textures/isDunesA/Color/roots0208_geo.ptx",
-        "textures/isDunesA/Color/roots0209_geo.ptx",
-        "textures/isDunesA/Color/roots0210_geo.ptx",
-        "textures/isDunesA/Color/roots0211_geo.ptx",
-        "textures/isDunesA/Color/roots0212_geo.ptx",
-        "textures/isDunesA/Color/roots0213_geo.ptx",
-        "textures/isDunesA/Color/roots0214_geo.ptx",
-        "textures/isDunesA/Color/roots0215_geo.ptx",
-        "textures/isDunesA/Color/roots0216_geo.ptx",
-        "textures/isDunesA/Color/roots0217_geo.ptx",
-        "textures/isDunesA/Color/roots0218_geo.ptx",
-        "textures/isDunesA/Color/roots0219_geo.ptx",
-        "textures/isDunesA/Color/roots0220_geo.ptx",
-        "textures/isDunesA/Color/roots0221_geo.ptx",
-        "textures/isDunesA/Color/roots0222_geo.ptx",
-        "textures/isDunesA/Color/roots0223_geo.ptx",
-        "textures/isDunesA/Color/roots0224_geo.ptx",
-        "textures/isDunesA/Color/roots0225_geo.ptx",
-        "textures/isDunesA/Color/roots0226_geo.ptx",
-        "textures/isDunesA/Color/roots0227_geo.ptx",
-        "textures/isDunesA/Color/roots0228_geo.ptx",
-        "textures/isDunesA/Color/roots0229_geo.ptx",
-        "textures/isDunesA/Color/roots0230_geo.ptx",
-        "textures/isDunesA/Color/roots0231_geo.ptx",
-        "textures/isDunesA/Color/roots0232_geo.ptx",
-        "textures/isDunesA/Color/roots0233_geo.ptx",
-        "textures/isDunesA/Color/roots0234_geo.ptx",
-        "textures/isDunesA/Color/roots0235_geo.ptx",
-        "textures/isDunesA/Color/roots0236_geo.ptx",
-        "textures/isDunesA/Color/roots0237_geo.ptx",
-        "textures/isDunesA/Color/roots0238_geo.ptx",
-        "textures/isDunesA/Color/roots0239_geo.ptx",
-        "textures/isDunesA/Color/roots0240_geo.ptx",
-        "textures/isDunesA/Color/roots0241_geo.ptx",
-        "textures/isDunesA/Color/roots0242_geo.ptx",
-        "textures/isDunesA/Color/roots0243_geo.ptx",
-        "textures/isDunesA/Color/roots0244_geo.ptx",
-        "textures/isDunesA/Color/roots0245_geo.ptx",
-        "textures/isDunesA/Color/roots0246_geo.ptx",
-        "textures/isDunesA/Color/roots0247_geo.ptx",
-        "textures/isDunesA/Color/roots0248_geo.ptx",
-        "textures/isDunesA/Color/roots0249_geo.ptx",
-        "textures/isDunesA/Color/roots0250_geo.ptx",
-        "textures/isDunesA/Color/roots0251_geo.ptx",
-        "textures/isDunesA/Color/roots0252_geo.ptx",
-        "textures/isDunesA/Color/roots0253_geo.ptx",
-        "textures/isDunesA/Color/roots0254_geo.ptx",
-        "textures/isDunesA/Color/roots0255_geo.ptx",
-        "textures/isDunesA/Color/roots0256_geo.ptx",
-        "textures/isDunesA/Color/roots0257_geo.ptx",
-        "textures/isDunesA/Color/roots0258_geo.ptx",
-        "textures/isDunesA/Color/roots0259_geo.ptx",
-        "textures/isDunesA/Color/roots0260_geo.ptx",
-        "textures/isDunesA/Color/roots0261_geo.ptx",
-        "textures/isDunesA/Color/roots0262_geo.ptx",
-        "textures/isDunesA/Color/roots0263_geo.ptx",
-        "textures/isDunesA/Color/roots0264_geo.ptx",
-        "textures/isDunesA/Color/roots0265_geo.ptx",
-        "textures/isDunesA/Color/roots0266_geo.ptx",
-        "textures/isDunesA/Color/roots0267_geo.ptx",
-        "textures/isDunesA/Color/roots0268_geo.ptx",
-        "textures/isDunesA/Color/roots0269_geo.ptx",
-        "textures/isDunesA/Color/roots0270_geo.ptx",
-        "textures/isDunesA/Color/roots0271_geo.ptx",
-        "textures/isDunesA/Color/roots0272_geo.ptx",
-        "textures/isDunesA/Color/roots0273_geo.ptx",
-        "textures/isDunesA/Color/roots0274_geo.ptx",
-        "textures/isDunesA/Color/roots0275_geo.ptx",
-        "textures/isDunesA/Color/roots0276_geo.ptx",
-        "textures/isDunesA/Color/roots0277_geo.ptx",
-        "textures/isDunesA/Color/roots0278_geo.ptx",
-        "textures/isDunesA/Color/roots0279_geo.ptx",
-        "textures/isDunesA/Color/roots0280_geo.ptx",
-        "textures/isDunesA/Color/roots0281_geo.ptx",
-        "textures/isDunesA/Color/roots0282_geo.ptx",
-        "textures/isDunesA/Color/roots0283_geo.ptx",
-        "textures/isDunesA/Color/roots0284_geo.ptx",
-        "textures/isDunesA/Color/roots0285_geo.ptx",
-        "textures/isDunesA/Color/roots0286_geo.ptx",
-        "textures/isDunesA/Color/roots0287_geo.ptx",
-        "textures/isDunesA/Color/roots0288_geo.ptx",
-        "textures/isDunesA/Color/roots0289_geo.ptx",
-        "textures/isDunesA/Color/roots0290_geo.ptx",
-        "textures/isDunesA/Color/roots0291_geo.ptx",
-        "textures/isDunesA/Color/roots0292_geo.ptx",
-        "textures/isDunesA/Color/roots0293_geo.ptx",
-        "textures/isDunesA/Color/roots0294_geo.ptx",
-        "textures/isDunesA/Color/roots0295_geo.ptx",
-        "textures/isDunesA/Color/roots0296_geo.ptx",
-        "textures/isDunesA/Color/roots0297_geo.ptx",
-        "textures/isDunesA/Color/roots0298_geo.ptx",
-        "textures/isDunesA/Color/roots0299_geo.ptx",
-        "textures/isDunesA/Color/roots0300_geo.ptx",
-        "textures/isDunesA/Color/roots0301_geo.ptx",
-        "textures/isDunesA/Color/roots0302_geo.ptx",
-        "textures/isDunesA/Color/roots0303_geo.ptx",
-        "textures/isDunesA/Color/roots0304_geo.ptx",
-        "textures/isDunesA/Color/roots0305_geo.ptx",
-        "textures/isDunesA/Color/roots0306_geo.ptx",
-        "textures/isDunesA/Color/roots0307_geo.ptx",
-        "textures/isDunesA/Color/roots0308_geo.ptx",
-        "textures/isDunesA/Color/roots0309_geo.ptx",
-        "textures/isDunesA/Color/roots0310_geo.ptx",
-        "textures/isDunesA/Color/roots0311_geo.ptx",
-        "textures/isDunesA/Color/roots0312_geo.ptx",
-        "textures/isDunesA/Color/roots0313_geo.ptx",
-        "textures/isDunesA/Color/roots0314_geo.ptx",
-        "textures/isDunesA/Color/roots0315_geo.ptx",
-        "textures/isDunesA/Color/roots0316_geo.ptx",
-        "textures/isDunesA/Color/roots0317_geo.ptx",
-        "textures/isDunesA/Color/roots0318_geo.ptx",
-        "textures/isDunesA/Color/roots0319_geo.ptx",
-        "textures/isDunesA/Color/roots0320_geo.ptx",
-        "textures/isDunesA/Color/roots0321_geo.ptx",
-        "textures/isDunesA/Color/roots0322_geo.ptx",
-        "textures/isDunesA/Color/roots0323_geo.ptx",
-        "textures/isDunesA/Color/roots0324_geo.ptx",
-        "textures/isDunesA/Color/roots0325_geo.ptx",
-        "textures/isDunesA/Color/roots0326_geo.ptx",
-        "textures/isDunesA/Color/roots0327_geo.ptx",
-        "textures/isDunesA/Color/roots0328_geo.ptx",
-        "textures/isDunesA/Color/roots0329_geo.ptx",
-        "textures/isDunesA/Color/roots0330_geo.ptx",
-        "textures/isDunesA/Color/roots0331_geo.ptx",
-        "textures/isDunesA/Color/roots0332_geo.ptx",
-        "textures/isDunesA/Color/roots0333_geo.ptx",
-        "textures/isDunesA/Color/roots0334_geo.ptx",
-        "textures/isDunesA/Color/roots0335_geo.ptx",
-        "textures/isDunesA/Color/roots0336_geo.ptx",
-        "textures/isDunesA/Color/roots0337_geo.ptx",
-        "textures/isDunesA/Color/roots0338_geo.ptx",
-        "textures/isDunesA/Color/roots0339_geo.ptx",
-        "textures/isDunesA/Color/roots0340_geo.ptx",
-        "textures/isDunesA/Color/roots0341_geo.ptx",
-        "textures/isDunesA/Color/roots0342_geo.ptx",
-        "textures/isDunesA/Color/roots0343_geo.ptx",
-        "textures/isDunesA/Color/roots0344_geo.ptx",
-        "textures/isDunesA/Color/roots0345_geo.ptx",
-        "textures/isDunesA/Color/roots0346_geo.ptx",
-        "textures/isDunesA/Color/roots0347_geo.ptx",
-        "textures/isDunesA/Color/roots0348_geo.ptx",
-        "textures/isDunesA/Color/roots0349_geo.ptx",
-        "textures/isDunesA/Color/roots0350_geo.ptx",
-        "textures/isDunesA/Color/roots0351_geo.ptx",
-        "textures/isDunesA/Color/roots0352_geo.ptx",
-        "textures/isDunesA/Color/roots0353_geo.ptx",
-        "textures/isDunesA/Color/roots0354_geo.ptx",
-        "textures/isDunesA/Color/roots0355_geo.ptx",
-        "textures/isDunesA/Color/roots0356_geo.ptx",
-        "textures/isDunesA/Color/roots0357_geo.ptx",
-        "textures/isDunesA/Color/roots0358_geo.ptx",
-        "textures/isDunesA/Color/roots0359_geo.ptx",
-        "textures/isDunesA/Color/roots0360_geo.ptx",
-        "textures/isDunesA/Color/roots0361_geo.ptx",
-        "textures/isDunesA/Color/roots0362_geo.ptx",
-        "textures/isDunesA/Color/roots0363_geo.ptx",
-        "textures/isDunesA/Color/roots0364_geo.ptx",
-        "textures/isDunesA/Color/roots0365_geo.ptx",
-        "textures/isDunesA/Color/roots0366_geo.ptx",
-        "textures/isDunesA/Color/roots0367_geo.ptx",
-        "textures/isDunesA/Color/roots0368_geo.ptx",
-        "textures/isDunesA/Color/roots0369_geo.ptx",
-        "textures/isDunesA/Color/roots0370_geo.ptx",
-        "textures/isDunesA/Color/roots0371_geo.ptx",
-        "textures/isDunesA/Color/roots0372_geo.ptx",
-        "textures/isDunesA/Color/roots0373_geo.ptx",
-        "textures/isDunesA/Color/roots0374_geo.ptx",
-        "textures/isDunesA/Color/roots0375_geo.ptx",
-        "textures/isDunesA/Color/roots0376_geo.ptx",
-        "textures/isDunesA/Color/roots0377_geo.ptx",
-        "textures/isDunesA/Color/roots0378_geo.ptx",
-        "textures/isDunesA/Color/roots0379_geo.ptx",
-        "textures/isDunesA/Color/roots0380_geo.ptx",
-        "textures/isDunesA/Color/roots0381_geo.ptx",
-        "textures/isDunesA/Color/roots0382_geo.ptx",
-        "textures/isDunesA/Color/roots0383_geo.ptx",
-        "textures/isDunesA/Color/roots0384_geo.ptx",
-        "textures/isDunesA/Color/roots0385_geo.ptx",
-        "textures/isDunesA/Color/roots0386_geo.ptx",
-        "textures/isDunesA/Color/roots0387_geo.ptx",
-        "textures/isDunesA/Color/roots0388_geo.ptx",
-        "textures/isDunesA/Color/roots0389_geo.ptx",
-        "textures/isDunesA/Color/roots0390_geo.ptx",
-        "textures/isDunesA/Color/roots0391_geo.ptx",
-        "textures/isDunesA/Color/roots0392_geo.ptx",
-        "textures/isDunesA/Color/roots0393_geo.ptx",
-        "textures/isDunesA/Color/roots0394_geo.ptx",
-        "textures/isDunesA/Color/roots0395_geo.ptx",
-        "textures/isDunesA/Color/roots0396_geo.ptx",
-        "textures/isDunesA/Color/roots0397_geo.ptx",
-        "textures/isDunesA/Color/roots0398_geo.ptx",
-        "textures/isDunesA/Color/roots0399_geo.ptx",
-        "textures/isDunesA/Color/roots0400_geo.ptx",
-        "textures/isDunesA/Color/roots0401_geo.ptx",
-        "textures/isDunesA/Color/roots0402_geo.ptx",
-        "textures/isDunesA/Color/roots0403_geo.ptx",
-        "textures/isDunesA/Color/roots0404_geo.ptx",
-        "textures/isDunesA/Color/roots0405_geo.ptx",
-        "textures/isDunesA/Color/roots0406_geo.ptx",
-        "textures/isDunesA/Color/roots0407_geo.ptx",
-        "textures/isDunesA/Color/roots0408_geo.ptx",
-        "textures/isDunesA/Color/roots0409_geo.ptx",
-        "textures/isDunesA/Color/roots0410_geo.ptx",
-        "textures/isDunesA/Color/roots0411_geo.ptx",
-        "textures/isDunesA/Color/roots0412_geo.ptx",
-        "textures/isDunesA/Color/roots0413_geo.ptx",
-        "textures/isDunesA/Color/roots0414_geo.ptx",
-        "textures/isDunesA/Color/roots0415_geo.ptx",
-        "textures/isDunesA/Color/roots0416_geo.ptx",
-        "textures/isDunesA/Color/roots0417_geo.ptx",
-        "textures/isDunesA/Color/roots0418_geo.ptx",
-        "textures/isDunesA/Color/roots0419_geo.ptx",
-        "textures/isDunesA/Color/roots0420_geo.ptx",
-        "textures/isDunesA/Color/roots0421_geo.ptx",
-        "textures/isDunesA/Color/roots0422_geo.ptx",
-        "textures/isDunesA/Color/roots0423_geo.ptx",
-        "textures/isDunesA/Color/roots0424_geo.ptx",
-        "textures/isDunesA/Color/roots0425_geo.ptx",
-        "textures/isDunesA/Color/roots0426_geo.ptx",
-        "textures/isDunesA/Color/roots0427_geo.ptx",
-        "textures/isDunesA/Color/roots0428_geo.ptx",
-        "textures/isDunesA/Color/roots0429_geo.ptx",
-        "textures/isDunesA/Color/roots0430_geo.ptx",
-        "textures/isDunesA/Color/roots0431_geo.ptx",
-        "textures/isDunesA/Color/roots0432_geo.ptx",
-        "textures/isDunesA/Color/roots0433_geo.ptx",
-        "textures/isDunesA/Color/roots0434_geo.ptx",
-        "textures/isDunesA/Color/roots0435_geo.ptx",
-        "textures/isDunesA/Color/roots0436_geo.ptx",
-        "textures/isDunesA/Color/roots0437_geo.ptx",
-        "textures/isDunesA/Color/roots0438_geo.ptx",
-        "textures/isDunesA/Color/roots0439_geo.ptx",
-        "textures/isDunesA/Color/roots0440_geo.ptx",
-        "textures/isDunesA/Color/roots0441_geo.ptx",
-        "textures/isDunesA/Color/roots0442_geo.ptx",
-        "textures/isDunesA/Color/roots0443_geo.ptx",
-        "textures/isDunesA/Color/roots0444_geo.ptx",
-        "textures/isDunesA/Color/roots0445_geo.ptx",
-        "textures/isDunesA/Color/roots0446_geo.ptx",
-        "textures/isDunesA/Color/roots0447_geo.ptx",
-        "textures/isDunesA/Color/roots0448_geo.ptx",
-        "textures/isDunesA/Color/roots0449_geo.ptx",
-        "textures/isDunesA/Color/roots0450_geo.ptx",
-        "textures/isDunesA/Color/roots0451_geo.ptx",
-        "textures/isDunesA/Color/roots0452_geo.ptx",
-        "textures/isDunesA/Color/roots0453_geo.ptx",
-        "textures/isDunesA/Color/roots0454_geo.ptx",
-        "textures/isDunesA/Color/roots0455_geo.ptx",
-        "textures/isDunesA/Color/roots0456_geo.ptx",
-        "textures/isDunesA/Color/roots0457_geo.ptx",
-        "textures/isDunesA/Color/roots0458_geo.ptx",
-        "textures/isDunesA/Color/roots0459_geo.ptx",
-        "textures/isDunesA/Color/roots0460_geo.ptx",
-        "textures/isDunesA/Color/roots0461_geo.ptx",
-        "textures/isDunesA/Color/roots0462_geo.ptx",
-        "textures/isDunesA/Color/roots0463_geo.ptx",
-        "textures/isDunesA/Color/roots0464_geo.ptx",
-        "textures/isDunesA/Color/roots0465_geo.ptx",
-        "textures/isDunesA/Color/roots0466_geo.ptx",
-        "textures/isDunesA/Color/roots0467_geo.ptx",
-        "textures/isDunesA/Color/roots0468_geo.ptx",
-        "textures/isDunesA/Color/roots0469_geo.ptx",
-        "textures/isDunesA/Color/roots0470_geo.ptx",
-        "textures/isDunesA/Color/roots0471_geo.ptx",
-        "textures/isDunesA/Color/roots0472_geo.ptx",
-        "textures/isDunesA/Color/roots0473_geo.ptx",
-        "textures/isDunesA/Color/roots0474_geo.ptx",
-        "textures/isDunesA/Color/roots0475_geo.ptx",
-        "textures/isDunesA/Color/roots0476_geo.ptx",
-        "textures/isDunesA/Color/roots0477_geo.ptx",
-        "textures/isDunesA/Color/roots0478_geo.ptx",
-        "textures/isDunesA/Color/roots0479_geo.ptx",
-        "textures/isDunesA/Color/roots0480_geo.ptx",
-        "textures/isDunesA/Color/roots0481_geo.ptx",
-        "textures/isDunesA/Color/roots0482_geo.ptx",
-        "textures/isDunesA/Color/roots0483_geo.ptx",
-        "textures/isDunesA/Color/roots0484_geo.ptx",
-        "textures/isDunesA/Color/roots0485_geo.ptx",
-        "textures/isDunesA/Color/roots0486_geo.ptx",
-        "textures/isDunesA/Color/roots0487_geo.ptx",
-        "textures/isDunesA/Color/roots0488_geo.ptx",
-        "textures/isDunesA/Color/roots0489_geo.ptx",
-        "textures/isDunesA/Color/roots0490_geo.ptx",
-        "textures/isDunesA/Color/roots0491_geo.ptx",
-        "textures/isDunesA/Color/roots0492_geo.ptx",
-        "textures/isDunesA/Color/roots0493_geo.ptx",
-        "textures/isDunesA/Color/roots0494_geo.ptx",
-        "textures/isDunesA/Color/roots0495_geo.ptx",
-        "textures/isDunesA/Color/roots0496_geo.ptx",
-        "textures/isDunesA/Color/roots0497_geo.ptx",
-        "textures/isDunesA/Color/roots0498_geo.ptx",
-        "textures/isDunesA/Color/roots0499_geo.ptx",
-        "textures/isDunesA/Color/roots0500_geo.ptx",
-        "textures/isDunesA/Color/roots0501_geo.ptx",
-        "textures/isDunesA/Color/roots0502_geo.ptx",
-        "textures/isDunesA/Color/roots0503_geo.ptx",
-        "textures/isDunesA/Color/roots0504_geo.ptx",
-        "textures/isDunesA/Color/roots0505_geo.ptx",
-        "textures/isDunesA/Color/roots0506_geo.ptx",
-        "textures/isDunesA/Color/roots0507_geo.ptx",
-        "textures/isDunesA/Color/roots0508_geo.ptx",
-        "textures/isDunesA/Color/roots0509_geo.ptx",
-        "textures/isDunesA/Color/roots0510_geo.ptx",
-        "textures/isDunesA/Color/roots0511_geo.ptx",
-        "textures/isDunesA/Color/roots0512_geo.ptx",
-        "textures/isDunesA/Color/roots0513_geo.ptx",
-        "textures/isDunesA/Color/roots0514_geo.ptx",
-        "textures/isDunesA/Color/roots0515_geo.ptx",
-        "textures/isDunesA/Color/roots0516_geo.ptx",
-        "textures/isDunesA/Color/roots0517_geo.ptx",
-        "textures/isDunesA/Color/roots0518_geo.ptx",
-        "textures/isDunesA/Color/roots0519_geo.ptx",
-        "textures/isDunesA/Color/roots0520_geo.ptx",
-        "textures/isDunesA/Color/roots0521_geo.ptx",
-        "textures/isDunesA/Color/roots0522_geo.ptx",
-        "textures/isDunesA/Color/roots0523_geo.ptx",
-        "textures/isDunesA/Color/roots0524_geo.ptx",
-        "textures/isDunesA/Color/roots0525_geo.ptx",
-        "textures/isDunesA/Color/roots0526_geo.ptx",
-        "textures/isDunesA/Color/roots0527_geo.ptx",
-        "textures/isDunesA/Color/roots0528_geo.ptx",
-        "textures/isDunesA/Color/roots0529_geo.ptx",
-        "textures/isDunesA/Color/roots0530_geo.ptx",
-        "textures/isDunesA/Color/roots0531_geo.ptx",
-        "textures/isDunesA/Color/roots0532_geo.ptx",
-        "textures/isDunesA/Color/roots0533_geo.ptx",
-        "textures/isDunesA/Color/roots0534_geo.ptx",
-        "textures/isDunesA/Color/roots0535_geo.ptx",
-        "textures/isDunesA/Color/roots0536_geo.ptx",
-        "textures/isDunesA/Color/roots0537_geo.ptx",
-        "textures/isDunesA/Color/roots0538_geo.ptx",
-        "textures/isDunesA/Color/roots0539_geo.ptx",
-        "textures/isDunesA/Color/roots0540_geo.ptx",
-        "textures/isDunesA/Color/roots0541_geo.ptx",
-        "textures/isDunesA/Color/roots0542_geo.ptx",
-        "textures/isDunesA/Color/roots0543_geo.ptx",
-        "textures/isDunesA/Color/roots0544_geo.ptx",
-        "textures/isDunesA/Color/roots0545_geo.ptx",
-        "textures/isDunesA/Color/roots0546_geo.ptx",
-        "textures/isDunesA/Color/roots0547_geo.ptx",
-        "textures/isDunesA/Color/roots0548_geo.ptx",
-        "textures/isDunesA/Color/roots0549_geo.ptx",
-        "textures/isDunesA/Color/roots0550_geo.ptx",
-        "textures/isDunesA/Color/roots0551_geo.ptx",
-        "textures/isDunesA/Color/roots0552_geo.ptx",
-        "textures/isDunesA/Color/roots0553_geo.ptx",
-        "textures/isDunesA/Color/roots0554_geo.ptx",
-        "textures/isDunesA/Color/roots0555_geo.ptx",
-        "textures/isDunesA/Color/roots0556_geo.ptx",
-        "textures/isDunesA/Color/roots0557_geo.ptx",
-        "textures/isDunesA/Color/roots0558_geo.ptx",
-        "textures/isDunesA/Color/roots0559_geo.ptx",
-        "textures/isDunesA/Color/roots0560_geo.ptx",
-        "textures/isDunesA/Color/roots0561_geo.ptx",
-        "textures/isDunesA/Color/roots0562_geo.ptx",
-        "textures/isDunesA/Color/roots0563_geo.ptx",
-        "textures/isDunesA/Color/roots0564_geo.ptx",
-        "textures/isDunesA/Color/roots0565_geo.ptx",
-        "textures/isDunesA/Color/roots0566_geo.ptx",
-        "textures/isDunesA/Color/roots0567_geo.ptx",
-        "textures/isDunesA/Color/roots0568_geo.ptx",
-        "textures/isDunesA/Color/roots0569_geo.ptx",
-        "textures/isDunesA/Color/roots0570_geo.ptx",
-        "textures/isDunesA/Color/roots0571_geo.ptx",
-        "textures/isDunesA/Color/roots0572_geo.ptx",
-        "textures/isDunesA/Color/roots0573_geo.ptx",
-        "textures/isDunesA/Color/roots0574_geo.ptx",
-        "textures/isDunesA/Color/roots0575_geo.ptx",
-        "textures/isDunesA/Color/roots0576_geo.ptx",
-        "textures/isDunesA/Color/roots0577_geo.ptx",
-        "textures/isDunesA/Color/roots0578_geo.ptx",
-        "textures/isDunesA/Color/roots0579_geo.ptx",
-        "textures/isDunesA/Color/roots0580_geo.ptx",
-        "textures/isDunesA/Color/roots0581_geo.ptx",
-        "textures/isDunesA/Color/roots0582_geo.ptx",
-        "textures/isDunesA/Color/roots0583_geo.ptx",
-        "textures/isDunesA/Color/roots0584_geo.ptx",
-        "textures/isDunesA/Color/roots0585_geo.ptx",
-        "textures/isDunesA/Color/roots0586_geo.ptx",
-        "textures/isDunesA/Color/roots0587_geo.ptx",
-        "textures/isDunesA/Color/roots0588_geo.ptx",
-        "textures/isDunesA/Color/roots0589_geo.ptx",
-        "textures/isDunesA/Color/roots0590_geo.ptx",
-        "textures/isDunesA/Color/roots0591_geo.ptx",
-        "textures/isDunesA/Color/roots0592_geo.ptx",
-        "textures/isDunesA/Color/roots0593_geo.ptx",
-        "textures/isDunesA/Color/roots0594_geo.ptx",
-        "textures/isDunesA/Color/roots0595_geo.ptx",
-        "textures/isDunesA/Color/roots0596_geo.ptx",
-        "textures/isDunesA/Color/roots0597_geo.ptx",
-        "textures/isDunesA/Color/roots0598_geo.ptx",
-        "textures/isDunesA/Color/roots0599_geo.ptx",
-        "textures/isDunesA/Color/roots0600_geo.ptx",
-        "textures/isDunesA/Color/roots0601_geo.ptx",
-        "textures/isDunesA/Color/roots0602_geo.ptx",
-        "textures/isDunesA/Color/roots0603_geo.ptx",
-        "textures/isDunesA/Color/roots0604_geo.ptx",
-        "textures/isDunesA/Color/roots0605_geo.ptx",
-        "textures/isDunesA/Color/roots0606_geo.ptx",
-        "textures/isDunesA/Color/roots0607_geo.ptx",
-        "textures/isDunesA/Color/roots0608_geo.ptx",
-        "textures/isDunesA/Color/roots0609_geo.ptx",
-        "textures/isDunesA/Color/roots0610_geo.ptx",
-        "textures/isDunesA/Color/roots0611_geo.ptx",
-        "textures/isDunesA/Color/roots0612_geo.ptx",
-        "textures/isDunesA/Color/roots0613_geo.ptx",
-        "textures/isDunesA/Color/roots0614_geo.ptx",
-        "textures/isDunesA/Color/roots0615_geo.ptx",
-        "textures/isDunesA/Color/roots0616_geo.ptx",
-        "textures/isDunesA/Color/roots0617_geo.ptx",
-        "textures/isDunesA/Color/roots0618_geo.ptx",
-        "textures/isDunesA/Color/roots0619_geo.ptx",
-        "textures/isDunesA/Color/roots0620_geo.ptx",
-        "textures/isDunesA/Color/roots0621_geo.ptx",
-        "textures/isDunesA/Color/roots0622_geo.ptx",
-        "textures/isDunesA/Color/roots0623_geo.ptx",
-        "textures/isDunesA/Color/roots0624_geo.ptx",
-        "textures/isDunesA/Color/roots0625_geo.ptx",
-        "textures/isDunesA/Color/roots0626_geo.ptx",
-        "textures/isDunesA/Color/roots0627_geo.ptx",
-        "textures/isDunesA/Color/roots0628_geo.ptx",
-        "textures/isDunesA/Color/roots0629_geo.ptx",
-        "textures/isDunesA/Color/roots0630_geo.ptx",
-        "textures/isDunesA/Color/roots0631_geo.ptx",
-        "textures/isDunesA/Color/roots0632_geo.ptx",
-        "textures/isDunesA/Color/roots0633_geo.ptx",
-        "textures/isDunesA/Color/roots0634_geo.ptx",
-        "textures/isDunesA/Color/roots0635_geo.ptx",
-        "textures/isDunesA/Color/roots0636_geo.ptx",
-        "textures/isDunesA/Color/roots0637_geo.ptx",
-        "textures/isDunesA/Color/roots0638_geo.ptx",
-        "textures/isDunesA/Color/roots0639_geo.ptx",
-        "textures/isDunesA/Color/roots0640_geo.ptx",
-        "textures/isDunesA/Color/roots0641_geo.ptx",
-        "textures/isDunesA/Color/roots0642_geo.ptx",
-        "textures/isDunesA/Color/roots0643_geo.ptx",
-        "textures/isDunesA/Color/roots0644_geo.ptx",
-        "textures/isDunesA/Color/roots0645_geo.ptx",
-        "textures/isDunesA/Color/roots0646_geo.ptx",
-        "textures/isDunesA/Color/roots0647_geo.ptx",
-        "textures/isDunesA/Color/roots0648_geo.ptx",
-        "textures/isDunesA/Color/roots0649_geo.ptx",
-        "textures/isDunesA/Color/roots0650_geo.ptx",
-        "textures/isDunesA/Color/roots0651_geo.ptx",
-        "textures/isDunesA/Color/roots0652_geo.ptx",
-        "textures/isDunesA/Color/roots0653_geo.ptx",
-        "textures/isDunesA/Color/roots0654_geo.ptx",
-        "textures/isDunesA/Color/roots0655_geo.ptx",
-        "textures/isDunesA/Color/roots0656_geo.ptx",
-        "textures/isDunesA/Color/roots0657_geo.ptx",
-        "textures/isDunesA/Color/roots0658_geo.ptx",
-        "textures/isDunesA/Color/roots0659_geo.ptx",
-        "textures/isDunesA/Color/roots0660_geo.ptx",
-        "textures/isDunesA/Color/roots0661_geo.ptx",
-        "textures/isDunesA/Color/roots0662_geo.ptx",
-        "textures/isDunesA/Color/roots0663_geo.ptx",
-        "textures/isDunesA/Color/roots0664_geo.ptx",
-        "textures/isDunesA/Color/roots0665_geo.ptx",
-        "textures/isDunesA/Color/roots0666_geo.ptx",
-        "textures/isDunesA/Color/roots0667_geo.ptx",
-        "textures/isDunesA/Color/roots0668_geo.ptx",
-        "textures/isDunesA/Color/roots0669_geo.ptx",
-        "textures/isDunesA/Color/roots0670_geo.ptx",
-        "textures/isDunesA/Color/roots0671_geo.ptx",
-        "textures/isDunesA/Color/roots0672_geo.ptx",
-        "textures/isDunesA/Color/roots0673_geo.ptx",
-        "textures/isDunesA/Color/roots0674_geo.ptx",
-        "textures/isDunesA/Color/roots0675_geo.ptx",
-        "textures/isDunesA/Color/roots0676_geo.ptx",
-        "textures/isDunesA/Color/roots0677_geo.ptx",
-        "textures/isDunesA/Color/roots0678_geo.ptx",
-        "textures/isDunesA/Color/roots0679_geo.ptx",
-        "textures/isDunesA/Color/roots0680_geo.ptx",
-        "textures/isDunesA/Color/roots0681_geo.ptx",
-        "textures/isDunesA/Color/roots0682_geo.ptx",
-        "textures/isDunesA/Color/roots0683_geo.ptx",
-        "textures/isDunesA/Color/roots0684_geo.ptx",
-        "textures/isDunesA/Color/roots0685_geo.ptx",
-        "textures/isDunesA/Color/roots0686_geo.ptx",
-        "textures/isDunesA/Color/roots0687_geo.ptx",
-        "textures/isDunesA/Color/roots0688_geo.ptx",
-        "textures/isDunesA/Color/roots0689_geo.ptx",
-        "textures/isDunesA/Color/roots0690_geo.ptx",
-        "textures/isDunesA/Color/roots0691_geo.ptx",
-        "textures/isDunesA/Color/roots0692_geo.ptx",
-        "textures/isDunesA/Color/roots0693_geo.ptx",
-        "textures/isDunesA/Color/roots0694_geo.ptx",
-        "textures/isDunesA/Color/roots0695_geo.ptx",
-        "textures/isDunesA/Color/roots0696_geo.ptx",
-        "textures/isDunesA/Color/roots0697_geo.ptx",
-        "textures/isDunesA/Color/roots0698_geo.ptx",
-        "textures/isDunesA/Color/roots0699_geo.ptx",
-        "textures/isDunesA/Color/roots0700_geo.ptx",
-        "textures/isDunesA/Color/roots0701_geo.ptx",
-        "textures/isDunesA/Color/roots0702_geo.ptx",
-        "textures/isDunesA/Color/roots0703_geo.ptx",
-        "textures/isDunesA/Color/roots0704_geo.ptx",
-        "textures/isDunesA/Color/roots0705_geo.ptx",
-        "textures/isDunesA/Color/roots0706_geo.ptx",
-        "textures/isDunesA/Color/roots0707_geo.ptx",
-        "textures/isDunesA/Color/roots0708_geo.ptx",
-        "textures/isDunesA/Color/roots0709_geo.ptx",
-        "textures/isDunesA/Color/roots0710_geo.ptx",
-        "textures/isDunesA/Color/roots0711_geo.ptx",
-        "textures/isDunesA/Color/roots0712_geo.ptx",
-        "textures/isDunesA/Color/roots0713_geo.ptx",
-        "textures/isDunesA/Color/roots0714_geo.ptx",
-        "textures/isDunesA/Color/roots0715_geo.ptx",
-        "textures/isDunesA/Color/roots0716_geo.ptx",
-        "textures/isDunesA/Color/roots0717_geo.ptx",
-        "textures/isDunesA/Color/roots0718_geo.ptx",
-        "textures/isDunesA/Color/roots0719_geo.ptx",
-        "textures/isDunesA/Color/roots0720_geo.ptx",
-        "textures/isDunesA/Color/roots0721_geo.ptx",
-        "textures/isDunesA/Color/roots0722_geo.ptx",
-        "textures/isDunesA/Color/roots0723_geo.ptx",
-        "textures/isDunesA/Color/roots0724_geo.ptx",
-        "textures/isDunesA/Color/roots0725_geo.ptx",
-        "textures/isDunesA/Color/roots0726_geo.ptx",
-        "textures/isDunesA/Color/roots0727_geo.ptx",
-        "textures/isDunesA/Color/roots0728_geo.ptx",
-        "textures/isDunesA/Color/roots0729_geo.ptx",
-        "textures/isDunesA/Color/roots0730_geo.ptx",
-        "textures/isDunesA/Color/roots0731_geo.ptx",
-        "textures/isDunesA/Color/roots0732_geo.ptx",
-        "textures/isDunesA/Color/roots0733_geo.ptx",
-        "textures/isDunesA/Color/roots0734_geo.ptx",
-        "textures/isDunesA/Color/roots0735_geo.ptx",
-        "textures/isDunesA/Color/roots0736_geo.ptx",
-        "textures/isDunesA/Color/roots0737_geo.ptx",
-        "textures/isDunesA/Color/roots0738_geo.ptx",
-        "textures/isDunesA/Color/roots0739_geo.ptx",
-        "textures/isDunesA/Color/roots0740_geo.ptx",
-        "textures/isDunesA/Color/roots0741_geo.ptx",
-        "textures/isDunesA/Color/roots0742_geo.ptx",
-        "textures/isDunesA/Color/roots0743_geo.ptx",
-        "textures/isDunesA/Color/roots0744_geo.ptx",
-        "textures/isDunesA/Color/roots0745_geo.ptx",
-        "textures/isDunesA/Color/roots0746_geo.ptx",
-        "textures/isDunesA/Color/roots0747_geo.ptx",
-        "textures/isDunesA/Color/roots0748_geo.ptx",
-        "textures/isDunesA/Color/roots0749_geo.ptx",
-        "textures/isDunesA/Color/roots0750_geo.ptx",
-        "textures/isDunesA/Color/roots0751_geo.ptx",
-        "textures/isDunesA/Color/roots0752_geo.ptx",
-        "textures/isDunesA/Color/stem0001_geo.ptx",
-        "textures/isDunesA/Color/stem0002_geo.ptx",
-        "textures/isDunesA/Color/stem0003_geo.ptx",
-        "textures/isDunesA/Color/stem0004_geo.ptx",
-        "textures/isDunesA/Color/stem0005_geo.ptx",
-        "textures/isDunesA/Color/stem0006_geo.ptx",
-        "textures/isDunesA/Color/stem0007_geo.ptx",
-        "textures/isDunesA/Color/stem0008_geo.ptx",
-        "textures/isDunesA/Color/stem0009_geo.ptx",
-        "textures/isDunesA/Color/stem0010_geo.ptx",
-        "textures/isDunesA/Color/stem0011_geo.ptx",
-        "textures/isDunesA/Color/stem0012_geo.ptx",
-        "textures/isDunesA/Color/stem0013_geo.ptx",
-        "textures/isDunesA/Color/stem0014_geo.ptx",
-        "textures/isDunesA/Color/topsoil0001_geo.ptx",
-        "textures/isDunesA/Displacement/topsoil0001_geo.ptx",
-        "textures/isDunesB/Color/dune0001_geo.ptx",
-        "textures/isDunesB/Color/dune0002_geo.ptx",
-        "textures/isDunesB/Color/trunk0001_geo.ptx",
-        "textures/isDunesB/Displacement/dune0001_geo.ptx",
-        "textures/isDunesB/Displacement/dune0002_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0001_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0002_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0003_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0004_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0005_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0006_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0007_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0008_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0009_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0010_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0011_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0012_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0013_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0014_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0015_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0016_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0017_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0018_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0019_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0020_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0021_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0022_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0023_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0024_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0025_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0026_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0027_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0028_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0029_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0030_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0031_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0032_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0033_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0034_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0035_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0036_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0037_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0038_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0039_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0040_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0041_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0042_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerbud0043_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0001_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0002_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0003_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0004_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0005_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0006_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0007_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0008_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0009_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0010_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0011_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0012_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0013_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0014_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0015_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0016_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0017_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0018_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0019_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0020_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0021_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0022_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0023_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0024_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0025_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0026_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0027_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0028_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0029_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0030_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0031_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0032_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0033_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0034_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0035_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0036_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0037_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0038_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0039_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0040_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0041_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0042_geo.ptx",
-        "textures/isGardeniaA/Color/archiveflowerstem0043_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0001_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0002_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0003_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0004_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0005_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0006_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0007_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0008_geo.ptx",
-        "textures/isGardeniaA/Color/archivegardenia0009_geo.ptx",
-        "textures/isGardeniaA/Color/trunk_base_geo.ptx",
-        "textures/isGardeniaA/Displacement/trunk_base_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0001_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0002_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0003_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0004_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0005_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0006_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0007_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0008_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusAnthers0009_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusLeaf0001_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusLeaf0002_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusLeaf0003_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0001_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0002_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0003_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0004_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0005_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0006_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0007_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0008_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0009_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0010_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0011_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0012_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0013_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0014_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0015_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0016_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0017_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0018_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0019_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0020_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0021_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0022_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0023_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0024_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0025_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0026_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0027_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0028_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0029_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0030_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0031_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0032_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0033_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0034_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0035_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0036_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0037_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0038_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0039_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0040_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0041_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0042_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0043_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0044_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusPetal0045_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0001_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0002_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0003_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0004_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0005_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0006_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0007_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0008_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0009_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0010_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0011_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0012_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0013_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0014_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0015_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0016_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0017_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusSepals0018_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0001_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0002_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0003_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0004_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0005_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0006_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0007_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0008_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStigma0009_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0001_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0002_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0003_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0004_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0005_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0006_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0007_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0008_geo.ptx",
-        "textures/isHibiscus/Color/archiveHibiscusStyle0009_geo.ptx",
-        "textures/isHibiscus/Color/trunk_base_geo.ptx",
-        "textures/isHibiscusYoung/Color/trunk0001_geo.ptx",
-        "textures/isIronwoodA1/Color/trunk0001_geo.ptx",
-        "textures/isIronwoodB/Color/trunk0001_geo.ptx",
-        "textures/isKava/Color/archive_kava0001_geo.ptx",
-        "textures/isKava/Color/plate_proxy.ptx",
-        "textures/isKava/Color/smalltrunk0001_geo.ptx",
-        "textures/isKava/Color/talltrunk0001_geo.ptx",
-        "textures/isKava/Color/talltrunk0002_geo.ptx",
-        "textures/isKava/Color/talltrunk0003_geo.ptx",
-        "textures/isLavaRocks/Color/lavarocks0004_geo.ptx",
-        "textures/isLavaRocks/Color/lavarocks0005_geo.ptx",
-        "textures/isLavaRocks/Color/lavarocks0006_geo.ptx",
-        "textures/isLavaRocks/Color/rockfacebg0001_geo.ptx",
-        "textures/isLavaRocks/Color/rockfacemain0001_geo.ptx",
-        "textures/isLavaRocks/Color/rocksm0001_geo.ptx",
-        "textures/isLavaRocks/Color/rocksm0002_geo.ptx",
-        "textures/isLavaRocks/Color/rocksm0003_geo.ptx",
-        "textures/isLavaRocks/Color/rocksm0004_geo.ptx",
-        "textures/isLavaRocks/Color/rocksm0005_geo.ptx",
-        "textures/isLavaRocks/Displacement/lavarocks0004_geo.ptx",
-        "textures/isLavaRocks/Displacement/lavarocks0005_geo.ptx",
-        "textures/isLavaRocks/Displacement/lavarocks0006_geo.ptx",
-        "textures/isLavaRocks/Displacement/rockfacebg0001_geo.ptx",
-        "textures/isLavaRocks/Displacement/rockfacemain0001_geo.ptx",
-        "textures/isLavaRocks/Displacement/rocksm0001_geo.ptx",
-        "textures/isLavaRocks/Displacement/rocksm0002_geo.ptx",
-        "textures/isLavaRocks/Displacement/rocksm0003_geo.ptx",
-        "textures/isLavaRocks/Displacement/rocksm0004_geo.ptx",
-        "textures/isLavaRocks/Displacement/rocksm0005_geo.ptx",
-        "textures/isMountainA/Color/mountain_geo.ptx",
-        "textures/isMountainB/Color/mountainb0001_geo.ptx",
-        "textures/isMountainB/Color/mountainb0002_geo.ptx",
-        "textures/isMountainB/Color/mountainb0003_geo.ptx",
-        "textures/isMountainB/Color/mountainb0004_geo.ptx",
-        "textures/isMountainB/Color/mountainb0005_geo.ptx",
-        "textures/isMountainB/Color/mountbring_geo.ptx",
-        "textures/isMountainB/Displacement/mountainb0001_geo.ptx",
-        "textures/isMountainB/Displacement/mountainb0002_geo.ptx",
-        "textures/isMountainB/Displacement/mountainb0003_geo.ptx",
-        "textures/isMountainB/Displacement/mountainb0004_geo.ptx",
-        "textures/isMountainB/Displacement/mountainb0005_geo.ptx",
-        "textures/isMountainB/Displacement/mountbring_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0001_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0002_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0003_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0004_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0005_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0006_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0007_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0008_geo.ptx",
-        "textures/isNaupakaA/Color/archive_naupakaleaf0009_geo.ptx",
-        "textures/isPalmDead/Color/rootball0001_geo.ptx",
-        "textures/isPalmDead/Color/trunk0001_geo.ptx",
-        "textures/isPalmDead/Displacement/rootball0001_geo.ptx",
-        "textures/isPalmDead/Displacement/trunk0001_geo.ptx",
-        "textures/isPalmRig/Color/deadstrand0001_geo.ptx",
-        "textures/isPalmRig/Color/deadstrand0002_geo.ptx",
-        "textures/isPalmRig/Color/deadstrand0003_geo.ptx",
-        "textures/isPalmRig/Color/deadstrand0004_geo.ptx",
-        "textures/isPalmRig/Color/deadstrand0005_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0001_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0002_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0003_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0004_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0005_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0006_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0007_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0008_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0009_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0010_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0011_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0012_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0013_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0014_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0015_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0016_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0017_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0018_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0019_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0020_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0021_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0022_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0023_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0024_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0025_geo.ptx",
-        "textures/isPalmRig/Color/frondspine0026_geo.ptx",
-        "textures/isPalmRig/Color/roots_geo.ptx",
-        "textures/isPalmRig/Color/sheatha0001_geo.ptx",
-        "textures/isPalmRig/Color/sheatha0002_geo.ptx",
-        "textures/isPalmRig/Color/sheatha0003_geo.ptx",
-        "textures/isPalmRig/Color/sheathb0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathb0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathb0003_geo.ptx",
-        "textures/isPalmRig/Color/sheathc0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathc0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathc0004_geo.ptx",
-        "textures/isPalmRig/Color/sheathc0005_geo.ptx",
-        "textures/isPalmRig/Color/sheathd0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathd0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathd0003_geo.ptx",
-        "textures/isPalmRig/Color/sheathe0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathe0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathe0004_geo.ptx",
-        "textures/isPalmRig/Color/sheathe0005_geo.ptx",
-        "textures/isPalmRig/Color/sheathf0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathf0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathf0004_geo.ptx",
-        "textures/isPalmRig/Color/sheathf0005_geo.ptx",
-        "textures/isPalmRig/Color/sheathg0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathg0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathh0001_geo.ptx",
-        "textures/isPalmRig/Color/sheathh0002_geo.ptx",
-        "textures/isPalmRig/Color/sheathi0001_geo.ptx",
-        "textures/isPalmRig/Color/skirt_geo.ptx",
-        "textures/isPalmRig/Color/trunk0001_geo.ptx",
-        "textures/isPalmRig/Displacement/deadstrand0001_geo.ptx",
-        "textures/isPalmRig/Displacement/deadstrand0002_geo.ptx",
-        "textures/isPalmRig/Displacement/deadstrand0003_geo.ptx",
-        "textures/isPalmRig/Displacement/deadstrand0004_geo.ptx",
-        "textures/isPalmRig/Displacement/deadstrand0005_geo.ptx",
-        "textures/isPalmRig/Displacement/roots_geo.ptx",
-        "textures/isPalmRig/Displacement/sheatha0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheatha0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheatha0003_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathb0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathb0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathb0003_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathc0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathc0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathc0004_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathc0005_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathd0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathd0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathd0003_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathe0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathe0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathe0004_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathe0005_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathf0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathf0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathf0004_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathf0005_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathg0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathg0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathh0001_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathh0002_geo.ptx",
-        "textures/isPalmRig/Displacement/sheathi0001_geo.ptx",
-        "textures/isPalmRig/Displacement/skirt_geo.ptx",
-        "textures/isPalmRig/Displacement/trunk0001_geo.ptx",
-        "textures/isPandanusA/Color/pandanusLo_leavesBot_geo.ptx",
-        "textures/isPandanusA/Color/pandanusLo_leavesTop_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0001_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0002_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0003_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0004_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0005_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0006_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0007_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0008_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0009_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0010_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0011_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0012_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0013_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0014_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0015_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0016_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0017_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0018_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0019_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0020_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0021_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0022_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0023_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0024_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0025_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0026_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0027_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0028_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0029_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0030_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0031_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0032_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0033_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0034_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0035_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0036_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0037_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0038_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0039_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0040_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0041_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0042_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0043_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0044_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0045_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0046_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0047_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0048_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0049_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0050_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0051_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0052_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0053_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0054_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0055_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0056_geo.ptx",
-        "textures/isPandanusA/Color/root_temp0057_geo.ptx",
-        "textures/isPandanusA/Color/trunka_temp_geo.ptx",
-        "textures/isPandanusA/Color/trunkb_temp_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0001_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0002_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0003_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0004_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0005_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0006_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0007_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0008_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0009_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0010_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0011_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0012_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0013_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0014_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0015_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0016_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0017_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0018_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0019_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0020_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0021_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0022_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0023_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0024_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0025_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0026_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0027_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0028_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0029_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0030_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0031_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0032_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0033_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0034_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0035_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0036_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0037_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0038_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0039_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0040_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0041_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0042_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0043_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0044_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0045_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0046_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0047_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0048_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0049_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0050_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0051_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0052_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0053_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0054_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0055_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0056_geo.ptx",
-        "textures/isPandanusA/Displacement/root_temp0057_geo.ptx",
-        "textures/isPandanusA/Displacement/trunka_temp_geo.ptx",
-        "textures/isPandanusA/Displacement/trunkb_temp_geo.ptx",
-    };
-
-    std::vector<std::vector<TextureOffset> > offsets = {
-        {},
-        {
-            TextureOffset{ 0, 15750, 1, "trunk_base_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 864, 0, "archivebaycedar0001_geo" },
-        },
-        {
-            TextureOffset{ 0, 360, 3, "archiveCoral0001_geo" },
-            TextureOffset{ 360, 440, 4, "archiveCoral0002_geo" },
-            TextureOffset{ 440, 520, 5, "archiveCoral0003_geo" },
-            TextureOffset{ 520, 960, 6, "archiveCoral0004_geo" },
-            TextureOffset{ 960, 1320, 7, "archiveCoral0005_geo" },
-            TextureOffset{ 1320, 1416, 8, "archiveCoral0006_geo" },
-            TextureOffset{ 1416, 1600, 9, "archiveCoral0007_geo" },
-            TextureOffset{ 1600, 1712, 10, "archiveCoral0008_geo" },
-            TextureOffset{ 1712, 1896, 11, "archiveCoral0009_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 2112, 12, "archiveHibiscusAnthers0002_geo" },
-            TextureOffset{ 2112, 2184, 17, "archiveHibiscusPetal0006_geo" },
-            TextureOffset{ 2184, 2256, 18, "archiveHibiscusPetal0007_geo" },
-            TextureOffset{ 2256, 2328, 19, "archiveHibiscusPetal0008_geo" },
-            TextureOffset{ 2328, 2400, 20, "archiveHibiscusPetal0009_geo" },
-            TextureOffset{ 2400, 2472, 21, "archiveHibiscusPetal0010_geo" },
-            TextureOffset{ 2472, 2940, 42, "archiveHibiscusSepals0003_geo" },
-            TextureOffset{ 2940, 3528, 43, "archiveHibiscusSepals0004_geo" },
-            TextureOffset{ 3528, 3828, 52, "archiveHibiscusStigma0002_geo" },
-            TextureOffset{ 3828, 3888, 57, "archiveHibiscusStyle0002_geo" },
-            TextureOffset{ 3888, 6000, 13, "archiveHibiscusAnthers0003_geo" },
-            TextureOffset{ 6000, 6072, 22, "archiveHibiscusPetal0011_geo" },
-            TextureOffset{ 6072, 6144, 23, "archiveHibiscusPetal0012_geo" },
-            TextureOffset{ 6144, 6216, 24, "archiveHibiscusPetal0013_geo" },
-            TextureOffset{ 6216, 6288, 25, "archiveHibiscusPetal0014_geo" },
-            TextureOffset{ 6288, 6360, 26, "archiveHibiscusPetal0015_geo" },
-            TextureOffset{ 6360, 6828, 44, "archiveHibiscusSepals0005_geo" },
-            TextureOffset{ 6828, 7416, 45, "archiveHibiscusSepals0006_geo" },
-            TextureOffset{ 7416, 7716, 53, "archiveHibiscusStigma0003_geo" },
-            TextureOffset{ 7716, 7776, 58, "archiveHibiscusStyle0003_geo" },
-            TextureOffset{ 7776, 9888, 14, "archiveHibiscusAnthers0005_geo" },
-            TextureOffset{ 9888, 9960, 27, "archiveHibiscusPetal0021_geo" },
-            TextureOffset{ 9960, 10032, 28, "archiveHibiscusPetal0022_geo" },
-            TextureOffset{ 10032, 10104, 29, "archiveHibiscusPetal0023_geo" },
-            TextureOffset{ 10104, 10176, 30, "archiveHibiscusPetal0024_geo" },
-            TextureOffset{ 10176, 10248, 31, "archiveHibiscusPetal0025_geo" },
-            TextureOffset{ 10248, 10716, 46, "archiveHibiscusSepals0009_geo" },
-            TextureOffset{ 10716, 11304, 47, "archiveHibiscusSepals0010_geo" },
-            TextureOffset{ 11304, 11604, 54, "archiveHibiscusStigma0005_geo" },
-            TextureOffset{ 11604, 11664, 59, "archiveHibiscusStyle0005_geo" },
-            TextureOffset{ 11664, 13776, 15, "archiveHibiscusAnthers0007_geo" },
-            TextureOffset{ 13776, 13848, 32, "archiveHibiscusPetal0031_geo" },
-            TextureOffset{ 13848, 13920, 33, "archiveHibiscusPetal0032_geo" },
-            TextureOffset{ 13920, 13992, 34, "archiveHibiscusPetal0033_geo" },
-            TextureOffset{ 13992, 14064, 35, "archiveHibiscusPetal0034_geo" },
-            TextureOffset{ 14064, 14136, 36, "archiveHibiscusPetal0035_geo" },
-            TextureOffset{ 14136, 14604, 48, "archiveHibiscusSepals0013_geo" },
-            TextureOffset{ 14604, 15192, 49, "archiveHibiscusSepals0014_geo" },
-            TextureOffset{ 15192, 15492, 55, "archiveHibiscusStigma0007_geo" },
-            TextureOffset{ 15492, 15552, 60, "archiveHibiscusStyle0007_geo" },
-            TextureOffset{ 15552, 17664, 16, "archiveHibiscusAnthers0008_geo" },
-            TextureOffset{ 17664, 17736, 37, "archiveHibiscusPetal0036_geo" },
-            TextureOffset{ 17736, 17808, 38, "archiveHibiscusPetal0037_geo" },
-            TextureOffset{ 17808, 17880, 39, "archiveHibiscusPetal0038_geo" },
-            TextureOffset{ 17880, 17952, 40, "archiveHibiscusPetal0039_geo" },
-            TextureOffset{ 17952, 18024, 41, "archiveHibiscusPetal0040_geo" },
-            TextureOffset{ 18024, 18492, 50, "archiveHibiscusSepals0015_geo" },
-            TextureOffset{ 18492, 19080, 51, "archiveHibiscusSepals0016_geo" },
-            TextureOffset{ 19080, 19380, 56, "archiveHibiscusStigma0008_geo" },
-            TextureOffset{ 19380, 19440, 61, "archiveHibiscusStyle0008_geo" },
-        },
-        {
-            TextureOffset{ 0, 160, 67, "archiveRock0001_geo" },
-            TextureOffset{ 160, 232, 68, "archiveRock0002_geo" },
-            TextureOffset{ 232, 336, 69, "archiveRock0003_geo" },
-            TextureOffset{ 336, 372, 70, "archiveRock0004_geo" },
-            TextureOffset{ 372, 452, 71, "archiveRock0005_geo" },
-            TextureOffset{ 452, 548, 72, "archiveRock0006_geo" },
-            TextureOffset{ 548, 600, 73, "archiveRock0007_geo" },
-            TextureOffset{ 600, 808, 77, "archiveShell0001_geo" },
-            TextureOffset{ 808, 1016, 78, "archiveShell0002_geo" },
-            TextureOffset{ 1016, 1224, 79, "archiveShell0003_geo" },
-            TextureOffset{ 1224, 1432, 80, "archiveShell0004_geo" },
-            TextureOffset{ 1432, 1600, 81, "archiveShell0005_geo" },
-            TextureOffset{ 1600, 1744, 82, "archiveShell0006_geo" },
-            TextureOffset{ 1744, 1848, 83, "archiveShell0007_geo" },
-            TextureOffset{ 1848, 2556, 84, "archiveShell0008_geo" },
-        },
-        {
-            TextureOffset{ 0, 112, 62, "archiveLeaflet0123_geo" },
-            TextureOffset{ 112, 208, 63, "archiveLeaflet0124_geo" },
-            TextureOffset{ 208, 312, 64, "archiveLeaflet0125_geo" },
-            TextureOffset{ 312, 416, 65, "archiveLeaflet0126_geo" },
-            TextureOffset{ 416, 520, 66, "archiveLeaflet0127_geo" },
-        },
-        {
-            TextureOffset{ 0, 160, 67, "archiveRock0001_geo" },
-            TextureOffset{ 160, 232, 68, "archiveRock0002_geo" },
-            TextureOffset{ 232, 336, 69, "archiveRock0003_geo" },
-            TextureOffset{ 336, 372, 70, "archiveRock0004_geo" },
-            TextureOffset{ 372, 452, 71, "archiveRock0005_geo" },
-            TextureOffset{ 452, 548, 72, "archiveRock0006_geo" },
-            TextureOffset{ 548, 600, 73, "archiveRock0007_geo" },
-        },
-        {
-            TextureOffset{ 0, 968, 86, "seaweed0001_geo" },
-            TextureOffset{ 968, 1936, 87, "seaweed0002_geo" },
-            TextureOffset{ 1936, 2904, 88, "seaweed0003_geo" },
-            TextureOffset{ 2904, 3872, 89, "seaweed0004_geo" },
-            TextureOffset{ 3872, 4840, 90, "seaweed0005_geo" },
-            TextureOffset{ 4840, 5808, 91, "seaweed0006_geo" },
-            TextureOffset{ 5808, 6776, 92, "seaweed0007_geo" },
-            TextureOffset{ 6776, 7744, 93, "seaweed0008_geo" },
-            TextureOffset{ 7744, 8712, 94, "seaweed0009_geo" },
-            TextureOffset{ 8712, 9680, 95, "seaweed0010_geo" },
-            TextureOffset{ 9680, 10648, 96, "seaweed0011_geo" },
-            TextureOffset{ 10648, 11616, 97, "seaweed0012_geo" },
-            TextureOffset{ 11616, 12584, 98, "seaweed0013_geo" },
-            TextureOffset{ 12584, 13552, 99, "seaweed0014_geo" },
-            TextureOffset{ 13552, 14520, 100, "seaweed0015_geo" },
-            TextureOffset{ 14520, 15488, 101, "seaweed0016_geo" },
-            TextureOffset{ 15488, 16456, 102, "seaweed0017_geo" },
-            TextureOffset{ 16456, 17424, 103, "seaweed0018_geo" },
-            TextureOffset{ 17424, 18392, 104, "seaweed0019_geo" },
-            TextureOffset{ 18392, 19360, 105, "seaweed0020_geo" },
-            TextureOffset{ 19360, 20328, 106, "seaweed0021_geo" },
-            TextureOffset{ 20328, 21296, 107, "seaweed0022_geo" },
-            TextureOffset{ 21296, 22264, 108, "seaweed0023_geo" },
-            TextureOffset{ 22264, 23232, 109, "seaweed0024_geo" },
-            TextureOffset{ 23232, 24200, 110, "seaweed0025_geo" },
-            TextureOffset{ 24200, 25168, 111, "seaweed0026_geo" },
-            TextureOffset{ 25168, 26136, 112, "seaweed0027_geo" },
-            TextureOffset{ 26136, 27104, 113, "seaweed0028_geo" },
-            TextureOffset{ 27104, 28072, 114, "seaweed0029_geo" },
-            TextureOffset{ 28072, 29040, 115, "seaweed0030_geo" },
-            TextureOffset{ 29040, 30008, 116, "seaweed0031_geo" },
-            TextureOffset{ 30008, 30944, 117, "seaweed0032_geo" },
-            TextureOffset{ 30944, 31912, 118, "seaweed0033_geo" },
-            TextureOffset{ 31912, 32880, 119, "seaweed0034_geo" },
-            TextureOffset{ 32880, 33848, 120, "seaweed0035_geo" },
-            TextureOffset{ 33848, 34816, 121, "seaweed0036_geo" },
-            TextureOffset{ 34816, 35784, 122, "seaweed0037_geo" },
-            TextureOffset{ 35784, 36752, 123, "seaweed0038_geo" },
-            TextureOffset{ 36752, 37720, 124, "seaweed0039_geo" },
-            TextureOffset{ 37720, 38688, 125, "seaweed0040_geo" },
-            TextureOffset{ 38688, 39656, 126, "seaweed0041_geo" },
-            TextureOffset{ 39656, 40624, 127, "seaweed0042_geo" },
-            TextureOffset{ 40624, 41592, 128, "seaweed0043_geo" },
-            TextureOffset{ 41592, 42560, 129, "seaweed0044_geo" },
-            TextureOffset{ 42560, 43528, 130, "seaweed0045_geo" },
-            TextureOffset{ 43528, 44496, 131, "seaweed0046_geo" },
-            TextureOffset{ 44496, 45464, 132, "seaweed0047_geo" },
-            TextureOffset{ 45464, 46432, 133, "seaweed0048_geo" },
-            TextureOffset{ 46432, 47400, 134, "seaweed0049_geo" },
-            TextureOffset{ 47400, 48368, 135, "seaweed0050_geo" },
-            TextureOffset{ 48368, 49336, 136, "seaweed0051_geo" },
-            TextureOffset{ 49336, 50064, 137, "seaweed0052_geo" },
-            TextureOffset{ 50064, 51032, 138, "seaweed0053_geo" },
-            TextureOffset{ 51032, 52000, 139, "seaweed0054_geo" },
-            TextureOffset{ 52000, 52968, 140, "seaweed0055_geo" },
-            TextureOffset{ 52968, 53936, 141, "seaweed0056_geo" },
-            TextureOffset{ 53936, 54904, 142, "seaweed0057_geo" },
-            TextureOffset{ 54904, 55872, 143, "seaweed0058_geo" },
-            TextureOffset{ 55872, 56840, 144, "seaweed0059_geo" },
-            TextureOffset{ 56840, 57808, 145, "seaweed0060_geo" },
-            TextureOffset{ 57808, 58776, 146, "seaweed0061_geo" },
-            TextureOffset{ 58776, 59328, 147, "seaweed0062_geo" },
-            TextureOffset{ 59328, 60296, 74, "archiveSeaweed0063_geo" },
-            TextureOffset{ 60296, 61264, 75, "archiveSeaweed0064_geo" },
-            TextureOffset{ 61264, 62232, 76, "archiveSeaweed0065_geo" },
-        },
-        {
-            TextureOffset{ 0, 208, 77, "archiveShell0001_geo" },
-            TextureOffset{ 208, 416, 78, "archiveShell0002_geo" },
-            TextureOffset{ 416, 624, 79, "archiveShell0003_geo" },
-            TextureOffset{ 624, 832, 80, "archiveShell0004_geo" },
-            TextureOffset{ 832, 1000, 81, "archiveShell0005_geo" },
-            TextureOffset{ 1000, 1144, 82, "archiveShell0006_geo" },
-            TextureOffset{ 1144, 1248, 83, "archiveShell0007_geo" },
-            TextureOffset{ 1248, 1956, 84, "archiveShell0008_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 160, 67, "archiveRock0001_geo" },
-            TextureOffset{ 72, 144, 68, "archiveRock0002_geo" },
-            TextureOffset{ 144, 248, 69, "archiveRock0003_geo" },
-            TextureOffset{ 248, 284, 70, "archiveRock0004_geo" },
-            TextureOffset{ 284, 364, 71, "archiveRock0005_geo" },
-            TextureOffset{ 364, 460, 72, "archiveRock0006_geo" },
-            TextureOffset{ 460, 512, 73, "archiveRock0007_geo" },
-        },
-        {
-            TextureOffset{ 0, 55836, 85, "beach_geo" },
-        },
-        {},
-        {},
-        {},
-        {},
-        {
-            TextureOffset{ 0, 112, 158, "archiveLeaflet0123_geo" },
-            TextureOffset{ 112, 208, 159, "archiveLeaflet0124_geo" },
-            TextureOffset{ 208, 312, 160, "archiveLeaflet0125_geo" },
-            TextureOffset{ 312, 416, 161, "archiveLeaflet0126_geo" },
-            TextureOffset{ 416, 520, 162, "archiveLeaflet0127_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 272, 163, "antler0001_geo" },
-            TextureOffset{ 272, 664, 164, "antler0002_geo" },
-            TextureOffset{ 664, 1056, 165, "antler0003_geo" },
-            TextureOffset{ 1056, 1448, 166, "antler0004_geo" },
-            TextureOffset{ 1448, 1840, 167, "antler0005_geo" },
-            TextureOffset{ 1840, 2232, 168, "antler0006_geo" },
-            TextureOffset{ 2232, 2624, 169, "antler0007_geo" },
-            TextureOffset{ 2624, 3016, 170, "antler0008_geo" },
-            TextureOffset{ 3016, 3408, 171, "antler0009_geo" },
-            TextureOffset{ 3408, 3800, 172, "antler0010_geo" },
-            TextureOffset{ 3800, 4192, 173, "antler0011_geo" },
-            TextureOffset{ 4192, 4584, 174, "antler0012_geo" },
-            TextureOffset{ 4584, 4976, 175, "antler0013_geo" },
-            TextureOffset{ 4976, 5368, 176, "antler0014_geo" },
-            TextureOffset{ 5368, 8376, 177, "antler0015_geo" },
-            TextureOffset{ 8376, 31160, 178, "antler0016_geo" },
-            TextureOffset{ 31160, 34168, 179, "antler0017_geo" },
-            TextureOffset{ 34168, 43000, 180, "antler0018_geo" },
-            TextureOffset{ 43000, 65784, 181, "antler0019_geo" },
-            TextureOffset{ 65784, 68792, 182, "antler0020_geo" },
-            TextureOffset{ 68792, 91576, 183, "antler0021_geo" },
-            TextureOffset{ 91576, 94584, 184, "antler0022_geo" },
-            TextureOffset{ 94584, 103416, 185, "antler0023_geo" },
-            TextureOffset{ 103416, 106424, 186, "antler0024_geo" },
-            TextureOffset{ 106424, 109432, 187, "antler0025_geo" },
-            TextureOffset{ 109432, 132216, 188, "antler0026_geo" },
-            TextureOffset{ 132216, 155000, 189, "antler0027_geo" },
-            TextureOffset{ 155000, 165964, 190, "antler0028_geo" },
-            TextureOffset{ 165964, 177996, 191, "antler0029_geo" },
-            TextureOffset{ 177996, 188960, 192, "antler0030_geo" },
-            TextureOffset{ 188960, 203296, 193, "antler0031_geo" },
-            TextureOffset{ 203296, 226080, 194, "antler0032_geo" },
-            TextureOffset{ 226080, 229088, 195, "antler0033_geo" },
-            TextureOffset{ 229088, 232096, 196, "antler0034_geo" },
-            TextureOffset{ 232096, 232204, 197, "antler0035_geo" },
-            TextureOffset{ 232204, 232296, 198, "antler0036_geo" },
-            TextureOffset{ 232296, 232388, 199, "antler0037_geo" },
-            TextureOffset{ 232388, 255172, 200, "antler0038_geo" },
-            TextureOffset{ 255172, 277956, 201, "antler0039_geo" },
-            TextureOffset{ 277956, 300740, 202, "antler0040_geo" },
-            TextureOffset{ 300740, 323524, 203, "antler0041_geo" },
-            TextureOffset{ 323524, 323916, 204, "antler0042_geo" },
-            TextureOffset{ 323916, 346700, 205, "antler0043_geo" },
-            TextureOffset{ 346700, 369484, 206, "antler0044_geo" },
-            TextureOffset{ 369484, 392268, 207, "antler0045_geo" },
-            TextureOffset{ 392268, 415052, 208, "antler0046_geo" },
-            TextureOffset{ 415052, 426016, 209, "antler0047_geo" },
-            TextureOffset{ 426016, 436980, 210, "antler0048_geo" },
-            TextureOffset{ 436980, 447944, 211, "antler0049_geo" },
-            TextureOffset{ 447944, 458908, 212, "antler0050_geo" },
-            TextureOffset{ 458908, 470940, 213, "antler0051_geo" },
-            TextureOffset{ 470940, 482972, 214, "antler0052_geo" },
-            TextureOffset{ 482972, 495004, 215, "antler0053_geo" },
-            TextureOffset{ 495004, 505968, 216, "antler0054_geo" },
-            TextureOffset{ 505968, 516932, 217, "antler0055_geo" },
-            TextureOffset{ 516932, 527896, 218, "antler0056_geo" },
-            TextureOffset{ 527896, 542232, 219, "antler0057_geo" },
-            TextureOffset{ 542232, 556568, 220, "antler0058_geo" },
-            TextureOffset{ 556568, 570904, 221, "antler0059_geo" },
-            TextureOffset{ 570904, 593688, 222, "antler0060_geo" },
-            TextureOffset{ 593688, 616472, 223, "antler0061_geo" },
-            TextureOffset{ 616472, 639256, 224, "antler0062_geo" },
-            TextureOffset{ 639256, 642264, 225, "antler0063_geo" },
-            TextureOffset{ 642264, 645272, 226, "antler0064_geo" },
-            TextureOffset{ 645272, 648280, 227, "antler0065_geo" },
-            TextureOffset{ 648280, 651288, 228, "antler0066_geo" },
-            TextureOffset{ 651288, 654296, 229, "antler0067_geo" },
-            TextureOffset{ 654296, 657304, 230, "antler0068_geo" },
-            TextureOffset{ 657304, 657412, 231, "antler0069_geo" },
-            TextureOffset{ 657412, 657520, 232, "antler0070_geo" },
-            TextureOffset{ 657520, 657612, 233, "antler0071_geo" },
-            TextureOffset{ 657612, 657704, 234, "antler0072_geo" },
-            TextureOffset{ 657704, 657796, 235, "antler0073_geo" },
-            TextureOffset{ 657796, 657888, 236, "antler0074_geo" },
-            TextureOffset{ 657888, 658080, 266, "barnacle0001_geo" },
-            TextureOffset{ 658080, 658272, 267, "barnacle0002_geo" },
-            TextureOffset{ 658272, 658464, 268, "barnacle0003_geo" },
-            TextureOffset{ 658464, 658656, 269, "barnacle0004_geo" },
-            TextureOffset{ 658656, 658848, 270, "barnacle0005_geo" },
-            TextureOffset{ 658848, 659040, 271, "barnacle0006_geo" },
-            TextureOffset{ 659040, 659232, 272, "barnacle0007_geo" },
-            TextureOffset{ 659232, 659424, 273, "barnacle0008_geo" },
-            TextureOffset{ 659424, 659616, 274, "barnacle0009_geo" },
-            TextureOffset{ 659616, 659808, 275, "barnacle0010_geo" },
-            TextureOffset{ 659808, 660000, 276, "barnacle0011_geo" },
-            TextureOffset{ 660000, 660192, 277, "barnacle0012_geo" },
-            TextureOffset{ 660192, 660384, 278, "barnacle0013_geo" },
-            TextureOffset{ 660384, 660576, 279, "barnacle0014_geo" },
-            TextureOffset{ 660576, 660768, 280, "barnacle0015_geo" },
-            TextureOffset{ 660768, 660960, 281, "barnacle0016_geo" },
-            TextureOffset{ 660960, 661152, 282, "barnacle0017_geo" },
-            TextureOffset{ 661152, 661344, 283, "barnacle0018_geo" },
-            TextureOffset{ 661344, 661536, 284, "barnacle0019_geo" },
-            TextureOffset{ 661536, 661728, 285, "barnacle0020_geo" },
-            TextureOffset{ 661728, 661920, 286, "barnacle0021_geo" },
-            TextureOffset{ 661920, 662112, 287, "barnacle0022_geo" },
-            TextureOffset{ 662112, 662304, 288, "barnacle0023_geo" },
-            TextureOffset{ 662304, 662496, 289, "barnacle0024_geo" },
-            TextureOffset{ 662496, 662688, 290, "barnacle0025_geo" },
-            TextureOffset{ 662688, 662880, 291, "barnacle0026_geo" },
-            TextureOffset{ 662880, 663072, 292, "barnacle0027_geo" },
-            TextureOffset{ 663072, 663264, 293, "barnacle0028_geo" },
-            TextureOffset{ 663264, 663456, 294, "barnacle0029_geo" },
-            TextureOffset{ 663456, 663648, 295, "barnacle0030_geo" },
-            TextureOffset{ 663648, 663840, 296, "barnacle0031_geo" },
-            TextureOffset{ 663840, 664032, 297, "barnacle0032_geo" },
-            TextureOffset{ 664032, 664224, 298, "barnacle0033_geo" },
-            TextureOffset{ 664224, 664416, 299, "barnacle0034_geo" },
-            TextureOffset{ 664416, 664608, 300, "barnacle0035_geo" },
-            TextureOffset{ 664608, 664800, 301, "barnacle0036_geo" },
-            TextureOffset{ 664800, 664992, 302, "barnacle0037_geo" },
-            TextureOffset{ 664992, 665184, 303, "barnacle0038_geo" },
-            TextureOffset{ 665184, 665376, 304, "barnacle0039_geo" },
-            TextureOffset{ 665376, 665568, 305, "barnacle0040_geo" },
-            TextureOffset{ 665568, 665760, 306, "barnacle0041_geo" },
-            TextureOffset{ 665760, 665952, 307, "barnacle0042_geo" },
-            TextureOffset{ 665952, 666144, 308, "barnacle0043_geo" },
-            TextureOffset{ 666144, 666336, 309, "barnacle0044_geo" },
-            TextureOffset{ 666336, 666528, 310, "barnacle0045_geo" },
-            TextureOffset{ 666528, 666720, 311, "barnacle0046_geo" },
-            TextureOffset{ 666720, 666912, 312, "barnacle0047_geo" },
-            TextureOffset{ 666912, 667104, 313, "barnacle0048_geo" },
-            TextureOffset{ 667104, 667296, 314, "barnacle0049_geo" },
-            TextureOffset{ 667296, 667488, 315, "barnacle0050_geo" },
-            TextureOffset{ 667488, 667680, 316, "barnacle0051_geo" },
-            TextureOffset{ 667680, 667872, 317, "barnacle0052_geo" },
-            TextureOffset{ 667872, 668064, 318, "barnacle0053_geo" },
-            TextureOffset{ 668064, 668256, 319, "barnacle0054_geo" },
-            TextureOffset{ 668256, 668448, 320, "barnacle0055_geo" },
-            TextureOffset{ 668448, 668640, 321, "barnacle0056_geo" },
-            TextureOffset{ 668640, 668832, 322, "barnacle0057_geo" },
-            TextureOffset{ 668832, 669024, 323, "barnacle0058_geo" },
-            TextureOffset{ 669024, 669216, 324, "barnacle0059_geo" },
-            TextureOffset{ 669216, 669408, 325, "barnacle0060_geo" },
-            TextureOffset{ 669408, 669600, 326, "barnacle0061_geo" },
-            TextureOffset{ 669600, 669792, 327, "barnacle0062_geo" },
-            TextureOffset{ 669792, 669984, 328, "barnacle0063_geo" },
-            TextureOffset{ 669984, 670176, 329, "barnacle0064_geo" },
-            TextureOffset{ 670176, 670368, 330, "barnacle0065_geo" },
-            TextureOffset{ 670368, 670560, 331, "barnacle0066_geo" },
-            TextureOffset{ 670560, 670752, 332, "barnacle0067_geo" },
-            TextureOffset{ 670752, 670944, 333, "barnacle0068_geo" },
-            TextureOffset{ 670944, 671136, 334, "barnacle0069_geo" },
-            TextureOffset{ 671136, 671328, 335, "barnacle0070_geo" },
-            TextureOffset{ 671328, 671520, 336, "barnacle0071_geo" },
-            TextureOffset{ 671520, 671712, 337, "barnacle0072_geo" },
-            TextureOffset{ 671712, 671904, 338, "barnacle0073_geo" },
-            TextureOffset{ 671904, 672096, 339, "barnacle0074_geo" },
-            TextureOffset{ 672096, 672288, 340, "barnacle0075_geo" },
-            TextureOffset{ 672288, 672480, 341, "barnacle0076_geo" },
-            TextureOffset{ 672480, 672672, 342, "barnacle0077_geo" },
-            TextureOffset{ 672672, 672864, 343, "barnacle0078_geo" },
-            TextureOffset{ 672864, 673056, 344, "barnacle0079_geo" },
-            TextureOffset{ 673056, 673248, 345, "barnacle0080_geo" },
-            TextureOffset{ 673248, 673440, 346, "barnacle0081_geo" },
-            TextureOffset{ 673440, 673632, 347, "barnacle0082_geo" },
-            TextureOffset{ 673632, 673824, 348, "barnacle0083_geo" },
-            TextureOffset{ 673824, 674016, 349, "barnacle0084_geo" },
-            TextureOffset{ 674016, 674208, 350, "barnacle0085_geo" },
-            TextureOffset{ 674208, 674400, 351, "barnacle0086_geo" },
-            TextureOffset{ 674400, 674592, 352, "barnacle0087_geo" },
-            TextureOffset{ 674592, 674784, 353, "barnacle0088_geo" },
-            TextureOffset{ 674784, 674976, 354, "barnacle0089_geo" },
-            TextureOffset{ 674976, 675168, 355, "barnacle0090_geo" },
-            TextureOffset{ 675168, 675360, 356, "barnacle0091_geo" },
-            TextureOffset{ 675360, 675552, 357, "barnacle0092_geo" },
-            TextureOffset{ 675552, 675744, 358, "barnacle0093_geo" },
-            TextureOffset{ 675744, 675936, 359, "barnacle0094_geo" },
-            TextureOffset{ 675936, 676128, 360, "barnacle0095_geo" },
-            TextureOffset{ 676128, 676320, 361, "barnacle0096_geo" },
-            TextureOffset{ 676320, 676512, 362, "barnacle0097_geo" },
-            TextureOffset{ 676512, 676704, 363, "barnacle0098_geo" },
-            TextureOffset{ 676704, 676896, 364, "barnacle0099_geo" },
-            TextureOffset{ 676896, 677088, 365, "barnacle0100_geo" },
-            TextureOffset{ 677088, 677280, 366, "barnacle0101_geo" },
-            TextureOffset{ 677280, 677472, 367, "barnacle0102_geo" },
-            TextureOffset{ 677472, 677664, 368, "barnacle0103_geo" },
-            TextureOffset{ 677664, 677856, 369, "barnacle0104_geo" },
-            TextureOffset{ 677856, 678048, 370, "barnacle0105_geo" },
-            TextureOffset{ 678048, 678240, 371, "barnacle0106_geo" },
-            TextureOffset{ 678240, 678432, 372, "barnacle0107_geo" },
-            TextureOffset{ 678432, 678624, 373, "barnacle0108_geo" },
-            TextureOffset{ 678624, 678816, 374, "barnacle0109_geo" },
-            TextureOffset{ 678816, 679008, 375, "barnacle0110_geo" },
-            TextureOffset{ 679008, 679200, 376, "barnacle0111_geo" },
-            TextureOffset{ 679200, 679392, 377, "barnacle0112_geo" },
-            TextureOffset{ 679392, 709344, 378, "cauliflower0001_geo" },
-            TextureOffset{ 709344, 739296, 379, "cauliflower0002_geo" },
-            TextureOffset{ 739296, 769248, 380, "cauliflower0003_geo" },
-            TextureOffset{ 769248, 799200, 381, "cauliflower0004_geo" },
-            TextureOffset{ 799200, 829152, 382, "cauliflower0005_geo" },
-            TextureOffset{ 829152, 859104, 383, "cauliflower0006_geo" },
-            TextureOffset{ 859104, 889632, 384, "cauliflower0007_geo" },
-            TextureOffset{ 889632, 920160, 385, "cauliflower0008_geo" },
-            TextureOffset{ 920160, 950688, 386, "cauliflower0009_geo" },
-            TextureOffset{ 950688, 981216, 387, "cauliflower0010_geo" },
-            TextureOffset{ 981216, 1011168, 388, "cauliflower0011_geo" },
-            TextureOffset{ 1011168, 1041120, 389, "cauliflower0012_geo" },
-            TextureOffset{ 1041120, 1071072, 390, "cauliflower0013_geo" },
-            TextureOffset{ 1071072, 1101024, 391, "cauliflower0014_geo" },
-            TextureOffset{ 1101024, 1130976, 392, "cauliflower0015_geo" },
-            TextureOffset{ 1130976, 1160928, 393, "cauliflower0016_geo" },
-            TextureOffset{ 1160928, 1190880, 394, "cauliflower0017_geo" },
-            TextureOffset{ 1190880, 1220832, 395, "cauliflower0018_geo" },
-            TextureOffset{ 1220832, 1250016, 396, "cauliflower0019_geo" },
-            TextureOffset{ 1250016, 1279200, 397, "cauliflower0020_geo" },
-            TextureOffset{ 1279200, 1308384, 398, "cauliflower0021_geo" },
-            TextureOffset{ 1308384, 1337568, 399, "cauliflower0022_geo" },
-            TextureOffset{ 1337568, 1367520, 400, "cauliflower0023_geo" },
-            TextureOffset{ 1367520, 1397472, 401, "cauliflower0024_geo" },
-            TextureOffset{ 1397472, 1427424, 402, "cauliflower0025_geo" },
-            TextureOffset{ 1427424, 1457376, 403, "cauliflower0026_geo" },
-            TextureOffset{ 1457376, 1487328, 404, "cauliflower0027_geo" },
-            TextureOffset{ 1487328, 1517280, 405, "cauliflower0028_geo" },
-            TextureOffset{ 1517280, 1547232, 406, "cauliflower0029_geo" },
-            TextureOffset{ 1547232, 1577184, 407, "cauliflower0030_geo" },
-            TextureOffset{ 1577184, 1577228, 408, "clubbedfinger0001_geo" },
-            TextureOffset{ 1577228, 1577272, 409, "clubbedfinger0002_geo" },
-            TextureOffset{ 1577272, 1577316, 410, "clubbedfinger0003_geo" },
-            TextureOffset{ 1577316, 1577360, 411, "clubbedfinger0004_geo" },
-            TextureOffset{ 1577360, 1577404, 412, "clubbedfinger0005_geo" },
-            TextureOffset{ 1577404, 1577448, 413, "clubbedfinger0006_geo" },
-            TextureOffset{ 1577448, 1577492, 414, "clubbedfinger0007_geo" },
-            TextureOffset{ 1577492, 1577536, 415, "clubbedfinger0009_geo" },
-            TextureOffset{ 1577536, 1577580, 416, "clubbedfinger0010_geo" },
-            TextureOffset{ 1577580, 1577624, 417, "clubbedfinger0011_geo" },
-            TextureOffset{ 1577624, 1577668, 418, "clubbedfinger0012_geo" },
-            TextureOffset{ 1577668, 1577712, 419, "clubbedfinger0013_geo" },
-            TextureOffset{ 1577712, 1577756, 420, "clubbedfinger0014_geo" },
-            TextureOffset{ 1577756, 1577800, 421, "clubbedfinger0015_geo" },
-            TextureOffset{ 1577800, 1577844, 422, "clubbedfinger0017_geo" },
-            TextureOffset{ 1577844, 1577888, 423, "clubbedfinger0018_geo" },
-            TextureOffset{ 1577888, 1577932, 424, "clubbedfinger0019_geo" },
-            TextureOffset{ 1577932, 1577976, 425, "clubbedfinger0020_geo" },
-            TextureOffset{ 1577976, 1578020, 426, "clubbedfinger0021_geo" },
-            TextureOffset{ 1578020, 1578064, 427, "clubbedfinger0022_geo" },
-            TextureOffset{ 1578064, 1578108, 428, "clubbedfinger0023_geo" },
-            TextureOffset{ 1578108, 1578152, 429, "clubbedfinger0024_geo" },
-            TextureOffset{ 1578152, 1578196, 430, "clubbedfinger0025_geo" },
-            TextureOffset{ 1578196, 1578240, 431, "clubbedfinger0026_geo" },
-            TextureOffset{ 1578240, 1578284, 432, "clubbedfinger0027_geo" },
-            TextureOffset{ 1578284, 1578328, 433, "clubbedfinger0028_geo" },
-            TextureOffset{ 1578328, 1578372, 434, "clubbedfinger0029_geo" },
-            TextureOffset{ 1578372, 1578416, 435, "clubbedfinger0030_geo" },
-            TextureOffset{ 1578416, 1578460, 436, "clubbedfinger0031_geo" },
-            TextureOffset{ 1578460, 1578504, 437, "clubbedfinger0032_geo" },
-            TextureOffset{ 1578504, 1578548, 438, "clubbedfinger0033_geo" },
-            TextureOffset{ 1578548, 1578592, 439, "clubbedfinger0034_geo" },
-            TextureOffset{ 1578592, 1578636, 440, "clubbedfinger0035_geo" },
-            TextureOffset{ 1578636, 1578680, 441, "clubbedfinger0037_geo" },
-            TextureOffset{ 1578680, 1578724, 442, "clubbedfinger0038_geo" },
-            TextureOffset{ 1578724, 1578768, 443, "clubbedfinger0039_geo" },
-            TextureOffset{ 1578768, 1578812, 444, "clubbedfinger0041_geo" },
-            TextureOffset{ 1578812, 1578856, 445, "clubbedfinger0042_geo" },
-            TextureOffset{ 1578856, 1578900, 446, "clubbedfinger0043_geo" },
-            TextureOffset{ 1578900, 1578944, 447, "clubbedfinger0045_geo" },
-            TextureOffset{ 1578944, 1578988, 448, "clubbedfinger0046_geo" },
-            TextureOffset{ 1578988, 1579032, 449, "clubbedfinger0047_geo" },
-            TextureOffset{ 1579032, 1579096, 450, "clubbedfinger0048_geo" },
-            TextureOffset{ 1579096, 1579140, 451, "clubbedfinger0049_geo" },
-            TextureOffset{ 1579140, 1579184, 452, "clubbedfinger0050_geo" },
-            TextureOffset{ 1579184, 1579228, 453, "clubbedfinger0051_geo" },
-            TextureOffset{ 1579228, 1579272, 454, "clubbedfinger0053_geo" },
-            TextureOffset{ 1579272, 1579316, 455, "clubbedfinger0054_geo" },
-            TextureOffset{ 1579316, 1579360, 456, "clubbedfinger0055_geo" },
-            TextureOffset{ 1579360, 1579404, 457, "clubbedfinger0057_geo" },
-            TextureOffset{ 1579404, 1579448, 458, "clubbedfinger0058_geo" },
-            TextureOffset{ 1579448, 1579492, 459, "clubbedfinger0059_geo" },
-            TextureOffset{ 1579492, 1579536, 460, "clubbedfinger0061_geo" },
-            TextureOffset{ 1579536, 1579580, 461, "clubbedfinger0062_geo" },
-            TextureOffset{ 1579580, 1579624, 462, "clubbedfinger0063_geo" },
-            TextureOffset{ 1579624, 1579668, 463, "clubbedfinger0064_geo" },
-            TextureOffset{ 1579668, 1579712, 464, "clubbedfinger0065_geo" },
-            TextureOffset{ 1579712, 1579756, 465, "clubbedfinger0066_geo" },
-            TextureOffset{ 1579756, 1579800, 466, "clubbedfinger0067_geo" },
-            TextureOffset{ 1579800, 1579844, 467, "clubbedfinger0068_geo" },
-            TextureOffset{ 1579844, 1579888, 468, "clubbedfinger0069_geo" },
-            TextureOffset{ 1579888, 1579932, 469, "clubbedfinger0070_geo" },
-            TextureOffset{ 1579932, 1579976, 470, "clubbedfinger0071_geo" },
-            TextureOffset{ 1579976, 1580020, 471, "clubbedfinger0073_geo" },
-            TextureOffset{ 1580020, 1580064, 472, "clubbedfinger0074_geo" },
-            TextureOffset{ 1580064, 1580108, 473, "clubbedfinger0075_geo" },
-            TextureOffset{ 1580108, 1580152, 474, "clubbedfinger0077_geo" },
-            TextureOffset{ 1580152, 1580196, 475, "clubbedfinger0078_geo" },
-            TextureOffset{ 1580196, 1580240, 476, "clubbedfinger0079_geo" },
-            TextureOffset{ 1580240, 1580284, 477, "clubbedfinger0081_geo" },
-            TextureOffset{ 1580284, 1580328, 478, "clubbedfinger0082_geo" },
-            TextureOffset{ 1580328, 1580372, 479, "clubbedfinger0083_geo" },
-            TextureOffset{ 1580372, 1580416, 480, "clubbedfinger0084_geo" },
-            TextureOffset{ 1580416, 1580460, 481, "clubbedfinger0085_geo" },
-            TextureOffset{ 1580460, 1580504, 482, "clubbedfinger0086_geo" },
-            TextureOffset{ 1580504, 1580548, 483, "clubbedfinger0087_geo" },
-            TextureOffset{ 1580548, 1580592, 484, "clubbedfinger0088_geo" },
-            TextureOffset{ 1580592, 1580636, 485, "clubbedfinger0089_geo" },
-            TextureOffset{ 1580636, 1580680, 486, "clubbedfinger0090_geo" },
-            TextureOffset{ 1580680, 1580724, 487, "clubbedfinger0091_geo" },
-            TextureOffset{ 1580724, 1580768, 488, "clubbedfinger0092_geo" },
-            TextureOffset{ 1580768, 1580812, 489, "clubbedfinger0093_geo" },
-            TextureOffset{ 1580812, 1580856, 490, "clubbedfinger0094_geo" },
-            TextureOffset{ 1580856, 1580900, 491, "clubbedfinger0095_geo" },
-            TextureOffset{ 1580900, 1580944, 492, "clubbedfinger0096_geo" },
-            TextureOffset{ 1580944, 1580988, 493, "clubbedfinger0097_geo" },
-            TextureOffset{ 1580988, 1581032, 494, "clubbedfinger0098_geo" },
-            TextureOffset{ 1581032, 1581076, 495, "clubbedfinger0099_geo" },
-            TextureOffset{ 1581076, 1581120, 496, "clubbedfinger0100_geo" },
-            TextureOffset{ 1581120, 1581164, 497, "clubbedfinger0101_geo" },
-            TextureOffset{ 1581164, 1581208, 498, "clubbedfinger0102_geo" },
-            TextureOffset{ 1581208, 1581252, 499, "clubbedfinger0103_geo" },
-            TextureOffset{ 1581252, 1581296, 500, "clubbedfinger0104_geo" },
-            TextureOffset{ 1581296, 1581340, 501, "clubbedfinger0105_geo" },
-            TextureOffset{ 1581340, 1581384, 502, "clubbedfinger0106_geo" },
-            TextureOffset{ 1581384, 1581428, 503, "clubbedfinger0107_geo" },
-            TextureOffset{ 1581428, 1581472, 504, "clubbedfinger0108_geo" },
-            TextureOffset{ 1581472, 1581516, 505, "clubbedfinger0109_geo" },
-            TextureOffset{ 1581516, 1581560, 506, "clubbedfinger0110_geo" },
-            TextureOffset{ 1581560, 1581604, 507, "clubbedfinger0111_geo" },
-            TextureOffset{ 1581604, 1581648, 508, "clubbedfinger0112_geo" },
-            TextureOffset{ 1581648, 1581692, 509, "clubbedfinger0113_geo" },
-            TextureOffset{ 1581692, 1581736, 510, "clubbedfinger0114_geo" },
-            TextureOffset{ 1581736, 1581780, 511, "clubbedfinger0115_geo" },
-            TextureOffset{ 1581780, 1581824, 512, "clubbedfinger0116_geo" },
-            TextureOffset{ 1581824, 1581868, 513, "clubbedfinger0117_geo" },
-            TextureOffset{ 1581868, 1581912, 514, "clubbedfinger0118_geo" },
-            TextureOffset{ 1581912, 1581956, 515, "clubbedfinger0119_geo" },
-            TextureOffset{ 1581956, 1582000, 516, "clubbedfinger0120_geo" },
-            TextureOffset{ 1582000, 1582044, 517, "clubbedfinger0121_geo" },
-            TextureOffset{ 1582044, 1582088, 518, "clubbedfinger0122_geo" },
-            TextureOffset{ 1582088, 1582132, 519, "clubbedfinger0123_geo" },
-            TextureOffset{ 1582132, 1582176, 520, "clubbedfinger0124_geo" },
-            TextureOffset{ 1582176, 1582220, 521, "clubbedfinger0125_geo" },
-            TextureOffset{ 1582220, 1582264, 522, "clubbedfinger0126_geo" },
-            TextureOffset{ 1582264, 1582308, 523, "clubbedfinger0127_geo" },
-            TextureOffset{ 1582308, 1582352, 524, "clubbedfinger0128_geo" },
-            TextureOffset{ 1582352, 1582396, 525, "clubbedfinger0129_geo" },
-            TextureOffset{ 1582396, 1582440, 526, "clubbedfinger0130_geo" },
-            TextureOffset{ 1582440, 1582484, 527, "clubbedfinger0131_geo" },
-            TextureOffset{ 1582484, 1582528, 528, "clubbedfinger0132_geo" },
-            TextureOffset{ 1582528, 1582572, 529, "clubbedfinger0133_geo" },
-            TextureOffset{ 1582572, 1582616, 530, "clubbedfinger0134_geo" },
-            TextureOffset{ 1582616, 1582660, 531, "clubbedfinger0135_geo" },
-            TextureOffset{ 1582660, 1582704, 532, "clubbedfinger0136_geo" },
-            TextureOffset{ 1582704, 1582748, 533, "clubbedfinger0137_geo" },
-            TextureOffset{ 1582748, 1582792, 534, "clubbedfinger0138_geo" },
-            TextureOffset{ 1582792, 1582836, 535, "clubbedfinger0139_geo" },
-            TextureOffset{ 1582836, 1582880, 536, "clubbedfinger0140_geo" },
-            TextureOffset{ 1582880, 1582924, 537, "clubbedfinger0141_geo" },
-            TextureOffset{ 1582924, 1582968, 538, "clubbedfinger0142_geo" },
-            TextureOffset{ 1582968, 1583012, 539, "clubbedfinger0143_geo" },
-            TextureOffset{ 1583012, 1583056, 540, "clubbedfinger0144_geo" },
-            TextureOffset{ 1583056, 1583100, 541, "clubbedfinger0145_geo" },
-            TextureOffset{ 1583100, 1583144, 542, "clubbedfinger0146_geo" },
-            TextureOffset{ 1583144, 1583188, 543, "clubbedfinger0147_geo" },
-            TextureOffset{ 1583188, 1583232, 544, "clubbedfinger0148_geo" },
-            TextureOffset{ 1583232, 1583276, 545, "clubbedfinger0149_geo" },
-            TextureOffset{ 1583276, 1583320, 546, "clubbedfinger0150_geo" },
-            TextureOffset{ 1583320, 1583364, 547, "clubbedfinger0151_geo" },
-            TextureOffset{ 1583364, 1583408, 548, "clubbedfinger0152_geo" },
-            TextureOffset{ 1583408, 1583452, 549, "clubbedfinger0153_geo" },
-            TextureOffset{ 1583452, 1583496, 550, "clubbedfinger0154_geo" },
-            TextureOffset{ 1583496, 1583540, 551, "clubbedfinger0155_geo" },
-            TextureOffset{ 1583540, 1583584, 552, "clubbedfinger0157_geo" },
-            TextureOffset{ 1583584, 1583628, 553, "clubbedfinger0158_geo" },
-            TextureOffset{ 1583628, 1583672, 554, "clubbedfinger0159_geo" },
-            TextureOffset{ 1583672, 1583716, 555, "clubbedfinger0161_geo" },
-            TextureOffset{ 1583716, 1583760, 556, "clubbedfinger0162_geo" },
-            TextureOffset{ 1583760, 1583804, 557, "clubbedfinger0163_geo" },
-            TextureOffset{ 1583804, 1583848, 558, "clubbedfinger0165_geo" },
-            TextureOffset{ 1583848, 1583892, 559, "clubbedfinger0166_geo" },
-            TextureOffset{ 1583892, 1583936, 560, "clubbedfinger0167_geo" },
-            TextureOffset{ 1583936, 1583980, 561, "clubbedfinger0168_geo" },
-            TextureOffset{ 1583980, 1584024, 562, "clubbedfinger0169_geo" },
-            TextureOffset{ 1584024, 1584068, 563, "clubbedfinger0170_geo" },
-            TextureOffset{ 1584068, 1584112, 564, "clubbedfinger0171_geo" },
-            TextureOffset{ 1584112, 1584156, 565, "clubbedfinger0172_geo" },
-            TextureOffset{ 1584156, 1584200, 566, "clubbedfinger0173_geo" },
-            TextureOffset{ 1584200, 1584244, 567, "clubbedfinger0174_geo" },
-            TextureOffset{ 1584244, 1584288, 568, "clubbedfinger0175_geo" },
-            TextureOffset{ 1584288, 1584332, 569, "clubbedfinger0176_geo" },
-            TextureOffset{ 1584332, 1584376, 570, "clubbedfinger0177_geo" },
-            TextureOffset{ 1584376, 1584420, 571, "clubbedfinger0178_geo" },
-            TextureOffset{ 1584420, 1584464, 572, "clubbedfinger0179_geo" },
-            TextureOffset{ 1584464, 1584508, 573, "clubbedfinger0180_geo" },
-            TextureOffset{ 1584508, 1584552, 574, "clubbedfinger0181_geo" },
-            TextureOffset{ 1584552, 1584596, 575, "clubbedfinger0182_geo" },
-            TextureOffset{ 1584596, 1584640, 576, "clubbedfinger0183_geo" },
-            TextureOffset{ 1584640, 1584684, 577, "clubbedfinger0184_geo" },
-            TextureOffset{ 1584684, 1584728, 578, "clubbedfinger0185_geo" },
-            TextureOffset{ 1584728, 1584772, 579, "clubbedfinger0186_geo" },
-            TextureOffset{ 1584772, 1584816, 580, "clubbedfinger0187_geo" },
-            TextureOffset{ 1584816, 1584860, 581, "clubbedfinger0188_geo" },
-            TextureOffset{ 1584860, 1584904, 582, "clubbedfinger0189_geo" },
-            TextureOffset{ 1584904, 1584948, 583, "clubbedfinger0190_geo" },
-            TextureOffset{ 1584948, 1584992, 584, "clubbedfinger0191_geo" },
-            TextureOffset{ 1584992, 1585036, 585, "clubbedfinger0192_geo" },
-            TextureOffset{ 1585036, 1585080, 586, "clubbedfinger0193_geo" },
-            TextureOffset{ 1585080, 1585124, 587, "clubbedfinger0194_geo" },
-            TextureOffset{ 1585124, 1585168, 588, "clubbedfinger0195_geo" },
-            TextureOffset{ 1585168, 1585212, 589, "clubbedfinger0196_geo" },
-            TextureOffset{ 1585212, 1585256, 590, "clubbedfinger0197_geo" },
-            TextureOffset{ 1585256, 1585300, 591, "clubbedfinger0198_geo" },
-            TextureOffset{ 1585300, 1585344, 592, "clubbedfinger0199_geo" },
-            TextureOffset{ 1585344, 1585388, 593, "clubbedfinger0200_geo" },
-            TextureOffset{ 1585388, 1585432, 594, "clubbedfinger0201_geo" },
-            TextureOffset{ 1585432, 1585476, 595, "clubbedfinger0202_geo" },
-            TextureOffset{ 1585476, 1585520, 596, "clubbedfinger0203_geo" },
-            TextureOffset{ 1585520, 1585564, 597, "clubbedfinger0204_geo" },
-            TextureOffset{ 1585564, 1585608, 598, "clubbedfinger0205_geo" },
-            TextureOffset{ 1585608, 1585652, 599, "clubbedfinger0206_geo" },
-            TextureOffset{ 1585652, 1585696, 600, "clubbedfinger0207_geo" },
-            TextureOffset{ 1585696, 1585740, 601, "clubbedfinger0208_geo" },
-            TextureOffset{ 1585740, 1585784, 602, "clubbedfinger0209_geo" },
-            TextureOffset{ 1585784, 1585828, 603, "clubbedfinger0210_geo" },
-            TextureOffset{ 1585828, 1585872, 604, "clubbedfinger0211_geo" },
-            TextureOffset{ 1585872, 1585916, 605, "clubbedfinger0212_geo" },
-            TextureOffset{ 1585916, 1585960, 606, "clubbedfinger0213_geo" },
-            TextureOffset{ 1585960, 1586004, 607, "clubbedfinger0214_geo" },
-            TextureOffset{ 1586004, 1586048, 608, "clubbedfinger0215_geo" },
-            TextureOffset{ 1586048, 1586092, 609, "clubbedfinger0216_geo" },
-            TextureOffset{ 1586092, 1586136, 610, "clubbedfinger0217_geo" },
-            TextureOffset{ 1586136, 1586180, 611, "clubbedfinger0218_geo" },
-            TextureOffset{ 1586180, 1586224, 612, "clubbedfinger0219_geo" },
-            TextureOffset{ 1586224, 1586268, 613, "clubbedfinger0220_geo" },
-            TextureOffset{ 1586268, 1586312, 614, "clubbedfinger0221_geo" },
-            TextureOffset{ 1586312, 1586356, 615, "clubbedfinger0222_geo" },
-            TextureOffset{ 1586356, 1586400, 616, "clubbedfinger0223_geo" },
-            TextureOffset{ 1586400, 1586444, 617, "clubbedfinger0224_geo" },
-            TextureOffset{ 1586444, 1586488, 618, "clubbedfinger0225_geo" },
-            TextureOffset{ 1586488, 1586532, 619, "clubbedfinger0226_geo" },
-            TextureOffset{ 1586532, 1586576, 620, "clubbedfinger0227_geo" },
-            TextureOffset{ 1586576, 1586620, 621, "clubbedfinger0228_geo" },
-            TextureOffset{ 1586620, 1586664, 622, "clubbedfinger0229_geo" },
-            TextureOffset{ 1586664, 1586708, 623, "clubbedfinger0230_geo" },
-            TextureOffset{ 1586708, 1586752, 624, "clubbedfinger0231_geo" },
-            TextureOffset{ 1586752, 1586796, 625, "clubbedfinger0233_geo" },
-            TextureOffset{ 1586796, 1586840, 626, "clubbedfinger0234_geo" },
-            TextureOffset{ 1586840, 1586884, 627, "clubbedfinger0235_geo" },
-            TextureOffset{ 1586884, 1586928, 628, "clubbedfinger0236_geo" },
-            TextureOffset{ 1586928, 1586972, 629, "clubbedfinger0237_geo" },
-            TextureOffset{ 1586972, 1587016, 630, "clubbedfinger0238_geo" },
-            TextureOffset{ 1587016, 1587060, 631, "clubbedfinger0239_geo" },
-            TextureOffset{ 1587060, 1587104, 632, "clubbedfinger0240_geo" },
-            TextureOffset{ 1587104, 1587148, 633, "clubbedfinger0241_geo" },
-            TextureOffset{ 1587148, 1587192, 634, "clubbedfinger0242_geo" },
-            TextureOffset{ 1587192, 1587236, 635, "clubbedfinger0243_geo" },
-            TextureOffset{ 1587236, 1587280, 636, "clubbedfinger0244_geo" },
-            TextureOffset{ 1587280, 1587324, 637, "clubbedfinger0245_geo" },
-            TextureOffset{ 1587324, 1587368, 638, "clubbedfinger0246_geo" },
-            TextureOffset{ 1587368, 1587412, 639, "clubbedfinger0247_geo" },
-            TextureOffset{ 1587412, 1587456, 640, "clubbedfinger0248_geo" },
-            TextureOffset{ 1587456, 1587500, 641, "clubbedfinger0249_geo" },
-            TextureOffset{ 1587500, 1587544, 642, "clubbedfinger0250_geo" },
-            TextureOffset{ 1587544, 1587588, 643, "clubbedfinger0251_geo" },
-            TextureOffset{ 1587588, 1587632, 644, "clubbedfinger0252_geo" },
-            TextureOffset{ 1587632, 1587676, 645, "clubbedfinger0253_geo" },
-            TextureOffset{ 1587676, 1587720, 646, "clubbedfinger0254_geo" },
-            TextureOffset{ 1587720, 1587764, 647, "clubbedfinger0255_geo" },
-            TextureOffset{ 1587764, 1587808, 648, "clubbedfinger0256_geo" },
-            TextureOffset{ 1587808, 1587852, 649, "clubbedfinger0257_geo" },
-            TextureOffset{ 1587852, 1587896, 650, "clubbedfinger0258_geo" },
-            TextureOffset{ 1587896, 1587940, 651, "clubbedfinger0259_geo" },
-            TextureOffset{ 1587940, 1587984, 652, "clubbedfinger0260_geo" },
-            TextureOffset{ 1587984, 1588028, 653, "clubbedfinger0261_geo" },
-            TextureOffset{ 1588028, 1588072, 654, "clubbedfinger0262_geo" },
-            TextureOffset{ 1588072, 1588116, 655, "clubbedfinger0263_geo" },
-            TextureOffset{ 1588116, 1588160, 656, "clubbedfinger0264_geo" },
-            TextureOffset{ 1588160, 1588204, 657, "clubbedfinger0265_geo" },
-            TextureOffset{ 1588204, 1588248, 658, "clubbedfinger0266_geo" },
-            TextureOffset{ 1588248, 1588292, 659, "clubbedfinger0267_geo" },
-            TextureOffset{ 1588292, 1588336, 660, "clubbedfinger0268_geo" },
-            TextureOffset{ 1588336, 1588380, 661, "clubbedfinger0269_geo" },
-            TextureOffset{ 1588380, 1588424, 662, "clubbedfinger0270_geo" },
-            TextureOffset{ 1588424, 1588468, 663, "clubbedfinger0271_geo" },
-            TextureOffset{ 1588468, 1588512, 664, "clubbedfinger0272_geo" },
-            TextureOffset{ 1588512, 1588556, 665, "clubbedfinger0273_geo" },
-            TextureOffset{ 1588556, 1588600, 666, "clubbedfinger0274_geo" },
-            TextureOffset{ 1588600, 1588644, 667, "clubbedfinger0275_geo" },
-            TextureOffset{ 1588644, 1588688, 668, "clubbedfinger0276_geo" },
-            TextureOffset{ 1588688, 1588732, 669, "clubbedfinger0277_geo" },
-            TextureOffset{ 1588732, 1588776, 670, "clubbedfinger0278_geo" },
-            TextureOffset{ 1588776, 1588820, 671, "clubbedfinger0279_geo" },
-            TextureOffset{ 1588820, 1588864, 672, "clubbedfinger0280_geo" },
-            TextureOffset{ 1588864, 1588908, 673, "clubbedfinger0281_geo" },
-            TextureOffset{ 1588908, 1588952, 674, "clubbedfinger0282_geo" },
-            TextureOffset{ 1588952, 1588996, 675, "clubbedfinger0283_geo" },
-            TextureOffset{ 1588996, 1589040, 676, "clubbedfinger0284_geo" },
-            TextureOffset{ 1589040, 1589084, 677, "clubbedfinger0285_geo" },
-            TextureOffset{ 1589084, 1589128, 678, "clubbedfinger0286_geo" },
-            TextureOffset{ 1589128, 1589172, 679, "clubbedfinger0287_geo" },
-            TextureOffset{ 1589172, 1589216, 680, "clubbedfinger0288_geo" },
-            TextureOffset{ 1589216, 1589260, 681, "clubbedfinger0289_geo" },
-            TextureOffset{ 1589260, 1589304, 682, "clubbedfinger0290_geo" },
-            TextureOffset{ 1589304, 1589348, 683, "clubbedfinger0291_geo" },
-            TextureOffset{ 1589348, 1589392, 684, "clubbedfinger0292_geo" },
-            TextureOffset{ 1589392, 1589436, 685, "clubbedfinger0293_geo" },
-            TextureOffset{ 1589436, 1589480, 686, "clubbedfinger0294_geo" },
-            TextureOffset{ 1589480, 1589524, 687, "clubbedfinger0295_geo" },
-            TextureOffset{ 1589524, 1589568, 688, "clubbedfinger0296_geo" },
-            TextureOffset{ 1589568, 1589612, 689, "clubbedfinger0297_geo" },
-            TextureOffset{ 1589612, 1589656, 690, "clubbedfinger0298_geo" },
-            TextureOffset{ 1589656, 1589700, 691, "clubbedfinger0299_geo" },
-            TextureOffset{ 1589700, 1589744, 692, "clubbedfinger0300_geo" },
-            TextureOffset{ 1589744, 1589788, 693, "clubbedfinger0301_geo" },
-            TextureOffset{ 1589788, 1589832, 694, "clubbedfinger0302_geo" },
-            TextureOffset{ 1589832, 1589876, 695, "clubbedfinger0303_geo" },
-            TextureOffset{ 1589876, 1589920, 696, "clubbedfinger0304_geo" },
-            TextureOffset{ 1589920, 1589964, 697, "clubbedfinger0305_geo" },
-            TextureOffset{ 1589964, 1590008, 698, "clubbedfinger0306_geo" },
-            TextureOffset{ 1590008, 1590052, 699, "clubbedfinger0307_geo" },
-            TextureOffset{ 1590052, 1590096, 700, "clubbedfinger0308_geo" },
-            TextureOffset{ 1590096, 1590140, 701, "clubbedfinger0309_geo" },
-            TextureOffset{ 1590140, 1590184, 702, "clubbedfinger0310_geo" },
-            TextureOffset{ 1590184, 1590228, 703, "clubbedfinger0311_geo" },
-            TextureOffset{ 1590228, 1590272, 704, "clubbedfinger0312_geo" },
-            TextureOffset{ 1590272, 1590316, 705, "clubbedfinger0313_geo" },
-            TextureOffset{ 1590316, 1590360, 706, "clubbedfinger0314_geo" },
-            TextureOffset{ 1590360, 1590404, 707, "clubbedfinger0315_geo" },
-            TextureOffset{ 1590404, 1590448, 708, "clubbedfinger0316_geo" },
-            TextureOffset{ 1590448, 1590492, 709, "clubbedfinger0317_geo" },
-            TextureOffset{ 1590492, 1590536, 710, "clubbedfinger0318_geo" },
-            TextureOffset{ 1590536, 1590580, 711, "clubbedfinger0319_geo" },
-            TextureOffset{ 1590580, 1590624, 712, "clubbedfinger0320_geo" },
-            TextureOffset{ 1590624, 1590668, 713, "clubbedfinger0321_geo" },
-            TextureOffset{ 1590668, 1590712, 714, "clubbedfinger0322_geo" },
-            TextureOffset{ 1590712, 1590756, 715, "clubbedfinger0323_geo" },
-            TextureOffset{ 1590756, 1590800, 716, "clubbedfinger0324_geo" },
-            TextureOffset{ 1590800, 1590844, 717, "clubbedfinger0325_geo" },
-            TextureOffset{ 1590844, 1590888, 718, "clubbedfinger0326_geo" },
-            TextureOffset{ 1590888, 1590932, 719, "clubbedfinger0327_geo" },
-            TextureOffset{ 1590932, 1590976, 720, "clubbedfinger0328_geo" },
-            TextureOffset{ 1590976, 1591020, 721, "clubbedfinger0329_geo" },
-            TextureOffset{ 1591020, 1591064, 722, "clubbedfinger0330_geo" },
-            TextureOffset{ 1591064, 1591108, 723, "clubbedfinger0331_geo" },
-            TextureOffset{ 1591108, 1591152, 724, "clubbedfinger0332_geo" },
-            TextureOffset{ 1591152, 1591196, 725, "clubbedfinger0333_geo" },
-            TextureOffset{ 1591196, 1591240, 726, "clubbedfinger0334_geo" },
-            TextureOffset{ 1591240, 1591284, 727, "clubbedfinger0335_geo" },
-            TextureOffset{ 1591284, 1591328, 728, "clubbedfinger0336_geo" },
-            TextureOffset{ 1591328, 1591372, 729, "clubbedfinger0337_geo" },
-            TextureOffset{ 1591372, 1591416, 730, "clubbedfinger0338_geo" },
-            TextureOffset{ 1591416, 1591460, 731, "clubbedfinger0339_geo" },
-            TextureOffset{ 1591460, 1591504, 732, "clubbedfinger0340_geo" },
-            TextureOffset{ 1591504, 1591548, 733, "clubbedfinger0341_geo" },
-            TextureOffset{ 1591548, 1591592, 734, "clubbedfinger0342_geo" },
-            TextureOffset{ 1591592, 1591636, 735, "clubbedfinger0343_geo" },
-            TextureOffset{ 1591636, 1591680, 736, "clubbedfinger0344_geo" },
-            TextureOffset{ 1591680, 1591724, 737, "clubbedfinger0345_geo" },
-            TextureOffset{ 1591724, 1591768, 738, "clubbedfinger0346_geo" },
-            TextureOffset{ 1591768, 1591812, 739, "clubbedfinger0347_geo" },
-            TextureOffset{ 1591812, 1591856, 740, "clubbedfinger0348_geo" },
-            TextureOffset{ 1591856, 1591900, 741, "clubbedfinger0349_geo" },
-            TextureOffset{ 1591900, 1591944, 742, "clubbedfinger0350_geo" },
-            TextureOffset{ 1591944, 1591988, 743, "clubbedfinger0351_geo" },
-            TextureOffset{ 1591988, 1592032, 744, "clubbedfinger0352_geo" },
-            TextureOffset{ 1592032, 1592076, 745, "clubbedfinger0353_geo" },
-            TextureOffset{ 1592076, 1592120, 746, "clubbedfinger0354_geo" },
-            TextureOffset{ 1592120, 1592164, 747, "clubbedfinger0355_geo" },
-            TextureOffset{ 1592164, 1592208, 748, "clubbedfinger0356_geo" },
-            TextureOffset{ 1592208, 1592252, 749, "clubbedfinger0357_geo" },
-            TextureOffset{ 1592252, 1592296, 750, "clubbedfinger0358_geo" },
-            TextureOffset{ 1592296, 1592340, 751, "clubbedfinger0359_geo" },
-            TextureOffset{ 1592340, 1592384, 752, "clubbedfinger0360_geo" },
-            TextureOffset{ 1592384, 1592428, 753, "clubbedfinger0361_geo" },
-            TextureOffset{ 1592428, 1592472, 754, "clubbedfinger0362_geo" },
-            TextureOffset{ 1592472, 1592516, 755, "clubbedfinger0363_geo" },
-            TextureOffset{ 1592516, 1592560, 756, "clubbedfinger0364_geo" },
-            TextureOffset{ 1592560, 1592604, 757, "clubbedfinger0365_geo" },
-            TextureOffset{ 1592604, 1592648, 758, "clubbedfinger0366_geo" },
-            TextureOffset{ 1592648, 1592692, 759, "clubbedfinger0367_geo" },
-            TextureOffset{ 1592692, 1592736, 760, "clubbedfinger0368_geo" },
-            TextureOffset{ 1592736, 1592780, 761, "clubbedfinger0369_geo" },
-            TextureOffset{ 1592780, 1592824, 762, "clubbedfinger0370_geo" },
-            TextureOffset{ 1592824, 1592868, 763, "clubbedfinger0371_geo" },
-            TextureOffset{ 1592868, 1592912, 764, "clubbedfinger0372_geo" },
-            TextureOffset{ 1592912, 1592956, 765, "clubbedfinger0373_geo" },
-            TextureOffset{ 1592956, 1593000, 766, "clubbedfinger0374_geo" },
-            TextureOffset{ 1593000, 1593044, 767, "clubbedfinger0375_geo" },
-            TextureOffset{ 1593044, 1593088, 768, "clubbedfinger0376_geo" },
-            TextureOffset{ 1593088, 1593132, 769, "clubbedfinger0377_geo" },
-            TextureOffset{ 1593132, 1593176, 770, "clubbedfinger0378_geo" },
-            TextureOffset{ 1593176, 1593220, 771, "clubbedfinger0379_geo" },
-            TextureOffset{ 1593220, 1593264, 772, "clubbedfinger0380_geo" },
-            TextureOffset{ 1593264, 1593308, 773, "clubbedfinger0381_geo" },
-            TextureOffset{ 1593308, 1593352, 774, "clubbedfinger0382_geo" },
-            TextureOffset{ 1593352, 1593396, 775, "clubbedfinger0383_geo" },
-            TextureOffset{ 1593396, 1593440, 776, "clubbedfinger0384_geo" },
-            TextureOffset{ 1593440, 1593484, 777, "clubbedfinger0385_geo" },
-            TextureOffset{ 1593484, 1593528, 778, "clubbedfinger0386_geo" },
-            TextureOffset{ 1593528, 1593572, 779, "clubbedfinger0387_geo" },
-            TextureOffset{ 1593572, 1593616, 780, "clubbedfinger0388_geo" },
-            TextureOffset{ 1593616, 1593660, 781, "clubbedfinger0389_geo" },
-            TextureOffset{ 1593660, 1593704, 782, "clubbedfinger0390_geo" },
-            TextureOffset{ 1593704, 1593748, 783, "clubbedfinger0391_geo" },
-            TextureOffset{ 1593748, 1593792, 784, "clubbedfinger0392_geo" },
-            TextureOffset{ 1593792, 1593836, 785, "clubbedfinger0393_geo" },
-            TextureOffset{ 1593836, 1593880, 786, "clubbedfinger0394_geo" },
-            TextureOffset{ 1593880, 1593924, 787, "clubbedfinger0395_geo" },
-            TextureOffset{ 1593924, 1593968, 788, "clubbedfinger0396_geo" },
-            TextureOffset{ 1593968, 1594012, 789, "clubbedfinger0397_geo" },
-            TextureOffset{ 1594012, 1594056, 790, "clubbedfinger0398_geo" },
-            TextureOffset{ 1594056, 1594100, 791, "clubbedfinger0399_geo" },
-            TextureOffset{ 1594100, 1594144, 792, "clubbedfinger0400_geo" },
-            TextureOffset{ 1594144, 1594188, 793, "clubbedfinger0401_geo" },
-            TextureOffset{ 1594188, 1594232, 794, "clubbedfinger0402_geo" },
-            TextureOffset{ 1594232, 1594276, 795, "clubbedfinger0403_geo" },
-            TextureOffset{ 1594276, 1594320, 796, "clubbedfinger0404_geo" },
-            TextureOffset{ 1594320, 1594364, 797, "clubbedfinger0405_geo" },
-            TextureOffset{ 1594364, 1594408, 798, "clubbedfinger0406_geo" },
-            TextureOffset{ 1594408, 1594452, 799, "clubbedfinger0407_geo" },
-            TextureOffset{ 1594452, 1594496, 800, "clubbedfinger0408_geo" },
-            TextureOffset{ 1594496, 1594540, 801, "clubbedfinger0409_geo" },
-            TextureOffset{ 1594540, 1594584, 802, "clubbedfinger0410_geo" },
-            TextureOffset{ 1594584, 1594628, 803, "clubbedfinger0411_geo" },
-            TextureOffset{ 1594628, 1594672, 804, "clubbedfinger0412_geo" },
-            TextureOffset{ 1594672, 1594716, 805, "clubbedfinger0413_geo" },
-            TextureOffset{ 1594716, 1594760, 806, "clubbedfinger0414_geo" },
-            TextureOffset{ 1594760, 1594804, 807, "clubbedfinger0415_geo" },
-            TextureOffset{ 1594804, 1594848, 808, "clubbedfinger0416_geo" },
-            TextureOffset{ 1594848, 1594892, 809, "clubbedfinger0417_geo" },
-            TextureOffset{ 1594892, 1594936, 810, "clubbedfinger0418_geo" },
-            TextureOffset{ 1594936, 1594980, 811, "clubbedfinger0419_geo" },
-            TextureOffset{ 1594980, 1595024, 812, "clubbedfinger0420_geo" },
-            TextureOffset{ 1595024, 1595068, 813, "clubbedfinger0421_geo" },
-            TextureOffset{ 1595068, 1595112, 814, "clubbedfinger0423_geo" },
-            TextureOffset{ 1595112, 1595156, 815, "clubbedfinger0424_geo" },
-            TextureOffset{ 1595156, 1595200, 816, "clubbedfinger0425_geo" },
-            TextureOffset{ 1595200, 1595244, 817, "clubbedfinger0426_geo" },
-            TextureOffset{ 1595244, 1595288, 818, "clubbedfinger0427_geo" },
-            TextureOffset{ 1595288, 1595332, 819, "clubbedfinger0428_geo" },
-            TextureOffset{ 1595332, 1595376, 820, "clubbedfinger0429_geo" },
-            TextureOffset{ 1595376, 1595420, 821, "clubbedfinger0431_geo" },
-            TextureOffset{ 1595420, 1595464, 822, "clubbedfinger0432_geo" },
-            TextureOffset{ 1595464, 1595508, 823, "clubbedfinger0433_geo" },
-            TextureOffset{ 1595508, 1595552, 824, "clubbedfinger0434_geo" },
-            TextureOffset{ 1595552, 1595596, 825, "clubbedfinger0435_geo" },
-            TextureOffset{ 1595596, 1595640, 826, "clubbedfinger0436_geo" },
-            TextureOffset{ 1595640, 1595684, 827, "clubbedfinger0437_geo" },
-            TextureOffset{ 1595684, 1595728, 828, "clubbedfinger0438_geo" },
-            TextureOffset{ 1595728, 1595772, 829, "clubbedfinger0439_geo" },
-            TextureOffset{ 1595772, 1595816, 830, "clubbedfinger0440_geo" },
-            TextureOffset{ 1595816, 1595860, 831, "clubbedfinger0441_geo" },
-            TextureOffset{ 1595860, 1595904, 832, "clubbedfinger0443_geo" },
-            TextureOffset{ 1595904, 1595948, 833, "clubbedfinger0444_geo" },
-            TextureOffset{ 1595948, 1595992, 834, "clubbedfinger0445_geo" },
-            TextureOffset{ 1595992, 1596036, 835, "clubbedfinger0446_geo" },
-            TextureOffset{ 1596036, 1596080, 836, "clubbedfinger0447_geo" },
-            TextureOffset{ 1596080, 1596124, 837, "clubbedfinger0448_geo" },
-            TextureOffset{ 1596124, 1596168, 838, "clubbedfinger0449_geo" },
-            TextureOffset{ 1596168, 1596212, 839, "clubbedfinger0450_geo" },
-            TextureOffset{ 1596212, 1596256, 840, "clubbedfinger0451_geo" },
-            TextureOffset{ 1596256, 1596300, 841, "clubbedfinger0452_geo" },
-            TextureOffset{ 1596300, 1596344, 842, "clubbedfinger0453_geo" },
-            TextureOffset{ 1596344, 1596388, 843, "clubbedfinger0454_geo" },
-            TextureOffset{ 1596388, 1596432, 844, "clubbedfinger0455_geo" },
-            TextureOffset{ 1596432, 1596476, 845, "clubbedfinger0456_geo" },
-            TextureOffset{ 1596476, 1596520, 846, "clubbedfinger0457_geo" },
-            TextureOffset{ 1596520, 1596564, 847, "clubbedfinger0458_geo" },
-            TextureOffset{ 1596564, 1596608, 848, "clubbedfinger0459_geo" },
-            TextureOffset{ 1596608, 1596652, 849, "clubbedfinger0460_geo" },
-            TextureOffset{ 1596652, 1596696, 850, "clubbedfinger0461_geo" },
-            TextureOffset{ 1596696, 1596740, 851, "clubbedfinger0462_geo" },
-            TextureOffset{ 1596740, 1596784, 852, "clubbedfinger0463_geo" },
-            TextureOffset{ 1596784, 1596828, 853, "clubbedfinger0464_geo" },
-            TextureOffset{ 1596828, 1596872, 854, "clubbedfinger0465_geo" },
-            TextureOffset{ 1596872, 1596916, 855, "clubbedfinger0467_geo" },
-            TextureOffset{ 1596916, 1596960, 856, "clubbedfinger0468_geo" },
-            TextureOffset{ 1596960, 1597004, 857, "clubbedfinger0469_geo" },
-            TextureOffset{ 1597004, 1597048, 858, "clubbedfinger0470_geo" },
-            TextureOffset{ 1597048, 1597092, 859, "clubbedfinger0471_geo" },
-            TextureOffset{ 1597092, 1597136, 860, "clubbedfinger0472_geo" },
-            TextureOffset{ 1597136, 1597180, 861, "clubbedfinger0473_geo" },
-            TextureOffset{ 1597180, 1597224, 862, "clubbedfinger0474_geo" },
-            TextureOffset{ 1597224, 1597268, 863, "clubbedfinger0475_geo" },
-            TextureOffset{ 1597268, 1597312, 864, "clubbedfinger0476_geo" },
-            TextureOffset{ 1597312, 1597356, 865, "clubbedfinger0477_geo" },
-            TextureOffset{ 1597356, 1597400, 866, "clubbedfinger0478_geo" },
-            TextureOffset{ 1597400, 1597444, 867, "clubbedfinger0479_geo" },
-            TextureOffset{ 1597444, 1597488, 868, "clubbedfinger0480_geo" },
-            TextureOffset{ 1597488, 1597532, 869, "clubbedfinger0481_geo" },
-            TextureOffset{ 1597532, 1597576, 870, "clubbedfinger0482_geo" },
-            TextureOffset{ 1597576, 1597620, 871, "clubbedfinger0483_geo" },
-            TextureOffset{ 1597620, 1597664, 872, "clubbedfinger0484_geo" },
-            TextureOffset{ 1597664, 1597708, 873, "clubbedfinger0485_geo" },
-            TextureOffset{ 1597708, 1597752, 874, "clubbedfinger0486_geo" },
-            TextureOffset{ 1597752, 1597796, 875, "clubbedfinger0487_geo" },
-            TextureOffset{ 1597796, 1597840, 876, "clubbedfinger0488_geo" },
-            TextureOffset{ 1597840, 1597884, 877, "clubbedfinger0489_geo" },
-            TextureOffset{ 1597884, 1597928, 878, "clubbedfinger0490_geo" },
-            TextureOffset{ 1597928, 1597972, 879, "clubbedfinger0491_geo" },
-            TextureOffset{ 1597972, 1598016, 880, "clubbedfinger0492_geo" },
-            TextureOffset{ 1598016, 1598060, 881, "clubbedfinger0493_geo" },
-            TextureOffset{ 1598060, 1598104, 882, "clubbedfinger0494_geo" },
-            TextureOffset{ 1598104, 1598148, 883, "clubbedfinger0495_geo" },
-            TextureOffset{ 1598148, 1598192, 884, "clubbedfinger0496_geo" },
-            TextureOffset{ 1598192, 1598236, 885, "clubbedfinger0497_geo" },
-            TextureOffset{ 1598236, 1598280, 886, "clubbedfinger0498_geo" },
-            TextureOffset{ 1598280, 1598324, 887, "clubbedfinger0499_geo" },
-            TextureOffset{ 1598324, 1598368, 888, "clubbedfinger0500_geo" },
-            TextureOffset{ 1598368, 1598412, 889, "clubbedfinger0501_geo" },
-            TextureOffset{ 1598412, 1598456, 890, "clubbedfinger0502_geo" },
-            TextureOffset{ 1598456, 1598500, 891, "clubbedfinger0503_geo" },
-            TextureOffset{ 1598500, 1598544, 892, "clubbedfinger0504_geo" },
-            TextureOffset{ 1598544, 1598588, 893, "clubbedfinger0505_geo" },
-            TextureOffset{ 1598588, 1598632, 894, "clubbedfinger0506_geo" },
-            TextureOffset{ 1598632, 1598676, 895, "clubbedfinger0507_geo" },
-            TextureOffset{ 1598676, 1598720, 896, "clubbedfinger0508_geo" },
-            TextureOffset{ 1598720, 1598764, 897, "clubbedfinger0509_geo" },
-            TextureOffset{ 1598764, 1598808, 898, "clubbedfinger0510_geo" },
-            TextureOffset{ 1598808, 1598852, 899, "clubbedfinger0511_geo" },
-            TextureOffset{ 1598852, 1598896, 900, "clubbedfinger0512_geo" },
-            TextureOffset{ 1598896, 1598940, 901, "clubbedfinger0513_geo" },
-            TextureOffset{ 1598940, 1598984, 902, "clubbedfinger0514_geo" },
-            TextureOffset{ 1598984, 1599028, 903, "clubbedfinger0515_geo" },
-            TextureOffset{ 1599028, 1599072, 904, "clubbedfinger0516_geo" },
-            TextureOffset{ 1599072, 1599116, 905, "clubbedfinger0517_geo" },
-            TextureOffset{ 1599116, 1599160, 906, "clubbedfinger0518_geo" },
-            TextureOffset{ 1599160, 1599204, 907, "clubbedfinger0519_geo" },
-            TextureOffset{ 1599204, 1599248, 908, "clubbedfinger0520_geo" },
-            TextureOffset{ 1599248, 1599292, 909, "clubbedfinger0521_geo" },
-            TextureOffset{ 1599292, 1599336, 910, "clubbedfinger0522_geo" },
-            TextureOffset{ 1599336, 1599380, 911, "clubbedfinger0523_geo" },
-            TextureOffset{ 1599380, 1599424, 912, "clubbedfinger0524_geo" },
-            TextureOffset{ 1599424, 1599468, 913, "clubbedfinger0525_geo" },
-            TextureOffset{ 1599468, 1599512, 914, "clubbedfinger0526_geo" },
-            TextureOffset{ 1599512, 1599556, 915, "clubbedfinger0527_geo" },
-            TextureOffset{ 1599556, 1599600, 916, "clubbedfinger0528_geo" },
-            TextureOffset{ 1599600, 1599644, 917, "clubbedfinger0529_geo" },
-            TextureOffset{ 1599644, 1599688, 918, "clubbedfinger0530_geo" },
-            TextureOffset{ 1599688, 1599732, 919, "clubbedfinger0531_geo" },
-            TextureOffset{ 1599732, 1599776, 920, "clubbedfinger0532_geo" },
-            TextureOffset{ 1599776, 1599820, 921, "clubbedfinger0533_geo" },
-            TextureOffset{ 1599820, 1599864, 922, "clubbedfinger0534_geo" },
-            TextureOffset{ 1599864, 1599908, 923, "clubbedfinger0535_geo" },
-            TextureOffset{ 1599908, 1599952, 924, "clubbedfinger0536_geo" },
-            TextureOffset{ 1599952, 1599996, 925, "clubbedfinger0537_geo" },
-            TextureOffset{ 1599996, 1600040, 926, "clubbedfinger0538_geo" },
-            TextureOffset{ 1600040, 1600084, 927, "clubbedfinger0539_geo" },
-            TextureOffset{ 1600084, 1600128, 928, "clubbedfinger0540_geo" },
-            TextureOffset{ 1600128, 1600172, 929, "clubbedfinger0541_geo" },
-            TextureOffset{ 1600172, 1600216, 930, "clubbedfinger0542_geo" },
-            TextureOffset{ 1600216, 1600260, 931, "clubbedfinger0543_geo" },
-            TextureOffset{ 1600260, 1600304, 932, "clubbedfinger0544_geo" },
-            TextureOffset{ 1600304, 1600348, 933, "clubbedfinger0545_geo" },
-            TextureOffset{ 1600348, 1600392, 934, "clubbedfinger0546_geo" },
-            TextureOffset{ 1600392, 1600436, 935, "clubbedfinger0547_geo" },
-            TextureOffset{ 1600436, 1600480, 936, "clubbedfinger0548_geo" },
-            TextureOffset{ 1600480, 1600524, 937, "clubbedfinger0549_geo" },
-            TextureOffset{ 1600524, 1600568, 938, "clubbedfinger0550_geo" },
-            TextureOffset{ 1600568, 1600612, 939, "clubbedfinger0551_geo" },
-            TextureOffset{ 1600612, 1600656, 940, "clubbedfinger0552_geo" },
-            TextureOffset{ 1600656, 1600700, 941, "clubbedfinger0553_geo" },
-            TextureOffset{ 1600700, 1600744, 942, "clubbedfinger0554_geo" },
-            TextureOffset{ 1600744, 1600788, 943, "clubbedfinger0555_geo" },
-            TextureOffset{ 1600788, 1600832, 944, "clubbedfinger0556_geo" },
-            TextureOffset{ 1600832, 1600876, 945, "clubbedfinger0557_geo" },
-            TextureOffset{ 1600876, 1600920, 946, "clubbedfinger0558_geo" },
-            TextureOffset{ 1600920, 1600964, 947, "clubbedfinger0559_geo" },
-            TextureOffset{ 1600964, 1601008, 948, "clubbedfinger0560_geo" },
-            TextureOffset{ 1601008, 1601052, 949, "clubbedfinger0561_geo" },
-            TextureOffset{ 1601052, 1601096, 950, "clubbedfinger0562_geo" },
-            TextureOffset{ 1601096, 1601140, 951, "clubbedfinger0563_geo" },
-            TextureOffset{ 1601140, 1601184, 952, "clubbedfinger0564_geo" },
-            TextureOffset{ 1601184, 1601228, 953, "clubbedfinger0565_geo" },
-            TextureOffset{ 1601228, 1601272, 954, "clubbedfinger0566_geo" },
-            TextureOffset{ 1601272, 1601316, 955, "clubbedfinger0567_geo" },
-            TextureOffset{ 1601316, 1601360, 956, "clubbedfinger0568_geo" },
-            TextureOffset{ 1601360, 1601404, 957, "clubbedfinger0569_geo" },
-            TextureOffset{ 1601404, 1601448, 958, "clubbedfinger0570_geo" },
-            TextureOffset{ 1601448, 1601492, 959, "clubbedfinger0571_geo" },
-            TextureOffset{ 1601492, 1601536, 960, "clubbedfinger0572_geo" },
-            TextureOffset{ 1601536, 1601580, 961, "clubbedfinger0573_geo" },
-            TextureOffset{ 1601580, 1601624, 962, "clubbedfinger0574_geo" },
-            TextureOffset{ 1601624, 1601668, 963, "clubbedfinger0575_geo" },
-            TextureOffset{ 1601668, 1601712, 964, "clubbedfinger0576_geo" },
-            TextureOffset{ 1601712, 1601756, 965, "clubbedfinger0577_geo" },
-            TextureOffset{ 1601756, 1601800, 966, "clubbedfinger0578_geo" },
-            TextureOffset{ 1601800, 1601844, 967, "clubbedfinger0579_geo" },
-            TextureOffset{ 1601844, 1601888, 968, "clubbedfinger0580_geo" },
-            TextureOffset{ 1601888, 1601932, 969, "clubbedfinger0581_geo" },
-            TextureOffset{ 1601932, 1601976, 970, "clubbedfinger0582_geo" },
-            TextureOffset{ 1601976, 1602020, 971, "clubbedfinger0583_geo" },
-            TextureOffset{ 1602020, 1602064, 972, "clubbedfinger0584_geo" },
-            TextureOffset{ 1602064, 1602108, 973, "clubbedfinger0585_geo" },
-            TextureOffset{ 1602108, 1602152, 974, "clubbedfinger0586_geo" },
-            TextureOffset{ 1602152, 1602196, 975, "clubbedfinger0587_geo" },
-            TextureOffset{ 1602196, 1602240, 976, "clubbedfinger0588_geo" },
-            TextureOffset{ 1602240, 1602284, 977, "clubbedfinger0589_geo" },
-            TextureOffset{ 1602284, 1602328, 978, "clubbedfinger0590_geo" },
-            TextureOffset{ 1602328, 1602372, 979, "clubbedfinger0591_geo" },
-            TextureOffset{ 1602372, 1602416, 980, "clubbedfinger0592_geo" },
-            TextureOffset{ 1602416, 1602460, 981, "clubbedfinger0593_geo" },
-            TextureOffset{ 1602460, 1602504, 982, "clubbedfinger0594_geo" },
-            TextureOffset{ 1602504, 1602548, 983, "clubbedfinger0595_geo" },
-            TextureOffset{ 1602548, 1602592, 984, "clubbedfinger0596_geo" },
-            TextureOffset{ 1602592, 1602636, 985, "clubbedfinger0597_geo" },
-            TextureOffset{ 1602636, 1602680, 986, "clubbedfinger0598_geo" },
-            TextureOffset{ 1602680, 1602724, 987, "clubbedfinger0599_geo" },
-            TextureOffset{ 1602724, 1602768, 988, "clubbedfinger0600_geo" },
-            TextureOffset{ 1602768, 1602812, 989, "clubbedfinger0601_geo" },
-            TextureOffset{ 1602812, 1602856, 990, "clubbedfinger0602_geo" },
-            TextureOffset{ 1602856, 1602900, 991, "clubbedfinger0603_geo" },
-            TextureOffset{ 1602900, 1602944, 992, "clubbedfinger0604_geo" },
-            TextureOffset{ 1602944, 1602988, 993, "clubbedfinger0605_geo" },
-            TextureOffset{ 1602988, 1603032, 994, "clubbedfinger0606_geo" },
-            TextureOffset{ 1603032, 1603076, 995, "clubbedfinger0607_geo" },
-            TextureOffset{ 1603076, 1603120, 996, "clubbedfinger0608_geo" },
-            TextureOffset{ 1603120, 1603164, 997, "clubbedfinger0609_geo" },
-            TextureOffset{ 1603164, 1603208, 998, "clubbedfinger0610_geo" },
-            TextureOffset{ 1603208, 1603252, 999, "clubbedfinger0611_geo" },
-            TextureOffset{ 1603252, 1603296, 1000, "clubbedfinger0612_geo" },
-            TextureOffset{ 1603296, 1603340, 1001, "clubbedfinger0613_geo" },
-            TextureOffset{ 1603340, 1603384, 1002, "clubbedfinger0614_geo" },
-            TextureOffset{ 1603384, 1603428, 1003, "clubbedfinger0615_geo" },
-            TextureOffset{ 1603428, 1603472, 1004, "clubbedfinger0616_geo" },
-            TextureOffset{ 1603472, 1603516, 1005, "clubbedfinger0617_geo" },
-            TextureOffset{ 1603516, 1603560, 1006, "clubbedfinger0618_geo" },
-            TextureOffset{ 1603560, 1603604, 1007, "clubbedfinger0619_geo" },
-            TextureOffset{ 1603604, 1603648, 1008, "clubbedfinger0620_geo" },
-            TextureOffset{ 1603648, 1603692, 1009, "clubbedfinger0621_geo" },
-            TextureOffset{ 1603692, 1603736, 1010, "clubbedfinger0622_geo" },
-            TextureOffset{ 1603736, 1603780, 1011, "clubbedfinger0623_geo" },
-            TextureOffset{ 1603780, 1603824, 1012, "clubbedfinger0624_geo" },
-            TextureOffset{ 1603824, 1603868, 1013, "clubbedfinger0625_geo" },
-            TextureOffset{ 1603868, 1603912, 1014, "clubbedfinger0626_geo" },
-            TextureOffset{ 1603912, 1603956, 1015, "clubbedfinger0627_geo" },
-            TextureOffset{ 1603956, 1604000, 1016, "clubbedfinger0628_geo" },
-            TextureOffset{ 1604000, 1604044, 1017, "clubbedfinger0629_geo" },
-            TextureOffset{ 1604044, 1604088, 1018, "clubbedfinger0630_geo" },
-            TextureOffset{ 1604088, 1604132, 1019, "clubbedfinger0631_geo" },
-            TextureOffset{ 1604132, 1604176, 1020, "clubbedfinger0632_geo" },
-            TextureOffset{ 1604176, 1604220, 1021, "clubbedfinger0633_geo" },
-            TextureOffset{ 1604220, 1604264, 1022, "clubbedfinger0634_geo" },
-            TextureOffset{ 1604264, 1604308, 1023, "clubbedfinger0635_geo" },
-            TextureOffset{ 1604308, 1604352, 1024, "clubbedfinger0636_geo" },
-            TextureOffset{ 1604352, 1604396, 1025, "clubbedfinger0637_geo" },
-            TextureOffset{ 1604396, 1604440, 1026, "clubbedfinger0638_geo" },
-            TextureOffset{ 1604440, 1604484, 1027, "clubbedfinger0639_geo" },
-            TextureOffset{ 1604484, 1604528, 1028, "clubbedfinger0640_geo" },
-            TextureOffset{ 1604528, 1604572, 1029, "clubbedfinger0641_geo" },
-            TextureOffset{ 1604572, 1604616, 1030, "clubbedfinger0642_geo" },
-            TextureOffset{ 1604616, 1604660, 1031, "clubbedfinger0643_geo" },
-            TextureOffset{ 1604660, 1604704, 1032, "clubbedfinger0644_geo" },
-            TextureOffset{ 1604704, 1604748, 1033, "clubbedfinger0645_geo" },
-            TextureOffset{ 1604748, 1604792, 1034, "clubbedfinger0646_geo" },
-            TextureOffset{ 1604792, 1604836, 1035, "clubbedfinger0647_geo" },
-            TextureOffset{ 1604836, 1604880, 1036, "clubbedfinger0648_geo" },
-            TextureOffset{ 1604880, 1604924, 1037, "clubbedfinger0649_geo" },
-            TextureOffset{ 1604924, 1604968, 1038, "clubbedfinger0650_geo" },
-            TextureOffset{ 1604968, 1605012, 1039, "clubbedfinger0651_geo" },
-            TextureOffset{ 1605012, 1605056, 1040, "clubbedfinger0652_geo" },
-            TextureOffset{ 1605056, 1605100, 1041, "clubbedfinger0653_geo" },
-            TextureOffset{ 1605100, 1605144, 1042, "clubbedfinger0654_geo" },
-            TextureOffset{ 1605144, 1605188, 1043, "clubbedfinger0655_geo" },
-            TextureOffset{ 1605188, 1605232, 1044, "clubbedfinger0656_geo" },
-            TextureOffset{ 1605232, 1605276, 1045, "clubbedfinger0657_geo" },
-            TextureOffset{ 1605276, 1605320, 1046, "clubbedfinger0658_geo" },
-            TextureOffset{ 1605320, 1605364, 1047, "clubbedfinger0659_geo" },
-            TextureOffset{ 1605364, 1605408, 1048, "clubbedfinger0660_geo" },
-            TextureOffset{ 1605408, 1605452, 1049, "clubbedfinger0661_geo" },
-            TextureOffset{ 1605452, 1605496, 1050, "clubbedfinger0662_geo" },
-            TextureOffset{ 1605496, 1605540, 1051, "clubbedfinger0663_geo" },
-            TextureOffset{ 1605540, 1605584, 1052, "clubbedfinger0664_geo" },
-            TextureOffset{ 1605584, 1605628, 1053, "clubbedfinger0665_geo" },
-            TextureOffset{ 1605628, 1605672, 1054, "clubbedfinger0666_geo" },
-            TextureOffset{ 1605672, 1605716, 1055, "clubbedfinger0667_geo" },
-            TextureOffset{ 1605716, 1605760, 1056, "clubbedfinger0668_geo" },
-            TextureOffset{ 1605760, 1605804, 1057, "clubbedfinger0669_geo" },
-            TextureOffset{ 1605804, 1605848, 1058, "clubbedfinger0670_geo" },
-            TextureOffset{ 1605848, 1605892, 1059, "clubbedfinger0671_geo" },
-            TextureOffset{ 1605892, 1605936, 1060, "clubbedfinger0672_geo" },
-            TextureOffset{ 1605936, 1605980, 1061, "clubbedfinger0673_geo" },
-            TextureOffset{ 1605980, 1606024, 1062, "clubbedfinger0674_geo" },
-            TextureOffset{ 1606024, 1606068, 1063, "clubbedfinger0675_geo" },
-            TextureOffset{ 1606068, 1606112, 1064, "clubbedfinger0676_geo" },
-            TextureOffset{ 1606112, 1606156, 1065, "clubbedfinger0677_geo" },
-            TextureOffset{ 1606156, 1606200, 1066, "clubbedfinger0678_geo" },
-            TextureOffset{ 1606200, 1606244, 1067, "clubbedfinger0679_geo" },
-            TextureOffset{ 1606244, 1606288, 1068, "clubbedfinger0680_geo" },
-            TextureOffset{ 1606288, 1606332, 1069, "clubbedfinger0681_geo" },
-            TextureOffset{ 1606332, 1606376, 1070, "clubbedfinger0682_geo" },
-            TextureOffset{ 1606376, 1606420, 1071, "clubbedfinger0683_geo" },
-            TextureOffset{ 1606420, 1606464, 1072, "clubbedfinger0684_geo" },
-            TextureOffset{ 1606464, 1606508, 1073, "clubbedfinger0685_geo" },
-            TextureOffset{ 1606508, 1606552, 1074, "clubbedfinger0686_geo" },
-            TextureOffset{ 1606552, 1606596, 1075, "clubbedfinger0687_geo" },
-            TextureOffset{ 1606596, 1606640, 1076, "clubbedfinger0688_geo" },
-            TextureOffset{ 1606640, 1606684, 1077, "clubbedfinger0689_geo" },
-            TextureOffset{ 1606684, 1606728, 1078, "clubbedfinger0690_geo" },
-            TextureOffset{ 1606728, 1606772, 1079, "clubbedfinger0691_geo" },
-            TextureOffset{ 1606772, 1606816, 1080, "clubbedfinger0692_geo" },
-            TextureOffset{ 1606816, 1606860, 1081, "clubbedfinger0693_geo" },
-            TextureOffset{ 1606860, 1606904, 1082, "clubbedfinger0694_geo" },
-            TextureOffset{ 1606904, 1606948, 1083, "clubbedfinger0695_geo" },
-            TextureOffset{ 1606948, 1606992, 1084, "clubbedfinger0696_geo" },
-            TextureOffset{ 1606992, 1607036, 1085, "clubbedfinger0697_geo" },
-            TextureOffset{ 1607036, 1607080, 1086, "clubbedfinger0698_geo" },
-            TextureOffset{ 1607080, 1607124, 1087, "clubbedfinger0699_geo" },
-            TextureOffset{ 1607124, 1607168, 1088, "clubbedfinger0700_geo" },
-            TextureOffset{ 1607168, 1607212, 1089, "clubbedfinger0701_geo" },
-            TextureOffset{ 1607212, 1607256, 1090, "clubbedfinger0702_geo" },
-            TextureOffset{ 1607256, 1607300, 1091, "clubbedfinger0703_geo" },
-            TextureOffset{ 1607300, 1607344, 1092, "clubbedfinger0704_geo" },
-            TextureOffset{ 1607344, 1607388, 1093, "clubbedfinger0705_geo" },
-            TextureOffset{ 1607388, 1607432, 1094, "clubbedfinger0706_geo" },
-            TextureOffset{ 1607432, 1607476, 1095, "clubbedfinger0707_geo" },
-            TextureOffset{ 1607476, 1607520, 1096, "clubbedfinger0708_geo" },
-            TextureOffset{ 1607520, 1607564, 1097, "clubbedfinger0709_geo" },
-            TextureOffset{ 1607564, 1607608, 1098, "clubbedfinger0710_geo" },
-            TextureOffset{ 1607608, 1607652, 1099, "clubbedfinger0711_geo" },
-            TextureOffset{ 1607652, 1607696, 1100, "clubbedfinger0712_geo" },
-            TextureOffset{ 1607696, 1607740, 1101, "clubbedfinger0713_geo" },
-            TextureOffset{ 1607740, 1607784, 1102, "clubbedfinger0714_geo" },
-            TextureOffset{ 1607784, 1607828, 1103, "clubbedfinger0715_geo" },
-            TextureOffset{ 1607828, 1607872, 1104, "clubbedfinger0716_geo" },
-            TextureOffset{ 1607872, 1607916, 1105, "clubbedfinger0717_geo" },
-            TextureOffset{ 1607916, 1607960, 1106, "clubbedfinger0718_geo" },
-            TextureOffset{ 1607960, 1608004, 1107, "clubbedfinger0719_geo" },
-            TextureOffset{ 1608004, 1608048, 1108, "clubbedfinger0720_geo" },
-            TextureOffset{ 1608048, 1608092, 1109, "clubbedfinger0721_geo" },
-            TextureOffset{ 1608092, 1608136, 1110, "clubbedfinger0722_geo" },
-            TextureOffset{ 1608136, 1608180, 1111, "clubbedfinger0723_geo" },
-            TextureOffset{ 1608180, 1608224, 1112, "clubbedfinger0724_geo" },
-            TextureOffset{ 1608224, 1608268, 1113, "clubbedfinger0725_geo" },
-            TextureOffset{ 1608268, 1608312, 1114, "clubbedfinger0726_geo" },
-            TextureOffset{ 1608312, 1608356, 1115, "clubbedfinger0727_geo" },
-            TextureOffset{ 1608356, 1608400, 1116, "clubbedfinger0728_geo" },
-            TextureOffset{ 1608400, 1608444, 1117, "clubbedfinger0729_geo" },
-            TextureOffset{ 1608444, 1608488, 1118, "clubbedfinger0730_geo" },
-            TextureOffset{ 1608488, 1608532, 1119, "clubbedfinger0731_geo" },
-            TextureOffset{ 1608532, 1608576, 1120, "clubbedfinger0732_geo" },
-            TextureOffset{ 1608576, 1608620, 1121, "clubbedfinger0733_geo" },
-            TextureOffset{ 1608620, 1608664, 1122, "clubbedfinger0734_geo" },
-            TextureOffset{ 1608664, 1608708, 1123, "clubbedfinger0735_geo" },
-            TextureOffset{ 1608708, 1608752, 1124, "clubbedfinger0736_geo" },
-            TextureOffset{ 1608752, 1608796, 1125, "clubbedfinger0737_geo" },
-            TextureOffset{ 1608796, 1608840, 1126, "clubbedfinger0738_geo" },
-            TextureOffset{ 1608840, 1608884, 1127, "clubbedfinger0739_geo" },
-            TextureOffset{ 1608884, 1608928, 1128, "clubbedfinger0740_geo" },
-            TextureOffset{ 1608928, 1608972, 1129, "clubbedfinger0741_geo" },
-            TextureOffset{ 1608972, 1609016, 1130, "clubbedfinger0742_geo" },
-            TextureOffset{ 1609016, 1609060, 1131, "clubbedfinger0743_geo" },
-            TextureOffset{ 1609060, 1609104, 1132, "clubbedfinger0744_geo" },
-            TextureOffset{ 1609104, 1609148, 1133, "clubbedfinger0745_geo" },
-            TextureOffset{ 1609148, 1609192, 1134, "clubbedfinger0746_geo" },
-            TextureOffset{ 1609192, 1609236, 1135, "clubbedfinger0747_geo" },
-            TextureOffset{ 1609236, 1609280, 1136, "clubbedfinger0748_geo" },
-            TextureOffset{ 1609280, 1609324, 1137, "clubbedfinger0749_geo" },
-            TextureOffset{ 1609324, 1609368, 1138, "clubbedfinger0750_geo" },
-            TextureOffset{ 1609368, 1609412, 1139, "clubbedfinger0751_geo" },
-            TextureOffset{ 1609412, 1609456, 1140, "clubbedfinger0752_geo" },
-            TextureOffset{ 1609456, 1609500, 1141, "clubbedfinger0753_geo" },
-            TextureOffset{ 1609500, 1609544, 1142, "clubbedfinger0754_geo" },
-            TextureOffset{ 1609544, 1609588, 1143, "clubbedfinger0755_geo" },
-            TextureOffset{ 1609588, 1609632, 1144, "clubbedfinger0756_geo" },
-            TextureOffset{ 1609632, 1609676, 1145, "clubbedfinger0757_geo" },
-            TextureOffset{ 1609676, 1609720, 1146, "clubbedfinger0758_geo" },
-            TextureOffset{ 1609720, 1609764, 1147, "clubbedfinger0759_geo" },
-            TextureOffset{ 1609764, 1609808, 1148, "clubbedfinger0760_geo" },
-            TextureOffset{ 1609808, 1609852, 1149, "clubbedfinger0761_geo" },
-            TextureOffset{ 1609852, 1609896, 1150, "clubbedfinger0762_geo" },
-            TextureOffset{ 1609896, 1609940, 1151, "clubbedfinger0763_geo" },
-            TextureOffset{ 1609940, 1609984, 1152, "clubbedfinger0764_geo" },
-            TextureOffset{ 1609984, 1610028, 1153, "clubbedfinger0765_geo" },
-            TextureOffset{ 1610028, 1610072, 1154, "clubbedfinger0766_geo" },
-            TextureOffset{ 1610072, 1610116, 1155, "clubbedfinger0767_geo" },
-            TextureOffset{ 1610116, 1610160, 1156, "clubbedfinger0768_geo" },
-            TextureOffset{ 1610160, 1610204, 1157, "clubbedfinger0769_geo" },
-            TextureOffset{ 1610204, 1610248, 1158, "clubbedfinger0770_geo" },
-            TextureOffset{ 1610248, 1610292, 1159, "clubbedfinger0771_geo" },
-            TextureOffset{ 1610292, 1610336, 1160, "clubbedfinger0772_geo" },
-            TextureOffset{ 1610336, 1610380, 1161, "clubbedfinger0773_geo" },
-            TextureOffset{ 1610380, 1610424, 1162, "clubbedfinger0774_geo" },
-            TextureOffset{ 1610424, 1610468, 1163, "clubbedfinger0775_geo" },
-            TextureOffset{ 1610468, 1610512, 1164, "clubbedfinger0776_geo" },
-            TextureOffset{ 1610512, 1610556, 1165, "clubbedfinger0777_geo" },
-            TextureOffset{ 1610556, 1610600, 1166, "clubbedfinger0778_geo" },
-            TextureOffset{ 1610600, 1610644, 1167, "clubbedfinger0779_geo" },
-            TextureOffset{ 1610644, 1610688, 1168, "clubbedfinger0780_geo" },
-            TextureOffset{ 1610688, 1610732, 1169, "clubbedfinger0781_geo" },
-            TextureOffset{ 1610732, 1610776, 1170, "clubbedfinger0782_geo" },
-            TextureOffset{ 1610776, 1610820, 1171, "clubbedfinger0783_geo" },
-            TextureOffset{ 1610820, 1610864, 1172, "clubbedfinger0784_geo" },
-            TextureOffset{ 1610864, 1610908, 1173, "clubbedfinger0785_geo" },
-            TextureOffset{ 1610908, 1610952, 1174, "clubbedfinger0786_geo" },
-            TextureOffset{ 1610952, 1610996, 1175, "clubbedfinger0787_geo" },
-            TextureOffset{ 1610996, 1611040, 1176, "clubbedfinger0788_geo" },
-            TextureOffset{ 1611040, 1611084, 1177, "clubbedfinger0789_geo" },
-            TextureOffset{ 1611084, 1611128, 1178, "clubbedfinger0790_geo" },
-            TextureOffset{ 1611128, 1611172, 1179, "clubbedfinger0791_geo" },
-            TextureOffset{ 1611172, 1611216, 1180, "clubbedfinger0792_geo" },
-            TextureOffset{ 1611216, 1611260, 1181, "clubbedfinger0793_geo" },
-            TextureOffset{ 1611260, 1611304, 1182, "clubbedfinger0794_geo" },
-            TextureOffset{ 1611304, 1611348, 1183, "clubbedfinger0795_geo" },
-            TextureOffset{ 1611348, 1611392, 1184, "clubbedfinger0796_geo" },
-            TextureOffset{ 1611392, 1611436, 1185, "clubbedfinger0797_geo" },
-            TextureOffset{ 1611436, 1611480, 1186, "clubbedfinger0798_geo" },
-            TextureOffset{ 1611480, 1611524, 1187, "clubbedfinger0799_geo" },
-            TextureOffset{ 1611524, 1611568, 1188, "clubbedfinger0800_geo" },
-            TextureOffset{ 1611568, 1611612, 1189, "clubbedfinger0801_geo" },
-            TextureOffset{ 1611612, 1611656, 1190, "clubbedfinger0802_geo" },
-            TextureOffset{ 1611656, 1611700, 1191, "clubbedfinger0803_geo" },
-            TextureOffset{ 1611700, 1611744, 1192, "clubbedfinger0804_geo" },
-            TextureOffset{ 1611744, 1611788, 1193, "clubbedfinger0805_geo" },
-            TextureOffset{ 1611788, 1611832, 1194, "clubbedfinger0806_geo" },
-            TextureOffset{ 1611832, 1611876, 1195, "clubbedfinger0807_geo" },
-            TextureOffset{ 1611876, 1611920, 1196, "clubbedfinger0808_geo" },
-            TextureOffset{ 1611920, 1611964, 1197, "clubbedfinger0809_geo" },
-            TextureOffset{ 1611964, 1612008, 1198, "clubbedfinger0810_geo" },
-            TextureOffset{ 1612008, 1612052, 1199, "clubbedfinger0811_geo" },
-            TextureOffset{ 1612052, 1612096, 1200, "clubbedfinger0812_geo" },
-            TextureOffset{ 1612096, 1612140, 1201, "clubbedfinger0813_geo" },
-            TextureOffset{ 1612140, 1612184, 1202, "clubbedfinger0814_geo" },
-            TextureOffset{ 1612184, 1612228, 1203, "clubbedfinger0815_geo" },
-            TextureOffset{ 1612228, 1612272, 1204, "clubbedfinger0816_geo" },
-            TextureOffset{ 1612272, 1612316, 1205, "clubbedfinger0817_geo" },
-            TextureOffset{ 1612316, 1612360, 1206, "clubbedfinger0818_geo" },
-            TextureOffset{ 1612360, 1612404, 1207, "clubbedfinger0819_geo" },
-            TextureOffset{ 1612404, 1612448, 1208, "clubbedfinger0820_geo" },
-            TextureOffset{ 1612448, 1612492, 1209, "clubbedfinger0821_geo" },
-            TextureOffset{ 1612492, 1612536, 1210, "clubbedfinger0822_geo" },
-            TextureOffset{ 1612536, 1612580, 1211, "clubbedfinger0823_geo" },
-            TextureOffset{ 1612580, 1612624, 1212, "clubbedfinger0824_geo" },
-            TextureOffset{ 1612624, 1612668, 1213, "clubbedfinger0825_geo" },
-            TextureOffset{ 1612668, 1612712, 1214, "clubbedfinger0826_geo" },
-            TextureOffset{ 1612712, 1612756, 1215, "clubbedfinger0827_geo" },
-            TextureOffset{ 1612756, 1612800, 1216, "clubbedfinger0828_geo" },
-            TextureOffset{ 1612800, 1612844, 1217, "clubbedfinger0829_geo" },
-            TextureOffset{ 1612844, 1612888, 1218, "clubbedfinger0830_geo" },
-            TextureOffset{ 1612888, 1612932, 1219, "clubbedfinger0831_geo" },
-            TextureOffset{ 1612932, 1612976, 1220, "clubbedfinger0832_geo" },
-            TextureOffset{ 1612976, 1613020, 1221, "clubbedfinger0833_geo" },
-            TextureOffset{ 1613020, 1613064, 1222, "clubbedfinger0834_geo" },
-            TextureOffset{ 1613064, 1613108, 1223, "clubbedfinger0835_geo" },
-            TextureOffset{ 1613108, 1613152, 1224, "clubbedfinger0836_geo" },
-            TextureOffset{ 1613152, 1613196, 1225, "clubbedfinger0837_geo" },
-            TextureOffset{ 1613196, 1613240, 1226, "clubbedfinger0838_geo" },
-            TextureOffset{ 1613240, 1613284, 1227, "clubbedfinger0839_geo" },
-            TextureOffset{ 1613284, 1613328, 1228, "clubbedfinger0840_geo" },
-            TextureOffset{ 1613328, 1613372, 1229, "clubbedfinger0841_geo" },
-            TextureOffset{ 1613372, 1613416, 1230, "clubbedfinger0842_geo" },
-            TextureOffset{ 1613416, 1613460, 1231, "clubbedfinger0843_geo" },
-            TextureOffset{ 1613460, 1613504, 1232, "clubbedfinger0844_geo" },
-            TextureOffset{ 1613504, 1613548, 1233, "clubbedfinger0845_geo" },
-            TextureOffset{ 1613548, 1613592, 1234, "clubbedfinger0846_geo" },
-            TextureOffset{ 1613592, 1613636, 1235, "clubbedfinger0847_geo" },
-            TextureOffset{ 1613636, 1613680, 1236, "clubbedfinger0848_geo" },
-            TextureOffset{ 1613680, 1613724, 1237, "clubbedfinger0849_geo" },
-            TextureOffset{ 1613724, 1613768, 1238, "clubbedfinger0850_geo" },
-            TextureOffset{ 1613768, 1613812, 1239, "clubbedfinger0851_geo" },
-            TextureOffset{ 1613812, 1613856, 1240, "clubbedfinger0852_geo" },
-            TextureOffset{ 1613856, 1613900, 1241, "clubbedfinger0853_geo" },
-            TextureOffset{ 1613900, 1613944, 1242, "clubbedfinger0854_geo" },
-            TextureOffset{ 1613944, 1613988, 1243, "clubbedfinger0855_geo" },
-            TextureOffset{ 1613988, 1614032, 1244, "clubbedfinger0856_geo" },
-            TextureOffset{ 1614032, 1614076, 1245, "clubbedfinger0857_geo" },
-            TextureOffset{ 1614076, 1614120, 1246, "clubbedfinger0858_geo" },
-            TextureOffset{ 1614120, 1614164, 1247, "clubbedfinger0859_geo" },
-            TextureOffset{ 1614164, 1614208, 1248, "clubbedfinger0860_geo" },
-            TextureOffset{ 1614208, 1614252, 1249, "clubbedfinger0861_geo" },
-            TextureOffset{ 1614252, 1614332, 1250, "clubbedfinger2323_geo" },
-            TextureOffset{ 1614332, 1614548, 1251, "clubbedthumb_a0001_geo" },
-            TextureOffset{ 1614548, 1615020, 1252, "clubbedthumb_b0001_geo" },
-            TextureOffset{ 1615020, 1615196, 1253, "clubbedthumb_d0001_geo" },
-            TextureOffset{ 1615196, 1615606, 1254, "clubbedtthumb_c0001_geo" },
-            TextureOffset{ 1615606, 1616374, 1255, "coralmoss0001_geo" },
-            TextureOffset{ 1616374, 1617142, 1256, "coralmoss0002_geo" },
-            TextureOffset{ 1617142, 1617910, 1257, "coralmoss0003_geo" },
-            TextureOffset{ 1617910, 1618678, 1258, "coralmoss0004_geo" },
-            TextureOffset{ 1618678, 1619254, 1259, "coralmoss0005_geo" },
-            TextureOffset{ 1619254, 1619830, 1260, "coralmoss0006_geo" },
-            TextureOffset{ 1619830, 1620406, 1261, "coralmoss0007_geo" },
-            TextureOffset{ 1620406, 1620982, 1262, "coralmoss0008_geo" },
-            TextureOffset{ 1620982, 1621126, 1263, "coralmoss0009_geo" },
-            TextureOffset{ 1621126, 1621270, 1264, "coralmoss0010_geo" },
-            TextureOffset{ 1621270, 1621414, 1265, "coralmoss0011_geo" },
-            TextureOffset{ 1621414, 1621558, 1266, "coralmoss0012_geo" },
-            TextureOffset{ 1621558, 1635172, 1267, "coralrock0001_geo" },
-            TextureOffset{ 1635172, 1648786, 1268, "coralrock0002_geo" },
-            TextureOffset{ 1648786, 1662400, 1269, "coralrock0003_geo" },
-            TextureOffset{ 1662400, 1676014, 1270, "coralrock0004_geo" },
-            TextureOffset{ 1676014, 1694514, 1271, "coralrock0005_geo" },
-            TextureOffset{ 1694514, 1704234, 1272, "coralrock0006_geo" },
-            TextureOffset{ 1704234, 1722734, 1273, "coralrock0007_geo" },
-            TextureOffset{ 1722734, 1741234, 1274, "coralrock0008_geo" },
-            TextureOffset{ 1741234, 1750954, 1275, "coralrock0009_geo" },
-            TextureOffset{ 1750954, 1760674, 1276, "coralrock0010_geo" },
-            TextureOffset{ 1760674, 1763266, 1277, "coralrock0011_geo" },
-            TextureOffset{ 1763266, 1765858, 1278, "coralrock0012_geo" },
-            TextureOffset{ 1765858, 1768450, 1279, "coralrock0013_geo" },
-            TextureOffset{ 1768450, 1778262, 1280, "coralrock0014_geo" },
-            TextureOffset{ 1778262, 1788074, 1281, "coralrock0015_geo" },
-            TextureOffset{ 1788074, 1797886, 1282, "coralrock0016_geo" },
-            TextureOffset{ 1797886, 1807606, 1283, "coralrock0017_geo" },
-            TextureOffset{ 1807606, 1817326, 1284, "coralrock0018_geo" },
-            TextureOffset{ 1817326, 1827046, 1285, "coralrock0019_geo" },
-            TextureOffset{ 1827046, 1836766, 1286, "coralrock0020_geo" },
-            TextureOffset{ 1836766, 1846486, 1287, "coralrock0021_geo" },
-            TextureOffset{ 1846486, 1860100, 1288, "coralrock0022_geo" },
-            TextureOffset{ 1860100, 1860352, 1289, "coralrock0023_geo" },
-            TextureOffset{ 1860352, 1860604, 1290, "coralrock0024_geo" },
-            TextureOffset{ 1860604, 1860856, 1291, "coralrock0025_geo" },
-            TextureOffset{ 1860856, 1861108, 1292, "coralrock0026_geo" },
-            TextureOffset{ 1861108, 1873780, 1293, "coralrock0027_geo" },
-            TextureOffset{ 1873780, 1886452, 1294, "coralrock0028_geo" },
-            TextureOffset{ 1886452, 1899124, 1295, "coralrock0029_geo" },
-            TextureOffset{ 1899124, 1911796, 1296, "coralrock0030_geo" },
-            TextureOffset{ 1911796, 1914388, 1297, "coralrock0031_geo" },
-            TextureOffset{ 1914388, 1916980, 1298, "coralrock0032_geo" },
-            TextureOffset{ 1916980, 1919572, 1299, "coralrock0033_geo" },
-            TextureOffset{ 1919572, 1922164, 1300, "coralrock0034_geo" },
-            TextureOffset{ 1922164, 1924756, 1301, "coralrock0035_geo" },
-            TextureOffset{ 1924756, 1927348, 1302, "coralrock0036_geo" },
-            TextureOffset{ 1927348, 1929940, 1303, "coralrock0037_geo" },
-            TextureOffset{ 1929940, 1932532, 1304, "coralrock0038_geo" },
-            TextureOffset{ 1932532, 1935124, 1305, "coralrock0039_geo" },
-            TextureOffset{ 1935124, 1937716, 1306, "coralrock0040_geo" },
-            TextureOffset{ 1937716, 1940308, 1307, "coralrock0041_geo" },
-            TextureOffset{ 1940308, 1942900, 1308, "coralrock0042_geo" },
-            TextureOffset{ 1942900, 1951732, 1309, "coralrock0043_geo" },
-            TextureOffset{ 1951732, 1960564, 1310, "coralrock0044_geo" },
-            TextureOffset{ 1960564, 1969396, 1311, "coralrock0045_geo" },
-            TextureOffset{ 1969396, 1978228, 1312, "coralrock0046_geo" },
-            TextureOffset{ 1978228, 1988040, 1313, "coralrock0047_geo" },
-            TextureOffset{ 1988040, 1997852, 1314, "coralrock0048_geo" },
-            TextureOffset{ 1997852, 2007664, 1315, "coralrock0049_geo" },
-            TextureOffset{ 2007664, 2017476, 1316, "coralrock0050_geo" },
-            TextureOffset{ 2017476, 2027288, 1317, "coralrock0051_geo" },
-            TextureOffset{ 2027288, 2029880, 1318, "coralrock0052_geo" },
-            TextureOffset{ 2029880, 2032472, 1319, "coralrock0053_geo" },
-            TextureOffset{ 2032472, 2035064, 1320, "coralrock0054_geo" },
-            TextureOffset{ 2035064, 2037656, 1321, "coralrock0055_geo" },
-            TextureOffset{ 2037656, 2040248, 1322, "coralrock0056_geo" },
-            TextureOffset{ 2040248, 2042840, 1323, "coralrock0057_geo" },
-            TextureOffset{ 2042840, 2045432, 1324, "coralrock0058_geo" },
-            TextureOffset{ 2045432, 2048024, 1325, "coralrock0059_geo" },
-            TextureOffset{ 2048024, 2050616, 1326, "coralrock0060_geo" },
-            TextureOffset{ 2050616, 2059448, 1327, "coralrock0061_geo" },
-            TextureOffset{ 2059448, 2069880, 1328, "coralrock0062_geo" },
-            TextureOffset{ 2069880, 2080312, 1329, "coralrock0063_geo" },
-            TextureOffset{ 2080312, 2090744, 1330, "coralrock0064_geo" },
-            TextureOffset{ 2090744, 2109244, 1331, "coralrock0065_geo" },
-            TextureOffset{ 2109244, 2119008, 1332, "coralrock0066_geo" },
-            TextureOffset{ 2119008, 2128772, 1333, "coralrock0067_geo" },
-            TextureOffset{ 2128772, 2138536, 1334, "coralrock0068_geo" },
-            TextureOffset{ 2138536, 2148300, 1335, "coralrock0069_geo" },
-            TextureOffset{ 2148300, 2158732, 1336, "coralrock0070_geo" },
-            TextureOffset{ 2158732, 2169164, 1337, "coralrock0071_geo" },
-            TextureOffset{ 2169164, 2179596, 1338, "coralrock0072_geo" },
-            TextureOffset{ 2179596, 2190028, 1339, "coralrock0073_geo" },
-            TextureOffset{ 2190028, 2190212, 1340, "coralstone0001_geo" },
-            TextureOffset{ 2190212, 2190396, 1341, "coralstone0002_geo" },
-            TextureOffset{ 2190396, 2190580, 1342, "coralstone0003_geo" },
-            TextureOffset{ 2190580, 2190764, 1343, "coralstone0004_geo" },
-            TextureOffset{ 2190764, 2190948, 1344, "coralstone0005_geo" },
-            TextureOffset{ 2190948, 2191132, 1345, "coralstone0006_geo" },
-            TextureOffset{ 2191132, 2191316, 1346, "coralstone0007_geo" },
-            TextureOffset{ 2191316, 2191500, 1347, "coralstone0008_geo" },
-            TextureOffset{ 2191500, 2191684, 1348, "coralstone0009_geo" },
-            TextureOffset{ 2191684, 2191868, 1349, "coralstone0010_geo" },
-            TextureOffset{ 2191868, 2192052, 1350, "coralstone0011_geo" },
-            TextureOffset{ 2192052, 2192236, 1351, "coralstone0012_geo" },
-            TextureOffset{ 2192236, 2192420, 1352, "coralstone0014_geo" },
-            TextureOffset{ 2192420, 2192604, 1353, "coralstone0015_geo" },
-            TextureOffset{ 2192604, 2192788, 1354, "coralstone0016_geo" },
-            TextureOffset{ 2192788, 2192972, 1355, "coralstone0017_geo" },
-            TextureOffset{ 2192972, 2193156, 1356, "coralstone0018_geo" },
-            TextureOffset{ 2193156, 2193340, 1357, "coralstone0019_geo" },
-            TextureOffset{ 2193340, 2193524, 1358, "coralstone0020_geo" },
-            TextureOffset{ 2193524, 2193708, 1359, "coralstone0021_geo" },
-            TextureOffset{ 2193708, 2193892, 1360, "coralstone0022_geo" },
-            TextureOffset{ 2193892, 2194076, 1361, "coralstone0023_geo" },
-            TextureOffset{ 2194076, 2194260, 1362, "coralstone0024_geo" },
-            TextureOffset{ 2194260, 2194436, 1363, "fingercoral0001_geo" },
-            TextureOffset{ 2194436, 2194612, 1364, "fingercoral0002_geo" },
-            TextureOffset{ 2194612, 2194788, 1365, "fingercoral0003_geo" },
-            TextureOffset{ 2194788, 2194964, 1366, "fingercoral0004_geo" },
-            TextureOffset{ 2194964, 2195140, 1367, "fingercoral0005_geo" },
-            TextureOffset{ 2195140, 2195316, 1368, "fingercoral0006_geo" },
-            TextureOffset{ 2195316, 2195492, 1369, "fingercoral0007_geo" },
-            TextureOffset{ 2195492, 2195668, 1370, "fingercoral0008_geo" },
-            TextureOffset{ 2195668, 2195844, 1371, "fingercoral0009_geo" },
-            TextureOffset{ 2195844, 2196020, 1372, "fingercoral0010_geo" },
-            TextureOffset{ 2196020, 2196196, 1373, "fingercoral0011_geo" },
-            TextureOffset{ 2196196, 2196372, 1374, "fingercoral0012_geo" },
-            TextureOffset{ 2196372, 2196548, 1375, "fingercoral0013_geo" },
-            TextureOffset{ 2196548, 2196724, 1376, "fingercoral0014_geo" },
-            TextureOffset{ 2196724, 2196900, 1377, "fingercoral0015_geo" },
-            TextureOffset{ 2196900, 2197076, 1378, "fingercoral0016_geo" },
-            TextureOffset{ 2197076, 2197252, 1379, "fingercoral0017_geo" },
-            TextureOffset{ 2197252, 2197428, 1380, "fingercoral0018_geo" },
-            TextureOffset{ 2197428, 2197604, 1381, "fingercoral0019_geo" },
-            TextureOffset{ 2197604, 2197780, 1382, "fingercoral0020_geo" },
-            TextureOffset{ 2197780, 2197956, 1383, "fingercoral0021_geo" },
-            TextureOffset{ 2197956, 2198132, 1384, "fingercoral0022_geo" },
-            TextureOffset{ 2198132, 2198308, 1385, "fingercoral0023_geo" },
-            TextureOffset{ 2198308, 2198484, 1386, "fingercoral0024_geo" },
-            TextureOffset{ 2198484, 2198660, 1387, "fingercoral0025_geo" },
-            TextureOffset{ 2198660, 2198836, 1388, "fingercoral0026_geo" },
-            TextureOffset{ 2198836, 2199012, 1389, "fingercoral0027_geo" },
-            TextureOffset{ 2199012, 2199188, 1390, "fingercoral0028_geo" },
-            TextureOffset{ 2199188, 2199364, 1391, "fingercoral0029_geo" },
-            TextureOffset{ 2199364, 2199540, 1392, "fingercoral0030_geo" },
-            TextureOffset{ 2199540, 2199716, 1393, "fingercoral0031_geo" },
-            TextureOffset{ 2199716, 2199892, 1394, "fingercoral0032_geo" },
-            TextureOffset{ 2199892, 2200068, 1395, "fingercoral0033_geo" },
-            TextureOffset{ 2200068, 2200244, 1396, "fingercoral0034_geo" },
-            TextureOffset{ 2200244, 2200420, 1397, "fingercoral0035_geo" },
-            TextureOffset{ 2200420, 2200596, 1398, "fingercoral0036_geo" },
-            TextureOffset{ 2200596, 2200772, 1399, "fingercoral0037_geo" },
-            TextureOffset{ 2200772, 2200948, 1400, "fingercoral0038_geo" },
-            TextureOffset{ 2200948, 2201124, 1401, "fingercoral0039_geo" },
-            TextureOffset{ 2201124, 2201300, 1402, "fingercoral0040_geo" },
-            TextureOffset{ 2201300, 2201476, 1403, "fingercoral0041_geo" },
-            TextureOffset{ 2201476, 2201652, 1404, "fingercoral0042_geo" },
-            TextureOffset{ 2201652, 2201828, 1405, "fingercoral0043_geo" },
-            TextureOffset{ 2201828, 2202004, 1406, "fingercoral0044_geo" },
-            TextureOffset{ 2202004, 2202180, 1407, "fingercoral0045_geo" },
-            TextureOffset{ 2202180, 2202356, 1408, "fingercoral0046_geo" },
-            TextureOffset{ 2202356, 2202532, 1409, "fingercoral0047_geo" },
-            TextureOffset{ 2202532, 2202708, 1410, "fingercoral0048_geo" },
-            TextureOffset{ 2202708, 2202884, 1411, "fingercoral0049_geo" },
-            TextureOffset{ 2202884, 2203060, 1412, "fingercoral0050_geo" },
-            TextureOffset{ 2203060, 2203236, 1413, "fingercoral0051_geo" },
-            TextureOffset{ 2203236, 2203412, 1414, "fingercoral0052_geo" },
-            TextureOffset{ 2203412, 2203588, 1415, "fingercoral0053_geo" },
-            TextureOffset{ 2203588, 2203764, 1416, "fingercoral0054_geo" },
-            TextureOffset{ 2203764, 2203940, 1417, "fingercoral0055_geo" },
-            TextureOffset{ 2203940, 2204116, 1418, "fingercoral0056_geo" },
-            TextureOffset{ 2204116, 2204292, 1419, "fingercoral0057_geo" },
-            TextureOffset{ 2204292, 2204468, 1420, "fingercoral0058_geo" },
-            TextureOffset{ 2204468, 2204644, 1421, "fingercoral0059_geo" },
-            TextureOffset{ 2204644, 2204820, 1422, "fingercoral0060_geo" },
-            TextureOffset{ 2204820, 2204996, 1423, "fingercoral0061_geo" },
-            TextureOffset{ 2204996, 2205172, 1424, "fingercoral0062_geo" },
-            TextureOffset{ 2205172, 2205348, 1425, "fingercoral0063_geo" },
-            TextureOffset{ 2205348, 2205524, 1426, "fingercoral0064_geo" },
-            TextureOffset{ 2205524, 2205700, 1427, "fingercoral0065_geo" },
-            TextureOffset{ 2205700, 2205876, 1428, "fingercoral0066_geo" },
-            TextureOffset{ 2205876, 2206052, 1429, "fingercoral0067_geo" },
-            TextureOffset{ 2206052, 2206228, 1430, "fingercoral0068_geo" },
-            TextureOffset{ 2206228, 2206404, 1431, "fingercoral0069_geo" },
-            TextureOffset{ 2206404, 2206580, 1432, "fingercoral0070_geo" },
-            TextureOffset{ 2206580, 2206756, 1433, "fingercoral0071_geo" },
-            TextureOffset{ 2206756, 2206932, 1434, "fingercoral0072_geo" },
-            TextureOffset{ 2206932, 2207108, 1435, "fingercoral0073_geo" },
-            TextureOffset{ 2207108, 2207284, 1436, "fingercoral0074_geo" },
-            TextureOffset{ 2207284, 2207460, 1437, "fingercoral0075_geo" },
-            TextureOffset{ 2207460, 2207636, 1438, "fingercoral0076_geo" },
-            TextureOffset{ 2207636, 2207812, 1439, "fingercoral0077_geo" },
-            TextureOffset{ 2207812, 2207988, 1440, "fingercoral0078_geo" },
-            TextureOffset{ 2207988, 2208164, 1441, "fingercoral0079_geo" },
-            TextureOffset{ 2208164, 2208340, 1442, "fingercoral0080_geo" },
-            TextureOffset{ 2208340, 2208516, 1443, "fingercoral0081_geo" },
-            TextureOffset{ 2208516, 2208692, 1444, "fingercoral0082_geo" },
-            TextureOffset{ 2208692, 2208868, 1445, "fingercoral0083_geo" },
-            TextureOffset{ 2208868, 2209044, 1446, "fingercoral0084_geo" },
-            TextureOffset{ 2209044, 2209220, 1447, "fingercoral0085_geo" },
-            TextureOffset{ 2209220, 2209396, 1448, "fingercoral0086_geo" },
-            TextureOffset{ 2209396, 2209572, 1449, "fingercoral0087_geo" },
-            TextureOffset{ 2209572, 2209748, 1450, "fingercoral0088_geo" },
-            TextureOffset{ 2209748, 2209924, 1451, "fingercoral0089_geo" },
-            TextureOffset{ 2209924, 2210100, 1452, "fingercoral0090_geo" },
-            TextureOffset{ 2210100, 2210276, 1453, "fingercoral0091_geo" },
-            TextureOffset{ 2210276, 2210452, 1454, "fingercoral0092_geo" },
-            TextureOffset{ 2210452, 2210628, 1455, "fingercoral0093_geo" },
-            TextureOffset{ 2210628, 2210804, 1456, "fingercoral0094_geo" },
-            TextureOffset{ 2210804, 2210980, 1457, "fingercoral0095_geo" },
-            TextureOffset{ 2210980, 2211156, 1458, "fingercoral0096_geo" },
-            TextureOffset{ 2211156, 2211332, 1459, "fingercoral0097_geo" },
-            TextureOffset{ 2211332, 2211508, 1460, "fingercoral0098_geo" },
-            TextureOffset{ 2211508, 2211684, 1461, "fingercoral0099_geo" },
-            TextureOffset{ 2211684, 2211860, 1462, "fingercoral0100_geo" },
-            TextureOffset{ 2211860, 2212036, 1463, "fingercoral0101_geo" },
-            TextureOffset{ 2212036, 2212212, 1464, "fingercoral0102_geo" },
-            TextureOffset{ 2212212, 2212388, 1465, "fingercoral0103_geo" },
-            TextureOffset{ 2212388, 2212564, 1466, "fingercoral0104_geo" },
-            TextureOffset{ 2212564, 2212740, 1467, "fingercoral0105_geo" },
-            TextureOffset{ 2212740, 2212916, 1468, "fingercoral0106_geo" },
-            TextureOffset{ 2212916, 2213092, 1469, "fingercoral0107_geo" },
-            TextureOffset{ 2213092, 2213268, 1470, "fingercoral0108_geo" },
-            TextureOffset{ 2213268, 2213444, 1471, "fingercoral0109_geo" },
-            TextureOffset{ 2213444, 2213620, 1472, "fingercoral0110_geo" },
-            TextureOffset{ 2213620, 2213796, 1473, "fingercoral0111_geo" },
-            TextureOffset{ 2213796, 2213972, 1474, "fingercoral0112_geo" },
-            TextureOffset{ 2213972, 2214148, 1475, "fingercoral0113_geo" },
-            TextureOffset{ 2214148, 2214324, 1476, "fingercoral0114_geo" },
-            TextureOffset{ 2214324, 2214500, 1477, "fingercoral0115_geo" },
-            TextureOffset{ 2214500, 2214676, 1478, "fingercoral0116_geo" },
-            TextureOffset{ 2214676, 2214852, 1479, "fingercoral0117_geo" },
-            TextureOffset{ 2214852, 2215028, 1480, "fingercoral0118_geo" },
-            TextureOffset{ 2215028, 2215204, 1481, "fingercoral0119_geo" },
-            TextureOffset{ 2215204, 2215380, 1482, "fingercoral0120_geo" },
-            TextureOffset{ 2215380, 2215556, 1483, "fingercoral0121_geo" },
-            TextureOffset{ 2215556, 2215732, 1484, "fingercoral0122_geo" },
-            TextureOffset{ 2215732, 2215908, 1485, "fingercoral0123_geo" },
-            TextureOffset{ 2215908, 2216084, 1486, "fingercoral0124_geo" },
-            TextureOffset{ 2216084, 2216260, 1487, "fingercoral0125_geo" },
-            TextureOffset{ 2216260, 2216436, 1488, "fingercoral0126_geo" },
-            TextureOffset{ 2216436, 2216612, 1489, "fingercoral0127_geo" },
-            TextureOffset{ 2216612, 2216788, 1490, "fingercoral0128_geo" },
-            TextureOffset{ 2216788, 2216964, 1491, "fingercoral0129_geo" },
-            TextureOffset{ 2216964, 2217140, 1492, "fingercoral0130_geo" },
-            TextureOffset{ 2217140, 2217316, 1493, "fingercoral0131_geo" },
-            TextureOffset{ 2217316, 2217492, 1494, "fingercoral0132_geo" },
-            TextureOffset{ 2217492, 2217668, 1495, "fingercoral0133_geo" },
-            TextureOffset{ 2217668, 2217844, 1496, "fingercoral0134_geo" },
-            TextureOffset{ 2217844, 2218020, 1497, "fingercoral0135_geo" },
-            TextureOffset{ 2218020, 2218196, 1498, "fingercoral0136_geo" },
-            TextureOffset{ 2218196, 2218372, 1499, "fingercoral0137_geo" },
-            TextureOffset{ 2218372, 2218548, 1500, "fingercoral0138_geo" },
-            TextureOffset{ 2218548, 2218724, 1501, "fingercoral0139_geo" },
-            TextureOffset{ 2218724, 2218900, 1502, "fingercoral0140_geo" },
-            TextureOffset{ 2218900, 2219076, 1503, "fingercoral0141_geo" },
-            TextureOffset{ 2219076, 2219252, 1504, "fingercoral0142_geo" },
-            TextureOffset{ 2219252, 2219428, 1505, "fingercoral0143_geo" },
-            TextureOffset{ 2219428, 2219604, 1506, "fingercoral0144_geo" },
-            TextureOffset{ 2219604, 2219780, 1507, "fingercoral0145_geo" },
-            TextureOffset{ 2219780, 2219956, 1508, "fingercoral0146_geo" },
-            TextureOffset{ 2219956, 2220132, 1509, "fingercoral0147_geo" },
-            TextureOffset{ 2220132, 2220308, 1510, "fingercoral0148_geo" },
-            TextureOffset{ 2220308, 2220484, 1511, "fingercoral0149_geo" },
-            TextureOffset{ 2220484, 2220660, 1512, "fingercoral0150_geo" },
-            TextureOffset{ 2220660, 2220836, 1513, "fingercoral0151_geo" },
-            TextureOffset{ 2220836, 2221012, 1514, "fingercoral0152_geo" },
-            TextureOffset{ 2221012, 2221188, 1515, "fingercoral0153_geo" },
-            TextureOffset{ 2221188, 2221364, 1516, "fingercoral0154_geo" },
-            TextureOffset{ 2221364, 2221540, 1517, "fingercoral0155_geo" },
-            TextureOffset{ 2221540, 2221716, 1518, "fingercoral0156_geo" },
-            TextureOffset{ 2221716, 2221892, 1519, "fingercoral0157_geo" },
-            TextureOffset{ 2221892, 2222068, 1520, "fingercoral0158_geo" },
-            TextureOffset{ 2222068, 2222244, 1521, "fingercoral0159_geo" },
-            TextureOffset{ 2222244, 2222420, 1522, "fingercoral0160_geo" },
-            TextureOffset{ 2222420, 2222596, 1523, "fingercoral0161_geo" },
-            TextureOffset{ 2222596, 2222772, 1524, "fingercoral0162_geo" },
-            TextureOffset{ 2222772, 2222948, 1525, "fingercoral0163_geo" },
-            TextureOffset{ 2222948, 2223124, 1526, "fingercoral0164_geo" },
-            TextureOffset{ 2223124, 2223300, 1527, "fingercoral0165_geo" },
-            TextureOffset{ 2223300, 2223476, 1528, "fingercoral0166_geo" },
-            TextureOffset{ 2223476, 2223652, 1529, "fingercoral0167_geo" },
-            TextureOffset{ 2223652, 2223828, 1530, "fingercoral0168_geo" },
-            TextureOffset{ 2223828, 2224004, 1531, "fingercoral0169_geo" },
-            TextureOffset{ 2224004, 2224180, 1532, "fingercoral0170_geo" },
-            TextureOffset{ 2224180, 2224356, 1533, "fingercoral0171_geo" },
-            TextureOffset{ 2224356, 2224532, 1534, "fingercoral0172_geo" },
-            TextureOffset{ 2224532, 2224708, 1535, "fingercoral0173_geo" },
-            TextureOffset{ 2224708, 2224884, 1536, "fingercoral0174_geo" },
-            TextureOffset{ 2224884, 2225060, 1537, "fingercoral0175_geo" },
-            TextureOffset{ 2225060, 2225236, 1538, "fingercoral0176_geo" },
-            TextureOffset{ 2225236, 2225412, 1539, "fingercoral0177_geo" },
-            TextureOffset{ 2225412, 2225588, 1540, "fingercoral0178_geo" },
-            TextureOffset{ 2225588, 2225764, 1541, "fingercoral0179_geo" },
-            TextureOffset{ 2225764, 2225940, 1542, "fingercoral0180_geo" },
-            TextureOffset{ 2225940, 2226116, 1543, "fingercoral0181_geo" },
-            TextureOffset{ 2226116, 2226292, 1544, "fingercoral0182_geo" },
-            TextureOffset{ 2226292, 2226468, 1545, "fingercoral0183_geo" },
-            TextureOffset{ 2226468, 2226644, 1546, "fingercoral0184_geo" },
-            TextureOffset{ 2226644, 2226820, 1547, "fingercoral0185_geo" },
-            TextureOffset{ 2226820, 2226996, 1548, "fingercoral0186_geo" },
-            TextureOffset{ 2226996, 2227172, 1549, "fingercoral0187_geo" },
-            TextureOffset{ 2227172, 2227348, 1550, "fingercoral0188_geo" },
-            TextureOffset{ 2227348, 2227524, 1551, "fingercoral0189_geo" },
-            TextureOffset{ 2227524, 2227700, 1552, "fingercoral0190_geo" },
-            TextureOffset{ 2227700, 2227876, 1553, "fingercoral0191_geo" },
-            TextureOffset{ 2227876, 2228052, 1554, "fingercoral0192_geo" },
-            TextureOffset{ 2228052, 2228228, 1555, "fingercoral0193_geo" },
-            TextureOffset{ 2228228, 2228404, 1556, "fingercoral0194_geo" },
-            TextureOffset{ 2228404, 2228580, 1557, "fingercoral0195_geo" },
-            TextureOffset{ 2228580, 2228756, 1558, "fingercoral0196_geo" },
-            TextureOffset{ 2228756, 2228932, 1559, "fingercoral0197_geo" },
-            TextureOffset{ 2228932, 2229108, 1560, "fingercoral0198_geo" },
-            TextureOffset{ 2229108, 2229284, 1561, "fingercoral0199_geo" },
-            TextureOffset{ 2229284, 2229460, 1562, "fingercoral0200_geo" },
-            TextureOffset{ 2229460, 2229636, 1563, "fingercoral0201_geo" },
-            TextureOffset{ 2229636, 2229812, 1564, "fingercoral0202_geo" },
-            TextureOffset{ 2229812, 2229988, 1565, "fingercoral0203_geo" },
-            TextureOffset{ 2229988, 2230164, 1566, "fingercoral0204_geo" },
-            TextureOffset{ 2230164, 2230340, 1567, "fingercoral0205_geo" },
-            TextureOffset{ 2230340, 2230516, 1568, "fingercoral0206_geo" },
-            TextureOffset{ 2230516, 2230692, 1569, "fingercoral0207_geo" },
-            TextureOffset{ 2230692, 2230868, 1570, "fingercoral0208_geo" },
-            TextureOffset{ 2230868, 2231044, 1571, "fingercoral0209_geo" },
-            TextureOffset{ 2231044, 2231220, 1572, "fingercoral0210_geo" },
-            TextureOffset{ 2231220, 2231396, 1573, "fingercoral0211_geo" },
-            TextureOffset{ 2231396, 2231572, 1574, "fingercoral0212_geo" },
-            TextureOffset{ 2231572, 2231748, 1575, "fingercoral0213_geo" },
-            TextureOffset{ 2231748, 2231924, 1576, "fingercoral0214_geo" },
-            TextureOffset{ 2231924, 2232100, 1577, "fingercoral0215_geo" },
-            TextureOffset{ 2232100, 2232276, 1578, "fingercoral0216_geo" },
-            TextureOffset{ 2232276, 2232452, 1579, "fingercoral0217_geo" },
-            TextureOffset{ 2232452, 2232628, 1580, "fingercoral0218_geo" },
-            TextureOffset{ 2232628, 2232804, 1581, "fingercoral0219_geo" },
-            TextureOffset{ 2232804, 2232980, 1582, "fingercoral0220_geo" },
-            TextureOffset{ 2232980, 2233156, 1583, "fingercoral0221_geo" },
-            TextureOffset{ 2233156, 2233332, 1584, "fingercoral0222_geo" },
-            TextureOffset{ 2233332, 2233508, 1585, "fingercoral0223_geo" },
-            TextureOffset{ 2233508, 2233684, 1586, "fingercoral0224_geo" },
-            TextureOffset{ 2233684, 2233860, 1587, "fingercoral0225_geo" },
-            TextureOffset{ 2233860, 2234036, 1588, "fingercoral0226_geo" },
-            TextureOffset{ 2234036, 2234212, 1589, "fingercoral0227_geo" },
-            TextureOffset{ 2234212, 2234388, 1590, "fingercoral0228_geo" },
-            TextureOffset{ 2234388, 2234564, 1591, "fingercoral0229_geo" },
-            TextureOffset{ 2234564, 2234740, 1592, "fingercoral0230_geo" },
-            TextureOffset{ 2234740, 2234916, 1593, "fingercoral0231_geo" },
-            TextureOffset{ 2234916, 2235092, 1594, "fingercoral0232_geo" },
-            TextureOffset{ 2235092, 2235268, 1595, "fingercoral0233_geo" },
-            TextureOffset{ 2235268, 2235444, 1596, "fingercoral0234_geo" },
-            TextureOffset{ 2235444, 2235620, 1597, "fingercoral0235_geo" },
-            TextureOffset{ 2235620, 2235796, 1598, "fingercoral0236_geo" },
-            TextureOffset{ 2235796, 2235972, 1599, "fingercoral0237_geo" },
-            TextureOffset{ 2235972, 2236148, 1600, "fingercoral0238_geo" },
-            TextureOffset{ 2236148, 2236324, 1601, "fingercoral0239_geo" },
-            TextureOffset{ 2236324, 2236500, 1602, "fingercoral0240_geo" },
-            TextureOffset{ 2236500, 2236676, 1603, "fingercoral0241_geo" },
-            TextureOffset{ 2236676, 2236852, 1604, "fingercoral0242_geo" },
-            TextureOffset{ 2236852, 2237028, 1605, "fingercoral0243_geo" },
-            TextureOffset{ 2237028, 2237204, 1606, "fingercoral0244_geo" },
-            TextureOffset{ 2237204, 2237380, 1607, "fingercoral0245_geo" },
-            TextureOffset{ 2237380, 2237556, 1608, "fingercoral0246_geo" },
-            TextureOffset{ 2237556, 2237732, 1609, "fingercoral0247_geo" },
-            TextureOffset{ 2237732, 2237908, 1610, "fingercoral0248_geo" },
-            TextureOffset{ 2237908, 2238084, 1611, "fingercoral0249_geo" },
-            TextureOffset{ 2238084, 2238260, 1612, "fingercoral0250_geo" },
-            TextureOffset{ 2238260, 2238436, 1613, "fingercoral0251_geo" },
-            TextureOffset{ 2238436, 2238612, 1614, "fingercoral0252_geo" },
-            TextureOffset{ 2238612, 2238788, 1615, "fingercoral0253_geo" },
-            TextureOffset{ 2238788, 2238964, 1616, "fingercoral0254_geo" },
-            TextureOffset{ 2238964, 2239140, 1617, "fingercoral0255_geo" },
-            TextureOffset{ 2239140, 2239316, 1618, "fingercoral0256_geo" },
-            TextureOffset{ 2239316, 2239492, 1619, "fingercoral0257_geo" },
-            TextureOffset{ 2239492, 2239668, 1620, "fingercoral0258_geo" },
-            TextureOffset{ 2239668, 2239844, 1621, "fingercoral0259_geo" },
-            TextureOffset{ 2239844, 2240020, 1622, "fingercoral0260_geo" },
-            TextureOffset{ 2240020, 2240196, 1623, "fingercoral0261_geo" },
-            TextureOffset{ 2240196, 2240372, 1624, "fingercoral0262_geo" },
-            TextureOffset{ 2240372, 2240548, 1625, "fingercoral0263_geo" },
-            TextureOffset{ 2240548, 2240724, 1626, "fingercoral0264_geo" },
-            TextureOffset{ 2240724, 2240900, 1627, "fingercoral0265_geo" },
-            TextureOffset{ 2240900, 2241076, 1628, "fingercoral0266_geo" },
-            TextureOffset{ 2241076, 2241252, 1629, "fingercoral0267_geo" },
-            TextureOffset{ 2241252, 2241428, 1630, "fingercoral0268_geo" },
-            TextureOffset{ 2241428, 2241604, 1631, "fingercoral0269_geo" },
-            TextureOffset{ 2241604, 2241780, 1632, "fingercoral0270_geo" },
-            TextureOffset{ 2241780, 2241956, 1633, "fingercoral0271_geo" },
-            TextureOffset{ 2241956, 2242132, 1634, "fingercoral0272_geo" },
-            TextureOffset{ 2242132, 2242308, 1635, "fingercoral0273_geo" },
-            TextureOffset{ 2242308, 2242484, 1636, "fingercoral0274_geo" },
-            TextureOffset{ 2242484, 2242660, 1637, "fingercoral0275_geo" },
-            TextureOffset{ 2242660, 2242836, 1638, "fingercoral0276_geo" },
-            TextureOffset{ 2242836, 2243012, 1639, "fingercoral0277_geo" },
-            TextureOffset{ 2243012, 2243188, 1640, "fingercoral0278_geo" },
-            TextureOffset{ 2243188, 2243364, 1641, "fingercoral0279_geo" },
-            TextureOffset{ 2243364, 2243540, 1642, "fingercoral0280_geo" },
-            TextureOffset{ 2243540, 2243716, 1643, "fingercoral0281_geo" },
-            TextureOffset{ 2243716, 2243892, 1644, "fingercoral0282_geo" },
-            TextureOffset{ 2243892, 2244068, 1645, "fingercoral0283_geo" },
-            TextureOffset{ 2244068, 2244244, 1646, "fingercoral0284_geo" },
-            TextureOffset{ 2244244, 2244420, 1647, "fingercoral0285_geo" },
-            TextureOffset{ 2244420, 2244596, 1648, "fingercoral0286_geo" },
-            TextureOffset{ 2244596, 2244772, 1649, "fingercoral0287_geo" },
-            TextureOffset{ 2244772, 2244948, 1650, "fingercoral0288_geo" },
-            TextureOffset{ 2244948, 2245124, 1651, "fingercoral0289_geo" },
-            TextureOffset{ 2245124, 2245300, 1652, "fingercoral0290_geo" },
-            TextureOffset{ 2245300, 2245476, 1653, "fingercoral0291_geo" },
-            TextureOffset{ 2245476, 2245652, 1654, "fingercoral0292_geo" },
-            TextureOffset{ 2245652, 2245828, 1655, "fingercoral0293_geo" },
-            TextureOffset{ 2245828, 2246004, 1656, "fingercoral0294_geo" },
-            TextureOffset{ 2246004, 2246180, 1657, "fingercoral0295_geo" },
-            TextureOffset{ 2246180, 2246356, 1658, "fingercoral0296_geo" },
-            TextureOffset{ 2246356, 2246532, 1659, "fingercoral0297_geo" },
-            TextureOffset{ 2246532, 2246708, 1660, "fingercoral0298_geo" },
-            TextureOffset{ 2246708, 2246884, 1661, "fingercoral0299_geo" },
-            TextureOffset{ 2246884, 2247060, 1662, "fingercoral0300_geo" },
-            TextureOffset{ 2247060, 2247236, 1663, "fingercoral0301_geo" },
-            TextureOffset{ 2247236, 2247412, 1664, "fingercoral0302_geo" },
-            TextureOffset{ 2247412, 2247588, 1665, "fingercoral0303_geo" },
-            TextureOffset{ 2247588, 2247764, 1666, "fingercoral0304_geo" },
-            TextureOffset{ 2247764, 2247940, 1667, "fingercoral0305_geo" },
-            TextureOffset{ 2247940, 2248116, 1668, "fingercoral0306_geo" },
-            TextureOffset{ 2248116, 2248292, 1669, "fingercoral0307_geo" },
-            TextureOffset{ 2248292, 2248468, 1670, "fingercoral0308_geo" },
-            TextureOffset{ 2248468, 2248644, 1671, "fingercoral0309_geo" },
-            TextureOffset{ 2248644, 2248820, 1672, "fingercoral0310_geo" },
-            TextureOffset{ 2248820, 2248996, 1673, "fingercoral0311_geo" },
-            TextureOffset{ 2248996, 2249172, 1674, "fingercoral0312_geo" },
-            TextureOffset{ 2249172, 2249348, 1675, "fingercoral0313_geo" },
-            TextureOffset{ 2249348, 2249524, 1676, "fingercoral0314_geo" },
-            TextureOffset{ 2249524, 2249700, 1677, "fingercoral0315_geo" },
-            TextureOffset{ 2249700, 2249876, 1678, "fingercoral0316_geo" },
-            TextureOffset{ 2249876, 2250052, 1679, "fingercoral0317_geo" },
-            TextureOffset{ 2250052, 2250228, 1680, "fingercoral0318_geo" },
-            TextureOffset{ 2250228, 2250404, 1681, "fingercoral0319_geo" },
-            TextureOffset{ 2250404, 2250580, 1682, "fingercoral0320_geo" },
-            TextureOffset{ 2250580, 2250756, 1683, "fingercoral0321_geo" },
-            TextureOffset{ 2250756, 2250932, 1684, "fingercoral0322_geo" },
-            TextureOffset{ 2250932, 2251108, 1685, "fingercoral0323_geo" },
-            TextureOffset{ 2251108, 2251284, 1686, "fingercoral0324_geo" },
-            TextureOffset{ 2251284, 2251460, 1687, "fingercoral0325_geo" },
-            TextureOffset{ 2251460, 2251636, 1688, "fingercoral0326_geo" },
-            TextureOffset{ 2251636, 2251812, 1689, "fingercoral0327_geo" },
-            TextureOffset{ 2251812, 2251988, 1690, "fingercoral0328_geo" },
-            TextureOffset{ 2251988, 2252164, 1691, "fingercoral0329_geo" },
-            TextureOffset{ 2252164, 2252340, 1692, "fingercoral0330_geo" },
-            TextureOffset{ 2252340, 2252516, 1693, "fingercoral0331_geo" },
-            TextureOffset{ 2252516, 2252692, 1694, "fingercoral0332_geo" },
-            TextureOffset{ 2252692, 2252868, 1695, "fingercoral0333_geo" },
-            TextureOffset{ 2252868, 2253044, 1696, "fingercoral0334_geo" },
-            TextureOffset{ 2253044, 2253220, 1697, "fingercoral0335_geo" },
-            TextureOffset{ 2253220, 2253396, 1698, "fingercoral0336_geo" },
-            TextureOffset{ 2253396, 2253572, 1699, "fingercoral0337_geo" },
-            TextureOffset{ 2253572, 2253748, 1700, "fingercoral0338_geo" },
-            TextureOffset{ 2253748, 2253924, 1701, "fingercoral0339_geo" },
-            TextureOffset{ 2253924, 2254100, 1702, "fingercoral0340_geo" },
-            TextureOffset{ 2254100, 2254276, 1703, "fingercoral0341_geo" },
-            TextureOffset{ 2254276, 2254452, 1704, "fingercoral0342_geo" },
-            TextureOffset{ 2254452, 2254628, 1705, "fingercoral0343_geo" },
-            TextureOffset{ 2254628, 2254804, 1706, "fingercoral0344_geo" },
-            TextureOffset{ 2254804, 2254980, 1707, "fingercoral0345_geo" },
-            TextureOffset{ 2254980, 2255156, 1708, "fingercoral0346_geo" },
-            TextureOffset{ 2255156, 2255332, 1709, "fingercoral0347_geo" },
-            TextureOffset{ 2255332, 2255508, 1710, "fingercoral0348_geo" },
-            TextureOffset{ 2255508, 2255684, 1711, "fingercoral0349_geo" },
-            TextureOffset{ 2255684, 2255860, 1712, "fingercoral0350_geo" },
-            TextureOffset{ 2255860, 2256036, 1713, "fingercoral0351_geo" },
-            TextureOffset{ 2256036, 2256212, 1714, "fingercoral0352_geo" },
-            TextureOffset{ 2256212, 2256388, 1715, "fingercoral0353_geo" },
-            TextureOffset{ 2256388, 2256564, 1716, "fingercoral0354_geo" },
-            TextureOffset{ 2256564, 2256740, 1717, "fingercoral0355_geo" },
-            TextureOffset{ 2256740, 2256916, 1718, "fingercoral0356_geo" },
-            TextureOffset{ 2256916, 2257092, 1719, "fingercoral0357_geo" },
-            TextureOffset{ 2257092, 2257268, 1720, "fingercoral0358_geo" },
-            TextureOffset{ 2257268, 2257444, 1721, "fingercoral0359_geo" },
-            TextureOffset{ 2257444, 2257620, 1722, "fingercoral0360_geo" },
-            TextureOffset{ 2257620, 2257796, 1723, "fingercoral0361_geo" },
-            TextureOffset{ 2257796, 2257972, 1724, "fingercoral0362_geo" },
-            TextureOffset{ 2257972, 2258148, 1725, "fingercoral0363_geo" },
-            TextureOffset{ 2258148, 2258324, 1726, "fingercoral0364_geo" },
-            TextureOffset{ 2258324, 2258500, 1727, "fingercoral0365_geo" },
-            TextureOffset{ 2258500, 2258676, 1728, "fingercoral0366_geo" },
-            TextureOffset{ 2258676, 2258852, 1729, "fingercoral0367_geo" },
-            TextureOffset{ 2258852, 2259028, 1730, "fingercoral0368_geo" },
-            TextureOffset{ 2259028, 2259204, 1731, "fingercoral0369_geo" },
-            TextureOffset{ 2259204, 2259380, 1732, "fingercoral0370_geo" },
-            TextureOffset{ 2259380, 2259556, 1733, "fingercoral0371_geo" },
-            TextureOffset{ 2259556, 2259732, 1734, "fingercoral0372_geo" },
-            TextureOffset{ 2259732, 2259908, 1735, "fingercoral0373_geo" },
-            TextureOffset{ 2259908, 2260084, 1736, "fingercoral0374_geo" },
-            TextureOffset{ 2260084, 2260260, 1737, "fingercoral0375_geo" },
-            TextureOffset{ 2260260, 2260436, 1738, "fingercoral0376_geo" },
-            TextureOffset{ 2260436, 2260612, 1739, "fingercoral0377_geo" },
-            TextureOffset{ 2260612, 2260788, 1740, "fingercoral0378_geo" },
-            TextureOffset{ 2260788, 2260964, 1741, "fingercoral0379_geo" },
-            TextureOffset{ 2260964, 2261140, 1742, "fingercoral0380_geo" },
-            TextureOffset{ 2261140, 2261316, 1743, "fingercoral0381_geo" },
-            TextureOffset{ 2261316, 2261492, 1744, "fingercoral0382_geo" },
-            TextureOffset{ 2261492, 2261668, 1745, "fingercoral0383_geo" },
-            TextureOffset{ 2261668, 2261844, 1746, "fingercoral0384_geo" },
-            TextureOffset{ 2261844, 2262020, 1747, "fingercoral0385_geo" },
-            TextureOffset{ 2262020, 2262196, 1748, "fingercoral0386_geo" },
-            TextureOffset{ 2262196, 2262372, 1749, "fingercoral0387_geo" },
-            TextureOffset{ 2262372, 2262548, 1750, "fingercoral0388_geo" },
-            TextureOffset{ 2262548, 2262724, 1751, "fingercoral0389_geo" },
-            TextureOffset{ 2262724, 2262900, 1752, "fingercoral0390_geo" },
-            TextureOffset{ 2262900, 2263076, 1753, "fingercoral0391_geo" },
-            TextureOffset{ 2263076, 2263252, 1754, "fingercoral0392_geo" },
-            TextureOffset{ 2263252, 2263428, 1755, "fingercoral0393_geo" },
-            TextureOffset{ 2263428, 2263604, 1756, "fingercoral0394_geo" },
-            TextureOffset{ 2263604, 2263780, 1757, "fingercoral0395_geo" },
-            TextureOffset{ 2263780, 2263956, 1758, "fingercoral0396_geo" },
-            TextureOffset{ 2263956, 2264132, 1759, "fingercoral0397_geo" },
-            TextureOffset{ 2264132, 2264308, 1760, "fingercoral0398_geo" },
-            TextureOffset{ 2264308, 2264484, 1761, "fingercoral0399_geo" },
-            TextureOffset{ 2264484, 2264660, 1762, "fingercoral0400_geo" },
-            TextureOffset{ 2264660, 2264836, 1763, "fingercoral0401_geo" },
-            TextureOffset{ 2264836, 2265012, 1764, "fingercoral0402_geo" },
-            TextureOffset{ 2265012, 2265188, 1765, "fingercoral0403_geo" },
-            TextureOffset{ 2265188, 2265364, 1766, "fingercoral0404_geo" },
-            TextureOffset{ 2265364, 2265540, 1767, "fingercoral0405_geo" },
-            TextureOffset{ 2265540, 2265716, 1768, "fingercoral0406_geo" },
-            TextureOffset{ 2265716, 2265892, 1769, "fingercoral0407_geo" },
-            TextureOffset{ 2265892, 2266068, 1770, "fingercoral0408_geo" },
-            TextureOffset{ 2266068, 2266244, 1771, "fingercoral0409_geo" },
-            TextureOffset{ 2266244, 2266420, 1772, "fingercoral0410_geo" },
-            TextureOffset{ 2266420, 2266596, 1773, "fingercoral0411_geo" },
-            TextureOffset{ 2266596, 2266772, 1774, "fingercoral0412_geo" },
-            TextureOffset{ 2266772, 2266948, 1775, "fingercoral0413_geo" },
-            TextureOffset{ 2266948, 2267124, 1776, "fingercoral0414_geo" },
-            TextureOffset{ 2267124, 2267300, 1777, "fingercoral0415_geo" },
-            TextureOffset{ 2267300, 2267476, 1778, "fingercoral0416_geo" },
-            TextureOffset{ 2267476, 2267652, 1779, "fingercoral0417_geo" },
-            TextureOffset{ 2267652, 2267828, 1780, "fingercoral0418_geo" },
-            TextureOffset{ 2267828, 2268004, 1781, "fingercoral0419_geo" },
-            TextureOffset{ 2268004, 2268180, 1782, "fingercoral0420_geo" },
-            TextureOffset{ 2268180, 2268356, 1783, "fingercoral0421_geo" },
-            TextureOffset{ 2268356, 2268532, 1784, "fingercoral0422_geo" },
-            TextureOffset{ 2268532, 2268708, 1785, "fingercoral0423_geo" },
-            TextureOffset{ 2268708, 2268884, 1786, "fingercoral0424_geo" },
-            TextureOffset{ 2268884, 2269060, 1787, "fingercoral0425_geo" },
-            TextureOffset{ 2269060, 2269236, 1788, "fingercoral0426_geo" },
-            TextureOffset{ 2269236, 2269412, 1789, "fingercoral0427_geo" },
-            TextureOffset{ 2269412, 2269588, 1790, "fingercoral0428_geo" },
-            TextureOffset{ 2269588, 2269764, 1791, "fingercoral0429_geo" },
-            TextureOffset{ 2269764, 2269940, 1792, "fingercoral0430_geo" },
-            TextureOffset{ 2269940, 2270116, 1793, "fingercoral0431_geo" },
-            TextureOffset{ 2270116, 2270292, 1794, "fingercoral0432_geo" },
-            TextureOffset{ 2270292, 2270468, 1795, "fingercoral0433_geo" },
-            TextureOffset{ 2270468, 2270644, 1796, "fingercoral0434_geo" },
-            TextureOffset{ 2270644, 2270820, 1797, "fingercoral0435_geo" },
-            TextureOffset{ 2270820, 2270996, 1798, "fingercoral0436_geo" },
-            TextureOffset{ 2270996, 2271172, 1799, "fingercoral0437_geo" },
-            TextureOffset{ 2271172, 2271348, 1800, "fingercoral0438_geo" },
-            TextureOffset{ 2271348, 2271524, 1801, "fingercoral0439_geo" },
-            TextureOffset{ 2271524, 2271700, 1802, "fingercoral0440_geo" },
-            TextureOffset{ 2271700, 2271876, 1803, "fingercoral0441_geo" },
-            TextureOffset{ 2271876, 2272052, 1804, "fingercoral0442_geo" },
-            TextureOffset{ 2272052, 2272228, 1805, "fingercoral0443_geo" },
-            TextureOffset{ 2272228, 2272404, 1806, "fingercoral0444_geo" },
-            TextureOffset{ 2272404, 2272580, 1807, "fingercoral0445_geo" },
-            TextureOffset{ 2272580, 2272756, 1808, "fingercoral0446_geo" },
-            TextureOffset{ 2272756, 2272932, 1809, "fingercoral0447_geo" },
-            TextureOffset{ 2272932, 2273108, 1810, "fingercoral0448_geo" },
-            TextureOffset{ 2273108, 2273284, 1811, "fingercoral0449_geo" },
-            TextureOffset{ 2273284, 2273460, 1812, "fingercoral0450_geo" },
-            TextureOffset{ 2273460, 2273636, 1813, "fingercoral0451_geo" },
-            TextureOffset{ 2273636, 2273812, 1814, "fingercoral0452_geo" },
-            TextureOffset{ 2273812, 2273988, 1815, "fingercoral0453_geo" },
-            TextureOffset{ 2273988, 2274164, 1816, "fingercoral0454_geo" },
-            TextureOffset{ 2274164, 2274340, 1817, "fingercoral0455_geo" },
-            TextureOffset{ 2274340, 2274516, 1818, "fingercoral0456_geo" },
-            TextureOffset{ 2274516, 2274692, 1819, "fingercoral0457_geo" },
-            TextureOffset{ 2274692, 2274868, 1820, "fingercoral0458_geo" },
-            TextureOffset{ 2274868, 2275044, 1821, "fingercoral0459_geo" },
-            TextureOffset{ 2275044, 2275220, 1822, "fingercoral0460_geo" },
-            TextureOffset{ 2275220, 2275396, 1823, "fingercoral0461_geo" },
-            TextureOffset{ 2275396, 2275572, 1824, "fingercoral0462_geo" },
-            TextureOffset{ 2275572, 2275748, 1825, "fingercoral0463_geo" },
-            TextureOffset{ 2275748, 2275924, 1826, "fingercoral0464_geo" },
-            TextureOffset{ 2275924, 2276100, 1827, "fingercoral0465_geo" },
-            TextureOffset{ 2276100, 2276276, 1828, "fingercoral0466_geo" },
-            TextureOffset{ 2276276, 2276452, 1829, "fingercoral0467_geo" },
-            TextureOffset{ 2276452, 2276628, 1830, "fingercoral0468_geo" },
-            TextureOffset{ 2276628, 2276804, 1831, "fingercoral0469_geo" },
-            TextureOffset{ 2276804, 2276980, 1832, "fingercoral0470_geo" },
-            TextureOffset{ 2276980, 2277156, 1833, "fingercoral0471_geo" },
-            TextureOffset{ 2277156, 2277332, 1834, "fingercoral0472_geo" },
-            TextureOffset{ 2277332, 2277508, 1835, "fingercoral0473_geo" },
-            TextureOffset{ 2277508, 2277684, 1836, "fingercoral0474_geo" },
-            TextureOffset{ 2277684, 2277860, 1837, "fingercoral0475_geo" },
-            TextureOffset{ 2277860, 2278036, 1838, "fingercoral0476_geo" },
-            TextureOffset{ 2278036, 2278212, 1839, "fingercoral0477_geo" },
-            TextureOffset{ 2278212, 2278388, 1840, "fingercoral0478_geo" },
-            TextureOffset{ 2278388, 2278564, 1841, "fingercoral0479_geo" },
-            TextureOffset{ 2278564, 2278740, 1842, "fingercoral0480_geo" },
-            TextureOffset{ 2278740, 2278916, 1843, "fingercoral0481_geo" },
-            TextureOffset{ 2278916, 2279092, 1844, "fingercoral0482_geo" },
-            TextureOffset{ 2279092, 2279268, 1845, "fingercoral0483_geo" },
-            TextureOffset{ 2279268, 2279444, 1846, "fingercoral0484_geo" },
-            TextureOffset{ 2279444, 2279620, 1847, "fingercoral0485_geo" },
-            TextureOffset{ 2279620, 2279796, 1848, "fingercoral0486_geo" },
-            TextureOffset{ 2279796, 2279972, 1849, "fingercoral0487_geo" },
-            TextureOffset{ 2279972, 2280148, 1850, "fingercoral0488_geo" },
-            TextureOffset{ 2280148, 2280324, 1851, "fingercoral0489_geo" },
-            TextureOffset{ 2280324, 2280500, 1852, "fingercoral0490_geo" },
-            TextureOffset{ 2280500, 2280676, 1853, "fingercoral0491_geo" },
-            TextureOffset{ 2280676, 2280852, 1854, "fingercoral0492_geo" },
-            TextureOffset{ 2280852, 2281028, 1855, "fingercoral0493_geo" },
-            TextureOffset{ 2281028, 2281204, 1856, "fingercoral0494_geo" },
-            TextureOffset{ 2281204, 2281380, 1857, "fingercoral0495_geo" },
-            TextureOffset{ 2281380, 2281556, 1858, "fingercoral0496_geo" },
-            TextureOffset{ 2281556, 2281732, 1859, "fingercoral0497_geo" },
-            TextureOffset{ 2281732, 2281908, 1860, "fingercoral0498_geo" },
-            TextureOffset{ 2281908, 2282084, 1861, "fingercoral0499_geo" },
-            TextureOffset{ 2282084, 2282260, 1862, "fingercoral0500_geo" },
-            TextureOffset{ 2282260, 2282436, 1863, "fingercoral0501_geo" },
-            TextureOffset{ 2282436, 2282612, 1864, "fingercoral0502_geo" },
-            TextureOffset{ 2282612, 2282788, 1865, "fingercoral0503_geo" },
-            TextureOffset{ 2282788, 2282964, 1866, "fingercoral0504_geo" },
-            TextureOffset{ 2282964, 2283140, 1867, "fingercoral0505_geo" },
-            TextureOffset{ 2283140, 2283316, 1868, "fingercoral0506_geo" },
-            TextureOffset{ 2283316, 2283492, 1869, "fingercoral0507_geo" },
-            TextureOffset{ 2283492, 2283668, 1870, "fingercoral0508_geo" },
-            TextureOffset{ 2283668, 2283844, 1871, "fingercoral0509_geo" },
-            TextureOffset{ 2283844, 2284020, 1872, "fingercoral0510_geo" },
-            TextureOffset{ 2284020, 2284196, 1873, "fingercoral0511_geo" },
-            TextureOffset{ 2284196, 2284372, 1874, "fingercoral0512_geo" },
-            TextureOffset{ 2284372, 2284548, 1875, "fingercoral0513_geo" },
-            TextureOffset{ 2284548, 2284724, 1876, "fingercoral0514_geo" },
-            TextureOffset{ 2284724, 2284900, 1877, "fingercoral0515_geo" },
-            TextureOffset{ 2284900, 2285076, 1878, "fingercoral0516_geo" },
-            TextureOffset{ 2285076, 2285252, 1879, "fingercoral0517_geo" },
-            TextureOffset{ 2285252, 2285428, 1880, "fingercoral0518_geo" },
-            TextureOffset{ 2285428, 2285604, 1881, "fingercoral0519_geo" },
-            TextureOffset{ 2285604, 2285780, 1882, "fingercoral0520_geo" },
-            TextureOffset{ 2285780, 2285956, 1883, "fingercoral0521_geo" },
-            TextureOffset{ 2285956, 2286132, 1884, "fingercoral0522_geo" },
-            TextureOffset{ 2286132, 2286308, 1885, "fingercoral0523_geo" },
-            TextureOffset{ 2286308, 2286484, 1886, "fingercoral0524_geo" },
-            TextureOffset{ 2286484, 2286660, 1887, "fingercoral0525_geo" },
-            TextureOffset{ 2286660, 2286836, 1888, "fingercoral0526_geo" },
-            TextureOffset{ 2286836, 2287012, 1889, "fingercoral0527_geo" },
-            TextureOffset{ 2287012, 2287188, 1890, "fingercoral0528_geo" },
-            TextureOffset{ 2287188, 2287364, 1891, "fingercoral0529_geo" },
-            TextureOffset{ 2287364, 2287540, 1892, "fingercoral0530_geo" },
-            TextureOffset{ 2287540, 2287716, 1893, "fingercoral0531_geo" },
-            TextureOffset{ 2287716, 2287892, 1894, "fingercoral0532_geo" },
-            TextureOffset{ 2287892, 2288068, 1895, "fingercoral0533_geo" },
-            TextureOffset{ 2288068, 2288244, 1896, "fingercoral0534_geo" },
-            TextureOffset{ 2288244, 2288420, 1897, "fingercoral0535_geo" },
-            TextureOffset{ 2288420, 2288596, 1898, "fingercoral0536_geo" },
-            TextureOffset{ 2288596, 2288772, 1899, "fingercoral0537_geo" },
-            TextureOffset{ 2288772, 2288948, 1900, "fingercoral0538_geo" },
-            TextureOffset{ 2288948, 2289124, 1901, "fingercoral0539_geo" },
-            TextureOffset{ 2289124, 2289300, 1902, "fingercoral0540_geo" },
-            TextureOffset{ 2289300, 2289476, 1903, "fingercoral0541_geo" },
-            TextureOffset{ 2289476, 2289652, 1904, "fingercoral0542_geo" },
-            TextureOffset{ 2289652, 2289828, 1905, "fingercoral0543_geo" },
-            TextureOffset{ 2289828, 2290004, 1906, "fingercoral0544_geo" },
-            TextureOffset{ 2290004, 2290180, 1907, "fingercoral0545_geo" },
-            TextureOffset{ 2290180, 2290356, 1908, "fingercoral0546_geo" },
-            TextureOffset{ 2290356, 2290532, 1909, "fingercoral0547_geo" },
-            TextureOffset{ 2290532, 2290708, 1910, "fingercoral0548_geo" },
-            TextureOffset{ 2290708, 2290884, 1911, "fingercoral0549_geo" },
-            TextureOffset{ 2290884, 2291060, 1912, "fingercoral0550_geo" },
-            TextureOffset{ 2291060, 2291236, 1913, "fingercoral0551_geo" },
-            TextureOffset{ 2291236, 2291412, 1914, "fingercoral0552_geo" },
-            TextureOffset{ 2291412, 2291588, 1915, "fingercoral0553_geo" },
-            TextureOffset{ 2291588, 2291764, 1916, "fingercoral0554_geo" },
-            TextureOffset{ 2291764, 2291940, 1917, "fingercoral0555_geo" },
-            TextureOffset{ 2291940, 2292116, 1918, "fingercoral0556_geo" },
-            TextureOffset{ 2292116, 2292292, 1919, "fingercoral0557_geo" },
-            TextureOffset{ 2292292, 2292468, 1920, "fingercoral0558_geo" },
-            TextureOffset{ 2292468, 2292644, 1921, "fingercoral0559_geo" },
-            TextureOffset{ 2292644, 2292820, 1922, "fingercoral0560_geo" },
-            TextureOffset{ 2292820, 2292996, 1923, "fingercoral0561_geo" },
-            TextureOffset{ 2292996, 2293172, 1924, "fingercoral0562_geo" },
-            TextureOffset{ 2293172, 2293348, 1925, "fingercoral0563_geo" },
-            TextureOffset{ 2293348, 2293524, 1926, "fingercoral0564_geo" },
-            TextureOffset{ 2293524, 2293700, 1927, "fingercoral0565_geo" },
-            TextureOffset{ 2293700, 2293876, 1928, "fingercoral0566_geo" },
-            TextureOffset{ 2293876, 2294052, 1929, "fingercoral0567_geo" },
-            TextureOffset{ 2294052, 2294228, 1930, "fingercoral0568_geo" },
-            TextureOffset{ 2294228, 2294404, 1931, "fingercoral0569_geo" },
-            TextureOffset{ 2294404, 2294580, 1932, "fingercoral0570_geo" },
-            TextureOffset{ 2294580, 2294756, 1933, "fingercoral0571_geo" },
-            TextureOffset{ 2294756, 2294932, 1934, "fingercoral0572_geo" },
-            TextureOffset{ 2294932, 2295108, 1935, "fingercoral0573_geo" },
-            TextureOffset{ 2295108, 2295284, 1936, "fingercoral0574_geo" },
-            TextureOffset{ 2295284, 2295460, 1937, "fingercoral0575_geo" },
-            TextureOffset{ 2295460, 2295636, 1938, "fingercoral0576_geo" },
-            TextureOffset{ 2295636, 2295812, 1939, "fingercoral0577_geo" },
-            TextureOffset{ 2295812, 2295988, 1940, "fingercoral0578_geo" },
-            TextureOffset{ 2295988, 2296164, 1941, "fingercoral0579_geo" },
-            TextureOffset{ 2296164, 2296340, 1942, "fingercoral0580_geo" },
-            TextureOffset{ 2296340, 2296516, 1943, "fingercoral0581_geo" },
-            TextureOffset{ 2296516, 2296692, 1944, "fingercoral0582_geo" },
-            TextureOffset{ 2296692, 2296868, 1945, "fingercoral0583_geo" },
-            TextureOffset{ 2296868, 2297044, 1946, "fingercoral0584_geo" },
-            TextureOffset{ 2297044, 2297220, 1947, "fingercoral0585_geo" },
-            TextureOffset{ 2297220, 2297396, 1948, "fingercoral0586_geo" },
-            TextureOffset{ 2297396, 2297572, 1949, "fingercoral0587_geo" },
-            TextureOffset{ 2297572, 2297748, 1950, "fingercoral0588_geo" },
-            TextureOffset{ 2297748, 2297924, 1951, "fingercoral0589_geo" },
-            TextureOffset{ 2297924, 2298100, 1952, "fingercoral0590_geo" },
-            TextureOffset{ 2298100, 2298276, 1953, "fingercoral0591_geo" },
-            TextureOffset{ 2298276, 2298452, 1954, "fingercoral0592_geo" },
-            TextureOffset{ 2298452, 2298628, 1955, "fingercoral0593_geo" },
-            TextureOffset{ 2298628, 2298804, 1956, "fingercoral0594_geo" },
-            TextureOffset{ 2298804, 2298980, 1957, "fingercoral0595_geo" },
-            TextureOffset{ 2298980, 2299156, 1958, "fingercoral0596_geo" },
-            TextureOffset{ 2299156, 2299332, 1959, "fingercoral0597_geo" },
-            TextureOffset{ 2299332, 2299508, 1960, "fingercoral0598_geo" },
-            TextureOffset{ 2299508, 2299684, 1961, "fingercoral0599_geo" },
-            TextureOffset{ 2299684, 2299860, 1962, "fingercoral0600_geo" },
-            TextureOffset{ 2299860, 2300036, 1963, "fingercoral0601_geo" },
-            TextureOffset{ 2300036, 2300212, 1964, "fingercoral0602_geo" },
-            TextureOffset{ 2300212, 2300388, 1965, "fingercoral0603_geo" },
-            TextureOffset{ 2300388, 2300564, 1966, "fingercoral0604_geo" },
-            TextureOffset{ 2300564, 2300740, 1967, "fingercoral0605_geo" },
-            TextureOffset{ 2300740, 2300916, 1968, "fingercoral0606_geo" },
-            TextureOffset{ 2300916, 2301092, 1969, "fingercoral0607_geo" },
-            TextureOffset{ 2301092, 2301268, 1970, "fingercoral0608_geo" },
-            TextureOffset{ 2301268, 2301444, 1971, "fingercoral0609_geo" },
-            TextureOffset{ 2301444, 2301620, 1972, "fingercoral0610_geo" },
-            TextureOffset{ 2301620, 2301796, 1973, "fingercoral0611_geo" },
-            TextureOffset{ 2301796, 2301972, 1974, "fingercoral0612_geo" },
-            TextureOffset{ 2301972, 2302148, 1975, "fingercoral0613_geo" },
-            TextureOffset{ 2302148, 2302324, 1976, "fingercoral0614_geo" },
-            TextureOffset{ 2302324, 2302500, 1977, "fingercoral0615_geo" },
-            TextureOffset{ 2302500, 2302676, 1978, "fingercoral0616_geo" },
-            TextureOffset{ 2302676, 2302852, 1979, "fingercoral0617_geo" },
-            TextureOffset{ 2302852, 2303028, 1980, "fingercoral0618_geo" },
-            TextureOffset{ 2303028, 2303204, 1981, "fingercoral0619_geo" },
-            TextureOffset{ 2303204, 2303380, 1982, "fingercoral0620_geo" },
-            TextureOffset{ 2303380, 2303556, 1983, "fingercoral0621_geo" },
-            TextureOffset{ 2303556, 2303732, 1984, "fingercoral0622_geo" },
-            TextureOffset{ 2303732, 2303908, 1985, "fingercoral0623_geo" },
-            TextureOffset{ 2303908, 2304084, 1986, "fingercoral0624_geo" },
-            TextureOffset{ 2304084, 2308404, 1987, "knobbybrain0002_geo" },
-            TextureOffset{ 2308404, 2312070, 1988, "knobbybrain0004_geo" },
-            TextureOffset{ 2312070, 2315736, 1989, "knobbybrain0005_geo" },
-            TextureOffset{ 2315736, 2319402, 1990, "knobbybrain0006_geo" },
-            TextureOffset{ 2319402, 2322400, 1991, "knobbybrain0007_geo" },
-            TextureOffset{ 2322400, 2325398, 1992, "knobbybrain0008_geo" },
-            TextureOffset{ 2325398, 2328396, 1993, "knobbybrain0009_geo" },
-            TextureOffset{ 2328396, 2331394, 1994, "knobbybrain0010_geo" },
-            TextureOffset{ 2331394, 2334392, 1995, "knobbybrain0011_geo" },
-            TextureOffset{ 2334392, 2337390, 1996, "knobbybrain0012_geo" },
-            TextureOffset{ 2337390, 2340388, 1997, "knobbybrain0013_geo" },
-            TextureOffset{ 2340388, 2343386, 1998, "knobbybrain0014_geo" },
-            TextureOffset{ 2343386, 2346384, 1999, "knobbybrain0015_geo" },
-            TextureOffset{ 2346384, 2355696, 2000, "ricecoral0001_geo" },
-            TextureOffset{ 2355696, 2365008, 2001, "ricecoral0002_geo" },
-            TextureOffset{ 2365008, 2374320, 2002, "ricecoral0003_geo" },
-            TextureOffset{ 2374320, 2383632, 2003, "ricecoral0004_geo" },
-            TextureOffset{ 2383632, 2392944, 2004, "ricecoral0005_geo" },
-            TextureOffset{ 2392944, 2402256, 2005, "ricecoral0006_geo" },
-            TextureOffset{ 2402256, 2411568, 2006, "ricecoral0007_geo" },
-            TextureOffset{ 2411568, 2420880, 2007, "ricecoral0008_geo" },
-            TextureOffset{ 2420880, 2430192, 2008, "ricecoral0009_geo" },
-            TextureOffset{ 2430192, 2439504, 2009, "ricecoral0010_geo" },
-            TextureOffset{ 2439504, 2448816, 2010, "ricecoral0011_geo" },
-            TextureOffset{ 2448816, 2458128, 2011, "ricecoral0012_geo" },
-            TextureOffset{ 2458128, 2467440, 2012, "ricecoral0013_geo" },
-            TextureOffset{ 2467440, 2476752, 2013, "ricecoral0014_geo" },
-            TextureOffset{ 2476752, 2486064, 2014, "ricecoral0015_geo" },
-            TextureOffset{ 2486064, 2495376, 2015, "ricecoral0016_geo" },
-            TextureOffset{ 2495376, 2496484, 2016, "seaweed0001_geo" },
-            TextureOffset{ 2496484, 2497592, 2017, "seaweed0002_geo" },
-            TextureOffset{ 2497592, 2498700, 2018, "seaweed0003_geo" },
-            TextureOffset{ 2498700, 2499808, 2019, "seaweed0004_geo" },
-            TextureOffset{ 2499808, 2500916, 2020, "seaweed0005_geo" },
-            TextureOffset{ 2500916, 2502024, 2021, "seaweed0006_geo" },
-            TextureOffset{ 2502024, 2503132, 2022, "seaweed0007_geo" },
-            TextureOffset{ 2503132, 2504240, 2023, "seaweed0008_geo" },
-            TextureOffset{ 2504240, 2505348, 2024, "seaweed0009_geo" },
-            TextureOffset{ 2505348, 2506456, 2025, "seaweed0010_geo" },
-            TextureOffset{ 2506456, 2507564, 2026, "seaweed0011_geo" },
-            TextureOffset{ 2507564, 2508672, 2027, "seaweed0012_geo" },
-            TextureOffset{ 2508672, 2509780, 2028, "seaweed0013_geo" },
-            TextureOffset{ 2509780, 2510888, 2029, "seaweed0014_geo" },
-            TextureOffset{ 2510888, 2511996, 2030, "seaweed0015_geo" },
-            TextureOffset{ 2511996, 2513104, 2031, "seaweed0016_geo" },
-            TextureOffset{ 2513104, 2514212, 2032, "seaweed0017_geo" },
-            TextureOffset{ 2514212, 2515320, 2033, "seaweed0018_geo" },
-            TextureOffset{ 2515320, 2516428, 2034, "seaweed0019_geo" },
-            TextureOffset{ 2516428, 2517536, 2035, "seaweed0020_geo" },
-            TextureOffset{ 2517536, 2518644, 2036, "seaweed0021_geo" },
-            TextureOffset{ 2518644, 2519752, 2037, "seaweed0022_geo" },
-            TextureOffset{ 2519752, 2520860, 2038, "seaweed0023_geo" },
-            TextureOffset{ 2520860, 2521968, 2039, "seaweed0024_geo" },
-            TextureOffset{ 2521968, 2523076, 2040, "seaweed0025_geo" },
-            TextureOffset{ 2523076, 2524184, 2041, "seaweed0026_geo" },
-            TextureOffset{ 2524184, 2525292, 2042, "seaweed0027_geo" },
-            TextureOffset{ 2525292, 2526400, 2043, "seaweed0028_geo" },
-            TextureOffset{ 2526400, 2527508, 2044, "seaweed0029_geo" },
-            TextureOffset{ 2527508, 2528616, 2045, "seaweed0030_geo" },
-            TextureOffset{ 2528616, 2529724, 2046, "seaweed0031_geo" },
-            TextureOffset{ 2529724, 2530832, 2047, "seaweed0032_geo" },
-            TextureOffset{ 2530832, 2531940, 2048, "seaweed0033_geo" },
-            TextureOffset{ 2531940, 2533048, 2049, "seaweed0034_geo" },
-            TextureOffset{ 2533048, 2534156, 2050, "seaweed0035_geo" },
-            TextureOffset{ 2534156, 2535264, 2051, "seaweed0036_geo" },
-            TextureOffset{ 2535264, 2536372, 2052, "seaweed0037_geo" },
-            TextureOffset{ 2536372, 2537480, 2053, "seaweed0038_geo" },
-            TextureOffset{ 2537480, 2538588, 2054, "seaweed0039_geo" },
-            TextureOffset{ 2538588, 2539696, 2055, "seaweed0040_geo" },
-            TextureOffset{ 2539696, 2540804, 2056, "seaweed0041_geo" },
-            TextureOffset{ 2540804, 2541912, 2057, "seaweed0042_geo" },
-            TextureOffset{ 2541912, 2543020, 2058, "seaweed0043_geo" },
-            TextureOffset{ 2543020, 2544128, 2059, "seaweed0044_geo" },
-            TextureOffset{ 2544128, 2545236, 2060, "seaweed0045_geo" },
-            TextureOffset{ 2545236, 2546344, 2061, "seaweed0046_geo" },
-            TextureOffset{ 2546344, 2547452, 2062, "seaweed0047_geo" },
-            TextureOffset{ 2547452, 2548560, 2063, "seaweed0048_geo" },
-            TextureOffset{ 2548560, 2549668, 2064, "seaweed0049_geo" },
-            TextureOffset{ 2549668, 2550776, 2065, "seaweed0050_geo" },
-            TextureOffset{ 2550776, 2551884, 2066, "seaweed0051_geo" },
-            TextureOffset{ 2551884, 2552992, 2067, "seaweed0052_geo" },
-            TextureOffset{ 2552992, 2554100, 2068, "seaweed0053_geo" },
-            TextureOffset{ 2554100, 2555208, 2069, "seaweed0054_geo" },
-            TextureOffset{ 2555208, 2556316, 2070, "seaweed0055_geo" },
-            TextureOffset{ 2556316, 2557424, 2071, "seaweed0056_geo" },
-            TextureOffset{ 2557424, 2558532, 2072, "seaweed0057_geo" },
-            TextureOffset{ 2558532, 2559640, 2073, "seaweed0058_geo" },
-            TextureOffset{ 2559640, 2560748, 2074, "seaweed0059_geo" },
-            TextureOffset{ 2560748, 2561856, 2075, "seaweed0060_geo" },
-            TextureOffset{ 2561856, 2562964, 2076, "seaweed0061_geo" },
-            TextureOffset{ 2562964, 2564072, 2077, "seaweed0062_geo" },
-            TextureOffset{ 2564072, 2565180, 2078, "seaweed0063_geo" },
-            TextureOffset{ 2565180, 2566288, 2079, "seaweed0064_geo" },
-            TextureOffset{ 2566288, 2567396, 2080, "seaweed0065_geo" },
-            TextureOffset{ 2567396, 2568504, 2081, "seaweed0066_geo" },
-            TextureOffset{ 2568504, 2569612, 2082, "seaweed0067_geo" },
-            TextureOffset{ 2569612, 2570720, 2083, "seaweed0068_geo" },
-            TextureOffset{ 2570720, 2571828, 2084, "seaweed0069_geo" },
-            TextureOffset{ 2571828, 2572936, 2085, "seaweed0070_geo" },
-            TextureOffset{ 2572936, 2574044, 2086, "seaweed0071_geo" },
-            TextureOffset{ 2574044, 2575152, 2087, "seaweed0072_geo" },
-            TextureOffset{ 2575152, 2576260, 2088, "seaweed0073_geo" },
-            TextureOffset{ 2576260, 2577368, 2089, "seaweed0074_geo" },
-            TextureOffset{ 2577368, 2578476, 2090, "seaweed0075_geo" },
-            TextureOffset{ 2578476, 2579584, 2091, "seaweed0076_geo" },
-            TextureOffset{ 2579584, 2580692, 2092, "seaweed0077_geo" },
-            TextureOffset{ 2580692, 2581800, 2093, "seaweed0078_geo" },
-            TextureOffset{ 2581800, 2582908, 2094, "seaweed0079_geo" },
-            TextureOffset{ 2582908, 2584016, 2095, "seaweed0080_geo" },
-            TextureOffset{ 2584016, 2585124, 2096, "seaweed0081_geo" },
-            TextureOffset{ 2585124, 2586232, 2097, "seaweed0082_geo" },
-            TextureOffset{ 2586232, 2587340, 2098, "seaweed0083_geo" },
-            TextureOffset{ 2587340, 2588448, 2099, "seaweed0084_geo" },
-            TextureOffset{ 2588448, 2589556, 2100, "seaweed0085_geo" },
-            TextureOffset{ 2589556, 2590664, 2101, "seaweed0086_geo" },
-            TextureOffset{ 2590664, 2591772, 2102, "seaweed0087_geo" },
-            TextureOffset{ 2591772, 2592880, 2103, "seaweed0088_geo" },
-            TextureOffset{ 2592880, 2593988, 2104, "seaweed0089_geo" },
-            TextureOffset{ 2593988, 2595096, 2105, "seaweed0090_geo" },
-            TextureOffset{ 2595096, 2596204, 2106, "seaweed0091_geo" },
-            TextureOffset{ 2596204, 2597312, 2107, "seaweed0092_geo" },
-            TextureOffset{ 2597312, 2598420, 2108, "seaweed0093_geo" },
-            TextureOffset{ 2598420, 2599528, 2109, "seaweed0094_geo" },
-            TextureOffset{ 2599528, 2600636, 2110, "seaweed0095_geo" },
-            TextureOffset{ 2600636, 2601744, 2111, "seaweed0096_geo" },
-            TextureOffset{ 2601744, 2602852, 2112, "seaweed0097_geo" },
-            TextureOffset{ 2602852, 2603960, 2113, "seaweed0098_geo" },
-            TextureOffset{ 2603960, 2605068, 2114, "seaweed0099_geo" },
-            TextureOffset{ 2605068, 2606176, 2115, "seaweed0100_geo" },
-            TextureOffset{ 2606176, 2607284, 2116, "seaweed0101_geo" },
-            TextureOffset{ 2607284, 2608392, 2117, "seaweed0102_geo" },
-            TextureOffset{ 2608392, 2609500, 2118, "seaweed0103_geo" },
-            TextureOffset{ 2609500, 2610608, 2119, "seaweed0104_geo" },
-            TextureOffset{ 2610608, 2611716, 2120, "seaweed0105_geo" },
-            TextureOffset{ 2611716, 2612824, 2121, "seaweed0106_geo" },
-            TextureOffset{ 2612824, 2613932, 2122, "seaweed0107_geo" },
-            TextureOffset{ 2613932, 2615040, 2123, "seaweed0108_geo" },
-            TextureOffset{ 2615040, 2616148, 2124, "seaweed0109_geo" },
-            TextureOffset{ 2616148, 2617256, 2125, "seaweed0110_geo" },
-            TextureOffset{ 2617256, 2618364, 2126, "seaweed0111_geo" },
-            TextureOffset{ 2618364, 2619472, 2127, "seaweed0112_geo" },
-            TextureOffset{ 2619472, 2620580, 2128, "seaweed0113_geo" },
-            TextureOffset{ 2620580, 2621688, 2129, "seaweed0114_geo" },
-            TextureOffset{ 2621688, 2622796, 2130, "seaweed0115_geo" },
-            TextureOffset{ 2622796, 2623904, 2131, "seaweed0116_geo" },
-            TextureOffset{ 2623904, 2625012, 2132, "seaweed0117_geo" },
-            TextureOffset{ 2625012, 2626120, 2133, "seaweed0118_geo" },
-            TextureOffset{ 2626120, 2627228, 2134, "seaweed0119_geo" },
-            TextureOffset{ 2627228, 2628336, 2135, "seaweed0120_geo" },
-            TextureOffset{ 2628336, 2629444, 2136, "seaweed0121_geo" },
-            TextureOffset{ 2629444, 2630552, 2137, "seaweed0122_geo" },
-            TextureOffset{ 2630552, 2631660, 2138, "seaweed0123_geo" },
-            TextureOffset{ 2631660, 2632768, 2139, "seaweed0124_geo" },
-            TextureOffset{ 2632768, 2633876, 2140, "seaweed0125_geo" },
-            TextureOffset{ 2633876, 2634984, 2141, "seaweed0126_geo" },
-            TextureOffset{ 2634984, 2636092, 2142, "seaweed0127_geo" },
-            TextureOffset{ 2636092, 2637200, 2143, "seaweed0128_geo" },
-            TextureOffset{ 2637200, 2638308, 2144, "seaweed0129_geo" },
-            TextureOffset{ 2638308, 2639416, 2145, "seaweed0130_geo" },
-            TextureOffset{ 2639416, 2640524, 2146, "seaweed0131_geo" },
-            TextureOffset{ 2640524, 2641632, 2147, "seaweed0132_geo" },
-            TextureOffset{ 2641632, 2642740, 2148, "seaweed0133_geo" },
-            TextureOffset{ 2642740, 2643848, 2149, "seaweed0134_geo" },
-            TextureOffset{ 2643848, 2644956, 2150, "seaweed0135_geo" },
-            TextureOffset{ 2644956, 2646064, 2151, "seaweed0136_geo" },
-            TextureOffset{ 2646064, 2647172, 2152, "seaweed0137_geo" },
-            TextureOffset{ 2647172, 2648280, 2153, "seaweed0138_geo" },
-            TextureOffset{ 2648280, 2649388, 2154, "seaweed0139_geo" },
-            TextureOffset{ 2649388, 2650496, 2155, "seaweed0140_geo" },
-            TextureOffset{ 2650496, 2651604, 2156, "seaweed0141_geo" },
-            TextureOffset{ 2651604, 2652712, 2157, "seaweed0142_geo" },
-            TextureOffset{ 2652712, 2653820, 2158, "seaweed0143_geo" },
-            TextureOffset{ 2653820, 2654928, 2159, "seaweed0144_geo" },
-            TextureOffset{ 2654928, 2656036, 2160, "seaweed0145_geo" },
-            TextureOffset{ 2656036, 2657144, 2161, "seaweed0146_geo" },
-            TextureOffset{ 2657144, 2658252, 2162, "seaweed0147_geo" },
-            TextureOffset{ 2658252, 2659360, 2163, "seaweed0148_geo" },
-            TextureOffset{ 2659360, 2660468, 2164, "seaweed0149_geo" },
-            TextureOffset{ 2660468, 2661576, 2165, "seaweed0150_geo" },
-            TextureOffset{ 2661576, 2662684, 2166, "seaweed0151_geo" },
-            TextureOffset{ 2662684, 2663792, 2167, "seaweed0152_geo" },
-            TextureOffset{ 2663792, 2664900, 2168, "seaweed0153_geo" },
-            TextureOffset{ 2664900, 2666008, 2169, "seaweed0154_geo" },
-            TextureOffset{ 2666008, 2667116, 2170, "seaweed0155_geo" },
-            TextureOffset{ 2667116, 2668224, 2171, "seaweed0156_geo" },
-            TextureOffset{ 2668224, 2669332, 2172, "seaweed0157_geo" },
-            TextureOffset{ 2669332, 2670440, 2173, "seaweed0158_geo" },
-            TextureOffset{ 2670440, 2671548, 2174, "seaweed0159_geo" },
-            TextureOffset{ 2671548, 2672656, 2175, "seaweed0160_geo" },
-            TextureOffset{ 2672656, 2673764, 2176, "seaweed0161_geo" },
-            TextureOffset{ 2673764, 2674872, 2177, "seaweed0162_geo" },
-            TextureOffset{ 2674872, 2675980, 2178, "seaweed0163_geo" },
-            TextureOffset{ 2675980, 2677088, 2179, "seaweed0164_geo" },
-            TextureOffset{ 2677088, 2678196, 2180, "seaweed0165_geo" },
-            TextureOffset{ 2678196, 2679304, 2181, "seaweed0166_geo" },
-            TextureOffset{ 2679304, 2680412, 2182, "seaweed0167_geo" },
-            TextureOffset{ 2680412, 2681520, 2183, "seaweed0168_geo" },
-            TextureOffset{ 2681520, 2682628, 2184, "seaweed0169_geo" },
-            TextureOffset{ 2682628, 2683736, 2185, "seaweed0170_geo" },
-            TextureOffset{ 2683736, 2684844, 2186, "seaweed0171_geo" },
-            TextureOffset{ 2684844, 2685952, 2187, "seaweed0172_geo" },
-            TextureOffset{ 2685952, 2687060, 2188, "seaweed0173_geo" },
-            TextureOffset{ 2687060, 2688168, 2189, "seaweed0174_geo" },
-            TextureOffset{ 2688168, 2689276, 2190, "seaweed0175_geo" },
-            TextureOffset{ 2689276, 2690384, 2191, "seaweed0176_geo" },
-            TextureOffset{ 2690384, 2691492, 2192, "seaweed0177_geo" },
-            TextureOffset{ 2691492, 2692600, 2193, "seaweed0178_geo" },
-            TextureOffset{ 2692600, 2693708, 2194, "seaweed0179_geo" },
-            TextureOffset{ 2693708, 2694816, 2195, "seaweed0180_geo" },
-            TextureOffset{ 2694816, 2695924, 2196, "seaweed0181_geo" },
-            TextureOffset{ 2695924, 2697032, 2197, "seaweed0182_geo" },
-            TextureOffset{ 2697032, 2698140, 2198, "seaweed0183_geo" },
-            TextureOffset{ 2698140, 2699248, 2199, "seaweed0184_geo" },
-            TextureOffset{ 2699248, 2700356, 2200, "seaweed0185_geo" },
-            TextureOffset{ 2700356, 2701464, 2201, "seaweed0186_geo" },
-            TextureOffset{ 2701464, 2702572, 2202, "seaweed0187_geo" },
-            TextureOffset{ 2702572, 2703680, 2203, "seaweed0188_geo" },
-            TextureOffset{ 2703680, 2704788, 2204, "seaweed0189_geo" },
-            TextureOffset{ 2704788, 2705896, 2205, "seaweed0190_geo" },
-            TextureOffset{ 2705896, 2707004, 2206, "seaweed0191_geo" },
-            TextureOffset{ 2707004, 2708112, 2207, "seaweed0192_geo" },
-            TextureOffset{ 2708112, 2709220, 2208, "seaweed0193_geo" },
-            TextureOffset{ 2709220, 2710328, 2209, "seaweed0194_geo" },
-            TextureOffset{ 2710328, 2711436, 2210, "seaweed0195_geo" },
-            TextureOffset{ 2711436, 2712544, 2211, "seaweed0196_geo" },
-            TextureOffset{ 2712544, 2713652, 2212, "seaweed0197_geo" },
-            TextureOffset{ 2713652, 2714760, 2213, "seaweed0198_geo" },
-            TextureOffset{ 2714760, 2715868, 2214, "seaweed0199_geo" },
-            TextureOffset{ 2715868, 2716976, 2215, "seaweed0200_geo" },
-            TextureOffset{ 2716976, 2718084, 2216, "seaweed0201_geo" },
-            TextureOffset{ 2718084, 2719192, 2217, "seaweed0202_geo" },
-            TextureOffset{ 2719192, 2720300, 2218, "seaweed0203_geo" },
-            TextureOffset{ 2720300, 2721408, 2219, "seaweed0204_geo" },
-            TextureOffset{ 2721408, 2722516, 2220, "seaweed0205_geo" },
-            TextureOffset{ 2722516, 2723624, 2221, "seaweed0206_geo" },
-            TextureOffset{ 2723624, 2724732, 2222, "seaweed0207_geo" },
-            TextureOffset{ 2724732, 2725840, 2223, "seaweed0208_geo" },
-            TextureOffset{ 2725840, 2726948, 2224, "seaweed0209_geo" },
-            TextureOffset{ 2726948, 2728056, 2225, "seaweed0210_geo" },
-            TextureOffset{ 2728056, 2729164, 2226, "seaweed0211_geo" },
-            TextureOffset{ 2729164, 2730272, 2227, "seaweed0212_geo" },
-            TextureOffset{ 2730272, 2731380, 2228, "seaweed0213_geo" },
-            TextureOffset{ 2731380, 2732488, 2229, "seaweed0214_geo" },
-            TextureOffset{ 2732488, 2733596, 2230, "seaweed0215_geo" },
-            TextureOffset{ 2733596, 2734704, 2231, "seaweed0216_geo" },
-            TextureOffset{ 2734704, 2735812, 2232, "seaweed0217_geo" },
-            TextureOffset{ 2735812, 2736920, 2233, "seaweed0218_geo" },
-            TextureOffset{ 2736920, 2738028, 2234, "seaweed0219_geo" },
-            TextureOffset{ 2738028, 2739136, 2235, "seaweed0220_geo" },
-            TextureOffset{ 2739136, 2740244, 2236, "seaweed0221_geo" },
-            TextureOffset{ 2740244, 2741352, 2237, "seaweed0222_geo" },
-            TextureOffset{ 2741352, 2742460, 2238, "seaweed0223_geo" },
-            TextureOffset{ 2742460, 2743568, 2239, "seaweed0224_geo" },
-            TextureOffset{ 2743568, 2744676, 2240, "seaweed0225_geo" },
-            TextureOffset{ 2744676, 2745784, 2241, "seaweed0226_geo" },
-            TextureOffset{ 2745784, 2746892, 2242, "seaweed0227_geo" },
-            TextureOffset{ 2746892, 2748000, 2243, "seaweed0228_geo" },
-            TextureOffset{ 2748000, 2749108, 2244, "seaweed0229_geo" },
-            TextureOffset{ 2749108, 2750216, 2245, "seaweed0230_geo" },
-            TextureOffset{ 2750216, 2751324, 2246, "seaweed0231_geo" },
-            TextureOffset{ 2751324, 2752432, 2247, "seaweed0232_geo" },
-            TextureOffset{ 2752432, 2753540, 2248, "seaweed0233_geo" },
-            TextureOffset{ 2753540, 2754648, 2249, "seaweed0234_geo" },
-            TextureOffset{ 2754648, 2755756, 2250, "seaweed0235_geo" },
-            TextureOffset{ 2755756, 2756864, 2251, "seaweed0236_geo" },
-            TextureOffset{ 2756864, 2757972, 2252, "seaweed0237_geo" },
-            TextureOffset{ 2757972, 2759080, 2253, "seaweed0238_geo" },
-            TextureOffset{ 2759080, 2760188, 2254, "seaweed0239_geo" },
-            TextureOffset{ 2760188, 2761296, 2255, "seaweed0240_geo" },
-            TextureOffset{ 2761296, 2762404, 2256, "seaweed0241_geo" },
-            TextureOffset{ 2762404, 2763512, 2257, "seaweed0242_geo" },
-            TextureOffset{ 2763512, 2764620, 2258, "seaweed0243_geo" },
-            TextureOffset{ 2764620, 2765728, 2259, "seaweed0244_geo" },
-            TextureOffset{ 2765728, 2766836, 2260, "seaweed0245_geo" },
-            TextureOffset{ 2766836, 2767944, 2261, "seaweed0246_geo" },
-            TextureOffset{ 2767944, 2769052, 2262, "seaweed0247_geo" },
-            TextureOffset{ 2769052, 2770160, 2263, "seaweed0248_geo" },
-            TextureOffset{ 2770160, 2771268, 2264, "seaweed0249_geo" },
-            TextureOffset{ 2771268, 2772376, 2265, "seaweed0250_geo" },
-            TextureOffset{ 2772376, 2773484, 2266, "seaweed0251_geo" },
-            TextureOffset{ 2773484, 2774592, 2267, "seaweed0252_geo" },
-            TextureOffset{ 2774592, 2775700, 2268, "seaweed0253_geo" },
-            TextureOffset{ 2775700, 2776808, 2269, "seaweed0254_geo" },
-            TextureOffset{ 2776808, 2777916, 2270, "seaweed0255_geo" },
-            TextureOffset{ 2777916, 2779024, 2271, "seaweed0256_geo" },
-            TextureOffset{ 2779024, 2780132, 2272, "seaweed0257_geo" },
-            TextureOffset{ 2780132, 2781240, 2273, "seaweed0258_geo" },
-            TextureOffset{ 2781240, 2782348, 2274, "seaweed0259_geo" },
-            TextureOffset{ 2782348, 2783456, 2275, "seaweed0260_geo" },
-            TextureOffset{ 2783456, 2784564, 2276, "seaweed0261_geo" },
-            TextureOffset{ 2784564, 2785672, 2277, "seaweed0262_geo" },
-            TextureOffset{ 2785672, 2786780, 2278, "seaweed0263_geo" },
-            TextureOffset{ 2786780, 2787888, 2279, "seaweed0264_geo" },
-            TextureOffset{ 2787888, 2788996, 2280, "seaweed0265_geo" },
-            TextureOffset{ 2788996, 2790104, 2281, "seaweed0266_geo" },
-            TextureOffset{ 2790104, 2791212, 2282, "seaweed0267_geo" },
-            TextureOffset{ 2791212, 2792320, 2283, "seaweed0268_geo" },
-            TextureOffset{ 2792320, 2793428, 2284, "seaweed0269_geo" },
-            TextureOffset{ 2793428, 2794536, 2285, "seaweed0270_geo" },
-            TextureOffset{ 2794536, 2795644, 2286, "seaweed0271_geo" },
-            TextureOffset{ 2795644, 2796752, 2287, "seaweed0272_geo" },
-            TextureOffset{ 2796752, 2797860, 2288, "seaweed0273_geo" },
-            TextureOffset{ 2797860, 2798968, 2289, "seaweed0274_geo" },
-            TextureOffset{ 2798968, 2800076, 2290, "seaweed0275_geo" },
-            TextureOffset{ 2800076, 2801184, 2291, "seaweed0276_geo" },
-            TextureOffset{ 2801184, 2802292, 2292, "seaweed0277_geo" },
-            TextureOffset{ 2802292, 2803400, 2293, "seaweed0278_geo" },
-            TextureOffset{ 2803400, 2804508, 2294, "seaweed0279_geo" },
-            TextureOffset{ 2804508, 2805616, 2295, "seaweed0280_geo" },
-            TextureOffset{ 2805616, 2806724, 2296, "seaweed0281_geo" },
-            TextureOffset{ 2806724, 2807832, 2297, "seaweed0282_geo" },
-            TextureOffset{ 2807832, 2808940, 2298, "seaweed0283_geo" },
-            TextureOffset{ 2808940, 2810048, 2299, "seaweed0284_geo" },
-            TextureOffset{ 2810048, 2811156, 2300, "seaweed0285_geo" },
-            TextureOffset{ 2811156, 2812264, 2301, "seaweed0286_geo" },
-            TextureOffset{ 2812264, 2813372, 2302, "seaweed0287_geo" },
-            TextureOffset{ 2813372, 2814480, 2303, "seaweed0288_geo" },
-            TextureOffset{ 2814480, 2815588, 2304, "seaweed0289_geo" },
-            TextureOffset{ 2815588, 2816696, 2305, "seaweed0290_geo" },
-            TextureOffset{ 2816696, 2817804, 2306, "seaweed0291_geo" },
-            TextureOffset{ 2817804, 2818912, 2307, "seaweed0292_geo" },
-            TextureOffset{ 2818912, 2820020, 2308, "seaweed0293_geo" },
-            TextureOffset{ 2820020, 2821128, 2309, "seaweed0294_geo" },
-            TextureOffset{ 2821128, 2822236, 2310, "seaweed0295_geo" },
-            TextureOffset{ 2822236, 2823344, 2311, "seaweed0296_geo" },
-            TextureOffset{ 2823344, 2824452, 2312, "seaweed0297_geo" },
-            TextureOffset{ 2824452, 2825560, 2313, "seaweed0298_geo" },
-            TextureOffset{ 2825560, 2826668, 2314, "seaweed0299_geo" },
-            TextureOffset{ 2826668, 2827776, 2315, "seaweed0300_geo" },
-            TextureOffset{ 2827776, 2828884, 2316, "seaweed0301_geo" },
-            TextureOffset{ 2828884, 2829992, 2317, "seaweed0302_geo" },
-            TextureOffset{ 2829992, 2831100, 2318, "seaweed0303_geo" },
-            TextureOffset{ 2831100, 2832208, 2319, "seaweed0304_geo" },
-            TextureOffset{ 2832208, 2833316, 2320, "seaweed0305_geo" },
-            TextureOffset{ 2833316, 2834424, 2321, "seaweed0306_geo" },
-            TextureOffset{ 2834424, 2835532, 2322, "seaweed0307_geo" },
-            TextureOffset{ 2835532, 2836640, 2323, "seaweed0308_geo" },
-            TextureOffset{ 2836640, 2837748, 2324, "seaweed0309_geo" },
-            TextureOffset{ 2837748, 2838856, 2325, "seaweed0310_geo" },
-            TextureOffset{ 2838856, 2839964, 2326, "seaweed0311_geo" },
-            TextureOffset{ 2839964, 2841072, 2327, "seaweed0312_geo" },
-            TextureOffset{ 2841072, 2842180, 2328, "seaweed0313_geo" },
-            TextureOffset{ 2842180, 2843288, 2329, "seaweed0314_geo" },
-            TextureOffset{ 2843288, 2844396, 2330, "seaweed0315_geo" },
-            TextureOffset{ 2844396, 2845504, 2331, "seaweed0316_geo" },
-            TextureOffset{ 2845504, 2846612, 2332, "seaweed0317_geo" },
-            TextureOffset{ 2846612, 2847720, 2333, "seaweed0318_geo" },
-            TextureOffset{ 2847720, 2848828, 2334, "seaweed0319_geo" },
-            TextureOffset{ 2848828, 2849936, 2335, "seaweed0320_geo" },
-            TextureOffset{ 2849936, 2851044, 2336, "seaweed0321_geo" },
-            TextureOffset{ 2851044, 2852152, 2337, "seaweed0322_geo" },
-            TextureOffset{ 2852152, 2853260, 2338, "seaweed0323_geo" },
-            TextureOffset{ 2853260, 2854368, 2339, "seaweed0324_geo" },
-            TextureOffset{ 2854368, 2855476, 2340, "seaweed0325_geo" },
-            TextureOffset{ 2855476, 2855796, 2341, "starhornplate0001_geo" },
-            TextureOffset{ 2855796, 2856116, 2342, "starhornplate0002_geo" },
-            TextureOffset{ 2856116, 2856436, 2343, "starhornplate0003_geo" },
-            TextureOffset{ 2856436, 2856756, 2344, "starhornplate0004_geo" },
-            TextureOffset{ 2856756, 2857076, 2345, "starhornplate0005_geo" },
-            TextureOffset{ 2857076, 2857396, 2346, "starhornplate0006_geo" },
-            TextureOffset{ 2857396, 2857716, 2347, "starhornplate0007_geo" },
-            TextureOffset{ 2857716, 2858036, 2348, "starhornplate0008_geo" },
-            TextureOffset{ 2858036, 2858332, 2349, "starhornplate0009_geo" },
-            TextureOffset{ 2858332, 2858628, 2350, "starhornplate0010_geo" },
-            TextureOffset{ 2858628, 2858924, 2351, "starhornplate0011_geo" },
-            TextureOffset{ 2858924, 2859220, 2352, "starhornplate0012_geo" },
-            TextureOffset{ 2859220, 2859540, 2353, "starhornplate0013_geo" },
-            TextureOffset{ 2859540, 2859860, 2354, "starhornplate0014_geo" },
-            TextureOffset{ 2859860, 2860180, 2355, "starhornplate0015_geo" },
-            TextureOffset{ 2860180, 2860500, 2356, "starhornplate0016_geo" },
-            TextureOffset{ 2860500, 2860904, 2357, "starhornplate0017_geo" },
-            TextureOffset{ 2860904, 2861308, 2358, "starhornplate0018_geo" },
-            TextureOffset{ 2861308, 2861712, 2359, "starhornplate0019_geo" },
-            TextureOffset{ 2861712, 2862116, 2360, "starhornplate0020_geo" },
-            TextureOffset{ 2862116, 2862640, 2361, "starhornplate0021_geo" },
-            TextureOffset{ 2862640, 2863164, 2362, "starhornplate0022_geo" },
-            TextureOffset{ 2863164, 2863688, 2363, "starhornplate0023_geo" },
-            TextureOffset{ 2863688, 2864212, 2364, "starhornplate0024_geo" },
-            TextureOffset{ 2864212, 2864616, 2365, "starhornplate0025_geo" },
-            TextureOffset{ 2864616, 2865020, 2366, "starhornplate0026_geo" },
-            TextureOffset{ 2865020, 2865424, 2367, "starhornplate0027_geo" },
-            TextureOffset{ 2865424, 2865828, 2368, "starhornplate0028_geo" },
-            TextureOffset{ 2865828, 2866232, 2369, "starhornplate0029_geo" },
-            TextureOffset{ 2866232, 2866636, 2370, "starhornplate0030_geo" },
-            TextureOffset{ 2866636, 2867040, 2371, "starhornplate0031_geo" },
-            TextureOffset{ 2867040, 2867444, 2372, "starhornplate0032_geo" },
-            TextureOffset{ 2867444, 2867764, 2373, "starhornplate0033_geo" },
-            TextureOffset{ 2867764, 2868084, 2374, "starhornplate0034_geo" },
-            TextureOffset{ 2868084, 2868404, 2375, "starhornplate0035_geo" },
-            TextureOffset{ 2868404, 2868724, 2376, "starhornplate0036_geo" },
-            TextureOffset{ 2868724, 2868952, 2377, "starhornplate0037_geo" },
-            TextureOffset{ 2868952, 2869180, 2378, "starhornplate0038_geo" },
-            TextureOffset{ 2869180, 2869408, 2379, "starhornplate0039_geo" },
-            TextureOffset{ 2869408, 2869636, 2380, "starhornplate0040_geo" },
-            TextureOffset{ 2869636, 2869956, 2381, "starhornplate0041_geo" },
-            TextureOffset{ 2869956, 2870276, 2382, "starhornplate0042_geo" },
-            TextureOffset{ 2870276, 2870596, 2383, "starhornplate0043_geo" },
-            TextureOffset{ 2870596, 2870916, 2384, "starhornplate0044_geo" },
-            TextureOffset{ 2870916, 2871320, 2385, "starhornplate0045_geo" },
-            TextureOffset{ 2871320, 2871724, 2386, "starhornplate0046_geo" },
-            TextureOffset{ 2871724, 2872128, 2387, "starhornplate0047_geo" },
-            TextureOffset{ 2872128, 2872532, 2388, "starhornplate0048_geo" },
-            TextureOffset{ 2872532, 2872852, 2389, "starhornplate0049_geo" },
-            TextureOffset{ 2872852, 2873172, 2390, "starhornplate0050_geo" },
-            TextureOffset{ 2873172, 2873492, 2391, "starhornplate0051_geo" },
-            TextureOffset{ 2873492, 2873812, 2392, "starhornplate0052_geo" },
-            TextureOffset{ 2873812, 2874040, 2393, "starhornplate0053_geo" },
-            TextureOffset{ 2874040, 2874268, 2394, "starhornplate0054_geo" },
-            TextureOffset{ 2874268, 2874496, 2395, "starhornplate0055_geo" },
-            TextureOffset{ 2874496, 2874724, 2396, "starhornplate0056_geo" },
-            TextureOffset{ 2874724, 2875044, 2397, "starhornplate0057_geo" },
-            TextureOffset{ 2875044, 2875364, 2398, "starhornplate0058_geo" },
-            TextureOffset{ 2875364, 2875684, 2399, "starhornplate0059_geo" },
-            TextureOffset{ 2875684, 2876004, 2400, "starhornplate0060_geo" },
-            TextureOffset{ 2876004, 2876324, 2401, "starhornplate0061_geo" },
-            TextureOffset{ 2876324, 2876644, 2402, "starhornplate0062_geo" },
-            TextureOffset{ 2876644, 2876964, 2403, "starhornplate0063_geo" },
-            TextureOffset{ 2876964, 2877284, 2404, "starhornplate0064_geo" },
-            TextureOffset{ 2877284, 2877512, 2405, "starhornplate0065_geo" },
-            TextureOffset{ 2877512, 2877740, 2406, "starhornplate0066_geo" },
-            TextureOffset{ 2877740, 2877968, 2407, "starhornplate0067_geo" },
-            TextureOffset{ 2877968, 2878196, 2408, "starhornplate0068_geo" },
-            TextureOffset{ 2878196, 2878516, 2409, "starhornplate0069_geo" },
-            TextureOffset{ 2878516, 2878836, 2410, "starhornplate0070_geo" },
-            TextureOffset{ 2878836, 2879156, 2411, "starhornplate0071_geo" },
-            TextureOffset{ 2879156, 2879476, 2412, "starhornplate0072_geo" },
-            TextureOffset{ 2879476, 2879812, 2413, "starhornplate0073_geo" },
-            TextureOffset{ 2879812, 2880148, 2414, "starhornplate0074_geo" },
-            TextureOffset{ 2880148, 2880484, 2415, "starhornplate0075_geo" },
-            TextureOffset{ 2880484, 2880820, 2416, "starhornplate0076_geo" },
-            TextureOffset{ 2880820, 2881048, 2417, "starhornplate0077_geo" },
-            TextureOffset{ 2881048, 2881276, 2418, "starhornplate0078_geo" },
-            TextureOffset{ 2881276, 2881504, 2419, "starhornplate0079_geo" },
-            TextureOffset{ 2881504, 2881732, 2420, "starhornplate0080_geo" },
-            TextureOffset{ 2881732, 2881960, 2421, "starhornplate0081_geo" },
-            TextureOffset{ 2881960, 2882188, 2422, "starhornplate0082_geo" },
-            TextureOffset{ 2882188, 2882416, 2423, "starhornplate0083_geo" },
-            TextureOffset{ 2882416, 2882644, 2424, "starhornplate0084_geo" },
-            TextureOffset{ 2882644, 2882872, 2425, "starhornplate0085_geo" },
-            TextureOffset{ 2882872, 2883100, 2426, "starhornplate0086_geo" },
-            TextureOffset{ 2883100, 2883328, 2427, "starhornplate0087_geo" },
-            TextureOffset{ 2883328, 2883556, 2428, "starhornplate0088_geo" },
-            TextureOffset{ 2883556, 2883784, 2429, "starhornplate0089_geo" },
-            TextureOffset{ 2883784, 2884012, 2430, "starhornplate0090_geo" },
-            TextureOffset{ 2884012, 2884240, 2431, "starhornplate0091_geo" },
-            TextureOffset{ 2884240, 2884468, 2432, "starhornplate0092_geo" },
-            TextureOffset{ 2884468, 2884696, 2433, "starhornplate0093_geo" },
-            TextureOffset{ 2884696, 2884924, 2434, "starhornplate0094_geo" },
-            TextureOffset{ 2884924, 2885152, 2435, "starhornplate0095_geo" },
-            TextureOffset{ 2885152, 2885380, 2436, "starhornplate0096_geo" },
-            TextureOffset{ 2885380, 2885608, 2437, "starhornplate0097_geo" },
-            TextureOffset{ 2885608, 2885836, 2438, "starhornplate0098_geo" },
-            TextureOffset{ 2885836, 2886064, 2439, "starhornplate0099_geo" },
-            TextureOffset{ 2886064, 2886292, 2440, "starhornplate0100_geo" },
-            TextureOffset{ 2886292, 2886696, 2441, "starhornplate0101_geo" },
-            TextureOffset{ 2886696, 2887100, 2442, "starhornplate0102_geo" },
-            TextureOffset{ 2887100, 2887504, 2443, "starhornplate0103_geo" },
-            TextureOffset{ 2887504, 2887908, 2444, "starhornplate0104_geo" },
-            TextureOffset{ 2887908, 2888228, 2445, "starhornplate0105_geo" },
-            TextureOffset{ 2888228, 2888548, 2446, "starhornplate0106_geo" },
-            TextureOffset{ 2888548, 2888868, 2447, "starhornplate0107_geo" },
-            TextureOffset{ 2888868, 2889188, 2448, "starhornplate0108_geo" },
-            TextureOffset{ 2889188, 2889508, 2449, "starhornplate0109_geo" },
-            TextureOffset{ 2889508, 2889828, 2450, "starhornplate0110_geo" },
-            TextureOffset{ 2889828, 2890148, 2451, "starhornplate0111_geo" },
-            TextureOffset{ 2890148, 2890468, 2452, "starhornplate0112_geo" },
-            TextureOffset{ 2890468, 2890788, 2453, "starhornplate0113_geo" },
-            TextureOffset{ 2890788, 2891108, 2454, "starhornplate0114_geo" },
-            TextureOffset{ 2891108, 2891428, 2455, "starhornplate0115_geo" },
-            TextureOffset{ 2891428, 2891748, 2456, "starhornplate0116_geo" },
-            TextureOffset{ 2891748, 2892068, 2457, "starhornplate0117_geo" },
-            TextureOffset{ 2892068, 2892388, 2458, "starhornplate0118_geo" },
-            TextureOffset{ 2892388, 2892708, 2459, "starhornplate0119_geo" },
-            TextureOffset{ 2892708, 2893028, 2460, "starhornplate0120_geo" },
-            TextureOffset{ 2893028, 2893468, 2461, "starhornstem0001_geo" },
-            TextureOffset{ 2893468, 2893908, 2462, "starhornstem0002_geo" },
-            TextureOffset{ 2893908, 2894348, 2463, "starhornstem0003_geo" },
-            TextureOffset{ 2894348, 2894788, 2464, "starhornstem0004_geo" },
-        },
-        {
-            TextureOffset{ 0, 160, 237, "archivecoral_antler0001_geo" },
-            TextureOffset{ 160, 320, 238, "archivecoral_antler0002_geo" },
-            TextureOffset{ 320, 480, 239, "archivecoral_antler0003_geo" },
-            TextureOffset{ 480, 676, 240, "archivecoral_antler0004_geo" },
-            TextureOffset{ 676, 872, 241, "archivecoral_antler0005_geo" },
-            TextureOffset{ 872, 1184, 242, "archivecoral_antler0006_geo" },
-            TextureOffset{ 1184, 1480, 243, "archivecoral_antler0007_geo" },
-            TextureOffset{ 1480, 1776, 244, "archivecoral_antler0008_geo" },
-            TextureOffset{ 1776, 2228, 245, "archivecoral_antler0009_geo" },
-        },
-        {
-            TextureOffset{ 0, 696, 246, "archivecoral_cabbage0001_geo" },
-            TextureOffset{ 696, 1256, 247, "archivecoral_cabbage0002_geo" },
-            TextureOffset{ 1256, 1952, 248, "archivecoral_cabbage0003_geo" },
-            TextureOffset{ 1952, 2448, 249, "archivecoral_cabbage0004_geo" },
-            TextureOffset{ 2448, 2836, 250, "archivecoral_cabbage0005_geo" },
-            TextureOffset{ 2836, 3332, 251, "archivecoral_cabbage0006_geo" },
-            TextureOffset{ 3332, 3748, 252, "archivecoral_cabbage0007_geo" },
-            TextureOffset{ 3748, 4136, 253, "archivecoral_cabbage0008_geo" },
-            TextureOffset{ 4136, 4552, 254, "archivecoral_cabbage0009_geo" },
-        },
-        {
-            TextureOffset{ 0, 106, 265, "archivecoralflute0001_geo" },
-        },
-        {
-            TextureOffset{ 0, 140, 255, "archivecoral_staghorn0001_geo" },
-            TextureOffset{ 140, 424, 256, "archivecoral_staghorn0002_geo" },
-            TextureOffset{ 424, 620, 257, "archivecoral_staghorn0003_geo" },
-            TextureOffset{ 620, 872, 258, "archivecoral_staghorn0004_geo" },
-            TextureOffset{ 872, 1100, 259, "archivecoral_staghorn0005_geo" },
-            TextureOffset{ 1100, 1328, 260, "archivecoral_staghorn0006_geo" },
-            TextureOffset{ 1328, 1524, 261, "archivecoral_staghorn0007_geo" },
-            TextureOffset{ 1524, 1712, 262, "archivecoral_staghorn0008_geo" },
-            TextureOffset{ 1712, 1908, 263, "archivecoral_staghorn0009_geo" },
-            TextureOffset{ 1908, 2204, 264, "archivecoral_staghorn0010_geo" },
-        },
-        {
-            TextureOffset{ 0, 2112, 3386, "archiveHibiscusAnthers0002_geo" },
-            TextureOffset{ 2112, 2184, 3402, "archiveHibiscusPetal0006_geo" },
-            TextureOffset{ 2184, 2256, 3403, "archiveHibiscusPetal0007_geo" },
-            TextureOffset{ 2256, 2328, 3404, "archiveHibiscusPetal0008_geo" },
-            TextureOffset{ 2328, 2400, 3405, "archiveHibiscusPetal0009_geo" },
-            TextureOffset{ 2400, 2472, 3406, "archiveHibiscusPetal0010_geo" },
-            TextureOffset{ 2472, 2940, 3444, "archiveHibiscusSepals0003_geo" },
-            TextureOffset{ 2940, 3528, 3445, "archiveHibiscusSepals0004_geo" },
-            TextureOffset{ 3528, 3828, 3461, "archiveHibiscusStigma0002_geo" },
-            TextureOffset{ 3828, 3888, 3470, "archiveHibiscusStyle0002_geo" },
-            TextureOffset{ 3888, 6000, 3387, "archiveHibiscusAnthers0003_geo" },
-            TextureOffset{ 6000, 6072, 3407, "archiveHibiscusPetal0011_geo" },
-            TextureOffset{ 6072, 6144, 3408, "archiveHibiscusPetal0012_geo" },
-            TextureOffset{ 6144, 6216, 3409, "archiveHibiscusPetal0013_geo" },
-            TextureOffset{ 6216, 6288, 3410, "archiveHibiscusPetal0014_geo" },
-            TextureOffset{ 6288, 6360, 3411, "archiveHibiscusPetal0015_geo" },
-            TextureOffset{ 6360, 6828, 3446, "archiveHibiscusSepals0005_geo" },
-            TextureOffset{ 6828, 7416, 3447, "archiveHibiscusSepals0006_geo" },
-            TextureOffset{ 7416, 7716, 3462, "archiveHibiscusStigma0003_geo" },
-            TextureOffset{ 7716, 7776, 3471, "archiveHibiscusStyle0003_geo" },
-            TextureOffset{ 7776, 9888, 3388, "archiveHibiscusAnthers0004_geo" },
-            TextureOffset{ 9888, 9960, 3412, "archiveHibiscusPetal0016_geo" },
-            TextureOffset{ 9960, 10032, 3413, "archiveHibiscusPetal0017_geo" },
-            TextureOffset{ 10032, 10104, 3414, "archiveHibiscusPetal0018_geo" },
-            TextureOffset{ 10104, 10176, 3415, "archiveHibiscusPetal0019_geo" },
-            TextureOffset{ 10176, 10248, 3416, "archiveHibiscusPetal0020_geo" },
-            TextureOffset{ 10248, 10716, 3448, "archiveHibiscusSepals0007_geo" },
-            TextureOffset{ 10716, 11304, 3449, "archiveHibiscusSepals0008_geo" },
-            TextureOffset{ 11304, 11604, 3463, "archiveHibiscusStigma0004_geo" },
-            TextureOffset{ 11604, 11664, 3472, "archiveHibiscusStyle0004_geo" },
-            TextureOffset{ 11664, 13776, 3389, "archiveHibiscusAnthers0005_geo" },
-            TextureOffset{ 13776, 13848, 3417, "archiveHibiscusPetal0021_geo" },
-            TextureOffset{ 13848, 13920, 3418, "archiveHibiscusPetal0022_geo" },
-            TextureOffset{ 13920, 13992, 3419, "archiveHibiscusPetal0023_geo" },
-            TextureOffset{ 13992, 14064, 3420, "archiveHibiscusPetal0024_geo" },
-            TextureOffset{ 14064, 14136, 3421, "archiveHibiscusPetal0025_geo" },
-            TextureOffset{ 14136, 14604, 3450, "archiveHibiscusSepals0009_geo" },
-            TextureOffset{ 14604, 15192, 3451, "archiveHibiscusSepals0010_geo" },
-            TextureOffset{ 15192, 15492, 3464, "archiveHibiscusStigma0005_geo" },
-            TextureOffset{ 15492, 15552, 3473, "archiveHibiscusStyle0005_geo" },
-            TextureOffset{ 15552, 17664, 3390, "archiveHibiscusAnthers0006_geo" },
-            TextureOffset{ 17664, 17736, 3422, "archiveHibiscusPetal0026_geo" },
-            TextureOffset{ 17736, 17808, 3423, "archiveHibiscusPetal0027_geo" },
-            TextureOffset{ 17808, 17880, 3424, "archiveHibiscusPetal0028_geo" },
-            TextureOffset{ 17880, 17952, 3425, "archiveHibiscusPetal0029_geo" },
-            TextureOffset{ 17952, 18024, 3426, "archiveHibiscusPetal0030_geo" },
-            TextureOffset{ 18024, 18492, 3452, "archiveHibiscusSepals0011_geo" },
-            TextureOffset{ 18492, 19080, 3453, "archiveHibiscusSepals0012_geo" },
-            TextureOffset{ 19080, 19380, 3465, "archiveHibiscusStigma0006_geo" },
-            TextureOffset{ 19380, 19440, 3474, "archiveHibiscusStyle0006_geo" },
-            TextureOffset{ 23328, 25440, 3391, "archiveHibiscusAnthers0007_geo" },
-            TextureOffset{ 25440, 25512, 3427, "archiveHibiscusPetal0031_geo" },
-            TextureOffset{ 25512, 25584, 3428, "archiveHibiscusPetal0032_geo" },
-            TextureOffset{ 25584, 25656, 3429, "archiveHibiscusPetal0033_geo" },
-            TextureOffset{ 25656, 25728, 3430, "archiveHibiscusPetal0034_geo" },
-            TextureOffset{ 25728, 25800, 3431, "archiveHibiscusPetal0035_geo" },
-            TextureOffset{ 25800, 26268, 3454, "archiveHibiscusSepals0013_geo" },
-            TextureOffset{ 26268, 26856, 3455, "archiveHibiscusSepals0014_geo" },
-            TextureOffset{ 26856, 27156, 3466, "archiveHibiscusStigma0007_geo" },
-            TextureOffset{ 27156, 27216, 3475, "archiveHibiscusStyle0007_geo" },
-            TextureOffset{ 27216, 29328, 3392, "archiveHibiscusAnthers0008_geo" },
-            TextureOffset{ 29328, 29400, 3432, "archiveHibiscusPetal0036_geo" },
-            TextureOffset{ 29400, 29472, 3433, "archiveHibiscusPetal0037_geo" },
-            TextureOffset{ 29472, 29544, 3434, "archiveHibiscusPetal0038_geo" },
-            TextureOffset{ 29544, 29616, 3435, "archiveHibiscusPetal0039_geo" },
-            TextureOffset{ 29616, 29688, 3436, "archiveHibiscusPetal0040_geo" },
-            TextureOffset{ 29688, 30156, 3456, "archiveHibiscusSepals0015_geo" },
-            TextureOffset{ 30156, 30744, 3457, "archiveHibiscusSepals0016_geo" },
-            TextureOffset{ 30744, 31044, 3467, "archiveHibiscusStigma0008_geo" },
-            TextureOffset{ 31044, 31104, 3476, "archiveHibiscusStyle0008_geo" },
-            TextureOffset{ 31104, 33216, 3393, "archiveHibiscusAnthers0009_geo" },
-            TextureOffset{ 33216, 33288, 3437, "archiveHibiscusPetal0041_geo" },
-            TextureOffset{ 33288, 33360, 3438, "archiveHibiscusPetal0042_geo" },
-            TextureOffset{ 33360, 33432, 3439, "archiveHibiscusPetal0043_geo" },
-            TextureOffset{ 33432, 33504, 3440, "archiveHibiscusPetal0044_geo" },
-            TextureOffset{ 33504, 33576, 3441, "archiveHibiscusPetal0045_geo" },
-            TextureOffset{ 33576, 34044, 3458, "archiveHibiscusSepals0017_geo" },
-            TextureOffset{ 34044, 34632, 3459, "archiveHibiscusSepals0018_geo" },
-            TextureOffset{ 34632, 34932, 3468, "archiveHibiscusStigma0009_geo" },
-            TextureOffset{ 34932, 34992, 3477, "archiveHibiscusStyle0009_geo" },
-        },
-        {
-            TextureOffset{ 0, 112, 2465, "archiveLeaflet0123_geo" },
-            TextureOffset{ 112, 208, 2466, "archiveLeaflet0124_geo" },
-            TextureOffset{ 208, 312, 2467, "archiveLeaflet0125_geo" },
-            TextureOffset{ 312, 416, 2468, "archiveLeaflet0126_geo" },
-            TextureOffset{ 416, 520, 2469, "archiveLeaflet0127_geo" },
-        },
-        {
-            TextureOffset{ 0, 2840, 2472, "frond0001_geo" },
-            TextureOffset{ 2840, 3364, 3267, "stem0001_geo" },
-            TextureOffset{ 3364, 6204, 2473, "frond0002_geo" },
-            TextureOffset{ 6204, 6728, 3268, "stem0002_geo" },
-            TextureOffset{ 6728, 9568, 2474, "frond0003_geo" },
-            TextureOffset{ 9568, 10092, 3269, "stem0003_geo" },
-            TextureOffset{ 10092, 12932, 2475, "frond0004_geo" },
-            TextureOffset{ 12932, 13456, 3270, "stem0004_geo" },
-            TextureOffset{ 13456, 16296, 2476, "frond0005_geo" },
-            TextureOffset{ 16296, 16820, 3271, "stem0005_geo" },
-            TextureOffset{ 16820, 19660, 2477, "frond0006_geo" },
-            TextureOffset{ 19660, 20184, 3272, "stem0006_geo" },
-            TextureOffset{ 20184, 23024, 2478, "frond0007_geo" },
-            TextureOffset{ 23024, 23548, 3273, "stem0007_geo" },
-            TextureOffset{ 23548, 26388, 2479, "frond0008_geo" },
-            TextureOffset{ 26388, 26912, 3274, "stem0008_geo" },
-            TextureOffset{ 26912, 29752, 2480, "frond0009_geo" },
-            TextureOffset{ 29752, 30276, 3275, "stem0009_geo" },
-            TextureOffset{ 30276, 33116, 2481, "frond0010_geo" },
-            TextureOffset{ 33116, 33640, 3276, "stem0010_geo" },
-            TextureOffset{ 33640, 36480, 2482, "frond0011_geo" },
-            TextureOffset{ 36480, 37004, 3277, "stem0011_geo" },
-            TextureOffset{ 37004, 39844, 2483, "frond0012_geo" },
-            TextureOffset{ 39844, 40368, 3278, "stem0012_geo" },
-            TextureOffset{ 40368, 43208, 2484, "frond0013_geo" },
-            TextureOffset{ 43208, 43732, 3279, "stem0013_geo" },
-            TextureOffset{ 43732, 46572, 2485, "frond0014_geo" },
-            TextureOffset{ 46572, 47096, 3280, "stem0014_geo" },
-        },
-        {
-            TextureOffset{ 0, 88, 2486, "leaflet0094_geo" },
-            TextureOffset{ 88, 200, 2487, "leaflet0095_geo" },
-            TextureOffset{ 200, 304, 2488, "leaflet0096_geo" },
-            TextureOffset{ 304, 384, 2489, "leaflet0097_geo" },
-            TextureOffset{ 384, 488, 2490, "leaflet0098_geo" },
-            TextureOffset{ 488, 576, 2491, "leaflet0099_geo" },
-            TextureOffset{ 576, 664, 2492, "leaflet0100_geo" },
-            TextureOffset{ 664, 776, 2493, "leaflet0101_geo" },
-            TextureOffset{ 776, 864, 2494, "leaflet0102_geo" },
-            TextureOffset{ 864, 952, 2495, "leaflet0103_geo" },
-            TextureOffset{ 952, 1064, 2496, "leaflet0104_geo" },
-            TextureOffset{ 1064, 1136, 2497, "leaflet0105_geo" },
-            TextureOffset{ 1136, 1216, 2498, "leaflet0106_geo" },
-            TextureOffset{ 1216, 1304, 2499, "leaflet0107_geo" },
-            TextureOffset{ 1304, 1392, 2500, "leaflet0108_geo" },
-            TextureOffset{ 1392, 1512, 2501, "leaflet0109_geo" },
-            TextureOffset{ 1512, 1616, 2502, "leaflet0110_geo" },
-            TextureOffset{ 1616, 1712, 2503, "leaflet0111_geo" },
-            TextureOffset{ 1712, 1816, 2504, "leaflet0112_geo" },
-            TextureOffset{ 1816, 1920, 2505, "leaflet0113_geo" },
-            TextureOffset{ 1920, 2008, 2506, "leaflet0114_geo" },
-            TextureOffset{ 2008, 2096, 2507, "leaflet0115_geo" },
-            TextureOffset{ 2096, 2184, 2508, "leaflet0116_geo" },
-            TextureOffset{ 2184, 2280, 2509, "leaflet0117_geo" },
-            TextureOffset{ 2280, 2376, 2510, "leaflet0118_geo" },
-            TextureOffset{ 2376, 2480, 2511, "leaflet0119_geo" },
-            TextureOffset{ 2480, 2584, 2512, "leaflet0120_geo" },
-            TextureOffset{ 2584, 2672, 2513, "leaflet0121_geo" },
-            TextureOffset{ 2672, 2752, 2514, "leaflet0122_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 212, 2515, "roots0001_geo" },
-            TextureOffset{ 212, 520, 2516, "roots0002_geo" },
-            TextureOffset{ 520, 852, 2517, "roots0003_geo" },
-            TextureOffset{ 852, 1076, 2518, "roots0004_geo" },
-            TextureOffset{ 1076, 1384, 2519, "roots0005_geo" },
-            TextureOffset{ 1384, 1704, 2520, "roots0006_geo" },
-            TextureOffset{ 1704, 1988, 2521, "roots0007_geo" },
-            TextureOffset{ 1988, 2272, 2522, "roots0008_geo" },
-            TextureOffset{ 2272, 2604, 2523, "roots0009_geo" },
-            TextureOffset{ 2604, 2888, 2524, "roots0010_geo" },
-            TextureOffset{ 2888, 3208, 2525, "roots0011_geo" },
-            TextureOffset{ 3208, 3480, 2526, "roots0012_geo" },
-            TextureOffset{ 3480, 3764, 2527, "roots0013_geo" },
-            TextureOffset{ 3764, 4048, 2528, "roots0014_geo" },
-            TextureOffset{ 4048, 4308, 2529, "roots0015_geo" },
-            TextureOffset{ 4308, 4616, 2530, "roots0016_geo" },
-            TextureOffset{ 4616, 4888, 2531, "roots0017_geo" },
-            TextureOffset{ 4888, 5148, 2532, "roots0018_geo" },
-            TextureOffset{ 5148, 5432, 2533, "roots0019_geo" },
-            TextureOffset{ 5432, 5716, 2534, "roots0020_geo" },
-            TextureOffset{ 5716, 5964, 2535, "roots0021_geo" },
-            TextureOffset{ 5964, 6272, 2536, "roots0022_geo" },
-            TextureOffset{ 6272, 6592, 2537, "roots0023_geo" },
-            TextureOffset{ 6592, 6888, 2538, "roots0024_geo" },
-            TextureOffset{ 6888, 7172, 2539, "roots0025_geo" },
-            TextureOffset{ 7172, 7480, 2540, "roots0026_geo" },
-            TextureOffset{ 7480, 7764, 2541, "roots0027_geo" },
-            TextureOffset{ 7764, 8060, 2542, "roots0028_geo" },
-            TextureOffset{ 8060, 8344, 2543, "roots0029_geo" },
-            TextureOffset{ 8344, 8652, 2544, "roots0030_geo" },
-            TextureOffset{ 8652, 8792, 2545, "roots0031_geo" },
-            TextureOffset{ 8792, 9100, 2546, "roots0032_geo" },
-            TextureOffset{ 9100, 9396, 2547, "roots0033_geo" },
-            TextureOffset{ 9396, 9992, 2548, "roots0034_geo" },
-            TextureOffset{ 9992, 10252, 2549, "roots0035_geo" },
-            TextureOffset{ 10252, 10512, 2550, "roots0036_geo" },
-            TextureOffset{ 10512, 10808, 2551, "roots0037_geo" },
-            TextureOffset{ 10808, 11104, 2552, "roots0038_geo" },
-            TextureOffset{ 11104, 11388, 2553, "roots0039_geo" },
-            TextureOffset{ 11388, 11684, 2554, "roots0040_geo" },
-            TextureOffset{ 11684, 11968, 2555, "roots0041_geo" },
-            TextureOffset{ 11968, 12276, 2556, "roots0042_geo" },
-            TextureOffset{ 12276, 12440, 2557, "roots0043_geo" },
-            TextureOffset{ 12440, 12712, 2558, "roots0044_geo" },
-            TextureOffset{ 12712, 12996, 2559, "roots0045_geo" },
-            TextureOffset{ 12996, 13304, 2560, "roots0046_geo" },
-            TextureOffset{ 13304, 13612, 2561, "roots0047_geo" },
-            TextureOffset{ 13612, 13896, 2562, "roots0048_geo" },
-            TextureOffset{ 13896, 14108, 2563, "roots0049_geo" },
-            TextureOffset{ 14108, 14296, 2564, "roots0050_geo" },
-            TextureOffset{ 14296, 14508, 2565, "roots0051_geo" },
-            TextureOffset{ 14508, 14708, 2566, "roots0052_geo" },
-            TextureOffset{ 14708, 14920, 2567, "roots0053_geo" },
-            TextureOffset{ 14920, 15228, 2568, "roots0054_geo" },
-            TextureOffset{ 15228, 15560, 2569, "roots0055_geo" },
-            TextureOffset{ 15560, 15784, 2570, "roots0056_geo" },
-            TextureOffset{ 15784, 16092, 2571, "roots0057_geo" },
-            TextureOffset{ 16092, 16412, 2572, "roots0058_geo" },
-            TextureOffset{ 16412, 16696, 2573, "roots0059_geo" },
-            TextureOffset{ 16696, 16980, 2574, "roots0060_geo" },
-            TextureOffset{ 16980, 17312, 2575, "roots0061_geo" },
-            TextureOffset{ 17312, 17596, 2576, "roots0062_geo" },
-            TextureOffset{ 17596, 17916, 2577, "roots0063_geo" },
-            TextureOffset{ 17916, 18188, 2578, "roots0064_geo" },
-            TextureOffset{ 18188, 18472, 2579, "roots0065_geo" },
-            TextureOffset{ 18472, 18756, 2580, "roots0066_geo" },
-            TextureOffset{ 18756, 19016, 2581, "roots0067_geo" },
-            TextureOffset{ 19016, 19324, 2582, "roots0068_geo" },
-            TextureOffset{ 19324, 19596, 2583, "roots0069_geo" },
-            TextureOffset{ 19596, 19856, 2584, "roots0070_geo" },
-            TextureOffset{ 19856, 20140, 2585, "roots0071_geo" },
-            TextureOffset{ 20140, 20424, 2586, "roots0072_geo" },
-            TextureOffset{ 20424, 20672, 2587, "roots0073_geo" },
-            TextureOffset{ 20672, 20980, 2588, "roots0074_geo" },
-            TextureOffset{ 20980, 21300, 2589, "roots0075_geo" },
-            TextureOffset{ 21300, 21596, 2590, "roots0076_geo" },
-            TextureOffset{ 21596, 21880, 2591, "roots0077_geo" },
-            TextureOffset{ 21880, 22188, 2592, "roots0078_geo" },
-            TextureOffset{ 22188, 22472, 2593, "roots0079_geo" },
-            TextureOffset{ 22472, 22768, 2594, "roots0080_geo" },
-            TextureOffset{ 22768, 23052, 2595, "roots0081_geo" },
-            TextureOffset{ 23052, 23360, 2596, "roots0082_geo" },
-            TextureOffset{ 23360, 23500, 2597, "roots0083_geo" },
-            TextureOffset{ 23500, 23808, 2598, "roots0084_geo" },
-            TextureOffset{ 23808, 24104, 2599, "roots0085_geo" },
-            TextureOffset{ 24104, 24700, 2600, "roots0086_geo" },
-            TextureOffset{ 24700, 24960, 2601, "roots0087_geo" },
-            TextureOffset{ 24960, 25220, 2602, "roots0088_geo" },
-            TextureOffset{ 25220, 25516, 2603, "roots0089_geo" },
-            TextureOffset{ 25516, 25812, 2604, "roots0090_geo" },
-            TextureOffset{ 25812, 26096, 2605, "roots0091_geo" },
-            TextureOffset{ 26096, 26392, 2606, "roots0092_geo" },
-            TextureOffset{ 26392, 26676, 2607, "roots0093_geo" },
-            TextureOffset{ 26676, 26984, 2608, "roots0094_geo" },
-            TextureOffset{ 26984, 27148, 2609, "roots0095_geo" },
-            TextureOffset{ 27148, 27420, 2610, "roots0096_geo" },
-            TextureOffset{ 27420, 27704, 2611, "roots0097_geo" },
-            TextureOffset{ 27704, 28012, 2612, "roots0098_geo" },
-            TextureOffset{ 28012, 28320, 2613, "roots0099_geo" },
-            TextureOffset{ 28320, 28604, 2614, "roots0100_geo" },
-            TextureOffset{ 28604, 28816, 2615, "roots0101_geo" },
-            TextureOffset{ 28816, 29004, 2616, "roots0102_geo" },
-            TextureOffset{ 29004, 29216, 2617, "roots0103_geo" },
-            TextureOffset{ 29216, 29416, 2618, "roots0104_geo" },
-            TextureOffset{ 29416, 29628, 2619, "roots0105_geo" },
-            TextureOffset{ 29628, 29936, 2620, "roots0106_geo" },
-            TextureOffset{ 29936, 30268, 2621, "roots0107_geo" },
-            TextureOffset{ 30268, 30492, 2622, "roots0108_geo" },
-            TextureOffset{ 30492, 30800, 2623, "roots0109_geo" },
-            TextureOffset{ 30800, 31120, 2624, "roots0110_geo" },
-            TextureOffset{ 31120, 31404, 2625, "roots0111_geo" },
-            TextureOffset{ 31404, 31688, 2626, "roots0112_geo" },
-            TextureOffset{ 31688, 32020, 2627, "roots0113_geo" },
-            TextureOffset{ 32020, 32304, 2628, "roots0114_geo" },
-            TextureOffset{ 32304, 32624, 2629, "roots0115_geo" },
-            TextureOffset{ 32624, 32896, 2630, "roots0116_geo" },
-            TextureOffset{ 32896, 33180, 2631, "roots0117_geo" },
-            TextureOffset{ 33180, 33464, 2632, "roots0118_geo" },
-            TextureOffset{ 33464, 33724, 2633, "roots0119_geo" },
-            TextureOffset{ 33724, 34032, 2634, "roots0120_geo" },
-            TextureOffset{ 34032, 34304, 2635, "roots0121_geo" },
-            TextureOffset{ 34304, 34564, 2636, "roots0122_geo" },
-            TextureOffset{ 34564, 34848, 2637, "roots0123_geo" },
-            TextureOffset{ 34848, 35132, 2638, "roots0124_geo" },
-            TextureOffset{ 35132, 35380, 2639, "roots0125_geo" },
-            TextureOffset{ 35380, 35688, 2640, "roots0126_geo" },
-            TextureOffset{ 35688, 36008, 2641, "roots0127_geo" },
-            TextureOffset{ 36008, 36304, 2642, "roots0128_geo" },
-            TextureOffset{ 36304, 36588, 2643, "roots0129_geo" },
-            TextureOffset{ 36588, 36896, 2644, "roots0130_geo" },
-            TextureOffset{ 36896, 37180, 2645, "roots0131_geo" },
-            TextureOffset{ 37180, 37476, 2646, "roots0132_geo" },
-            TextureOffset{ 37476, 37760, 2647, "roots0133_geo" },
-            TextureOffset{ 37760, 38068, 2648, "roots0134_geo" },
-            TextureOffset{ 38068, 38208, 2649, "roots0135_geo" },
-            TextureOffset{ 38208, 38516, 2650, "roots0136_geo" },
-            TextureOffset{ 38516, 38812, 2651, "roots0137_geo" },
-            TextureOffset{ 38812, 39408, 2652, "roots0138_geo" },
-            TextureOffset{ 39408, 39668, 2653, "roots0139_geo" },
-            TextureOffset{ 39668, 39928, 2654, "roots0140_geo" },
-            TextureOffset{ 39928, 40224, 2655, "roots0141_geo" },
-            TextureOffset{ 40224, 40520, 2656, "roots0142_geo" },
-            TextureOffset{ 40520, 40804, 2657, "roots0143_geo" },
-            TextureOffset{ 40804, 41100, 2658, "roots0144_geo" },
-            TextureOffset{ 41100, 41384, 2659, "roots0145_geo" },
-            TextureOffset{ 41384, 41692, 2660, "roots0146_geo" },
-            TextureOffset{ 41692, 41856, 2661, "roots0147_geo" },
-            TextureOffset{ 41856, 42128, 2662, "roots0148_geo" },
-            TextureOffset{ 42128, 42412, 2663, "roots0149_geo" },
-            TextureOffset{ 42412, 42720, 2664, "roots0150_geo" },
-            TextureOffset{ 42720, 43028, 2665, "roots0151_geo" },
-            TextureOffset{ 43028, 43312, 2666, "roots0152_geo" },
-            TextureOffset{ 43312, 43524, 2667, "roots0153_geo" },
-            TextureOffset{ 43524, 43712, 2668, "roots0154_geo" },
-            TextureOffset{ 43712, 43924, 2669, "roots0155_geo" },
-            TextureOffset{ 43924, 44124, 2670, "roots0156_geo" },
-            TextureOffset{ 44124, 44348, 2671, "roots0157_geo" },
-            TextureOffset{ 44348, 44620, 2672, "roots0158_geo" },
-            TextureOffset{ 44620, 44868, 2673, "roots0159_geo" },
-            TextureOffset{ 44868, 45092, 2674, "roots0160_geo" },
-            TextureOffset{ 45092, 45316, 2675, "roots0161_geo" },
-            TextureOffset{ 45316, 45564, 2676, "roots0162_geo" },
-            TextureOffset{ 45564, 45764, 2677, "roots0163_geo" },
-            TextureOffset{ 45764, 45988, 2678, "roots0164_geo" },
-            TextureOffset{ 45988, 46236, 2679, "roots0165_geo" },
-            TextureOffset{ 46236, 46472, 2680, "roots0166_geo" },
-            TextureOffset{ 46472, 46708, 2681, "roots0167_geo" },
-            TextureOffset{ 46708, 46920, 2682, "roots0168_geo" },
-            TextureOffset{ 46920, 47108, 2683, "roots0169_geo" },
-            TextureOffset{ 47108, 47356, 2684, "roots0170_geo" },
-            TextureOffset{ 47356, 47580, 2685, "roots0171_geo" },
-            TextureOffset{ 47580, 47804, 2686, "roots0172_geo" },
-            TextureOffset{ 47804, 48052, 2687, "roots0173_geo" },
-            TextureOffset{ 48052, 48276, 2688, "roots0174_geo" },
-            TextureOffset{ 48276, 48524, 2689, "roots0175_geo" },
-            TextureOffset{ 48524, 48760, 2690, "roots0176_geo" },
-            TextureOffset{ 48760, 48996, 2691, "roots0177_geo" },
-            TextureOffset{ 48996, 49220, 2692, "roots0178_geo" },
-            TextureOffset{ 49220, 49456, 2693, "roots0179_geo" },
-            TextureOffset{ 49456, 49680, 2694, "roots0180_geo" },
-            TextureOffset{ 49680, 49916, 2695, "roots0181_geo" },
-            TextureOffset{ 49916, 50128, 2696, "roots0182_geo" },
-            TextureOffset{ 50128, 50364, 2697, "roots0183_geo" },
-            TextureOffset{ 50364, 50624, 2698, "roots0184_geo" },
-            TextureOffset{ 50624, 50860, 2699, "roots0185_geo" },
-            TextureOffset{ 50860, 51084, 2700, "roots0186_geo" },
-            TextureOffset{ 51084, 51380, 2701, "roots0187_geo" },
-            TextureOffset{ 51380, 51712, 2702, "roots0188_geo" },
-            TextureOffset{ 51712, 51936, 2703, "roots0189_geo" },
-            TextureOffset{ 51936, 52196, 2704, "roots0190_geo" },
-            TextureOffset{ 52196, 52456, 2705, "roots0191_geo" },
-            TextureOffset{ 52456, 52692, 2706, "roots0192_geo" },
-            TextureOffset{ 52692, 52940, 2707, "roots0193_geo" },
-            TextureOffset{ 52940, 53176, 2708, "roots0194_geo" },
-            TextureOffset{ 53176, 53412, 2709, "roots0195_geo" },
-            TextureOffset{ 53412, 53672, 2710, "roots0196_geo" },
-            TextureOffset{ 53672, 53932, 2711, "roots0197_geo" },
-            TextureOffset{ 53932, 54144, 2712, "roots0198_geo" },
-            TextureOffset{ 54144, 54392, 2713, "roots0199_geo" },
-            TextureOffset{ 54392, 54652, 2714, "roots0200_geo" },
-            TextureOffset{ 54652, 54948, 2715, "roots0201_geo" },
-            TextureOffset{ 54948, 55220, 2716, "roots0202_geo" },
-            TextureOffset{ 55220, 55504, 2717, "roots0203_geo" },
-            TextureOffset{ 55504, 55776, 2718, "roots0204_geo" },
-            TextureOffset{ 55776, 56024, 2719, "roots0205_geo" },
-            TextureOffset{ 56024, 56272, 2720, "roots0206_geo" },
-            TextureOffset{ 56272, 56508, 2721, "roots0207_geo" },
-            TextureOffset{ 56508, 56792, 2722, "roots0208_geo" },
-            TextureOffset{ 56792, 57052, 2723, "roots0209_geo" },
-            TextureOffset{ 57052, 57312, 2724, "roots0210_geo" },
-            TextureOffset{ 57312, 57572, 2725, "roots0211_geo" },
-            TextureOffset{ 57572, 57820, 2726, "roots0212_geo" },
-            TextureOffset{ 57820, 58116, 2727, "roots0213_geo" },
-            TextureOffset{ 58116, 58400, 2728, "roots0214_geo" },
-            TextureOffset{ 58400, 58696, 2729, "roots0215_geo" },
-            TextureOffset{ 58696, 58980, 2730, "roots0216_geo" },
-            TextureOffset{ 58980, 59240, 2731, "roots0217_geo" },
-            TextureOffset{ 59240, 59524, 2732, "roots0218_geo" },
-            TextureOffset{ 59524, 59796, 2733, "roots0219_geo" },
-            TextureOffset{ 59796, 60092, 2734, "roots0220_geo" },
-            TextureOffset{ 60092, 60424, 2735, "roots0221_geo" },
-            TextureOffset{ 60424, 60672, 2736, "roots0222_geo" },
-            TextureOffset{ 60672, 60920, 2737, "roots0223_geo" },
-            TextureOffset{ 60920, 61156, 2738, "roots0224_geo" },
-            TextureOffset{ 61156, 61404, 2739, "roots0225_geo" },
-            TextureOffset{ 61404, 61652, 2740, "roots0226_geo" },
-            TextureOffset{ 61652, 61960, 2741, "roots0227_geo" },
-            TextureOffset{ 61960, 62208, 2742, "roots0228_geo" },
-            TextureOffset{ 62208, 62432, 2743, "roots0229_geo" },
-            TextureOffset{ 62432, 62668, 2744, "roots0230_geo" },
-            TextureOffset{ 62668, 62928, 2745, "roots0231_geo" },
-            TextureOffset{ 62928, 63212, 2746, "roots0232_geo" },
-            TextureOffset{ 63212, 63496, 2747, "roots0233_geo" },
-            TextureOffset{ 63496, 63768, 2748, "roots0234_geo" },
-            TextureOffset{ 63768, 64004, 2749, "roots0235_geo" },
-            TextureOffset{ 64004, 64252, 2750, "roots0236_geo" },
-            TextureOffset{ 64252, 64500, 2751, "roots0237_geo" },
-            TextureOffset{ 64500, 64748, 2752, "roots0238_geo" },
-            TextureOffset{ 64748, 65008, 2753, "roots0239_geo" },
-            TextureOffset{ 65008, 65280, 2754, "roots0240_geo" },
-            TextureOffset{ 65280, 65540, 2755, "roots0241_geo" },
-            TextureOffset{ 65540, 65800, 2756, "roots0242_geo" },
-            TextureOffset{ 65800, 66060, 2757, "roots0243_geo" },
-            TextureOffset{ 66060, 66332, 2758, "roots0244_geo" },
-            TextureOffset{ 66332, 66604, 2759, "roots0245_geo" },
-            TextureOffset{ 66604, 66840, 2760, "roots0246_geo" },
-            TextureOffset{ 66840, 67124, 2761, "roots0247_geo" },
-            TextureOffset{ 67124, 67396, 2762, "roots0248_geo" },
-            TextureOffset{ 67396, 67608, 2763, "roots0249_geo" },
-            TextureOffset{ 67608, 67820, 2764, "roots0250_geo" },
-            TextureOffset{ 67820, 68020, 2765, "roots0251_geo" },
-            TextureOffset{ 68020, 68208, 2766, "roots0252_geo" },
-            TextureOffset{ 68208, 68396, 2767, "roots0253_geo" },
-            TextureOffset{ 68396, 68584, 2768, "roots0254_geo" },
-            TextureOffset{ 68584, 68724, 2769, "roots0255_geo" },
-            TextureOffset{ 68724, 68888, 2770, "roots0256_geo" },
-            TextureOffset{ 68888, 69052, 2771, "roots0257_geo" },
-            TextureOffset{ 69052, 69240, 2772, "roots0258_geo" },
-            TextureOffset{ 69240, 69428, 2773, "roots0259_geo" },
-            TextureOffset{ 69428, 69628, 2774, "roots0260_geo" },
-            TextureOffset{ 69628, 69876, 2775, "roots0261_geo" },
-            TextureOffset{ 69876, 70052, 2776, "roots0262_geo" },
-            TextureOffset{ 70052, 70228, 2777, "roots0263_geo" },
-            TextureOffset{ 70228, 70404, 2778, "roots0264_geo" },
-            TextureOffset{ 70404, 70712, 2779, "roots0265_geo" },
-            TextureOffset{ 70712, 70996, 2780, "roots0266_geo" },
-            TextureOffset{ 70996, 71328, 2781, "roots0267_geo" },
-            TextureOffset{ 71328, 71636, 2782, "roots0268_geo" },
-            TextureOffset{ 71636, 71968, 2783, "roots0269_geo" },
-            TextureOffset{ 71968, 72360, 2784, "roots0270_geo" },
-            TextureOffset{ 72360, 72656, 2785, "roots0271_geo" },
-            TextureOffset{ 72656, 72952, 2786, "roots0272_geo" },
-            TextureOffset{ 72952, 73260, 2787, "roots0273_geo" },
-            TextureOffset{ 73260, 73532, 2788, "roots0274_geo" },
-            TextureOffset{ 73532, 73840, 2789, "roots0275_geo" },
-            TextureOffset{ 73840, 74100, 2790, "roots0276_geo" },
-            TextureOffset{ 74100, 74384, 2791, "roots0277_geo" },
-            TextureOffset{ 74384, 74716, 2792, "roots0278_geo" },
-            TextureOffset{ 74716, 75048, 2793, "roots0279_geo" },
-            TextureOffset{ 75048, 75356, 2794, "roots0280_geo" },
-            TextureOffset{ 75356, 75664, 2795, "roots0281_geo" },
-            TextureOffset{ 75664, 75948, 2796, "roots0282_geo" },
-            TextureOffset{ 75948, 76232, 2797, "roots0283_geo" },
-            TextureOffset{ 76232, 76528, 2798, "roots0284_geo" },
-            TextureOffset{ 76528, 76860, 2799, "roots0285_geo" },
-            TextureOffset{ 76860, 77168, 2800, "roots0286_geo" },
-            TextureOffset{ 77168, 77476, 2801, "roots0287_geo" },
-            TextureOffset{ 77476, 77724, 2802, "roots0288_geo" },
-            TextureOffset{ 77724, 77948, 2803, "roots0289_geo" },
-            TextureOffset{ 77948, 78244, 2804, "roots0290_geo" },
-            TextureOffset{ 78244, 78552, 2805, "roots0291_geo" },
-            TextureOffset{ 78552, 78848, 2806, "roots0292_geo" },
-            TextureOffset{ 78848, 79144, 2807, "roots0293_geo" },
-            TextureOffset{ 79144, 79476, 2808, "roots0294_geo" },
-            TextureOffset{ 79476, 79772, 2809, "roots0295_geo" },
-            TextureOffset{ 79772, 80032, 2810, "roots0296_geo" },
-            TextureOffset{ 80032, 80340, 2811, "roots0297_geo" },
-            TextureOffset{ 80340, 80636, 2812, "roots0298_geo" },
-            TextureOffset{ 80636, 80932, 2813, "roots0299_geo" },
-            TextureOffset{ 80932, 81240, 2814, "roots0300_geo" },
-            TextureOffset{ 81240, 81548, 2815, "roots0301_geo" },
-            TextureOffset{ 81548, 81832, 2816, "roots0302_geo" },
-            TextureOffset{ 81832, 82092, 2817, "roots0303_geo" },
-            TextureOffset{ 82092, 82352, 2818, "roots0304_geo" },
-            TextureOffset{ 82352, 82636, 2819, "roots0305_geo" },
-            TextureOffset{ 82636, 82932, 2820, "roots0306_geo" },
-            TextureOffset{ 82932, 83204, 2821, "roots0307_geo" },
-            TextureOffset{ 83204, 83512, 2822, "roots0308_geo" },
-            TextureOffset{ 83512, 83736, 2823, "roots0309_geo" },
-            TextureOffset{ 83736, 83984, 2824, "roots0310_geo" },
-            TextureOffset{ 83984, 84220, 2825, "roots0311_geo" },
-            TextureOffset{ 84220, 84480, 2826, "roots0312_geo" },
-            TextureOffset{ 84480, 84752, 2827, "roots0313_geo" },
-            TextureOffset{ 84752, 85024, 2828, "roots0314_geo" },
-            TextureOffset{ 85024, 85284, 2829, "roots0315_geo" },
-            TextureOffset{ 85284, 85568, 2830, "roots0316_geo" },
-            TextureOffset{ 85568, 85888, 2831, "roots0317_geo" },
-            TextureOffset{ 85888, 86172, 2832, "roots0318_geo" },
-            TextureOffset{ 86172, 86432, 2833, "roots0319_geo" },
-            TextureOffset{ 86432, 86644, 2834, "roots0320_geo" },
-            TextureOffset{ 86644, 86784, 2835, "roots0321_geo" },
-            TextureOffset{ 86784, 87104, 2836, "roots0322_geo" },
-            TextureOffset{ 87104, 87352, 2837, "roots0323_geo" },
-            TextureOffset{ 87352, 87612, 2838, "roots0324_geo" },
-            TextureOffset{ 87612, 87812, 2839, "roots0325_geo" },
-            TextureOffset{ 87812, 88060, 2840, "roots0326_geo" },
-            TextureOffset{ 88060, 88320, 2841, "roots0327_geo" },
-            TextureOffset{ 88320, 88568, 2842, "roots0328_geo" },
-            TextureOffset{ 88568, 88876, 2843, "roots0329_geo" },
-            TextureOffset{ 88876, 89160, 2844, "roots0330_geo" },
-            TextureOffset{ 89160, 89552, 2845, "roots0331_geo" },
-            TextureOffset{ 89552, 89860, 2846, "roots0332_geo" },
-            TextureOffset{ 89860, 90192, 2847, "roots0333_geo" },
-            TextureOffset{ 90192, 90524, 2848, "roots0334_geo" },
-            TextureOffset{ 90524, 90784, 2849, "roots0335_geo" },
-            TextureOffset{ 90784, 91092, 2850, "roots0336_geo" },
-            TextureOffset{ 91092, 91352, 2851, "roots0337_geo" },
-            TextureOffset{ 91352, 91720, 2852, "roots0338_geo" },
-            TextureOffset{ 91720, 92028, 2853, "roots0339_geo" },
-            TextureOffset{ 92028, 92336, 2854, "roots0340_geo" },
-            TextureOffset{ 92336, 92608, 2855, "roots0341_geo" },
-            TextureOffset{ 92608, 92820, 2856, "roots0342_geo" },
-            TextureOffset{ 92820, 93128, 2857, "roots0343_geo" },
-            TextureOffset{ 93128, 93304, 2858, "roots0344_geo" },
-            TextureOffset{ 93304, 93504, 2859, "roots0345_geo" },
-            TextureOffset{ 93504, 93644, 2860, "roots0346_geo" },
-            TextureOffset{ 93644, 93832, 2861, "roots0347_geo" },
-            TextureOffset{ 93832, 93996, 2862, "roots0348_geo" },
-            TextureOffset{ 93996, 94220, 2863, "roots0349_geo" },
-            TextureOffset{ 94220, 94420, 2864, "roots0350_geo" },
-            TextureOffset{ 94420, 94608, 2865, "roots0351_geo" },
-            TextureOffset{ 94608, 94796, 2866, "roots0352_geo" },
-            TextureOffset{ 94796, 95020, 2867, "roots0353_geo" },
-            TextureOffset{ 95020, 95292, 2868, "roots0354_geo" },
-            TextureOffset{ 95292, 95540, 2869, "roots0355_geo" },
-            TextureOffset{ 95540, 95764, 2870, "roots0356_geo" },
-            TextureOffset{ 95764, 95988, 2871, "roots0357_geo" },
-            TextureOffset{ 95988, 96236, 2872, "roots0358_geo" },
-            TextureOffset{ 96236, 96436, 2873, "roots0359_geo" },
-            TextureOffset{ 96436, 96660, 2874, "roots0360_geo" },
-            TextureOffset{ 96660, 96908, 2875, "roots0361_geo" },
-            TextureOffset{ 96908, 97144, 2876, "roots0362_geo" },
-            TextureOffset{ 97144, 97380, 2877, "roots0363_geo" },
-            TextureOffset{ 97380, 97592, 2878, "roots0364_geo" },
-            TextureOffset{ 97592, 97780, 2879, "roots0365_geo" },
-            TextureOffset{ 97780, 98028, 2880, "roots0366_geo" },
-            TextureOffset{ 98028, 98252, 2881, "roots0367_geo" },
-            TextureOffset{ 98252, 98476, 2882, "roots0368_geo" },
-            TextureOffset{ 98476, 98724, 2883, "roots0369_geo" },
-            TextureOffset{ 98724, 98948, 2884, "roots0370_geo" },
-            TextureOffset{ 98948, 99196, 2885, "roots0371_geo" },
-            TextureOffset{ 99196, 99432, 2886, "roots0372_geo" },
-            TextureOffset{ 99432, 99668, 2887, "roots0373_geo" },
-            TextureOffset{ 99668, 99892, 2888, "roots0374_geo" },
-            TextureOffset{ 99892, 100128, 2889, "roots0375_geo" },
-            TextureOffset{ 100128, 100352, 2890, "roots0376_geo" },
-            TextureOffset{ 100352, 100588, 2891, "roots0377_geo" },
-            TextureOffset{ 100588, 100800, 2892, "roots0378_geo" },
-            TextureOffset{ 100800, 101036, 2893, "roots0379_geo" },
-            TextureOffset{ 101036, 101296, 2894, "roots0380_geo" },
-            TextureOffset{ 101296, 101532, 2895, "roots0381_geo" },
-            TextureOffset{ 101532, 101756, 2896, "roots0382_geo" },
-            TextureOffset{ 101756, 102052, 2897, "roots0383_geo" },
-            TextureOffset{ 102052, 102384, 2898, "roots0384_geo" },
-            TextureOffset{ 102384, 102608, 2899, "roots0385_geo" },
-            TextureOffset{ 102608, 102868, 2900, "roots0386_geo" },
-            TextureOffset{ 102868, 103128, 2901, "roots0387_geo" },
-            TextureOffset{ 103128, 103364, 2902, "roots0388_geo" },
-            TextureOffset{ 103364, 103612, 2903, "roots0389_geo" },
-            TextureOffset{ 103612, 103848, 2904, "roots0390_geo" },
-            TextureOffset{ 103848, 104084, 2905, "roots0391_geo" },
-            TextureOffset{ 104084, 104344, 2906, "roots0392_geo" },
-            TextureOffset{ 104344, 104604, 2907, "roots0393_geo" },
-            TextureOffset{ 104604, 104816, 2908, "roots0394_geo" },
-            TextureOffset{ 104816, 105064, 2909, "roots0395_geo" },
-            TextureOffset{ 105064, 105324, 2910, "roots0396_geo" },
-            TextureOffset{ 105324, 105620, 2911, "roots0397_geo" },
-            TextureOffset{ 105620, 105892, 2912, "roots0398_geo" },
-            TextureOffset{ 105892, 106176, 2913, "roots0399_geo" },
-            TextureOffset{ 106176, 106448, 2914, "roots0400_geo" },
-            TextureOffset{ 106448, 106696, 2915, "roots0401_geo" },
-            TextureOffset{ 106696, 106944, 2916, "roots0402_geo" },
-            TextureOffset{ 106944, 107180, 2917, "roots0403_geo" },
-            TextureOffset{ 107180, 107464, 2918, "roots0404_geo" },
-            TextureOffset{ 107464, 107724, 2919, "roots0405_geo" },
-            TextureOffset{ 107724, 107984, 2920, "roots0406_geo" },
-            TextureOffset{ 107984, 108244, 2921, "roots0407_geo" },
-            TextureOffset{ 108244, 108492, 2922, "roots0408_geo" },
-            TextureOffset{ 108492, 108788, 2923, "roots0409_geo" },
-            TextureOffset{ 108788, 109072, 2924, "roots0410_geo" },
-            TextureOffset{ 109072, 109368, 2925, "roots0411_geo" },
-            TextureOffset{ 109368, 109652, 2926, "roots0412_geo" },
-            TextureOffset{ 109652, 109912, 2927, "roots0413_geo" },
-            TextureOffset{ 109912, 110196, 2928, "roots0414_geo" },
-            TextureOffset{ 110196, 110468, 2929, "roots0415_geo" },
-            TextureOffset{ 110468, 110764, 2930, "roots0416_geo" },
-            TextureOffset{ 110764, 111096, 2931, "roots0417_geo" },
-            TextureOffset{ 111096, 111344, 2932, "roots0418_geo" },
-            TextureOffset{ 111344, 111592, 2933, "roots0419_geo" },
-            TextureOffset{ 111592, 111828, 2934, "roots0420_geo" },
-            TextureOffset{ 111828, 112076, 2935, "roots0421_geo" },
-            TextureOffset{ 112076, 112324, 2936, "roots0422_geo" },
-            TextureOffset{ 112324, 112632, 2937, "roots0423_geo" },
-            TextureOffset{ 112632, 112880, 2938, "roots0424_geo" },
-            TextureOffset{ 112880, 113104, 2939, "roots0425_geo" },
-            TextureOffset{ 113104, 113340, 2940, "roots0426_geo" },
-            TextureOffset{ 113340, 113600, 2941, "roots0427_geo" },
-            TextureOffset{ 113600, 113884, 2942, "roots0428_geo" },
-            TextureOffset{ 113884, 114168, 2943, "roots0429_geo" },
-            TextureOffset{ 114168, 114440, 2944, "roots0430_geo" },
-            TextureOffset{ 114440, 114676, 2945, "roots0431_geo" },
-            TextureOffset{ 114676, 114924, 2946, "roots0432_geo" },
-            TextureOffset{ 114924, 115172, 2947, "roots0433_geo" },
-            TextureOffset{ 115172, 115420, 2948, "roots0434_geo" },
-            TextureOffset{ 115420, 115680, 2949, "roots0435_geo" },
-            TextureOffset{ 115680, 115952, 2950, "roots0436_geo" },
-            TextureOffset{ 115952, 116212, 2951, "roots0437_geo" },
-            TextureOffset{ 116212, 116472, 2952, "roots0438_geo" },
-            TextureOffset{ 116472, 116732, 2953, "roots0439_geo" },
-            TextureOffset{ 116732, 117004, 2954, "roots0440_geo" },
-            TextureOffset{ 117004, 117276, 2955, "roots0441_geo" },
-            TextureOffset{ 117276, 117512, 2956, "roots0442_geo" },
-            TextureOffset{ 117512, 117796, 2957, "roots0443_geo" },
-            TextureOffset{ 117796, 118068, 2958, "roots0444_geo" },
-            TextureOffset{ 118068, 118280, 2959, "roots0445_geo" },
-            TextureOffset{ 118280, 118492, 2960, "roots0446_geo" },
-            TextureOffset{ 118492, 118692, 2961, "roots0447_geo" },
-            TextureOffset{ 118692, 118880, 2962, "roots0448_geo" },
-            TextureOffset{ 118880, 119068, 2963, "roots0449_geo" },
-            TextureOffset{ 119068, 119256, 2964, "roots0450_geo" },
-            TextureOffset{ 119256, 119396, 2965, "roots0451_geo" },
-            TextureOffset{ 119396, 119560, 2966, "roots0452_geo" },
-            TextureOffset{ 119560, 119724, 2967, "roots0453_geo" },
-            TextureOffset{ 119724, 119912, 2968, "roots0454_geo" },
-            TextureOffset{ 119912, 120100, 2969, "roots0455_geo" },
-            TextureOffset{ 120100, 120300, 2970, "roots0456_geo" },
-            TextureOffset{ 120300, 120548, 2971, "roots0457_geo" },
-            TextureOffset{ 120548, 120724, 2972, "roots0458_geo" },
-            TextureOffset{ 120724, 120900, 2973, "roots0459_geo" },
-            TextureOffset{ 120900, 121076, 2974, "roots0460_geo" },
-            TextureOffset{ 121076, 121384, 2975, "roots0461_geo" },
-            TextureOffset{ 121384, 121668, 2976, "roots0462_geo" },
-            TextureOffset{ 121668, 122000, 2977, "roots0463_geo" },
-            TextureOffset{ 122000, 122308, 2978, "roots0464_geo" },
-            TextureOffset{ 122308, 122640, 2979, "roots0465_geo" },
-            TextureOffset{ 122640, 123032, 2980, "roots0466_geo" },
-            TextureOffset{ 123032, 123328, 2981, "roots0467_geo" },
-            TextureOffset{ 123328, 123624, 2982, "roots0468_geo" },
-            TextureOffset{ 123624, 123932, 2983, "roots0469_geo" },
-            TextureOffset{ 123932, 124204, 2984, "roots0470_geo" },
-            TextureOffset{ 124204, 124512, 2985, "roots0471_geo" },
-            TextureOffset{ 124512, 124772, 2986, "roots0472_geo" },
-            TextureOffset{ 124772, 125056, 2987, "roots0473_geo" },
-            TextureOffset{ 125056, 125388, 2988, "roots0474_geo" },
-            TextureOffset{ 125388, 125720, 2989, "roots0475_geo" },
-            TextureOffset{ 125720, 126028, 2990, "roots0476_geo" },
-            TextureOffset{ 126028, 126336, 2991, "roots0477_geo" },
-            TextureOffset{ 126336, 126620, 2992, "roots0478_geo" },
-            TextureOffset{ 126620, 126904, 2993, "roots0479_geo" },
-            TextureOffset{ 126904, 127200, 2994, "roots0480_geo" },
-            TextureOffset{ 127200, 127532, 2995, "roots0481_geo" },
-            TextureOffset{ 127532, 127840, 2996, "roots0482_geo" },
-            TextureOffset{ 127840, 128148, 2997, "roots0483_geo" },
-            TextureOffset{ 128148, 128396, 2998, "roots0484_geo" },
-            TextureOffset{ 128396, 128620, 2999, "roots0485_geo" },
-            TextureOffset{ 128620, 128916, 3000, "roots0486_geo" },
-            TextureOffset{ 128916, 129224, 3001, "roots0487_geo" },
-            TextureOffset{ 129224, 129520, 3002, "roots0488_geo" },
-            TextureOffset{ 129520, 129816, 3003, "roots0489_geo" },
-            TextureOffset{ 129816, 130148, 3004, "roots0490_geo" },
-            TextureOffset{ 130148, 130444, 3005, "roots0491_geo" },
-            TextureOffset{ 130444, 130704, 3006, "roots0492_geo" },
-            TextureOffset{ 130704, 131012, 3007, "roots0493_geo" },
-            TextureOffset{ 131012, 131308, 3008, "roots0494_geo" },
-            TextureOffset{ 131308, 131604, 3009, "roots0495_geo" },
-            TextureOffset{ 131604, 131912, 3010, "roots0496_geo" },
-            TextureOffset{ 131912, 132220, 3011, "roots0497_geo" },
-            TextureOffset{ 132220, 132504, 3012, "roots0498_geo" },
-            TextureOffset{ 132504, 132764, 3013, "roots0499_geo" },
-            TextureOffset{ 132764, 133024, 3014, "roots0500_geo" },
-            TextureOffset{ 133024, 133308, 3015, "roots0501_geo" },
-            TextureOffset{ 133308, 133604, 3016, "roots0502_geo" },
-            TextureOffset{ 133604, 133876, 3017, "roots0503_geo" },
-            TextureOffset{ 133876, 134184, 3018, "roots0504_geo" },
-            TextureOffset{ 134184, 134408, 3019, "roots0505_geo" },
-            TextureOffset{ 134408, 134656, 3020, "roots0506_geo" },
-            TextureOffset{ 134656, 134892, 3021, "roots0507_geo" },
-            TextureOffset{ 134892, 135152, 3022, "roots0508_geo" },
-            TextureOffset{ 135152, 135424, 3023, "roots0509_geo" },
-            TextureOffset{ 135424, 135696, 3024, "roots0510_geo" },
-            TextureOffset{ 135696, 135956, 3025, "roots0511_geo" },
-            TextureOffset{ 135956, 136240, 3026, "roots0512_geo" },
-            TextureOffset{ 136240, 136560, 3027, "roots0513_geo" },
-            TextureOffset{ 136560, 136844, 3028, "roots0514_geo" },
-            TextureOffset{ 136844, 137104, 3029, "roots0515_geo" },
-            TextureOffset{ 137104, 137316, 3030, "roots0516_geo" },
-            TextureOffset{ 137316, 137456, 3031, "roots0517_geo" },
-            TextureOffset{ 137456, 137776, 3032, "roots0518_geo" },
-            TextureOffset{ 137776, 138024, 3033, "roots0519_geo" },
-            TextureOffset{ 138024, 138284, 3034, "roots0520_geo" },
-            TextureOffset{ 138284, 138484, 3035, "roots0521_geo" },
-            TextureOffset{ 138484, 138732, 3036, "roots0522_geo" },
-            TextureOffset{ 138732, 138992, 3037, "roots0523_geo" },
-            TextureOffset{ 138992, 139240, 3038, "roots0524_geo" },
-            TextureOffset{ 139240, 139548, 3039, "roots0525_geo" },
-            TextureOffset{ 139548, 139832, 3040, "roots0526_geo" },
-            TextureOffset{ 139832, 140224, 3041, "roots0527_geo" },
-            TextureOffset{ 140224, 140532, 3042, "roots0528_geo" },
-            TextureOffset{ 140532, 140864, 3043, "roots0529_geo" },
-            TextureOffset{ 140864, 141196, 3044, "roots0530_geo" },
-            TextureOffset{ 141196, 141456, 3045, "roots0531_geo" },
-            TextureOffset{ 141456, 141764, 3046, "roots0532_geo" },
-            TextureOffset{ 141764, 142024, 3047, "roots0533_geo" },
-            TextureOffset{ 142024, 142392, 3048, "roots0534_geo" },
-            TextureOffset{ 142392, 142700, 3049, "roots0535_geo" },
-            TextureOffset{ 142700, 143008, 3050, "roots0536_geo" },
-            TextureOffset{ 143008, 143280, 3051, "roots0537_geo" },
-            TextureOffset{ 143280, 143492, 3052, "roots0538_geo" },
-            TextureOffset{ 143492, 143800, 3053, "roots0539_geo" },
-            TextureOffset{ 143800, 143976, 3054, "roots0540_geo" },
-            TextureOffset{ 143976, 144176, 3055, "roots0541_geo" },
-            TextureOffset{ 144176, 144316, 3056, "roots0542_geo" },
-            TextureOffset{ 144316, 144504, 3057, "roots0543_geo" },
-            TextureOffset{ 144504, 144668, 3058, "roots0544_geo" },
-            TextureOffset{ 144668, 144892, 3059, "roots0545_geo" },
-            TextureOffset{ 144892, 145092, 3060, "roots0546_geo" },
-            TextureOffset{ 145092, 145280, 3061, "roots0547_geo" },
-            TextureOffset{ 145280, 145468, 3062, "roots0548_geo" },
-            TextureOffset{ 145468, 145716, 3063, "roots0549_geo" },
-            TextureOffset{ 145716, 145952, 3064, "roots0550_geo" },
-            TextureOffset{ 145952, 146212, 3065, "roots0551_geo" },
-            TextureOffset{ 146212, 146436, 3066, "roots0552_geo" },
-            TextureOffset{ 146436, 146696, 3067, "roots0553_geo" },
-            TextureOffset{ 146696, 146908, 3068, "roots0554_geo" },
-            TextureOffset{ 146908, 147144, 3069, "roots0555_geo" },
-            TextureOffset{ 147144, 147416, 3070, "roots0556_geo" },
-            TextureOffset{ 147416, 147640, 3071, "roots0557_geo" },
-            TextureOffset{ 147640, 147912, 3072, "roots0558_geo" },
-            TextureOffset{ 147912, 148160, 3073, "roots0559_geo" },
-            TextureOffset{ 148160, 148384, 3074, "roots0560_geo" },
-            TextureOffset{ 148384, 148608, 3075, "roots0561_geo" },
-            TextureOffset{ 148608, 148856, 3076, "roots0562_geo" },
-            TextureOffset{ 148856, 149056, 3077, "roots0563_geo" },
-            TextureOffset{ 149056, 149280, 3078, "roots0564_geo" },
-            TextureOffset{ 149280, 149528, 3079, "roots0565_geo" },
-            TextureOffset{ 149528, 149764, 3080, "roots0566_geo" },
-            TextureOffset{ 149764, 150000, 3081, "roots0567_geo" },
-            TextureOffset{ 150000, 150212, 3082, "roots0568_geo" },
-            TextureOffset{ 150212, 150400, 3083, "roots0569_geo" },
-            TextureOffset{ 150400, 150648, 3084, "roots0570_geo" },
-            TextureOffset{ 150648, 150872, 3085, "roots0571_geo" },
-            TextureOffset{ 150872, 151096, 3086, "roots0572_geo" },
-            TextureOffset{ 151096, 151344, 3087, "roots0573_geo" },
-            TextureOffset{ 151344, 151568, 3088, "roots0574_geo" },
-            TextureOffset{ 151568, 151816, 3089, "roots0575_geo" },
-            TextureOffset{ 151816, 152052, 3090, "roots0576_geo" },
-            TextureOffset{ 152052, 152288, 3091, "roots0577_geo" },
-            TextureOffset{ 152288, 152512, 3092, "roots0578_geo" },
-            TextureOffset{ 152512, 152748, 3093, "roots0579_geo" },
-            TextureOffset{ 152748, 152972, 3094, "roots0580_geo" },
-            TextureOffset{ 152972, 153208, 3095, "roots0581_geo" },
-            TextureOffset{ 153208, 153420, 3096, "roots0582_geo" },
-            TextureOffset{ 153420, 153656, 3097, "roots0583_geo" },
-            TextureOffset{ 153656, 153916, 3098, "roots0584_geo" },
-            TextureOffset{ 153916, 154152, 3099, "roots0585_geo" },
-            TextureOffset{ 154152, 154376, 3100, "roots0586_geo" },
-            TextureOffset{ 154376, 154672, 3101, "roots0587_geo" },
-            TextureOffset{ 154672, 155004, 3102, "roots0588_geo" },
-            TextureOffset{ 155004, 155228, 3103, "roots0589_geo" },
-            TextureOffset{ 155228, 155488, 3104, "roots0590_geo" },
-            TextureOffset{ 155488, 155748, 3105, "roots0591_geo" },
-            TextureOffset{ 155748, 155984, 3106, "roots0592_geo" },
-            TextureOffset{ 155984, 156232, 3107, "roots0593_geo" },
-            TextureOffset{ 156232, 156468, 3108, "roots0594_geo" },
-            TextureOffset{ 156468, 156704, 3109, "roots0595_geo" },
-            TextureOffset{ 156704, 156964, 3110, "roots0596_geo" },
-            TextureOffset{ 156964, 157224, 3111, "roots0597_geo" },
-            TextureOffset{ 157224, 157436, 3112, "roots0598_geo" },
-            TextureOffset{ 157436, 157684, 3113, "roots0599_geo" },
-            TextureOffset{ 157684, 157944, 3114, "roots0600_geo" },
-            TextureOffset{ 157944, 158240, 3115, "roots0601_geo" },
-            TextureOffset{ 158240, 158512, 3116, "roots0602_geo" },
-            TextureOffset{ 158512, 158796, 3117, "roots0603_geo" },
-            TextureOffset{ 158796, 159068, 3118, "roots0604_geo" },
-            TextureOffset{ 159068, 159316, 3119, "roots0605_geo" },
-            TextureOffset{ 159316, 159564, 3120, "roots0606_geo" },
-            TextureOffset{ 159564, 159800, 3121, "roots0607_geo" },
-            TextureOffset{ 159800, 160084, 3122, "roots0608_geo" },
-            TextureOffset{ 160084, 160344, 3123, "roots0609_geo" },
-            TextureOffset{ 160344, 160604, 3124, "roots0610_geo" },
-            TextureOffset{ 160604, 160864, 3125, "roots0611_geo" },
-            TextureOffset{ 160864, 161112, 3126, "roots0612_geo" },
-            TextureOffset{ 161112, 161408, 3127, "roots0613_geo" },
-            TextureOffset{ 161408, 161692, 3128, "roots0614_geo" },
-            TextureOffset{ 161692, 161988, 3129, "roots0615_geo" },
-            TextureOffset{ 161988, 162272, 3130, "roots0616_geo" },
-            TextureOffset{ 162272, 162532, 3131, "roots0617_geo" },
-            TextureOffset{ 162532, 162816, 3132, "roots0618_geo" },
-            TextureOffset{ 162816, 163088, 3133, "roots0619_geo" },
-            TextureOffset{ 163088, 163384, 3134, "roots0620_geo" },
-            TextureOffset{ 163384, 163716, 3135, "roots0621_geo" },
-            TextureOffset{ 163716, 163964, 3136, "roots0622_geo" },
-            TextureOffset{ 163964, 164212, 3137, "roots0623_geo" },
-            TextureOffset{ 164212, 164448, 3138, "roots0624_geo" },
-            TextureOffset{ 164448, 164696, 3139, "roots0625_geo" },
-            TextureOffset{ 164696, 164944, 3140, "roots0626_geo" },
-            TextureOffset{ 164944, 165252, 3141, "roots0627_geo" },
-            TextureOffset{ 165252, 165500, 3142, "roots0628_geo" },
-            TextureOffset{ 165500, 165724, 3143, "roots0629_geo" },
-            TextureOffset{ 165724, 165960, 3144, "roots0630_geo" },
-            TextureOffset{ 165960, 166220, 3145, "roots0631_geo" },
-            TextureOffset{ 166220, 166504, 3146, "roots0632_geo" },
-            TextureOffset{ 166504, 166788, 3147, "roots0633_geo" },
-            TextureOffset{ 166788, 167060, 3148, "roots0634_geo" },
-            TextureOffset{ 167060, 167296, 3149, "roots0635_geo" },
-            TextureOffset{ 167296, 167544, 3150, "roots0636_geo" },
-            TextureOffset{ 167544, 167792, 3151, "roots0637_geo" },
-            TextureOffset{ 167792, 168040, 3152, "roots0638_geo" },
-            TextureOffset{ 168040, 168300, 3153, "roots0639_geo" },
-            TextureOffset{ 168300, 168572, 3154, "roots0640_geo" },
-            TextureOffset{ 168572, 168832, 3155, "roots0641_geo" },
-            TextureOffset{ 168832, 169092, 3156, "roots0642_geo" },
-            TextureOffset{ 169092, 169352, 3157, "roots0643_geo" },
-            TextureOffset{ 169352, 169624, 3158, "roots0644_geo" },
-            TextureOffset{ 169624, 169896, 3159, "roots0645_geo" },
-            TextureOffset{ 169896, 170132, 3160, "roots0646_geo" },
-            TextureOffset{ 170132, 170416, 3161, "roots0647_geo" },
-            TextureOffset{ 170416, 170688, 3162, "roots0648_geo" },
-            TextureOffset{ 170688, 170900, 3163, "roots0649_geo" },
-            TextureOffset{ 170900, 171112, 3164, "roots0650_geo" },
-            TextureOffset{ 171112, 171312, 3165, "roots0651_geo" },
-            TextureOffset{ 171312, 171500, 3166, "roots0652_geo" },
-            TextureOffset{ 171500, 171688, 3167, "roots0653_geo" },
-            TextureOffset{ 171688, 171876, 3168, "roots0654_geo" },
-            TextureOffset{ 171876, 172016, 3169, "roots0655_geo" },
-            TextureOffset{ 172016, 172180, 3170, "roots0656_geo" },
-            TextureOffset{ 172180, 172344, 3171, "roots0657_geo" },
-            TextureOffset{ 172344, 172532, 3172, "roots0658_geo" },
-            TextureOffset{ 172532, 172720, 3173, "roots0659_geo" },
-            TextureOffset{ 172720, 172920, 3174, "roots0660_geo" },
-            TextureOffset{ 172920, 173168, 3175, "roots0661_geo" },
-            TextureOffset{ 173168, 173344, 3176, "roots0662_geo" },
-            TextureOffset{ 173344, 173520, 3177, "roots0663_geo" },
-            TextureOffset{ 173520, 173696, 3178, "roots0664_geo" },
-            TextureOffset{ 173696, 174004, 3179, "roots0665_geo" },
-            TextureOffset{ 174004, 174288, 3180, "roots0666_geo" },
-            TextureOffset{ 174288, 174620, 3181, "roots0667_geo" },
-            TextureOffset{ 174620, 174928, 3182, "roots0668_geo" },
-            TextureOffset{ 174928, 175260, 3183, "roots0669_geo" },
-            TextureOffset{ 175260, 175652, 3184, "roots0670_geo" },
-            TextureOffset{ 175652, 175948, 3185, "roots0671_geo" },
-            TextureOffset{ 175948, 176244, 3186, "roots0672_geo" },
-            TextureOffset{ 176244, 176552, 3187, "roots0673_geo" },
-            TextureOffset{ 176552, 176824, 3188, "roots0674_geo" },
-            TextureOffset{ 176824, 177132, 3189, "roots0675_geo" },
-            TextureOffset{ 177132, 177392, 3190, "roots0676_geo" },
-            TextureOffset{ 177392, 177676, 3191, "roots0677_geo" },
-            TextureOffset{ 177676, 178008, 3192, "roots0678_geo" },
-            TextureOffset{ 178008, 178340, 3193, "roots0679_geo" },
-            TextureOffset{ 178340, 178648, 3194, "roots0680_geo" },
-            TextureOffset{ 178648, 178956, 3195, "roots0681_geo" },
-            TextureOffset{ 178956, 179240, 3196, "roots0682_geo" },
-            TextureOffset{ 179240, 179524, 3197, "roots0683_geo" },
-            TextureOffset{ 179524, 179820, 3198, "roots0684_geo" },
-            TextureOffset{ 179820, 180152, 3199, "roots0685_geo" },
-            TextureOffset{ 180152, 180460, 3200, "roots0686_geo" },
-            TextureOffset{ 180460, 180768, 3201, "roots0687_geo" },
-            TextureOffset{ 180768, 181016, 3202, "roots0688_geo" },
-            TextureOffset{ 181016, 181240, 3203, "roots0689_geo" },
-            TextureOffset{ 181240, 181536, 3204, "roots0690_geo" },
-            TextureOffset{ 181536, 181844, 3205, "roots0691_geo" },
-            TextureOffset{ 181844, 182140, 3206, "roots0692_geo" },
-            TextureOffset{ 182140, 182436, 3207, "roots0693_geo" },
-            TextureOffset{ 182436, 182768, 3208, "roots0694_geo" },
-            TextureOffset{ 182768, 183064, 3209, "roots0695_geo" },
-            TextureOffset{ 183064, 183324, 3210, "roots0696_geo" },
-            TextureOffset{ 183324, 183632, 3211, "roots0697_geo" },
-            TextureOffset{ 183632, 183928, 3212, "roots0698_geo" },
-            TextureOffset{ 183928, 184224, 3213, "roots0699_geo" },
-            TextureOffset{ 184224, 184532, 3214, "roots0700_geo" },
-            TextureOffset{ 184532, 184840, 3215, "roots0701_geo" },
-            TextureOffset{ 184840, 185124, 3216, "roots0702_geo" },
-            TextureOffset{ 185124, 185384, 3217, "roots0703_geo" },
-            TextureOffset{ 185384, 185644, 3218, "roots0704_geo" },
-            TextureOffset{ 185644, 185928, 3219, "roots0705_geo" },
-            TextureOffset{ 185928, 186224, 3220, "roots0706_geo" },
-            TextureOffset{ 186224, 186496, 3221, "roots0707_geo" },
-            TextureOffset{ 186496, 186804, 3222, "roots0708_geo" },
-            TextureOffset{ 186804, 187028, 3223, "roots0709_geo" },
-            TextureOffset{ 187028, 187276, 3224, "roots0710_geo" },
-            TextureOffset{ 187276, 187512, 3225, "roots0711_geo" },
-            TextureOffset{ 187512, 187772, 3226, "roots0712_geo" },
-            TextureOffset{ 187772, 188044, 3227, "roots0713_geo" },
-            TextureOffset{ 188044, 188316, 3228, "roots0714_geo" },
-            TextureOffset{ 188316, 188576, 3229, "roots0715_geo" },
-            TextureOffset{ 188576, 188860, 3230, "roots0716_geo" },
-            TextureOffset{ 188860, 189180, 3231, "roots0717_geo" },
-            TextureOffset{ 189180, 189464, 3232, "roots0718_geo" },
-            TextureOffset{ 189464, 189724, 3233, "roots0719_geo" },
-            TextureOffset{ 189724, 189936, 3234, "roots0720_geo" },
-            TextureOffset{ 189936, 190076, 3235, "roots0721_geo" },
-            TextureOffset{ 190076, 190396, 3236, "roots0722_geo" },
-            TextureOffset{ 190396, 190644, 3237, "roots0723_geo" },
-            TextureOffset{ 190644, 190904, 3238, "roots0724_geo" },
-            TextureOffset{ 190904, 191104, 3239, "roots0725_geo" },
-            TextureOffset{ 191104, 191352, 3240, "roots0726_geo" },
-            TextureOffset{ 191352, 191612, 3241, "roots0727_geo" },
-            TextureOffset{ 191612, 191860, 3242, "roots0728_geo" },
-            TextureOffset{ 191860, 192168, 3243, "roots0729_geo" },
-            TextureOffset{ 192168, 192452, 3244, "roots0730_geo" },
-            TextureOffset{ 192452, 192844, 3245, "roots0731_geo" },
-            TextureOffset{ 192844, 193152, 3246, "roots0732_geo" },
-            TextureOffset{ 193152, 193484, 3247, "roots0733_geo" },
-            TextureOffset{ 193484, 193816, 3248, "roots0734_geo" },
-            TextureOffset{ 193816, 194076, 3249, "roots0735_geo" },
-            TextureOffset{ 194076, 194384, 3250, "roots0736_geo" },
-            TextureOffset{ 194384, 194644, 3251, "roots0737_geo" },
-            TextureOffset{ 194644, 195012, 3252, "roots0738_geo" },
-            TextureOffset{ 195012, 195320, 3253, "roots0739_geo" },
-            TextureOffset{ 195320, 195628, 3254, "roots0740_geo" },
-            TextureOffset{ 195628, 195900, 3255, "roots0741_geo" },
-            TextureOffset{ 195900, 196112, 3256, "roots0742_geo" },
-            TextureOffset{ 196112, 196420, 3257, "roots0743_geo" },
-            TextureOffset{ 196420, 196596, 3258, "roots0744_geo" },
-            TextureOffset{ 196596, 196796, 3259, "roots0745_geo" },
-            TextureOffset{ 196796, 196936, 3260, "roots0746_geo" },
-            TextureOffset{ 196936, 197124, 3261, "roots0747_geo" },
-            TextureOffset{ 197124, 197288, 3262, "roots0748_geo" },
-            TextureOffset{ 197288, 197512, 3263, "roots0749_geo" },
-            TextureOffset{ 197512, 197712, 3264, "roots0750_geo" },
-            TextureOffset{ 197712, 197900, 3265, "roots0751_geo" },
-            TextureOffset{ 197900, 198088, 3266, "roots0752_geo" },
-        },
-        {
-            TextureOffset{ 0, 9274, 3281, "topsoil0001_geo" },
-        },
-        {
-            TextureOffset{ 0, 4492, 2470, "dirt0001_geo" },
-            TextureOffset{ 4492, 5716, 2471, "dirt0002_geo" },
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            TextureOffset{ 0, 486526, 3285, "trunk0001_geo" },
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            TextureOffset{ 0, 6422, 3283, "dune0001_geo" },
-            TextureOffset{ 6422, 38642, 3284, "dune0002_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 12344, 3383, "trunk_base_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 12, 3300, "archiveflowerbud0013_geo" },
-            TextureOffset{ 12, 24, 3301, "archiveflowerbud0014_geo" },
-            TextureOffset{ 24, 36, 3302, "archiveflowerbud0015_geo" },
-            TextureOffset{ 36, 48, 3303, "archiveflowerbud0016_geo" },
-            TextureOffset{ 48, 60, 3304, "archiveflowerbud0017_geo" },
-            TextureOffset{ 60, 72, 3305, "archiveflowerbud0018_geo" },
-            TextureOffset{ 72, 84, 3306, "archiveflowerbud0019_geo" },
-            TextureOffset{ 84, 96, 3307, "archiveflowerbud0020_geo" },
-            TextureOffset{ 96, 108, 3308, "archiveflowerbud0021_geo" },
-            TextureOffset{ 108, 120, 3309, "archiveflowerbud0022_geo" },
-            TextureOffset{ 120, 132, 3310, "archiveflowerbud0023_geo" },
-            TextureOffset{ 132, 144, 3311, "archiveflowerbud0024_geo" },
-            TextureOffset{ 144, 156, 3312, "archiveflowerbud0025_geo" },
-            TextureOffset{ 156, 168, 3313, "archiveflowerbud0026_geo" },
-            TextureOffset{ 204, 216, 3288, "archiveflowerbud0001_geo" },
-            TextureOffset{ 216, 228, 3289, "archiveflowerbud0002_geo" },
-            TextureOffset{ 228, 240, 3290, "archiveflowerbud0003_geo" },
-            TextureOffset{ 240, 252, 3291, "archiveflowerbud0004_geo" },
-            TextureOffset{ 252, 264, 3292, "archiveflowerbud0005_geo" },
-            TextureOffset{ 264, 276, 3293, "archiveflowerbud0006_geo" },
-            TextureOffset{ 276, 288, 3294, "archiveflowerbud0007_geo" },
-            TextureOffset{ 288, 300, 3295, "archiveflowerbud0008_geo" },
-            TextureOffset{ 300, 312, 3296, "archiveflowerbud0009_geo" },
-            TextureOffset{ 312, 324, 3297, "archiveflowerbud0010_geo" },
-            TextureOffset{ 324, 336, 3298, "archiveflowerbud0011_geo" },
-            TextureOffset{ 336, 348, 3299, "archiveflowerbud0012_geo" },
-            TextureOffset{ 348, 360, 3314, "archiveflowerbud0027_geo" },
-            TextureOffset{ 360, 372, 3315, "archiveflowerbud0028_geo" },
-            TextureOffset{ 372, 384, 3316, "archiveflowerbud0029_geo" },
-            TextureOffset{ 384, 396, 3317, "archiveflowerbud0030_geo" },
-            TextureOffset{ 396, 408, 3318, "archiveflowerbud0031_geo" },
-            TextureOffset{ 408, 420, 3319, "archiveflowerbud0032_geo" },
-            TextureOffset{ 420, 432, 3320, "archiveflowerbud0033_geo" },
-            TextureOffset{ 432, 444, 3321, "archiveflowerbud0034_geo" },
-            TextureOffset{ 444, 456, 3322, "archiveflowerbud0035_geo" },
-            TextureOffset{ 456, 468, 3323, "archiveflowerbud0036_geo" },
-            TextureOffset{ 468, 480, 3324, "archiveflowerbud0037_geo" },
-            TextureOffset{ 480, 492, 3325, "archiveflowerbud0038_geo" },
-            TextureOffset{ 492, 504, 3326, "archiveflowerbud0039_geo" },
-            TextureOffset{ 504, 516, 3327, "archiveflowerbud0040_geo" },
-            TextureOffset{ 516, 528, 3328, "archiveflowerbud0041_geo" },
-            TextureOffset{ 528, 540, 3329, "archiveflowerbud0042_geo" },
-            TextureOffset{ 540, 552, 3330, "archiveflowerbud0043_geo" },
-        },
-        {
-            TextureOffset{ 0, 540, 3379, "archivegardenia0006_geo" },
-            TextureOffset{ 540, 1080, 3380, "archivegardenia0007_geo" },
-            TextureOffset{ 1080, 1556, 3376, "archivegardenia0003_geo" },
-            TextureOffset{ 1556, 2032, 3374, "archivegardenia0001_geo" },
-            TextureOffset{ 2032, 2572, 3377, "archivegardenia0004_geo" },
-            TextureOffset{ 2572, 3112, 3382, "archivegardenia0009_geo" },
-            TextureOffset{ 3112, 3588, 3375, "archivegardenia0002_geo" },
-            TextureOffset{ 3588, 4128, 3381, "archivegardenia0008_geo" },
-            TextureOffset{ 4128, 4668, 3378, "archivegardenia0005_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 2112, 3385, "archiveHibiscusAnthers0001_geo" },
-            TextureOffset{ 2112, 2184, 3397, "archiveHibiscusPetal0001_geo" },
-            TextureOffset{ 2184, 2256, 3398, "archiveHibiscusPetal0002_geo" },
-            TextureOffset{ 2256, 2328, 3399, "archiveHibiscusPetal0003_geo" },
-            TextureOffset{ 2328, 2400, 3400, "archiveHibiscusPetal0004_geo" },
-            TextureOffset{ 2400, 2472, 3401, "archiveHibiscusPetal0005_geo" },
-            TextureOffset{ 2472, 2940, 3442, "archiveHibiscusSepals0001_geo" },
-            TextureOffset{ 2940, 3528, 3443, "archiveHibiscusSepals0002_geo" },
-            TextureOffset{ 3528, 3828, 3460, "archiveHibiscusStigma0001_geo" },
-            TextureOffset{ 3828, 3888, 3469, "archiveHibiscusStyle0001_geo" },
-        },
-        {
-            TextureOffset{ 0, 120, 3394, "archiveHibiscusLeaf0001_geo" },
-            TextureOffset{ 120, 240, 3395, "archiveHibiscusLeaf0002_geo" },
-            TextureOffset{ 240, 360, 3396, "archiveHibiscusLeaf0003_geo" },
-        },
-        {
-            TextureOffset{ 0, 7398, 3478, "trunk_base_geo" },
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            TextureOffset{ 0, 8028, 3484, "smalltrunk0001_geo" },
-            TextureOffset{ 8028, 8440, 3485, "talltrunk0001_geo" },
-            TextureOffset{ 8440, 8968, 3486, "talltrunk0002_geo" },
-            TextureOffset{ 8968, 17584, 3487, "talltrunk0003_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 92, 3482, "archive_kava0001_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 2206, 3488, "lavarocks0004_geo" },
-            TextureOffset{ 2206, 8750, 3489, "lavarocks0005_geo" },
-            TextureOffset{ 8750, 15294, 3490, "lavarocks0006_geo" },
-            TextureOffset{ 15294, 33664, 3491, "rockfacebg0001_geo" },
-            TextureOffset{ 33664, 56432, 3492, "rockfacemain0001_geo" },
-            TextureOffset{ 56432, 56672, 3493, "rocksm0001_geo" },
-            TextureOffset{ 56672, 56912, 3494, "rocksm0002_geo" },
-            TextureOffset{ 56912, 57152, 3495, "rocksm0003_geo" },
-            TextureOffset{ 57152, 57392, 3496, "rocksm0004_geo" },
-            TextureOffset{ 57392, 57632, 3497, "rocksm0005_geo" },
-        },
-        {},
-        {},
-        {},
-        {},
-        {
-            TextureOffset{ 0, 67006, 3508, "mountain_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 1088, 3539, "frondspine0001_geo" },
-            TextureOffset{ 1088, 2176, 3540, "frondspine0002_geo" },
-            TextureOffset{ 2176, 3264, 3541, "frondspine0003_geo" },
-            TextureOffset{ 3264, 4352, 3542, "frondspine0004_geo" },
-            TextureOffset{ 4352, 5440, 3543, "frondspine0005_geo" },
-            TextureOffset{ 5440, 6528, 3544, "frondspine0006_geo" },
-            TextureOffset{ 6528, 7616, 3545, "frondspine0007_geo" },
-            TextureOffset{ 7616, 8704, 3546, "frondspine0008_geo" },
-            TextureOffset{ 8704, 9792, 3547, "frondspine0009_geo" },
-            TextureOffset{ 9792, 10880, 3548, "frondspine0010_geo" },
-            TextureOffset{ 10880, 11968, 3549, "frondspine0011_geo" },
-            TextureOffset{ 11968, 13056, 3550, "frondspine0012_geo" },
-            TextureOffset{ 13056, 14144, 3551, "frondspine0013_geo" },
-            TextureOffset{ 14144, 15232, 3552, "frondspine0014_geo" },
-            TextureOffset{ 15232, 16320, 3553, "frondspine0015_geo" },
-            TextureOffset{ 16320, 17408, 3554, "frondspine0016_geo" },
-            TextureOffset{ 17408, 18496, 3555, "frondspine0017_geo" },
-            TextureOffset{ 18496, 19584, 3556, "frondspine0018_geo" },
-            TextureOffset{ 19584, 20672, 3557, "frondspine0019_geo" },
-            TextureOffset{ 20672, 21760, 3558, "frondspine0020_geo" },
-            TextureOffset{ 21760, 22848, 3559, "frondspine0021_geo" },
-            TextureOffset{ 22848, 23936, 3560, "frondspine0022_geo" },
-            TextureOffset{ 23936, 25024, 3561, "frondspine0023_geo" },
-            TextureOffset{ 25024, 26112, 3562, "frondspine0024_geo" },
-            TextureOffset{ 26112, 27200, 3563, "frondspine0025_geo" },
-            TextureOffset{ 27200, 28288, 3564, "frondspine0026_geo" },
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            TextureOffset{ 0, 62904, 3509, "mountainb0001_geo" },
-            TextureOffset{ 62904, 82446, 3510, "mountainb0002_geo" },
-            TextureOffset{ 82446, 101952, 3511, "mountainb0003_geo" },
-            TextureOffset{ 101952, 121430, 3512, "mountainb0004_geo" },
-            TextureOffset{ 121430, 137620, 3513, "mountainb0005_geo" },
-            TextureOffset{ 137620, 144020, 3514, "mountbring_geo" },
-        },
-        {
-            TextureOffset{ 0, 56, 3534, "deadstrand0001_geo" },
-            TextureOffset{ 56, 154, 3535, "deadstrand0002_geo" },
-            TextureOffset{ 154, 312, 3536, "deadstrand0003_geo" },
-            TextureOffset{ 312, 606, 3537, "deadstrand0004_geo" },
-            TextureOffset{ 606, 748, 3538, "deadstrand0005_geo" },
-            TextureOffset{ 748, 68076, 3565, "roots_geo" },
-            TextureOffset{ 68076, 69510, 3566, "sheatha0001_geo" },
-            TextureOffset{ 69510, 70944, 3567, "sheatha0002_geo" },
-            TextureOffset{ 70944, 72378, 3568, "sheatha0003_geo" },
-            TextureOffset{ 72378, 73662, 3569, "sheathb0001_geo" },
-            TextureOffset{ 73662, 74946, 3570, "sheathb0002_geo" },
-            TextureOffset{ 74946, 76230, 3571, "sheathb0003_geo" },
-            TextureOffset{ 76230, 77508, 3572, "sheathc0001_geo" },
-            TextureOffset{ 77508, 78786, 3573, "sheathc0002_geo" },
-            TextureOffset{ 78786, 80064, 3574, "sheathc0004_geo" },
-            TextureOffset{ 80064, 81342, 3575, "sheathc0005_geo" },
-            TextureOffset{ 81342, 82392, 3576, "sheathd0001_geo" },
-            TextureOffset{ 82392, 83442, 3577, "sheathd0002_geo" },
-            TextureOffset{ 83442, 84492, 3578, "sheathd0003_geo" },
-            TextureOffset{ 84492, 85684, 3579, "sheathe0001_geo" },
-            TextureOffset{ 85684, 86876, 3580, "sheathe0002_geo" },
-            TextureOffset{ 86876, 88068, 3581, "sheathe0004_geo" },
-            TextureOffset{ 88068, 89260, 3582, "sheathe0005_geo" },
-            TextureOffset{ 89260, 90522, 3583, "sheathf0001_geo" },
-            TextureOffset{ 90522, 91784, 3584, "sheathf0002_geo" },
-            TextureOffset{ 91784, 93046, 3585, "sheathf0004_geo" },
-            TextureOffset{ 93046, 94308, 3586, "sheathf0005_geo" },
-            TextureOffset{ 94308, 95456, 3587, "sheathg0001_geo" },
-            TextureOffset{ 95456, 96604, 3588, "sheathg0002_geo" },
-            TextureOffset{ 96604, 98018, 3589, "sheathh0001_geo" },
-            TextureOffset{ 98018, 99432, 3590, "sheathh0002_geo" },
-            TextureOffset{ 99432, 100604, 3591, "sheathi0001_geo" },
-            TextureOffset{ 100604, 102396, 3592, "skirt_geo" },
-        },
-        {
-            TextureOffset{ 0, 1636, 3593, "trunk0001_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 352, 3521, "archive_naupakaleaf0001_geo" },
-            TextureOffset{ 352, 504, 3522, "archive_naupakaleaf0002_geo" },
-            TextureOffset{ 504, 656, 3523, "archive_naupakaleaf0003_geo" },
-            TextureOffset{ 656, 1008, 3525, "archive_naupakaleaf0005_geo" },
-            TextureOffset{ 1008, 1360, 3527, "archive_naupakaleaf0007_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 306400, 3530, "rootball0001_geo" },
-        },
-        {
-            TextureOffset{ 0, 2638, 3531, "trunk0001_geo" },
-        },
-        {
-            TextureOffset{ 0, 1088, 3539, "frondspine0001_geo" },
-            TextureOffset{ 1088, 2176, 3540, "frondspine0002_geo" },
-            TextureOffset{ 2176, 3264, 3541, "frondspine0003_geo" },
-            TextureOffset{ 3264, 4352, 3542, "frondspine0004_geo" },
-            TextureOffset{ 4352, 5440, 3543, "frondspine0005_geo" },
-            TextureOffset{ 5440, 6528, 3544, "frondspine0006_geo" },
-            TextureOffset{ 6528, 7616, 3545, "frondspine0007_geo" },
-            TextureOffset{ 7616, 8704, 3546, "frondspine0008_geo" },
-            TextureOffset{ 8704, 9792, 3547, "frondspine0009_geo" },
-            TextureOffset{ 9792, 10880, 3548, "frondspine0010_geo" },
-            TextureOffset{ 10880, 11968, 3549, "frondspine0011_geo" },
-            TextureOffset{ 11968, 13056, 3550, "frondspine0012_geo" },
-            TextureOffset{ 13056, 14144, 3551, "frondspine0013_geo" },
-            TextureOffset{ 14144, 15232, 3552, "frondspine0014_geo" },
-            TextureOffset{ 15232, 16320, 3553, "frondspine0015_geo" },
-            TextureOffset{ 16320, 17408, 3554, "frondspine0016_geo" },
-            TextureOffset{ 17408, 18496, 3555, "frondspine0017_geo" },
-            TextureOffset{ 18496, 19584, 3556, "frondspine0018_geo" },
-            TextureOffset{ 19584, 20672, 3557, "frondspine0019_geo" },
-            TextureOffset{ 20672, 21760, 3558, "frondspine0020_geo" },
-            TextureOffset{ 21760, 22848, 3559, "frondspine0021_geo" },
-            TextureOffset{ 22848, 23936, 3560, "frondspine0022_geo" },
-            TextureOffset{ 23936, 25024, 3561, "frondspine0023_geo" },
-            TextureOffset{ 25024, 26112, 3562, "frondspine0024_geo" },
-            TextureOffset{ 26112, 27200, 3563, "frondspine0025_geo" },
-            TextureOffset{ 27200, 28288, 3564, "frondspine0026_geo" },
-        },
-        {},
-        {
-            TextureOffset{ 0, 56, 3534, "deadstrand0001_geo" },
-            TextureOffset{ 56, 154, 3535, "deadstrand0002_geo" },
-            TextureOffset{ 154, 312, 3536, "deadstrand0003_geo" },
-            TextureOffset{ 312, 606, 3537, "deadstrand0004_geo" },
-            TextureOffset{ 606, 748, 3538, "deadstrand0005_geo" },
-            TextureOffset{ 748, 68076, 3565, "roots_geo" },
-            TextureOffset{ 68076, 69510, 3566, "sheatha0001_geo" },
-            TextureOffset{ 69510, 70944, 3567, "sheatha0002_geo" },
-            TextureOffset{ 70944, 72378, 3568, "sheatha0003_geo" },
-            TextureOffset{ 72378, 73662, 3569, "sheathb0001_geo" },
-            TextureOffset{ 73662, 74946, 3570, "sheathb0002_geo" },
-            TextureOffset{ 74946, 76230, 3571, "sheathb0003_geo" },
-            TextureOffset{ 76230, 77508, 3572, "sheathc0001_geo" },
-            TextureOffset{ 77508, 78786, 3573, "sheathc0002_geo" },
-            TextureOffset{ 78786, 80064, 3574, "sheathc0004_geo" },
-            TextureOffset{ 80064, 81342, 3575, "sheathc0005_geo" },
-            TextureOffset{ 81342, 82392, 3576, "sheathd0001_geo" },
-            TextureOffset{ 82392, 83442, 3577, "sheathd0002_geo" },
-            TextureOffset{ 83442, 84492, 3578, "sheathd0003_geo" },
-            TextureOffset{ 84492, 85684, 3579, "sheathe0001_geo" },
-            TextureOffset{ 85684, 86876, 3580, "sheathe0002_geo" },
-            TextureOffset{ 86876, 88068, 3581, "sheathe0004_geo" },
-            TextureOffset{ 88068, 89260, 3582, "sheathe0005_geo" },
-            TextureOffset{ 89260, 90522, 3583, "sheathf0001_geo" },
-            TextureOffset{ 90522, 91784, 3584, "sheathf0002_geo" },
-            TextureOffset{ 91784, 93046, 3585, "sheathf0004_geo" },
-            TextureOffset{ 93046, 94308, 3586, "sheathf0005_geo" },
-            TextureOffset{ 94308, 95456, 3587, "sheathg0001_geo" },
-            TextureOffset{ 95456, 96604, 3588, "sheathg0002_geo" },
-            TextureOffset{ 96604, 98018, 3589, "sheathh0001_geo" },
-            TextureOffset{ 98018, 99432, 3590, "sheathh0002_geo" },
-            TextureOffset{ 99432, 100604, 3591, "sheathi0001_geo" },
-            TextureOffset{ 100604, 102396, 3592, "skirt_geo" },
-            TextureOffset{ 102396, 104032, 3593, "trunk0001_geo" },
-        },
-        {},
-        {},
-        {
-            TextureOffset{ 0, 296, 3630, "root_temp0001_geo" },
-            TextureOffset{ 296, 568, 3631, "root_temp0002_geo" },
-            TextureOffset{ 568, 672, 3632, "root_temp0003_geo" },
-            TextureOffset{ 672, 776, 3633, "root_temp0004_geo" },
-            TextureOffset{ 776, 892, 3634, "root_temp0005_geo" },
-            TextureOffset{ 892, 1032, 3635, "root_temp0006_geo" },
-            TextureOffset{ 1032, 1172, 3636, "root_temp0007_geo" },
-            TextureOffset{ 1172, 1312, 3637, "root_temp0008_geo" },
-            TextureOffset{ 1312, 1452, 3638, "root_temp0009_geo" },
-            TextureOffset{ 1452, 1592, 3639, "root_temp0010_geo" },
-            TextureOffset{ 1592, 1732, 3640, "root_temp0011_geo" },
-            TextureOffset{ 1732, 1872, 3641, "root_temp0012_geo" },
-            TextureOffset{ 1872, 2012, 3642, "root_temp0013_geo" },
-            TextureOffset{ 2012, 2152, 3643, "root_temp0014_geo" },
-            TextureOffset{ 2152, 2292, 3644, "root_temp0015_geo" },
-            TextureOffset{ 2292, 2432, 3645, "root_temp0016_geo" },
-            TextureOffset{ 2432, 2572, 3646, "root_temp0017_geo" },
-            TextureOffset{ 2572, 2712, 3647, "root_temp0018_geo" },
-            TextureOffset{ 2712, 2852, 3648, "root_temp0019_geo" },
-            TextureOffset{ 2852, 2992, 3649, "root_temp0020_geo" },
-            TextureOffset{ 2992, 3132, 3650, "root_temp0021_geo" },
-            TextureOffset{ 3132, 3272, 3651, "root_temp0022_geo" },
-            TextureOffset{ 3272, 3412, 3652, "root_temp0023_geo" },
-            TextureOffset{ 3412, 3552, 3653, "root_temp0024_geo" },
-            TextureOffset{ 3552, 3716, 3654, "root_temp0025_geo" },
-            TextureOffset{ 3716, 3868, 3655, "root_temp0026_geo" },
-            TextureOffset{ 3868, 4032, 3656, "root_temp0027_geo" },
-            TextureOffset{ 4032, 4208, 3657, "root_temp0028_geo" },
-            TextureOffset{ 4208, 4348, 3658, "root_temp0029_geo" },
-            TextureOffset{ 4348, 4488, 3659, "root_temp0030_geo" },
-            TextureOffset{ 4488, 4760, 3660, "root_temp0031_geo" },
-            TextureOffset{ 4760, 4864, 3661, "root_temp0032_geo" },
-            TextureOffset{ 4864, 5028, 3662, "root_temp0033_geo" },
-            TextureOffset{ 5028, 5132, 3663, "root_temp0034_geo" },
-            TextureOffset{ 5132, 5296, 3664, "root_temp0035_geo" },
-            TextureOffset{ 5296, 5436, 3665, "root_temp0036_geo" },
-            TextureOffset{ 5436, 5576, 3666, "root_temp0037_geo" },
-            TextureOffset{ 5576, 5716, 3667, "root_temp0038_geo" },
-            TextureOffset{ 5716, 5856, 3668, "root_temp0039_geo" },
-            TextureOffset{ 5856, 5996, 3669, "root_temp0040_geo" },
-            TextureOffset{ 5996, 6136, 3670, "root_temp0041_geo" },
-            TextureOffset{ 6136, 6276, 3671, "root_temp0042_geo" },
-            TextureOffset{ 6276, 6416, 3672, "root_temp0043_geo" },
-            TextureOffset{ 6416, 6556, 3673, "root_temp0044_geo" },
-            TextureOffset{ 6556, 6660, 3674, "root_temp0045_geo" },
-            TextureOffset{ 6660, 6800, 3675, "root_temp0046_geo" },
-            TextureOffset{ 6800, 6892, 3676, "root_temp0047_geo" },
-            TextureOffset{ 6892, 6984, 3677, "root_temp0048_geo" },
-            TextureOffset{ 6984, 7076, 3678, "root_temp0049_geo" },
-            TextureOffset{ 7076, 7168, 3679, "root_temp0050_geo" },
-            TextureOffset{ 7168, 7260, 3680, "root_temp0051_geo" },
-            TextureOffset{ 7260, 7400, 3681, "root_temp0052_geo" },
-            TextureOffset{ 7400, 7540, 3682, "root_temp0053_geo" },
-            TextureOffset{ 7540, 7632, 3683, "root_temp0054_geo" },
-            TextureOffset{ 7632, 7748, 3684, "root_temp0055_geo" },
-            TextureOffset{ 7748, 7864, 3685, "root_temp0056_geo" },
-            TextureOffset{ 7864, 7968, 3686, "root_temp0057_geo" },
-            TextureOffset{ 7968, 11276, 3687, "trunka_temp_geo" },
-            TextureOffset{ 11276, 15964, 3688, "trunkb_temp_geo" },
-        },
-        {},
-    };
-
+std::vector<std::string> textureFilenames = {
+    "textures/isBayCedarA1/Color/trunk_base_geo.ptx", // [0]
+    "textures/isBayCedarA1/Color/archivebaycedar0001_geo.ptx", // [1]
+    "textures/isBeach/Sand_Color_Lo/beach_geo.ptx", // [2]
+    "textures/isBeach/Sand_Color_Hi/beach_geo.ptx", // [3]
+    "textures/isBeach/Color/archiveHibiscusPetal0013_geo.ptx", // [4]
+    "textures/isBeach/Color/archiveHibiscusAnthers0002_geo.ptx", // [5]
+    "textures/isBeach/Color/archiveShell0004_geo.ptx", // [6]
+    "textures/isBeach/Color/archiveCoral0006_geo.ptx", // [7]
+    "textures/isBeach/Color/seaweed0001_geo.ptx", // [8]
+    "textures/isBeach/Color/seaweed0061_geo.ptx", // [9]
+    "textures/isBeach/Color/seaweed0021_geo.ptx", // [10]
+    "textures/isBeach/Color/archiveHibiscusStyle0007_geo.ptx", // [11]
+    "textures/isBeach/Color/seaweed0029_geo.ptx", // [12]
+    "textures/isBeach/Color/archiveHibiscusSepals0004_geo.ptx", // [13]
+    "textures/isBeach/Color/seaweed0052_geo.ptx", // [14]
+    "textures/isBeach/Color/archiveHibiscusPetal0032_geo.ptx", // [15]
+    "textures/isBeach/Color/archiveHibiscusPetal0014_geo.ptx", // [16]
+    "textures/isBeach/Color/archiveHibiscusAnthers0005_geo.ptx", // [17]
+    "textures/isBeach/Color/archiveShell0007_geo.ptx", // [18]
+    "textures/isBeach/Color/archiveSeaweed0065_geo.ptx", // [19]
+    "textures/isBeach/Color/seaweed0060_geo.ptx", // [20]
+    "textures/isBeach/Color/archiveLeaflet0126_geo.ptx", // [21]
+    "textures/isBeach/Color/seaweed0028_geo.ptx", // [22]
+    "textures/isBeach/Color/archiveSeaweed0063_geo.ptx", // [23]
+    "textures/isBeach/Color/archiveHibiscusStigma0005_geo.ptx", // [24]
+    "textures/isBeach/Color/archiveHibiscusStigma0008_geo.ptx", // [25]
+    "textures/isBeach/Color/seaweed0039_geo.ptx", // [26]
+    "textures/isBeach/Color/archiveShell0008_geo.ptx", // [27]
+    "textures/isBeach/Color/archiveHibiscusSepals0005_geo.ptx", // [28]
+    "textures/isBeach/Color/archiveHibiscusStigma0007_geo.ptx", // [29]
+    "textures/isBeach/Color/archiveCoral0004_geo.ptx", // [30]
+    "textures/isBeach/Color/archiveHibiscusPetal0007_geo.ptx", // [31]
+    "textures/isBeach/Color/archiveHibiscusPetal0011_geo.ptx", // [32]
+    "textures/isBeach/Color/beach_geo.ptx", // [33]
+    "textures/isBeach/Color/seaweed0042_geo.ptx", // [34]
+    "textures/isBeach/Color/seaweed0055_geo.ptx", // [35]
+    "textures/isBeach/Color/archiveRock0002_geo.ptx", // [36]
+    "textures/isBeach/Color/archiveHibiscusPetal0035_geo.ptx", // [37]
+    "textures/isBeach/Color/archiveHibiscusPetal0025_geo.ptx", // [38]
+    "textures/isBeach/Color/archiveHibiscusStyle0003_geo.ptx", // [39]
+    "textures/isBeach/Color/seaweed0044_geo.ptx", // [40]
+    "textures/isBeach/Color/archiveHibiscusPetal0038_geo.ptx", // [41]
+    "textures/isBeach/Color/archiveHibiscusPetal0021_geo.ptx", // [42]
+    "textures/isBeach/Color/seaweed0002_geo.ptx", // [43]
+    "textures/isBeach/Color/archiveLeaflet0125_geo.ptx", // [44]
+    "textures/isBeach/Color/archiveHibiscusAnthers0003_geo.ptx", // [45]
+    "textures/isBeach/Color/seaweed0004_geo.ptx", // [46]
+    "textures/isBeach/Color/archiveRock0006_geo.ptx", // [47]
+    "textures/isBeach/Color/archiveHibiscusSepals0009_geo.ptx", // [48]
+    "textures/isBeach/Color/seaweed0019_geo.ptx", // [49]
+    "textures/isBeach/Color/archiveHibiscusPetal0012_geo.ptx", // [50]
+    "textures/isBeach/Color/archiveHibiscusPetal0024_geo.ptx", // [51]
+    "textures/isBeach/Color/archiveHibiscusStyle0002_geo.ptx", // [52]
+    "textures/isBeach/Color/seaweed0062_geo.ptx", // [53]
+    "textures/isBeach/Color/seaweed0056_geo.ptx", // [54]
+    "textures/isBeach/Color/seaweed0058_geo.ptx", // [55]
+    "textures/isBeach/Color/archiveHibiscusStigma0003_geo.ptx", // [56]
+    "textures/isBeach/Color/archiveLeaflet0124_geo.ptx", // [57]
+    "textures/isBeach/Color/seaweed0014_geo.ptx", // [58]
+    "textures/isBeach/Color/archiveHibiscusSepals0010_geo.ptx", // [59]
+    "textures/isBeach/Color/seaweed0049_geo.ptx", // [60]
+    "textures/isBeach/Color/seaweed0041_geo.ptx", // [61]
+    "textures/isBeach/Color/archiveRock0007_geo.ptx", // [62]
+    "textures/isBeach/Color/archiveHibiscusPetal0039_geo.ptx", // [63]
+    "textures/isBeach/Color/seaweed0057_geo.ptx", // [64]
+    "textures/isBeach/Color/archiveRock0003_geo.ptx", // [65]
+    "textures/isBeach/Color/archiveHibiscusPetal0022_geo.ptx", // [66]
+    "textures/isBeach/Color/archiveHibiscusSepals0016_geo.ptx", // [67]
+    "textures/isBeach/Color/archiveHibiscusPetal0010_geo.ptx", // [68]
+    "textures/isBeach/Color/seaweed0037_geo.ptx", // [69]
+    "textures/isBeach/Color/archiveCoral0007_geo.ptx", // [70]
+    "textures/isBeach/Color/seaweed0054_geo.ptx", // [71]
+    "textures/isBeach/Color/seaweed0017_geo.ptx", // [72]
+    "textures/isBeach/Color/archiveCoral0008_geo.ptx", // [73]
+    "textures/isBeach/Color/archiveCoral0009_geo.ptx", // [74]
+    "textures/isBeach/Color/archiveShell0005_geo.ptx", // [75]
+    "textures/isBeach/Color/archiveHibiscusPetal0015_geo.ptx", // [76]
+    "textures/isBeach/Color/archiveRock0005_geo.ptx", // [77]
+    "textures/isBeach/Color/seaweed0035_geo.ptx", // [78]
+    "textures/isBeach/Color/archiveHibiscusAnthers0007_geo.ptx", // [79]
+    "textures/isBeach/Color/archiveHibiscusPetal0040_geo.ptx", // [80]
+    "textures/isBeach/Color/archiveHibiscusSepals0006_geo.ptx", // [81]
+    "textures/isBeach/Color/archiveHibiscusSepals0013_geo.ptx", // [82]
+    "textures/isBeach/Color/seaweed0013_geo.ptx", // [83]
+    "textures/isBeach/Color/seaweed0030_geo.ptx", // [84]
+    "textures/isBeach/Color/seaweed0018_geo.ptx", // [85]
+    "textures/isBeach/Color/seaweed0046_geo.ptx", // [86]
+    "textures/isBeach/Color/seaweed0040_geo.ptx", // [87]
+    "textures/isBeach/Color/archiveShell0001_geo.ptx", // [88]
+    "textures/isBeach/Color/seaweed0045_geo.ptx", // [89]
+    "textures/isBeach/Color/archiveCoral0003_geo.ptx", // [90]
+    "textures/isBeach/Color/archiveLeaflet0127_geo.ptx", // [91]
+    "textures/isBeach/Color/seaweed0038_geo.ptx", // [92]
+    "textures/isBeach/Color/archiveCoral0002_geo.ptx", // [93]
+    "textures/isBeach/Color/archiveCoral0005_geo.ptx", // [94]
+    "textures/isBeach/Color/seaweed0016_geo.ptx", // [95]
+    "textures/isBeach/Color/archiveHibiscusPetal0034_geo.ptx", // [96]
+    "textures/isBeach/Color/seaweed0051_geo.ptx", // [97]
+    "textures/isBeach/Color/seaweed0023_geo.ptx", // [98]
+    "textures/isBeach/Color/seaweed0034_geo.ptx", // [99]
+    "textures/isBeach/Color/archiveHibiscusPetal0006_geo.ptx", // [100]
+    "textures/isBeach/Color/seaweed0025_geo.ptx", // [101]
+    "textures/isBeach/Color/archiveHibiscusPetal0008_geo.ptx", // [102]
+    "textures/isBeach/Color/archiveHibiscusStigma0002_geo.ptx", // [103]
+    "textures/isBeach/Color/archiveHibiscusSepals0003_geo.ptx", // [104]
+    "textures/isBeach/Color/seaweed0010_geo.ptx", // [105]
+    "textures/isBeach/Color/seaweed0015_geo.ptx", // [106]
+    "textures/isBeach/Color/archiveHibiscusSepals0014_geo.ptx", // [107]
+    "textures/isBeach/Color/seaweed0003_geo.ptx", // [108]
+    "textures/isBeach/Color/archiveHibiscusStyle0008_geo.ptx", // [109]
+    "textures/isBeach/Color/seaweed0036_geo.ptx", // [110]
+    "textures/isBeach/Color/archiveRock0001_geo.ptx", // [111]
+    "textures/isBeach/Color/seaweed0012_geo.ptx", // [112]
+    "textures/isBeach/Color/seaweed0008_geo.ptx", // [113]
+    "textures/isBeach/Color/archiveHibiscusPetal0023_geo.ptx", // [114]
+    "textures/isBeach/Color/seaweed0009_geo.ptx", // [115]
+    "textures/isBeach/Color/seaweed0027_geo.ptx", // [116]
+    "textures/isBeach/Color/archiveHibiscusPetal0036_geo.ptx", // [117]
+    "textures/isBeach/Color/archiveLeaflet0123_geo.ptx", // [118]
+    "textures/isBeach/Color/archiveHibiscusPetal0033_geo.ptx", // [119]
+    "textures/isBeach/Color/seaweed0007_geo.ptx", // [120]
+    "textures/isBeach/Color/seaweed0050_geo.ptx", // [121]
+    "textures/isBeach/Color/seaweed0011_geo.ptx", // [122]
+    "textures/isBeach/Color/seaweed0032_geo.ptx", // [123]
+    "textures/isBeach/Color/seaweed0043_geo.ptx", // [124]
+    "textures/isBeach/Color/archiveHibiscusStyle0005_geo.ptx", // [125]
+    "textures/isBeach/Color/seaweed0026_geo.ptx", // [126]
+    "textures/isBeach/Color/archiveShell0003_geo.ptx", // [127]
+    "textures/isBeach/Color/archiveHibiscusPetal0009_geo.ptx", // [128]
+    "textures/isBeach/Color/seaweed0031_geo.ptx", // [129]
+    "textures/isBeach/Color/seaweed0024_geo.ptx", // [130]
+    "textures/isBeach/Color/archiveCoral0001_geo.ptx", // [131]
+    "textures/isBeach/Color/archiveHibiscusAnthers0008_geo.ptx", // [132]
+    "textures/isBeach/Color/archiveHibiscusPetal0037_geo.ptx", // [133]
+    "textures/isBeach/Color/seaweed0053_geo.ptx", // [134]
+    "textures/isBeach/Color/seaweed0020_geo.ptx", // [135]
+    "textures/isBeach/Color/archiveShell0006_geo.ptx", // [136]
+    "textures/isBeach/Color/archiveHibiscusSepals0015_geo.ptx", // [137]
+    "textures/isBeach/Color/archiveRock0004_geo.ptx", // [138]
+    "textures/isBeach/Color/seaweed0059_geo.ptx", // [139]
+    "textures/isBeach/Color/archiveShell0002_geo.ptx", // [140]
+    "textures/isBeach/Color/seaweed0022_geo.ptx", // [141]
+    "textures/isBeach/Color/seaweed0047_geo.ptx", // [142]
+    "textures/isBeach/Color/seaweed0006_geo.ptx", // [143]
+    "textures/isBeach/Color/seaweed0005_geo.ptx", // [144]
+    "textures/isBeach/Color/archiveHibiscusPetal0031_geo.ptx", // [145]
+    "textures/isBeach/Color/seaweed0048_geo.ptx", // [146]
+    "textures/isBeach/Color/seaweed0033_geo.ptx", // [147]
+    "textures/isBeach/Color/archiveSeaweed0064_geo.ptx", // [148]
+    "textures/isCoastline/Color/archiveLeaflet0126_geo.ptx", // [149]
+    "textures/isCoastline/Color/archiveLeaflet0125_geo.ptx", // [150]
+    "textures/isCoastline/Color/archiveLeaflet0124_geo.ptx", // [151]
+    "textures/isCoastline/Color/archiveLeaflet0127_geo.ptx", // [152]
+    "textures/isCoastline/Color/archiveLeaflet0123_geo.ptx", // [153]
+    "textures/isCoral/Color/antler0071_geo.ptx", // [154]
+    "textures/isCoral/Color/knobbybrain0014_geo.ptx", // [155]
+    "textures/isCoral/Color/clubbedfinger0161_geo.ptx", // [156]
+    "textures/isCoral/Color/starhornplate0051_geo.ptx", // [157]
+    "textures/isCoral/Color/barnacle0106_geo.ptx", // [158]
+    "textures/isCoral/Color/barnacle0024_geo.ptx", // [159]
+    "textures/isCoral/Color/fingercoral0095_geo.ptx", // [160]
+    "textures/isCoral/Color/fingercoral0059_geo.ptx", // [161]
+    "textures/isCoral/Color/clubbedfinger0812_geo.ptx", // [162]
+    "textures/isCoral/Color/antler0059_geo.ptx", // [163]
+    "textures/isCoral/Color/antler0018_geo.ptx", // [164]
+    "textures/isCoral/Color/fingercoral0354_geo.ptx", // [165]
+    "textures/isCoral/Color/seaweed0321_geo.ptx", // [166]
+    "textures/isCoral/Color/clubbedfinger0355_geo.ptx", // [167]
+    "textures/isCoral/Color/clubbedfinger0710_geo.ptx", // [168]
+    "textures/isCoral/Color/clubbedfinger0506_geo.ptx", // [169]
+    "textures/isCoral/Color/starhornplate0097_geo.ptx", // [170]
+    "textures/isCoral/Color/clubbedfinger0132_geo.ptx", // [171]
+    "textures/isCoral/Color/clubbedfinger0148_geo.ptx", // [172]
+    "textures/isCoral/Color/fingercoral0565_geo.ptx", // [173]
+    "textures/isCoral/Color/fingercoral0317_geo.ptx", // [174]
+    "textures/isCoral/Color/clubbedfinger0099_geo.ptx", // [175]
+    "textures/isCoral/Color/clubbedfinger0637_geo.ptx", // [176]
+    "textures/isCoral/Color/seaweed0238_geo.ptx", // [177]
+    "textures/isCoral/Color/clubbedfinger0381_geo.ptx", // [178]
+    "textures/isCoral/Color/seaweed0309_geo.ptx", // [179]
+    "textures/isCoral/Color/starhornplate0013_geo.ptx", // [180]
+    "textures/isCoral/Color/clubbedfinger0432_geo.ptx", // [181]
+    "textures/isCoral/Color/fingercoral0387_geo.ptx", // [182]
+    "textures/isCoral/Color/antler0010_geo.ptx", // [183]
+    "textures/isCoral/Color/clubbedfinger0853_geo.ptx", // [184]
+    "textures/isCoral/Color/clubbedfinger0649_geo.ptx", // [185]
+    "textures/isCoral/Color/archivecoral_antler0004_geo.ptx", // [186]
+    "textures/isCoral/Color/clubbedfinger0263_geo.ptx", // [187]
+    "textures/isCoral/Color/clubbedfinger0807_geo.ptx", // [188]
+    "textures/isCoral/Color/clubbedfinger0349_geo.ptx", // [189]
+    "textures/isCoral/Color/fingercoral0067_geo.ptx", // [190]
+    "textures/isCoral/Color/starhornplate0094_geo.ptx", // [191]
+    "textures/isCoral/Color/coralrock0015_geo.ptx", // [192]
+    "textures/isCoral/Color/clubbedfinger0496_geo.ptx", // [193]
+    "textures/isCoral/Color/antler0070_geo.ptx", // [194]
+    "textures/isCoral/Color/barnacle0016_geo.ptx", // [195]
+    "textures/isCoral/Color/fingercoral0176_geo.ptx", // [196]
+    "textures/isCoral/Color/fingercoral0173_geo.ptx", // [197]
+    "textures/isCoral/Color/clubbedfinger0415_geo.ptx", // [198]
+    "textures/isCoral/Color/fingercoral0566_geo.ptx", // [199]
+    "textures/isCoral/Color/clubbedfinger0411_geo.ptx", // [200]
+    "textures/isCoral/Color/fingercoral0404_geo.ptx", // [201]
+    "textures/isCoral/Color/clubbedfinger0202_geo.ptx", // [202]
+    "textures/isCoral/Color/seaweed0172_geo.ptx", // [203]
+    "textures/isCoral/Color/fingercoral0567_geo.ptx", // [204]
+    "textures/isCoral/Color/clubbedfinger0656_geo.ptx", // [205]
+    "textures/isCoral/Color/starhornplate0062_geo.ptx", // [206]
+    "textures/isCoral/Color/coralrock0050_geo.ptx", // [207]
+    "textures/isCoral/Color/fingercoral0149_geo.ptx", // [208]
+    "textures/isCoral/Color/fingercoral0150_geo.ptx", // [209]
+    "textures/isCoral/Color/fingercoral0099_geo.ptx", // [210]
+    "textures/isCoral/Color/fingercoral0297_geo.ptx", // [211]
+    "textures/isCoral/Color/fingercoral0153_geo.ptx", // [212]
+    "textures/isCoral/Color/fingercoral0473_geo.ptx", // [213]
+    "textures/isCoral/Color/clubbedfinger0693_geo.ptx", // [214]
+    "textures/isCoral/Color/clubbedfinger0095_geo.ptx", // [215]
+    "textures/isCoral/Color/clubbedfinger0480_geo.ptx", // [216]
+    "textures/isCoral/Color/fingercoral0261_geo.ptx", // [217]
+    "textures/isCoral/Color/fingercoral0296_geo.ptx", // [218]
+    "textures/isCoral/Color/clubbedfinger0756_geo.ptx", // [219]
+    "textures/isCoral/Color/clubbedfinger0121_geo.ptx", // [220]
+    "textures/isCoral/Color/starhornplate0044_geo.ptx", // [221]
+    "textures/isCoral/Color/fingercoral0126_geo.ptx", // [222]
+    "textures/isCoral/Color/antler0003_geo.ptx", // [223]
+    "textures/isCoral/Color/clubbedfinger0712_geo.ptx", // [224]
+    "textures/isCoral/Color/clubbedfinger0565_geo.ptx", // [225]
+    "textures/isCoral/Color/clubbedfinger0257_geo.ptx", // [226]
+    "textures/isCoral/Color/fingercoral0275_geo.ptx", // [227]
+    "textures/isCoral/Color/clubbedfinger0085_geo.ptx", // [228]
+    "textures/isCoral/Color/clubbedfinger0454_geo.ptx", // [229]
+    "textures/isCoral/Color/seaweed0250_geo.ptx", // [230]
+    "textures/isCoral/Color/clubbedfinger0811_geo.ptx", // [231]
+    "textures/isCoral/Color/clubbedfinger0604_geo.ptx", // [232]
+    "textures/isCoral/Color/barnacle0043_geo.ptx", // [233]
+    "textures/isCoral/Color/clubbedfinger0291_geo.ptx", // [234]
+    "textures/isCoral/Color/barnacle0045_geo.ptx", // [235]
+    "textures/isCoral/Color/clubbedfinger0310_geo.ptx", // [236]
+    "textures/isCoral/Color/antler0005_geo.ptx", // [237]
+    "textures/isCoral/Color/fingercoral0233_geo.ptx", // [238]
+    "textures/isCoral/Color/clubbedfinger0439_geo.ptx", // [239]
+    "textures/isCoral/Color/coralrock0030_geo.ptx", // [240]
+    "textures/isCoral/Color/fingercoral0189_geo.ptx", // [241]
+    "textures/isCoral/Color/fingercoral0065_geo.ptx", // [242]
+    "textures/isCoral/Color/clubbedfinger0493_geo.ptx", // [243]
+    "textures/isCoral/Color/clubbedfinger0026_geo.ptx", // [244]
+    "textures/isCoral/Color/seaweed0001_geo.ptx", // [245]
+    "textures/isCoral/Color/clubbedfinger0127_geo.ptx", // [246]
+    "textures/isCoral/Color/clubbedfinger0136_geo.ptx", // [247]
+    "textures/isCoral/Color/clubbedfinger0590_geo.ptx", // [248]
+    "textures/isCoral/Color/seaweed0106_geo.ptx", // [249]
+    "textures/isCoral/Color/coralstone0010_geo.ptx", // [250]
+    "textures/isCoral/Color/fingercoral0069_geo.ptx", // [251]
+    "textures/isCoral/Color/clubbedfinger0322_geo.ptx", // [252]
+    "textures/isCoral/Color/seaweed0225_geo.ptx", // [253]
+    "textures/isCoral/Color/fingercoral0543_geo.ptx", // [254]
+    "textures/isCoral/Color/fingercoral0487_geo.ptx", // [255]
+    "textures/isCoral/Color/fingercoral0530_geo.ptx", // [256]
+    "textures/isCoral/Color/clubbedfinger0517_geo.ptx", // [257]
+    "textures/isCoral/Color/seaweed0271_geo.ptx", // [258]
+    "textures/isCoral/Color/clubbedfinger0657_geo.ptx", // [259]
+    "textures/isCoral/Color/clubbedfinger0332_geo.ptx", // [260]
+    "textures/isCoral/Color/seaweed0322_geo.ptx", // [261]
+    "textures/isCoral/Color/clubbedfinger0129_geo.ptx", // [262]
+    "textures/isCoral/Color/seaweed0224_geo.ptx", // [263]
+    "textures/isCoral/Color/clubbedfinger0512_geo.ptx", // [264]
+    "textures/isCoral/Color/fingercoral0008_geo.ptx", // [265]
+    "textures/isCoral/Color/cauliflower0014_geo.ptx", // [266]
+    "textures/isCoral/Color/fingercoral0127_geo.ptx", // [267]
+    "textures/isCoral/Color/clubbedfinger0297_geo.ptx", // [268]
+    "textures/isCoral/Color/seaweed0208_geo.ptx", // [269]
+    "textures/isCoral/Color/fingercoral0194_geo.ptx", // [270]
+    "textures/isCoral/Color/fingercoral0088_geo.ptx", // [271]
+    "textures/isCoral/Color/clubbedfinger0701_geo.ptx", // [272]
+    "textures/isCoral/Color/clubbedfinger0703_geo.ptx", // [273]
+    "textures/isCoral/Color/seaweed0306_geo.ptx", // [274]
+    "textures/isCoral/Color/clubbedfinger0451_geo.ptx", // [275]
+    "textures/isCoral/Color/clubbedfinger0793_geo.ptx", // [276]
+    "textures/isCoral/Color/coralstone0020_geo.ptx", // [277]
+    "textures/isCoral/Color/fingercoral0220_geo.ptx", // [278]
+    "textures/isCoral/Color/antler0050_geo.ptx", // [279]
+    "textures/isCoral/Color/coralmoss0002_geo.ptx", // [280]
+    "textures/isCoral/Color/clubbedfinger0157_geo.ptx", // [281]
+    "textures/isCoral/Color/starhornplate0110_geo.ptx", // [282]
+    "textures/isCoral/Color/seaweed0082_geo.ptx", // [283]
+    "textures/isCoral/Color/fingercoral0497_geo.ptx", // [284]
+    "textures/isCoral/Color/clubbedfinger0515_geo.ptx", // [285]
+    "textures/isCoral/Color/clubbedfinger0196_geo.ptx", // [286]
+    "textures/isCoral/Color/seaweed0061_geo.ptx", // [287]
+    "textures/isCoral/Color/seaweed0021_geo.ptx", // [288]
+    "textures/isCoral/Color/fingercoral0406_geo.ptx", // [289]
+    "textures/isCoral/Color/fingercoral0273_geo.ptx", // [290]
+    "textures/isCoral/Color/seaweed0291_geo.ptx", // [291]
+    "textures/isCoral/Color/coralmoss0007_geo.ptx", // [292]
+    "textures/isCoral/Color/coralrock0029_geo.ptx", // [293]
+    "textures/isCoral/Color/fingercoral0164_geo.ptx", // [294]
+    "textures/isCoral/Color/clubbedfinger0611_geo.ptx", // [295]
+    "textures/isCoral/Color/fingercoral0560_geo.ptx", // [296]
+    "textures/isCoral/Color/clubbedfinger0101_geo.ptx", // [297]
+    "textures/isCoral/Color/fingercoral0178_geo.ptx", // [298]
+    "textures/isCoral/Color/fingercoral0282_geo.ptx", // [299]
+    "textures/isCoral/Color/starhornplate0068_geo.ptx", // [300]
+    "textures/isCoral/Color/clubbedfinger0850_geo.ptx", // [301]
+    "textures/isCoral/Color/fingercoral0403_geo.ptx", // [302]
+    "textures/isCoral/Color/clubbedfinger0569_geo.ptx", // [303]
+    "textures/isCoral/Color/knobbybrain0010_geo.ptx", // [304]
+    "textures/isCoral/Color/fingercoral0602_geo.ptx", // [305]
+    "textures/isCoral/Color/clubbedfinger0393_geo.ptx", // [306]
+    "textures/isCoral/Color/clubbedfinger0605_geo.ptx", // [307]
+    "textures/isCoral/Color/clubbedfinger0145_geo.ptx", // [308]
+    "textures/isCoral/Color/clubbedfinger0821_geo.ptx", // [309]
+    "textures/isCoral/Color/clubbedfinger0667_geo.ptx", // [310]
+    "textures/isCoral/Color/fingercoral0092_geo.ptx", // [311]
+    "textures/isCoral/Color/fingercoral0580_geo.ptx", // [312]
+    "textures/isCoral/Color/barnacle0075_geo.ptx", // [313]
+    "textures/isCoral/Color/fingercoral0398_geo.ptx", // [314]
+    "textures/isCoral/Color/fingercoral0264_geo.ptx", // [315]
+    "textures/isCoral/Color/antler0002_geo.ptx", // [316]
+    "textures/isCoral/Color/ricecoral0014_geo.ptx", // [317]
+    "textures/isCoral/Color/fingercoral0415_geo.ptx", // [318]
+    "textures/isCoral/Color/clubbedfinger0217_geo.ptx", // [319]
+    "textures/isCoral/Color/clubbedfinger0686_geo.ptx", // [320]
+    "textures/isCoral/Color/clubbedfinger0003_geo.ptx", // [321]
+    "textures/isCoral/Color/fingercoral0182_geo.ptx", // [322]
+    "textures/isCoral/Color/archivecoral_cabbage0002_geo.ptx", // [323]
+    "textures/isCoral/Color/clubbedfinger0816_geo.ptx", // [324]
+    "textures/isCoral/Color/clubbedfinger0216_geo.ptx", // [325]
+    "textures/isCoral/Color/seaweed0173_geo.ptx", // [326]
+    "textures/isCoral/Color/fingercoral0510_geo.ptx", // [327]
+    "textures/isCoral/Color/seaweed0282_geo.ptx", // [328]
+    "textures/isCoral/Color/clubbedfinger0487_geo.ptx", // [329]
+    "textures/isCoral/Color/seaweed0029_geo.ptx", // [330]
+    "textures/isCoral/Color/clubbedfinger0460_geo.ptx", // [331]
+    "textures/isCoral/Color/cauliflower0012_geo.ptx", // [332]
+    "textures/isCoral/Color/clubbedfinger0280_geo.ptx", // [333]
+    "textures/isCoral/Color/clubbedfinger0012_geo.ptx", // [334]
+    "textures/isCoral/Color/clubbedfinger0333_geo.ptx", // [335]
+    "textures/isCoral/Color/fingercoral0393_geo.ptx", // [336]
+    "textures/isCoral/Color/clubbedfinger0300_geo.ptx", // [337]
+    "textures/isCoral/Color/seaweed0301_geo.ptx", // [338]
+    "textures/isCoral/Color/fingercoral0386_geo.ptx", // [339]
+    "textures/isCoral/Color/seaweed0313_geo.ptx", // [340]
+    "textures/isCoral/Color/seaweed0068_geo.ptx", // [341]
+    "textures/isCoral/Color/starhornplate0032_geo.ptx", // [342]
+    "textures/isCoral/Color/clubbedfinger0801_geo.ptx", // [343]
+    "textures/isCoral/Color/antler0024_geo.ptx", // [344]
+    "textures/isCoral/Color/starhornplate0101_geo.ptx", // [345]
+    "textures/isCoral/Color/seaweed0098_geo.ptx", // [346]
+    "textures/isCoral/Color/clubbedfinger0092_geo.ptx", // [347]
+    "textures/isCoral/Color/antler0001_geo.ptx", // [348]
+    "textures/isCoral/Color/starhornplate0074_geo.ptx", // [349]
+    "textures/isCoral/Color/clubbedfinger0743_geo.ptx", // [350]
+    "textures/isCoral/Color/clubbedfinger0051_geo.ptx", // [351]
+    "textures/isCoral/Color/clubbedfinger0295_geo.ptx", // [352]
+    "textures/isCoral/Color/clubbedfinger0209_geo.ptx", // [353]
+    "textures/isCoral/Color/clubbedfinger0672_geo.ptx", // [354]
+    "textures/isCoral/Color/clubbedfinger0682_geo.ptx", // [355]
+    "textures/isCoral/Color/fingercoral0078_geo.ptx", // [356]
+    "textures/isCoral/Color/fingercoral0117_geo.ptx", // [357]
+    "textures/isCoral/Color/fingercoral0167_geo.ptx", // [358]
+    "textures/isCoral/Color/clubbedfinger0185_geo.ptx", // [359]
+    "textures/isCoral/Color/clubbedfinger0713_geo.ptx", // [360]
+    "textures/isCoral/Color/coralrock0072_geo.ptx", // [361]
+    "textures/isCoral/Color/fingercoral0520_geo.ptx", // [362]
+    "textures/isCoral/Color/fingercoral0192_geo.ptx", // [363]
+    "textures/isCoral/Color/clubbedfinger0294_geo.ptx", // [364]
+    "textures/isCoral/Color/clubbedfinger0718_geo.ptx", // [365]
+    "textures/isCoral/Color/seaweed0052_geo.ptx", // [366]
+    "textures/isCoral/Color/clubbedfinger0688_geo.ptx", // [367]
+    "textures/isCoral/Color/antler0035_geo.ptx", // [368]
+    "textures/isCoral/Color/cauliflower0015_geo.ptx", // [369]
+    "textures/isCoral/Color/clubbedfinger0242_geo.ptx", // [370]
+    "textures/isCoral/Color/fingercoral0291_geo.ptx", // [371]
+    "textures/isCoral/Color/seaweed0063_geo.ptx", // [372]
+    "textures/isCoral/Color/clubbedfinger0716_geo.ptx", // [373]
+    "textures/isCoral/Color/starhornplate0063_geo.ptx", // [374]
+    "textures/isCoral/Color/fingercoral0410_geo.ptx", // [375]
+    "textures/isCoral/Color/clubbedfinger0389_geo.ptx", // [376]
+    "textures/isCoral/Color/fingercoral0195_geo.ptx", // [377]
+    "textures/isCoral/Color/clubbedfinger0537_geo.ptx", // [378]
+    "textures/isCoral/Color/antler0063_geo.ptx", // [379]
+    "textures/isCoral/Color/fingercoral0002_geo.ptx", // [380]
+    "textures/isCoral/Color/clubbedfinger0489_geo.ptx", // [381]
+    "textures/isCoral/Color/clubbedfinger0305_geo.ptx", // [382]
+    "textures/isCoral/Color/clubbedfinger0719_geo.ptx", // [383]
+    "textures/isCoral/Color/clubbedfinger0064_geo.ptx", // [384]
+    "textures/isCoral/Color/starhornplate0008_geo.ptx", // [385]
+    "textures/isCoral/Color/clubbedfinger0675_geo.ptx", // [386]
+    "textures/isCoral/Color/archivecoral_cabbage0006_geo.ptx", // [387]
+    "textures/isCoral/Color/fingercoral0295_geo.ptx", // [388]
+    "textures/isCoral/Color/coralrock0045_geo.ptx", // [389]
+    "textures/isCoral/Color/clubbedfinger0678_geo.ptx", // [390]
+    "textures/isCoral/Color/clubbedfinger0388_geo.ptx", // [391]
+    "textures/isCoral/Color/fingercoral0271_geo.ptx", // [392]
+    "textures/isCoral/Color/starhornplate0018_geo.ptx", // [393]
+    "textures/isCoral/Color/seaweed0241_geo.ptx", // [394]
+    "textures/isCoral/Color/clubbedfinger0340_geo.ptx", // [395]
+    "textures/isCoral/Color/clubbedfinger0062_geo.ptx", // [396]
+    "textures/isCoral/Color/clubbedfinger2323_geo.ptx", // [397]
+    "textures/isCoral/Color/clubbedfinger0043_geo.ptx", // [398]
+    "textures/isCoral/Color/archivecoralflute0001_geo.ptx", // [399]
+    "textures/isCoral/Color/clubbedfinger0830_geo.ptx", // [400]
+    "textures/isCoral/Color/barnacle0104_geo.ptx", // [401]
+    "textures/isCoral/Color/clubbedfinger0621_geo.ptx", // [402]
+    "textures/isCoral/Color/seaweed0060_geo.ptx", // [403]
+    "textures/isCoral/Color/clubbedfinger0418_geo.ptx", // [404]
+    "textures/isCoral/Color/clubbedfinger0270_geo.ptx", // [405]
+    "textures/isCoral/Color/knobbybrain0002_geo.ptx", // [406]
+    "textures/isCoral/Color/clubbedfinger0544_geo.ptx", // [407]
+    "textures/isCoral/Color/clubbedfinger0818_geo.ptx", // [408]
+    "textures/isCoral/Color/clubbedfinger0320_geo.ptx", // [409]
+    "textures/isCoral/Color/fingercoral0121_geo.ptx", // [410]
+    "textures/isCoral/Color/fingercoral0579_geo.ptx", // [411]
+    "textures/isCoral/Color/starhornplate0070_geo.ptx", // [412]
+    "textures/isCoral/Color/clubbedfinger0413_geo.ptx", // [413]
+    "textures/isCoral/Color/fingercoral0342_geo.ptx", // [414]
+    "textures/isCoral/Color/fingercoral0469_geo.ptx", // [415]
+    "textures/isCoral/Color/fingercoral0353_geo.ptx", // [416]
+    "textures/isCoral/Color/fingercoral0340_geo.ptx", // [417]
+    "textures/isCoral/Color/clubbedfinger0638_geo.ptx", // [418]
+    "textures/isCoral/Color/clubbedfinger0715_geo.ptx", // [419]
+    "textures/isCoral/Color/fingercoral0531_geo.ptx", // [420]
+    "textures/isCoral/Color/seaweed0248_geo.ptx", // [421]
+    "textures/isCoral/Color/clubbedfinger0751_geo.ptx", // [422]
+    "textures/isCoral/Color/clubbedfinger0403_geo.ptx", // [423]
+    "textures/isCoral/Color/barnacle0063_geo.ptx", // [424]
+    "textures/isCoral/Color/fingercoral0138_geo.ptx", // [425]
+    "textures/isCoral/Color/clubbedfinger0283_geo.ptx", // [426]
+    "textures/isCoral/Color/clubbedfinger0700_geo.ptx", // [427]
+    "textures/isCoral/Color/starhornplate0036_geo.ptx", // [428]
+    "textures/isCoral/Color/antler0036_geo.ptx", // [429]
+    "textures/isCoral/Color/fingercoral0389_geo.ptx", // [430]
+    "textures/isCoral/Color/fingercoral0603_geo.ptx", // [431]
+    "textures/isCoral/Color/fingercoral0434_geo.ptx", // [432]
+    "textures/isCoral/Color/barnacle0076_geo.ptx", // [433]
+    "textures/isCoral/Color/fingercoral0548_geo.ptx", // [434]
+    "textures/isCoral/Color/starhornplate0007_geo.ptx", // [435]
+    "textures/isCoral/Color/seaweed0028_geo.ptx", // [436]
+    "textures/isCoral/Color/clubbedfinger0182_geo.ptx", // [437]
+    "textures/isCoral/Color/clubbedfinger0630_geo.ptx", // [438]
+    "textures/isCoral/Color/fingercoral0269_geo.ptx", // [439]
+    "textures/isCoral/Color/fingercoral0421_geo.ptx", // [440]
+    "textures/isCoral/Color/clubbedfinger0380_geo.ptx", // [441]
+    "textures/isCoral/Color/clubbedfinger0416_geo.ptx", // [442]
+    "textures/isCoral/Color/knobbybrain0006_geo.ptx", // [443]
+    "textures/isCoral/Color/clubbedfinger0342_geo.ptx", // [444]
+    "textures/isCoral/Color/fingercoral0390_geo.ptx", // [445]
+    "textures/isCoral/Color/clubbedfinger0152_geo.ptx", // [446]
+    "textures/isCoral/Color/fingercoral0198_geo.ptx", // [447]
+    "textures/isCoral/Color/clubbedfinger0846_geo.ptx", // [448]
+    "textures/isCoral/Color/clubbedfinger0467_geo.ptx", // [449]
+    "textures/isCoral/Color/fingercoral0555_geo.ptx", // [450]
+    "textures/isCoral/Color/fingercoral0450_geo.ptx", // [451]
+    "textures/isCoral/Color/clubbedfinger0445_geo.ptx", // [452]
+    "textures/isCoral/Color/fingercoral0090_geo.ptx", // [453]
+    "textures/isCoral/Color/fingercoral0246_geo.ptx", // [454]
+    "textures/isCoral/Color/fingercoral0251_geo.ptx", // [455]
+    "textures/isCoral/Color/starhornstem0001_geo.ptx", // [456]
+    "textures/isCoral/Color/clubbedfinger0205_geo.ptx", // [457]
+    "textures/isCoral/Color/clubbedfinger0338_geo.ptx", // [458]
+    "textures/isCoral/Color/seaweed0286_geo.ptx", // [459]
+    "textures/isCoral/Color/seaweed0283_geo.ptx", // [460]
+    "textures/isCoral/Color/coralstone0024_geo.ptx", // [461]
+    "textures/isCoral/Color/cauliflower0006_geo.ptx", // [462]
+    "textures/isCoral/Color/seaweed0119_geo.ptx", // [463]
+    "textures/isCoral/Color/seaweed0324_geo.ptx", // [464]
+    "textures/isCoral/Color/fingercoral0556_geo.ptx", // [465]
+    "textures/isCoral/Color/clubbedfinger0848_geo.ptx", // [466]
+    "textures/isCoral/Color/fingercoral0528_geo.ptx", // [467]
+    "textures/isCoral/Color/clubbedfinger0617_geo.ptx", // [468]
+    "textures/isCoral/Color/fingercoral0553_geo.ptx", // [469]
+    "textures/isCoral/Color/fingercoral0068_geo.ptx", // [470]
+    "textures/isCoral/Color/seaweed0310_geo.ptx", // [471]
+    "textures/isCoral/Color/fingercoral0448_geo.ptx", // [472]
+    "textures/isCoral/Color/seaweed0066_geo.ptx", // [473]
+    "textures/isCoral/Color/coralrock0047_geo.ptx", // [474]
+    "textures/isCoral/Color/clubbedfinger0767_geo.ptx", // [475]
+    "textures/isCoral/Color/clubbedfinger0837_geo.ptx", // [476]
+    "textures/isCoral/Color/fingercoral0285_geo.ptx", // [477]
+    "textures/isCoral/Color/clubbedfinger0014_geo.ptx", // [478]
+    "textures/isCoral/Color/fingercoral0082_geo.ptx", // [479]
+    "textures/isCoral/Color/coralrock0010_geo.ptx", // [480]
+    "textures/isCoral/Color/fingercoral0442_geo.ptx", // [481]
+    "textures/isCoral/Color/clubbedfinger0208_geo.ptx", // [482]
+    "textures/isCoral/Color/seaweed0107_geo.ptx", // [483]
+    "textures/isCoral/Color/starhornplate0100_geo.ptx", // [484]
+    "textures/isCoral/Color/fingercoral0401_geo.ptx", // [485]
+    "textures/isCoral/Color/fingercoral0621_geo.ptx", // [486]
+    "textures/isCoral/Color/fingercoral0525_geo.ptx", // [487]
+    "textures/isCoral/Color/clubbedfinger0652_geo.ptx", // [488]
+    "textures/isCoral/Color/fingercoral0590_geo.ptx", // [489]
+    "textures/isCoral/Color/seaweed0113_geo.ptx", // [490]
+    "textures/isCoral/Color/clubbedfinger0017_geo.ptx", // [491]
+    "textures/isCoral/Color/fingercoral0023_geo.ptx", // [492]
+    "textures/isCoral/Color/clubbedfinger0106_geo.ptx", // [493]
+    "textures/isCoral/Color/seaweed0305_geo.ptx", // [494]
+    "textures/isCoral/Color/antler0042_geo.ptx", // [495]
+    "textures/isCoral/Color/clubbedfinger0360_geo.ptx", // [496]
+    "textures/isCoral/Color/clubbedfinger0459_geo.ptx", // [497]
+    "textures/isCoral/Color/fingercoral0166_geo.ptx", // [498]
+    "textures/isCoral/Color/seaweed0162_geo.ptx", // [499]
+    "textures/isCoral/Color/seaweed0186_geo.ptx", // [500]
+    "textures/isCoral/Color/fingercoral0334_geo.ptx", // [501]
+    "textures/isCoral/Color/clubbedfinger0859_geo.ptx", // [502]
+    "textures/isCoral/Color/seaweed0081_geo.ptx", // [503]
+    "textures/isCoral/Color/fingercoral0479_geo.ptx", // [504]
+    "textures/isCoral/Color/fingercoral0522_geo.ptx", // [505]
+    "textures/isCoral/Color/seaweed0039_geo.ptx", // [506]
+    "textures/isCoral/Color/fingercoral0197_geo.ptx", // [507]
+    "textures/isCoral/Color/clubbedfinger0498_geo.ptx", // [508]
+    "textures/isCoral/Color/clubbedfinger0068_geo.ptx", // [509]
+    "textures/isCoral/Color/fingercoral0058_geo.ptx", // [510]
+    "textures/isCoral/Color/seaweed0292_geo.ptx", // [511]
+    "textures/isCoral/Color/barnacle0067_geo.ptx", // [512]
+    "textures/isCoral/Color/clubbedfinger0709_geo.ptx", // [513]
+    "textures/isCoral/Color/fingercoral0478_geo.ptx", // [514]
+    "textures/isCoral/Color/coralrock0044_geo.ptx", // [515]
+    "textures/isCoral/Color/barnacle0012_geo.ptx", // [516]
+    "textures/isCoral/Color/fingercoral0015_geo.ptx", // [517]
+    "textures/isCoral/Color/barnacle0103_geo.ptx", // [518]
+    "textures/isCoral/Color/clubbedfinger0104_geo.ptx", // [519]
+    "textures/isCoral/Color/clubbedfinger0629_geo.ptx", // [520]
+    "textures/isCoral/Color/fingercoral0256_geo.ptx", // [521]
+    "textures/isCoral/Color/starhornplate0030_geo.ptx", // [522]
+    "textures/isCoral/Color/clubbedfinger0796_geo.ptx", // [523]
+    "textures/isCoral/Color/knobbybrain0007_geo.ptx", // [524]
+    "textures/isCoral/Color/clubbedfinger0468_geo.ptx", // [525]
+    "textures/isCoral/Color/fingercoral0186_geo.ptx", // [526]
+    "textures/isCoral/Color/clubbedfinger0661_geo.ptx", // [527]
+    "textures/isCoral/Color/fingercoral0244_geo.ptx", // [528]
+    "textures/isCoral/Color/seaweed0080_geo.ptx", // [529]
+    "textures/isCoral/Color/clubbedfinger0117_geo.ptx", // [530]
+    "textures/isCoral/Color/fingercoral0171_geo.ptx", // [531]
+    "textures/isCoral/Color/coralstone0011_geo.ptx", // [532]
+    "textures/isCoral/Color/fingercoral0527_geo.ptx", // [533]
+    "textures/isCoral/Color/clubbedfinger0089_geo.ptx", // [534]
+    "textures/isCoral/Color/seaweed0213_geo.ptx", // [535]
+    "textures/isCoral/Color/clubbedfinger0642_geo.ptx", // [536]
+    "textures/isCoral/Color/antler0033_geo.ptx", // [537]
+    "textures/isCoral/Color/seaweed0111_geo.ptx", // [538]
+    "textures/isCoral/Color/clubbedfinger0172_geo.ptx", // [539]
+    "textures/isCoral/Color/clubbedfinger0449_geo.ptx", // [540]
+    "textures/isCoral/Color/clubbedfinger0081_geo.ptx", // [541]
+    "textures/isCoral/Color/fingercoral0041_geo.ptx", // [542]
+    "textures/isCoral/Color/barnacle0047_geo.ptx", // [543]
+    "textures/isCoral/Color/knobbybrain0012_geo.ptx", // [544]
+    "textures/isCoral/Color/seaweed0092_geo.ptx", // [545]
+    "textures/isCoral/Color/antler0034_geo.ptx", // [546]
+    "textures/isCoral/Color/clubbedfinger0214_geo.ptx", // [547]
+    "textures/isCoral/Color/fingercoral0277_geo.ptx", // [548]
+    "textures/isCoral/Color/fingercoral0240_geo.ptx", // [549]
+    "textures/isCoral/Color/clubbedfinger0113_geo.ptx", // [550]
+    "textures/isCoral/Color/barnacle0070_geo.ptx", // [551]
+    "textures/isCoral/Color/coralrock0020_geo.ptx", // [552]
+    "textures/isCoral/Color/clubbedfinger0170_geo.ptx", // [553]
+    "textures/isCoral/Color/clubbedfinger0653_geo.ptx", // [554]
+    "textures/isCoral/Color/clubbedfinger0609_geo.ptx", // [555]
+    "textures/isCoral/Color/clubbedfinger0412_geo.ptx", // [556]
+    "textures/isCoral/Color/clubbedfinger0734_geo.ptx", // [557]
+    "textures/isCoral/Color/clubbedfinger0049_geo.ptx", // [558]
+    "textures/isCoral/Color/clubbedfinger0324_geo.ptx", // [559]
+    "textures/isCoral/Color/clubbedfinger0844_geo.ptx", // [560]
+    "textures/isCoral/Color/antler0057_geo.ptx", // [561]
+    "textures/isCoral/Color/clubbedfinger0093_geo.ptx", // [562]
+    "textures/isCoral/Color/clubbedfinger0201_geo.ptx", // [563]
+    "textures/isCoral/Color/starhornplate0060_geo.ptx", // [564]
+    "textures/isCoral/Color/clubbedfinger0379_geo.ptx", // [565]
+    "textures/isCoral/Color/fingercoral0464_geo.ptx", // [566]
+    "textures/isCoral/Color/fingercoral0048_geo.ptx", // [567]
+    "textures/isCoral/Color/fingercoral0417_geo.ptx", // [568]
+    "textures/isCoral/Color/clubbedfinger0643_geo.ptx", // [569]
+    "textures/isCoral/Color/fingercoral0500_geo.ptx", // [570]
+    "textures/isCoral/Color/clubbedfinger0159_geo.ptx", // [571]
+    "textures/isCoral/Color/fingercoral0452_geo.ptx", // [572]
+    "textures/isCoral/Color/clubbedfinger0220_geo.ptx", // [573]
+    "textures/isCoral/Color/seaweed0143_geo.ptx", // [574]
+    "textures/isCoral/Color/clubbedfinger0694_geo.ptx", // [575]
+    "textures/isCoral/Color/clubbedfinger0464_geo.ptx", // [576]
+    "textures/isCoral/Color/clubbedfinger0753_geo.ptx", // [577]
+    "textures/isCoral/Color/fingercoral0494_geo.ptx", // [578]
+    "textures/isCoral/Color/fingercoral0588_geo.ptx", // [579]
+    "textures/isCoral/Color/seaweed0183_geo.ptx", // [580]
+    "textures/isCoral/Color/fingercoral0119_geo.ptx", // [581]
+    "textures/isCoral/Color/seaweed0095_geo.ptx", // [582]
+    "textures/isCoral/Color/clubbedfinger0329_geo.ptx", // [583]
+    "textures/isCoral/Color/clubbedfinger0516_geo.ptx", // [584]
+    "textures/isCoral/Color/clubbedfinger0788_geo.ptx", // [585]
+    "textures/isCoral/Color/clubbedfinger0318_geo.ptx", // [586]
+    "textures/isCoral/Color/clubbedfinger0500_geo.ptx", // [587]
+    "textures/isCoral/Color/seaweed0294_geo.ptx", // [588]
+    "textures/isCoral/Color/fingercoral0367_geo.ptx", // [589]
+    "textures/isCoral/Color/seaweed0154_geo.ptx", // [590]
+    "textures/isCoral/Color/fingercoral0519_geo.ptx", // [591]
+    "textures/isCoral/Color/clubbedfinger0435_geo.ptx", // [592]
+    "textures/isCoral/Color/clubbedfinger0600_geo.ptx", // [593]
+    "textures/isCoral/Color/barnacle0066_geo.ptx", // [594]
+    "textures/isCoral/Color/fingercoral0169_geo.ptx", // [595]
+    "textures/isCoral/Color/clubbedfinger0241_geo.ptx", // [596]
+    "textures/isCoral/Color/clubbedfinger0770_geo.ptx", // [597]
+    "textures/isCoral/Color/fingercoral0158_geo.ptx", // [598]
+    "textures/isCoral/Color/clubbedfinger0510_geo.ptx", // [599]
+    "textures/isCoral/Color/clubbedfinger0083_geo.ptx", // [600]
+    "textures/isCoral/Color/clubbedfinger0079_geo.ptx", // [601]
+    "textures/isCoral/Color/clubbedfinger0681_geo.ptx", // [602]
+    "textures/isCoral/Color/clubbedfinger0692_geo.ptx", // [603]
+    "textures/isCoral/Color/cauliflower0028_geo.ptx", // [604]
+    "textures/isCoral/Color/fingercoral0004_geo.ptx", // [605]
+    "textures/isCoral/Color/clubbedfinger0857_geo.ptx", // [606]
+    "textures/isCoral/Color/fingercoral0056_geo.ptx", // [607]
+    "textures/isCoral/Color/antler0066_geo.ptx", // [608]
+    "textures/isCoral/Color/barnacle0107_geo.ptx", // [609]
+    "textures/isCoral/Color/seaweed0077_geo.ptx", // [610]
+    "textures/isCoral/Color/fingercoral0267_geo.ptx", // [611]
+    "textures/isCoral/Color/fingercoral0310_geo.ptx", // [612]
+    "textures/isCoral/Color/fingercoral0091_geo.ptx", // [613]
+    "textures/isCoral/Color/clubbedfinger0251_geo.ptx", // [614]
+    "textures/isCoral/Color/fingercoral0516_geo.ptx", // [615]
+    "textures/isCoral/Color/seaweed0196_geo.ptx", // [616]
+    "textures/isCoral/Color/fingercoral0001_geo.ptx", // [617]
+    "textures/isCoral/Color/seaweed0146_geo.ptx", // [618]
+    "textures/isCoral/Color/fingercoral0139_geo.ptx", // [619]
+    "textures/isCoral/Color/clubbedfinger0455_geo.ptx", // [620]
+    "textures/isCoral/Color/clubbedfinger0711_geo.ptx", // [621]
+    "textures/isCoral/Color/clubbedfinger0782_geo.ptx", // [622]
+    "textures/isCoral/Color/clubbedfinger0488_geo.ptx", // [623]
+    "textures/isCoral/Color/clubbedfinger0314_geo.ptx", // [624]
+    "textures/isCoral/Color/clubbedfinger0521_geo.ptx", // [625]
+    "textures/isCoral/Color/starhornplate0071_geo.ptx", // [626]
+    "textures/isCoral/Color/fingercoral0206_geo.ptx", // [627]
+    "textures/isCoral/Color/seaweed0316_geo.ptx", // [628]
+    "textures/isCoral/Color/seaweed0121_geo.ptx", // [629]
+    "textures/isCoral/Color/starhornplate0038_geo.ptx", // [630]
+    "textures/isCoral/Color/clubbedfinger0549_geo.ptx", // [631]
+    "textures/isCoral/Color/barnacle0089_geo.ptx", // [632]
+    "textures/isCoral/Color/fingercoral0228_geo.ptx", // [633]
+    "textures/isCoral/Color/fingercoral0137_geo.ptx", // [634]
+    "textures/isCoral/Color/clubbedfinger0431_geo.ptx", // [635]
+    "textures/isCoral/Color/clubbedfinger0091_geo.ptx", // [636]
+    "textures/isCoral/Color/clubbedfinger0246_geo.ptx", // [637]
+    "textures/isCoral/Color/clubbedfinger0640_geo.ptx", // [638]
+    "textures/isCoral/Color/clubbedfinger0702_geo.ptx", // [639]
+    "textures/isCoral/Color/fingercoral0542_geo.ptx", // [640]
+    "textures/isCoral/Color/clubbedfinger0277_geo.ptx", // [641]
+    "textures/isCoral/Color/seaweed0042_geo.ptx", // [642]
+    "textures/isCoral/Color/clubbedfinger0825_geo.ptx", // [643]
+    "textures/isCoral/Color/clubbedfinger0731_geo.ptx", // [644]
+    "textures/isCoral/Color/coralrock0033_geo.ptx", // [645]
+    "textures/isCoral/Color/clubbedfinger0598_geo.ptx", // [646]
+    "textures/isCoral/Color/fingercoral0200_geo.ptx", // [647]
+    "textures/isCoral/Color/fingercoral0313_geo.ptx", // [648]
+    "textures/isCoral/Color/clubbedfinger0112_geo.ptx", // [649]
+    "textures/isCoral/Color/clubbedfinger0059_geo.ptx", // [650]
+    "textures/isCoral/Color/clubbedfinger0375_geo.ptx", // [651]
+    "textures/isCoral/Color/coralmoss0011_geo.ptx", // [652]
+    "textures/isCoral/Color/clubbedfinger0134_geo.ptx", // [653]
+    "textures/isCoral/Color/fingercoral0262_geo.ptx", // [654]
+    "textures/isCoral/Color/clubbedfinger0433_geo.ptx", // [655]
+    "textures/isCoral/Color/starhornplate0120_geo.ptx", // [656]
+    "textures/isCoral/Color/clubbedfinger0817_geo.ptx", // [657]
+    "textures/isCoral/Color/fingercoral0184_geo.ptx", // [658]
+    "textures/isCoral/Color/seaweed0055_geo.ptx", // [659]
+    "textures/isCoral/Color/fingercoral0252_geo.ptx", // [660]
+    "textures/isCoral/Color/fingercoral0336_geo.ptx", // [661]
+    "textures/isCoral/Color/fingercoral0188_geo.ptx", // [662]
+    "textures/isCoral/Color/seaweed0211_geo.ptx", // [663]
+    "textures/isCoral/Color/barnacle0112_geo.ptx", // [664]
+    "textures/isCoral/Color/coralmoss0008_geo.ptx", // [665]
+    "textures/isCoral/Color/seaweed0228_geo.ptx", // [666]
+    "textures/isCoral/Color/barnacle0084_geo.ptx", // [667]
+    "textures/isCoral/Color/fingercoral0440_geo.ptx", // [668]
+    "textures/isCoral/Color/clubbedfinger0705_geo.ptx", // [669]
+    "textures/isCoral/Color/starhornplate0069_geo.ptx", // [670]
+    "textures/isCoral/Color/clubbedfinger0580_geo.ptx", // [671]
+    "textures/isCoral/Color/coralrock0048_geo.ptx", // [672]
+    "textures/isCoral/Color/clubbedfinger0317_geo.ptx", // [673]
+    "textures/isCoral/Color/clubbedfinger0084_geo.ptx", // [674]
+    "textures/isCoral/Color/antler0068_geo.ptx", // [675]
+    "textures/isCoral/Color/clubbedfinger0212_geo.ptx", // [676]
+    "textures/isCoral/Color/clubbedfinger0645_geo.ptx", // [677]
+    "textures/isCoral/Color/knobbybrain0013_geo.ptx", // [678]
+    "textures/isCoral/Color/archivecoral_cabbage0009_geo.ptx", // [679]
+    "textures/isCoral/Color/seaweed0256_geo.ptx", // [680]
+    "textures/isCoral/Color/clubbedfinger0186_geo.ptx", // [681]
+    "textures/isCoral/Color/starhornplate0006_geo.ptx", // [682]
+    "textures/isCoral/Color/fingercoral0114_geo.ptx", // [683]
+    "textures/isCoral/Color/barnacle0099_geo.ptx", // [684]
+    "textures/isCoral/Color/fingercoral0309_geo.ptx", // [685]
+    "textures/isCoral/Color/fingercoral0305_geo.ptx", // [686]
+    "textures/isCoral/Color/archivecoral_staghorn0007_geo.ptx", // [687]
+    "textures/isCoral/Color/seaweed0298_geo.ptx", // [688]
+    "textures/isCoral/Color/archivecoral_staghorn0006_geo.ptx", // [689]
+    "textures/isCoral/Color/barnacle0105_geo.ptx", // [690]
+    "textures/isCoral/Color/clubbedfinger0028_geo.ptx", // [691]
+    "textures/isCoral/Color/clubbedfinger0525_geo.ptx", // [692]
+    "textures/isCoral/Color/clubbedfinger0469_geo.ptx", // [693]
+    "textures/isCoral/Color/seaweed0168_geo.ptx", // [694]
+    "textures/isCoral/Color/clubbedfinger0230_geo.ptx", // [695]
+    "textures/isCoral/Color/seaweed0215_geo.ptx", // [696]
+    "textures/isCoral/Color/starhornplate0016_geo.ptx", // [697]
+    "textures/isCoral/Color/barnacle0074_geo.ptx", // [698]
+    "textures/isCoral/Color/clubbedfinger0179_geo.ptx", // [699]
+    "textures/isCoral/Color/cauliflower0021_geo.ptx", // [700]
+    "textures/isCoral/Color/clubbedfinger0146_geo.ptx", // [701]
+    "textures/isCoral/Color/clubbedfinger0528_geo.ptx", // [702]
+    "textures/isCoral/Color/antler0043_geo.ptx", // [703]
+    "textures/isCoral/Color/clubbedfinger0551_geo.ptx", // [704]
+    "textures/isCoral/Color/ricecoral0009_geo.ptx", // [705]
+    "textures/isCoral/Color/fingercoral0042_geo.ptx", // [706]
+    "textures/isCoral/Color/fingercoral0435_geo.ptx", // [707]
+    "textures/isCoral/Color/fingercoral0458_geo.ptx", // [708]
+    "textures/isCoral/Color/fingercoral0594_geo.ptx", // [709]
+    "textures/isCoral/Color/clubbedfinger0834_geo.ptx", // [710]
+    "textures/isCoral/Color/fingercoral0163_geo.ptx", // [711]
+    "textures/isCoral/Color/starhornplate0077_geo.ptx", // [712]
+    "textures/isCoral/Color/seaweed0067_geo.ptx", // [713]
+    "textures/isCoral/Color/coralstone0016_geo.ptx", // [714]
+    "textures/isCoral/Color/seaweed0065_geo.ptx", // [715]
+    "textures/isCoral/Color/starhornplate0042_geo.ptx", // [716]
+    "textures/isCoral/Color/fingercoral0235_geo.ptx", // [717]
+    "textures/isCoral/Color/fingercoral0124_geo.ptx", // [718]
+    "textures/isCoral/Color/coralmoss0010_geo.ptx", // [719]
+    "textures/isCoral/Color/clubbedfinger0370_geo.ptx", // [720]
+    "textures/isCoral/Color/barnacle0017_geo.ptx", // [721]
+    "textures/isCoral/Color/clubbedfinger0181_geo.ptx", // [722]
+    "textures/isCoral/Color/fingercoral0217_geo.ptx", // [723]
+    "textures/isCoral/Color/antler0051_geo.ptx", // [724]
+    "textures/isCoral/Color/starhornplate0096_geo.ptx", // [725]
+    "textures/isCoral/Color/clubbedfinger0587_geo.ptx", // [726]
+    "textures/isCoral/Color/starhornplate0019_geo.ptx", // [727]
+    "textures/isCoral/Color/fingercoral0564_geo.ptx", // [728]
+    "textures/isCoral/Color/clubbedfinger0615_geo.ptx", // [729]
+    "textures/isCoral/Color/seaweed0276_geo.ptx", // [730]
+    "textures/isCoral/Color/fingercoral0247_geo.ptx", // [731]
+    "textures/isCoral/Color/seaweed0086_geo.ptx", // [732]
+    "textures/isCoral/Color/barnacle0032_geo.ptx", // [733]
+    "textures/isCoral/Color/clubbedfinger0177_geo.ptx", // [734]
+    "textures/isCoral/Color/cauliflower0005_geo.ptx", // [735]
+    "textures/isCoral/Color/fingercoral0372_geo.ptx", // [736]
+    "textures/isCoral/Color/clubbedfinger0219_geo.ptx", // [737]
+    "textures/isCoral/Color/clubbedfinger0659_geo.ptx", // [738]
+    "textures/isCoral/Color/clubbedfinger0664_geo.ptx", // [739]
+    "textures/isCoral/Color/clubbedfinger0031_geo.ptx", // [740]
+    "textures/isCoral/Color/clubbedfinger0058_geo.ptx", // [741]
+    "textures/isCoral/Color/clubbedfinger0293_geo.ptx", // [742]
+    "textures/isCoral/Color/clubbedfinger0518_geo.ptx", // [743]
+    "textures/isCoral/Color/seaweed0135_geo.ptx", // [744]
+    "textures/isCoral/Color/seaweed0044_geo.ptx", // [745]
+    "textures/isCoral/Color/coralrock0013_geo.ptx", // [746]
+    "textures/isCoral/Color/clubbedfinger0740_geo.ptx", // [747]
+    "textures/isCoral/Color/seaweed0229_geo.ptx", // [748]
+    "textures/isCoral/Color/fingercoral0250_geo.ptx", // [749]
+    "textures/isCoral/Color/starhornplate0040_geo.ptx", // [750]
+    "textures/isCoral/Color/clubbedfinger0440_geo.ptx", // [751]
+    "textures/isCoral/Color/clubbedfinger0655_geo.ptx", // [752]
+    "textures/isCoral/Color/clubbedfinger0553_geo.ptx", // [753]
+    "textures/isCoral/Color/clubbedfinger0032_geo.ptx", // [754]
+    "textures/isCoral/Color/fingercoral0036_geo.ptx", // [755]
+    "textures/isCoral/Color/fingercoral0508_geo.ptx", // [756]
+    "textures/isCoral/Color/clubbedfinger0627_geo.ptx", // [757]
+    "textures/isCoral/Color/fingercoral0003_geo.ptx", // [758]
+    "textures/isCoral/Color/fingercoral0554_geo.ptx", // [759]
+    "textures/isCoral/Color/clubbedfinger0369_geo.ptx", // [760]
+    "textures/isCoral/Color/starhornplate0067_geo.ptx", // [761]
+    "textures/isCoral/Color/fingercoral0368_geo.ptx", // [762]
+    "textures/isCoral/Color/clubbedfinger0823_geo.ptx", // [763]
+    "textures/isCoral/Color/fingercoral0451_geo.ptx", // [764]
+    "textures/isCoral/Color/fingercoral0483_geo.ptx", // [765]
+    "textures/isCoral/Color/clubbedfinger0558_geo.ptx", // [766]
+    "textures/isCoral/Color/fingercoral0034_geo.ptx", // [767]
+    "textures/isCoral/Color/clubbedfinger0100_geo.ptx", // [768]
+    "textures/isCoral/Color/clubbedfinger0004_geo.ptx", // [769]
+    "textures/isCoral/Color/clubbedfinger0033_geo.ptx", // [770]
+    "textures/isCoral/Color/seaweed0247_geo.ptx", // [771]
+    "textures/isCoral/Color/antler0060_geo.ptx", // [772]
+    "textures/isCoral/Color/seaweed0233_geo.ptx", // [773]
+    "textures/isCoral/Color/clubbedfinger0002_geo.ptx", // [774]
+    "textures/isCoral/Color/clubbedfinger0728_geo.ptx", // [775]
+    "textures/isCoral/Color/clubbedfinger0276_geo.ptx", // [776]
+    "textures/isCoral/Color/fingercoral0223_geo.ptx", // [777]
+    "textures/isCoral/Color/seaweed0274_geo.ptx", // [778]
+    "textures/isCoral/Color/fingercoral0046_geo.ptx", // [779]
+    "textures/isCoral/Color/fingercoral0265_geo.ptx", // [780]
+    "textures/isCoral/Color/seaweed0181_geo.ptx", // [781]
+    "textures/isCoral/Color/clubbedfinger0733_geo.ptx", // [782]
+    "textures/isCoral/Color/knobbybrain0015_geo.ptx", // [783]
+    "textures/isCoral/Color/fingercoral0488_geo.ptx", // [784]
+    "textures/isCoral/Color/barnacle0061_geo.ptx", // [785]
+    "textures/isCoral/Color/clubbedfinger0840_geo.ptx", // [786]
+    "textures/isCoral/Color/seaweed0110_geo.ptx", // [787]
+    "textures/isCoral/Color/clubbedfinger0761_geo.ptx", // [788]
+    "textures/isCoral/Color/clubbedfinger0533_geo.ptx", // [789]
+    "textures/isCoral/Color/clubbedfinger0620_geo.ptx", // [790]
+    "textures/isCoral/Color/barnacle0020_geo.ptx", // [791]
+    "textures/isCoral/Color/fingercoral0545_geo.ptx", // [792]
+    "textures/isCoral/Color/clubbedfinger0856_geo.ptx", // [793]
+    "textures/isCoral/Color/barnacle0039_geo.ptx", // [794]
+    "textures/isCoral/Color/coralstone0002_geo.ptx", // [795]
+    "textures/isCoral/Color/clubbedfinger0648_geo.ptx", // [796]
+    "textures/isCoral/Color/clubbedfinger0491_geo.ptx", // [797]
+    "textures/isCoral/Color/fingercoral0332_geo.ptx", // [798]
+    "textures/isCoral/Color/clubbedfinger0452_geo.ptx", // [799]
+    "textures/isCoral/Color/clubbedfinger0237_geo.ptx", // [800]
+    "textures/isCoral/Color/fingercoral0540_geo.ptx", // [801]
+    "textures/isCoral/Color/clubbedfinger0619_geo.ptx", // [802]
+    "textures/isCoral/Color/clubbedfinger0822_geo.ptx", // [803]
+    "textures/isCoral/Color/antler0027_geo.ptx", // [804]
+    "textures/isCoral/Color/fingercoral0490_geo.ptx", // [805]
+    "textures/isCoral/Color/seaweed0096_geo.ptx", // [806]
+    "textures/isCoral/Color/coralrock0009_geo.ptx", // [807]
+    "textures/isCoral/Color/clubbedfinger0304_geo.ptx", // [808]
+    "textures/isCoral/Color/clubbedfinger0128_geo.ptx", // [809]
+    "textures/isCoral/Color/fingercoral0147_geo.ptx", // [810]
+    "textures/isCoral/Color/knobbybrain0004_geo.ptx", // [811]
+    "textures/isCoral/Color/fingercoral0512_geo.ptx", // [812]
+    "textures/isCoral/Color/starhornplate0085_geo.ptx", // [813]
+    "textures/isCoral/Color/clubbedfinger0511_geo.ptx", // [814]
+    "textures/isCoral/Color/fingercoral0280_geo.ptx", // [815]
+    "textures/isCoral/Color/clubbedfinger0414_geo.ptx", // [816]
+    "textures/isCoral/Color/seaweed0308_geo.ptx", // [817]
+    "textures/isCoral/Color/clubbedfinger0168_geo.ptx", // [818]
+    "textures/isCoral/Color/starhornplate0115_geo.ptx", // [819]
+    "textures/isCoral/Color/clubbedfinger0240_geo.ptx", // [820]
+    "textures/isCoral/Color/clubbedfinger0458_geo.ptx", // [821]
+    "textures/isCoral/Color/clubbedfinger0471_geo.ptx", // [822]
+    "textures/isCoral/Color/seaweed0002_geo.ptx", // [823]
+    "textures/isCoral/Color/coralstone0009_geo.ptx", // [824]
+    "textures/isCoral/Color/fingercoral0281_geo.ptx", // [825]
+    "textures/isCoral/Color/seaweed0235_geo.ptx", // [826]
+    "textures/isCoral/Color/fingercoral0350_geo.ptx", // [827]
+    "textures/isCoral/Color/clubbedfinger0685_geo.ptx", // [828]
+    "textures/isCoral/Color/clubbedfinger0684_geo.ptx", // [829]
+    "textures/isCoral/Color/clubbedfinger0519_geo.ptx", // [830]
+    "textures/isCoral/Color/antler0061_geo.ptx", // [831]
+    "textures/isCoral/Color/clubbedfinger0536_geo.ptx", // [832]
+    "textures/isCoral/Color/clubbedfinger0024_geo.ptx", // [833]
+    "textures/isCoral/Color/clubbedfinger0494_geo.ptx", // [834]
+    "textures/isCoral/Color/coralrock0055_geo.ptx", // [835]
+    "textures/isCoral/Color/clubbedfinger0777_geo.ptx", // [836]
+    "textures/isCoral/Color/fingercoral0077_geo.ptx", // [837]
+    "textures/isCoral/Color/starhornplate0093_geo.ptx", // [838]
+    "textures/isCoral/Color/clubbedfinger0420_geo.ptx", // [839]
+    "textures/isCoral/Color/clubbedfinger0165_geo.ptx", // [840]
+    "textures/isCoral/Color/clubbedfinger0275_geo.ptx", // [841]
+    "textures/isCoral/Color/fingercoral0299_geo.ptx", // [842]
+    "textures/isCoral/Color/fingercoral0010_geo.ptx", // [843]
+    "textures/isCoral/Color/fingercoral0032_geo.ptx", // [844]
+    "textures/isCoral/Color/seaweed0085_geo.ptx", // [845]
+    "textures/isCoral/Color/cauliflower0020_geo.ptx", // [846]
+    "textures/isCoral/Color/fingercoral0425_geo.ptx", // [847]
+    "textures/isCoral/Color/fingercoral0420_geo.ptx", // [848]
+    "textures/isCoral/Color/seaweed0127_geo.ptx", // [849]
+    "textures/isCoral/Color/seaweed0004_geo.ptx", // [850]
+    "textures/isCoral/Color/starhornplate0047_geo.ptx", // [851]
+    "textures/isCoral/Color/barnacle0064_geo.ptx", // [852]
+    "textures/isCoral/Color/barnacle0077_geo.ptx", // [853]
+    "textures/isCoral/Color/clubbedfinger0352_geo.ptx", // [854]
+    "textures/isCoral/Color/fingercoral0378_geo.ptx", // [855]
+    "textures/isCoral/Color/coralrock0022_geo.ptx", // [856]
+    "textures/isCoral/Color/seaweed0075_geo.ptx", // [857]
+    "textures/isCoral/Color/coralrock0062_geo.ptx", // [858]
+    "textures/isCoral/Color/fingercoral0550_geo.ptx", // [859]
+    "textures/isCoral/Color/coralrock0019_geo.ptx", // [860]
+    "textures/isCoral/Color/clubbedfinger0309_geo.ptx", // [861]
+    "textures/isCoral/Color/clubbedfinger0477_geo.ptx", // [862]
+    "textures/isCoral/Color/clubbedfinger0260_geo.ptx", // [863]
+    "textures/isCoral/Color/fingercoral0096_geo.ptx", // [864]
+    "textures/isCoral/Color/ricecoral0002_geo.ptx", // [865]
+    "textures/isCoral/Color/clubbedfinger0490_geo.ptx", // [866]
+    "textures/isCoral/Color/coralstone0023_geo.ptx", // [867]
+    "textures/isCoral/Color/fingercoral0561_geo.ptx", // [868]
+    "textures/isCoral/Color/clubbedfinger0272_geo.ptx", // [869]
+    "textures/isCoral/Color/clubbedfinger0739_geo.ptx", // [870]
+    "textures/isCoral/Color/cauliflower0001_geo.ptx", // [871]
+    "textures/isCoral/Color/clubbedfinger0392_geo.ptx", // [872]
+    "textures/isCoral/Color/clubbedfinger0007_geo.ptx", // [873]
+    "textures/isCoral/Color/seaweed0267_geo.ptx", // [874]
+    "textures/isCoral/Color/clubbedfinger0552_geo.ptx", // [875]
+    "textures/isCoral/Color/ricecoral0005_geo.ptx", // [876]
+    "textures/isCoral/Color/clubbedfinger0245_geo.ptx", // [877]
+    "textures/isCoral/Color/coralrock0006_geo.ptx", // [878]
+    "textures/isCoral/Color/fingercoral0129_geo.ptx", // [879]
+    "textures/isCoral/Color/fingercoral0245_geo.ptx", // [880]
+    "textures/isCoral/Color/coralrock0049_geo.ptx", // [881]
+    "textures/isCoral/Color/fingercoral0033_geo.ptx", // [882]
+    "textures/isCoral/Color/clubbedfinger0556_geo.ptx", // [883]
+    "textures/isCoral/Color/clubbedfinger0371_geo.ptx", // [884]
+    "textures/isCoral/Color/fingercoral0467_geo.ptx", // [885]
+    "textures/isCoral/Color/starhornplate0087_geo.ptx", // [886]
+    "textures/isCoral/Color/fingercoral0272_geo.ptx", // [887]
+    "textures/isCoral/Color/clubbedfinger0035_geo.ptx", // [888]
+    "textures/isCoral/Color/fingercoral0128_geo.ptx", // [889]
+    "textures/isCoral/Color/clubbedfinger0738_geo.ptx", // [890]
+    "textures/isCoral/Color/clubbedfinger0124_geo.ptx", // [891]
+    "textures/isCoral/Color/clubbedfinger0772_geo.ptx", // [892]
+    "textures/isCoral/Color/seaweed0218_geo.ptx", // [893]
+    "textures/isCoral/Color/fingercoral0165_geo.ptx", // [894]
+    "textures/isCoral/Color/seaweed0200_geo.ptx", // [895]
+    "textures/isCoral/Color/clubbedfinger0599_geo.ptx", // [896]
+    "textures/isCoral/Color/ricecoral0001_geo.ptx", // [897]
+    "textures/isCoral/Color/coralmoss0006_geo.ptx", // [898]
+    "textures/isCoral/Color/clubbedfinger0057_geo.ptx", // [899]
+    "textures/isCoral/Color/clubbedfinger0184_geo.ptx", // [900]
+    "textures/isCoral/Color/fingercoral0408_geo.ptx", // [901]
+    "textures/isCoral/Color/clubbedfinger0835_geo.ptx", // [902]
+    "textures/isCoral/Color/barnacle0056_geo.ptx", // [903]
+    "textures/isCoral/Color/clubbedfinger0614_geo.ptx", // [904]
+    "textures/isCoral/Color/clubbedfinger0174_geo.ptx", // [905]
+    "textures/isCoral/Color/clubbedfinger0321_geo.ptx", // [906]
+    "textures/isCoral/Color/fingercoral0416_geo.ptx", // [907]
+    "textures/isCoral/Color/starhornplate0119_geo.ptx", // [908]
+    "textures/isCoral/Color/clubbedfinger0265_geo.ptx", // [909]
+    "textures/isCoral/Color/fingercoral0459_geo.ptx", // [910]
+    "textures/isCoral/Color/seaweed0289_geo.ptx", // [911]
+    "textures/isCoral/Color/archivecoral_antler0009_geo.ptx", // [912]
+    "textures/isCoral/Color/seaweed0019_geo.ptx", // [913]
+    "textures/isCoral/Color/fingercoral0541_geo.ptx", // [914]
+    "textures/isCoral/Color/clubbedfinger0144_geo.ptx", // [915]
+    "textures/isCoral/Color/clubbedfinger0485_geo.ptx", // [916]
+    "textures/isCoral/Color/coralrock0011_geo.ptx", // [917]
+    "textures/isCoral/Color/clubbedfinger0555_geo.ptx", // [918]
+    "textures/isCoral/Color/starhornplate0028_geo.ptx", // [919]
+    "textures/isCoral/Color/fingercoral0509_geo.ptx", // [920]
+    "textures/isCoral/Color/clubbedfinger0061_geo.ptx", // [921]
+    "textures/isCoral/Color/fingercoral0242_geo.ptx", // [922]
+    "textures/isCoral/Color/seaweed0120_geo.ptx", // [923]
+    "textures/isCoral/Color/antler0074_geo.ptx", // [924]
+    "textures/isCoral/Color/clubbedfinger0120_geo.ptx", // [925]
+    "textures/isCoral/Color/clubbedfinger0082_geo.ptx", // [926]
+    "textures/isCoral/Color/seaweed0232_geo.ptx", // [927]
+    "textures/isCoral/Color/clubbedfinger0387_geo.ptx", // [928]
+    "textures/isCoral/Color/fingercoral0146_geo.ptx", // [929]
+    "textures/isCoral/Color/starhornplate0066_geo.ptx", // [930]
+    "textures/isCoral/Color/barnacle0073_geo.ptx", // [931]
+    "textures/isCoral/Color/starhornplate0111_geo.ptx", // [932]
+    "textures/isCoral/Color/fingercoral0011_geo.ptx", // [933]
+    "textures/isCoral/Color/barnacle0087_geo.ptx", // [934]
+    "textures/isCoral/Color/clubbedfinger0424_geo.ptx", // [935]
+    "textures/isCoral/Color/antler0072_geo.ptx", // [936]
+    "textures/isCoral/Color/clubbedfinger0345_geo.ptx", // [937]
+    "textures/isCoral/Color/fingercoral0486_geo.ptx", // [938]
+    "textures/isCoral/Color/clubbedfinger0748_geo.ptx", // [939]
+    "textures/isCoral/Color/clubbedfinger0385_geo.ptx", // [940]
+    "textures/isCoral/Color/fingercoral0446_geo.ptx", // [941]
+    "textures/isCoral/Color/clubbedfinger0343_geo.ptx", // [942]
+    "textures/isCoral/Color/clubbedfinger0635_geo.ptx", // [943]
+    "textures/isCoral/Color/fingercoral0457_geo.ptx", // [944]
+    "textures/isCoral/Color/seaweed0087_geo.ptx", // [945]
+    "textures/isCoral/Color/seaweed0259_geo.ptx", // [946]
+    "textures/isCoral/Color/barnacle0011_geo.ptx", // [947]
+    "textures/isCoral/Color/fingercoral0020_geo.ptx", // [948]
+    "textures/isCoral/Color/fingercoral0274_geo.ptx", // [949]
+    "textures/isCoral/Color/fingercoral0045_geo.ptx", // [950]
+    "textures/isCoral/Color/barnacle0097_geo.ptx", // [951]
+    "textures/isCoral/Color/clubbedfinger0572_geo.ptx", // [952]
+    "textures/isCoral/Color/barnacle0003_geo.ptx", // [953]
+    "textures/isCoral/Color/clubbedfinger0330_geo.ptx", // [954]
+    "textures/isCoral/Color/fingercoral0589_geo.ptx", // [955]
+    "textures/isCoral/Color/clubbedfinger0775_geo.ptx", // [956]
+    "textures/isCoral/Color/antler0047_geo.ptx", // [957]
+    "textures/isCoral/Color/fingercoral0352_geo.ptx", // [958]
+    "textures/isCoral/Color/fingercoral0210_geo.ptx", // [959]
+    "textures/isCoral/Color/fingercoral0366_geo.ptx", // [960]
+    "textures/isCoral/Color/clubbedfinger0697_geo.ptx", // [961]
+    "textures/isCoral/Color/cauliflower0018_geo.ptx", // [962]
+    "textures/isCoral/Color/fingercoral0081_geo.ptx", // [963]
+    "textures/isCoral/Color/fingercoral0585_geo.ptx", // [964]
+    "textures/isCoral/Color/clubbedfinger0508_geo.ptx", // [965]
+    "textures/isCoral/Color/seaweed0297_geo.ptx", // [966]
+    "textures/isCoral/Color/clubbedfinger0831_geo.ptx", // [967]
+    "textures/isCoral/Color/seaweed0254_geo.ptx", // [968]
+    "textures/isCoral/Color/seaweed0159_geo.ptx", // [969]
+    "textures/isCoral/Color/fingercoral0429_geo.ptx", // [970]
+    "textures/isCoral/Color/barnacle0008_geo.ptx", // [971]
+    "textures/isCoral/Color/antler0058_geo.ptx", // [972]
+    "textures/isCoral/Color/fingercoral0286_geo.ptx", // [973]
+    "textures/isCoral/Color/fingercoral0418_geo.ptx", // [974]
+    "textures/isCoral/Color/clubbedfinger0456_geo.ptx", // [975]
+    "textures/isCoral/Color/fingercoral0234_geo.ptx", // [976]
+    "textures/isCoral/Color/clubbedfinger0226_geo.ptx", // [977]
+    "textures/isCoral/Color/starhornplate0113_geo.ptx", // [978]
+    "textures/isCoral/Color/fingercoral0238_geo.ptx", // [979]
+    "textures/isCoral/Color/coralstone0006_geo.ptx", // [980]
+    "textures/isCoral/Color/fingercoral0224_geo.ptx", // [981]
+    "textures/isCoral/Color/clubbedfinger0154_geo.ptx", // [982]
+    "textures/isCoral/Color/fingercoral0412_geo.ptx", // [983]
+    "textures/isCoral/Color/fingercoral0474_geo.ptx", // [984]
+    "textures/isCoral/Color/seaweed0115_geo.ptx", // [985]
+    "textures/isCoral/Color/clubbedfinger0670_geo.ptx", // [986]
+    "textures/isCoral/Color/seaweed0062_geo.ptx", // [987]
+    "textures/isCoral/Color/fingercoral0422_geo.ptx", // [988]
+    "textures/isCoral/Color/clubbedfinger0421_geo.ptx", // [989]
+    "textures/isCoral/Color/starhornplate0010_geo.ptx", // [990]
+    "textures/isCoral/Color/clubbedfinger0010_geo.ptx", // [991]
+    "textures/isCoral/Color/clubbedfinger0574_geo.ptx", // [992]
+    "textures/isCoral/Color/clubbedfinger0838_geo.ptx", // [993]
+    "textures/isCoral/Color/seaweed0056_geo.ptx", // [994]
+    "textures/isCoral/Color/fingercoral0575_geo.ptx", // [995]
+    "textures/isCoral/Color/clubbedfinger0785_geo.ptx", // [996]
+    "textures/isCoral/Color/fingercoral0511_geo.ptx", // [997]
+    "textures/isCoral/Color/starhornplate0015_geo.ptx", // [998]
+    "textures/isCoral/Color/fingercoral0024_geo.ptx", // [999]
+    "textures/isCoral/Color/clubbedfinger0749_geo.ptx", // [1000]
+    "textures/isCoral/Color/clubbedfinger0348_geo.ptx", // [1001]
+    "textures/isCoral/Color/clubbedfinger0628_geo.ptx", // [1002]
+    "textures/isCoral/Color/clubbedfinger0594_geo.ptx", // [1003]
+    "textures/isCoral/Color/fingercoral0226_geo.ptx", // [1004]
+    "textures/isCoral/Color/fingercoral0061_geo.ptx", // [1005]
+    "textures/isCoral/Color/starhornplate0043_geo.ptx", // [1006]
+    "textures/isCoral/Color/coralrock0066_geo.ptx", // [1007]
+    "textures/isCoral/Color/clubbedfinger0641_geo.ptx", // [1008]
+    "textures/isCoral/Color/barnacle0027_geo.ptx", // [1009]
+    "textures/isCoral/Color/antler0046_geo.ptx", // [1010]
+    "textures/isCoral/Color/clubbedfinger0729_geo.ptx", // [1011]
+    "textures/isCoral/Color/coralrock0064_geo.ptx", // [1012]
+    "textures/isCoral/Color/fingercoral0123_geo.ptx", // [1013]
+    "textures/isCoral/Color/fingercoral0249_geo.ptx", // [1014]
+    "textures/isCoral/Color/seaweed0145_geo.ptx", // [1015]
+    "textures/isCoral/Color/fingercoral0362_geo.ptx", // [1016]
+    "textures/isCoral/Color/clubbedfinger0470_geo.ptx", // [1017]
+    "textures/isCoral/Color/seaweed0058_geo.ptx", // [1018]
+    "textures/isCoral/Color/fingercoral0208_geo.ptx", // [1019]
+    "textures/isCoral/Color/antler0025_geo.ptx", // [1020]
+    "textures/isCoral/Color/clubbedfinger0698_geo.ptx", // [1021]
+    "textures/isCoral/Color/barnacle0057_geo.ptx", // [1022]
+    "textures/isCoral/Color/starhornstem0004_geo.ptx", // [1023]
+    "textures/isCoral/Color/fingercoral0351_geo.ptx", // [1024]
+    "textures/isCoral/Color/coralrock0042_geo.ptx", // [1025]
+    "textures/isCoral/Color/seaweed0152_geo.ptx", // [1026]
+    "textures/isCoral/Color/starhornplate0024_geo.ptx", // [1027]
+    "textures/isCoral/Color/clubbedfinger0194_geo.ptx", // [1028]
+    "textures/isCoral/Color/clubbedfinger0861_geo.ptx", // [1029]
+    "textures/isCoral/Color/clubbedfinger0027_geo.ptx", // [1030]
+    "textures/isCoral/Color/clubbedfinger0690_geo.ptx", // [1031]
+    "textures/isCoral/Color/clubbedfinger0453_geo.ptx", // [1032]
+    "textures/isCoral/Color/clubbedfinger0167_geo.ptx", // [1033]
+    "textures/isCoral/Color/clubbedfinger0444_geo.ptx", // [1034]
+    "textures/isCoral/Color/starhornplate0048_geo.ptx", // [1035]
+    "textures/isCoral/Color/fingercoral0134_geo.ptx", // [1036]
+    "textures/isCoral/Color/clubbedfinger0018_geo.ptx", // [1037]
+    "textures/isCoral/Color/fingercoral0444_geo.ptx", // [1038]
+    "textures/isCoral/Color/clubbedfinger0408_geo.ptx", // [1039]
+    "textures/isCoral/Color/clubbedfinger0372_geo.ptx", // [1040]
+    "textures/isCoral/Color/clubbedfinger0359_geo.ptx", // [1041]
+    "textures/isCoral/Color/clubbedfinger0745_geo.ptx", // [1042]
+    "textures/isCoral/Color/fingercoral0316_geo.ptx", // [1043]
+    "textures/isCoral/Color/fingercoral0219_geo.ptx", // [1044]
+    "textures/isCoral/Color/starhornplate0103_geo.ptx", // [1045]
+    "textures/isCoral/Color/clubbedfinger0851_geo.ptx", // [1046]
+    "textures/isCoral/Color/seaweed0014_geo.ptx", // [1047]
+    "textures/isCoral/Color/coralrock0014_geo.ptx", // [1048]
+    "textures/isCoral/Color/clubbedfinger0123_geo.ptx", // [1049]
+    "textures/isCoral/Color/seaweed0097_geo.ptx", // [1050]
+    "textures/isCoral/Color/clubbedfinger0013_geo.ptx", // [1051]
+    "textures/isCoral/Color/fingercoral0491_geo.ptx", // [1052]
+    "textures/isCoral/Color/clubbedfinger0503_geo.ptx", // [1053]
+    "textures/isCoral/Color/fingercoral0391_geo.ptx", // [1054]
+    "textures/isCoral/Color/clubbedfinger0069_geo.ptx", // [1055]
+    "textures/isCoral/Color/starhornplate0045_geo.ptx", // [1056]
+    "textures/isCoral/Color/clubbedfinger0286_geo.ptx", // [1057]
+    "textures/isCoral/Color/fingercoral0151_geo.ptx", // [1058]
+    "textures/isCoral/Color/starhornplate0061_geo.ptx", // [1059]
+    "textures/isCoral/Color/seaweed0049_geo.ptx", // [1060]
+    "textures/isCoral/Color/coralrock0039_geo.ptx", // [1061]
+    "textures/isCoral/Color/seaweed0041_geo.ptx", // [1062]
+    "textures/isCoral/Color/fingercoral0432_geo.ptx", // [1063]
+    "textures/isCoral/Color/cauliflower0008_geo.ptx", // [1064]
+    "textures/isCoral/Color/clubbedfinger0311_geo.ptx", // [1065]
+    "textures/isCoral/Color/clubbedfinger0234_geo.ptx", // [1066]
+    "textures/isCoral/Color/clubbedfinger0287_geo.ptx", // [1067]
+    "textures/isCoral/Color/coralrock0016_geo.ptx", // [1068]
+    "textures/isCoral/Color/clubbedfinger0258_geo.ptx", // [1069]
+    "textures/isCoral/Color/seaweed0100_geo.ptx", // [1070]
+    "textures/isCoral/Color/fingercoral0426_geo.ptx", // [1071]
+    "textures/isCoral/Color/seaweed0303_geo.ptx", // [1072]
+    "textures/isCoral/Color/clubbedfinger0593_geo.ptx", // [1073]
+    "textures/isCoral/Color/clubbedfinger0233_geo.ptx", // [1074]
+    "textures/isCoral/Color/clubbedfinger0116_geo.ptx", // [1075]
+    "textures/isCoral/Color/clubbedfinger0153_geo.ptx", // [1076]
+    "textures/isCoral/Color/starhornplate0002_geo.ptx", // [1077]
+    "textures/isCoral/Color/fingercoral0174_geo.ptx", // [1078]
+    "textures/isCoral/Color/seaweed0144_geo.ptx", // [1079]
+    "textures/isCoral/Color/starhornplate0108_geo.ptx", // [1080]
+    "textures/isCoral/Color/starhornplate0055_geo.ptx", // [1081]
+    "textures/isCoral/Color/seaweed0064_geo.ptx", // [1082]
+    "textures/isCoral/Color/clubbedfinger0271_geo.ptx", // [1083]
+    "textures/isCoral/Color/fingercoral0546_geo.ptx", // [1084]
+    "textures/isCoral/Color/clubbedfinger0677_geo.ptx", // [1085]
+    "textures/isCoral/Color/fingercoral0538_geo.ptx", // [1086]
+    "textures/isCoral/Color/fingercoral0622_geo.ptx", // [1087]
+    "textures/isCoral/Color/fingercoral0470_geo.ptx", // [1088]
+    "textures/isCoral/Color/seaweed0153_geo.ptx", // [1089]
+    "textures/isCoral/Color/fingercoral0101_geo.ptx", // [1090]
+    "textures/isCoral/Color/clubbedfinger0404_geo.ptx", // [1091]
+    "textures/isCoral/Color/antler0054_geo.ptx", // [1092]
+    "textures/isCoral/Color/fingercoral0157_geo.ptx", // [1093]
+    "textures/isCoral/Color/fingercoral0445_geo.ptx", // [1094]
+    "textures/isCoral/Color/fingercoral0521_geo.ptx", // [1095]
+    "textures/isCoral/Color/seaweed0243_geo.ptx", // [1096]
+    "textures/isCoral/Color/seaweed0093_geo.ptx", // [1097]
+    "textures/isCoral/Color/seaweed0091_geo.ptx", // [1098]
+    "textures/isCoral/Color/seaweed0216_geo.ptx", // [1099]
+    "textures/isCoral/Color/seaweed0057_geo.ptx", // [1100]
+    "textures/isCoral/Color/clubbedfinger0075_geo.ptx", // [1101]
+    "textures/isCoral/Color/fingercoral0605_geo.ptx", // [1102]
+    "textures/isCoral/Color/clubbedfinger0810_geo.ptx", // [1103]
+    "textures/isCoral/Color/seaweed0180_geo.ptx", // [1104]
+    "textures/isCoral/Color/clubbedfinger0366_geo.ptx", // [1105]
+    "textures/isCoral/Color/clubbedfinger0376_geo.ptx", // [1106]
+    "textures/isCoral/Color/clubbedfinger0269_geo.ptx", // [1107]
+    "textures/isCoral/Color/fingercoral0292_geo.ptx", // [1108]
+    "textures/isCoral/Color/fingercoral0289_geo.ptx", // [1109]
+    "textures/isCoral/Color/fingercoral0263_geo.ptx", // [1110]
+    "textures/isCoral/Color/seaweed0150_geo.ptx", // [1111]
+    "textures/isCoral/Color/coralrock0060_geo.ptx", // [1112]
+    "textures/isCoral/Color/clubbedfinger0566_geo.ptx", // [1113]
+    "textures/isCoral/Color/seaweed0253_geo.ptx", // [1114]
+    "textures/isCoral/Color/barnacle0101_geo.ptx", // [1115]
+    "textures/isCoral/Color/fingercoral0414_geo.ptx", // [1116]
+    "textures/isCoral/Color/coralstone0017_geo.ptx", // [1117]
+    "textures/isCoral/Color/fingercoral0364_geo.ptx", // [1118]
+    "textures/isCoral/Color/clubbedfinger0448_geo.ptx", // [1119]
+    "textures/isCoral/Color/fingercoral0106_geo.ptx", // [1120]
+    "textures/isCoral/Color/fingercoral0202_geo.ptx", // [1121]
+    "textures/isCoral/Color/fingercoral0534_geo.ptx", // [1122]
+    "textures/isCoral/Color/fingercoral0447_geo.ptx", // [1123]
+    "textures/isCoral/Color/seaweed0166_geo.ptx", // [1124]
+    "textures/isCoral/Color/barnacle0090_geo.ptx", // [1125]
+    "textures/isCoral/Color/clubbedfinger0746_geo.ptx", // [1126]
+    "textures/isCoral/Color/clubbedfinger0188_geo.ptx", // [1127]
+    "textures/isCoral/Color/fingercoral0327_geo.ptx", // [1128]
+    "textures/isCoral/Color/clubbedfinger0483_geo.ptx", // [1129]
+    "textures/isCoral/Color/fingercoral0074_geo.ptx", // [1130]
+    "textures/isCoral/Color/coralrock0057_geo.ptx", // [1131]
+    "textures/isCoral/Color/fingercoral0384_geo.ptx", // [1132]
+    "textures/isCoral/Color/clubbedfinger0824_geo.ptx", // [1133]
+    "textures/isCoral/Color/barnacle0065_geo.ptx", // [1134]
+    "textures/isCoral/Color/clubbedfinger0803_geo.ptx", // [1135]
+    "textures/isCoral/Color/coralmoss0009_geo.ptx", // [1136]
+    "textures/isCoral/Color/seaweed0287_geo.ptx", // [1137]
+    "textures/isCoral/Color/starhornplate0049_geo.ptx", // [1138]
+    "textures/isCoral/Color/fingercoral0100_geo.ptx", // [1139]
+    "textures/isCoral/Color/fingercoral0322_geo.ptx", // [1140]
+    "textures/isCoral/Color/barnacle0034_geo.ptx", // [1141]
+    "textures/isCoral/Color/barnacle0033_geo.ptx", // [1142]
+    "textures/isCoral/Color/clubbedfinger0622_geo.ptx", // [1143]
+    "textures/isCoral/Color/fingercoral0596_geo.ptx", // [1144]
+    "textures/isCoral/Color/clubbedfinger0183_geo.ptx", // [1145]
+    "textures/isCoral/Color/ricecoral0012_geo.ptx", // [1146]
+    "textures/isCoral/Color/clubbedfinger0358_geo.ptx", // [1147]
+    "textures/isCoral/Color/fingercoral0014_geo.ptx", // [1148]
+    "textures/isCoral/Color/barnacle0059_geo.ptx", // [1149]
+    "textures/isCoral/Color/clubbedfinger0482_geo.ptx", // [1150]
+    "textures/isCoral/Color/seaweed0219_geo.ptx", // [1151]
+    "textures/isCoral/Color/clubbedfinger0795_geo.ptx", // [1152]
+    "textures/isCoral/Color/clubbedfinger0228_geo.ptx", // [1153]
+    "textures/isCoral/Color/clubbedfinger0567_geo.ptx", // [1154]
+    "textures/isCoral/Color/fingercoral0027_geo.ptx", // [1155]
+    "textures/isCoral/Color/fingercoral0592_geo.ptx", // [1156]
+    "textures/isCoral/Color/fingercoral0321_geo.ptx", // [1157]
+    "textures/isCoral/Color/fingercoral0455_geo.ptx", // [1158]
+    "textures/isCoral/Color/barnacle0093_geo.ptx", // [1159]
+    "textures/isCoral/Color/barnacle0010_geo.ptx", // [1160]
+    "textures/isCoral/Color/coralstone0001_geo.ptx", // [1161]
+    "textures/isCoral/Color/clubbedfinger0306_geo.ptx", // [1162]
+    "textures/isCoral/Color/fingercoral0094_geo.ptx", // [1163]
+    "textures/isCoral/Color/fingercoral0549_geo.ptx", // [1164]
+    "textures/isCoral/Color/cauliflower0029_geo.ptx", // [1165]
+    "textures/isCoral/Color/clubbedfinger0603_geo.ptx", // [1166]
+    "textures/isCoral/Color/fingercoral0485_geo.ptx", // [1167]
+    "textures/isCoral/Color/starhornplate0072_geo.ptx", // [1168]
+    "textures/isCoral/Color/clubbedfinger0215_geo.ptx", // [1169]
+    "textures/isCoral/Color/fingercoral0484_geo.ptx", // [1170]
+    "textures/isCoral/Color/fingercoral0276_geo.ptx", // [1171]
+    "textures/isCoral/Color/clubbedfinger0847_geo.ptx", // [1172]
+    "textures/isCoral/Color/clubbedfinger0351_geo.ptx", // [1173]
+    "textures/isCoral/Color/seaweed0130_geo.ptx", // [1174]
+    "textures/isCoral/Color/coralrock0067_geo.ptx", // [1175]
+    "textures/isCoral/Color/barnacle0060_geo.ptx", // [1176]
+    "textures/isCoral/Color/archivecoral_cabbage0001_geo.ptx", // [1177]
+    "textures/isCoral/Color/fingercoral0371_geo.ptx", // [1178]
+    "textures/isCoral/Color/clubbedfinger0842_geo.ptx", // [1179]
+    "textures/isCoral/Color/ricecoral0004_geo.ptx", // [1180]
+    "textures/isCoral/Color/fingercoral0201_geo.ptx", // [1181]
+    "textures/isCoral/Color/clubbedfinger0754_geo.ptx", // [1182]
+    "textures/isCoral/Color/fingercoral0159_geo.ptx", // [1183]
+    "textures/isCoral/Color/fingercoral0122_geo.ptx", // [1184]
+    "textures/isCoral/Color/clubbedfinger0021_geo.ptx", // [1185]
+    "textures/isCoral/Color/seaweed0302_geo.ptx", // [1186]
+    "textures/isCoral/Color/seaweed0209_geo.ptx", // [1187]
+    "textures/isCoral/Color/barnacle0025_geo.ptx", // [1188]
+    "textures/isCoral/Color/barnacle0069_geo.ptx", // [1189]
+    "textures/isCoral/Color/clubbedfinger0193_geo.ptx", // [1190]
+    "textures/isCoral/Color/clubbedfinger0298_geo.ptx", // [1191]
+    "textures/isCoral/Color/fingercoral0427_geo.ptx", // [1192]
+    "textures/isCoral/Color/clubbedfinger0284_geo.ptx", // [1193]
+    "textures/isCoral/Color/fingercoral0087_geo.ptx", // [1194]
+    "textures/isCoral/Color/clubbedfinger0576_geo.ptx", // [1195]
+    "textures/isCoral/Color/clubbedfinger0747_geo.ptx", // [1196]
+    "textures/isCoral/Color/fingercoral0377_geo.ptx", // [1197]
+    "textures/isCoral/Color/clubbedfinger0356_geo.ptx", // [1198]
+    "textures/isCoral/Color/clubbedfinger0409_geo.ptx", // [1199]
+    "textures/isCoral/Color/clubbedthumb_d0001_geo.ptx", // [1200]
+    "textures/isCoral/Color/clubbedfinger0839_geo.ptx", // [1201]
+    "textures/isCoral/Color/clubbedfinger0501_geo.ptx", // [1202]
+    "textures/isCoral/Color/seaweed0102_geo.ptx", // [1203]
+    "textures/isCoral/Color/seaweed0140_geo.ptx", // [1204]
+    "textures/isCoral/Color/fingercoral0514_geo.ptx", // [1205]
+    "textures/isCoral/Color/knobbybrain0008_geo.ptx", // [1206]
+    "textures/isCoral/Color/clubbedfinger0346_geo.ptx", // [1207]
+    "textures/isCoral/Color/clubbedfinger0523_geo.ptx", // [1208]
+    "textures/isCoral/Color/clubbedfinger0780_geo.ptx", // [1209]
+    "textures/isCoral/Color/archivecoral_staghorn0001_geo.ptx", // [1210]
+    "textures/isCoral/Color/clubbedfinger0436_geo.ptx", // [1211]
+    "textures/isCoral/Color/clubbedfinger0561_geo.ptx", // [1212]
+    "textures/isCoral/Color/antler0029_geo.ptx", // [1213]
+    "textures/isCoral/Color/clubbedfinger0626_geo.ptx", // [1214]
+    "textures/isCoral/Color/seaweed0214_geo.ptx", // [1215]
+    "textures/isCoral/Color/clubbedfinger0150_geo.ptx", // [1216]
+    "textures/isCoral/Color/clubbedfinger0070_geo.ptx", // [1217]
+    "textures/isCoral/Color/clubbedfinger0860_geo.ptx", // [1218]
+    "textures/isCoral/Color/antler0038_geo.ptx", // [1219]
+    "textures/isCoral/Color/barnacle0079_geo.ptx", // [1220]
+    "textures/isCoral/Color/clubbedfinger0543_geo.ptx", // [1221]
+    "textures/isCoral/Color/coralstone0012_geo.ptx", // [1222]
+    "textures/isCoral/Color/seaweed0221_geo.ptx", // [1223]
+    "textures/isCoral/Color/clubbedfinger0540_geo.ptx", // [1224]
+    "textures/isCoral/Color/clubbedfinger0647_geo.ptx", // [1225]
+    "textures/isCoral/Color/starhornplate0095_geo.ptx", // [1226]
+    "textures/isCoral/Color/clubbedfinger0472_geo.ptx", // [1227]
+    "textures/isCoral/Color/clubbedfinger0730_geo.ptx", // [1228]
+    "textures/isCoral/Color/starhornplate0023_geo.ptx", // [1229]
+    "textures/isCoral/Color/fingercoral0013_geo.ptx", // [1230]
+    "textures/isCoral/Color/fingercoral0449_geo.ptx", // [1231]
+    "textures/isCoral/Color/seaweed0212_geo.ptx", // [1232]
+    "textures/isCoral/Color/fingercoral0324_geo.ptx", // [1233]
+    "textures/isCoral/Color/seaweed0257_geo.ptx", // [1234]
+    "textures/isCoral/Color/clubbedfinger0601_geo.ptx", // [1235]
+    "textures/isCoral/Color/clubbedfinger0665_geo.ptx", // [1236]
+    "textures/isCoral/Color/clubbedfinger0247_geo.ptx", // [1237]
+    "textures/isCoral/Color/seaweed0037_geo.ptx", // [1238]
+    "textures/isCoral/Color/clubbedfinger0221_geo.ptx", // [1239]
+    "textures/isCoral/Color/seaweed0160_geo.ptx", // [1240]
+    "textures/isCoral/Color/seaweed0104_geo.ptx", // [1241]
+    "textures/isCoral/Color/fingercoral0148_geo.ptx", // [1242]
+    "textures/isCoral/Color/seaweed0296_geo.ptx", // [1243]
+    "textures/isCoral/Color/seaweed0161_geo.ptx", // [1244]
+    "textures/isCoral/Color/clubbedfinger0323_geo.ptx", // [1245]
+    "textures/isCoral/Color/antler0011_geo.ptx", // [1246]
+    "textures/isCoral/Color/starhornplate0073_geo.ptx", // [1247]
+    "textures/isCoral/Color/clubbedfinger0674_geo.ptx", // [1248]
+    "textures/isCoral/Color/seaweed0141_geo.ptx", // [1249]
+    "textures/isCoral/Color/fingercoral0072_geo.ptx", // [1250]
+    "textures/isCoral/Color/antler0026_geo.ptx", // [1251]
+    "textures/isCoral/Color/barnacle0052_geo.ptx", // [1252]
+    "textures/isCoral/Color/coralrock0036_geo.ptx", // [1253]
+    "textures/isCoral/Color/seaweed0078_geo.ptx", // [1254]
+    "textures/isCoral/Color/fingercoral0073_geo.ptx", // [1255]
+    "textures/isCoral/Color/clubbedfinger0162_geo.ptx", // [1256]
+    "textures/isCoral/Color/clubbedfinger0397_geo.ptx", // [1257]
+    "textures/isCoral/Color/coralrock0046_geo.ptx", // [1258]
+    "textures/isCoral/Color/fingercoral0284_geo.ptx", // [1259]
+    "textures/isCoral/Color/clubbedfinger0737_geo.ptx", // [1260]
+    "textures/isCoral/Color/clubbedfinger0827_geo.ptx", // [1261]
+    "textures/isCoral/Color/fingercoral0539_geo.ptx", // [1262]
+    "textures/isCoral/Color/fingercoral0049_geo.ptx", // [1263]
+    "textures/isCoral/Color/knobbybrain0005_geo.ptx", // [1264]
+    "textures/isCoral/Color/fingercoral0005_geo.ptx", // [1265]
+    "textures/isCoral/Color/seaweed0206_geo.ptx", // [1266]
+    "textures/isCoral/Color/clubbedfinger0597_geo.ptx", // [1267]
+    "textures/isCoral/Color/clubbedfinger0437_geo.ptx", // [1268]
+    "textures/isCoral/Color/clubbedfinger0239_geo.ptx", // [1269]
+    "textures/isCoral/Color/fingercoral0120_geo.ptx", // [1270]
+    "textures/isCoral/Color/clubbedfinger0726_geo.ptx", // [1271]
+    "textures/isCoral/Color/clubbedfinger0227_geo.ptx", // [1272]
+    "textures/isCoral/Color/antler0009_geo.ptx", // [1273]
+    "textures/isCoral/Color/clubbedfinger0447_geo.ptx", // [1274]
+    "textures/isCoral/Color/clubbedfinger0676_geo.ptx", // [1275]
+    "textures/isCoral/Color/cauliflower0010_geo.ptx", // [1276]
+    "textures/isCoral/Color/barnacle0080_geo.ptx", // [1277]
+    "textures/isCoral/Color/antler0065_geo.ptx", // [1278]
+    "textures/isCoral/Color/seaweed0122_geo.ptx", // [1279]
+    "textures/isCoral/Color/clubbedfinger0282_geo.ptx", // [1280]
+    "textures/isCoral/Color/fingercoral0397_geo.ptx", // [1281]
+    "textures/isCoral/Color/antler0004_geo.ptx", // [1282]
+    "textures/isCoral/Color/clubbedfinger0401_geo.ptx", // [1283]
+    "textures/isCoral/Color/clubbedfinger0066_geo.ptx", // [1284]
+    "textures/isCoral/Color/seaweed0054_geo.ptx", // [1285]
+    "textures/isCoral/Color/barnacle0044_geo.ptx", // [1286]
+    "textures/isCoral/Color/clubbedfinger0398_geo.ptx", // [1287]
+    "textures/isCoral/Color/archivecoral_cabbage0003_geo.ptx", // [1288]
+    "textures/isCoral/Color/barnacle0078_geo.ptx", // [1289]
+    "textures/isCoral/Color/clubbedfinger0481_geo.ptx", // [1290]
+    "textures/isCoral/Color/seaweed0187_geo.ptx", // [1291]
+    "textures/isCoral/Color/clubbedfinger0264_geo.ptx", // [1292]
+    "textures/isCoral/Color/barnacle0040_geo.ptx", // [1293]
+    "textures/isCoral/Color/fingercoral0463_geo.ptx", // [1294]
+    "textures/isCoral/Color/fingercoral0043_geo.ptx", // [1295]
+    "textures/isCoral/Color/fingercoral0503_geo.ptx", // [1296]
+    "textures/isCoral/Color/fingercoral0102_geo.ptx", // [1297]
+    "textures/isCoral/Color/starhornplate0058_geo.ptx", // [1298]
+    "textures/isCoral/Color/clubbedfinger0717_geo.ptx", // [1299]
+    "textures/isCoral/Color/clubbedfinger0463_geo.ptx", // [1300]
+    "textures/isCoral/Color/barnacle0054_geo.ptx", // [1301]
+    "textures/isCoral/Color/clubbedfinger0199_geo.ptx", // [1302]
+    "textures/isCoral/Color/clubbedfinger0820_geo.ptx", // [1303]
+    "textures/isCoral/Color/fingercoral0241_geo.ptx", // [1304]
+    "textures/isCoral/Color/clubbedfinger0727_geo.ptx", // [1305]
+    "textures/isCoral/Color/clubbedfinger0163_geo.ptx", // [1306]
+    "textures/isCoral/Color/fingercoral0214_geo.ptx", // [1307]
+    "textures/isCoral/Color/clubbedfinger0814_geo.ptx", // [1308]
+    "textures/isCoral/Color/clubbedfinger0826_geo.ptx", // [1309]
+    "textures/isCoral/Color/coralrock0027_geo.ptx", // [1310]
+    "textures/isCoral/Color/fingercoral0338_geo.ptx", // [1311]
+    "textures/isCoral/Color/seaweed0192_geo.ptx", // [1312]
+    "textures/isCoral/Color/clubbedfinger0707_geo.ptx", // [1313]
+    "textures/isCoral/Color/clubbedfinger0367_geo.ptx", // [1314]
+    "textures/isCoral/Color/barnacle0021_geo.ptx", // [1315]
+    "textures/isCoral/Color/fingercoral0462_geo.ptx", // [1316]
+    "textures/isCoral/Color/clubbedfinger0562_geo.ptx", // [1317]
+    "textures/isCoral/Color/clubbedfinger0539_geo.ptx", // [1318]
+    "textures/isCoral/Color/clubbedfinger0316_geo.ptx", // [1319]
+    "textures/isCoral/Color/clubbedfinger0571_geo.ptx", // [1320]
+    "textures/isCoral/Color/clubbedfinger0683_geo.ptx", // [1321]
+    "textures/isCoral/Color/fingercoral0376_geo.ptx", // [1322]
+    "textures/isCoral/Color/clubbedfinger0585_geo.ptx", // [1323]
+    "textures/isCoral/Color/fingercoral0586_geo.ptx", // [1324]
+    "textures/isCoral/Color/seaweed0273_geo.ptx", // [1325]
+    "textures/isCoral/Color/fingercoral0183_geo.ptx", // [1326]
+    "textures/isCoral/Color/clubbedfinger0326_geo.ptx", // [1327]
+    "textures/isCoral/Color/clubbedfinger0045_geo.ptx", // [1328]
+    "textures/isCoral/Color/fingercoral0460_geo.ptx", // [1329]
+    "textures/isCoral/Color/clubbedfinger0362_geo.ptx", // [1330]
+    "textures/isCoral/Color/clubbedfinger0039_geo.ptx", // [1331]
+    "textures/isCoral/Color/coralrock0005_geo.ptx", // [1332]
+    "textures/isCoral/Color/clubbedfinger0368_geo.ptx", // [1333]
+    "textures/isCoral/Color/clubbedfinger0606_geo.ptx", // [1334]
+    "textures/isCoral/Color/fingercoral0599_geo.ptx", // [1335]
+    "textures/isCoral/Color/clubbedfinger0255_geo.ptx", // [1336]
+    "textures/isCoral/Color/seaweed0268_geo.ptx", // [1337]
+    "textures/isCoral/Color/fingercoral0396_geo.ptx", // [1338]
+    "textures/isCoral/Color/starhornplate0098_geo.ptx", // [1339]
+    "textures/isCoral/Color/barnacle0092_geo.ptx", // [1340]
+    "textures/isCoral/Color/seaweed0017_geo.ptx", // [1341]
+    "textures/isCoral/Color/coralrock0054_geo.ptx", // [1342]
+    "textures/isCoral/Color/fingercoral0053_geo.ptx", // [1343]
+    "textures/isCoral/Color/antler0015_geo.ptx", // [1344]
+    "textures/isCoral/Color/clubbedfinger0025_geo.ptx", // [1345]
+    "textures/isCoral/Color/fingercoral0428_geo.ptx", // [1346]
+    "textures/isCoral/Color/seaweed0251_geo.ptx", // [1347]
+    "textures/isCoral/Color/antler0031_geo.ptx", // [1348]
+    "textures/isCoral/Color/fingercoral0211_geo.ptx", // [1349]
+    "textures/isCoral/Color/fingercoral0501_geo.ptx", // [1350]
+    "textures/isCoral/Color/clubbedfinger0535_geo.ptx", // [1351]
+    "textures/isCoral/Color/clubbedfinger0800_geo.ptx", // [1352]
+    "textures/isCoral/Color/clubbedfinger0773_geo.ptx", // [1353]
+    "textures/isCoral/Color/clubbedfinger0074_geo.ptx", // [1354]
+    "textures/isCoral/Color/clubbedfinger0086_geo.ptx", // [1355]
+    "textures/isCoral/Color/fingercoral0144_geo.ptx", // [1356]
+    "textures/isCoral/Color/fingercoral0243_geo.ptx", // [1357]
+    "textures/isCoral/Color/clubbedfinger0022_geo.ptx", // [1358]
+    "textures/isCoral/Color/fingercoral0209_geo.ptx", // [1359]
+    "textures/isCoral/Color/clubbedfinger0632_geo.ptx", // [1360]
+    "textures/isCoral/Color/antler0012_geo.ptx", // [1361]
+    "textures/isCoral/Color/barnacle0050_geo.ptx", // [1362]
+    "textures/isCoral/Color/fingercoral0047_geo.ptx", // [1363]
+    "textures/isCoral/Color/clubbedfinger0532_geo.ptx", // [1364]
+    "textures/isCoral/Color/cauliflower0023_geo.ptx", // [1365]
+    "textures/isCoral/Color/clubbedfinger0218_geo.ptx", // [1366]
+    "textures/isCoral/Color/archivecoral_antler0002_geo.ptx", // [1367]
+    "textures/isCoral/Color/clubbedfinger0524_geo.ptx", // [1368]
+    "textures/isCoral/Color/seaweed0222_geo.ptx", // [1369]
+    "textures/isCoral/Color/clubbedfinger0568_geo.ptx", // [1370]
+    "textures/isCoral/Color/seaweed0128_geo.ptx", // [1371]
+    "textures/isCoral/Color/clubbedfinger0098_geo.ptx", // [1372]
+    "textures/isCoral/Color/clubbedfinger0268_geo.ptx", // [1373]
+    "textures/isCoral/Color/clubbedfinger0849_geo.ptx", // [1374]
+    "textures/isCoral/Color/clubbedfinger0673_geo.ptx", // [1375]
+    "textures/isCoral/Color/fingercoral0356_geo.ptx", // [1376]
+    "textures/isCoral/Color/fingercoral0328_geo.ptx", // [1377]
+    "textures/isCoral/Color/fingercoral0454_geo.ptx", // [1378]
+    "textures/isCoral/Color/fingercoral0419_geo.ptx", // [1379]
+    "textures/isCoral/Color/clubbedfinger0776_geo.ptx", // [1380]
+    "textures/isCoral/Color/clubbedfinger0137_geo.ptx", // [1381]
+    "textures/isCoral/Color/fingercoral0152_geo.ptx", // [1382]
+    "textures/isCoral/Color/starhornplate0106_geo.ptx", // [1383]
+    "textures/isCoral/Color/fingercoral0559_geo.ptx", // [1384]
+    "textures/isCoral/Color/clubbedfinger0029_geo.ptx", // [1385]
+    "textures/isCoral/Color/clubbedfinger0623_geo.ptx", // [1386]
+    "textures/isCoral/Color/clubbedfinger0130_geo.ptx", // [1387]
+    "textures/isCoral/Color/seaweed0072_geo.ptx", // [1388]
+    "textures/isCoral/Color/seaweed0281_geo.ptx", // [1389]
+    "textures/isCoral/Color/seaweed0205_geo.ptx", // [1390]
+    "textures/isCoral/Color/starhornplate0035_geo.ptx", // [1391]
+    "textures/isCoral/Color/clubbedfinger0841_geo.ptx", // [1392]
+    "textures/isCoral/Color/seaweed0265_geo.ptx", // [1393]
+    "textures/isCoral/Color/clubbedfinger0774_geo.ptx", // [1394]
+    "textures/isCoral/Color/clubbedfinger0210_geo.ptx", // [1395]
+    "textures/isCoral/Color/fingercoral0093_geo.ptx", // [1396]
+    "textures/isCoral/Color/seaweed0198_geo.ptx", // [1397]
+    "textures/isCoral/Color/antler0044_geo.ptx", // [1398]
+    "textures/isCoral/Color/fingercoral0477_geo.ptx", // [1399]
+    "textures/isCoral/Color/clubbedfinger0142_geo.ptx", // [1400]
+    "textures/isCoral/Color/fingercoral0143_geo.ptx", // [1401]
+    "textures/isCoral/Color/archivecoral_staghorn0004_geo.ptx", // [1402]
+    "textures/isCoral/Color/starhornplate0039_geo.ptx", // [1403]
+    "textures/isCoral/Color/clubbedfinger0118_geo.ptx", // [1404]
+    "textures/isCoral/Color/clubbedfinger0001_geo.ptx", // [1405]
+    "textures/isCoral/Color/fingercoral0104_geo.ptx", // [1406]
+    "textures/isCoral/Color/clubbedfinger0034_geo.ptx", // [1407]
+    "textures/isCoral/Color/barnacle0004_geo.ptx", // [1408]
+    "textures/isCoral/Color/fingercoral0279_geo.ptx", // [1409]
+    "textures/isCoral/Color/clubbedfinger0579_geo.ptx", // [1410]
+    "textures/isCoral/Color/starhornplate0056_geo.ptx", // [1411]
+    "textures/isCoral/Color/fingercoral0312_geo.ptx", // [1412]
+    "textures/isCoral/Color/clubbedfinger0583_geo.ptx", // [1413]
+    "textures/isCoral/Color/barnacle0042_geo.ptx", // [1414]
+    "textures/isCoral/Color/fingercoral0385_geo.ptx", // [1415]
+    "textures/isCoral/Color/clubbedfinger0613_geo.ptx", // [1416]
+    "textures/isCoral/Color/starhornplate0027_geo.ptx", // [1417]
+    "textures/isCoral/Color/clubbedfinger0771_geo.ptx", // [1418]
+    "textures/isCoral/Color/seaweed0202_geo.ptx", // [1419]
+    "textures/isCoral/Color/clubbedfinger0699_geo.ptx", // [1420]
+    "textures/isCoral/Color/clubbedfinger0354_geo.ptx", // [1421]
+    "textures/isCoral/Color/seaweed0311_geo.ptx", // [1422]
+    "textures/isCoral/Color/fingercoral0060_geo.ptx", // [1423]
+    "textures/isCoral/Color/clubbedfinger0336_geo.ptx", // [1424]
+    "textures/isCoral/Color/clubbedfinger0607_geo.ptx", // [1425]
+    "textures/isCoral/Color/barnacle0022_geo.ptx", // [1426]
+    "textures/isCoral/Color/archivecoral_cabbage0005_geo.ptx", // [1427]
+    "textures/isCoral/Color/clubbedfinger0504_geo.ptx", // [1428]
+    "textures/isCoral/Color/fingercoral0379_geo.ptx", // [1429]
+    "textures/isCoral/Color/fingercoral0619_geo.ptx", // [1430]
+    "textures/isCoral/Color/coralrock0024_geo.ptx", // [1431]
+    "textures/isCoral/Color/fingercoral0066_geo.ptx", // [1432]
+    "textures/isCoral/Color/cauliflower0027_geo.ptx", // [1433]
+    "textures/isCoral/Color/fingercoral0212_geo.ptx", // [1434]
+    "textures/isCoral/Color/seaweed0307_geo.ptx", // [1435]
+    "textures/isCoral/Color/fingercoral0595_geo.ptx", // [1436]
+    "textures/isCoral/Color/clubbedfinger0363_geo.ptx", // [1437]
+    "textures/isCoral/Color/fingercoral0030_geo.ptx", // [1438]
+    "textures/isCoral/Color/barnacle0071_geo.ptx", // [1439]
+    "textures/isCoral/Color/clubbedfinger0832_geo.ptx", // [1440]
+    "textures/isCoral/Color/clubbedfinger0787_geo.ptx", // [1441]
+    "textures/isCoral/Color/clubbedfinger0589_geo.ptx", // [1442]
+    "textures/isCoral/Color/seaweed0132_geo.ptx", // [1443]
+    "textures/isCoral/Color/clubbedfinger0133_geo.ptx", // [1444]
+    "textures/isCoral/Color/antler0062_geo.ptx", // [1445]
+    "textures/isCoral/Color/fingercoral0361_geo.ptx", // [1446]
+    "textures/isCoral/Color/clubbedfinger0169_geo.ptx", // [1447]
+    "textures/isCoral/Color/cauliflower0016_geo.ptx", // [1448]
+    "textures/isCoral/Color/coralstone0003_geo.ptx", // [1449]
+    "textures/isCoral/Color/seaweed0325_geo.ptx", // [1450]
+    "textures/isCoral/Color/seaweed0147_geo.ptx", // [1451]
+    "textures/isCoral/Color/seaweed0035_geo.ptx", // [1452]
+    "textures/isCoral/Color/antler0055_geo.ptx", // [1453]
+    "textures/isCoral/Color/seaweed0149_geo.ptx", // [1454]
+    "textures/isCoral/Color/clubbedfinger0023_geo.ptx", // [1455]
+    "textures/isCoral/Color/fingercoral0616_geo.ptx", // [1456]
+    "textures/isCoral/Color/fingercoral0086_geo.ptx", // [1457]
+    "textures/isCoral/Color/clubbedfinger0229_geo.ptx", // [1458]
+    "textures/isCoral/Color/seaweed0129_geo.ptx", // [1459]
+    "textures/isCoral/Color/coralrock0068_geo.ptx", // [1460]
+    "textures/isCoral/Color/starhornplate0014_geo.ptx", // [1461]
+    "textures/isCoral/Color/barnacle0048_geo.ptx", // [1462]
+    "textures/isCoral/Color/fingercoral0409_geo.ptx", // [1463]
+    "textures/isCoral/Color/clubbedfinger0531_geo.ptx", // [1464]
+    "textures/isCoral/Color/cauliflower0025_geo.ptx", // [1465]
+    "textures/isCoral/Color/fingercoral0329_geo.ptx", // [1466]
+    "textures/isCoral/Color/seaweed0217_geo.ptx", // [1467]
+    "textures/isCoral/Color/fingercoral0326_geo.ptx", // [1468]
+    "textures/isCoral/Color/fingercoral0136_geo.ptx", // [1469]
+    "textures/isCoral/Color/fingercoral0576_geo.ptx", // [1470]
+    "textures/isCoral/Color/clubbedfinger0149_geo.ptx", // [1471]
+    "textures/isCoral/Color/fingercoral0207_geo.ptx", // [1472]
+    "textures/isCoral/Color/clubbedfinger0274_geo.ptx", // [1473]
+    "textures/isCoral/Color/clubbedfinger0769_geo.ptx", // [1474]
+    "textures/isCoral/Color/clubbedfinger0096_geo.ptx", // [1475]
+    "textures/isCoral/Color/clubbedfinger0624_geo.ptx", // [1476]
+    "textures/isCoral/Color/antler0014_geo.ptx", // [1477]
+    "textures/isCoral/Color/clubbedfinger0292_geo.ptx", // [1478]
+    "textures/isCoral/Color/clubbedfinger0425_geo.ptx", // [1479]
+    "textures/isCoral/Color/seaweed0300_geo.ptx", // [1480]
+    "textures/isCoral/Color/seaweed0203_geo.ptx", // [1481]
+    "textures/isCoral/Color/seaweed0169_geo.ptx", // [1482]
+    "textures/isCoral/Color/seaweed0199_geo.ptx", // [1483]
+    "textures/isCoral/Color/clubbedfinger0654_geo.ptx", // [1484]
+    "textures/isCoral/Color/clubbedfinger0762_geo.ptx", // [1485]
+    "textures/isCoral/Color/fingercoral0583_geo.ptx", // [1486]
+    "textures/isCoral/Color/fingercoral0080_geo.ptx", // [1487]
+    "textures/isCoral/Color/clubbedfinger0011_geo.ptx", // [1488]
+    "textures/isCoral/Color/clubbedfinger0732_geo.ptx", // [1489]
+    "textures/isCoral/Color/clubbedfinger0110_geo.ptx", // [1490]
+    "textures/isCoral/Color/starhornplate0086_geo.ptx", // [1491]
+    "textures/isCoral/Color/antler0053_geo.ptx", // [1492]
+    "textures/isCoral/Color/fingercoral0609_geo.ptx", // [1493]
+    "textures/isCoral/Color/clubbedfinger0542_geo.ptx", // [1494]
+    "textures/isCoral/Color/seaweed0317_geo.ptx", // [1495]
+    "textures/isCoral/Color/antler0030_geo.ptx", // [1496]
+    "textures/isCoral/Color/clubbedfinger0410_geo.ptx", // [1497]
+    "textures/isCoral/Color/clubbedfinger0858_geo.ptx", // [1498]
+    "textures/isCoral/Color/fingercoral0179_geo.ptx", // [1499]
+    "textures/isCoral/Color/seaweed0099_geo.ptx", // [1500]
+    "textures/isCoral/Color/fingercoral0039_geo.ptx", // [1501]
+    "textures/isCoral/Color/clubbedfinger0259_geo.ptx", // [1502]
+    "textures/isCoral/Color/fingercoral0505_geo.ptx", // [1503]
+    "textures/isCoral/Color/ricecoral0015_geo.ptx", // [1504]
+    "textures/isCoral/Color/fingercoral0314_geo.ptx", // [1505]
+    "textures/isCoral/Color/clubbedfinger0103_geo.ptx", // [1506]
+    "textures/isCoral/Color/starhornplate0037_geo.ptx", // [1507]
+    "textures/isCoral/Color/coralrock0040_geo.ptx", // [1508]
+    "textures/isCoral/Color/fingercoral0607_geo.ptx", // [1509]
+    "textures/isCoral/Color/fingercoral0569_geo.ptx", // [1510]
+    "textures/isCoral/Color/barnacle0035_geo.ptx", // [1511]
+    "textures/isCoral/Color/clubbedfinger0250_geo.ptx", // [1512]
+    "textures/isCoral/Color/clubbedfinger0526_geo.ptx", // [1513]
+    "textures/isCoral/Color/clubbedfinger0563_geo.ptx", // [1514]
+    "textures/isCoral/Color/fingercoral0489_geo.ptx", // [1515]
+    "textures/isCoral/Color/cauliflower0011_geo.ptx", // [1516]
+    "textures/isCoral/Color/seaweed0170_geo.ptx", // [1517]
+    "textures/isCoral/Color/clubbedfinger0806_geo.ptx", // [1518]
+    "textures/isCoral/Color/clubbedfinger0592_geo.ptx", // [1519]
+    "textures/isCoral/Color/clubbedfinger0560_geo.ptx", // [1520]
+    "textures/isCoral/Color/clubbedfinger0331_geo.ptx", // [1521]
+    "textures/isCoral/Color/antler0040_geo.ptx", // [1522]
+    "textures/isCoral/Color/clubbedfinger0591_geo.ptx", // [1523]
+    "textures/isCoral/Color/clubbedfinger0497_geo.ptx", // [1524]
+    "textures/isCoral/Color/fingercoral0112_geo.ptx", // [1525]
+    "textures/isCoral/Color/barnacle0001_geo.ptx", // [1526]
+    "textures/isCoral/Color/fingercoral0218_geo.ptx", // [1527]
+    "textures/isCoral/Color/seaweed0263_geo.ptx", // [1528]
+    "textures/isCoral/Color/clubbedfinger0809_geo.ptx", // [1529]
+    "textures/isCoral/Color/fingercoral0581_geo.ptx", // [1530]
+    "textures/isCoral/Color/fingercoral0191_geo.ptx", // [1531]
+    "textures/isCoral/Color/clubbedfinger0140_geo.ptx", // [1532]
+    "textures/isCoral/Color/fingercoral0306_geo.ptx", // [1533]
+    "textures/isCoral/Color/barnacle0094_geo.ptx", // [1534]
+    "textures/isCoral/Color/starhornplate0011_geo.ptx", // [1535]
+    "textures/isCoral/Color/clubbedfinger0735_geo.ptx", // [1536]
+    "textures/isCoral/Color/coralrock0021_geo.ptx", // [1537]
+    "textures/isCoral/Color/fingercoral0411_geo.ptx", // [1538]
+    "textures/isCoral/Color/clubbedfinger0759_geo.ptx", // [1539]
+    "textures/isCoral/Color/seaweed0109_geo.ptx", // [1540]
+    "textures/isCoral/Color/seaweed0013_geo.ptx", // [1541]
+    "textures/isCoral/Color/fingercoral0145_geo.ptx", // [1542]
+    "textures/isCoral/Color/fingercoral0333_geo.ptx", // [1543]
+    "textures/isCoral/Color/seaweed0030_geo.ptx", // [1544]
+    "textures/isCoral/Color/starhornplate0029_geo.ptx", // [1545]
+    "textures/isCoral/Color/clubbedfinger0514_geo.ptx", // [1546]
+    "textures/isCoral/Color/cauliflower0026_geo.ptx", // [1547]
+    "textures/isCoral/Color/seaweed0312_geo.ptx", // [1548]
+    "textures/isCoral/Color/barnacle0046_geo.ptx", // [1549]
+    "textures/isCoral/Color/fingercoral0562_geo.ptx", // [1550]
+    "textures/isCoral/Color/seaweed0101_geo.ptx", // [1551]
+    "textures/isCoral/Color/seaweed0285_geo.ptx", // [1552]
+    "textures/isCoral/Color/fingercoral0116_geo.ptx", // [1553]
+    "textures/isCoral/Color/clubbedfinger0289_geo.ptx", // [1554]
+    "textures/isCoral/Color/fingercoral0572_geo.ptx", // [1555]
+    "textures/isCoral/Color/clubbedfinger0307_geo.ptx", // [1556]
+    "textures/isCoral/Color/fingercoral0181_geo.ptx", // [1557]
+    "textures/isCoral/Color/starhornplate0090_geo.ptx", // [1558]
+    "textures/isCoral/Color/clubbedfinger0009_geo.ptx", // [1559]
+    "textures/isCoral/Color/clubbedfinger0374_geo.ptx", // [1560]
+    "textures/isCoral/Color/clubbedfinger0390_geo.ptx", // [1561]
+    "textures/isCoral/Color/clubbedfinger0402_geo.ptx", // [1562]
+    "textures/isCoral/Color/starhornplate0025_geo.ptx", // [1563]
+    "textures/isCoral/Color/seaweed0018_geo.ptx", // [1564]
+    "textures/isCoral/Color/seaweed0105_geo.ptx", // [1565]
+    "textures/isCoral/Color/clubbedfinger0278_geo.ptx", // [1566]
+    "textures/isCoral/Color/clubbedfinger0465_geo.ptx", // [1567]
+    "textures/isCoral/Color/seaweed0201_geo.ptx", // [1568]
+    "textures/isCoral/Color/seaweed0108_geo.ptx", // [1569]
+    "textures/isCoral/Color/clubbedfinger0669_geo.ptx", // [1570]
+    "textures/isCoral/Color/clubbedfinger0428_geo.ptx", // [1571]
+    "textures/isCoral/Color/fingercoral0115_geo.ptx", // [1572]
+    "textures/isCoral/Color/clubbedfinger0696_geo.ptx", // [1573]
+    "textures/isCoral/Color/fingercoral0109_geo.ptx", // [1574]
+    "textures/isCoral/Color/clubbedfinger0313_geo.ptx", // [1575]
+    "textures/isCoral/Color/seaweed0046_geo.ptx", // [1576]
+    "textures/isCoral/Color/clubbedfinger0529_geo.ptx", // [1577]
+    "textures/isCoral/Color/clubbedfinger0262_geo.ptx", // [1578]
+    "textures/isCoral/Color/coralrock0063_geo.ptx", // [1579]
+    "textures/isCoral/Color/seaweed0189_geo.ptx", // [1580]
+    "textures/isCoral/Color/starhornplate0057_geo.ptx", // [1581]
+    "textures/isCoral/Color/seaweed0040_geo.ptx", // [1582]
+    "textures/isCoral/Color/seaweed0227_geo.ptx", // [1583]
+    "textures/isCoral/Color/clubbedfinger0131_geo.ptx", // [1584]
+    "textures/isCoral/Color/clubbedfinger0573_geo.ptx", // [1585]
+    "textures/isCoral/Color/coralrock0037_geo.ptx", // [1586]
+    "textures/isCoral/Color/clubbedfinger0005_geo.ptx", // [1587]
+    "textures/isCoral/Color/barnacle0102_geo.ptx", // [1588]
+    "textures/isCoral/Color/fingercoral0237_geo.ptx", // [1589]
+    "textures/isCoral/Color/fingercoral0180_geo.ptx", // [1590]
+    "textures/isCoral/Color/clubbedfinger0384_geo.ptx", // [1591]
+    "textures/isCoral/Color/clubbedfinger0105_geo.ptx", // [1592]
+    "textures/isCoral/Color/fingercoral0568_geo.ptx", // [1593]
+    "textures/isCoral/Color/fingercoral0319_geo.ptx", // [1594]
+    "textures/isCoral/Color/clubbedfinger0799_geo.ptx", // [1595]
+    "textures/isCoral/Color/clubbedfinger0750_geo.ptx", // [1596]
+    "textures/isCoral/Color/clubbedfinger0253_geo.ptx", // [1597]
+    "textures/isCoral/Color/fingercoral0355_geo.ptx", // [1598]
+    "textures/isCoral/Color/archivecoral_staghorn0002_geo.ptx", // [1599]
+    "textures/isCoral/Color/clubbedfinger0457_geo.ptx", // [1600]
+    "textures/isCoral/Color/barnacle0028_geo.ptx", // [1601]
+    "textures/isCoral/Color/clubbedfinger0790_geo.ptx", // [1602]
+    "textures/isCoral/Color/clubbedfinger0461_geo.ptx", // [1603]
+    "textures/isCoral/Color/fingercoral0611_geo.ptx", // [1604]
+    "textures/isCoral/Color/seaweed0069_geo.ptx", // [1605]
+    "textures/isCoral/Color/fingercoral0315_geo.ptx", // [1606]
+    "textures/isCoral/Color/clubbedfinger0502_geo.ptx", // [1607]
+    "textures/isCoral/Color/fingercoral0266_geo.ptx", // [1608]
+    "textures/isCoral/Color/fingercoral0395_geo.ptx", // [1609]
+    "textures/isCoral/Color/fingercoral0517_geo.ptx", // [1610]
+    "textures/isCoral/Color/seaweed0210_geo.ptx", // [1611]
+    "textures/isCoral/Color/fingercoral0375_geo.ptx", // [1612]
+    "textures/isCoral/Color/clubbedfinger0612_geo.ptx", // [1613]
+    "textures/isCoral/Color/fingercoral0318_geo.ptx", // [1614]
+    "textures/isCoral/Color/clubbedfinger0417_geo.ptx", // [1615]
+    "textures/isCoral/Color/fingercoral0480_geo.ptx", // [1616]
+    "textures/isCoral/Color/fingercoral0578_geo.ptx", // [1617]
+    "textures/isCoral/Color/clubbedfinger0396_geo.ptx", // [1618]
+    "textures/isCoral/Color/seaweed0045_geo.ptx", // [1619]
+    "textures/isCoral/Color/fingercoral0016_geo.ptx", // [1620]
+    "textures/isCoral/Color/clubbedfinger0158_geo.ptx", // [1621]
+    "textures/isCoral/Color/ricecoral0010_geo.ptx", // [1622]
+    "textures/isCoral/Color/seaweed0139_geo.ptx", // [1623]
+    "textures/isCoral/Color/clubbedfinger0755_geo.ptx", // [1624]
+    "textures/isCoral/Color/fingercoral0190_geo.ptx", // [1625]
+    "textures/isCoral/Color/seaweed0269_geo.ptx", // [1626]
+    "textures/isCoral/Color/clubbedfinger0462_geo.ptx", // [1627]
+    "textures/isCoral/Color/fingercoral0388_geo.ptx", // [1628]
+    "textures/isCoral/Color/fingercoral0373_geo.ptx", // [1629]
+    "textures/isCoral/Color/fingercoral0300_geo.ptx", // [1630]
+    "textures/isCoral/Color/coralrock0038_geo.ptx", // [1631]
+    "textures/isCoral/Color/seaweed0038_geo.ptx", // [1632]
+    "textures/isCoral/Color/clubbedfinger0789_geo.ptx", // [1633]
+    "textures/isCoral/Color/coralrock0025_geo.ptx", // [1634]
+    "textures/isCoral/Color/clubbedfinger0192_geo.ptx", // [1635]
+    "textures/isCoral/Color/clubbedfinger0427_geo.ptx", // [1636]
+    "textures/isCoral/Color/barnacle0013_geo.ptx", // [1637]
+    "textures/isCoral/Color/clubbedfinger0078_geo.ptx", // [1638]
+    "textures/isCoral/Color/seaweed0304_geo.ptx", // [1639]
+    "textures/isCoral/Color/fingercoral0084_geo.ptx", // [1640]
+    "textures/isCoral/Color/clubbedfinger0187_geo.ptx", // [1641]
+    "textures/isCoral/Color/fingercoral0009_geo.ptx", // [1642]
+    "textures/isCoral/Color/seaweed0185_geo.ptx", // [1643]
+    "textures/isCoral/Color/seaweed0315_geo.ptx", // [1644]
+    "textures/isCoral/Color/fingercoral0582_geo.ptx", // [1645]
+    "textures/isCoral/Color/clubbedfinger0341_geo.ptx", // [1646]
+    "textures/isCoral/Color/ricecoral0008_geo.ptx", // [1647]
+    "textures/isCoral/Color/clubbedfinger0545_geo.ptx", // [1648]
+    "textures/isCoral/Color/clubbedfinger0087_geo.ptx", // [1649]
+    "textures/isCoral/Color/antler0008_geo.ptx", // [1650]
+    "textures/isCoral/Color/clubbedfinger0405_geo.ptx", // [1651]
+    "textures/isCoral/Color/fingercoral0083_geo.ptx", // [1652]
+    "textures/isCoral/Color/seaweed0016_geo.ptx", // [1653]
+    "textures/isCoral/Color/cauliflower0030_geo.ptx", // [1654]
+    "textures/isCoral/Color/clubbedtthumb_c0001_geo.ptx", // [1655]
+    "textures/isCoral/Color/fingercoral0288_geo.ptx", // [1656]
+    "textures/isCoral/Color/seaweed0116_geo.ptx", // [1657]
+    "textures/isCoral/Color/clubbedfinger0742_geo.ptx", // [1658]
+    "textures/isCoral/Color/clubbedfinger0852_geo.ptx", // [1659]
+    "textures/isCoral/Color/starhornplate0031_geo.ptx", // [1660]
+    "textures/isCoral/Color/fingercoral0311_geo.ptx", // [1661]
+    "textures/isCoral/Color/clubbedfinger0301_geo.ptx", // [1662]
+    "textures/isCoral/Color/seaweed0266_geo.ptx", // [1663]
+    "textures/isCoral/Color/clubbedfinger0423_geo.ptx", // [1664]
+    "textures/isCoral/Color/fingercoral0142_geo.ptx", // [1665]
+    "textures/isCoral/Color/fingercoral0618_geo.ptx", // [1666]
+    "textures/isCoral/Color/seaweed0051_geo.ptx", // [1667]
+    "textures/isCoral/Color/barnacle0068_geo.ptx", // [1668]
+    "textures/isCoral/Color/clubbedfinger0666_geo.ptx", // [1669]
+    "textures/isCoral/Color/clubbedfinger0020_geo.ptx", // [1670]
+    "textures/isCoral/Color/seaweed0167_geo.ptx", // [1671]
+    "textures/isCoral/Color/seaweed0244_geo.ptx", // [1672]
+    "textures/isCoral/Color/coralrock0041_geo.ptx", // [1673]
+    "textures/isCoral/Color/fingercoral0154_geo.ptx", // [1674]
+    "textures/isCoral/Color/seaweed0156_geo.ptx", // [1675]
+    "textures/isCoral/Color/seaweed0023_geo.ptx", // [1676]
+    "textures/isCoral/Color/clubbedfinger0792_geo.ptx", // [1677]
+    "textures/isCoral/Color/coralrock0012_geo.ptx", // [1678]
+    "textures/isCoral/Color/starhornplate0059_geo.ptx", // [1679]
+    "textures/isCoral/Color/barnacle0108_geo.ptx", // [1680]
+    "textures/isCoral/Color/fingercoral0436_geo.ptx", // [1681]
+    "textures/isCoral/Color/fingercoral0204_geo.ptx", // [1682]
+    "textures/isCoral/Color/seaweed0034_geo.ptx", // [1683]
+    "textures/isCoral/Color/clubbedfinger0327_geo.ptx", // [1684]
+    "textures/isCoral/Color/fingercoral0499_geo.ptx", // [1685]
+    "textures/isCoral/Color/fingercoral0185_geo.ptx", // [1686]
+    "textures/isCoral/Color/fingercoral0345_geo.ptx", // [1687]
+    "textures/isCoral/Color/seaweed0090_geo.ptx", // [1688]
+    "textures/isCoral/Color/clubbedfinger0441_geo.ptx", // [1689]
+    "textures/isCoral/Color/clubbedfinger0706_geo.ptx", // [1690]
+    "textures/isCoral/Color/fingercoral0268_geo.ptx", // [1691]
+    "textures/isCoral/Color/clubbedfinger0037_geo.ptx", // [1692]
+    "textures/isCoral/Color/fingercoral0175_geo.ptx", // [1693]
+    "textures/isCoral/Color/clubbedfinger0636_geo.ptx", // [1694]
+    "textures/isCoral/Color/cauliflower0009_geo.ptx", // [1695]
+    "textures/isCoral/Color/clubbedfinger0249_geo.ptx", // [1696]
+    "textures/isCoral/Color/fingercoral0130_geo.ptx", // [1697]
+    "textures/isCoral/Color/clubbedfinger0651_geo.ptx", // [1698]
+    "textures/isCoral/Color/clubbedfinger0854_geo.ptx", // [1699]
+    "textures/isCoral/Color/starhornplate0003_geo.ptx", // [1700]
+    "textures/isCoral/Color/clubbedfinger0779_geo.ptx", // [1701]
+    "textures/isCoral/Color/seaweed0319_geo.ptx", // [1702]
+    "textures/isCoral/Color/fingercoral0623_geo.ptx", // [1703]
+    "textures/isCoral/Color/fingercoral0038_geo.ptx", // [1704]
+    "textures/isCoral/Color/archivecoral_antler0006_geo.ptx", // [1705]
+    "textures/isCoral/Color/clubbedfinger0434_geo.ptx", // [1706]
+    "textures/isCoral/Color/clubbedfinger0618_geo.ptx", // [1707]
+    "textures/isCoral/Color/antler0039_geo.ptx", // [1708]
+    "textures/isCoral/Color/clubbedfinger0166_geo.ptx", // [1709]
+    "textures/isCoral/Color/starhornplate0092_geo.ptx", // [1710]
+    "textures/isCoral/Color/cauliflower0024_geo.ptx", // [1711]
+    "textures/isCoral/Color/clubbedfinger0736_geo.ptx", // [1712]
+    "textures/isCoral/Color/clubbedfinger0547_geo.ptx", // [1713]
+    "textures/isCoral/Color/fingercoral0064_geo.ptx", // [1714]
+    "textures/isCoral/Color/fingercoral0363_geo.ptx", // [1715]
+    "textures/isCoral/Color/barnacle0088_geo.ptx", // [1716]
+    "textures/isCoral/Color/clubbedfinger0695_geo.ptx", // [1717]
+    "textures/isCoral/Color/fingercoral0441_geo.ptx", // [1718]
+    "textures/isCoral/Color/seaweed0025_geo.ptx", // [1719]
+    "textures/isCoral/Color/clubbedfinger0041_geo.ptx", // [1720]
+    "textures/isCoral/Color/fingercoral0472_geo.ptx", // [1721]
+    "textures/isCoral/Color/fingercoral0405_geo.ptx", // [1722]
+    "textures/isCoral/Color/clubbedfinger0804_geo.ptx", // [1723]
+    "textures/isCoral/Color/clubbedfinger0586_geo.ptx", // [1724]
+    "textures/isCoral/Color/barnacle0110_geo.ptx", // [1725]
+    "textures/isCoral/Color/knobbybrain0011_geo.ptx", // [1726]
+    "textures/isCoral/Color/fingercoral0107_geo.ptx", // [1727]
+    "textures/isCoral/Color/barnacle0037_geo.ptx", // [1728]
+    "textures/isCoral/Color/clubbedfinger0798_geo.ptx", // [1729]
+    "textures/isCoral/Color/starhornplate0102_geo.ptx", // [1730]
+    "textures/isCoral/Color/fingercoral0374_geo.ptx", // [1731]
+    "textures/isCoral/Color/seaweed0070_geo.ptx", // [1732]
+    "textures/isCoral/Color/clubbedfinger0791_geo.ptx", // [1733]
+    "textures/isCoral/Color/barnacle0005_geo.ptx", // [1734]
+    "textures/isCoral/Color/fingercoral0133_geo.ptx", // [1735]
+    "textures/isCoral/Color/fingercoral0526_geo.ptx", // [1736]
+    "textures/isCoral/Color/clubbedfinger0053_geo.ptx", // [1737]
+    "textures/isCoral/Color/fingercoral0482_geo.ptx", // [1738]
+    "textures/isCoral/Color/clubbedfinger0407_geo.ptx", // [1739]
+    "textures/isCoral/Color/fingercoral0057_geo.ptx", // [1740]
+    "textures/isCoral/Color/fingercoral0506_geo.ptx", // [1741]
+    "textures/isCoral/Color/fingercoral0187_geo.ptx", // [1742]
+    "textures/isCoral/Color/clubbedfinger0365_geo.ptx", // [1743]
+    "textures/isCoral/Color/clubbedfinger0238_geo.ptx", // [1744]
+    "textures/isCoral/Color/fingercoral0162_geo.ptx", // [1745]
+    "textures/isCoral/Color/coralrock0026_geo.ptx", // [1746]
+    "textures/isCoral/Color/coralrock0051_geo.ptx", // [1747]
+    "textures/isCoral/Color/clubbedfinger0819_geo.ptx", // [1748]
+    "textures/isCoral/Color/fingercoral0346_geo.ptx", // [1749]
+    "textures/isCoral/Color/clubbedfinger0347_geo.ptx", // [1750]
+    "textures/isCoral/Color/barnacle0109_geo.ptx", // [1751]
+    "textures/isCoral/Color/fingercoral0255_geo.ptx", // [1752]
+    "textures/isCoral/Color/fingercoral0031_geo.ptx", // [1753]
+    "textures/isCoral/Color/antler0037_geo.ptx", // [1754]
+    "textures/isCoral/Color/clubbedfinger0708_geo.ptx", // [1755]
+    "textures/isCoral/Color/seaweed0207_geo.ptx", // [1756]
+    "textures/isCoral/Color/clubbedfinger0357_geo.ptx", // [1757]
+    "textures/isCoral/Color/fingercoral0040_geo.ptx", // [1758]
+    "textures/isCoral/Color/barnacle0041_geo.ptx", // [1759]
+    "textures/isCoral/Color/coralrock0065_geo.ptx", // [1760]
+    "textures/isCoral/Color/seaweed0236_geo.ptx", // [1761]
+    "textures/isCoral/Color/clubbedfinger0725_geo.ptx", // [1762]
+    "textures/isCoral/Color/ricecoral0011_geo.ptx", // [1763]
+    "textures/isCoral/Color/fingercoral0222_geo.ptx", // [1764]
+    "textures/isCoral/Color/clubbedfinger0691_geo.ptx", // [1765]
+    "textures/isCoral/Color/clubbedfinger0855_geo.ptx", // [1766]
+    "textures/isCoral/Color/clubbedfinger0608_geo.ptx", // [1767]
+    "textures/isCoral/Color/coralrock0002_geo.ptx", // [1768]
+    "textures/isCoral/Color/fingercoral0303_geo.ptx", // [1769]
+    "textures/isCoral/Color/clubbedfinger0546_geo.ptx", // [1770]
+    "textures/isCoral/Color/clubbedfinger0714_geo.ptx", // [1771]
+    "textures/isCoral/Color/barnacle0006_geo.ptx", // [1772]
+    "textures/isCoral/Color/cauliflower0003_geo.ptx", // [1773]
+    "textures/isCoral/Color/fingercoral0606_geo.ptx", // [1774]
+    "textures/isCoral/Color/coralrock0070_geo.ptx", // [1775]
+    "textures/isCoral/Color/clubbedfinger0339_geo.ptx", // [1776]
+    "textures/isCoral/Color/fingercoral0570_geo.ptx", // [1777]
+    "textures/isCoral/Color/seaweed0193_geo.ptx", // [1778]
+    "textures/isCoral/Color/clubbedfinger0802_geo.ptx", // [1779]
+    "textures/isCoral/Color/fingercoral0168_geo.ptx", // [1780]
+    "textures/isCoral/Color/clubbedfinger0261_geo.ptx", // [1781]
+    "textures/isCoral/Color/seaweed0230_geo.ptx", // [1782]
+    "textures/isCoral/Color/seaweed0314_geo.ptx", // [1783]
+    "textures/isCoral/Color/fingercoral0624_geo.ptx", // [1784]
+    "textures/isCoral/Color/seaweed0323_geo.ptx", // [1785]
+    "textures/isCoral/Color/cauliflower0002_geo.ptx", // [1786]
+    "textures/isCoral/Color/seaweed0197_geo.ptx", // [1787]
+    "textures/isCoral/Color/fingercoral0600_geo.ptx", // [1788]
+    "textures/isCoral/Color/fingercoral0025_geo.ptx", // [1789]
+    "textures/isCoral/Color/clubbedfinger0038_geo.ptx", // [1790]
+    "textures/isCoral/Color/clubbedfinger0475_geo.ptx", // [1791]
+    "textures/isCoral/Color/ricecoral0003_geo.ptx", // [1792]
+    "textures/isCoral/Color/fingercoral0085_geo.ptx", // [1793]
+    "textures/isCoral/Color/clubbedfinger0138_geo.ptx", // [1794]
+    "textures/isCoral/Color/fingercoral0160_geo.ptx", // [1795]
+    "textures/isCoral/Color/fingercoral0052_geo.ptx", // [1796]
+    "textures/isCoral/Color/clubbedfinger0486_geo.ptx", // [1797]
+    "textures/isCoral/Color/fingercoral0407_geo.ptx", // [1798]
+    "textures/isCoral/Color/antler0021_geo.ptx", // [1799]
+    "textures/isCoral/Color/coralrock0052_geo.ptx", // [1800]
+    "textures/isCoral/Color/clubbedfinger0634_geo.ptx", // [1801]
+    "textures/isCoral/Color/clubbedfinger0248_geo.ptx", // [1802]
+    "textures/isCoral/Color/seaweed0112_geo.ptx", // [1803]
+    "textures/isCoral/Color/fingercoral0357_geo.ptx", // [1804]
+    "textures/isCoral/Color/clubbedfinger0805_geo.ptx", // [1805]
+    "textures/isCoral/Color/fingercoral0213_geo.ptx", // [1806]
+    "textures/isCoral/Color/fingercoral0323_geo.ptx", // [1807]
+    "textures/isCoral/Color/fingercoral0258_geo.ptx", // [1808]
+    "textures/isCoral/Color/clubbedfinger0386_geo.ptx", // [1809]
+    "textures/isCoral/Color/clubbedfinger0042_geo.ptx", // [1810]
+    "textures/isCoral/Color/seaweed0188_geo.ptx", // [1811]
+    "textures/isCoral/Color/fingercoral0399_geo.ptx", // [1812]
+    "textures/isCoral/Color/seaweed0010_geo.ptx", // [1813]
+    "textures/isCoral/Color/coralstone0015_geo.ptx", // [1814]
+    "textures/isCoral/Color/fingercoral0365_geo.ptx", // [1815]
+    "textures/isCoral/Color/clubbedfinger0256_geo.ptx", // [1816]
+    "textures/isCoral/Color/fingercoral0468_geo.ptx", // [1817]
+    "textures/isCoral/Color/fingercoral0402_geo.ptx", // [1818]
+    "textures/isCoral/Color/fingercoral0615_geo.ptx", // [1819]
+    "textures/isCoral/Color/seaweed0165_geo.ptx", // [1820]
+    "textures/isCoral/Color/clubbedfinger0235_geo.ptx", // [1821]
+    "textures/isCoral/Color/seaweed0191_geo.ptx", // [1822]
+    "textures/isCoral/Color/starhornplate0118_geo.ptx", // [1823]
+    "textures/isCoral/Color/seaweed0320_geo.ptx", // [1824]
+    "textures/isCoral/Color/seaweed0015_geo.ptx", // [1825]
+    "textures/isCoral/Color/fingercoral0347_geo.ptx", // [1826]
+    "textures/isCoral/Color/clubbedfinger0722_geo.ptx", // [1827]
+    "textures/isCoral/Color/clubbedfinger0139_geo.ptx", // [1828]
+    "textures/isCoral/Color/fingercoral0613_geo.ptx", // [1829]
+    "textures/isCoral/Color/fingercoral0177_geo.ptx", // [1830]
+    "textures/isCoral/Color/clubbedfinger0335_geo.ptx", // [1831]
+    "textures/isCoral/Color/seaweed0003_geo.ptx", // [1832]
+    "textures/isCoral/Color/barnacle0081_geo.ptx", // [1833]
+    "textures/isCoral/Color/clubbedfinger0373_geo.ptx", // [1834]
+    "textures/isCoral/Color/seaweed0171_geo.ptx", // [1835]
+    "textures/isCoral/Color/fingercoral0424_geo.ptx", // [1836]
+    "textures/isCoral/Color/clubbedfinger0662_geo.ptx", // [1837]
+    "textures/isCoral/Color/fingercoral0535_geo.ptx", // [1838]
+    "textures/isCoral/Color/fingercoral0358_geo.ptx", // [1839]
+    "textures/isCoral/Color/seaweed0279_geo.ptx", // [1840]
+    "textures/isCoral/Color/fingercoral0524_geo.ptx", // [1841]
+    "textures/isCoral/Color/clubbedfinger0176_geo.ptx", // [1842]
+    "textures/isCoral/Color/starhornplate0116_geo.ptx", // [1843]
+    "textures/isCoral/Color/coralmoss0012_geo.ptx", // [1844]
+    "textures/isCoral/Color/barnacle0085_geo.ptx", // [1845]
+    "textures/isCoral/Color/fingercoral0037_geo.ptx", // [1846]
+    "textures/isCoral/Color/clubbedfinger0646_geo.ptx", // [1847]
+    "textures/isCoral/Color/seaweed0195_geo.ptx", // [1848]
+    "textures/isCoral/Color/coralmoss0005_geo.ptx", // [1849]
+    "textures/isCoral/Color/fingercoral0331_geo.ptx", // [1850]
+    "textures/isCoral/Color/starhornplate0041_geo.ptx", // [1851]
+    "textures/isCoral/Color/antler0020_geo.ptx", // [1852]
+    "textures/isCoral/Color/antler0007_geo.ptx", // [1853]
+    "textures/isCoral/Color/clubbedfinger0147_geo.ptx", // [1854]
+    "textures/isCoral/Color/fingercoral0199_geo.ptx", // [1855]
+    "textures/isCoral/Color/fingercoral0260_geo.ptx", // [1856]
+    "textures/isCoral/Color/fingercoral0301_geo.ptx", // [1857]
+    "textures/isCoral/Color/fingercoral0330_geo.ptx", // [1858]
+    "textures/isCoral/Color/fingercoral0536_geo.ptx", // [1859]
+    "textures/isCoral/Color/fingercoral0051_geo.ptx", // [1860]
+    "textures/isCoral/Color/clubbedfinger0344_geo.ptx", // [1861]
+    "textures/isCoral/Color/clubbedfinger0813_geo.ptx", // [1862]
+    "textures/isCoral/Color/fingercoral0278_geo.ptx", // [1863]
+    "textures/isCoral/Color/fingercoral0257_geo.ptx", // [1864]
+    "textures/isCoral/Color/barnacle0007_geo.ptx", // [1865]
+    "textures/isCoral/Color/seaweed0036_geo.ptx", // [1866]
+    "textures/isCoral/Color/clubbedfinger0308_geo.ptx", // [1867]
+    "textures/isCoral/Color/archivecoral_antler0008_geo.ptx", // [1868]
+    "textures/isCoral/Color/clubbedfinger0195_geo.ptx", // [1869]
+    "textures/isCoral/Color/fingercoral0573_geo.ptx", // [1870]
+    "textures/isCoral/Color/clubbedfinger0724_geo.ptx", // [1871]
+    "textures/isCoral/Color/antler0041_geo.ptx", // [1872]
+    "textures/isCoral/Color/clubbedfinger0784_geo.ptx", // [1873]
+    "textures/isCoral/Color/antler0056_geo.ptx", // [1874]
+    "textures/isCoral/Color/fingercoral0294_geo.ptx", // [1875]
+    "textures/isCoral/Color/antler0019_geo.ptx", // [1876]
+    "textures/isCoral/Color/seaweed0190_geo.ptx", // [1877]
+    "textures/isCoral/Color/starhornplate0075_geo.ptx", // [1878]
+    "textures/isCoral/Color/coralrock0031_geo.ptx", // [1879]
+    "textures/isCoral/Color/barnacle0023_geo.ptx", // [1880]
+    "textures/isCoral/Color/antler0073_geo.ptx", // [1881]
+    "textures/isCoral/Color/seaweed0012_geo.ptx", // [1882]
+    "textures/isCoral/Color/clubbedfinger0757_geo.ptx", // [1883]
+    "textures/isCoral/Color/barnacle0100_geo.ptx", // [1884]
+    "textures/isCoral/Color/clubbedfinger0766_geo.ptx", // [1885]
+    "textures/isCoral/Color/seaweed0008_geo.ptx", // [1886]
+    "textures/isCoral/Color/seaweed0094_geo.ptx", // [1887]
+    "textures/isCoral/Color/antler0006_geo.ptx", // [1888]
+    "textures/isCoral/Color/fingercoral0293_geo.ptx", // [1889]
+    "textures/isCoral/Color/clubbedfinger0173_geo.ptx", // [1890]
+    "textures/isCoral/Color/clubbedfinger0631_geo.ptx", // [1891]
+    "textures/isCoral/Color/fingercoral0050_geo.ptx", // [1892]
+    "textures/isCoral/Color/clubbedfinger0687_geo.ptx", // [1893]
+    "textures/isCoral/Color/starhornplate0021_geo.ptx", // [1894]
+    "textures/isCoral/Color/fingercoral0413_geo.ptx", // [1895]
+    "textures/isCoral/Color/fingercoral0161_geo.ptx", // [1896]
+    "textures/isCoral/Color/seaweed0124_geo.ptx", // [1897]
+    "textures/isCoral/Color/archivecoral_staghorn0008_geo.ptx", // [1898]
+    "textures/isCoral/Color/clubbedfinger0319_geo.ptx", // [1899]
+    "textures/isCoral/Color/seaweed0133_geo.ptx", // [1900]
+    "textures/isCoral/Color/seaweed0220_geo.ptx", // [1901]
+    "textures/isCoral/Color/clubbedfinger0115_geo.ptx", // [1902]
+    "textures/isCoral/Color/clubbedfinger0836_geo.ptx", // [1903]
+    "textures/isCoral/Color/fingercoral0614_geo.ptx", // [1904]
+    "textures/isCoral/Color/seaweed0009_geo.ptx", // [1905]
+    "textures/isCoral/Color/seaweed0158_geo.ptx", // [1906]
+    "textures/isCoral/Color/starhornplate0009_geo.ptx", // [1907]
+    "textures/isCoral/Color/seaweed0079_geo.ptx", // [1908]
+    "textures/isCoral/Color/barnacle0053_geo.ptx", // [1909]
+    "textures/isCoral/Color/seaweed0027_geo.ptx", // [1910]
+    "textures/isCoral/Color/fingercoral0236_geo.ptx", // [1911]
+    "textures/isCoral/Color/fingercoral0196_geo.ptx", // [1912]
+    "textures/isCoral/Color/seaweed0288_geo.ptx", // [1913]
+    "textures/isCoral/Color/fingercoral0019_geo.ptx", // [1914]
+    "textures/isCoral/Color/barnacle0002_geo.ptx", // [1915]
+    "textures/isCoral/Color/fingercoral0028_geo.ptx", // [1916]
+    "textures/isCoral/Color/antler0069_geo.ptx", // [1917]
+    "textures/isCoral/Color/seaweed0295_geo.ptx", // [1918]
+    "textures/isCoral/Color/seaweed0280_geo.ptx", // [1919]
+    "textures/isCoral/Color/fingercoral0495_geo.ptx", // [1920]
+    "textures/isCoral/Color/seaweed0239_geo.ptx", // [1921]
+    "textures/isCoral/Color/knobbybrain0009_geo.ptx", // [1922]
+    "textures/isCoral/Color/fingercoral0337_geo.ptx", // [1923]
+    "textures/isCoral/Color/coralrock0034_geo.ptx", // [1924]
+    "textures/isCoral/Color/barnacle0038_geo.ptx", // [1925]
+    "textures/isCoral/Color/clubbedfinger0391_geo.ptx", // [1926]
+    "textures/isCoral/Color/clubbedfinger0119_geo.ptx", // [1927]
+    "textures/isCoral/Color/clubbedfinger0213_geo.ptx", // [1928]
+    "textures/isCoral/Color/fingercoral0335_geo.ptx", // [1929]
+    "textures/isCoral/Color/fingercoral0029_geo.ptx", // [1930]
+    "textures/isCoral/Color/starhornplate0004_geo.ptx", // [1931]
+    "textures/isCoral/Color/fingercoral0563_geo.ptx", // [1932]
+    "textures/isCoral/Color/clubbedfinger0400_geo.ptx", // [1933]
+    "textures/isCoral/Color/clubbedfinger0476_geo.ptx", // [1934]
+    "textures/isCoral/Color/fingercoral0063_geo.ptx", // [1935]
+    "textures/isCoral/Color/clubbedfinger0171_geo.ptx", // [1936]
+    "textures/isCoral/Color/barnacle0062_geo.ptx", // [1937]
+    "textures/isCoral/Color/clubbedfinger0073_geo.ptx", // [1938]
+    "textures/isCoral/Color/seaweed0252_geo.ptx", // [1939]
+    "textures/isCoral/Color/clubbedfinger0353_geo.ptx", // [1940]
+    "textures/isCoral/Color/clubbedfinger0778_geo.ptx", // [1941]
+    "textures/isCoral/Color/barnacle0014_geo.ptx", // [1942]
+    "textures/isCoral/Color/coralrock0056_geo.ptx", // [1943]
+    "textures/isCoral/Color/fingercoral0221_geo.ptx", // [1944]
+    "textures/isCoral/Color/fingercoral0620_geo.ptx", // [1945]
+    "textures/isCoral/Color/seaweed0194_geo.ptx", // [1946]
+    "textures/isCoral/Color/clubbedfinger0197_geo.ptx", // [1947]
+    "textures/isCoral/Color/fingercoral0601_geo.ptx", // [1948]
+    "textures/isCoral/Color/clubbedfinger0394_geo.ptx", // [1949]
+    "textures/isCoral/Color/fingercoral0254_geo.ptx", // [1950]
+    "textures/isCoral/Color/clubbedfinger0189_geo.ptx", // [1951]
+    "textures/isCoral/Color/fingercoral0382_geo.ptx", // [1952]
+    "textures/isCoral/Color/archivecoral_staghorn0003_geo.ptx", // [1953]
+    "textures/isCoral/Color/fingercoral0610_geo.ptx", // [1954]
+    "textures/isCoral/Color/clubbedfinger0578_geo.ptx", // [1955]
+    "textures/isCoral/Color/barnacle0009_geo.ptx", // [1956]
+    "textures/isCoral/Color/starhornplate0112_geo.ptx", // [1957]
+    "textures/isCoral/Color/fingercoral0431_geo.ptx", // [1958]
+    "textures/isCoral/Color/barnacle0036_geo.ptx", // [1959]
+    "textures/isCoral/Color/clubbedfinger0760_geo.ptx", // [1960]
+    "textures/isCoral/Color/fingercoral0140_geo.ptx", // [1961]
+    "textures/isCoral/Color/fingercoral0493_geo.ptx", // [1962]
+    "textures/isCoral/Color/coralrock0008_geo.ptx", // [1963]
+    "textures/isCoral/Color/clubbedfinger0450_geo.ptx", // [1964]
+    "textures/isCoral/Color/fingercoral0007_geo.ptx", // [1965]
+    "textures/isCoral/Color/clubbedfinger0808_geo.ptx", // [1966]
+    "textures/isCoral/Color/fingercoral0423_geo.ptx", // [1967]
+    "textures/isCoral/Color/clubbedfinger0200_geo.ptx", // [1968]
+    "textures/isCoral/Color/clubbedfinger0063_geo.ptx", // [1969]
+    "textures/isCoral/Color/clubbedfinger0663_geo.ptx", // [1970]
+    "textures/isCoral/Color/starhornplate0005_geo.ptx", // [1971]
+    "textures/isCoral/Color/seaweed0137_geo.ptx", // [1972]
+    "textures/isCoral/Color/barnacle0086_geo.ptx", // [1973]
+    "textures/isCoral/Color/clubbedfinger0845_geo.ptx", // [1974]
+    "textures/isCoral/Color/fingercoral0089_geo.ptx", // [1975]
+    "textures/isCoral/Color/fingercoral0515_geo.ptx", // [1976]
+    "textures/isCoral/Color/seaweed0184_geo.ptx", // [1977]
+    "textures/isCoral/Color/fingercoral0344_geo.ptx", // [1978]
+    "textures/isCoral/Color/barnacle0031_geo.ptx", // [1979]
+    "textures/isCoral/Color/clubbedfinger0530_geo.ptx", // [1980]
+    "textures/isCoral/Color/seaweed0177_geo.ptx", // [1981]
+    "textures/isCoral/Color/seaweed0007_geo.ptx", // [1982]
+    "textures/isCoral/Color/seaweed0050_geo.ptx", // [1983]
+    "textures/isCoral/Color/antler0064_geo.ptx", // [1984]
+    "textures/isCoral/Color/seaweed0175_geo.ptx", // [1985]
+    "textures/isCoral/Color/clubbedfinger0094_geo.ptx", // [1986]
+    "textures/isCoral/Color/seaweed0142_geo.ptx", // [1987]
+    "textures/isCoral/Color/clubbedfinger0102_geo.ptx", // [1988]
+    "textures/isCoral/Color/fingercoral0502_geo.ptx", // [1989]
+    "textures/isCoral/Color/clubbedfinger0513_geo.ptx", // [1990]
+    "textures/isCoral/Color/fingercoral0577_geo.ptx", // [1991]
+    "textures/isCoral/Color/fingercoral0383_geo.ptx", // [1992]
+    "textures/isCoral/Color/clubbedfinger0484_geo.ptx", // [1993]
+    "textures/isCoral/Color/seaweed0011_geo.ptx", // [1994]
+    "textures/isCoral/Color/starhornplate0081_geo.ptx", // [1995]
+    "textures/isCoral/Color/clubbedfinger0097_geo.ptx", // [1996]
+    "textures/isCoral/Color/fingercoral0348_geo.ptx", // [1997]
+    "textures/isCoral/Color/barnacle0096_geo.ptx", // [1998]
+    "textures/isCoral/Color/clubbedfinger0198_geo.ptx", // [1999]
+    "textures/isCoral/Color/coralrock0043_geo.ptx", // [2000]
+    "textures/isCoral/Color/seaweed0178_geo.ptx", // [2001]
+    "textures/isCoral/Color/coralrock0004_geo.ptx", // [2002]
+    "textures/isCoral/Color/fingercoral0523_geo.ptx", // [2003]
+    "textures/isCoral/Color/clubbedfinger0650_geo.ptx", // [2004]
+    "textures/isCoral/Color/coralrock0003_geo.ptx", // [2005]
+    "textures/isCoral/Color/clubbedfinger0768_geo.ptx", // [2006]
+    "textures/isCoral/Color/clubbedfinger0296_geo.ptx", // [2007]
+    "textures/isCoral/Color/fingercoral0381_geo.ptx", // [2008]
+    "textures/isCoral/Color/clubbedfinger0495_geo.ptx", // [2009]
+    "textures/isCoral/Color/seaweed0148_geo.ptx", // [2010]
+    "textures/isCoral/Color/seaweed0083_geo.ptx", // [2011]
+    "textures/isCoral/Color/fingercoral0518_geo.ptx", // [2012]
+    "textures/isCoral/Color/seaweed0032_geo.ptx", // [2013]
+    "textures/isCoral/Color/starhornplate0052_geo.ptx", // [2014]
+    "textures/isCoral/Color/fingercoral0475_geo.ptx", // [2015]
+    "textures/isCoral/Color/cauliflower0013_geo.ptx", // [2016]
+    "textures/isCoral/Color/clubbedfinger0224_geo.ptx", // [2017]
+    "textures/isCoral/Color/clubbedfinger0419_geo.ptx", // [2018]
+    "textures/isCoral/Color/fingercoral0320_geo.ptx", // [2019]
+    "textures/isCoral/Color/fingercoral0108_geo.ptx", // [2020]
+    "textures/isCoral/Color/fingercoral0205_geo.ptx", // [2021]
+    "textures/isCoral/Color/fingercoral0006_geo.ptx", // [2022]
+    "textures/isCoral/Color/clubbedfinger0203_geo.ptx", // [2023]
+    "textures/isCoral/Color/clubbedfinger0658_geo.ptx", // [2024]
+    "textures/isCoral/Color/seaweed0246_geo.ptx", // [2025]
+    "textures/isCoral/Color/antler0052_geo.ptx", // [2026]
+    "textures/isCoral/Color/seaweed0234_geo.ptx", // [2027]
+    "textures/isCoral/Color/fingercoral0443_geo.ptx", // [2028]
+    "textures/isCoral/Color/clubbedfinger0522_geo.ptx", // [2029]
+    "textures/isCoral/Color/coralrock0001_geo.ptx", // [2030]
+    "textures/isCoral/Color/clubbedfinger0047_geo.ptx", // [2031]
+    "textures/isCoral/Color/clubbedfinger0443_geo.ptx", // [2032]
+    "textures/isCoral/Color/seaweed0157_geo.ptx", // [2033]
+    "textures/isCoral/Color/coralstone0008_geo.ptx", // [2034]
+    "textures/isCoral/Color/clubbedfinger0303_geo.ptx", // [2035]
+    "textures/isCoral/Color/clubbedfinger0236_geo.ptx", // [2036]
+    "textures/isCoral/Color/fingercoral0298_geo.ptx", // [2037]
+    "textures/isCoral/Color/starhornplate0104_geo.ptx", // [2038]
+    "textures/isCoral/Color/seaweed0278_geo.ptx", // [2039]
+    "textures/isCoral/Color/clubbedfinger0071_geo.ptx", // [2040]
+    "textures/isCoral/Color/fingercoral0438_geo.ptx", // [2041]
+    "textures/isCoral/Color/clubbedfinger0446_geo.ptx", // [2042]
+    "textures/isCoral/Color/coralrock0018_geo.ptx", // [2043]
+    "textures/isCoral/Color/fingercoral0456_geo.ptx", // [2044]
+    "textures/isCoral/Color/clubbedfinger0207_geo.ptx", // [2045]
+    "textures/isCoral/Color/archivecoral_antler0003_geo.ptx", // [2046]
+    "textures/isCoral/Color/fingercoral0259_geo.ptx", // [2047]
+    "textures/isCoral/Color/starhornplate0001_geo.ptx", // [2048]
+    "textures/isCoral/Color/starhornplate0117_geo.ptx", // [2049]
+    "textures/isCoral/Color/clubbedfinger0067_geo.ptx", // [2050]
+    "textures/isCoral/Color/seaweed0318_geo.ptx", // [2051]
+    "textures/isCoral/Color/fingercoral0230_geo.ptx", // [2052]
+    "textures/isCoral/Color/clubbedfinger0595_geo.ptx", // [2053]
+    "textures/isCoral/Color/clubbedfinger0438_geo.ptx", // [2054]
+    "textures/isCoral/Color/antler0013_geo.ptx", // [2055]
+    "textures/isCoral/Color/clubbedfinger0204_geo.ptx", // [2056]
+    "textures/isCoral/Color/seaweed0043_geo.ptx", // [2057]
+    "textures/isCoral/Color/starhornplate0080_geo.ptx", // [2058]
+    "textures/isCoral/Color/starhornplate0012_geo.ptx", // [2059]
+    "textures/isCoral/Color/fingercoral0529_geo.ptx", // [2060]
+    "textures/isCoral/Color/starhornplate0064_geo.ptx", // [2061]
+    "textures/isCoral/Color/fingercoral0574_geo.ptx", // [2062]
+    "textures/isCoral/Color/clubbedfinger0680_geo.ptx", // [2063]
+    "textures/isCoral/Color/clubbedfinger0244_geo.ptx", // [2064]
+    "textures/isCoral/Color/seaweed0114_geo.ptx", // [2065]
+    "textures/isCoral/Color/starhornplate0050_geo.ptx", // [2066]
+    "textures/isCoral/Color/fingercoral0593_geo.ptx", // [2067]
+    "textures/isCoral/Color/seaweed0073_geo.ptx", // [2068]
+    "textures/isCoral/Color/fingercoral0597_geo.ptx", // [2069]
+    "textures/isCoral/Color/clubbedfinger0231_geo.ptx", // [2070]
+    "textures/isCoral/Color/clubbedfinger0527_geo.ptx", // [2071]
+    "textures/isCoral/Color/clubbedfinger0143_geo.ptx", // [2072]
+    "textures/isCoral/Color/fingercoral0111_geo.ptx", // [2073]
+    "textures/isCoral/Color/clubbedfinger0721_geo.ptx", // [2074]
+    "textures/isCoral/Color/fingercoral0612_geo.ptx", // [2075]
+    "textures/isCoral/Color/starhornplate0105_geo.ptx", // [2076]
+    "textures/isCoral/Color/fingercoral0227_geo.ptx", // [2077]
+    "textures/isCoral/Color/fingercoral0302_geo.ptx", // [2078]
+    "textures/isCoral/Color/fingercoral0231_geo.ptx", // [2079]
+    "textures/isCoral/Color/fingercoral0598_geo.ptx", // [2080]
+    "textures/isCoral/Color/archivecoral_staghorn0010_geo.ptx", // [2081]
+    "textures/isCoral/Color/clubbedfinger0538_geo.ptx", // [2082]
+    "textures/isCoral/Color/clubbedfinger0151_geo.ptx", // [2083]
+    "textures/isCoral/Color/seaweed0261_geo.ptx", // [2084]
+    "textures/isCoral/Color/clubbedfinger0815_geo.ptx", // [2085]
+    "textures/isCoral/Color/clubbedfinger0616_geo.ptx", // [2086]
+    "textures/isCoral/Color/starhornplate0082_geo.ptx", // [2087]
+    "textures/isCoral/Color/coralrock0017_geo.ptx", // [2088]
+    "textures/isCoral/Color/clubbedfinger0361_geo.ptx", // [2089]
+    "textures/isCoral/Color/starhornplate0088_geo.ptx", // [2090]
+    "textures/isCoral/Color/fingercoral0287_geo.ptx", // [2091]
+    "textures/isCoral/Color/seaweed0151_geo.ptx", // [2092]
+    "textures/isCoral/Color/seaweed0270_geo.ptx", // [2093]
+    "textures/isCoral/Color/fingercoral0131_geo.ptx", // [2094]
+    "textures/isCoral/Color/starhornplate0114_geo.ptx", // [2095]
+    "textures/isCoral/Color/seaweed0290_geo.ptx", // [2096]
+    "textures/isCoral/Color/clubbedfinger0765_geo.ptx", // [2097]
+    "textures/isCoral/Color/seaweed0163_geo.ptx", // [2098]
+    "textures/isCoral/Color/clubbedfinger0499_geo.ptx", // [2099]
+    "textures/isCoral/Color/coralrock0071_geo.ptx", // [2100]
+    "textures/isCoral/Color/fingercoral0172_geo.ptx", // [2101]
+    "textures/isCoral/Color/seaweed0103_geo.ptx", // [2102]
+    "textures/isCoral/Color/seaweed0242_geo.ptx", // [2103]
+    "textures/isCoral/Color/seaweed0284_geo.ptx", // [2104]
+    "textures/isCoral/Color/fingercoral0349_geo.ptx", // [2105]
+    "textures/isCoral/Color/clubbedthumb_b0001_geo.ptx", // [2106]
+    "textures/isCoral/Color/fingercoral0075_geo.ptx", // [2107]
+    "textures/isCoral/Color/clubbedfinger0554_geo.ptx", // [2108]
+    "textures/isCoral/Color/cauliflower0017_geo.ptx", // [2109]
+    "textures/isCoral/Color/fingercoral0498_geo.ptx", // [2110]
+    "textures/isCoral/Color/clubbedfinger0015_geo.ptx", // [2111]
+    "textures/isCoral/Color/fingercoral0513_geo.ptx", // [2112]
+    "textures/isCoral/Color/clubbedfinger0541_geo.ptx", // [2113]
+    "textures/isCoral/Color/fingercoral0097_geo.ptx", // [2114]
+    "textures/isCoral/Color/fingercoral0225_geo.ptx", // [2115]
+    "textures/isCoral/Color/seaweed0026_geo.ptx", // [2116]
+    "textures/isCoral/Color/fingercoral0135_geo.ptx", // [2117]
+    "textures/isCoral/Color/fingercoral0044_geo.ptx", // [2118]
+    "textures/isCoral/Color/starhornplate0109_geo.ptx", // [2119]
+    "textures/isCoral/Color/clubbedfinger0829_geo.ptx", // [2120]
+    "textures/isCoral/Color/seaweed0134_geo.ptx", // [2121]
+    "textures/isCoral/Color/fingercoral0557_geo.ptx", // [2122]
+    "textures/isCoral/Color/clubbedfinger0744_geo.ptx", // [2123]
+    "textures/isCoral/Color/seaweed0258_geo.ptx", // [2124]
+    "textures/isCoral/Color/clubbedfinger0507_geo.ptx", // [2125]
+    "textures/isCoral/Color/fingercoral0062_geo.ptx", // [2126]
+    "textures/isCoral/Color/clubbedfinger0644_geo.ptx", // [2127]
+    "textures/isCoral/Color/seaweed0260_geo.ptx", // [2128]
+    "textures/isCoral/Color/clubbedfinger0111_geo.ptx", // [2129]
+    "textures/isCoral/Color/seaweed0223_geo.ptx", // [2130]
+    "textures/isCoral/Color/clubbedfinger0474_geo.ptx", // [2131]
+    "textures/isCoral/Color/clubbedfinger0382_geo.ptx", // [2132]
+    "textures/isCoral/Color/clubbedfinger0509_geo.ptx", // [2133]
+    "textures/isCoral/Color/clubbedfinger0557_geo.ptx", // [2134]
+    "textures/isCoral/Color/seaweed0031_geo.ptx", // [2135]
+    "textures/isCoral/Color/clubbedfinger0302_geo.ptx", // [2136]
+    "textures/isCoral/Color/fingercoral0558_geo.ptx", // [2137]
+    "textures/isCoral/Color/clubbedfinger0180_geo.ptx", // [2138]
+    "textures/isCoral/Color/clubbedfinger0178_geo.ptx", // [2139]
+    "textures/isCoral/Color/clubbedfinger0479_geo.ptx", // [2140]
+    "textures/isCoral/Color/fingercoral0125_geo.ptx", // [2141]
+    "textures/isCoral/Color/archivecoral_cabbage0008_geo.ptx", // [2142]
+    "textures/isCoral/Color/fingercoral0552_geo.ptx", // [2143]
+    "textures/isCoral/Color/seaweed0299_geo.ptx", // [2144]
+    "textures/isCoral/Color/starhornplate0076_geo.ptx", // [2145]
+    "textures/isCoral/Color/seaweed0024_geo.ptx", // [2146]
+    "textures/isCoral/Color/clubbedfinger0478_geo.ptx", // [2147]
+    "textures/isCoral/Color/clubbedfinger0175_geo.ptx", // [2148]
+    "textures/isCoral/Color/fingercoral0017_geo.ptx", // [2149]
+    "textures/isCoral/Color/fingercoral0492_geo.ptx", // [2150]
+    "textures/isCoral/Color/archivecoral_cabbage0004_geo.ptx", // [2151]
+    "textures/isCoral/Color/barnacle0026_geo.ptx", // [2152]
+    "textures/isCoral/Color/fingercoral0307_geo.ptx", // [2153]
+    "textures/isCoral/Color/seaweed0264_geo.ptx", // [2154]
+    "textures/isCoral/Color/archivecoral_antler0005_geo.ptx", // [2155]
+    "textures/isCoral/Color/fingercoral0203_geo.ptx", // [2156]
+    "textures/isCoral/Color/fingercoral0113_geo.ptx", // [2157]
+    "textures/isCoral/Color/cauliflower0022_geo.ptx", // [2158]
+    "textures/isCoral/Color/starhornstem0002_geo.ptx", // [2159]
+    "textures/isCoral/Color/fingercoral0035_geo.ptx", // [2160]
+    "textures/isCoral/Color/starhornplate0053_geo.ptx", // [2161]
+    "textures/isCoral/Color/seaweed0074_geo.ptx", // [2162]
+    "textures/isCoral/Color/starhornplate0026_geo.ptx", // [2163]
+    "textures/isCoral/Color/clubbedfinger0588_geo.ptx", // [2164]
+    "textures/isCoral/Color/clubbedfinger0596_geo.ptx", // [2165]
+    "textures/isCoral/Color/clubbedfinger0783_geo.ptx", // [2166]
+    "textures/isCoral/Color/fingercoral0055_geo.ptx", // [2167]
+    "textures/isCoral/Color/archivecoral_staghorn0009_geo.ptx", // [2168]
+    "textures/isCoral/Color/fingercoral0105_geo.ptx", // [2169]
+    "textures/isCoral/Color/cauliflower0007_geo.ptx", // [2170]
+    "textures/isCoral/Color/fingercoral0466_geo.ptx", // [2171]
+    "textures/isCoral/Color/fingercoral0532_geo.ptx", // [2172]
+    "textures/isCoral/Color/clubbedfinger0299_geo.ptx", // [2173]
+    "textures/isCoral/Color/fingercoral0076_geo.ptx", // [2174]
+    "textures/isCoral/Color/clubbedfinger0285_geo.ptx", // [2175]
+    "textures/isCoral/Color/clubbedfinger0723_geo.ptx", // [2176]
+    "textures/isCoral/Color/fingercoral0453_geo.ptx", // [2177]
+    "textures/isCoral/Color/seaweed0262_geo.ptx", // [2178]
+    "textures/isCoral/Color/fingercoral0551_geo.ptx", // [2179]
+    "textures/isCoral/Color/barnacle0019_geo.ptx", // [2180]
+    "textures/isCoral/Color/barnacle0049_geo.ptx", // [2181]
+    "textures/isCoral/Color/fingercoral0608_geo.ptx", // [2182]
+    "textures/isCoral/Color/fingercoral0617_geo.ptx", // [2183]
+    "textures/isCoral/Color/barnacle0111_geo.ptx", // [2184]
+    "textures/isCoral/Color/antler0048_geo.ptx", // [2185]
+    "textures/isCoral/Color/clubbedfinger0114_geo.ptx", // [2186]
+    "textures/isCoral/Color/clubbedfinger0377_geo.ptx", // [2187]
+    "textures/isCoral/Color/barnacle0030_geo.ptx", // [2188]
+    "textures/isCoral/Color/coralrock0053_geo.ptx", // [2189]
+    "textures/isCoral/Color/clubbedfinger0290_geo.ptx", // [2190]
+    "textures/isCoral/Color/fingercoral0098_geo.ptx", // [2191]
+    "textures/isCoral/Color/fingercoral0584_geo.ptx", // [2192]
+    "textures/isCoral/Color/fingercoral0012_geo.ptx", // [2193]
+    "textures/isCoral/Color/coralrock0032_geo.ptx", // [2194]
+    "textures/isCoral/Color/starhornplate0054_geo.ptx", // [2195]
+    "textures/isCoral/Color/clubbedfinger0050_geo.ptx", // [2196]
+    "textures/isCoral/Color/clubbedfinger0109_geo.ptx", // [2197]
+    "textures/isCoral/Color/antler0017_geo.ptx", // [2198]
+    "textures/isCoral/Color/clubbedfinger0679_geo.ptx", // [2199]
+    "textures/isCoral/Color/seaweed0174_geo.ptx", // [2200]
+    "textures/isCoral/Color/clubbedfinger0633_geo.ptx", // [2201]
+    "textures/isCoral/Color/starhornplate0084_geo.ptx", // [2202]
+    "textures/isCoral/Color/barnacle0055_geo.ptx", // [2203]
+    "textures/isCoral/Color/barnacle0082_geo.ptx", // [2204]
+    "textures/isCoral/Color/seaweed0179_geo.ptx", // [2205]
+    "textures/isCoral/Color/clubbedfinger0267_geo.ptx", // [2206]
+    "textures/isCoral/Color/seaweed0053_geo.ptx", // [2207]
+    "textures/isCoral/Color/seaweed0020_geo.ptx", // [2208]
+    "textures/isCoral/Color/barnacle0098_geo.ptx", // [2209]
+    "textures/isCoral/Color/fingercoral0141_geo.ptx", // [2210]
+    "textures/isCoral/Color/clubbedfinger0054_geo.ptx", // [2211]
+    "textures/isCoral/Color/seaweed0182_geo.ptx", // [2212]
+    "textures/isCoral/Color/fingercoral0360_geo.ptx", // [2213]
+    "textures/isCoral/Color/coralrock0023_geo.ptx", // [2214]
+    "textures/isCoral/Color/fingercoral0370_geo.ptx", // [2215]
+    "textures/isCoral/Color/cauliflower0019_geo.ptx", // [2216]
+    "textures/isCoral/Color/clubbedfinger0689_geo.ptx", // [2217]
+    "textures/isCoral/Color/antler0049_geo.ptx", // [2218]
+    "textures/isCoral/Color/fingercoral0400_geo.ptx", // [2219]
+    "textures/isCoral/Color/clubbedfinger0548_geo.ptx", // [2220]
+    "textures/isCoral/Color/starhornstem0003_geo.ptx", // [2221]
+    "textures/isCoral/Color/fingercoral0022_geo.ptx", // [2222]
+    "textures/isCoral/Color/fingercoral0341_geo.ptx", // [2223]
+    "textures/isCoral/Color/clubbedfinger0406_geo.ptx", // [2224]
+    "textures/isCoral/Color/fingercoral0587_geo.ptx", // [2225]
+    "textures/isCoral/Color/fingercoral0533_geo.ptx", // [2226]
+    "textures/isCoral/Color/fingercoral0170_geo.ptx", // [2227]
+    "textures/isCoral/Color/clubbedfinger0639_geo.ptx", // [2228]
+    "textures/isCoral/Color/starhornplate0089_geo.ptx", // [2229]
+    "textures/isCoral/Color/cauliflower0004_geo.ptx", // [2230]
+    "textures/isCoral/Color/barnacle0029_geo.ptx", // [2231]
+    "textures/isCoral/Color/seaweed0240_geo.ptx", // [2232]
+    "textures/isCoral/Color/seaweed0293_geo.ptx", // [2233]
+    "textures/isCoral/Color/fingercoral0071_geo.ptx", // [2234]
+    "textures/isCoral/Color/clubbedfinger0559_geo.ptx", // [2235]
+    "textures/isCoral/Color/clubbedfinger0328_geo.ptx", // [2236]
+    "textures/isCoral/Color/fingercoral0571_geo.ptx", // [2237]
+    "textures/isCoral/Color/seaweed0118_geo.ptx", // [2238]
+    "textures/isCoral/Color/clubbedfinger0337_geo.ptx", // [2239]
+    "textures/isCoral/Color/seaweed0272_geo.ptx", // [2240]
+    "textures/isCoral/Color/fingercoral0270_geo.ptx", // [2241]
+    "textures/isCoral/Color/starhornplate0022_geo.ptx", // [2242]
+    "textures/isCoral/Color/clubbedfinger0764_geo.ptx", // [2243]
+    "textures/isCoral/Color/fingercoral0193_geo.ptx", // [2244]
+    "textures/isCoral/Color/clubbedfinger0030_geo.ptx", // [2245]
+    "textures/isCoral/Color/antler0016_geo.ptx", // [2246]
+    "textures/isCoral/Color/clubbedfinger0828_geo.ptx", // [2247]
+    "textures/isCoral/Color/clubbedfinger0223_geo.ptx", // [2248]
+    "textures/isCoral/Color/fingercoral0392_geo.ptx", // [2249]
+    "textures/isCoral/Color/fingercoral0507_geo.ptx", // [2250]
+    "textures/isCoral/Color/fingercoral0079_geo.ptx", // [2251]
+    "textures/isCoral/Color/clubbedfinger0395_geo.ptx", // [2252]
+    "textures/isCoral/Color/antler0045_geo.ptx", // [2253]
+    "textures/isCoral/Color/clubbedfinger0065_geo.ptx", // [2254]
+    "textures/isCoral/Color/clubbedfinger0505_geo.ptx", // [2255]
+    "textures/isCoral/Color/clubbedfinger0752_geo.ptx", // [2256]
+    "textures/isCoral/Color/fingercoral0118_geo.ptx", // [2257]
+    "textures/isCoral/Color/clubbedfinger0077_geo.ptx", // [2258]
+    "textures/isCoral/Color/fingercoral0604_geo.ptx", // [2259]
+    "textures/isCoral/Color/clubbedfinger0564_geo.ptx", // [2260]
+    "textures/isCoral/Color/clubbedfinger0429_geo.ptx", // [2261]
+    "textures/isCoral/Color/coralstone0007_geo.ptx", // [2262]
+    "textures/isCoral/Color/clubbedfinger0660_geo.ptx", // [2263]
+    "textures/isCoral/Color/seaweed0231_geo.ptx", // [2264]
+    "textures/isCoral/Color/clubbedfinger0520_geo.ptx", // [2265]
+    "textures/isCoral/Color/fingercoral0547_geo.ptx", // [2266]
+    "textures/isCoral/Color/seaweed0076_geo.ptx", // [2267]
+    "textures/isCoral/Color/clubbedfinger0758_geo.ptx", // [2268]
+    "textures/isCoral/Color/archivecoral_cabbage0007_geo.ptx", // [2269]
+    "textures/isCoral/Color/clubbedfinger0741_geo.ptx", // [2270]
+    "textures/isCoral/Color/ricecoral0013_geo.ptx", // [2271]
+    "textures/isCoral/Color/starhornplate0091_geo.ptx", // [2272]
+    "textures/isCoral/Color/seaweed0277_geo.ptx", // [2273]
+    "textures/isCoral/Color/archivecoral_staghorn0005_geo.ptx", // [2274]
+    "textures/isCoral/Color/coralmoss0001_geo.ptx", // [2275]
+    "textures/isCoral/Color/coralstone0021_geo.ptx", // [2276]
+    "textures/isCoral/Color/seaweed0275_geo.ptx", // [2277]
+    "textures/isCoral/Color/coralstone0014_geo.ptx", // [2278]
+    "textures/isCoral/Color/fingercoral0229_geo.ptx", // [2279]
+    "textures/isCoral/Color/fingercoral0248_geo.ptx", // [2280]
+    "textures/isCoral/Color/fingercoral0537_geo.ptx", // [2281]
+    "textures/isCoral/Color/clubbedfinger0794_geo.ptx", // [2282]
+    "textures/isCoral/Color/clubbedfinger0763_geo.ptx", // [2283]
+    "textures/isCoral/Color/clubbedfinger0334_geo.ptx", // [2284]
+    "textures/isCoral/Color/ricecoral0016_geo.ptx", // [2285]
+    "textures/isCoral/Color/clubbedfinger0243_geo.ptx", // [2286]
+    "textures/isCoral/Color/fingercoral0155_geo.ptx", // [2287]
+    "textures/isCoral/Color/antler0032_geo.ptx", // [2288]
+    "textures/isCoral/Color/starhornplate0099_geo.ptx", // [2289]
+    "textures/isCoral/Color/seaweed0245_geo.ptx", // [2290]
+    "textures/isCoral/Color/seaweed0226_geo.ptx", // [2291]
+    "textures/isCoral/Color/fingercoral0504_geo.ptx", // [2292]
+    "textures/isCoral/Color/seaweed0089_geo.ptx", // [2293]
+    "textures/isCoral/Color/barnacle0095_geo.ptx", // [2294]
+    "textures/isCoral/Color/fingercoral0325_geo.ptx", // [2295]
+    "textures/isCoral/Color/fingercoral0290_geo.ptx", // [2296]
+    "textures/isCoral/Color/clubbedfinger0584_geo.ptx", // [2297]
+    "textures/isCoral/Color/fingercoral0216_geo.ptx", // [2298]
+    "textures/isCoral/Color/clubbedfinger0312_geo.ptx", // [2299]
+    "textures/isCoral/Color/fingercoral0343_geo.ptx", // [2300]
+    "textures/isCoral/Color/clubbedfinger0190_geo.ptx", // [2301]
+    "textures/isCoral/Color/clubbedfinger0383_geo.ptx", // [2302]
+    "textures/isCoral/Color/clubbedfinger0315_geo.ptx", // [2303]
+    "textures/isCoral/Color/clubbedfinger0492_geo.ptx", // [2304]
+    "textures/isCoral/Color/coralrock0007_geo.ptx", // [2305]
+    "textures/isCoral/Color/clubbedfinger0006_geo.ptx", // [2306]
+    "textures/isCoral/Color/seaweed0131_geo.ptx", // [2307]
+    "textures/isCoral/Color/clubbedfinger0279_geo.ptx", // [2308]
+    "textures/isCoral/Color/barnacle0015_geo.ptx", // [2309]
+    "textures/isCoral/Color/seaweed0126_geo.ptx", // [2310]
+    "textures/isCoral/Color/clubbedfinger0135_geo.ptx", // [2311]
+    "textures/isCoral/Color/seaweed0125_geo.ptx", // [2312]
+    "textures/isCoral/Color/ricecoral0006_geo.ptx", // [2313]
+    "textures/isCoral/Color/coralstone0022_geo.ptx", // [2314]
+    "textures/isCoral/Color/fingercoral0021_geo.ptx", // [2315]
+    "textures/isCoral/Color/starhornplate0065_geo.ptx", // [2316]
+    "textures/isCoral/Color/fingercoral0476_geo.ptx", // [2317]
+    "textures/isCoral/Color/clubbedfinger0602_geo.ptx", // [2318]
+    "textures/isCoral/Color/coralrock0035_geo.ptx", // [2319]
+    "textures/isCoral/Color/clubbedfinger0843_geo.ptx", // [2320]
+    "textures/isCoral/Color/fingercoral0132_geo.ptx", // [2321]
+    "textures/isCoral/Color/clubbedfinger0019_geo.ptx", // [2322]
+    "textures/isCoral/Color/archivecoral_antler0007_geo.ptx", // [2323]
+    "textures/isCoral/Color/clubbedfinger0141_geo.ptx", // [2324]
+    "textures/isCoral/Color/coralstone0004_geo.ptx", // [2325]
+    "textures/isCoral/Color/seaweed0059_geo.ptx", // [2326]
+    "textures/isCoral/Color/barnacle0091_geo.ptx", // [2327]
+    "textures/isCoral/Color/seaweed0204_geo.ptx", // [2328]
+    "textures/isCoral/Color/coralrock0059_geo.ptx", // [2329]
+    "textures/isCoral/Color/starhornplate0020_geo.ptx", // [2330]
+    "textures/isCoral/Color/starhornplate0017_geo.ptx", // [2331]
+    "textures/isCoral/Color/starhornplate0046_geo.ptx", // [2332]
+    "textures/isCoral/Color/coralmoss0004_geo.ptx", // [2333]
+    "textures/isCoral/Color/clubbedfinger0781_geo.ptx", // [2334]
+    "textures/isCoral/Color/clubbedfinger0126_geo.ptx", // [2335]
+    "textures/isCoral/Color/antler0067_geo.ptx", // [2336]
+    "textures/isCoral/Color/coralstone0018_geo.ptx", // [2337]
+    "textures/isCoral/Color/clubbedfinger0704_geo.ptx", // [2338]
+    "textures/isCoral/Color/clubbedfinger0364_geo.ptx", // [2339]
+    "textures/isCoral/Color/clubbedfinger0570_geo.ptx", // [2340]
+    "textures/isCoral/Color/starhornplate0078_geo.ptx", // [2341]
+    "textures/isCoral/Color/coralrock0061_geo.ptx", // [2342]
+    "textures/isCoral/Color/fingercoral0156_geo.ptx", // [2343]
+    "textures/isCoral/Color/fingercoral0544_geo.ptx", // [2344]
+    "textures/isCoral/Color/clubbedfinger0225_geo.ptx", // [2345]
+    "textures/isCoral/Color/seaweed0084_geo.ptx", // [2346]
+    "textures/isCoral/Color/clubbedfinger0350_geo.ptx", // [2347]
+    "textures/isCoral/Color/fingercoral0283_geo.ptx", // [2348]
+    "textures/isCoral/Color/seaweed0237_geo.ptx", // [2349]
+    "textures/isCoral/Color/clubbedfinger0577_geo.ptx", // [2350]
+    "textures/isCoral/Color/clubbedfinger0288_geo.ptx", // [2351]
+    "textures/isCoral/Color/seaweed0071_geo.ptx", // [2352]
+    "textures/isCoral/Color/seaweed0255_geo.ptx", // [2353]
+    "textures/isCoral/Color/clubbedfinger0534_geo.ptx", // [2354]
+    "textures/isCoral/Color/fingercoral0070_geo.ptx", // [2355]
+    "textures/isCoral/Color/barnacle0072_geo.ptx", // [2356]
+    "textures/isCoral/Color/ricecoral0007_geo.ptx", // [2357]
+    "textures/isCoral/Color/barnacle0051_geo.ptx", // [2358]
+    "textures/isCoral/Color/clubbedfinger0254_geo.ptx", // [2359]
+    "textures/isCoral/Color/clubbedfinger0399_geo.ptx", // [2360]
+    "textures/isCoral/Color/fingercoral0430_geo.ptx", // [2361]
+    "textures/isCoral/Color/fingercoral0439_geo.ptx", // [2362]
+    "textures/isCoral/Color/coralstone0019_geo.ptx", // [2363]
+    "textures/isCoral/Color/seaweed0022_geo.ptx", // [2364]
+    "textures/isCoral/Color/fingercoral0591_geo.ptx", // [2365]
+    "textures/isCoral/Color/seaweed0047_geo.ptx", // [2366]
+    "textures/isCoral/Color/clubbedfinger0211_geo.ptx", // [2367]
+    "textures/isCoral/Color/fingercoral0239_geo.ptx", // [2368]
+    "textures/isCoral/Color/clubbedfinger0625_geo.ptx", // [2369]
+    "textures/isCoral/Color/fingercoral0339_geo.ptx", // [2370]
+    "textures/isCoral/Color/barnacle0058_geo.ptx", // [2371]
+    "textures/isCoral/Color/seaweed0138_geo.ptx", // [2372]
+    "textures/isCoral/Color/clubbedfinger0325_geo.ptx", // [2373]
+    "textures/isCoral/Color/fingercoral0481_geo.ptx", // [2374]
+    "textures/isCoral/Color/fingercoral0496_geo.ptx", // [2375]
+    "textures/isCoral/Color/fingercoral0304_geo.ptx", // [2376]
+    "textures/isCoral/Color/clubbedfinger0720_geo.ptx", // [2377]
+    "textures/isCoral/Color/clubbedfinger0426_geo.ptx", // [2378]
+    "textures/isCoral/Color/fingercoral0465_geo.ptx", // [2379]
+    "textures/isCoral/Color/starhornplate0083_geo.ptx", // [2380]
+    "textures/isCoral/Color/clubbedfinger0252_geo.ptx", // [2381]
+    "textures/isCoral/Color/starhornplate0107_geo.ptx", // [2382]
+    "textures/isCoral/Color/clubbedfinger0575_geo.ptx", // [2383]
+    "textures/isCoral/Color/clubbedfinger0582_geo.ptx", // [2384]
+    "textures/isCoral/Color/coralrock0073_geo.ptx", // [2385]
+    "textures/isCoral/Color/seaweed0117_geo.ptx", // [2386]
+    "textures/isCoral/Color/fingercoral0437_geo.ptx", // [2387]
+    "textures/isCoral/Color/clubbedfinger0048_geo.ptx", // [2388]
+    "textures/isCoral/Color/clubbedfinger0378_geo.ptx", // [2389]
+    "textures/isCoral/Color/clubbedfinger0155_geo.ptx", // [2390]
+    "textures/isCoral/Color/barnacle0018_geo.ptx", // [2391]
+    "textures/isCoral/Color/clubbedfinger0797_geo.ptx", // [2392]
+    "textures/isCoral/Color/fingercoral0103_geo.ptx", // [2393]
+    "textures/isCoral/Color/fingercoral0380_geo.ptx", // [2394]
+    "textures/isCoral/Color/clubbedfinger0222_geo.ptx", // [2395]
+    "textures/isCoral/Color/fingercoral0308_geo.ptx", // [2396]
+    "textures/isCoral/Color/fingercoral0232_geo.ptx", // [2397]
+    "textures/isCoral/Color/fingercoral0018_geo.ptx", // [2398]
+    "textures/isCoral/Color/archivecoral_antler0001_geo.ptx", // [2399]
+    "textures/isCoral/Color/fingercoral0215_geo.ptx", // [2400]
+    "textures/isCoral/Color/clubbedfinger0671_geo.ptx", // [2401]
+    "textures/isCoral/Color/clubbedfinger0473_geo.ptx", // [2402]
+    "textures/isCoral/Color/clubbedfinger0046_geo.ptx", // [2403]
+    "textures/isCoral/Color/seaweed0155_geo.ptx", // [2404]
+    "textures/isCoral/Color/seaweed0006_geo.ptx", // [2405]
+    "textures/isCoral/Color/starhornplate0033_geo.ptx", // [2406]
+    "textures/isCoral/Color/fingercoral0054_geo.ptx", // [2407]
+    "textures/isCoral/Color/antler0028_geo.ptx", // [2408]
+    "textures/isCoral/Color/clubbedfinger0833_geo.ptx", // [2409]
+    "textures/isCoral/Color/fingercoral0359_geo.ptx", // [2410]
+    "textures/isCoral/Color/clubbedfinger0266_geo.ptx", // [2411]
+    "textures/isCoral/Color/seaweed0176_geo.ptx", // [2412]
+    "textures/isCoral/Color/fingercoral0369_geo.ptx", // [2413]
+    "textures/isCoral/Color/clubbedfinger0125_geo.ptx", // [2414]
+    "textures/isCoral/Color/barnacle0083_geo.ptx", // [2415]
+    "textures/isCoral/Color/clubbedfinger0786_geo.ptx", // [2416]
+    "textures/isCoral/Color/starhornplate0079_geo.ptx", // [2417]
+    "textures/isCoral/Color/clubbedthumb_a0001_geo.ptx", // [2418]
+    "textures/isCoral/Color/clubbedfinger0273_geo.ptx", // [2419]
+    "textures/isCoral/Color/clubbedfinger0090_geo.ptx", // [2420]
+    "textures/isCoral/Color/coralrock0058_geo.ptx", // [2421]
+    "textures/isCoral/Color/clubbedfinger0610_geo.ptx", // [2422]
+    "textures/isCoral/Color/seaweed0088_geo.ptx", // [2423]
+    "textures/isCoral/Color/clubbedfinger0281_geo.ptx", // [2424]
+    "textures/isCoral/Color/clubbedfinger0550_geo.ptx", // [2425]
+    "textures/isCoral/Color/fingercoral0461_geo.ptx", // [2426]
+    "textures/isCoral/Color/fingercoral0471_geo.ptx", // [2427]
+    "textures/isCoral/Color/coralmoss0003_geo.ptx", // [2428]
+    "textures/isCoral/Color/clubbedfinger0122_geo.ptx", // [2429]
+    "textures/isCoral/Color/seaweed0005_geo.ptx", // [2430]
+    "textures/isCoral/Color/starhornplate0034_geo.ptx", // [2431]
+    "textures/isCoral/Color/antler0023_geo.ptx", // [2432]
+    "textures/isCoral/Color/antler0022_geo.ptx", // [2433]
+    "textures/isCoral/Color/seaweed0136_geo.ptx", // [2434]
+    "textures/isCoral/Color/clubbedfinger0088_geo.ptx", // [2435]
+    "textures/isCoral/Color/fingercoral0253_geo.ptx", // [2436]
+    "textures/isCoral/Color/clubbedfinger0055_geo.ptx", // [2437]
+    "textures/isCoral/Color/fingercoral0394_geo.ptx", // [2438]
+    "textures/isCoral/Color/clubbedfinger0108_geo.ptx", // [2439]
+    "textures/isCoral/Color/seaweed0164_geo.ptx", // [2440]
+    "textures/isCoral/Color/coralstone0005_geo.ptx", // [2441]
+    "textures/isCoral/Color/fingercoral0433_geo.ptx", // [2442]
+    "textures/isCoral/Color/clubbedfinger0107_geo.ptx", // [2443]
+    "textures/isCoral/Color/seaweed0048_geo.ptx", // [2444]
+    "textures/isCoral/Color/seaweed0123_geo.ptx", // [2445]
+    "textures/isCoral/Color/clubbedfinger0206_geo.ptx", // [2446]
+    "textures/isCoral/Color/seaweed0033_geo.ptx", // [2447]
+    "textures/isCoral/Color/clubbedfinger0668_geo.ptx", // [2448]
+    "textures/isCoral/Color/coralrock0069_geo.ptx", // [2449]
+    "textures/isCoral/Color/coralrock0028_geo.ptx", // [2450]
+    "textures/isCoral/Color/clubbedfinger0191_geo.ptx", // [2451]
+    "textures/isCoral/Color/fingercoral0026_geo.ptx", // [2452]
+    "textures/isCoral/Color/fingercoral0110_geo.ptx", // [2453]
+    "textures/isCoral/Color/clubbedfinger0581_geo.ptx", // [2454]
+    "textures/isCoral/Color/seaweed0249_geo.ptx", // [2455]
+    "textures/isDunesA/Color/roots0377_geo.ptx", // [2456]
+    "textures/isDunesA/Color/roots0554_geo.ptx", // [2457]
+    "textures/isDunesA/Color/roots0153_geo.ptx", // [2458]
+    "textures/isDunesA/Color/roots0255_geo.ptx", // [2459]
+    "textures/isDunesA/Color/roots0032_geo.ptx", // [2460]
+    "textures/isDunesA/Color/roots0499_geo.ptx", // [2461]
+    "textures/isDunesA/Color/roots0635_geo.ptx", // [2462]
+    "textures/isDunesA/Color/leaflet0096_geo.ptx", // [2463]
+    "textures/isDunesA/Color/roots0668_geo.ptx", // [2464]
+    "textures/isDunesA/Color/roots0431_geo.ptx", // [2465]
+    "textures/isDunesA/Color/roots0702_geo.ptx", // [2466]
+    "textures/isDunesA/Color/roots0680_geo.ptx", // [2467]
+    "textures/isDunesA/Color/roots0736_geo.ptx", // [2468]
+    "textures/isDunesA/Color/roots0102_geo.ptx", // [2469]
+    "textures/isDunesA/Color/roots0504_geo.ptx", // [2470]
+    "textures/isDunesA/Color/roots0246_geo.ptx", // [2471]
+    "textures/isDunesA/Color/roots0245_geo.ptx", // [2472]
+    "textures/isDunesA/Color/roots0588_geo.ptx", // [2473]
+    "textures/isDunesA/Color/roots0277_geo.ptx", // [2474]
+    "textures/isDunesA/Color/roots0144_geo.ptx", // [2475]
+    "textures/isDunesA/Color/roots0226_geo.ptx", // [2476]
+    "textures/isDunesA/Color/stem0001_geo.ptx", // [2477]
+    "textures/isDunesA/Color/roots0212_geo.ptx", // [2478]
+    "textures/isDunesA/Color/roots0749_geo.ptx", // [2479]
+    "textures/isDunesA/Color/roots0031_geo.ptx", // [2480]
+    "textures/isDunesA/Color/roots0630_geo.ptx", // [2481]
+    "textures/isDunesA/Color/roots0113_geo.ptx", // [2482]
+    "textures/isDunesA/Color/roots0348_geo.ptx", // [2483]
+    "textures/isDunesA/Color/roots0477_geo.ptx", // [2484]
+    "textures/isDunesA/Color/roots0718_geo.ptx", // [2485]
+    "textures/isDunesA/Color/roots0409_geo.ptx", // [2486]
+    "textures/isDunesA/Color/roots0070_geo.ptx", // [2487]
+    "textures/isDunesA/Color/roots0735_geo.ptx", // [2488]
+    "textures/isDunesA/Color/roots0257_geo.ptx", // [2489]
+    "textures/isDunesA/Color/roots0648_geo.ptx", // [2490]
+    "textures/isDunesA/Color/roots0224_geo.ptx", // [2491]
+    "textures/isDunesA/Color/roots0624_geo.ptx", // [2492]
+    "textures/isDunesA/Color/frond0014_geo.ptx", // [2493]
+    "textures/isDunesA/Color/roots0443_geo.ptx", // [2494]
+    "textures/isDunesA/Color/roots0469_geo.ptx", // [2495]
+    "textures/isDunesA/Color/roots0308_geo.ptx", // [2496]
+    "textures/isDunesA/Color/roots0524_geo.ptx", // [2497]
+    "textures/isDunesA/Color/roots0018_geo.ptx", // [2498]
+    "textures/isDunesA/Color/roots0432_geo.ptx", // [2499]
+    "textures/isDunesA/Color/roots0173_geo.ptx", // [2500]
+    "textures/isDunesA/Color/roots0278_geo.ptx", // [2501]
+    "textures/isDunesA/Color/roots0233_geo.ptx", // [2502]
+    "textures/isDunesA/Color/roots0373_geo.ptx", // [2503]
+    "textures/isDunesA/Color/frond0012_geo.ptx", // [2504]
+    "textures/isDunesA/Color/roots0193_geo.ptx", // [2505]
+    "textures/isDunesA/Color/roots0575_geo.ptx", // [2506]
+    "textures/isDunesA/Color/roots0094_geo.ptx", // [2507]
+    "textures/isDunesA/Color/roots0603_geo.ptx", // [2508]
+    "textures/isDunesA/Color/roots0674_geo.ptx", // [2509]
+    "textures/isDunesA/Color/roots0429_geo.ptx", // [2510]
+    "textures/isDunesA/Color/roots0267_geo.ptx", // [2511]
+    "textures/isDunesA/Color/roots0742_geo.ptx", // [2512]
+    "textures/isDunesA/Color/roots0401_geo.ptx", // [2513]
+    "textures/isDunesA/Color/roots0653_geo.ptx", // [2514]
+    "textures/isDunesA/Color/roots0512_geo.ptx", // [2515]
+    "textures/isDunesA/Color/roots0215_geo.ptx", // [2516]
+    "textures/isDunesA/Color/roots0189_geo.ptx", // [2517]
+    "textures/isDunesA/Color/roots0107_geo.ptx", // [2518]
+    "textures/isDunesA/Color/roots0192_geo.ptx", // [2519]
+    "textures/isDunesA/Color/roots0100_geo.ptx", // [2520]
+    "textures/isDunesA/Color/roots0369_geo.ptx", // [2521]
+    "textures/isDunesA/Color/roots0719_geo.ptx", // [2522]
+    "textures/isDunesA/Color/roots0613_geo.ptx", // [2523]
+    "textures/isDunesA/Color/roots0089_geo.ptx", // [2524]
+    "textures/isDunesA/Color/roots0675_geo.ptx", // [2525]
+    "textures/isDunesA/Color/roots0581_geo.ptx", // [2526]
+    "textures/isDunesA/Color/roots0383_geo.ptx", // [2527]
+    "textures/isDunesA/Color/roots0023_geo.ptx", // [2528]
+    "textures/isDunesA/Color/roots0110_geo.ptx", // [2529]
+    "textures/isDunesA/Color/roots0408_geo.ptx", // [2530]
+    "textures/isDunesA/Color/roots0182_geo.ptx", // [2531]
+    "textures/isDunesA/Color/roots0629_geo.ptx", // [2532]
+    "textures/isDunesA/Color/roots0520_geo.ptx", // [2533]
+    "textures/isDunesA/Color/roots0649_geo.ptx", // [2534]
+    "textures/isDunesA/Color/stem0014_geo.ptx", // [2535]
+    "textures/isDunesA/Color/leaflet0104_geo.ptx", // [2536]
+    "textures/isDunesA/Color/roots0204_geo.ptx", // [2537]
+    "textures/isDunesA/Color/roots0077_geo.ptx", // [2538]
+    "textures/isDunesA/Color/roots0103_geo.ptx", // [2539]
+    "textures/isDunesA/Color/roots0744_geo.ptx", // [2540]
+    "textures/isDunesA/Color/roots0721_geo.ptx", // [2541]
+    "textures/isDunesA/Color/roots0523_geo.ptx", // [2542]
+    "textures/isDunesA/Color/frond0010_geo.ptx", // [2543]
+    "textures/isDunesA/Color/roots0647_geo.ptx", // [2544]
+    "textures/isDunesA/Color/roots0203_geo.ptx", // [2545]
+    "textures/isDunesA/Color/roots0395_geo.ptx", // [2546]
+    "textures/isDunesA/Color/roots0650_geo.ptx", // [2547]
+    "textures/isDunesA/Color/roots0446_geo.ptx", // [2548]
+    "textures/isDunesA/Color/roots0697_geo.ptx", // [2549]
+    "textures/isDunesA/Color/roots0188_geo.ptx", // [2550]
+    "textures/isDunesA/Color/roots0500_geo.ptx", // [2551]
+    "textures/isDunesA/Color/archiveLeaflet0126_geo.ptx", // [2552]
+    "textures/isDunesA/Color/roots0055_geo.ptx", // [2553]
+    "textures/isDunesA/Color/roots0043_geo.ptx", // [2554]
+    "textures/isDunesA/Color/roots0435_geo.ptx", // [2555]
+    "textures/isDunesA/Color/roots0627_geo.ptx", // [2556]
+    "textures/isDunesA/Color/roots0201_geo.ptx", // [2557]
+    "textures/isDunesA/Color/roots0251_geo.ptx", // [2558]
+    "textures/isDunesA/Color/roots0691_geo.ptx", // [2559]
+    "textures/isDunesA/Color/roots0717_geo.ptx", // [2560]
+    "textures/isDunesA/Color/roots0471_geo.ptx", // [2561]
+    "textures/isDunesA/Color/roots0709_geo.ptx", // [2562]
+    "textures/isDunesA/Color/roots0106_geo.ptx", // [2563]
+    "textures/isDunesA/Color/roots0084_geo.ptx", // [2564]
+    "textures/isDunesA/Color/roots0533_geo.ptx", // [2565]
+    "textures/isDunesA/Color/roots0404_geo.ptx", // [2566]
+    "textures/isDunesA/Color/roots0393_geo.ptx", // [2567]
+    "textures/isDunesA/Color/stem0013_geo.ptx", // [2568]
+    "textures/isDunesA/Color/roots0578_geo.ptx", // [2569]
+    "textures/isDunesA/Color/roots0732_geo.ptx", // [2570]
+    "textures/isDunesA/Color/roots0360_geo.ptx", // [2571]
+    "textures/isDunesA/Color/roots0587_geo.ptx", // [2572]
+    "textures/isDunesA/Color/roots0056_geo.ptx", // [2573]
+    "textures/isDunesA/Color/roots0154_geo.ptx", // [2574]
+    "textures/isDunesA/Color/roots0261_geo.ptx", // [2575]
+    "textures/isDunesA/Color/roots0426_geo.ptx", // [2576]
+    "textures/isDunesA/Color/roots0386_geo.ptx", // [2577]
+    "textures/isDunesA/Color/roots0672_geo.ptx", // [2578]
+    "textures/isDunesA/Color/roots0616_geo.ptx", // [2579]
+    "textures/isDunesA/Color/roots0727_geo.ptx", // [2580]
+    "textures/isDunesA/Color/roots0307_geo.ptx", // [2581]
+    "textures/isDunesA/Color/roots0661_geo.ptx", // [2582]
+    "textures/isDunesA/Color/roots0436_geo.ptx", // [2583]
+    "textures/isDunesA/Color/roots0671_geo.ptx", // [2584]
+    "textures/isDunesA/Color/roots0327_geo.ptx", // [2585]
+    "textures/isDunesA/Color/roots0466_geo.ptx", // [2586]
+    "textures/isDunesA/Color/roots0075_geo.ptx", // [2587]
+    "textures/isDunesA/Color/roots0583_geo.ptx", // [2588]
+    "textures/isDunesA/Color/roots0061_geo.ptx", // [2589]
+    "textures/isDunesA/Color/roots0228_geo.ptx", // [2590]
+    "textures/isDunesA/Color/roots0013_geo.ptx", // [2591]
+    "textures/isDunesA/Color/roots0657_geo.ptx", // [2592]
+    "textures/isDunesA/Color/roots0531_geo.ptx", // [2593]
+    "textures/isDunesA/Color/roots0034_geo.ptx", // [2594]
+    "textures/isDunesA/Color/roots0634_geo.ptx", // [2595]
+    "textures/isDunesA/Color/roots0498_geo.ptx", // [2596]
+    "textures/isDunesA/Color/roots0399_geo.ptx", // [2597]
+    "textures/isDunesA/Color/roots0704_geo.ptx", // [2598]
+    "textures/isDunesA/Color/roots0045_geo.ptx", // [2599]
+    "textures/isDunesA/Color/stem0002_geo.ptx", // [2600]
+    "textures/isDunesA/Color/roots0244_geo.ptx", // [2601]
+    "textures/isDunesA/Color/roots0701_geo.ptx", // [2602]
+    "textures/isDunesA/Color/roots0667_geo.ptx", // [2603]
+    "textures/isDunesA/Color/roots0451_geo.ptx", // [2604]
+    "textures/isDunesA/Color/roots0388_geo.ptx", // [2605]
+    "textures/isDunesA/Color/roots0101_geo.ptx", // [2606]
+    "textures/isDunesA/Color/leaflet0105_geo.ptx", // [2607]
+    "textures/isDunesA/Color/roots0139_geo.ptx", // [2608]
+    "textures/isDunesA/Color/roots0181_geo.ptx", // [2609]
+    "textures/isDunesA/Color/roots0479_geo.ptx", // [2610]
+    "textures/isDunesA/Color/roots0285_geo.ptx", // [2611]
+    "textures/isDunesA/Color/roots0027_geo.ptx", // [2612]
+    "textures/isDunesA/Color/roots0336_geo.ptx", // [2613]
+    "textures/isDunesA/Color/roots0005_geo.ptx", // [2614]
+    "textures/isDunesA/Color/roots0417_geo.ptx", // [2615]
+    "textures/isDunesA/Color/roots0039_geo.ptx", // [2616]
+    "textures/isDunesA/Color/roots0464_geo.ptx", // [2617]
+    "textures/isDunesA/Color/roots0461_geo.ptx", // [2618]
+    "textures/isDunesA/Color/roots0042_geo.ptx", // [2619]
+    "textures/isDunesA/Color/roots0165_geo.ptx", // [2620]
+    "textures/isDunesA/Color/roots0176_geo.ptx", // [2621]
+    "textures/isDunesA/Color/dirt0001_geo.ptx", // [2622]
+    "textures/isDunesA/Color/roots0044_geo.ptx", // [2623]
+    "textures/isDunesA/Color/roots0152_geo.ptx", // [2624]
+    "textures/isDunesA/Color/roots0180_geo.ptx", // [2625]
+    "textures/isDunesA/Color/roots0574_geo.ptx", // [2626]
+    "textures/isDunesA/Color/roots0079_geo.ptx", // [2627]
+    "textures/isDunesA/Color/leaflet0116_geo.ptx", // [2628]
+    "textures/isDunesA/Color/roots0324_geo.ptx", // [2629]
+    "textures/isDunesA/Color/roots0086_geo.ptx", // [2630]
+    "textures/isDunesA/Color/roots0130_geo.ptx", // [2631]
+    "textures/isDunesA/Color/roots0082_geo.ptx", // [2632]
+    "textures/isDunesA/Color/roots0117_geo.ptx", // [2633]
+    "textures/isDunesA/Color/roots0580_geo.ptx", // [2634]
+    "textures/isDunesA/Color/roots0112_geo.ptx", // [2635]
+    "textures/isDunesA/Color/stem0012_geo.ptx", // [2636]
+    "textures/isDunesA/Color/roots0216_geo.ptx", // [2637]
+    "textures/isDunesA/Color/roots0074_geo.ptx", // [2638]
+    "textures/isDunesA/Color/roots0167_geo.ptx", // [2639]
+    "textures/isDunesA/Color/roots0274_geo.ptx", // [2640]
+    "textures/isDunesA/Color/roots0301_geo.ptx", // [2641]
+    "textures/isDunesA/Color/roots0582_geo.ptx", // [2642]
+    "textures/isDunesA/Color/roots0724_geo.ptx", // [2643]
+    "textures/isDunesA/Color/roots0376_geo.ptx", // [2644]
+    "textures/isDunesA/Color/roots0693_geo.ptx", // [2645]
+    "textures/isDunesA/Color/roots0536_geo.ptx", // [2646]
+    "textures/isDunesA/Color/roots0354_geo.ptx", // [2647]
+    "textures/isDunesA/Color/roots0071_geo.ptx", // [2648]
+    "textures/isDunesA/Color/roots0576_geo.ptx", // [2649]
+    "textures/isDunesA/Color/roots0462_geo.ptx", // [2650]
+    "textures/isDunesA/Color/roots0366_geo.ptx", // [2651]
+    "textures/isDunesA/Color/roots0585_geo.ptx", // [2652]
+    "textures/isDunesA/Color/roots0368_geo.ptx", // [2653]
+    "textures/isDunesA/Color/roots0540_geo.ptx", // [2654]
+    "textures/isDunesA/Color/roots0519_geo.ptx", // [2655]
+    "textures/isDunesA/Color/roots0179_geo.ptx", // [2656]
+    "textures/isDunesA/Color/roots0019_geo.ptx", // [2657]
+    "textures/isDunesA/Color/roots0497_geo.ptx", // [2658]
+    "textures/isDunesA/Color/roots0199_geo.ptx", // [2659]
+    "textures/isDunesA/Color/roots0626_geo.ptx", // [2660]
+    "textures/isDunesA/Color/roots0351_geo.ptx", // [2661]
+    "textures/isDunesA/Color/roots0136_geo.ptx", // [2662]
+    "textures/isDunesA/Color/roots0442_geo.ptx", // [2663]
+    "textures/isDunesA/Color/roots0651_geo.ptx", // [2664]
+    "textures/isDunesA/Color/roots0644_geo.ptx", // [2665]
+    "textures/isDunesA/Color/roots0196_geo.ptx", // [2666]
+    "textures/isDunesA/Color/leaflet0114_geo.ptx", // [2667]
+    "textures/isDunesA/Color/roots0415_geo.ptx", // [2668]
+    "textures/isDunesA/Color/roots0501_geo.ptx", // [2669]
+    "textures/isDunesA/Color/roots0186_geo.ptx", // [2670]
+    "textures/isDunesA/Color/roots0577_geo.ptx", // [2671]
+    "textures/isDunesA/Color/roots0015_geo.ptx", // [2672]
+    "textures/isDunesA/Color/roots0385_geo.ptx", // [2673]
+    "textures/isDunesA/Color/roots0185_geo.ptx", // [2674]
+    "textures/isDunesA/Color/roots0362_geo.ptx", // [2675]
+    "textures/isDunesA/Color/roots0712_geo.ptx", // [2676]
+    "textures/isDunesA/Color/roots0602_geo.ptx", // [2677]
+    "textures/isDunesA/Color/roots0046_geo.ptx", // [2678]
+    "textures/isDunesA/Color/roots0428_geo.ptx", // [2679]
+    "textures/isDunesA/Color/roots0293_geo.ptx", // [2680]
+    "textures/isDunesA/Color/roots0733_geo.ptx", // [2681]
+    "textures/isDunesA/Color/roots0737_geo.ptx", // [2682]
+    "textures/isDunesA/Color/roots0503_geo.ptx", // [2683]
+    "textures/isDunesA/Color/roots0690_geo.ptx", // [2684]
+    "textures/isDunesA/Color/leaflet0108_geo.ptx", // [2685]
+    "textures/isDunesA/Color/roots0589_geo.ptx", // [2686]
+    "textures/isDunesA/Color/topsoil0001_geo.ptx", // [2687]
+    "textures/isDunesA/Color/roots0552_geo.ptx", // [2688]
+    "textures/isDunesA/Color/archiveLeaflet0125_geo.ptx", // [2689]
+    "textures/isDunesA/Color/roots0009_geo.ptx", // [2690]
+    "textures/isDunesA/Color/roots0638_geo.ptx", // [2691]
+    "textures/isDunesA/Color/roots0024_geo.ptx", // [2692]
+    "textures/isDunesA/Color/roots0707_geo.ptx", // [2693]
+    "textures/isDunesA/Color/roots0073_geo.ptx", // [2694]
+    "textures/isDunesA/Color/roots0287_geo.ptx", // [2695]
+    "textures/isDunesA/Color/roots0211_geo.ptx", // [2696]
+    "textures/isDunesA/Color/roots0382_geo.ptx", // [2697]
+    "textures/isDunesA/Color/roots0036_geo.ptx", // [2698]
+    "textures/isDunesA/Color/roots0302_geo.ptx", // [2699]
+    "textures/isDunesA/Color/roots0217_geo.ptx", // [2700]
+    "textures/isDunesA/Color/roots0569_geo.ptx", // [2701]
+    "textures/isDunesA/Color/roots0579_geo.ptx", // [2702]
+    "textures/isDunesA/Color/leaflet0103_geo.ptx", // [2703]
+    "textures/isDunesA/Color/roots0598_geo.ptx", // [2704]
+    "textures/isDunesA/Color/roots0367_geo.ptx", // [2705]
+    "textures/isDunesA/Color/roots0347_geo.ptx", // [2706]
+    "textures/isDunesA/Color/roots0242_geo.ptx", // [2707]
+    "textures/isDunesA/Color/roots0151_geo.ptx", // [2708]
+    "textures/isDunesA/Color/leaflet0122_geo.ptx", // [2709]
+    "textures/isDunesA/Color/roots0098_geo.ptx", // [2710]
+    "textures/isDunesA/Color/roots0740_geo.ptx", // [2711]
+    "textures/isDunesA/Color/roots0452_geo.ptx", // [2712]
+    "textures/isDunesA/Color/dirt0002_geo.ptx", // [2713]
+    "textures/isDunesA/Color/roots0125_geo.ptx", // [2714]
+    "textures/isDunesA/Color/roots0507_geo.ptx", // [2715]
+    "textures/isDunesA/Color/roots0544_geo.ptx", // [2716]
+    "textures/isDunesA/Color/roots0254_geo.ptx", // [2717]
+    "textures/isDunesA/Color/roots0460_geo.ptx", // [2718]
+    "textures/isDunesA/Color/roots0088_geo.ptx", // [2719]
+    "textures/isDunesA/Color/roots0353_geo.ptx", // [2720]
+    "textures/isDunesA/Color/roots0642_geo.ptx", // [2721]
+    "textures/isDunesA/Color/roots0439_geo.ptx", // [2722]
+    "textures/isDunesA/Color/roots0745_geo.ptx", // [2723]
+    "textures/isDunesA/Color/roots0275_geo.ptx", // [2724]
+    "textures/isDunesA/Color/roots0133_geo.ptx", // [2725]
+    "textures/isDunesA/Color/roots0458_geo.ptx", // [2726]
+    "textures/isDunesA/Color/roots0705_geo.ptx", // [2727]
+    "textures/isDunesA/Color/roots0527_geo.ptx", // [2728]
+    "textures/isDunesA/Color/roots0541_geo.ptx", // [2729]
+    "textures/isDunesA/Color/roots0129_geo.ptx", // [2730]
+    "textures/isDunesA/Color/leaflet0112_geo.ptx", // [2731]
+    "textures/isDunesA/Color/roots0747_geo.ptx", // [2732]
+    "textures/isDunesA/Color/leaflet0102_geo.ptx", // [2733]
+    "textures/isDunesA/Color/roots0449_geo.ptx", // [2734]
+    "textures/isDunesA/Color/roots0315_geo.ptx", // [2735]
+    "textures/isDunesA/Color/roots0146_geo.ptx", // [2736]
+    "textures/isDunesA/Color/roots0406_geo.ptx", // [2737]
+    "textures/isDunesA/Color/leaflet0097_geo.ptx", // [2738]
+    "textures/isDunesA/Color/leaflet0113_geo.ptx", // [2739]
+    "textures/isDunesA/Color/roots0299_geo.ptx", // [2740]
+    "textures/isDunesA/Color/roots0467_geo.ptx", // [2741]
+    "textures/isDunesA/Color/roots0002_geo.ptx", // [2742]
+    "textures/isDunesA/Color/roots0403_geo.ptx", // [2743]
+    "textures/isDunesA/Color/roots0711_geo.ptx", // [2744]
+    "textures/isDunesA/Color/roots0419_geo.ptx", // [2745]
+    "textures/isDunesA/Color/roots0283_geo.ptx", // [2746]
+    "textures/isDunesA/Color/roots0628_geo.ptx", // [2747]
+    "textures/isDunesA/Color/roots0017_geo.ptx", // [2748]
+    "textures/isDunesA/Color/roots0177_geo.ptx", // [2749]
+    "textures/isDunesA/Color/roots0546_geo.ptx", // [2750]
+    "textures/isDunesA/Color/roots0726_geo.ptx", // [2751]
+    "textures/isDunesA/Color/roots0402_geo.ptx", // [2752]
+    "textures/isDunesA/Color/roots0473_geo.ptx", // [2753]
+    "textures/isDunesA/Color/roots0741_geo.ptx", // [2754]
+    "textures/isDunesA/Color/roots0247_geo.ptx", // [2755]
+    "textures/isDunesA/Color/archiveLeaflet0124_geo.ptx", // [2756]
+    "textures/isDunesA/Color/roots0273_geo.ptx", // [2757]
+    "textures/isDunesA/Color/roots0502_geo.ptx", // [2758]
+    "textures/isDunesA/Color/roots0067_geo.ptx", // [2759]
+    "textures/isDunesA/Color/roots0163_geo.ptx", // [2760]
+    "textures/isDunesA/Color/roots0064_geo.ptx", // [2761]
+    "textures/isDunesA/Color/roots0739_geo.ptx", // [2762]
+    "textures/isDunesA/Color/roots0689_geo.ptx", // [2763]
+    "textures/isDunesA/Color/roots0108_geo.ptx", // [2764]
+    "textures/isDunesA/Color/frond0006_geo.ptx", // [2765]
+    "textures/isDunesA/Color/roots0184_geo.ptx", // [2766]
+    "textures/isDunesA/Color/roots0570_geo.ptx", // [2767]
+    "textures/isDunesA/Color/roots0304_geo.ptx", // [2768]
+    "textures/isDunesA/Color/roots0317_geo.ptx", // [2769]
+    "textures/isDunesA/Color/roots0187_geo.ptx", // [2770]
+    "textures/isDunesA/Color/roots0572_geo.ptx", // [2771]
+    "textures/isDunesA/Color/roots0618_geo.ptx", // [2772]
+    "textures/isDunesA/Color/roots0178_geo.ptx", // [2773]
+    "textures/isDunesA/Color/roots0486_geo.ptx", // [2774]
+    "textures/isDunesA/Color/roots0214_geo.ptx", // [2775]
+    "textures/isDunesA/Color/roots0496_geo.ptx", // [2776]
+    "textures/isDunesA/Color/leaflet0094_geo.ptx", // [2777]
+    "textures/isDunesA/Color/roots0484_geo.ptx", // [2778]
+    "textures/isDunesA/Color/roots0623_geo.ptx", // [2779]
+    "textures/isDunesA/Color/roots0686_geo.ptx", // [2780]
+    "textures/isDunesA/Color/roots0542_geo.ptx", // [2781]
+    "textures/isDunesA/Color/roots0340_geo.ptx", // [2782]
+    "textures/isDunesA/Color/roots0116_geo.ptx", // [2783]
+    "textures/isDunesA/Color/roots0748_geo.ptx", // [2784]
+    "textures/isDunesA/Color/roots0122_geo.ptx", // [2785]
+    "textures/isDunesA/Color/roots0694_geo.ptx", // [2786]
+    "textures/isDunesA/Color/roots0422_geo.ptx", // [2787]
+    "textures/isDunesA/Color/roots0670_geo.ptx", // [2788]
+    "textures/isDunesA/Color/roots0494_geo.ptx", // [2789]
+    "textures/isDunesA/Color/roots0485_geo.ptx", // [2790]
+    "textures/isDunesA/Color/roots0030_geo.ptx", // [2791]
+    "textures/isDunesA/Color/roots0174_geo.ptx", // [2792]
+    "textures/isDunesA/Color/roots0455_geo.ptx", // [2793]
+    "textures/isDunesA/Color/roots0114_geo.ptx", // [2794]
+    "textures/isDunesA/Color/roots0596_geo.ptx", // [2795]
+    "textures/isDunesA/Color/roots0421_geo.ptx", // [2796]
+    "textures/isDunesA/Color/roots0033_geo.ptx", // [2797]
+    "textures/isDunesA/Color/roots0606_geo.ptx", // [2798]
+    "textures/isDunesA/Color/roots0750_geo.ptx", // [2799]
+    "textures/isDunesA/Color/roots0158_geo.ptx", // [2800]
+    "textures/isDunesA/Color/roots0652_geo.ptx", // [2801]
+    "textures/isDunesA/Color/roots0746_geo.ptx", // [2802]
+    "textures/isDunesA/Color/roots0322_geo.ptx", // [2803]
+    "textures/isDunesA/Color/roots0241_geo.ptx", // [2804]
+    "textures/isDunesA/Color/roots0269_geo.ptx", // [2805]
+    "textures/isDunesA/Color/roots0567_geo.ptx", // [2806]
+    "textures/isDunesA/Color/roots0016_geo.ptx", // [2807]
+    "textures/isDunesA/Color/roots0495_geo.ptx", // [2808]
+    "textures/isDunesA/Color/roots0258_geo.ptx", // [2809]
+    "textures/isDunesA/Color/roots0528_geo.ptx", // [2810]
+    "textures/isDunesA/Color/roots0550_geo.ptx", // [2811]
+    "textures/isDunesA/Color/roots0600_geo.ptx", // [2812]
+    "textures/isDunesA/Color/roots0207_geo.ptx", // [2813]
+    "textures/isDunesA/Color/roots0223_geo.ptx", // [2814]
+    "textures/isDunesA/Color/roots0743_geo.ptx", // [2815]
+    "textures/isDunesA/Color/roots0389_geo.ptx", // [2816]
+    "textures/isDunesA/Color/roots0645_geo.ptx", // [2817]
+    "textures/isDunesA/Color/roots0481_geo.ptx", // [2818]
+    "textures/isDunesA/Color/roots0654_geo.ptx", // [2819]
+    "textures/isDunesA/Color/roots0119_geo.ptx", // [2820]
+    "textures/isDunesA/Color/leaflet0120_geo.ptx", // [2821]
+    "textures/isDunesA/Color/roots0387_geo.ptx", // [2822]
+    "textures/isDunesA/Color/roots0655_geo.ptx", // [2823]
+    "textures/isDunesA/Color/roots0641_geo.ptx", // [2824]
+    "textures/isDunesA/Color/roots0065_geo.ptx", // [2825]
+    "textures/isDunesA/Color/roots0290_geo.ptx", // [2826]
+    "textures/isDunesA/Color/roots0068_geo.ptx", // [2827]
+    "textures/isDunesA/Color/roots0197_geo.ptx", // [2828]
+    "textures/isDunesA/Color/roots0221_geo.ptx", // [2829]
+    "textures/isDunesA/Color/roots0142_geo.ptx", // [2830]
+    "textures/isDunesA/Color/roots0617_geo.ptx", // [2831]
+    "textures/isDunesA/Color/roots0534_geo.ptx", // [2832]
+    "textures/isDunesA/Color/roots0276_geo.ptx", // [2833]
+    "textures/isDunesA/Color/roots0364_geo.ptx", // [2834]
+    "textures/isDunesA/Color/roots0643_geo.ptx", // [2835]
+    "textures/isDunesA/Color/roots0562_geo.ptx", // [2836]
+    "textures/isDunesA/Color/roots0355_geo.ptx", // [2837]
+    "textures/isDunesA/Color/roots0358_geo.ptx", // [2838]
+    "textures/isDunesA/Color/roots0164_geo.ptx", // [2839]
+    "textures/isDunesA/Color/roots0135_geo.ptx", // [2840]
+    "textures/isDunesA/Color/roots0234_geo.ptx", // [2841]
+    "textures/isDunesA/Color/roots0493_geo.ptx", // [2842]
+    "textures/isDunesA/Color/roots0156_geo.ptx", // [2843]
+    "textures/isDunesA/Color/roots0716_geo.ptx", // [2844]
+    "textures/isDunesA/Color/roots0306_geo.ptx", // [2845]
+    "textures/isDunesA/Color/roots0700_geo.ptx", // [2846]
+    "textures/isDunesA/Color/roots0011_geo.ptx", // [2847]
+    "textures/isDunesA/Color/roots0365_geo.ptx", // [2848]
+    "textures/isDunesA/Color/roots0556_geo.ptx", // [2849]
+    "textures/isDunesA/Color/leaflet0121_geo.ptx", // [2850]
+    "textures/isDunesA/Color/roots0492_geo.ptx", // [2851]
+    "textures/isDunesA/Color/roots0356_geo.ptx", // [2852]
+    "textures/isDunesA/Color/roots0314_geo.ptx", // [2853]
+    "textures/isDunesA/Color/roots0363_geo.ptx", // [2854]
+    "textures/isDunesA/Color/roots0028_geo.ptx", // [2855]
+    "textures/isDunesA/Color/roots0673_geo.ptx", // [2856]
+    "textures/isDunesA/Color/roots0676_geo.ptx", // [2857]
+    "textures/isDunesA/Color/roots0359_geo.ptx", // [2858]
+    "textures/isDunesA/Color/roots0611_geo.ptx", // [2859]
+    "textures/isDunesA/Color/roots0124_geo.ptx", // [2860]
+    "textures/isDunesA/Color/roots0006_geo.ptx", // [2861]
+    "textures/isDunesA/Color/roots0420_geo.ptx", // [2862]
+    "textures/isDunesA/Color/roots0062_geo.ptx", // [2863]
+    "textures/isDunesA/Color/roots0400_geo.ptx", // [2864]
+    "textures/isDunesA/Color/roots0378_geo.ptx", // [2865]
+    "textures/isDunesA/Color/roots0060_geo.ptx", // [2866]
+    "textures/isDunesA/Color/roots0265_geo.ptx", // [2867]
+    "textures/isDunesA/Color/roots0329_geo.ptx", // [2868]
+    "textures/isDunesA/Color/roots0637_geo.ptx", // [2869]
+    "textures/isDunesA/Color/roots0687_geo.ptx", // [2870]
+    "textures/isDunesA/Color/frond0008_geo.ptx", // [2871]
+    "textures/isDunesA/Color/roots0610_geo.ptx", // [2872]
+    "textures/isDunesA/Color/roots0678_geo.ptx", // [2873]
+    "textures/isDunesA/Color/roots0063_geo.ptx", // [2874]
+    "textures/isDunesA/Color/roots0160_geo.ptx", // [2875]
+    "textures/isDunesA/Color/roots0488_geo.ptx", // [2876]
+    "textures/isDunesA/Color/roots0237_geo.ptx", // [2877]
+    "textures/isDunesA/Color/roots0352_geo.ptx", // [2878]
+    "textures/isDunesA/Color/roots0593_geo.ptx", // [2879]
+    "textures/isDunesA/Color/roots0080_geo.ptx", // [2880]
+    "textures/isDunesA/Color/roots0332_geo.ptx", // [2881]
+    "textures/isDunesA/Color/roots0696_geo.ptx", // [2882]
+    "textures/isDunesA/Color/roots0047_geo.ptx", // [2883]
+    "textures/isDunesA/Color/frond0005_geo.ptx", // [2884]
+    "textures/isDunesA/Color/roots0271_geo.ptx", // [2885]
+    "textures/isDunesA/Color/roots0099_geo.ptx", // [2886]
+    "textures/isDunesA/Color/roots0325_geo.ptx", // [2887]
+    "textures/isDunesA/Color/roots0526_geo.ptx", // [2888]
+    "textures/isDunesA/Color/roots0551_geo.ptx", // [2889]
+    "textures/isDunesA/Color/roots0568_geo.ptx", // [2890]
+    "textures/isDunesA/Color/roots0384_geo.ptx", // [2891]
+    "textures/isDunesA/Color/roots0291_geo.ptx", // [2892]
+    "textures/isDunesA/Color/roots0128_geo.ptx", // [2893]
+    "textures/isDunesA/Color/roots0738_geo.ptx", // [2894]
+    "textures/isDunesA/Color/roots0708_geo.ptx", // [2895]
+    "textures/isDunesA/Color/roots0222_geo.ptx", // [2896]
+    "textures/isDunesA/Color/roots0170_geo.ptx", // [2897]
+    "textures/isDunesA/Color/roots0625_geo.ptx", // [2898]
+    "textures/isDunesA/Color/roots0609_geo.ptx", // [2899]
+    "textures/isDunesA/Color/roots0392_geo.ptx", // [2900]
+    "textures/isDunesA/Color/roots0660_geo.ptx", // [2901]
+    "textures/isDunesA/Color/roots0025_geo.ptx", // [2902]
+    "textures/isDunesA/Color/roots0268_geo.ptx", // [2903]
+    "textures/isDunesA/Color/leaflet0100_geo.ptx", // [2904]
+    "textures/isDunesA/Color/roots0232_geo.ptx", // [2905]
+    "textures/isDunesA/Color/roots0604_geo.ptx", // [2906]
+    "textures/isDunesA/Color/roots0150_geo.ptx", // [2907]
+    "textures/isDunesA/Color/roots0505_geo.ptx", // [2908]
+    "textures/isDunesA/Color/roots0622_geo.ptx", // [2909]
+    "textures/isDunesA/Color/roots0218_geo.ptx", // [2910]
+    "textures/isDunesA/Color/roots0380_geo.ptx", // [2911]
+    "textures/isDunesA/Color/roots0723_geo.ptx", // [2912]
+    "textures/isDunesA/Color/frond0002_geo.ptx", // [2913]
+    "textures/isDunesA/Color/roots0026_geo.ptx", // [2914]
+    "textures/isDunesA/Color/roots0270_geo.ptx", // [2915]
+    "textures/isDunesA/Color/roots0126_geo.ptx", // [2916]
+    "textures/isDunesA/Color/roots0195_geo.ptx", // [2917]
+    "textures/isDunesA/Color/leaflet0109_geo.ptx", // [2918]
+    "textures/isDunesA/Color/roots0294_geo.ptx", // [2919]
+    "textures/isDunesA/Color/roots0081_geo.ptx", // [2920]
+    "textures/isDunesA/Color/roots0035_geo.ptx", // [2921]
+    "textures/isDunesA/Color/roots0296_geo.ptx", // [2922]
+    "textures/isDunesA/Color/roots0679_geo.ptx", // [2923]
+    "textures/isDunesA/Color/roots0532_geo.ptx", // [2924]
+    "textures/isDunesA/Color/roots0521_geo.ptx", // [2925]
+    "textures/isDunesA/Color/roots0478_geo.ptx", // [2926]
+    "textures/isDunesA/Color/roots0279_geo.ptx", // [2927]
+    "textures/isDunesA/Color/roots0109_geo.ptx", // [2928]
+    "textures/isDunesA/Color/roots0349_geo.ptx", // [2929]
+    "textures/isDunesA/Color/leaflet0118_geo.ptx", // [2930]
+    "textures/isDunesA/Color/roots0698_geo.ptx", // [2931]
+    "textures/isDunesA/Color/roots0169_geo.ptx", // [2932]
+    "textures/isDunesA/Color/roots0058_geo.ptx", // [2933]
+    "textures/isDunesA/Color/roots0326_geo.ptx", // [2934]
+    "textures/isDunesA/Color/roots0286_geo.ptx", // [2935]
+    "textures/isDunesA/Color/roots0731_geo.ptx", // [2936]
+    "textures/isDunesA/Color/roots0659_geo.ptx", // [2937]
+    "textures/isDunesA/Color/roots0703_geo.ptx", // [2938]
+    "textures/isDunesA/Color/frond0001_geo.ptx", // [2939]
+    "textures/isDunesA/Color/roots0447_geo.ptx", // [2940]
+    "textures/isDunesA/Color/roots0004_geo.ptx", // [2941]
+    "textures/isDunesA/Color/roots0510_geo.ptx", // [2942]
+    "textures/isDunesA/Color/roots0475_geo.ptx", // [2943]
+    "textures/isDunesA/Color/roots0213_geo.ptx", // [2944]
+    "textures/isDunesA/Color/roots0548_geo.ptx", // [2945]
+    "textures/isDunesA/Color/roots0096_geo.ptx", // [2946]
+    "textures/isDunesA/Color/roots0090_geo.ptx", // [2947]
+    "textures/isDunesA/Color/roots0518_geo.ptx", // [2948]
+    "textures/isDunesA/Color/roots0683_geo.ptx", // [2949]
+    "textures/isDunesA/Color/roots0639_geo.ptx", // [2950]
+    "textures/isDunesA/Color/roots0240_geo.ptx", // [2951]
+    "textures/isDunesA/Color/roots0200_geo.ptx", // [2952]
+    "textures/isDunesA/Color/roots0319_geo.ptx", // [2953]
+    "textures/isDunesA/Color/roots0231_geo.ptx", // [2954]
+    "textures/isDunesA/Color/roots0646_geo.ptx", // [2955]
+    "textures/isDunesA/Color/roots0172_geo.ptx", // [2956]
+    "textures/isDunesA/Color/archiveLeaflet0127_geo.ptx", // [2957]
+    "textures/isDunesA/Color/roots0595_geo.ptx", // [2958]
+    "textures/isDunesA/Color/roots0752_geo.ptx", // [2959]
+    "textures/isDunesA/Color/roots0490_geo.ptx", // [2960]
+    "textures/isDunesA/Color/roots0292_geo.ptx", // [2961]
+    "textures/isDunesA/Color/roots0450_geo.ptx", // [2962]
+    "textures/isDunesA/Color/stem0005_geo.ptx", // [2963]
+    "textures/isDunesA/Color/roots0175_geo.ptx", // [2964]
+    "textures/isDunesA/Color/roots0715_geo.ptx", // [2965]
+    "textures/isDunesA/Color/leaflet0095_geo.ptx", // [2966]
+    "textures/isDunesA/Color/roots0631_geo.ptx", // [2967]
+    "textures/isDunesA/Color/roots0465_geo.ptx", // [2968]
+    "textures/isDunesA/Color/roots0131_geo.ptx", // [2969]
+    "textures/isDunesA/Color/roots0381_geo.ptx", // [2970]
+    "textures/isDunesA/Color/roots0591_geo.ptx", // [2971]
+    "textures/isDunesA/Color/roots0394_geo.ptx", // [2972]
+    "textures/isDunesA/Color/roots0470_geo.ptx", // [2973]
+    "textures/isDunesA/Color/roots0091_geo.ptx", // [2974]
+    "textures/isDunesA/Color/frond0011_geo.ptx", // [2975]
+    "textures/isDunesA/Color/roots0539_geo.ptx", // [2976]
+    "textures/isDunesA/Color/roots0371_geo.ptx", // [2977]
+    "textures/isDunesA/Color/roots0729_geo.ptx", // [2978]
+    "textures/isDunesA/Color/roots0482_geo.ptx", // [2979]
+    "textures/isDunesA/Color/roots0076_geo.ptx", // [2980]
+    "textures/isDunesA/Color/roots0662_geo.ptx", // [2981]
+    "textures/isDunesA/Color/roots0049_geo.ptx", // [2982]
+    "textures/isDunesA/Color/roots0121_geo.ptx", // [2983]
+    "textures/isDunesA/Color/roots0341_geo.ptx", // [2984]
+    "textures/isDunesA/Color/roots0083_geo.ptx", // [2985]
+    "textures/isDunesA/Color/roots0730_geo.ptx", // [2986]
+    "textures/isDunesA/Color/roots0375_geo.ptx", // [2987]
+    "textures/isDunesA/Color/roots0483_geo.ptx", // [2988]
+    "textures/isDunesA/Color/roots0262_geo.ptx", // [2989]
+    "textures/isDunesA/Color/roots0345_geo.ptx", // [2990]
+    "textures/isDunesA/Color/roots0318_geo.ptx", // [2991]
+    "textures/isDunesA/Color/roots0514_geo.ptx", // [2992]
+    "textures/isDunesA/Color/roots0545_geo.ptx", // [2993]
+    "textures/isDunesA/Color/roots0191_geo.ptx", // [2994]
+    "textures/isDunesA/Color/roots0664_geo.ptx", // [2995]
+    "textures/isDunesA/Color/roots0323_geo.ptx", // [2996]
+    "textures/isDunesA/Color/roots0105_geo.ptx", // [2997]
+    "textures/isDunesA/Color/roots0021_geo.ptx", // [2998]
+    "textures/isDunesA/Color/roots0559_geo.ptx", // [2999]
+    "textures/isDunesA/Color/roots0334_geo.ptx", // [3000]
+    "textures/isDunesA/Color/roots0059_geo.ptx", // [3001]
+    "textures/isDunesA/Color/frond0009_geo.ptx", // [3002]
+    "textures/isDunesA/Color/roots0048_geo.ptx", // [3003]
+    "textures/isDunesA/Color/roots0037_geo.ptx", // [3004]
+    "textures/isDunesA/Color/roots0220_geo.ptx", // [3005]
+    "textures/isDunesA/Color/roots0525_geo.ptx", // [3006]
+    "textures/isDunesA/Color/roots0558_geo.ptx", // [3007]
+    "textures/isDunesA/Color/roots0111_geo.ptx", // [3008]
+    "textures/isDunesA/Color/roots0571_geo.ptx", // [3009]
+    "textures/isDunesA/Color/roots0633_geo.ptx", // [3010]
+    "textures/isDunesA/Color/roots0411_geo.ptx", // [3011]
+    "textures/isDunesA/Color/roots0476_geo.ptx", // [3012]
+    "textures/isDunesA/Color/roots0456_geo.ptx", // [3013]
+    "textures/isDunesA/Color/roots0260_geo.ptx", // [3014]
+    "textures/isDunesA/Color/roots0453_geo.ptx", // [3015]
+    "textures/isDunesA/Color/roots0665_geo.ptx", // [3016]
+    "textures/isDunesA/Color/leaflet0115_geo.ptx", // [3017]
+    "textures/isDunesA/Color/roots0407_geo.ptx", // [3018]
+    "textures/isDunesA/Color/roots0328_geo.ptx", // [3019]
+    "textures/isDunesA/Color/roots0123_geo.ptx", // [3020]
+    "textures/isDunesA/Color/roots0198_geo.ptx", // [3021]
+    "textures/isDunesA/Color/roots0029_geo.ptx", // [3022]
+    "textures/isDunesA/Color/roots0480_geo.ptx", // [3023]
+    "textures/isDunesA/Color/roots0289_geo.ptx", // [3024]
+    "textures/isDunesA/Color/roots0010_geo.ptx", // [3025]
+    "textures/isDunesA/Color/roots0391_geo.ptx", // [3026]
+    "textures/isDunesA/Color/roots0337_geo.ptx", // [3027]
+    "textures/isDunesA/Color/roots0427_geo.ptx", // [3028]
+    "textures/isDunesA/Color/roots0599_geo.ptx", // [3029]
+    "textures/isDunesA/Color/stem0004_geo.ptx", // [3030]
+    "textures/isDunesA/Color/roots0280_geo.ptx", // [3031]
+    "textures/isDunesA/Color/roots0190_geo.ptx", // [3032]
+    "textures/isDunesA/Color/roots0621_geo.ptx", // [3033]
+    "textures/isDunesA/Color/roots0619_geo.ptx", // [3034]
+    "textures/isDunesA/Color/roots0097_geo.ptx", // [3035]
+    "textures/isDunesA/Color/roots0249_geo.ptx", // [3036]
+    "textures/isDunesA/Color/roots0632_geo.ptx", // [3037]
+    "textures/isDunesA/Color/roots0573_geo.ptx", // [3038]
+    "textures/isDunesA/Color/roots0430_geo.ptx", // [3039]
+    "textures/isDunesA/Color/roots0414_geo.ptx", // [3040]
+    "textures/isDunesA/Color/roots0321_geo.ptx", // [3041]
+    "textures/isDunesA/Color/roots0134_geo.ptx", // [3042]
+    "textures/isDunesA/Color/roots0699_geo.ptx", // [3043]
+    "textures/isDunesA/Color/roots0206_geo.ptx", // [3044]
+    "textures/isDunesA/Color/leaflet0117_geo.ptx", // [3045]
+    "textures/isDunesA/Color/roots0137_geo.ptx", // [3046]
+    "textures/isDunesA/Color/leaflet0098_geo.ptx", // [3047]
+    "textures/isDunesA/Color/roots0284_geo.ptx", // [3048]
+    "textures/isDunesA/Color/roots0295_geo.ptx", // [3049]
+    "textures/isDunesA/Color/roots0051_geo.ptx", // [3050]
+    "textures/isDunesA/Color/roots0390_geo.ptx", // [3051]
+    "textures/isDunesA/Color/roots0529_geo.ptx", // [3052]
+    "textures/isDunesA/Color/roots0457_geo.ptx", // [3053]
+    "textures/isDunesA/Color/roots0751_geo.ptx", // [3054]
+    "textures/isDunesA/Color/roots0433_geo.ptx", // [3055]
+    "textures/isDunesA/Color/roots0487_geo.ptx", // [3056]
+    "textures/isDunesA/Color/roots0342_geo.ptx", // [3057]
+    "textures/isDunesA/Color/roots0202_geo.ptx", // [3058]
+    "textures/isDunesA/Color/roots0140_geo.ptx", // [3059]
+    "textures/isDunesA/Color/roots0640_geo.ptx", // [3060]
+    "textures/isDunesA/Color/roots0227_geo.ptx", // [3061]
+    "textures/isDunesA/Color/roots0259_geo.ptx", // [3062]
+    "textures/isDunesA/Color/stem0009_geo.ptx", // [3063]
+    "textures/isDunesA/Color/roots0684_geo.ptx", // [3064]
+    "textures/isDunesA/Color/roots0298_geo.ptx", // [3065]
+    "textures/isDunesA/Color/roots0728_geo.ptx", // [3066]
+    "textures/isDunesA/Color/roots0508_geo.ptx", // [3067]
+    "textures/isDunesA/Color/archiveLeaflet0123_geo.ptx", // [3068]
+    "textures/isDunesA/Color/roots0656_geo.ptx", // [3069]
+    "textures/isDunesA/Color/roots0516_geo.ptx", // [3070]
+    "textures/isDunesA/Color/roots0069_geo.ptx", // [3071]
+    "textures/isDunesA/Color/roots0608_geo.ptx", // [3072]
+    "textures/isDunesA/Color/roots0412_geo.ptx", // [3073]
+    "textures/isDunesA/Color/roots0007_geo.ptx", // [3074]
+    "textures/isDunesA/Color/roots0517_geo.ptx", // [3075]
+    "textures/isDunesA/Color/roots0171_geo.ptx", // [3076]
+    "textures/isDunesA/Color/roots0350_geo.ptx", // [3077]
+    "textures/isDunesA/Color/frond0003_geo.ptx", // [3078]
+    "textures/isDunesA/Color/roots0682_geo.ptx", // [3079]
+    "textures/isDunesA/Color/roots0155_geo.ptx", // [3080]
+    "textures/isDunesA/Color/roots0320_geo.ptx", // [3081]
+    "textures/isDunesA/Color/roots0159_geo.ptx", // [3082]
+    "textures/isDunesA/Color/roots0250_geo.ptx", // [3083]
+    "textures/isDunesA/Color/roots0669_geo.ptx", // [3084]
+    "textures/isDunesA/Color/roots0057_geo.ptx", // [3085]
+    "textures/isDunesA/Color/roots0066_geo.ptx", // [3086]
+    "textures/isDunesA/Color/roots0434_geo.ptx", // [3087]
+    "textures/isDunesA/Color/roots0561_geo.ptx", // [3088]
+    "textures/isDunesA/Color/roots0547_geo.ptx", // [3089]
+    "textures/isDunesA/Color/roots0692_geo.ptx", // [3090]
+    "textures/isDunesA/Color/roots0305_geo.ptx", // [3091]
+    "textures/isDunesA/Color/roots0410_geo.ptx", // [3092]
+    "textures/isDunesA/Color/roots0425_geo.ptx", // [3093]
+    "textures/isDunesA/Color/roots0138_geo.ptx", // [3094]
+    "textures/isDunesA/Color/roots0157_geo.ptx", // [3095]
+    "textures/isDunesA/Color/roots0474_geo.ptx", // [3096]
+    "textures/isDunesA/Color/roots0205_geo.ptx", // [3097]
+    "textures/isDunesA/Color/leaflet0107_geo.ptx", // [3098]
+    "textures/isDunesA/Color/roots0725_geo.ptx", // [3099]
+    "textures/isDunesA/Color/roots0418_geo.ptx", // [3100]
+    "textures/isDunesA/Color/roots0209_geo.ptx", // [3101]
+    "textures/isDunesA/Color/roots0506_geo.ptx", // [3102]
+    "textures/isDunesA/Color/roots0236_geo.ptx", // [3103]
+    "textures/isDunesA/Color/roots0549_geo.ptx", // [3104]
+    "textures/isDunesA/Color/roots0014_geo.ptx", // [3105]
+    "textures/isDunesA/Color/roots0022_geo.ptx", // [3106]
+    "textures/isDunesA/Color/roots0379_geo.ptx", // [3107]
+    "textures/isDunesA/Color/roots0147_geo.ptx", // [3108]
+    "textures/isDunesA/Color/roots0614_geo.ptx", // [3109]
+    "textures/isDunesA/Color/roots0104_geo.ptx", // [3110]
+    "textures/isDunesA/Color/stem0006_geo.ptx", // [3111]
+    "textures/isDunesA/Color/frond0004_geo.ptx", // [3112]
+    "textures/isDunesA/Color/roots0346_geo.ptx", // [3113]
+    "textures/isDunesA/Color/roots0115_geo.ptx", // [3114]
+    "textures/isDunesA/Color/roots0052_geo.ptx", // [3115]
+    "textures/isDunesA/Color/roots0459_geo.ptx", // [3116]
+    "textures/isDunesA/Color/roots0620_geo.ptx", // [3117]
+    "textures/isDunesA/Color/roots0398_geo.ptx", // [3118]
+    "textures/isDunesA/Color/roots0038_geo.ptx", // [3119]
+    "textures/isDunesA/Color/roots0132_geo.ptx", // [3120]
+    "textures/isDunesA/Color/roots0445_geo.ptx", // [3121]
+    "textures/isDunesA/Color/roots0564_geo.ptx", // [3122]
+    "textures/isDunesA/Color/roots0008_geo.ptx", // [3123]
+    "textures/isDunesA/Color/roots0685_geo.ptx", // [3124]
+    "textures/isDunesA/Color/roots0020_geo.ptx", // [3125]
+    "textures/isDunesA/Color/stem0008_geo.ptx", // [3126]
+    "textures/isDunesA/Color/stem0007_geo.ptx", // [3127]
+    "textures/isDunesA/Color/roots0713_geo.ptx", // [3128]
+    "textures/isDunesA/Color/roots0127_geo.ptx", // [3129]
+    "textures/isDunesA/Color/roots0040_geo.ptx", // [3130]
+    "textures/isDunesA/Color/roots0316_geo.ptx", // [3131]
+    "textures/isDunesA/Color/roots0143_geo.ptx", // [3132]
+    "textures/isDunesA/Color/roots0553_geo.ptx", // [3133]
+    "textures/isDunesA/Color/roots0413_geo.ptx", // [3134]
+    "textures/isDunesA/Color/roots0566_geo.ptx", // [3135]
+    "textures/isDunesA/Color/roots0681_geo.ptx", // [3136]
+    "textures/isDunesA/Color/roots0309_geo.ptx", // [3137]
+    "textures/isDunesA/Color/roots0054_geo.ptx", // [3138]
+    "textures/isDunesA/Color/leaflet0119_geo.ptx", // [3139]
+    "textures/isDunesA/Color/roots0555_geo.ptx", // [3140]
+    "textures/isDunesA/Color/roots0438_geo.ptx", // [3141]
+    "textures/isDunesA/Color/roots0463_geo.ptx", // [3142]
+    "textures/isDunesA/Color/roots0078_geo.ptx", // [3143]
+    "textures/isDunesA/Color/roots0264_geo.ptx", // [3144]
+    "textures/isDunesA/Color/roots0335_geo.ptx", // [3145]
+    "textures/isDunesA/Color/roots0454_geo.ptx", // [3146]
+    "textures/isDunesA/Color/roots0535_geo.ptx", // [3147]
+    "textures/isDunesA/Color/roots0085_geo.ptx", // [3148]
+    "textures/isDunesA/Color/roots0557_geo.ptx", // [3149]
+    "textures/isDunesA/Color/roots0361_geo.ptx", // [3150]
+    "textures/isDunesA/Color/roots0219_geo.ptx", // [3151]
+    "textures/isDunesA/Color/roots0515_geo.ptx", // [3152]
+    "textures/isDunesA/Color/roots0338_geo.ptx", // [3153]
+    "textures/isDunesA/Color/roots0230_geo.ptx", // [3154]
+    "textures/isDunesA/Color/roots0092_geo.ptx", // [3155]
+    "textures/isDunesA/Color/roots0095_geo.ptx", // [3156]
+    "textures/isDunesA/Color/roots0538_geo.ptx", // [3157]
+    "textures/isDunesA/Color/roots0303_geo.ptx", // [3158]
+    "textures/isDunesA/Color/leaflet0111_geo.ptx", // [3159]
+    "textures/isDunesA/Color/roots0722_geo.ptx", // [3160]
+    "textures/isDunesA/Color/roots0448_geo.ptx", // [3161]
+    "textures/isDunesA/Color/roots0666_geo.ptx", // [3162]
+    "textures/isDunesA/Color/frond0007_geo.ptx", // [3163]
+    "textures/isDunesA/Color/roots0663_geo.ptx", // [3164]
+    "textures/isDunesA/Color/roots0001_geo.ptx", // [3165]
+    "textures/isDunesA/Color/roots0509_geo.ptx", // [3166]
+    "textures/isDunesA/Color/leaflet0101_geo.ptx", // [3167]
+    "textures/isDunesA/Color/roots0272_geo.ptx", // [3168]
+    "textures/isDunesA/Color/roots0225_geo.ptx", // [3169]
+    "textures/isDunesA/Color/roots0087_geo.ptx", // [3170]
+    "textures/isDunesA/Color/roots0210_geo.ptx", // [3171]
+    "textures/isDunesA/Color/roots0313_geo.ptx", // [3172]
+    "textures/isDunesA/Color/roots0437_geo.ptx", // [3173]
+    "textures/isDunesA/Color/roots0168_geo.ptx", // [3174]
+    "textures/isDunesA/Color/roots0424_geo.ptx", // [3175]
+    "textures/isDunesA/Color/roots0248_geo.ptx", // [3176]
+    "textures/isDunesA/Color/roots0183_geo.ptx", // [3177]
+    "textures/isDunesA/Color/roots0491_geo.ptx", // [3178]
+    "textures/isDunesA/Color/roots0118_geo.ptx", // [3179]
+    "textures/isDunesA/Color/roots0720_geo.ptx", // [3180]
+    "textures/isDunesA/Color/roots0513_geo.ptx", // [3181]
+    "textures/isDunesA/Color/roots0511_geo.ptx", // [3182]
+    "textures/isDunesA/Color/roots0266_geo.ptx", // [3183]
+    "textures/isDunesA/Color/roots0734_geo.ptx", // [3184]
+    "textures/isDunesA/Color/roots0149_geo.ptx", // [3185]
+    "textures/isDunesA/Color/roots0239_geo.ptx", // [3186]
+    "textures/isDunesA/Color/roots0688_geo.ptx", // [3187]
+    "textures/isDunesA/Color/roots0543_geo.ptx", // [3188]
+    "textures/isDunesA/Color/roots0530_geo.ptx", // [3189]
+    "textures/isDunesA/Color/roots0695_geo.ptx", // [3190]
+    "textures/isDunesA/Color/stem0010_geo.ptx", // [3191]
+    "textures/isDunesA/Color/roots0145_geo.ptx", // [3192]
+    "textures/isDunesA/Color/roots0235_geo.ptx", // [3193]
+    "textures/isDunesA/Color/roots0710_geo.ptx", // [3194]
+    "textures/isDunesA/Color/roots0300_geo.ptx", // [3195]
+    "textures/isDunesA/Color/roots0374_geo.ptx", // [3196]
+    "textures/isDunesA/Color/roots0714_geo.ptx", // [3197]
+    "textures/isDunesA/Color/roots0252_geo.ptx", // [3198]
+    "textures/isDunesA/Color/roots0331_geo.ptx", // [3199]
+    "textures/isDunesA/Color/roots0012_geo.ptx", // [3200]
+    "textures/isDunesA/Color/roots0229_geo.ptx", // [3201]
+    "textures/isDunesA/Color/roots0343_geo.ptx", // [3202]
+    "textures/isDunesA/Color/roots0370_geo.ptx", // [3203]
+    "textures/isDunesA/Color/roots0243_geo.ptx", // [3204]
+    "textures/isDunesA/Color/roots0053_geo.ptx", // [3205]
+    "textures/isDunesA/Color/roots0256_geo.ptx", // [3206]
+    "textures/isDunesA/Color/roots0468_geo.ptx", // [3207]
+    "textures/isDunesA/Color/roots0311_geo.ptx", // [3208]
+    "textures/isDunesA/Color/roots0161_geo.ptx", // [3209]
+    "textures/isDunesA/Color/roots0405_geo.ptx", // [3210]
+    "textures/isDunesA/Color/leaflet0099_geo.ptx", // [3211]
+    "textures/isDunesA/Color/roots0658_geo.ptx", // [3212]
+    "textures/isDunesA/Color/roots0397_geo.ptx", // [3213]
+    "textures/isDunesA/Color/roots0208_geo.ptx", // [3214]
+    "textures/isDunesA/Color/roots0253_geo.ptx", // [3215]
+    "textures/isDunesA/Color/roots0563_geo.ptx", // [3216]
+    "textures/isDunesA/Color/roots0093_geo.ptx", // [3217]
+    "textures/isDunesA/Color/roots0440_geo.ptx", // [3218]
+    "textures/isDunesA/Color/roots0590_geo.ptx", // [3219]
+    "textures/isDunesA/Color/roots0560_geo.ptx", // [3220]
+    "textures/isDunesA/Color/roots0594_geo.ptx", // [3221]
+    "textures/isDunesA/Color/roots0003_geo.ptx", // [3222]
+    "textures/isDunesA/Color/roots0605_geo.ptx", // [3223]
+    "textures/isDunesA/Color/roots0489_geo.ptx", // [3224]
+    "textures/isDunesA/Color/roots0263_geo.ptx", // [3225]
+    "textures/isDunesA/Color/roots0615_geo.ptx", // [3226]
+    "textures/isDunesA/Color/roots0050_geo.ptx", // [3227]
+    "textures/isDunesA/Color/roots0194_geo.ptx", // [3228]
+    "textures/isDunesA/Color/roots0522_geo.ptx", // [3229]
+    "textures/isDunesA/Color/roots0330_geo.ptx", // [3230]
+    "textures/isDunesA/Color/roots0423_geo.ptx", // [3231]
+    "textures/isDunesA/Color/stem0011_geo.ptx", // [3232]
+    "textures/isDunesA/Color/roots0288_geo.ptx", // [3233]
+    "textures/isDunesA/Color/roots0282_geo.ptx", // [3234]
+    "textures/isDunesA/Color/roots0677_geo.ptx", // [3235]
+    "textures/isDunesA/Color/roots0586_geo.ptx", // [3236]
+    "textures/isDunesA/Color/leaflet0110_geo.ptx", // [3237]
+    "textures/isDunesA/Color/roots0333_geo.ptx", // [3238]
+    "textures/isDunesA/Color/roots0041_geo.ptx", // [3239]
+    "textures/isDunesA/Color/roots0148_geo.ptx", // [3240]
+    "textures/isDunesA/Color/roots0636_geo.ptx", // [3241]
+    "textures/isDunesA/Color/roots0565_geo.ptx", // [3242]
+    "textures/isDunesA/Color/roots0297_geo.ptx", // [3243]
+    "textures/isDunesA/Color/roots0344_geo.ptx", // [3244]
+    "textures/isDunesA/Color/roots0238_geo.ptx", // [3245]
+    "textures/isDunesA/Color/roots0339_geo.ptx", // [3246]
+    "textures/isDunesA/Color/roots0601_geo.ptx", // [3247]
+    "textures/isDunesA/Color/roots0584_geo.ptx", // [3248]
+    "textures/isDunesA/Color/roots0444_geo.ptx", // [3249]
+    "textures/isDunesA/Color/roots0312_geo.ptx", // [3250]
+    "textures/isDunesA/Color/stem0003_geo.ptx", // [3251]
+    "textures/isDunesA/Color/roots0612_geo.ptx", // [3252]
+    "textures/isDunesA/Color/leaflet0106_geo.ptx", // [3253]
+    "textures/isDunesA/Color/roots0396_geo.ptx", // [3254]
+    "textures/isDunesA/Color/roots0607_geo.ptx", // [3255]
+    "textures/isDunesA/Color/roots0706_geo.ptx", // [3256]
+    "textures/isDunesA/Color/roots0416_geo.ptx", // [3257]
+    "textures/isDunesA/Color/roots0597_geo.ptx", // [3258]
+    "textures/isDunesA/Color/roots0162_geo.ptx", // [3259]
+    "textures/isDunesA/Color/roots0281_geo.ptx", // [3260]
+    "textures/isDunesA/Color/roots0141_geo.ptx", // [3261]
+    "textures/isDunesA/Color/roots0537_geo.ptx", // [3262]
+    "textures/isDunesA/Color/roots0072_geo.ptx", // [3263]
+    "textures/isDunesA/Color/roots0472_geo.ptx", // [3264]
+    "textures/isDunesA/Color/frond0013_geo.ptx", // [3265]
+    "textures/isDunesA/Color/roots0441_geo.ptx", // [3266]
+    "textures/isDunesA/Color/roots0120_geo.ptx", // [3267]
+    "textures/isDunesA/Color/roots0372_geo.ptx", // [3268]
+    "textures/isDunesA/Color/roots0592_geo.ptx", // [3269]
+    "textures/isDunesA/Color/roots0310_geo.ptx", // [3270]
+    "textures/isDunesA/Color/roots0357_geo.ptx", // [3271]
+    "textures/isDunesA/Color/roots0166_geo.ptx", // [3272]
+    "textures/isDunesB/Color/trunk0001_geo.ptx", // [3273]
+    "textures/isDunesB/Color/dune0002_geo.ptx", // [3274]
+    "textures/isDunesB/Color/dune0001_geo.ptx", // [3275]
+    "textures/isGardeniaA/Color/archiveflowerstem0022_geo.ptx", // [3276]
+    "textures/isGardeniaA/Color/archiveflowerstem0028_geo.ptx", // [3277]
+    "textures/isGardeniaA/Color/archiveflowerstem0013_geo.ptx", // [3278]
+    "textures/isGardeniaA/Color/archiveflowerstem0030_geo.ptx", // [3279]
+    "textures/isGardeniaA/Color/archiveflowerstem0007_geo.ptx", // [3280]
+    "textures/isGardeniaA/Color/archiveflowerstem0003_geo.ptx", // [3281]
+    "textures/isGardeniaA/Color/archiveflowerstem0026_geo.ptx", // [3282]
+    "textures/isGardeniaA/Color/archiveflowerstem0035_geo.ptx", // [3283]
+    "textures/isGardeniaA/Color/archiveflowerbud0035_geo.ptx", // [3284]
+    "textures/isGardeniaA/Color/archiveflowerstem0002_geo.ptx", // [3285]
+    "textures/isGardeniaA/Color/archiveflowerbud0020_geo.ptx", // [3286]
+    "textures/isGardeniaA/Color/archiveflowerbud0008_geo.ptx", // [3287]
+    "textures/isGardeniaA/Color/archiveflowerstem0037_geo.ptx", // [3288]
+    "textures/isGardeniaA/Color/trunk_base_geo.ptx", // [3289]
+    "textures/isGardeniaA/Color/archiveflowerbud0016_geo.ptx", // [3290]
+    "textures/isGardeniaA/Color/archiveflowerstem0033_geo.ptx", // [3291]
+    "textures/isGardeniaA/Color/archiveflowerstem0042_geo.ptx", // [3292]
+    "textures/isGardeniaA/Color/archiveflowerbud0036_geo.ptx", // [3293]
+    "textures/isGardeniaA/Color/archiveflowerbud0028_geo.ptx", // [3294]
+    "textures/isGardeniaA/Color/archiveflowerbud0004_geo.ptx", // [3295]
+    "textures/isGardeniaA/Color/archiveflowerstem0040_geo.ptx", // [3296]
+    "textures/isGardeniaA/Color/archivegardenia0008_geo.ptx", // [3297]
+    "textures/isGardeniaA/Color/archiveflowerbud0041_geo.ptx", // [3298]
+    "textures/isGardeniaA/Color/archiveflowerstem0023_geo.ptx", // [3299]
+    "textures/isGardeniaA/Color/archiveflowerstem0009_geo.ptx", // [3300]
+    "textures/isGardeniaA/Color/archivegardenia0002_geo.ptx", // [3301]
+    "textures/isGardeniaA/Color/archiveflowerstem0008_geo.ptx", // [3302]
+    "textures/isGardeniaA/Color/archiveflowerbud0014_geo.ptx", // [3303]
+    "textures/isGardeniaA/Color/archiveflowerstem0014_geo.ptx", // [3304]
+    "textures/isGardeniaA/Color/archiveflowerbud0003_geo.ptx", // [3305]
+    "textures/isGardeniaA/Color/archiveflowerstem0031_geo.ptx", // [3306]
+    "textures/isGardeniaA/Color/archiveflowerbud0022_geo.ptx", // [3307]
+    "textures/isGardeniaA/Color/archivegardenia0006_geo.ptx", // [3308]
+    "textures/isGardeniaA/Color/archiveflowerstem0012_geo.ptx", // [3309]
+    "textures/isGardeniaA/Color/archiveflowerstem0019_geo.ptx", // [3310]
+    "textures/isGardeniaA/Color/archiveflowerbud0009_geo.ptx", // [3311]
+    "textures/isGardeniaA/Color/archiveflowerstem0011_geo.ptx", // [3312]
+    "textures/isGardeniaA/Color/archiveflowerbud0042_geo.ptx", // [3313]
+    "textures/isGardeniaA/Color/archiveflowerstem0034_geo.ptx", // [3314]
+    "textures/isGardeniaA/Color/archiveflowerstem0032_geo.ptx", // [3315]
+    "textures/isGardeniaA/Color/archiveflowerstem0043_geo.ptx", // [3316]
+    "textures/isGardeniaA/Color/archiveflowerbud0005_geo.ptx", // [3317]
+    "textures/isGardeniaA/Color/archiveflowerbud0001_geo.ptx", // [3318]
+    "textures/isGardeniaA/Color/archiveflowerstem0024_geo.ptx", // [3319]
+    "textures/isGardeniaA/Color/archiveflowerbud0034_geo.ptx", // [3320]
+    "textures/isGardeniaA/Color/archiveflowerbud0007_geo.ptx", // [3321]
+    "textures/isGardeniaA/Color/archiveflowerbud0029_geo.ptx", // [3322]
+    "textures/isGardeniaA/Color/archiveflowerstem0010_geo.ptx", // [3323]
+    "textures/isGardeniaA/Color/archiveflowerbud0031_geo.ptx", // [3324]
+    "textures/isGardeniaA/Color/archivegardenia0009_geo.ptx", // [3325]
+    "textures/isGardeniaA/Color/archiveflowerbud0013_geo.ptx", // [3326]
+    "textures/isGardeniaA/Color/archiveflowerstem0018_geo.ptx", // [3327]
+    "textures/isGardeniaA/Color/archiveflowerbud0002_geo.ptx", // [3328]
+    "textures/isGardeniaA/Color/archiveflowerstem0039_geo.ptx", // [3329]
+    "textures/isGardeniaA/Color/archiveflowerbud0030_geo.ptx", // [3330]
+    "textures/isGardeniaA/Color/archiveflowerstem0025_geo.ptx", // [3331]
+    "textures/isGardeniaA/Color/archiveflowerstem0006_geo.ptx", // [3332]
+    "textures/isGardeniaA/Color/archiveflowerstem0004_geo.ptx", // [3333]
+    "textures/isGardeniaA/Color/archiveflowerstem0041_geo.ptx", // [3334]
+    "textures/isGardeniaA/Color/archiveflowerbud0015_geo.ptx", // [3335]
+    "textures/isGardeniaA/Color/archiveflowerbud0011_geo.ptx", // [3336]
+    "textures/isGardeniaA/Color/archiveflowerbud0037_geo.ptx", // [3337]
+    "textures/isGardeniaA/Color/archiveflowerbud0010_geo.ptx", // [3338]
+    "textures/isGardeniaA/Color/archiveflowerbud0024_geo.ptx", // [3339]
+    "textures/isGardeniaA/Color/archivegardenia0005_geo.ptx", // [3340]
+    "textures/isGardeniaA/Color/archiveflowerstem0005_geo.ptx", // [3341]
+    "textures/isGardeniaA/Color/archivegardenia0007_geo.ptx", // [3342]
+    "textures/isGardeniaA/Color/archiveflowerstem0029_geo.ptx", // [3343]
+    "textures/isGardeniaA/Color/archiveflowerbud0012_geo.ptx", // [3344]
+    "textures/isGardeniaA/Color/archivegardenia0001_geo.ptx", // [3345]
+    "textures/isGardeniaA/Color/archiveflowerstem0001_geo.ptx", // [3346]
+    "textures/isGardeniaA/Color/archiveflowerbud0032_geo.ptx", // [3347]
+    "textures/isGardeniaA/Color/archiveflowerbud0019_geo.ptx", // [3348]
+    "textures/isGardeniaA/Color/archiveflowerbud0026_geo.ptx", // [3349]
+    "textures/isGardeniaA/Color/archiveflowerbud0040_geo.ptx", // [3350]
+    "textures/isGardeniaA/Color/archiveflowerbud0021_geo.ptx", // [3351]
+    "textures/isGardeniaA/Color/archiveflowerstem0016_geo.ptx", // [3352]
+    "textures/isGardeniaA/Color/archiveflowerbud0033_geo.ptx", // [3353]
+    "textures/isGardeniaA/Color/archiveflowerbud0023_geo.ptx", // [3354]
+    "textures/isGardeniaA/Color/archiveflowerstem0020_geo.ptx", // [3355]
+    "textures/isGardeniaA/Color/archiveflowerbud0043_geo.ptx", // [3356]
+    "textures/isGardeniaA/Color/archivegardenia0003_geo.ptx", // [3357]
+    "textures/isGardeniaA/Color/archiveflowerbud0038_geo.ptx", // [3358]
+    "textures/isGardeniaA/Color/archiveflowerbud0018_geo.ptx", // [3359]
+    "textures/isGardeniaA/Color/archiveflowerbud0006_geo.ptx", // [3360]
+    "textures/isGardeniaA/Color/archiveflowerbud0025_geo.ptx", // [3361]
+    "textures/isGardeniaA/Color/archiveflowerbud0039_geo.ptx", // [3362]
+    "textures/isGardeniaA/Color/archiveflowerstem0021_geo.ptx", // [3363]
+    "textures/isGardeniaA/Color/archiveflowerstem0017_geo.ptx", // [3364]
+    "textures/isGardeniaA/Color/archiveflowerstem0015_geo.ptx", // [3365]
+    "textures/isGardeniaA/Color/archiveflowerbud0027_geo.ptx", // [3366]
+    "textures/isGardeniaA/Color/archiveflowerstem0038_geo.ptx", // [3367]
+    "textures/isGardeniaA/Color/archivegardenia0004_geo.ptx", // [3368]
+    "textures/isGardeniaA/Color/archiveflowerstem0036_geo.ptx", // [3369]
+    "textures/isGardeniaA/Color/archiveflowerstem0027_geo.ptx", // [3370]
+    "textures/isGardeniaA/Color/archiveflowerbud0017_geo.ptx", // [3371]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0013_geo.ptx", // [3372]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0002_geo.ptx", // [3373]
+    "textures/isHibiscus/Color/archiveHibiscusLeaf0002_geo.ptx", // [3374]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0007_geo.ptx", // [3375]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0030_geo.ptx", // [3376]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0004_geo.ptx", // [3377]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0004_geo.ptx", // [3378]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0032_geo.ptx", // [3379]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0014_geo.ptx", // [3380]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0005_geo.ptx", // [3381]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0017_geo.ptx", // [3382]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0005_geo.ptx", // [3383]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0008_geo.ptx", // [3384]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0017_geo.ptx", // [3385]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0005_geo.ptx", // [3386]
+    "textures/isHibiscus/Color/trunk_base_geo.ptx", // [3387]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0007_geo.ptx", // [3388]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0007_geo.ptx", // [3389]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0011_geo.ptx", // [3390]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0035_geo.ptx", // [3391]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0043_geo.ptx", // [3392]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0025_geo.ptx", // [3393]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0003_geo.ptx", // [3394]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0003_geo.ptx", // [3395]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0038_geo.ptx", // [3396]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0021_geo.ptx", // [3397]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0003_geo.ptx", // [3398]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0009_geo.ptx", // [3399]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0012_geo.ptx", // [3400]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0024_geo.ptx", // [3401]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0002_geo.ptx", // [3402]
+    "textures/isHibiscus/Color/archiveHibiscusLeaf0001_geo.ptx", // [3403]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0003_geo.ptx", // [3404]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0010_geo.ptx", // [3405]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0002_geo.ptx", // [3406]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0039_geo.ptx", // [3407]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0019_geo.ptx", // [3408]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0022_geo.ptx", // [3409]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0016_geo.ptx", // [3410]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0010_geo.ptx", // [3411]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0008_geo.ptx", // [3412]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0044_geo.ptx", // [3413]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0018_geo.ptx", // [3414]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0028_geo.ptx", // [3415]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0015_geo.ptx", // [3416]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0026_geo.ptx", // [3417]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0005_geo.ptx", // [3418]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0007_geo.ptx", // [3419]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0040_geo.ptx", // [3420]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0006_geo.ptx", // [3421]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0013_geo.ptx", // [3422]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0016_geo.ptx", // [3423]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0034_geo.ptx", // [3424]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0011_geo.ptx", // [3425]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0001_geo.ptx", // [3426]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0001_geo.ptx", // [3427]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0006_geo.ptx", // [3428]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0008_geo.ptx", // [3429]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0001_geo.ptx", // [3430]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0002_geo.ptx", // [3431]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0006_geo.ptx", // [3432]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0029_geo.ptx", // [3433]
+    "textures/isHibiscus/Color/archiveHibiscusLeaf0003_geo.ptx", // [3434]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0041_geo.ptx", // [3435]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0003_geo.ptx", // [3436]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0014_geo.ptx", // [3437]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0008_geo.ptx", // [3438]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0001_geo.ptx", // [3439]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0023_geo.ptx", // [3440]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0002_geo.ptx", // [3441]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0004_geo.ptx", // [3442]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0004_geo.ptx", // [3443]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0036_geo.ptx", // [3444]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0033_geo.ptx", // [3445]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0007_geo.ptx", // [3446]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0018_geo.ptx", // [3447]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0006_geo.ptx", // [3448]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0004_geo.ptx", // [3449]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0006_geo.ptx", // [3450]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0020_geo.ptx", // [3451]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0005_geo.ptx", // [3452]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0009_geo.ptx", // [3453]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0042_geo.ptx", // [3454]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0008_geo.ptx", // [3455]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0037_geo.ptx", // [3456]
+    "textures/isHibiscus/Color/archiveHibiscusStyle0009_geo.ptx", // [3457]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0027_geo.ptx", // [3458]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0015_geo.ptx", // [3459]
+    "textures/isHibiscus/Color/archiveHibiscusStigma0009_geo.ptx", // [3460]
+    "textures/isHibiscus/Color/archiveHibiscusAnthers0009_geo.ptx", // [3461]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0045_geo.ptx", // [3462]
+    "textures/isHibiscus/Color/archiveHibiscusSepals0012_geo.ptx", // [3463]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0001_geo.ptx", // [3464]
+    "textures/isHibiscus/Color/archiveHibiscusPetal0031_geo.ptx", // [3465]
+    "textures/isHibiscusYoung/Color/trunk0001_geo.ptx", // [3466]
+    "textures/isIronwoodA1/Color/trunk0001_geo.ptx", // [3467]
+    "textures/isIronwoodB/Color/trunk0001_geo.ptx", // [3468]
+    "textures/isKava/Color/talltrunk0003_geo.ptx", // [3469]
+    "textures/isKava/Color/talltrunk0001_geo.ptx", // [3470]
+    "textures/isKava/Color/talltrunk0002_geo.ptx", // [3471]
+    "textures/isKava/Color/smalltrunk0001_geo.ptx", // [3472]
+    "textures/isKava/Color/archive_kava0001_geo.ptx", // [3473]
+    "textures/isKava/Color/plate_proxy.ptx", // [3474]
+    "textures/isLavaRocks/Color/rocksm0005_geo.ptx", // [3475]
+    "textures/isLavaRocks/Color/rockfacebg0001_geo.ptx", // [3476]
+    "textures/isLavaRocks/Color/rockfacemain0001_geo.ptx", // [3477]
+    "textures/isLavaRocks/Color/rocksm0001_geo.ptx", // [3478]
+    "textures/isLavaRocks/Color/lavarocks0004_geo.ptx", // [3479]
+    "textures/isLavaRocks/Color/rocksm0003_geo.ptx", // [3480]
+    "textures/isLavaRocks/Color/rocksm0004_geo.ptx", // [3481]
+    "textures/isLavaRocks/Color/rocksm0002_geo.ptx", // [3482]
+    "textures/isLavaRocks/Color/lavarocks0006_geo.ptx", // [3483]
+    "textures/isLavaRocks/Color/lavarocks0005_geo.ptx", // [3484]
+    "textures/isMountainA/Color/mountain_geo.ptx", // [3485]
+    "textures/isMountainB/Color/mountainb0001_geo.ptx", // [3486]
+    "textures/isMountainB/Color/mountainb0005_geo.ptx", // [3487]
+    "textures/isMountainB/Color/mountbring_geo.ptx", // [3488]
+    "textures/isMountainB/Color/mountainb0002_geo.ptx", // [3489]
+    "textures/isMountainB/Color/mountainb0003_geo.ptx", // [3490]
+    "textures/isMountainB/Color/mountainb0004_geo.ptx", // [3491]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0007_geo.ptx", // [3492]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0005_geo.ptx", // [3493]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0006_geo.ptx", // [3494]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0001_geo.ptx", // [3495]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0008_geo.ptx", // [3496]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0009_geo.ptx", // [3497]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0004_geo.ptx", // [3498]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0003_geo.ptx", // [3499]
+    "textures/isNaupakaA/Color/archive_naupakaleaf0002_geo.ptx", // [3500]
+    "textures/isPalmDead/Color/rootball0001_geo.ptx", // [3501]
+    "textures/isPalmDead/Color/trunk0001_geo.ptx", // [3502]
+    "textures/isPalmRig/Color/sheathe0005_geo.ptx", // [3503]
+    "textures/isPalmRig/Color/frondspine0016_geo.ptx", // [3504]
+    "textures/isPalmRig/Color/frondspine0005_geo.ptx", // [3505]
+    "textures/isPalmRig/Color/sheathd0003_geo.ptx", // [3506]
+    "textures/isPalmRig/Color/skirt_geo.ptx", // [3507]
+    "textures/isPalmRig/Color/trunk0001_geo.ptx", // [3508]
+    "textures/isPalmRig/Color/sheathe0001_geo.ptx", // [3509]
+    "textures/isPalmRig/Color/sheathb0001_geo.ptx", // [3510]
+    "textures/isPalmRig/Color/deadstrand0003_geo.ptx", // [3511]
+    "textures/isPalmRig/Color/frondspine0004_geo.ptx", // [3512]
+    "textures/isPalmRig/Color/frondspine0003_geo.ptx", // [3513]
+    "textures/isPalmRig/Color/sheathc0002_geo.ptx", // [3514]
+    "textures/isPalmRig/Color/frondspine0002_geo.ptx", // [3515]
+    "textures/isPalmRig/Color/sheathe0002_geo.ptx", // [3516]
+    "textures/isPalmRig/Color/sheathc0001_geo.ptx", // [3517]
+    "textures/isPalmRig/Color/roots_geo.ptx", // [3518]
+    "textures/isPalmRig/Color/frondspine0011_geo.ptx", // [3519]
+    "textures/isPalmRig/Color/frondspine0024_geo.ptx", // [3520]
+    "textures/isPalmRig/Color/sheathg0002_geo.ptx", // [3521]
+    "textures/isPalmRig/Color/frondspine0009_geo.ptx", // [3522]
+    "textures/isPalmRig/Color/sheathc0004_geo.ptx", // [3523]
+    "textures/isPalmRig/Color/frondspine0006_geo.ptx", // [3524]
+    "textures/isPalmRig/Color/frondspine0025_geo.ptx", // [3525]
+    "textures/isPalmRig/Color/frondspine0022_geo.ptx", // [3526]
+    "textures/isPalmRig/Color/frondspine0001_geo.ptx", // [3527]
+    "textures/isPalmRig/Color/frondspine0012_geo.ptx", // [3528]
+    "textures/isPalmRig/Color/sheathb0003_geo.ptx", // [3529]
+    "textures/isPalmRig/Color/sheathi0001_geo.ptx", // [3530]
+    "textures/isPalmRig/Color/sheathg0001_geo.ptx", // [3531]
+    "textures/isPalmRig/Color/sheathc0005_geo.ptx", // [3532]
+    "textures/isPalmRig/Color/deadstrand0004_geo.ptx", // [3533]
+    "textures/isPalmRig/Color/frondspine0026_geo.ptx", // [3534]
+    "textures/isPalmRig/Color/frondspine0010_geo.ptx", // [3535]
+    "textures/isPalmRig/Color/frondspine0018_geo.ptx", // [3536]
+    "textures/isPalmRig/Color/frondspine0007_geo.ptx", // [3537]
+    "textures/isPalmRig/Color/deadstrand0001_geo.ptx", // [3538]
+    "textures/isPalmRig/Color/sheathh0001_geo.ptx", // [3539]
+    "textures/isPalmRig/Color/sheatha0003_geo.ptx", // [3540]
+    "textures/isPalmRig/Color/sheatha0002_geo.ptx", // [3541]
+    "textures/isPalmRig/Color/sheathf0002_geo.ptx", // [3542]
+    "textures/isPalmRig/Color/sheathd0001_geo.ptx", // [3543]
+    "textures/isPalmRig/Color/sheathf0001_geo.ptx", // [3544]
+    "textures/isPalmRig/Color/sheatha0001_geo.ptx", // [3545]
+    "textures/isPalmRig/Color/frondspine0019_geo.ptx", // [3546]
+    "textures/isPalmRig/Color/deadstrand0005_geo.ptx", // [3547]
+    "textures/isPalmRig/Color/sheathf0005_geo.ptx", // [3548]
+    "textures/isPalmRig/Color/frondspine0021_geo.ptx", // [3549]
+    "textures/isPalmRig/Color/sheathd0002_geo.ptx", // [3550]
+    "textures/isPalmRig/Color/sheathh0002_geo.ptx", // [3551]
+    "textures/isPalmRig/Color/frondspine0013_geo.ptx", // [3552]
+    "textures/isPalmRig/Color/deadstrand0002_geo.ptx", // [3553]
+    "textures/isPalmRig/Color/sheathb0002_geo.ptx", // [3554]
+    "textures/isPalmRig/Color/frondspine0017_geo.ptx", // [3555]
+    "textures/isPalmRig/Color/sheathf0004_geo.ptx", // [3556]
+    "textures/isPalmRig/Color/frondspine0023_geo.ptx", // [3557]
+    "textures/isPalmRig/Color/frondspine0020_geo.ptx", // [3558]
+    "textures/isPalmRig/Color/frondspine0015_geo.ptx", // [3559]
+    "textures/isPalmRig/Color/frondspine0008_geo.ptx", // [3560]
+    "textures/isPalmRig/Color/frondspine0014_geo.ptx", // [3561]
+    "textures/isPalmRig/Color/sheathe0004_geo.ptx", // [3562]
+    "textures/isPandanusA/Color/root_temp0025_geo.ptx", // [3563]
+    "textures/isPandanusA/Color/root_temp0036_geo.ptx", // [3564]
+    "textures/isPandanusA/Color/root_temp0011_geo.ptx", // [3565]
+    "textures/isPandanusA/Color/root_temp0034_geo.ptx", // [3566]
+    "textures/isPandanusA/Color/root_temp0052_geo.ptx", // [3567]
+    "textures/isPandanusA/Color/root_temp0021_geo.ptx", // [3568]
+    "textures/isPandanusA/Color/root_temp0045_geo.ptx", // [3569]
+    "textures/isPandanusA/Color/root_temp0012_geo.ptx", // [3570]
+    "textures/isPandanusA/Color/root_temp0049_geo.ptx", // [3571]
+    "textures/isPandanusA/Color/root_temp0042_geo.ptx", // [3572]
+    "textures/isPandanusA/Color/root_temp0015_geo.ptx", // [3573]
+    "textures/isPandanusA/Color/root_temp0040_geo.ptx", // [3574]
+    "textures/isPandanusA/Color/root_temp0048_geo.ptx", // [3575]
+    "textures/isPandanusA/Color/root_temp0033_geo.ptx", // [3576]
+    "textures/isPandanusA/Color/root_temp0006_geo.ptx", // [3577]
+    "textures/isPandanusA/Color/root_temp0022_geo.ptx", // [3578]
+    "textures/isPandanusA/Color/root_temp0032_geo.ptx", // [3579]
+    "textures/isPandanusA/Color/root_temp0026_geo.ptx", // [3580]
+    "textures/isPandanusA/Color/root_temp0003_geo.ptx", // [3581]
+    "textures/isPandanusA/Color/root_temp0007_geo.ptx", // [3582]
+    "textures/isPandanusA/Color/root_temp0054_geo.ptx", // [3583]
+    "textures/isPandanusA/Color/pandanusLo_leavesTop_geo.ptx", // [3584]
+    "textures/isPandanusA/Color/trunka_temp_geo.ptx", // [3585]
+    "textures/isPandanusA/Color/root_temp0023_geo.ptx", // [3586]
+    "textures/isPandanusA/Color/root_temp0046_geo.ptx", // [3587]
+    "textures/isPandanusA/Color/root_temp0027_geo.ptx", // [3588]
+    "textures/isPandanusA/Color/root_temp0038_geo.ptx", // [3589]
+    "textures/isPandanusA/Color/root_temp0035_geo.ptx", // [3590]
+    "textures/isPandanusA/Color/root_temp0051_geo.ptx", // [3591]
+    "textures/isPandanusA/Color/root_temp0020_geo.ptx", // [3592]
+    "textures/isPandanusA/Color/root_temp0017_geo.ptx", // [3593]
+    "textures/isPandanusA/Color/root_temp0018_geo.ptx", // [3594]
+    "textures/isPandanusA/Color/root_temp0005_geo.ptx", // [3595]
+    "textures/isPandanusA/Color/root_temp0013_geo.ptx", // [3596]
+    "textures/isPandanusA/Color/root_temp0039_geo.ptx", // [3597]
+    "textures/isPandanusA/Color/root_temp0030_geo.ptx", // [3598]
+    "textures/isPandanusA/Color/root_temp0053_geo.ptx", // [3599]
+    "textures/isPandanusA/Color/root_temp0002_geo.ptx", // [3600]
+    "textures/isPandanusA/Color/root_temp0043_geo.ptx", // [3601]
+    "textures/isPandanusA/Color/root_temp0028_geo.ptx", // [3602]
+    "textures/isPandanusA/Color/root_temp0041_geo.ptx", // [3603]
+    "textures/isPandanusA/Color/pandanusLo_leavesBot_geo.ptx", // [3604]
+    "textures/isPandanusA/Color/root_temp0004_geo.ptx", // [3605]
+    "textures/isPandanusA/Color/root_temp0008_geo.ptx", // [3606]
+    "textures/isPandanusA/Color/trunkb_temp_geo.ptx", // [3607]
+    "textures/isPandanusA/Color/root_temp0010_geo.ptx", // [3608]
+    "textures/isPandanusA/Color/root_temp0014_geo.ptx", // [3609]
+    "textures/isPandanusA/Color/root_temp0050_geo.ptx", // [3610]
+    "textures/isPandanusA/Color/root_temp0056_geo.ptx", // [3611]
+    "textures/isPandanusA/Color/root_temp0031_geo.ptx", // [3612]
+    "textures/isPandanusA/Color/root_temp0009_geo.ptx", // [3613]
+    "textures/isPandanusA/Color/root_temp0001_geo.ptx", // [3614]
+    "textures/isPandanusA/Color/root_temp0057_geo.ptx", // [3615]
+    "textures/isPandanusA/Color/root_temp0037_geo.ptx", // [3616]
+    "textures/isPandanusA/Color/root_temp0047_geo.ptx", // [3617]
+    "textures/isPandanusA/Color/root_temp0019_geo.ptx", // [3618]
+    "textures/isPandanusA/Color/root_temp0024_geo.ptx", // [3619]
+    "textures/isPandanusA/Color/root_temp0044_geo.ptx", // [3620]
+    "textures/isPandanusA/Color/root_temp0016_geo.ptx", // [3621]
+    "textures/isPandanusA/Color/root_temp0055_geo.ptx", // [3622]
+    "textures/isPandanusA/Color/root_temp0029_geo.ptx", // [3623]
+};
 } }

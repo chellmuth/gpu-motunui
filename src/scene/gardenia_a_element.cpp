@@ -8,14 +8,14 @@ GardeniaAElement::GardeniaAElement()
 
     m_elementName = "isGardeniaA";
 
-    m_sbtOffset = 48;
-
     m_mtlLookup = {
         "bark",
         "barkSimple",
         "instances",
         "leaves",
     };
+
+    m_materialOffset = 48;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isGardeniaA/isGardeniaA.obj",

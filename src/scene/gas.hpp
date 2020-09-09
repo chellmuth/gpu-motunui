@@ -7,10 +7,10 @@
 
 namespace moana { namespace GAS {
 
-OptixTraversableHandle gasInfoFromObjResult(
+OptixTraversableHandle gasInfoFromMeshRecords(
     OptixDeviceContext context,
     ASArena &arena,
-    const ObjResult &model,
+    const std::vector<MeshRecord> &records,
     int primitiveIndexOffset = 0
 );
 

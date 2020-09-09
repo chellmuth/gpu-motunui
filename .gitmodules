@@ -4,3 +4,6 @@
 [submodule "ext/ptex"]
 	path = ext/ptex
 	url = https://github.com/wdas/ptex.git
+[submodule "ext/Catch2"]
+	path = ext/Catch2
+	url = https://github.com/catchorg/Catch2.git

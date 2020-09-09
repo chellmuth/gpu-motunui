@@ -8,12 +8,12 @@ LavaRocksElement::LavaRocksElement()
 
     m_elementName = "isLavaRocks";
 
-    m_sbtOffset = 75;
-
     m_mtlLookup = {
         "default",
         "volcanicRock",
     };
+
+    m_materialOffset = 75;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isLavaRocks/isLavaRocks.obj",

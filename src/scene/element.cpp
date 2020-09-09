@@ -12,17 +12,76 @@
 #include "scene/gas.hpp"
 #include "scene/ias.hpp"
 #include "scene/instances_bin.hpp"
+#include "scene/texture_lookup.hpp"
 
 namespace moana {
 
+static std::vector<HostSBTRecord> createSBTRecords(
+    const std::vector<MeshRecord> &meshRecords,
+    const std::string &element,
+    const std::vector<std::string> &mtlLookup,
+    int materialOffset
+) {
+    std::vector<HostSBTRecord> sbtRecords;
+
+    for (const auto &meshRecord : meshRecords) {
+        CUdeviceptr d_normals;
+        size_t normalsSizeInBytes = meshRecord.normals.size() * sizeof(float);
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_normals),
+            normalsSizeInBytes
+        ));
+
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_normals),
+            meshRecord.normals.data(),
+            normalsSizeInBytes,
+            cudaMemcpyHostToDevice
+        ));
+
+        CUdeviceptr d_normalIndices;
+        size_t normalIndicesSizeInBytes = meshRecord.normalIndices.size() * sizeof(int);
+        CHECK_CUDA(cudaMalloc(
+            reinterpret_cast<void **>(&d_normalIndices),
+            normalIndicesSizeInBytes
+        ));
+
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_normalIndices),
+            meshRecord.normalIndices.data(),
+            normalIndicesSizeInBytes,
+            cudaMemcpyHostToDevice
+        ));
+
+        const int textureIndex = TextureLookup::indexForMesh(
+            element,
+            mtlLookup[meshRecord.materialIndex],
+            meshRecord.name
+        );
+        HostSBTRecord sbtRecord{
+            .d_normals = d_normals,
+            .d_normalIndices = d_normalIndices,
+            .materialID = materialOffset + meshRecord.materialIndex,
+            .textureIndex = textureIndex
+        };
+        sbtRecords.push_back(sbtRecord);
+    }
+
+    return sbtRecords;
+}
+
 GeometryResult Element::buildAcceleration(
     OptixDeviceContext context,
-    ASArena &arena
+    ASArena &arena,
+    int elementSBTOffset
 ) {
     const std::string moanaRoot = MOANA_ROOT;
 
     std::cout << "Processing " << m_elementName << std::endl;
+    std::cout << "  SBT Offset: " << elementSBTOffset << std::endl;
     std::vector<OptixInstance> rootRecords;
+    std::vector<HostSBTRecord> hostSBTRecords;
+    std::vector<int> archiveSBTOffsets;
 
     std::cout << "  Processing primitive archives" << std::endl;
 
@@ -32,14 +91,28 @@ GeometryResult Element::buildAcceleration(
         std::cout << "    Processing: " << objArchivePath << std::endl;
 
         ObjParser objParser(objArchivePath, m_mtlLookup);
-        auto model = objParser.parse();
+        auto meshRecords = objParser.parse();
 
-        const auto gasHandle = GAS::gasInfoFromObjResult(
+        const auto gasHandle = GAS::gasInfoFromMeshRecords(
             context,
             arena,
-            model,
-            m_archivePrimitiveIndexOffsets[i]
+            meshRecords
         );
+
+        archiveSBTOffsets.push_back(hostSBTRecords.size() + elementSBTOffset);
+
+        auto meshHostSBTRecords = createSBTRecords(
+            meshRecords,
+            m_elementName,
+            m_mtlLookup,
+            m_materialOffset
+        );
+        hostSBTRecords.insert(
+            hostSBTRecords.end(),
+            meshHostSBTRecords.begin(),
+            meshHostSBTRecords.end()
+        );
+
         archiveHandles.push_back(gasHandle);
     }
 
@@ -56,7 +129,7 @@ GeometryResult Element::buildAcceleration(
             m_primitiveInstancesHandleIndices[i],
             archiveHandles
         );
-        archive.processRecords(context, arena, records, m_sbtOffset);
+        archive.processRecords(context, arena, records, archiveSBTOffsets);
         }
 
         // Process element instance curves
@@ -82,8 +155,16 @@ GeometryResult Element::buildAcceleration(
                     records,
                     curveInstances,
                     curveHandle,
-                    m_sbtOffset + curveMtlIndices[j]
+                    hostSBTRecords.size() + elementSBTOffset
                 );
+
+                HostSBTRecord curveRecord = {
+                    .d_normals = 0,
+                    .d_normalIndices = 0,
+                    .materialID = m_materialOffset + curveMtlIndices[j],
+                    .textureIndex = -1,
+                };
+                hostSBTRecords.push_back(curveRecord);
             }
         }
 
@@ -91,32 +172,45 @@ GeometryResult Element::buildAcceleration(
         std::cout << "  Processing base obj: " << baseObj << std::endl;
 
         ObjParser objParser(baseObj, m_mtlLookup);
-        auto model = objParser.parse();
+        auto meshRecords = objParser.parse();
 
-        const auto gasHandle = GAS::gasInfoFromObjResult(
-            context,
-            arena,
-            model,
-            m_baseObjPrimitiveIndexOffsets[i]
-        );
-
-        // Process element instance geometry
-        {
-            float transform[12] = {
-                1.f, 0.f, 0.f, 0.f,
-                0.f, 1.f, 0.f, 0.f,
-                0.f, 0.f, 1.f, 0.f
-            };
-            Instances elementGeometryInstances;
-            elementGeometryInstances.transforms = transform;
-            elementGeometryInstances.count = 1;
-
-            IAS::createOptixInstanceRecords(
+        if (meshRecords.size() > 0) {
+            const auto gasHandle = GAS::gasInfoFromMeshRecords(
                 context,
-                records,
-                elementGeometryInstances,
-                gasHandle,
-                m_sbtOffset
+                arena,
+                meshRecords
+            );
+
+            // Process element instance geometry
+            {
+                float transform[12] = {
+                    1.f, 0.f, 0.f, 0.f,
+                    0.f, 1.f, 0.f, 0.f,
+                    0.f, 0.f, 1.f, 0.f
+                };
+                Instances elementGeometryInstances;
+                elementGeometryInstances.transforms = transform;
+                elementGeometryInstances.count = 1;
+
+                IAS::createOptixInstanceRecords(
+                    context,
+                    records,
+                    elementGeometryInstances,
+                    gasHandle,
+                    hostSBTRecords.size() + elementSBTOffset
+                );
+            }
+
+            std::vector<HostSBTRecord> meshHostSBTRecords = createSBTRecords(
+                meshRecords,
+                m_elementName,
+                m_mtlLookup,
+                m_materialOffset
+            );
+            hostSBTRecords.insert(
+                hostSBTRecords.end(),
+                meshHostSBTRecords.begin(),
+                meshHostSBTRecords.end()
             );
         }
 
@@ -145,7 +239,8 @@ GeometryResult Element::buildAcceleration(
 
     return GeometryResult{
         iasHandle,
-        snapshot
+        snapshot,
+        hostSBTRecords
     };
 }
 

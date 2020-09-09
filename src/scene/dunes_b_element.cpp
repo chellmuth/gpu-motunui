@@ -8,8 +8,6 @@ DunesBElement::DunesBElement()
 
     m_elementName = "isDunesB";
 
-    m_sbtOffset = 37;
-
     m_mtlLookup = {
         "isBayCedar_bark",
         "isBayCedar_barkSimple",
@@ -23,6 +21,8 @@ DunesBElement::DunesBElement()
         "soilSimple",
         "xgRoots",
     };
+
+    m_materialOffset = 37;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isDunesB/isDunesB.obj",

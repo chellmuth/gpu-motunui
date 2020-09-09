@@ -45,7 +45,9 @@ def find_ptx_files(element_name, full_path=True):
     results = []
 
     root_path = MoanaPath / f"textures/{element_name}"
-    for root, directory, filenames in os.walk(root_path):
+    for root, directories, filenames in os.walk(root_path):
+        if "Displacement" in root: continue
+
         for filename in filenames:
             if filename.endswith(".ptx"):
                 path = Path(root) / filename
@@ -81,3 +83,9 @@ def find_obj_files(element_name):
     return [
         MoanaPath / obj_file for obj_file in sorted(results)
     ]
+
+def find_material_json_file(element_name):
+    element_path = f"json/{element_name}/{element_name}.json"
+    element_json = json.load(open(MoanaPath / element_path))
+
+    return MoanaPath / element_json["matFile"]

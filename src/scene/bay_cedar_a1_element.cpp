@@ -8,13 +8,13 @@ BayCedarA1Element::BayCedarA1Element()
 
     m_elementName = "isBayCedarA1";
 
-    m_sbtOffset = 1;
-
     m_mtlLookup = {
         "bark",
         "barkSimple",
         "leaves",
     };
+
+    m_materialOffset = 1;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isBayCedarA1/isBayCedarA1.obj",

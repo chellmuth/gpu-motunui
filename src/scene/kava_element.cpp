@@ -8,13 +8,13 @@ KavaElement::KavaElement()
 
     m_elementName = "isKava";
 
-    m_sbtOffset = 72;
-
     m_mtlLookup = {
         "bark",
         "barkSimple",
         "leaves",
     };
+
+    m_materialOffset = 72;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isKava/isKava.obj",

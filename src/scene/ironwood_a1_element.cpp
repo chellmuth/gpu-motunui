@@ -8,8 +8,6 @@ IronwoodA1Element::IronwoodA1Element()
 
     m_elementName = "isIronwoodA1";
 
-    m_sbtOffset = 60;
-
     m_mtlLookup = {
         "archive_bark",
         "archive_pineNeedles",
@@ -18,6 +16,8 @@ IronwoodA1Element::IronwoodA1Element()
         "barkSimple",
         "leaves",
     };
+
+    m_materialOffset = 60;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isIronwoodA1/isIronwoodA1.obj",

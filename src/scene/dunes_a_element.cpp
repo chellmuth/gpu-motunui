@@ -8,8 +8,6 @@ DunesAElement::DunesAElement()
 
     m_elementName = "isDunesA";
 
-    m_sbtOffset = 26;
-
     m_mtlLookup = {
         "archiveHibiscusFlower",
         "archiveLeaflet",
@@ -23,6 +21,8 @@ DunesAElement::DunesAElement()
         "xgRoots",
         "xgShootRoots",
     };
+
+    m_materialOffset = 26;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isDunesA/isDunesA.obj",

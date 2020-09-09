@@ -8,8 +8,6 @@ CoralElement::CoralElement()
 
     m_elementName = "isCoral";
 
-    m_sbtOffset = 21;
-
     m_mtlLookup = {
         "coral",
         "xgAntler",
@@ -17,6 +15,8 @@ CoralElement::CoralElement()
         "xgFlutes",
         "xgStaghorn",
     };
+
+    m_materialOffset = 21;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isCoral/isCoral.obj",

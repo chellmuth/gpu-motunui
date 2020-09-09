@@ -14,7 +14,8 @@ class Element {
 public:
     virtual GeometryResult buildAcceleration(
         OptixDeviceContext context,
-        ASArena &arena
+        ASArena &arena,
+        int elementSBTOffset
     );
 
 protected:
@@ -40,9 +41,6 @@ protected:
     // Path to curve binaries for each element instance
     std::vector<std::vector<std::string> > m_curveBinPathsByElementInstance;
 
-    // Global offset into SBT
-    int m_sbtOffset = 0;
-
     // List ordering how the element's materials map to the SBT
     std::vector<std::string> m_mtlLookup;
 
@@ -51,6 +49,8 @@ protected:
 
     std::vector<int> m_archivePrimitiveIndexOffsets;
     std::vector<int> m_baseObjPrimitiveIndexOffsets;
+
+    int m_materialOffset = 0;
 };
 
 }

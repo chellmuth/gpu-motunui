@@ -56,6 +56,7 @@ add_library(moana
   src/scene/palm_dead_element.cpp
   src/scene/palm_rig_element.cpp
   src/scene/pandanus_a_element.cpp
+  src/scene/texture_lookup.cpp
   src/scene/texture_offsets.cpp
 
   src/util/color_map.cpp
@@ -72,3 +73,4 @@ add_subdirectory(optix)
 add_dependencies(moana ptx_headers)
 
 add_subdirectory(app)
+add_subdirectory(test)

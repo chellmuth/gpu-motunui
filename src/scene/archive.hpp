@@ -21,7 +21,7 @@ public:
         OptixDeviceContext context,
         ASArena &arena,
         std::vector<OptixInstance> &records,
-        int sbtOffset
+        const std::vector<int> &sbtOffsets
     ) const;
 
 private:

@@ -8,8 +8,6 @@ BeachElement::BeachElement()
 
     m_elementName = "isBeach";
 
-    m_sbtOffset = 4;
-
     m_mtlLookup = {
         "archiveCoralPebbles",
         "archiveFibers",
@@ -26,6 +24,8 @@ BeachElement::BeachElement()
         "xgBonBabyGardeniaLeaves",
         "xgGrass",
     };
+
+    m_materialOffset = 4;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isBeach/isBeach.obj",

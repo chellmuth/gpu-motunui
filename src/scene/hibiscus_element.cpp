@@ -8,14 +8,14 @@ HibiscusElement::HibiscusElement()
 
     m_elementName = "isHibiscus";
 
-    m_sbtOffset = 52;
-
     m_mtlLookup = {
         "branches",
         "flowerHibiscus",
         "leafHibiscus",
         "trunk",
     };
+
+    m_materialOffset = 52;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isHibiscus/isHibiscus.obj",

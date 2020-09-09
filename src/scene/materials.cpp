@@ -3,110 +3,110 @@
 namespace moana { namespace Materials {
 
 std::vector<float3> baseColors = {
-    float3{ 0.0, 0.0, 0.0 },
-    float3{ 0.518, 0.478, 0.443 },
-    float3{ 0.518, 0.478, 0.443 },
-    float3{ 0.796, 0.878, 0.608 },
-    float3{ 0.933, 0.937, 0.95 },
-    float3{ 0.506, 0.272, 0.136 },
-    float3{ 0.957, 0.916, 0.105 },
-    float3{ 0.95, 0.916, 0.845 },
-    float3{ 0.804, 0.745, 0.647 },
-    float3{ 0.953, 0.957, 0.97 },
-    float3{ 0.369, 0.22, 0.165 },
-    float3{ 0.9, 0.837, 0.837 },
-    float3{ 0.98, 0.911, 0.911 },
-    float3{ 0.245, 0.249, 0.262 },
-    float3{ 0.784, 0.787, 0.8 },
-    float3{ 0.992, 0.882, 0.796 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.631, 0.683, 0.146 },
-    float3{ 0.506, 0.272, 0.136 },
-    float3{ 0.804, 0.745, 0.647 },
-    float3{ 0.784, 0.787, 0.8 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.957, 0.916, 0.105 },
-    float3{ 0.804, 0.745, 0.647 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.756, 0.715, 0.645 },
-    float3{ 0.5, 0.5, 0.5 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.722, 0.682, 0.651 },
-    float3{ 0.218, 0.218, 0.218 },
-    float3{ 0.47, 0.271, 0.217 },
-    float3{ 0.757, 0.606, 0.606 },
-    float3{ 0.831, 0.835, 0.847 },
-    float3{ 0.518, 0.478, 0.443 },
-    float3{ 0.518, 0.478, 0.443 },
-    float3{ 0.796, 0.878, 0.608 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.549, 0.529, 0.529 },
-    float3{ 0.244, 0.475, 0.058 },
-    float3{ 0.78, 0.707, 0.604 },
-    float3{ 0.691, 0.762, 0.457 },
-    float3{ 0.738, 0.676, 0.612 },
-    float3{ 0.722, 0.682, 0.651 },
-    float3{ 0.757, 0.606, 0.606 },
-    float3{ 0.51, 0.462, 0.445 },
-    float3{ 0.51, 0.463, 0.443 },
-    float3{ 0.992, 0.945, 0.945 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.457, 0.423, 0.365 },
-    float3{ 0.957, 0.916, 0.105 },
-    float3{ 0.395, 0.634, 0.073 },
-    float3{ 0.5019607843137255, 0.5019607843137255, 0.5019607843137255 },
-    float3{ 0.457, 0.423, 0.365 },
-    float3{ 0.957, 0.916, 0.105 },
-    float3{ 0.395, 0.634, 0.073 },
-    float3{ 0.5019607843137255, 0.5019607843137255, 0.5019607843137255 },
-    float3{ 0.518, 0.478, 0.443 },
-    float3{ 0.445, 0.218, 0.087 },
-    float3{ 0.741, 0.514, 0.42 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.549, 0.529, 0.529 },
-    float3{ 0.244, 0.475, 0.058 },
-    float3{ 1.0, 1.0, 0.0 },
-    float3{ 0.445, 0.218, 0.087 },
-    float3{ 0.741, 0.514, 0.42 },
-    float3{ 1.0, 0.0, 1.0 },
-    float3{ 0.549, 0.529, 0.529 },
-    float3{ 0.244, 0.475, 0.058 },
-    float3{ 0.189, 0.079, 0.059 },
-    float3{ 0.188, 0.078, 0.059 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.369, 0.38, 0.231 },
-    float3{ 0.504, 0.713, 0.226 },
-    float3{ 0.286, 0.42, 0.165 },
-    float3{ 0.554, 0.689, 0.374 },
-    float3{ 0.429, 0.451, 0.286 },
-    float3{ 0.433, 0.407, 0.358 },
-    float3{ 0.369, 0.38, 0.231 },
-    float3{ 0.513, 0.665, 0.312 },
-    float3{ 0.247, 0.443, 0.216 },
-    float3{ 0.344, 0.555, 0.186 },
-    float3{ 0.554, 0.689, 0.374 },
-    float3{ 0.389, 0.537, 0.294 },
-    float3{ 0.5019607843137255, 0.5019607843137255, 0.5019607843137255 },
-    float3{ 0.433, 0.407, 0.358 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.0, 0.0, 1.0 },
-    float3{ 0.456, 0.665, 0.15 },
-    float3{ 0.61, 0.528, 0.377 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.369, 0.38, 0.231 },
-    float3{ 0.286, 0.42, 0.165 },
-    float3{ 1.0, 0.0, 0.0 },
-    float3{ 0.691, 0.762, 0.457 },
-    float3{ 0.78, 0.707, 0.604 },
-    float3{ 0.738, 0.676, 0.612 },
-    float3{ 1.0, 1.0, 1.0 },
+    float3{ 0.0, 0.0, 0.0 }, // missing material [0]
+    float3{ 0.518, 0.478, 0.443 }, // isBayCedarA1: bark [1]
+    float3{ 0.518, 0.478, 0.443 }, // isBayCedarA1: barkSimple [2]
+    float3{ 0.796, 0.878, 0.608 }, // isBayCedarA1: leaves [3]
+    float3{ 0.933, 0.937, 0.95 }, // isBeach: archiveCoralPebbles [4]
+    float3{ 0.506, 0.272, 0.136 }, // isBeach: archiveFibers [5]
+    float3{ 0.957, 0.916, 0.105 }, // isBeach: archiveFlowerHibiscus [6]
+    float3{ 0.95, 0.916, 0.845 }, // isBeach: archiveGroundCoverThin [7]
+    float3{ 0.804, 0.745, 0.647 }, // isBeach: archiveLeaflet [8]
+    float3{ 0.953, 0.957, 0.97 }, // isBeach: archivePebbles [9]
+    float3{ 0.369, 0.22, 0.165 }, // isBeach: archiveSeaweed [10]
+    float3{ 0.9, 0.837, 0.837 }, // isBeach: archiveShells [11]
+    float3{ 0.98, 0.911, 0.911 }, // isBeach: archiveShellsSmall [12]
+    float3{ 0.245, 0.249, 0.262 }, // isBeach: archiveVolcanicRock [13]
+    float3{ 0.784, 0.787, 0.8 }, // isBeach: sand [14]
+    float3{ 0.992, 0.882, 0.796 }, // isBeach: xgBonBabyGardeniaBranch [15]
+    float3{ 1.0, 0.0, 0.0 }, // isBeach: xgBonBabyGardeniaLeaves [16]
+    float3{ 0.631, 0.683, 0.146 }, // isBeach: xgGrass [17]
+    float3{ 0.506, 0.272, 0.136 }, // isCoastline: archiveFibers [18]
+    float3{ 0.804, 0.745, 0.647 }, // isCoastline: archiveLeaflet [19]
+    float3{ 0.784, 0.787, 0.8 }, // isCoastline: sandSimple [20]
+    float3{ 1.0, 0.0, 0.0 }, // isCoral: coral [21]
+    float3{ 1.0, 0.0, 0.0 }, // isCoral: xgAntler [22]
+    float3{ 1.0, 0.0, 0.0 }, // isCoral: xgCabbage [23]
+    float3{ 1.0, 0.0, 0.0 }, // isCoral: xgFlutes [24]
+    float3{ 1.0, 0.0, 0.0 }, // isCoral: xgStaghorn [25]
+    float3{ 0.957, 0.916, 0.105 }, // isDunesA: archiveHibiscusFlower [26]
+    float3{ 0.804, 0.745, 0.647 }, // isDunesA: archiveLeaflet [27]
+    float3{ 1.0, 0.0, 0.0 }, // isDunesA: archiveMuskFern [28]
+    float3{ 0.756, 0.715, 0.645 }, // isDunesA: archivePalm [29]
+    float3{ 0.5, 0.5, 0.5 }, // isDunesA: base [30]
+    float3{ 1.0, 0.0, 0.0 }, // isDunesA: shoots [31]
+    float3{ 0.722, 0.682, 0.651 }, // isDunesA: soil [32]
+    float3{ 0.218, 0.218, 0.218 }, // isDunesA: underDunes [33]
+    float3{ 0.47, 0.271, 0.217 }, // isDunesA: xgDebris [34]
+    float3{ 0.757, 0.606, 0.606 }, // isDunesA: xgRoots [35]
+    float3{ 0.831, 0.835, 0.847 }, // isDunesA: xgShootRoots [36]
+    float3{ 0.518, 0.478, 0.443 }, // isDunesB: isBayCedar_bark [37]
+    float3{ 0.518, 0.478, 0.443 }, // isDunesB: isBayCedar_barkSimple [38]
+    float3{ 0.796, 0.878, 0.608 }, // isDunesB: isBayCedar_leaves [39]
+    float3{ 1.0, 0.0, 0.0 }, // isDunesB: isIronwoodA_archive_bark [40]
+    float3{ 0.549, 0.529, 0.529 }, // isDunesB: isIronwoodA_barkSimple [41]
+    float3{ 0.244, 0.475, 0.058 }, // isDunesB: isIronwoodA_leaves [42]
+    float3{ 0.78, 0.707, 0.604 }, // isDunesB: isPandanus_leavesLower [43]
+    float3{ 0.691, 0.762, 0.457 }, // isDunesB: isPandanus_leavesSimple [44]
+    float3{ 0.738, 0.676, 0.612 }, // isDunesB: isPandanus_trunk [45]
+    float3{ 0.722, 0.682, 0.651 }, // isDunesB: soilSimple [46]
+    float3{ 0.757, 0.606, 0.606 }, // isDunesB: xgRoots [47]
+    float3{ 0.51, 0.462, 0.445 }, // isGardeniaA: bark [48]
+    float3{ 0.51, 0.463, 0.443 }, // isGardeniaA: barkSimple [49]
+    float3{ 0.992, 0.945, 0.945 }, // isGardeniaA: instances [50]
+    float3{ 1.0, 0.0, 0.0 }, // isGardeniaA: leaves [51]
+    float3{ 0.457, 0.423, 0.365 }, // isHibiscus: branches [52]
+    float3{ 0.957, 0.916, 0.105 }, // isHibiscus: flowerHibiscus [53]
+    float3{ 0.395, 0.634, 0.073 }, // isHibiscus: leafHibiscus [54]
+    float3{ 0.5019607843137255, 0.5019607843137255, 0.5019607843137255 }, // isHibiscus: trunk [55]
+    float3{ 0.457, 0.423, 0.365 }, // isHibiscusYoung: branches [56]
+    float3{ 0.957, 0.916, 0.105 }, // isHibiscusYoung: flowerHibiscus [57]
+    float3{ 0.395, 0.634, 0.073 }, // isHibiscusYoung: leafHibiscus [58]
+    float3{ 0.5019607843137255, 0.5019607843137255, 0.5019607843137255 }, // isHibiscusYoung: trunk [59]
+    float3{ 0.518, 0.478, 0.443 }, // isIronwoodA1: archive_bark [60]
+    float3{ 0.445, 0.218, 0.087 }, // isIronwoodA1: archive_pineNeedles [61]
+    float3{ 0.741, 0.514, 0.42 }, // isIronwoodA1: archive_seedPod [62]
+    float3{ 1.0, 0.0, 0.0 }, // isIronwoodA1: bark [63]
+    float3{ 0.549, 0.529, 0.529 }, // isIronwoodA1: barkSimple [64]
+    float3{ 0.244, 0.475, 0.058 }, // isIronwoodA1: leaves [65]
+    float3{ 1.0, 1.0, 0.0 }, // isIronwoodB: archive_bark [66]
+    float3{ 0.445, 0.218, 0.087 }, // isIronwoodB: archive_pineNeedles [67]
+    float3{ 0.741, 0.514, 0.42 }, // isIronwoodB: archive_seedPod [68]
+    float3{ 1.0, 0.0, 1.0 }, // isIronwoodB: bark [69]
+    float3{ 0.549, 0.529, 0.529 }, // isIronwoodB: barkSimple [70]
+    float3{ 0.244, 0.475, 0.058 }, // isIronwoodB: leaves [71]
+    float3{ 0.189, 0.079, 0.059 }, // isKava: bark [72]
+    float3{ 0.188, 0.078, 0.059 }, // isKava: barkSimple [73]
+    float3{ 1.0, 0.0, 0.0 }, // isKava: leaves [74]
+    float3{ 1.0, 0.0, 0.0 }, // isLavaRocks: default [75]
+    float3{ 1.0, 0.0, 0.0 }, // isLavaRocks: volcanicRock [76]
+    float3{ 0.369, 0.38, 0.231 }, // isMountainA: branches [77]
+    float3{ 0.504, 0.713, 0.226 }, // isMountainA: breadFruit [78]
+    float3{ 0.286, 0.42, 0.165 }, // isMountainA: fronds [79]
+    float3{ 0.554, 0.689, 0.374 }, // isMountainA: leavesOnHillside [80]
+    float3{ 0.429, 0.451, 0.286 }, // isMountainA: mountainLo [81]
+    float3{ 0.433, 0.407, 0.358 }, // isMountainA: trunk [82]
+    float3{ 0.369, 0.38, 0.231 }, // isMountainB: branches [83]
+    float3{ 0.513, 0.665, 0.312 }, // isMountainB: breadFruit [84]
+    float3{ 0.247, 0.443, 0.216 }, // isMountainB: ferns [85]
+    float3{ 0.344, 0.555, 0.186 }, // isMountainB: fronds [86]
+    float3{ 0.554, 0.689, 0.374 }, // isMountainB: leavesOnHillside [87]
+    float3{ 0.389, 0.537, 0.294 }, // isMountainB: loGrowth [88]
+    float3{ 0.5019607843137255, 0.5019607843137255, 0.5019607843137255 }, // isMountainB: mountainLo [89]
+    float3{ 0.433, 0.407, 0.358 }, // isMountainB: trunk [90]
+    float3{ 1.0, 0.0, 0.0 }, // isMountainB: trunkDetailed [91]
+    float3{ 0.0, 0.0, 1.0 }, // isNaupakaA: hidden [92]
+    float3{ 0.456, 0.665, 0.15 }, // isNaupakaA: leaves [93]
+    float3{ 0.61, 0.528, 0.377 }, // isNaupakaA: stem [94]
+    float3{ 1.0, 0.0, 0.0 }, // isPalmDead: roots [95]
+    float3{ 1.0, 0.0, 0.0 }, // isPalmDead: trunk [96]
+    float3{ 0.369, 0.38, 0.231 }, // isPalmRig: branches [97]
+    float3{ 0.286, 0.42, 0.165 }, // isPalmRig: fronds [98]
+    float3{ 1.0, 0.0, 0.0 }, // isPalmRig: trunk [99]
+    float3{ 0.691, 0.762, 0.457 }, // isPandanusA: leaves [100]
+    float3{ 0.78, 0.707, 0.604 }, // isPandanusA: leavesLower [101]
+    float3{ 0.738, 0.676, 0.612 }, // isPandanusA: trunk [102]
+    float3{ 1.0, 1.0, 1.0 }, // osOcean: water [103]
 };
 
 } }

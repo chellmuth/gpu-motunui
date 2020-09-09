@@ -7,7 +7,7 @@ from pathlib import Path
 import code
 import curves
 import materials
-import obj
+import textures
 import transforms as transform_util
 from params import MoanaPath, ScenePath, elements, skip_list
 
@@ -247,29 +247,32 @@ def run():
     # process_element("isBeach", sbt_manager, output_cpp=True)
 
     temp_elements = [
-        "isPalmRig",
-        "isHibiscus",
-        "isGardeniaA",
-        "isHibiscusYoung",
-        "isKava",
-        "isLavaRocks",
-        "isNaupakaA",
-        "isPalmDead",
-        "isPandanusA",
-        "isMountainA",
-        "isMountainB",
+        "isBayCedarA1",
+        "isBeach",
+        "isCoastline",
+        # # "isCoral",
         "isDunesA",
         "isDunesB",
-        "isCoastline",
-        "isBayCedarA1",
-        "isCoral",
-        "isBeach",
+        "isGardeniaA",
+        "isHibiscus",
+        "isHibiscusYoung",
+        # # "isIronwoodA1",
+        # # "isIronwoodB",
+        "isKava",
+        "isLavaRocks",
+        "isMountainA",
+        "isMountainB",
+        "isNaupakaA",
+        "isPalmDead",
+        "isPalmRig",
+        "isPandanusA",
+        # "osOcean",
     ]
     for element in temp_elements:
         if element not in skip_list:
             process_element(element, sbt_manager, output_cpp=True)
 
-    obj.process_texture_offsets(temp_elements)
+    textures.generate_texture_lookup_code()
 
 def list_element_jsons():
     for element_name in elements:

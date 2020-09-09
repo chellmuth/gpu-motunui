@@ -8,13 +8,13 @@ PalmRigElement::PalmRigElement()
 
     m_elementName = "isPalmRig";
 
-    m_sbtOffset = 97;
-
     m_mtlLookup = {
         "branches",
         "fronds",
         "trunk",
     };
+
+    m_materialOffset = 97;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isPalmRig/isPalmRig.obj",

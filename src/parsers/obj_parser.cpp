@@ -1,111 +1,217 @@
 #include "moana/parsers/obj_parser.hpp"
 
+#include <assert.h>
 #include <iostream>
-#include <fstream>
-#include <regex>
 #include <optional>
+#include <regex>
 
 #include "moana/parsers/string_util.hpp"
 
 namespace moana {
 
 ObjParser::ObjParser(
-    const std::string &objFilename,
+    std::unique_ptr<std::istream> objFilePtr,
     const std::vector<std::string> &mtlLookup
 )
-    : m_objFilename(objFilename),
+    : m_objFilePtr(std::move(objFilePtr)),
       m_mtlLookup(mtlLookup),
       m_faceFormat(ObjFaceFormat::Unknown)
 {}
 
-ObjResult ObjParser::parse()
+ObjParser::ObjParser(
+    const std::string &objFilename,
+    const std::vector<std::string> &mtlLookup
+) : ObjParser(
+        std::unique_ptr<std::istream>(new std::ifstream(objFilename)),
+        mtlLookup
+    )
+{}
+
+ParseState ObjParser::parseHeader(
+    std::string_view command,
+    std::string_view rest,
+    MeshRecord &record
+) {
+    if (command == "g") {
+        assert(rest == "default");
+
+        // don't return the new state until we
+        // hit the first unprocessable line
+        return ParseState::Header;
+    } else if (command == "v") {
+        return ParseState::Vertices;
+    }
+
+    return ParseState::Header;
+}
+
+ParseState ObjParser::parseVertices(
+    std::string_view command,
+    std::string_view rest,
+    MeshRecord &record
+) {
+    if (command == "v") {
+        processVertex(rest, record);
+        return ParseState::Vertices;
+    } else if (command == "vn") {
+        return ParseState::Normals;
+    }
+
+    return ParseState::Error;
+}
+
+ParseState ObjParser::parseNormals(
+    std::string_view command,
+    std::string_view rest,
+    MeshRecord &record
+) {
+    if (command == "vn") {
+        processNormal(rest, record);
+        return ParseState::Normals;
+    } else {
+        return ParseState::MeshName;
+    }
+}
+
+ParseState ObjParser::parseMeshName(
+    std::string_view command,
+    std::string_view rest,
+    MeshRecord &record
+) {
+    if (command == "g") {
+        record.name = rest.data();
+
+        return ParseState::Material;
+    } else {
+        return ParseState::MeshName;
+    }
+}
+
+ParseState ObjParser::parseMaterial(
+    std::string_view command,
+    std::string_view rest,
+    MeshRecord &record
+) {
+    if (command == "usemtl") {
+        std::string mtlName = rest.data();
+        record.hidden = (mtlName == "hidden");
+
+        // Search for the index of the material key
+        // If unfound, use the special 0 material
+        const auto iter = std::find(m_mtlLookup.begin(), m_mtlLookup.end(), mtlName);
+        if (iter == m_mtlLookup.end()) {
+            record.materialIndex = 0;
+        } else {
+            const int index = std::distance(m_mtlLookup.begin(), iter);
+            record.materialIndex = index;
+        }
+
+        return ParseState::Material;
+    } else if (command == "f") {
+        return ParseState::Faces;
+    }
+    return ParseState::Material;
+}
+
+ParseState ObjParser::parseFaces(
+    std::string_view command,
+    std::string_view rest,
+    MeshRecord &record
+) {
+    if (command == "f") {
+        processFace(rest, record);
+        return ParseState::Faces;
+    } else {
+        return ParseState::Complete;
+    }
+}
+
+std::vector<MeshRecord> ObjParser::parse()
 {
-    std::ifstream objFile(m_objFilename);
+    std::vector<MeshRecord> records;
+    while (m_objFilePtr->good()) {
+        MeshRecord record = parseMesh();
+        if (record.hidden) { continue; }
 
-    for (const auto &mtlName : m_mtlLookup) {
-        m_nestedIndices.push_back({});
+        records.push_back(record);
+
+        assert(record.vertices.size() % 3 == 0);
+        assert(record.normals.size() % 3 == 0);
+
+        m_offsets.verticesOffset += record.vertices.size() / 3;
+        m_offsets.normalsOffset += record.normals.size() / 3;
     }
-    if (m_nestedIndices.empty()) {
-        m_nestedIndices.push_back({}); // fixme: catch-all material
+    return records;
+}
+
+MeshRecord ObjParser::parseMesh()
+{
+    MeshRecord record;
+    ParseState state = ParseState::Header;
+
+    std::string lineData;
+    while (std::getline(*m_objFilePtr, lineData)) {
+        std::string_view line(lineData);
+        if (line.empty()) { continue; }
+
+        std::string::size_type spaceIndex = line.find_first_of(" \t");
+        if (spaceIndex == std::string::npos) { continue; }
+
+        const std::string_view command = line.substr(0, spaceIndex);
+        if (command[0] == '#') { continue; }
+
+        std::optional<std::string_view> rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
+        // fixme: account for blank usemtl lines
+
+        if (!rest) { continue; }
+
+        if (state == ParseState::Header) {
+            state = parseHeader(command, rest.value(), record);
+        }
+        if (state == ParseState::Vertices) {
+            state = parseVertices(command, rest.value(), record);
+        }
+        if (state == ParseState::Normals) {
+            state = parseNormals(command, rest.value(), record);
+        }
+        if (state == ParseState::MeshName) {
+            state = parseMeshName(command, rest.value(), record);
+        }
+        if (state == ParseState::Material) {
+            state = parseMaterial(command, rest.value(), record);
+        }
+        if (state == ParseState::Faces) {
+            state = parseFaces(command, rest.value(), record);
+        }
+        if (state == ParseState::Error) {
+            throw std::runtime_error("Invalid obj");
+        }
+
+        if (state == ParseState::Complete) {
+            break;
+        }
     }
 
-    std::string line;
-    while(std::getline(objFile, line)) {
-        std::string_view lineView(line);
-        parseLine(lineView);
-    }
+    assert(record.vertexIndices.size() == record.normalIndices.size());
+    assert(record.vertexIndices.size() % 3 == 0);
+    record.indexTripletCount = record.vertexIndices.size() / 3;
 
-    ObjResult result;
-    result.vertices = m_vertices;
-    result.vertexCount = m_vertices.size() / 3;
+    std::cout << "  Mesh Geometry:" << std::endl
+              << "    Vertex count: " << record.vertices.size() / 3 << std::endl
+              << "    Vertex indices count: " << record.vertexIndices.size() / 3 << std::endl
+              << "    Normal count: " << record.normals.size() / 3 << std::endl
+              << "    Normal indices count: " << record.normalIndices.size() / 3 << std::endl
+              << "    Material index: " << record.materialIndex << std::endl
+              << "    Hidden: " << record.hidden << std::endl;
 
-    result.buildInputResults = {};
-
-    int totalIndexTripletCount = 0;
-    for (const auto &indices : m_nestedIndices) {
-        BuildInputResult buildInputResult;
-        buildInputResult.indices = indices;
-        buildInputResult.indexTripletCount = indices.size() / 3;
-        totalIndexTripletCount += buildInputResult.indexTripletCount;
-
-        result.buildInputResults.push_back(buildInputResult);
-    }
-
-    std::cout << "  Geometry:" << std::endl
-              << "    Vertex count: " << result.vertexCount << std::endl
-              << "    Build Inputs count: " << result.buildInputResults.size() << std::endl
-              << "    Index triplet count: " << totalIndexTripletCount << std::endl;
-
-    return result;
+    return record;
 }
 
 void ObjParser::parseLine(std::string_view &line)
 {
-    if (line.empty()) { return; }
-
-    std::string::size_type spaceIndex = line.find_first_of(" \t");
-    if (spaceIndex == std::string::npos) { return; }
-
-    std::string_view command = line.substr(0, spaceIndex);
-    if (command[0] == '#') { return; }
-
-    std::optional<std::string_view> rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
-    if (!rest) {
-        if (command == "usemtl") {
-            // // fixme: isIronwoodA1 .obj file has an empty usemtl command
-            // // Correctly assign its material
-            // rest = "archive_seedPod";
-
-            m_skipFaces = true;
-        }
-
-        return;
-    }
-
-    if (command == "v") {
-        processVertex(rest.value());
-    } else if (command == "usemtl") {
-        const std::string key = rest.value().data();
-        m_skipFaces = (key == "hidden");
-
-        // Search for the index of the material key
-        // If unfound, use the special 0 material
-        const auto iter = std::find(m_mtlLookup.begin(), m_mtlLookup.end(), key);
-        if (iter == m_mtlLookup.end()) {
-            m_currentMtlIndex = 0;
-        } else {
-            int index = std::distance(m_mtlLookup.begin(), iter);
-            m_currentMtlIndex = index;
-        }
-
-    } else if (command == "f") {
-        if (!m_skipFaces) {
-            processFace(rest.value());
-        }
-    }
 }
 
-void ObjParser::processVertex(std::string_view &vertexArgs)
+void ObjParser::processVertex(std::string_view &vertexArgs, MeshRecord &record)
 {
     std::string::size_type index = 0;
     std::string_view rest = vertexArgs;
@@ -118,29 +224,32 @@ void ObjParser::processVertex(std::string_view &vertexArgs)
     rest = rest.substr(index);
     float z = std::stof(rest.data(), &index);
 
-    m_vertices.insert(
-        m_vertices.end(),
+    record.vertices.insert(
+        record.vertices.end(),
         { x, y, z }
     );
 }
 
-void ObjParser::processNormal(std::string &normalArgs)
+void ObjParser::processNormal(std::string_view &normalArgs, MeshRecord &record)
 {
     std::string::size_type index = 0;
-    std::string rest = normalArgs;
+    std::string_view rest = normalArgs;
 
-    float x = std::stof(rest, &index);
-
-    rest = rest.substr(index);
-    float y = std::stof(rest, &index);
+    float x = std::stof(rest.data(), &index);
 
     rest = rest.substr(index);
-    float z = std::stof(rest, &index);
+    float y = std::stof(rest.data(), &index);
 
-    // m_normals.push_back(Point(x, y, z));
+    rest = rest.substr(index);
+    float z = std::stof(rest.data(), &index);
+
+    record.normals.insert(
+        record.normals.end(),
+        { x, y, z }
+    );
 }
 
-static ObjFaceFormat identityFaceFormat(std::string faceArgs)
+static ObjFaceFormat identifyFaceFormat(std::string faceArgs)
 {
     {
         static std::regex expression("^(-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+) (-?\\d+)//(-?\\d+)\\s*");
@@ -164,19 +273,19 @@ static ObjFaceFormat identityFaceFormat(std::string faceArgs)
     throw std::runtime_error("Unsupported face format: " + faceArgs);
 }
 
-void ObjParser::processFace(std::string_view &faceArgs)
+void ObjParser::processFace(std::string_view &faceArgs, MeshRecord &record)
 {
     if (m_faceFormat == ObjFaceFormat::Unknown) {
-        m_faceFormat = identityFaceFormat(std::string(faceArgs));
+        m_faceFormat = identifyFaceFormat(std::string(faceArgs));
     }
 
     switch(m_faceFormat) {
     case ObjFaceFormat::SingleFaceVertexAndNormal: {
-        processSingleFaceVertexAndNormal(faceArgs);
+        processSingleFaceVertexAndNormal(faceArgs, record);
         return;
     }
     case ObjFaceFormat::DoubleFaceVertexAndNormal: {
-        processDoubleFaceVertexAndNormal(faceArgs);
+        processDoubleFaceVertexAndNormal(faceArgs, record);
         return;
     }
     }
@@ -184,8 +293,10 @@ void ObjParser::processFace(std::string_view &faceArgs)
     throw std::runtime_error("Unsupported face pattern: " + std::string(faceArgs));
 }
 
-void ObjParser::processSingleFaceVertexAndNormal(std::string_view &faceArgs)
-{
+void ObjParser::processSingleFaceVertexAndNormal(
+    std::string_view &faceArgs,
+    MeshRecord &record
+) {
     int vertexIndices[3];
     int normalIndices[3];
 
@@ -206,12 +317,15 @@ void ObjParser::processSingleFaceVertexAndNormal(std::string_view &faceArgs)
 
     processTriangle(
         vertexIndices[0], vertexIndices[1], vertexIndices[2],
-        normalIndices[0], normalIndices[1], normalIndices[2]
+        normalIndices[0], normalIndices[1], normalIndices[2],
+        record
     );
 }
 
-void ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
-{
+void ObjParser::processDoubleFaceVertexAndNormal(
+    std::string_view &faceArgs,
+    MeshRecord &record
+) {
     int vertexIndices[4];
     int normalIndices[4];
 
@@ -232,48 +346,70 @@ void ObjParser::processDoubleFaceVertexAndNormal(std::string_view &faceArgs)
 
     processTriangle(
         vertexIndices[0], vertexIndices[1], vertexIndices[2],
-        normalIndices[0], normalIndices[1], normalIndices[2]
+        normalIndices[0], normalIndices[1], normalIndices[2],
+        record
     );
     processTriangle(
         vertexIndices[0], vertexIndices[2], vertexIndices[3],
-        normalIndices[0], normalIndices[2], normalIndices[3]
+        normalIndices[0], normalIndices[2], normalIndices[3],
+        record
     );
 }
 
 void ObjParser::processTriangle(
     int vertexIndex0, int vertexIndex1, int vertexIndex2,
-    int normalIndex0, int normalIndex1, int normalIndex2
+    int normalIndex0, int normalIndex1, int normalIndex2,
+    MeshRecord &record
 ) {
-    correctIndices(m_vertices, &vertexIndex0, &vertexIndex1, &vertexIndex2);
-    // correctIndices(m_normals, &normalIndex0, &normalIndex1, &normalIndex2);
+    correctIndices(
+        record.vertices,
+        m_offsets.verticesOffset,
+        &vertexIndex0,
+        &vertexIndex1,
+        &vertexIndex2
+    );
+    correctIndices(
+        record.normals,
+        m_offsets.normalsOffset,
+        &normalIndex0,
+        &normalIndex1,
+        &normalIndex2
+    );
 
-    std::vector<int> &indices = m_nestedIndices[m_currentMtlIndex];
-    indices.insert(
-        indices.end(),
+    record.vertexIndices.insert(
+        record.vertexIndices.end(),
         { vertexIndex0, vertexIndex1, vertexIndex2 }
+    );
+
+    record.normalIndices.insert(
+        record.normalIndices.end(),
+        { normalIndex0, normalIndex1, normalIndex2 }
     );
 }
 
 template <class T>
-void ObjParser::correctIndex(const std::vector<T> &indices, int *index)
+void ObjParser::correctIndex(const std::vector<T> &indices, int offset, int *index)
 {
     if (*index < 0) {
         *index += indices.size();
     } else {
         *index -= 1;
     }
+
+    *index -= offset;
 }
 
 template <class T>
 void ObjParser::correctIndices(
     const std::vector<T> &indices,
+    int offset,
     int *index0,
     int *index1,
     int *index2
 ) {
-    correctIndex(indices, index0);
-    correctIndex(indices, index1);
-    correctIndex(indices, index2);
+    correctIndex(indices, offset, index0);
+    correctIndex(indices, offset, index1);
+    correctIndex(indices, offset, index2);
 }
 
 }

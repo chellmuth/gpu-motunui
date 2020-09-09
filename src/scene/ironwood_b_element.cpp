@@ -8,8 +8,6 @@ IronwoodBElement::IronwoodBElement()
 
     m_elementName = "isIronwoodB";
 
-    m_sbtOffset = 66;
-
     m_mtlLookup = {
         "archive_bark",
         "archive_pineNeedles",
@@ -19,12 +17,22 @@ IronwoodBElement::IronwoodBElement()
         "leaves",
     };
 
+    m_materialOffset = 66;
+
     m_baseObjs = {
         moanaRoot + "/island/obj/isIronwoodB/isIronwoodB.obj",
     };
 
     m_objArchivePaths = {
         moanaRoot + "/island/obj/isIronwoodB/archives/archiveseedpodb_mod.obj",
+    };
+
+    m_archivePrimitiveIndexOffsets = {
+        0
+    };
+
+    m_baseObjPrimitiveIndexOffsets = {
+        0
     };
 
     m_elementInstancesBinPaths = {

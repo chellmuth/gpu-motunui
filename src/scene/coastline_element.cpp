@@ -8,13 +8,13 @@ CoastlineElement::CoastlineElement()
 
     m_elementName = "isCoastline";
 
-    m_sbtOffset = 18;
-
     m_mtlLookup = {
         "archiveFibers",
         "archiveLeaflet",
         "sandSimple",
     };
+
+    m_materialOffset = 18;
 
     m_baseObjs = {
         moanaRoot + "/island/obj/isCoastline/isCoastline.obj",
