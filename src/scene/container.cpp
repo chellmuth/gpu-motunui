@@ -40,7 +40,7 @@ std::vector<GeometryResult> createGeometryResults(
         std::make_unique<BayCedarA1Element>(),
         std::make_unique<BeachElement>(),
         std::make_unique<CoastlineElement>(),
-        // std::make_unique<CoralElement>(),
+        std::make_unique<CoralElement>(),
         std::make_unique<DunesAElement>(),
         std::make_unique<DunesBElement>(),
         std::make_unique<GardeniaAElement>(),

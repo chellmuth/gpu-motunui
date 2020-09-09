@@ -131,15 +131,16 @@ std::vector<MeshRecord> ObjParser::parse()
     std::vector<MeshRecord> records;
     while (m_objFilePtr->good()) {
         MeshRecord record = parseMesh();
-        if (record.hidden) { continue; }
-
-        records.push_back(record);
 
         assert(record.vertices.size() % 3 == 0);
         assert(record.normals.size() % 3 == 0);
 
         m_offsets.verticesOffset += record.vertices.size() / 3;
         m_offsets.normalsOffset += record.normals.size() / 3;
+
+        if (record.hidden) { continue; }
+
+        records.push_back(record);
     }
     return records;
 }

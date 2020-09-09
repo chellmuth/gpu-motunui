@@ -250,7 +250,7 @@ def run():
         "isBayCedarA1",
         "isBeach",
         "isCoastline",
-        # # "isCoral",
+        "isCoral",
         "isDunesA",
         "isDunesB",
         "isGardeniaA",
@@ -272,7 +272,7 @@ def run():
         if element not in skip_list:
             process_element(element, sbt_manager, output_cpp=True)
 
-    textures.generate_texture_lookup_code()
+    # textures.generate_texture_lookup_code()
 
 def list_element_jsons():
     for element_name in elements:
