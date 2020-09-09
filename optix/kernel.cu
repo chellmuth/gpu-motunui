@@ -37,6 +37,7 @@ __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
     const Frame frame(prd.normal);
 
     const BSDFSampleRecord record = {
+        .isValid = true,
         .point = prd.point,
         .wiLocal = wiLocal,
         .normal = prd.normal,
@@ -151,7 +152,7 @@ extern "C" __global__ void __miss__ms()
     prd->materialID = -1;
 }
 
-extern "C" __global__ void __raygen__rg()
+__forceinline__ __device__ static void raygenCamera()
 {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
@@ -232,5 +233,59 @@ extern "C" __global__ void __raygen__rg()
         params.idBuffer[idIndex + 0] = prd.primitiveID;
         params.idBuffer[idIndex + 1] = prd.materialID;
         params.idBuffer[idIndex + 2] = prd.textureIndex;
+    }
+}
+
+__forceinline__ __device__ static void raygenBounce()
+{
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+
+    const BSDFSampleRecord &sampleRecord = params.sampleRecordBuffer[sampleRecordIndex];
+    if (!sampleRecord.isValid) { return; }
+
+    const float3 origin = sampleRecord.point;
+
+    const Vec3 &wiLocal = sampleRecord.wiLocal;
+    const Vec3 wiWorld = sampleRecord.frame.toWorld(wiLocal);
+
+    PerRayData prd;
+    prd.isHit = false;
+
+    unsigned int p0, p1;
+    util::packPointer(&prd, p0, p1);
+    optixTrace(
+        params.handle,
+        origin,
+        float3{ wiWorld.x(), wiWorld.y(), wiWorld.z() },
+        0.f,
+        1e15,
+        0.f,
+        OptixVisibilityMask(255),
+        OPTIX_RAY_FLAG_NONE,
+        0, 1, 0, // SBT params
+        p0, p1
+    );
+
+    const int pixelIndex = 3 * (index.y * dim.x + index.x);
+    // params.outputBuffer[pixelIndex + 0] = origin.x;
+    // params.outputBuffer[pixelIndex + 1] = origin.y;
+    // params.outputBuffer[pixelIndex + 2] = origin.z;
+
+    if (prd.isHit) {
+        params.outputBuffer[pixelIndex + 0] = 1.f;
+        params.outputBuffer[pixelIndex + 1] = 1.f;
+        params.outputBuffer[pixelIndex + 2] = 1.f;
+    }
+}
+
+extern "C" __global__ void __raygen__rg()
+{
+    if (params.bounce == 0) {
+        raygenCamera();
+    } else {
+        raygenBounce();
     }
 }

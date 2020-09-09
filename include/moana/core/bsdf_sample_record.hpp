@@ -6,6 +6,7 @@
 namespace moana {
 
 struct BSDFSampleRecord {
+    bool isValid = false;
     float3 point;
     Vec3 wiLocal;
     Vec3 normal;

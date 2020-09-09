@@ -392,11 +392,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     params.camera = camera;
 
     std::vector<float> textureImage(width * height * 3, 0.f);
-    const int spp = 32;
+    const int spp = 1;
 
     for (int sample = 0; sample < spp; sample++) {
         std::cout << "Sample #" << sample << std::endl;
 
+        params.bounce = 0;
         params.sampleCount = sample;
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.outputBuffer),
@@ -574,6 +575,53 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                 textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * outputBuffer[pixelIndex + 2];
             }
         }
+
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.outputBuffer),
+            0,
+            outputBufferSizeInBytes
+        ));
+        for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
+            m_state.arena.restoreSnapshot(geometry.snapshot);
+
+            params.handle = geometry.handle;
+            params.bounce = 1;
+            CHECK_CUDA(cudaMemcpy(
+                reinterpret_cast<void *>(d_params),
+                &params,
+                sizeof(params),
+                cudaMemcpyHostToDevice
+            ));
+
+            CHECK_OPTIX(optixLaunch(
+                m_state.pipeline,
+                stream,
+                d_params,
+                sizeof(Params),
+                &m_state.sbt,
+                width,
+                height,
+                /*depth=*/1
+            ));
+
+            CHECK_CUDA(cudaDeviceSynchronize());
+        }
+
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(outputBuffer.data()),
+            params.outputBuffer,
+            outputBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+        for (int i = 0; i < outputBuffer.size(); i++) {
+            outputBuffer[i] = 1.f - outputBuffer[i];
+        }
+        Image::save(
+            width,
+            height,
+            outputBuffer,
+            exrFilename
+        );
     }
 
     // Image::save(

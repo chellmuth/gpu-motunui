@@ -37,6 +37,7 @@ struct Params {
     int *idBuffer;
 
     Camera camera;
+    int bounce;
 
     int sampleCount;
 };
