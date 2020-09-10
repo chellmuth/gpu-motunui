@@ -1,4 +1,4 @@
-from params import MoanaPath
+from params import MoanaPath, Root, RootedPath
 
 def obj_tokens(obj_filename):
     with open(obj_filename, "r") as obj:
@@ -13,9 +13,12 @@ def obj_tokens(obj_filename):
                 yield command, None
 
 
-def split(obj_filename, out_filename1, out_filename2):
+def split(obj_path):
+    out_filename1 = f"{obj_path.stem}-1.obj"
+    out_filename2 = f"{obj_path.stem}-2.obj"
+
     count = 0
-    for _ in obj_tokens(obj_filename):
+    for _ in obj_tokens(obj_path):
         count += 1
 
     target = count // 2
@@ -27,7 +30,7 @@ def split(obj_filename, out_filename1, out_filename2):
     vertex_offset = 0
     normal_offset = 0
 
-    for i, (command, rest) in enumerate(obj_tokens(obj_filename)):
+    for i, (command, rest) in enumerate(obj_tokens(obj_path)):
         if in_section1 \
            and i > target \
            and command == "g" and rest == "default":
@@ -59,16 +62,18 @@ def split(obj_filename, out_filename1, out_filename2):
 
             section2_lines.append(f"{command or ''} {rest or ''}\n")
 
-    with open(out_filename1, "w") as f:
+    out_path1 = RootedPath(out_filename1, Root.Generated)
+    with open(out_path1.fs_path, "w") as f:
         f.writelines(section1_lines)
 
-    with open(out_filename2, "w") as f:
+    out_path2 = RootedPath(out_filename2, Root.Generated)
+    with open(out_path2.fs_path, "w") as f:
         f.writelines(section2_lines)
 
+    return (out_path1, out_path2)
 
 if __name__ == "__main__":
     split(
         MoanaPath / "obj/isIronwoodA1/isIronwoodA1.obj",
-        "../scene/isIronwoodA1-1.obj",
-        "../scene/isIronwoodA1-2.obj",
+        Path("../scene")
     )

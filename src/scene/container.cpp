@@ -14,7 +14,6 @@
 #include "scene/hibiscus_young_element.hpp"
 #include "scene/ias.hpp"
 #include "scene/ironwood_a1_element.hpp"
-#include "scene/ironwood_a1_element_overflow.hpp"
 #include "scene/ironwood_b_element.hpp"
 #include "scene/kava_element.hpp"
 #include "scene/lava_rocks_element.hpp"
