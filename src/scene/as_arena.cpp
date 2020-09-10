@@ -20,6 +20,8 @@ ASArena::ASArena()
 
 void ASArena::init(size_t poolSizeInBytes)
 {
+    poolSizeInBytes = roundUp(poolSizeInBytes, ByteAlignment);
+
     assert(poolSizeInBytes % ByteAlignment == 0);
 
     CHECK_CUDA(cudaMalloc(
@@ -41,7 +43,7 @@ CUdeviceptr ASArena::allocOutput(size_t bytes)
     CUdeviceptr pointer = m_basePtr + m_outputOffset;
 
     m_outputOffset += bytes;
-    if (m_outputOffset > m_poolSizeInBytes) {
+    if (m_outputOffset >= m_tempOffset) {
         throw std::runtime_error("Not enough arena memory");
     }
 
@@ -50,7 +52,7 @@ CUdeviceptr ASArena::allocOutput(size_t bytes)
 
 CUdeviceptr ASArena::pushTemp(size_t bytes)
 {
-    assert(bytes % ByteAlignment == 0);
+    bytes = roundUp(bytes, ByteAlignment);
 
     m_tempOffset -= bytes;
     m_tempOffsetStack.push_back(bytes);
@@ -65,6 +67,10 @@ CUdeviceptr ASArena::pushTemp(size_t bytes)
 
 void ASArena::popTemp()
 {
+    if (m_tempOffsetStack.empty()) {
+        throw std::runtime_error("No temp memory to pop!");
+    }
+
     size_t currentTempSize = m_tempOffsetStack.back();
     m_tempOffset += currentTempSize;
 

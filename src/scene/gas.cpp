@@ -30,12 +30,8 @@ OptixTraversableHandle gasInfoFromMeshRecords(
 
     uint32_t inputFlags[] = { OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT };
     for (const auto &[i, record] : enumerate(records)) {
-        CUdeviceptr d_vertices = 0;
         size_t verticesSizeInBytes = record.vertices.size() * sizeof(float);
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_vertices),
-            verticesSizeInBytes
-        ));
+        CUdeviceptr d_vertices = arena.pushTemp(verticesSizeInBytes);
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_vertices),
             record.vertices.data(),
@@ -43,12 +39,8 @@ OptixTraversableHandle gasInfoFromMeshRecords(
             cudaMemcpyHostToDevice
         ));
 
-        CUdeviceptr d_vertexIndices = 0;
         size_t vertexIndicesSizeInBytes = record.vertexIndices.size() * sizeof(int);
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_vertexIndices),
-            vertexIndicesSizeInBytes
-        ));
+        CUdeviceptr d_vertexIndices = arena.pushTemp(vertexIndicesSizeInBytes);
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_vertexIndices),
             record.vertexIndices.data(),
@@ -56,15 +48,15 @@ OptixTraversableHandle gasInfoFromMeshRecords(
             cudaMemcpyHostToDevice
         ));
 
-        verticesToFree.push_back(d_vertices);
-        vertexIndicesToFree.push_back(d_vertexIndices);
+        verticesToFree[i] = d_vertices;
+        vertexIndicesToFree[i] = d_vertexIndices;
 
         // Setup build input
         triangleInputs[i].type = OPTIX_BUILD_INPUT_TYPE_TRIANGLES;
 
         triangleInputs[i].triangleArray.vertexFormat = OPTIX_VERTEX_FORMAT_FLOAT3;
         triangleInputs[i].triangleArray.numVertices = record.vertices.size() / 3;
-        triangleInputs[i].triangleArray.vertexBuffers = &verticesToFree[verticesToFree.size() - 1];
+        triangleInputs[i].triangleArray.vertexBuffers = &verticesToFree[i];
 
         triangleInputs[i].triangleArray.numIndexTriplets = record.indexTripletCount;
         triangleInputs[i].triangleArray.indexFormat = OPTIX_INDICES_FORMAT_UNSIGNED_INT3;
@@ -115,10 +107,10 @@ OptixTraversableHandle gasInfoFromMeshRecords(
     CHECK_CUDA(cudaDeviceSynchronize());
 
     for (auto d_vertices : verticesToFree) {
-        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertices)));
+        arena.popTemp();
     }
     for (auto d_vertexIndices : vertexIndicesToFree) {
-        CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertexIndices)));
+        arena.popTemp();
     }
     arena.popTemp();
 
