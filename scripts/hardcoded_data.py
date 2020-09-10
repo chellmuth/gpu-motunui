@@ -5,5 +5,6 @@ cross_element_texture_access = {
 }
 
 overflow_elements = set([
-    "isIronwoodA1"
+    "isIronwoodA1",
+    "isIronwoodB",
 ])

@@ -20,7 +20,7 @@ IronwoodBElement::IronwoodBElement()
     m_materialOffset = 66;
 
     m_baseObjs = {
-        moanaRoot + "/island/obj/isIronwoodB/isIronwoodB.obj",
+        "../scene/isIronwoodB-1.obj",
     };
 
     m_objArchivePaths = {
@@ -50,6 +50,52 @@ IronwoodBElement::IronwoodBElement()
 }
 
 
+IronwoodBElementOverflow::IronwoodBElementOverflow()
+{
+    const std::string moanaRoot = MOANA_ROOT;
+
+    m_elementName = "isIronwoodB";
+
+    m_mtlLookup = {
+        "archive_bark",
+        "archive_pineNeedles",
+        "archive_seedPod",
+        "bark",
+        "barkSimple",
+        "leaves",
+    };
+
+    m_materialOffset = 66;
+
+    m_baseObjs = {
+        "../scene/isIronwoodB-2.obj",
+    };
+
+    m_objArchivePaths = {
+
+    };
+
+    m_elementInstancesBinPaths = {
+        "../scene/isIronwoodB.bin",
+    };
+
+    m_primitiveInstancesBinPaths = {
+        {},
+    };
+
+    m_primitiveInstancesHandleIndices = {
+        {},
+    };
+
+    m_curveBinPathsByElementInstance = {
+        {},
+    };
+
+    m_curveMtlIndicesByElementInstance = {
+        {},
+    };
+
+}
 
 
 }

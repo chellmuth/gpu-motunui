@@ -10,6 +10,10 @@ public:
 };
 
 
+class IronwoodBElementOverflow : public Element {
+public:
+    IronwoodBElementOverflow();
+};
 
 
 }

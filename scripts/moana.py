@@ -269,7 +269,7 @@ def run():
         "isHibiscus",
         "isHibiscusYoung",
         "isIronwoodA1",
-        # "isIronwoodB",
+        "isIronwoodB",
         "isKava",
         "isLavaRocks",
         "isMountainA",
