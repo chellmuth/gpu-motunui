@@ -18,6 +18,7 @@ namespace moana {
 
 static std::vector<HostSBTRecord> createSBTRecords(
     const std::vector<MeshRecord> &meshRecords,
+    ASArena &arena,
     const std::string &element,
     const std::vector<std::string> &mtlLookup,
     int materialOffset
@@ -28,12 +29,8 @@ static std::vector<HostSBTRecord> createSBTRecords(
 
     std::cout << "Processing " << meshRecords.size() << " mesh records" << std::endl;
     for (const auto &meshRecord : meshRecords) {
-        CUdeviceptr d_normals;
         size_t normalsSizeInBytes = meshRecord.normals.size() * sizeof(float);
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_normals),
-            normalsSizeInBytes
-        ));
+        CUdeviceptr d_normals = arena.allocOutput(normalsSizeInBytes);
 
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_normals),
@@ -42,12 +39,8 @@ static std::vector<HostSBTRecord> createSBTRecords(
             cudaMemcpyHostToDevice
         ));
 
-        CUdeviceptr d_normalIndices;
         size_t normalIndicesSizeInBytes = meshRecord.normalIndices.size() * sizeof(int);
-        CHECK_CUDA(cudaMalloc(
-            reinterpret_cast<void **>(&d_normalIndices),
-            normalIndicesSizeInBytes
-        ));
+        CUdeviceptr d_normalIndices = arena.allocOutput(normalIndicesSizeInBytes);
 
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_normalIndices),
@@ -112,6 +105,7 @@ GeometryResult Element::buildAcceleration(
 
         auto meshHostSBTRecords = createSBTRecords(
             meshRecords,
+            arena,
             m_elementName,
             m_mtlLookup,
             m_materialOffset
@@ -212,6 +206,7 @@ GeometryResult Element::buildAcceleration(
 
             std::vector<HostSBTRecord> meshHostSBTRecords = createSBTRecords(
                 meshRecords,
+                arena,
                 m_elementName,
                 m_mtlLookup,
                 m_materialOffset
