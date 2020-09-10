@@ -29,7 +29,7 @@ LavaRocksElement::LavaRocksElement()
     };
 
     m_baseObjPrimitiveIndexOffsets = {
-        15294, 0
+        0, 0
     };
 
     m_elementInstancesBinPaths = {
@@ -58,5 +58,8 @@ LavaRocksElement::LavaRocksElement()
     };
 
     }
+
+
+
 
 }

@@ -23,8 +23,8 @@ public:
     Snapshot createSnapshot();
     void restoreSnapshot(Snapshot snapshot);
 
-    // CUdeviceptr pushTemp(size_t bytes);
-    // void popTemp();
+    CUdeviceptr pushTemp(size_t bytes);
+    void popTemp();
 
     void releaseAll();
 
@@ -33,8 +33,8 @@ private:
     size_t m_poolSizeInBytes;
 
     size_t m_outputOffset;
-    // size_t m_tempOffset;
-    // std::vector<size_t> m_tempOffsetStack;
+    size_t m_tempOffset;
+    std::vector<size_t> m_tempOffsetStack;
 };
 
 }

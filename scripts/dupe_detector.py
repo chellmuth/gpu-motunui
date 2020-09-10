@@ -2,18 +2,7 @@ import collections
 
 import files
 import params
-
-def obj_tokens(obj_filename):
-    with open(obj_filename, "r") as obj:
-        for line in obj:
-            tokens = line.strip().split(" ", 1)
-            if not tokens: continue
-
-            command = tokens[0]
-            if len(tokens) > 1:
-                yield command, tokens[1]
-            else:
-                yield command, None
+from obj import obj_tokens
 
 DoubleMeshRecord = collections.namedtuple("DoubleMeshRecord", [
     "obj_filename",

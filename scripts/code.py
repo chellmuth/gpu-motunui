@@ -26,11 +26,12 @@ def generate_code(
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
     curve_records_by_element_instance,
+    requires_overflow
 ):
     header_filename = _header_filename_from_element_name(element_name)
     source_filename = _source_filename_from_element_name(element_name)
     return {
-        header_filename: _generate_header(element_name),
+        header_filename: _generate_header(element_name, requires_overflow),
         source_filename: _generate_src(
             element_name,
             sbt_manager,
@@ -40,11 +41,24 @@ def generate_code(
             primitive_instances_bin_paths,
             primitive_instances_handle_indices,
             curve_records_by_element_instance,
+            requires_overflow,
         )
     }
 
-def _generate_header(element_name):
+def _generate_header(element_name, requires_overflow):
+    def class_definition(class_name):
+        return f"""\
+class {class_name} : public Element {{
+public:
+    {class_name}();
+}};
+"""
     class_name = _class_name_from_element_name(element_name)
+
+    class_code = class_definition(class_name)
+    overflow_class_code = ""
+    if requires_overflow:
+        overflow_class_code = class_definition(f"{class_name}Overflow")
 
     return f"""\
 #pragma once
@@ -53,10 +67,9 @@ def _generate_header(element_name):
 
 namespace moana {{
 
-class {class_name} : public Element {{
-public:
-    {class_name}();
-}};
+{class_code}
+
+{overflow_class_code}
 
 }}
 """
@@ -70,12 +83,70 @@ def _generate_src(
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
     curve_records_by_element_instance,
+    requires_overflow
 ):
-    class_name = _class_name_from_element_name(element_name)
     header_filename = _header_filename_from_element_name(element_name)
 
+    class_name = _class_name_from_element_name(element_name)
+    if requires_overflow:
+        impl_base_objs = [ base_objs[0] ]
+        overflow_base_objs = [ base_objs[1] ]
+    else:
+        impl_base_objs = base_objs
+        overflow_base_objs = []
+
+    impl = _generate_impl(
+        element_name,
+        class_name,
+        sbt_manager,
+        impl_base_objs,
+        element_instances_bin_paths,
+        obj_archives,
+        primitive_instances_bin_paths,
+        primitive_instances_handle_indices,
+        curve_records_by_element_instance,
+    )
+
+    overflow_impl = ""
+    if requires_overflow:
+        overflow_impl = _generate_impl(
+            element_name,
+            f"{class_name}Overflow",
+            sbt_manager,
+            overflow_base_objs,
+            element_instances_bin_paths,
+            [],
+            [[]],
+            [[]],
+            [[]],
+        )
+
+    return f"""\
+#include "{header_filename}"
+
+namespace moana {{
+
+{impl}
+
+{overflow_impl}
+
+}}
+"""
+
+def _generate_impl(
+    element_name,
+    class_name,
+    sbt_manager,
+    base_objs,
+    element_instances_bin_paths,
+    obj_archives,
+    primitive_instances_bin_paths,
+    primitive_instances_handle_indices,
+    curve_records_by_element_instance,
+):
+
     base_obj_items = "\n".join([
-        f"{' ' * 8}moanaRoot + \"/island/{base_obj}\","
+        f"{' ' * 8}{base_obj.code_path},"
         for base_obj
         in base_objs
     ])
@@ -153,10 +224,6 @@ def _generate_src(
     )
 
     return f"""\
-#include "{header_filename}"
-
-namespace moana {{
-
 {class_name}::{class_name}()
 {{
     const std::string moanaRoot = MOANA_ROOT;
@@ -206,8 +273,6 @@ namespace moana {{
     }};
 
     }}
-
-}}
 """
 
 def generate_sbt_array(sbt_manager):

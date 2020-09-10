@@ -94,12 +94,7 @@ OptixTraversableHandle gasInfoFromMeshRecords(
               << std::endl
               << std::endl;
 
-    CUdeviceptr d_tempBufferGas;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_tempBufferGas),
-        gasBufferSizes.tempSizeInBytes
-    ));
-
+    CUdeviceptr d_tempBufferGas = arena.pushTemp(gasBufferSizes.tempSizeInBytes);
     CUdeviceptr d_gasOutputBuffer = arena.allocOutput(gasBufferSizes.outputSizeInBytes);
 
     OptixTraversableHandle handle;
@@ -125,7 +120,7 @@ OptixTraversableHandle gasInfoFromMeshRecords(
     for (auto d_vertexIndices : vertexIndicesToFree) {
         CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_vertexIndices)));
     }
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBufferGas)));
+    arena.popTemp();
 
     return handle;
 }

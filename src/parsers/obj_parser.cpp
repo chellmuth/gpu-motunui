@@ -162,6 +162,17 @@ MeshRecord ObjParser::parseMesh()
         if (command[0] == '#') { continue; }
 
         std::optional<std::string_view> rest = StringUtil::lTrim(line.substr(spaceIndex + 1));
+        if (!rest) {
+            // fixme: isIronwoodA1 .obj file has an empty usemtl command
+            // Correctly assign its material
+            //
+            // isCoral.obj and xgPandanus_isPandanusAlo_base.obj also have
+            // "usemtl " lines; skip them (for now)
+            if (record.name == "archiveseedpodb_geo") {
+                rest = "archive_seedPod";
+            }
+
+        }
         // fixme: account for blank usemtl lines
 
         if (!rest) { continue; }
@@ -197,13 +208,13 @@ MeshRecord ObjParser::parseMesh()
     assert(record.vertexIndices.size() % 3 == 0);
     record.indexTripletCount = record.vertexIndices.size() / 3;
 
-    std::cout << "  Mesh Geometry:" << std::endl
-              << "    Vertex count: " << record.vertices.size() / 3 << std::endl
-              << "    Vertex indices count: " << record.vertexIndices.size() / 3 << std::endl
-              << "    Normal count: " << record.normals.size() / 3 << std::endl
-              << "    Normal indices count: " << record.normalIndices.size() / 3 << std::endl
-              << "    Material index: " << record.materialIndex << std::endl
-              << "    Hidden: " << record.hidden << std::endl;
+    // std::cout << "  Mesh Geometry:" << std::endl
+    //           << "    Vertex count: " << record.vertices.size() / 3 << std::endl
+    //           << "    Vertex indices count: " << record.vertexIndices.size() / 3 << std::endl
+    //           << "    Normal count: " << record.normals.size() / 3 << std::endl
+    //           << "    Normal indices count: " << record.normalIndices.size() / 3 << std::endl
+    //           << "    Material index: " << record.materialIndex << std::endl
+    //           << "    Hidden: " << record.hidden << std::endl;
 
     return record;
 }

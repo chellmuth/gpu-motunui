@@ -6,10 +6,12 @@ from pathlib import Path
 
 import code
 import curves
+import hardcoded_data
 import materials
+import obj
 import textures
 import transforms as transform_util
-from params import MoanaPath, ScenePath, elements, skip_list
+from params import MoanaPath, Root, RootedPath, ScenePath, elements, skip_list
 
 class ElementInstanceInfo:
     def __init__(self, transform):
@@ -200,7 +202,7 @@ def process_element(element_name, sbt_manager, output_cpp=False):
         obj_stem = Path(geom_obj_file).stem
         bin_path = ScenePath / f"{obj_stem}.bin"
 
-        base_obj_paths.append(geom_obj_file)
+        base_obj_paths.append(RootedPath(geom_obj_file, Root.Moana))
         element_instances_bin_paths.append(bin_path)
 
         primitive_instance_bin_paths = [
@@ -219,6 +221,15 @@ def process_element(element_name, sbt_manager, output_cpp=False):
 
         curve_records_by_element_instance.append(instance_info.curve_records[:])
 
+    requires_overflow = False
+    if element_name in hardcoded_data.overflow_elements:
+        assert len(base_obj_paths) == 1
+
+        base_obj_path, = base_obj_paths
+        base_obj_paths = list(obj.split(base_obj_path.fs_path))
+
+        requires_overflow = True
+
     # Codegen
     if output_cpp:
         print("Writing code:")
@@ -231,13 +242,14 @@ def process_element(element_name, sbt_manager, output_cpp=False):
             primitive_instances_bin_paths,
             primitive_instances_handle_indices,
             curve_records_by_element_instance,
+            requires_overflow
         )
         for filename, code_str in code_dict.items():
             code_path = Path("../src/") / filename
             print(f"  {code_path}")
 
-            f = open(code_path, "w")
-            f.write(code_str)
+            with open(code_path, "w") as f:
+                f.write(code_str)
 
 def run():
     sbt_manager = materials.build_sbt_manager(elements)
@@ -256,8 +268,8 @@ def run():
         "isGardeniaA",
         "isHibiscus",
         "isHibiscusYoung",
-        # # "isIronwoodA1",
-        # # "isIronwoodB",
+        "isIronwoodA1",
+        # "isIronwoodB",
         "isKava",
         "isLavaRocks",
         "isMountainA",

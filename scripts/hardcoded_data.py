@@ -147,3 +147,7 @@ cross_element_texture_access = {
     "isDunesA": "isHibiscus",
     "isDunesB": "isIronwoodA1",
 }
+
+overflow_elements = set([
+    "isIronwoodA1"
+])

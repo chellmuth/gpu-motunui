@@ -20,6 +20,8 @@ ASArena::ASArena()
 
 void ASArena::init(size_t poolSizeInBytes)
 {
+    assert(poolSizeInBytes % ByteAlignment == 0);
+
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&m_basePtr),
         poolSizeInBytes
@@ -29,6 +31,7 @@ void ASArena::init(size_t poolSizeInBytes)
 
     m_poolSizeInBytes = poolSizeInBytes;
     m_outputOffset = 0;
+    m_tempOffset = poolSizeInBytes;
 }
 
 CUdeviceptr ASArena::allocOutput(size_t bytes)
@@ -43,6 +46,29 @@ CUdeviceptr ASArena::allocOutput(size_t bytes)
     }
 
     return pointer;
+}
+
+CUdeviceptr ASArena::pushTemp(size_t bytes)
+{
+    assert(bytes % ByteAlignment == 0);
+
+    m_tempOffset -= bytes;
+    m_tempOffsetStack.push_back(bytes);
+
+    if (m_tempOffset <= m_outputOffset) {
+        throw std::runtime_error("Not enough arena memory");
+    }
+
+    CUdeviceptr pointer = m_basePtr + m_tempOffset;
+    return pointer;
+}
+
+void ASArena::popTemp()
+{
+    size_t currentTempSize = m_tempOffsetStack.back();
+    m_tempOffset += currentTempSize;
+
+    m_tempOffsetStack.pop_back();
 }
 
 Snapshot ASArena::createSnapshot()
