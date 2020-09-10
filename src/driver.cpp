@@ -309,6 +309,8 @@ void Driver::init()
 
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
+    std::cout << "Launching " << exrFilename << std::endl;
+
     std::vector<PtexTexture> textures;
     for (const auto &filename : Textures::textureFilenames) {
         PtexTexture texture(MOANA_ROOT + std::string("/island/") + filename);
