@@ -278,7 +278,7 @@ def run():
         "isPalmDead",
         "isPalmRig",
         "isPandanusA",
-        # "osOcean",
+        "osOcean",
     ]
     for element in temp_elements:
         if element not in skip_list:
