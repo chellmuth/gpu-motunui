@@ -120,14 +120,6 @@ BeachElement::BeachElement()
         moanaRoot + "/island/obj/isBeach/archives/xgStones_archiveRock0007_geo.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        0, 0, 0, 0, 0, 360, 440, 520, 960, 1320, 1416, 1600, 1712, 0, 160, 232, 336, 372, 452, 548, 600, 808, 1016, 1224, 1432, 1600, 1744, 1848, 0, 3888, 0, 7776, 0, 11664, 15552, 0, 0, 112, 208, 312, 416, 0, 360, 440, 520, 960, 1320, 1416, 1600, 1712, 0, 160, 232, 336, 372, 452, 548, 0, 30944, 50064, 59328, 60296, 61264, 0, 208, 416, 624, 832, 1000, 1144, 1248, 0, 208, 416, 624, 832, 1000, 1144, 1248, 0, 72, 144, 248, 284, 364, 460
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isBeach.bin",
     };
@@ -148,7 +140,7 @@ BeachElement::BeachElement()
         {13},
     };
 
-    }
+}
 
 
 

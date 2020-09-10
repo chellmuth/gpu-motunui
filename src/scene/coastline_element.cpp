@@ -32,14 +32,6 @@ CoastlineElement::CoastlineElement()
         moanaRoot + "/island/obj/isCoastline/archives/xgPalmDebris_archiveLeaflet0127_geo.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        0, 0, 0, 0, 0, 112, 208, 312, 416
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isCoastline.bin",
     };
@@ -60,7 +52,7 @@ CoastlineElement::CoastlineElement()
         {0},
     };
 
-    }
+}
 
 
 

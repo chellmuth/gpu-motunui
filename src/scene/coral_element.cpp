@@ -59,14 +59,6 @@ CoralElement::CoralElement()
         moanaRoot + "/island/obj/isCoral/archives/xgStaghorn_archivecoral_staghorn0010_geo.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        0, 160, 320, 480, 676, 872, 1184, 1480, 1776, 0, 696, 1256, 1952, 2448, 2836, 3332, 3748, 4136, 0, 0, 140, 424, 620, 872, 1100, 1328, 1524, 1712, 1908
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0, 0, 0, 0, 0, 0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isCoral.bin",
         "../scene/isCoral5.bin",
@@ -112,7 +104,7 @@ CoralElement::CoralElement()
         {},
     };
 
-    }
+}
 
 
 

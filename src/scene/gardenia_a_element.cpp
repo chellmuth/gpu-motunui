@@ -36,14 +36,6 @@ GardeniaAElement::GardeniaAElement()
         moanaRoot + "/island/obj/isGardeniaA/archives/archivegardeniaflw0003_mod.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        1556, 3112, 1080, 2032, 4128, 0, 540, 3588, 2572, 204, 0, 348
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isGardeniaA.bin",
     };
@@ -64,7 +56,7 @@ GardeniaAElement::GardeniaAElement()
         {},
     };
 
-    }
+}
 
 
 

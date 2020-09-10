@@ -24,14 +24,6 @@ LavaRocksElement::LavaRocksElement()
 
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0, 0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isLavaRocks.bin",
         "../scene/isLavaRocks1.bin",
@@ -57,7 +49,7 @@ LavaRocksElement::LavaRocksElement()
         {},
     };
 
-    }
+}
 
 
 

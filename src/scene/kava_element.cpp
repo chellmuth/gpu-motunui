@@ -24,14 +24,6 @@ KavaElement::KavaElement()
         moanaRoot + "/island/obj/isKava/archives/archive_kava0001_mod.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        0
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isKava.bin",
     };
@@ -52,7 +44,7 @@ KavaElement::KavaElement()
         {},
     };
 
-    }
+}
 
 
 

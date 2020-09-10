@@ -28,14 +28,6 @@ HibiscusElement::HibiscusElement()
         moanaRoot + "/island/obj/isHibiscus/archives/archiveHibiscusLeaf0003_mod.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        0, 0, 120, 240
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isHibiscus.bin",
     };
@@ -56,7 +48,7 @@ HibiscusElement::HibiscusElement()
         {},
     };
 
-    }
+}
 
 
 

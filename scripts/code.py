@@ -165,18 +165,6 @@ def _generate_impl(
         in obj_archives
     )
 
-    archive_primitive_index_offsets_items = " " * 8 + ", ".join(
-        str(hardcoded_data.primitive_index_offsets.get(obj_archive, 0))
-        for obj_archive
-        in obj_archives
-    )
-
-    base_obj_primitive_index_offsets_items = " " * 8 + ", ".join(
-        str(hardcoded_data.primitive_index_offsets.get(base_obj, 0))
-        for base_obj
-        in base_objs
-    )
-
     element_instances_bin_path_items = "\n".join(
         f"{' ' * 8}\"{element_instances_bin_path}\","
         for element_instances_bin_path
@@ -244,14 +232,6 @@ def _generate_impl(
 {obj_archives_items}
     }};
 
-    m_archivePrimitiveIndexOffsets = {{
-{archive_primitive_index_offsets_items}
-    }};
-
-    m_baseObjPrimitiveIndexOffsets = {{
-{base_obj_primitive_index_offsets_items}
-    }};
-
     m_elementInstancesBinPaths = {{
 {element_instances_bin_path_items}
     }};
@@ -272,7 +252,7 @@ def _generate_impl(
 {curve_mtl_indices_items}
     }};
 
-    }}
+}}
 """
 
 def generate_sbt_array(sbt_manager):

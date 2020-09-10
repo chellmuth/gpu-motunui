@@ -27,14 +27,6 @@ NaupakaAElement::NaupakaAElement()
         moanaRoot + "/island/obj/isNaupakaA/archives/xgBonsai_isNaupakaBon_bon_hero_ALL.obj",
     };
 
-    m_archivePrimitiveIndexOffsets = {
-        0
-    };
-
-    m_baseObjPrimitiveIndexOffsets = {
-        0, 0, 0, 0
-    };
-
     m_elementInstancesBinPaths = {
         "../scene/isNaupakaA.bin",
         "../scene/isNaupakaA1.bin",
@@ -70,7 +62,7 @@ NaupakaAElement::NaupakaAElement()
         {},
     };
 
-    }
+}
 
 
 

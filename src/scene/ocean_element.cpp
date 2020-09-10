@@ -12,6 +12,8 @@ OceanElement::OceanElement()
         "water",
     };
 
+    m_materialOffset = 103;
+
     m_baseObjs = {
         moanaRoot + "/island/obj/osOcean/osOcean.obj",
     };
@@ -40,6 +42,9 @@ OceanElement::OceanElement()
         {},
     };
 
-    }
+}
+
+
+
 
 }
