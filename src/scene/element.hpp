@@ -48,6 +48,7 @@ protected:
     std::vector<std::vector<int> > m_curveMtlIndicesByElementInstance;
 
     int m_materialOffset = 0;
+    bool m_shouldSplitPrimitiveInstances = false;
 };
 
 }

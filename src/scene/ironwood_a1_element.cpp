@@ -47,6 +47,7 @@ IronwoodA1Element::IronwoodA1Element()
         {},
     };
 
+
 }
 
 
@@ -94,6 +95,7 @@ IronwoodA1ElementOverflow::IronwoodA1ElementOverflow()
     m_curveMtlIndicesByElementInstance = {
         {},
     };
+
 
 }
 

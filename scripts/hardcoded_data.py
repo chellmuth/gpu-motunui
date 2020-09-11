@@ -8,3 +8,7 @@ overflow_elements = set([
     "isIronwoodA1",
     "isIronwoodB",
 ])
+
+split_primitive_instances_elements = set([
+    "isBeach"
+])

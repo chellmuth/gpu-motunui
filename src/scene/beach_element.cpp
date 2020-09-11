@@ -140,6 +140,7 @@ BeachElement::BeachElement()
         {13},
     };
 
+    m_shouldSplitPrimitiveInstances = true;
 }
 
 

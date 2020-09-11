@@ -230,6 +230,10 @@ def process_element(element_name, sbt_manager, output_cpp=False):
 
         requires_overflow = True
 
+    should_split_primitive_instances = False
+    if element_name in hardcoded_data.split_primitive_instances_elements:
+        should_split_primitive_instances = True
+
     # Codegen
     if output_cpp:
         print("Writing code:")
@@ -242,7 +246,8 @@ def process_element(element_name, sbt_manager, output_cpp=False):
             primitive_instances_bin_paths,
             primitive_instances_handle_indices,
             curve_records_by_element_instance,
-            requires_overflow
+            requires_overflow,
+            should_split_primitive_instances,
         )
         for filename, code_str in code_dict.items():
             code_path = Path("../src/") / filename
@@ -258,29 +263,7 @@ def run():
 
     # process_element("isBeach", sbt_manager, output_cpp=True)
 
-    temp_elements = [
-        "isBayCedarA1",
-        "isBeach",
-        "isCoastline",
-        "isCoral",
-        "isDunesA",
-        "isDunesB",
-        "isGardeniaA",
-        "isHibiscus",
-        "isHibiscusYoung",
-        "isIronwoodA1",
-        "isIronwoodB",
-        "isKava",
-        "isLavaRocks",
-        "isMountainA",
-        "isMountainB",
-        "isNaupakaA",
-        "isPalmDead",
-        "isPalmRig",
-        "isPandanusA",
-        "osOcean",
-    ]
-    for element in temp_elements:
+    for element in elements:
         if element not in skip_list:
             process_element(element, sbt_manager, output_cpp=True)
 
