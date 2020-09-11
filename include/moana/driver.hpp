@@ -28,12 +28,15 @@ struct Params {
 
     float *outputBuffer;
     float *depthBuffer;
+    float *xiBuffer;
     float *colorBuffer;
     float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
 
     Camera camera;
+
+    int sampleCount;
 };
 
 struct OptixState {

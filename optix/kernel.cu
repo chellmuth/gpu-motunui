@@ -6,6 +6,7 @@
 #include "moana/core/camera.hpp"
 #include "moana/core/ray.hpp"
 #include "optix_sdk.hpp"
+#include "random.hpp"
 #include "util.hpp"
 
 using namespace moana;
@@ -137,9 +138,21 @@ extern "C" __global__ void __raygen__rg()
     const int row = index.y;
     const int col = index.x;
 
+    const int xiIndex = 2 * (index.y * dim.x + index.x);
+    float xi1 = params.xiBuffer[xiIndex + 0];
+    float xi2 = params.xiBuffer[xiIndex + 1];
+    if (xi1 < 0) {
+        unsigned int seed = tea<4>(index.y * dim.x + index.x, params.sampleCount);
+        xi1 = rnd(seed);
+        xi2 = rnd(seed);
+
+        params.xiBuffer[xiIndex + 0] = xi1;
+        params.xiBuffer[xiIndex + 1] = xi2;
+    }
+
     const Ray cameraRay = params.camera.generateRay(
         row, col,
-        float2{ 0.5f, 0.5f }
+        float2{ xi1, xi2 }
     );
 
     const Vec3 origin = cameraRay.origin();

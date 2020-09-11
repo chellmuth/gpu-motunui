@@ -309,7 +309,7 @@ void Driver::init()
 
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
-    std::cout << "Launching " << exrFilename << std::endl;
+    std::cout << "Rendering: " << exrFilename << std::endl;
 
     std::vector<PtexTexture> textures;
     for (const auto &filename : Textures::textureFilenames) {
@@ -330,55 +330,6 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         reinterpret_cast<void **>(&params.outputBuffer),
         outputBufferSizeInBytes
     ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.outputBuffer),
-        0,
-        outputBufferSizeInBytes
-    ));
-
-    const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.barycentricBuffer),
-        barycentricBufferSizeInBytes
-    ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.barycentricBuffer),
-        0,
-        barycentricBufferSizeInBytes
-    ));
-
-    const size_t idBufferSizeInBytes = width * height * sizeof(int) * 3;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.idBuffer),
-        idBufferSizeInBytes
-    ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.idBuffer),
-        0,
-        idBufferSizeInBytes
-    ));
-
-    const size_t colorBufferSizeInBytes = width * height * sizeof(float) * 3;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.colorBuffer),
-        colorBufferSizeInBytes
-    ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.colorBuffer),
-        0,
-        colorBufferSizeInBytes
-    ));
-
-    const size_t normalBufferSizeInBytes = width * height * sizeof(float) * 3;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.normalBuffer),
-        normalBufferSizeInBytes
-    ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.normalBuffer),
-        0,
-        normalBufferSizeInBytes
-    ));
 
     const size_t depthBufferSizeInBytes = width * height * sizeof(float);
     CHECK_CUDA(cudaMalloc(
@@ -387,11 +338,37 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     ));
 
     std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(params.depthBuffer),
-        depthBuffer.data(),
-        depthBufferSizeInBytes,
-        cudaMemcpyHostToDevice
+
+    const size_t xiBufferSizeInBytes = width * height * 2 * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.xiBuffer),
+        xiBufferSizeInBytes
+    ));
+
+    std::vector<float> xiBuffer(width * height * 2, -1.f);
+
+    const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.barycentricBuffer),
+        barycentricBufferSizeInBytes
+    ));
+
+    const size_t idBufferSizeInBytes = width * height * sizeof(int) * 3;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.idBuffer),
+        idBufferSizeInBytes
+    ));
+
+    const size_t colorBufferSizeInBytes = width * height * sizeof(float) * 3;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.colorBuffer),
+        colorBufferSizeInBytes
+    ));
+
+    const size_t normalBufferSizeInBytes = width * height * sizeof(float) * 3;
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.normalBuffer),
+        normalBufferSizeInBytes
     ));
 
     // Camera camera(
@@ -408,151 +385,199 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     params.camera = camera;
 
-    for (auto [i, geometry] : enumerate(m_state.geometries)) {
-        m_state.arena.restoreSnapshot(geometry.snapshot);
+    std::vector<float> textureImage(width * height * 3, 0.f);
+    const int spp = 32;
 
-        params.handle = geometry.handle;
+    for (int sample = 0; sample < spp; sample++) {
+        std::cout << "Sample #" << sample << std::endl;
+
+        params.sampleCount = sample;
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.outputBuffer),
+            0,
+            outputBufferSizeInBytes
+        ));
         CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(d_params),
-            &params,
-            sizeof(params),
+            reinterpret_cast<void *>(params.depthBuffer),
+            depthBuffer.data(),
+            depthBufferSizeInBytes,
             cudaMemcpyHostToDevice
         ));
-
-        CHECK_OPTIX(optixLaunch(
-            m_state.pipeline,
-            stream,
-            d_params,
-            sizeof(Params),
-            &m_state.sbt,
-            width,
-            height,
-            /*depth=*/1
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(params.xiBuffer),
+            xiBuffer.data(),
+            xiBufferSizeInBytes,
+            cudaMemcpyHostToDevice
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.barycentricBuffer),
+            0,
+            barycentricBufferSizeInBytes
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.idBuffer),
+            0,
+            idBufferSizeInBytes
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.colorBuffer),
+            0,
+            colorBufferSizeInBytes
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.normalBuffer),
+            0,
+            normalBufferSizeInBytes
         ));
 
+        for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
+            m_state.arena.restoreSnapshot(geometry.snapshot);
+
+            params.handle = geometry.handle;
+            CHECK_CUDA(cudaMemcpy(
+                reinterpret_cast<void *>(d_params),
+                &params,
+                sizeof(params),
+                cudaMemcpyHostToDevice
+            ));
+
+            CHECK_OPTIX(optixLaunch(
+                m_state.pipeline,
+                stream,
+                d_params,
+                sizeof(Params),
+                &m_state.sbt,
+                width,
+                height,
+                /*depth=*/1
+            ));
+
+            CHECK_CUDA(cudaDeviceSynchronize());
+        }
+
+        std::vector<float> outputBuffer(width * height * 3);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(outputBuffer.data()),
+            params.outputBuffer,
+            outputBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
         CHECK_CUDA(cudaDeviceSynchronize());
-    }
 
-    std::vector<float> outputBuffer(width * height * 3);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(outputBuffer.data()),
-        params.outputBuffer,
-        outputBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
-    CHECK_CUDA(cudaDeviceSynchronize());
+        std::vector<float> barycentricBuffer(width * height * 2);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(barycentricBuffer.data()),
+            params.barycentricBuffer,
+            barycentricBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+        CHECK_CUDA(cudaDeviceSynchronize());
 
-    std::vector<float> barycentricBuffer(width * height * 2);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(barycentricBuffer.data()),
-        params.barycentricBuffer,
-        barycentricBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
-    CHECK_CUDA(cudaDeviceSynchronize());
+        std::vector<int> idBuffer(width * height * 3);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(idBuffer.data()),
+            params.idBuffer,
+            idBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+        CHECK_CUDA(cudaDeviceSynchronize());
 
-    std::vector<int> idBuffer(width * height * 3);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(idBuffer.data()),
-        params.idBuffer,
-        idBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
-    CHECK_CUDA(cudaDeviceSynchronize());
+        std::vector<float> colorBuffer(width * height * 3);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(colorBuffer.data()),
+            params.colorBuffer,
+            colorBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+        CHECK_CUDA(cudaDeviceSynchronize());
 
-    std::vector<float> colorBuffer(width * height * 3);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(colorBuffer.data()),
-        params.colorBuffer,
-        colorBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
-    CHECK_CUDA(cudaDeviceSynchronize());
+        std::vector<float> normalImage(width * height * 3);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(normalImage.data()),
+            params.normalBuffer,
+            normalBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+        CHECK_CUDA(cudaDeviceSynchronize());
 
-    std::vector<float> normalImage(width * height * 3);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(normalImage.data()),
-        params.normalBuffer,
-        normalBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
-    CHECK_CUDA(cudaDeviceSynchronize());
+        ColorMap faceMap;
+        ColorMap materialMap;
+        std::vector<float> faceImage(width * height * 3, 0.f);
+        std::vector<float> uvImage(width * height * 3, 0.f);
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                const int pixelIndex = 3 * (row * width + col);
 
-    ColorMap faceMap;
-    ColorMap materialMap;
-    std::vector<float> textureImage(width * height * 3, 0.f);
-    std::vector<float> faceImage(width * height * 3, 0.f);
-    std::vector<float> uvImage(width * height * 3, 0.f);
-    for (int row = 0; row < height; row++) {
-        for (int col = 0; col < width; col++) {
-            const int pixelIndex = 3 * (row * width + col);
+                const int idIndex = 3 * (row * width + col);
+                const int primitiveID = idBuffer[idIndex + 0];
+                const int materialID = idBuffer[idIndex + 1];
+                const int textureIndex = idBuffer[idIndex + 2];
+                const int faceID = primitiveID / 2;
 
-            const int idIndex = 3 * (row * width + col);
-            const int primitiveID = idBuffer[idIndex + 0];
-            const int materialID = idBuffer[idIndex + 1];
-            const int textureIndex = idBuffer[idIndex + 2];
-            const int faceID = primitiveID / 2;
+                const int barycentricIndex = 2 * (row * width + col);
+                const float alpha = barycentricBuffer[barycentricIndex + 0];
+                const float beta = barycentricBuffer[barycentricIndex + 1];
 
-            const int barycentricIndex = 2 * (row * width + col);
-            const float alpha = barycentricBuffer[barycentricIndex + 0];
-            const float beta = barycentricBuffer[barycentricIndex + 1];
+                float u, v;
+                if (primitiveID % 2 == 0) {
+                    u = alpha + beta;
+                    v = beta;
+                } else {
+                    u = alpha;
+                    v = alpha + beta;
+                }
+                uvImage[pixelIndex + 0] = u;
+                uvImage[pixelIndex + 1] = v;
+                uvImage[pixelIndex + 2] = materialID;
 
-            float u, v;
-            if (primitiveID % 2 == 0) {
-                u = alpha + beta;
-                v = beta;
-            } else {
-                u = alpha;
-                v = alpha + beta;
+                if (materialID > 0) {
+                    float3 color = faceMap.get(faceID);
+                    faceImage[pixelIndex + 0] = color.x;
+                    faceImage[pixelIndex + 1] = color.y;
+                    faceImage[pixelIndex + 2] = color.z;
+                }
+
+                float textureX = 0;
+                float textureY = 0;
+                float textureZ = 0;
+                if (textureIndex >= 0) {
+                    PtexTexture texture = textures[textureIndex];
+
+                    Vec3 color = texture.lookup(
+                        float2{ u, v },
+                        faceID
+                    );
+                    textureX = color.x();
+                    textureY = color.y();
+                    textureZ = color.z();
+                } else if (materialID > 0) {
+                    float3 color = materialMap.get(materialID);
+
+                    textureX = colorBuffer[pixelIndex + 0];
+                    textureY = colorBuffer[pixelIndex + 1];
+                    textureZ = colorBuffer[pixelIndex + 2];
+                }
+
+                textureImage[pixelIndex + 0] += (1.f / spp) * textureX * outputBuffer[pixelIndex + 0];
+                textureImage[pixelIndex + 1] += (1.f / spp) * textureY * outputBuffer[pixelIndex + 1];
+                textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * outputBuffer[pixelIndex + 2];
             }
-            uvImage[pixelIndex + 0] = u;
-            uvImage[pixelIndex + 1] = v;
-            uvImage[pixelIndex + 2] = materialID;
-
-            if (materialID > 0) {
-                float3 color = faceMap.get(faceID);
-                faceImage[pixelIndex + 0] = color.x;
-                faceImage[pixelIndex + 1] = color.y;
-                faceImage[pixelIndex + 2] = color.z;
-            }
-
-            if (textureIndex >= 0) {
-                PtexTexture texture = textures[textureIndex];
-
-                Vec3 color = texture.lookup(
-                    float2{ u, v },
-                    faceID
-                );
-                textureImage[pixelIndex + 0] = color.x();
-                textureImage[pixelIndex + 1] = color.y();
-                textureImage[pixelIndex + 2] = color.z();
-            } else if (materialID > 0) {
-                float3 color = materialMap.get(materialID);
-
-                textureImage[pixelIndex + 0] = colorBuffer[pixelIndex + 0];
-                textureImage[pixelIndex + 1] = colorBuffer[pixelIndex + 1];
-                textureImage[pixelIndex + 2] = colorBuffer[pixelIndex + 2];
-            }
-
-            textureImage[pixelIndex + 0] *= outputBuffer[pixelIndex + 0];
-            textureImage[pixelIndex + 1] *= outputBuffer[pixelIndex + 1];
-            textureImage[pixelIndex + 2] *= outputBuffer[pixelIndex + 2];
         }
     }
 
-    Image::save(
-        width,
-        height,
-        outputBuffer,
-        exrFilename
-    );
+    // Image::save(
+    //     width,
+    //     height,
+    //     outputBuffer,
+    //     exrFilename
+    // );
 
-    Image::save(
-        width,
-        height,
-        faceImage,
-        "face-buffer_" + exrFilename
-    );
+    // Image::save(
+    //     width,
+    //     height,
+    //     faceImage,
+    //     "face-buffer_" + exrFilename
+    // );
 
     Image::save(
         width,
@@ -561,19 +586,19 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         "texture-buffer_" + exrFilename
     );
 
-    Image::save(
-        width,
-        height,
-        normalImage,
-        "normals-buffer_" + exrFilename
-    );
+    // Image::save(
+    //     width,
+    //     height,
+    //     normalImage,
+    //     "normals-buffer_" + exrFilename
+    // );
 
-    Image::save(
-        width,
-        height,
-        uvImage,
-        "uv-buffer_" + exrFilename
-    );
+    // Image::save(
+    //     width,
+    //     height,
+    //     uvImage,
+    //     "uv-buffer_" + exrFilename
+    // );
 
     // CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));
