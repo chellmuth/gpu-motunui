@@ -42,10 +42,11 @@ OptixTraversableHandle iasFromInstanceRecords(
 ) {
     CUdeviceptr d_instances;
     const size_t instancesSizeInBytes = sizeof(OptixInstance) * records.size();
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_instances),
-        instancesSizeInBytes
-    ));
+    std::cout << "IAS:" << std::endl
+              << "  Records: " << records.size() << std::endl
+              << "  Records size(mb): " << (instancesSizeInBytes / (1024. * 1024.)) << std::endl;
+
+    d_instances = arena.pushTemp(instancesSizeInBytes);
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(d_instances),
         records.data(),
@@ -71,12 +72,12 @@ OptixTraversableHandle iasFromInstanceRecords(
         &iasBufferSizes
     ));
 
-    CUdeviceptr d_tempBuffer;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_tempBuffer),
-        iasBufferSizes.tempSizeInBytes
-    ));
+    std::cout << "  Output Buffer size(mb): "
+              << (iasBufferSizes.outputSizeInBytes / (1024. * 1024.)) << std::endl
+              << "  Temp Buffer size(mb): "
+              << (iasBufferSizes.tempSizeInBytes / (1024. * 1024.)) << std::endl;
 
+    CUdeviceptr d_tempBuffer = arena.pushTemp(iasBufferSizes.tempSizeInBytes);
     CUdeviceptr d_iasOutputBuffer = arena.allocOutput(iasBufferSizes.outputSizeInBytes);
 
     OptixTraversableHandle handle;
@@ -96,8 +97,8 @@ OptixTraversableHandle iasFromInstanceRecords(
     ));
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_tempBuffer)));
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_instances)));
+    arena.popTemp(); // tempBuffer
+    arena.popTemp(); // OptixInstance records
 
     return handle;
 }

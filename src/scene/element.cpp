@@ -72,6 +72,65 @@ static std::vector<HostSBTRecord> createSBTRecords(
     return sbtRecords;
 }
 
+void createRecordsForElementInstances(
+    bool shouldSplitRecords,
+    OptixDeviceContext context,
+    ASArena &arena,
+    const std::string &instancesBinPath,
+    const std::vector<OptixInstance> &primitiveRecords,
+    std::vector<OptixInstance> &elementInstanceRecords
+) {
+    std::vector<OptixInstance> records1;
+    std::vector<OptixInstance> records2;
+
+    if (shouldSplitRecords) {
+        const int recordSplit = int(primitiveRecords.size() / 2.f);
+        const int recordSize = primitiveRecords.size();
+
+        for (int i = 0; i < recordSplit; i++) {
+            records1.push_back(primitiveRecords[i]);
+        }
+        for (int i = recordSplit; i < recordSize; i++) {
+            records2.push_back(primitiveRecords[i]);
+        }
+    } else {
+        records1 = primitiveRecords;
+    }
+
+    {
+        // Build IAS records for each instance with this geometry
+        auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records1);
+
+        std::cout << "  Processing element instances" << std::endl;
+
+        const Instances instancesResult = InstancesBin::parse(instancesBinPath);
+        std::cout << "    Count: " << instancesResult.count << std::endl;
+
+        IAS::createOptixInstanceRecords(
+            context,
+            elementInstanceRecords,
+            instancesResult,
+            iasObjectHandle
+        );
+    }
+    if (records2.size() > 0) {
+        // Build IAS records for each instance with this geometry
+        auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records2);
+
+        std::cout << "  Processing element instances" << std::endl;
+
+        const Instances instancesResult = InstancesBin::parse(instancesBinPath);
+        std::cout << "    Count: " << instancesResult.count << std::endl;
+
+        IAS::createOptixInstanceRecords(
+            context,
+            elementInstanceRecords,
+            instancesResult,
+            iasObjectHandle
+        );
+    }
+}
+
 GeometryResult Element::buildAcceleration(
     OptixDeviceContext context,
     ASArena &arena,
@@ -124,8 +183,6 @@ GeometryResult Element::buildAcceleration(
     for (int i = 0; i < uniqueElementCopyCount; i++) {
         std::vector<OptixInstance> records;
 
-        // fixme
-        if (m_elementName != "isBeach") {
         // Process element instance archives
         Archive archive(
             m_primitiveInstancesBinPaths[i],
@@ -133,7 +190,6 @@ GeometryResult Element::buildAcceleration(
             archiveHandles
         );
         archive.processRecords(context, arena, records, archiveSBTOffsets);
-        }
 
         // Process element instance curves
         const auto &curveBinPaths = m_curveBinPathsByElementInstance[i];
@@ -218,20 +274,13 @@ GeometryResult Element::buildAcceleration(
             );
         }
 
-        // Build IAS records for each instance with this geometry
-        auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records);
-
-        std::cout << "  Processing element instances" << std::endl;
-
-        const std::string instancesPath = m_elementInstancesBinPaths[i];
-        const Instances instancesResult = InstancesBin::parse(instancesPath);
-        std::cout << "    Count: " << instancesResult.count << std::endl;
-
-        IAS::createOptixInstanceRecords(
+        createRecordsForElementInstances(
+            m_shouldSplitPrimitiveInstances,
             context,
-            rootRecords,
-            instancesResult,
-            iasObjectHandle
+            arena,
+            m_elementInstancesBinPaths[i],
+            records,
+            rootRecords
         );
     }
 

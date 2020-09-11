@@ -26,7 +26,8 @@ def generate_code(
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
     curve_records_by_element_instance,
-    requires_overflow
+    requires_overflow,
+    should_split_primitive_instances,
 ):
     header_filename = _header_filename_from_element_name(element_name)
     source_filename = _source_filename_from_element_name(element_name)
@@ -42,6 +43,7 @@ def generate_code(
             primitive_instances_handle_indices,
             curve_records_by_element_instance,
             requires_overflow,
+            should_split_primitive_instances,
         )
     }
 
@@ -83,7 +85,8 @@ def _generate_src(
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
     curve_records_by_element_instance,
-    requires_overflow
+    requires_overflow,
+    should_split_primitive_instances,
 ):
     header_filename = _header_filename_from_element_name(element_name)
 
@@ -105,6 +108,7 @@ def _generate_src(
         primitive_instances_bin_paths,
         primitive_instances_handle_indices,
         curve_records_by_element_instance,
+        should_split_primitive_instances,
     )
 
     overflow_impl = ""
@@ -119,6 +123,7 @@ def _generate_src(
             [[]],
             [[]],
             [[]],
+            False
         )
 
     return f"""\
@@ -143,6 +148,7 @@ def _generate_impl(
     primitive_instances_bin_paths,
     primitive_instances_handle_indices,
     curve_records_by_element_instance,
+    should_split_primitive_instances,
 ):
 
     base_obj_items = "\n".join([
@@ -211,6 +217,10 @@ def _generate_impl(
         in curve_records_by_element_instance
     )
 
+    split_instances_item = ""
+    if should_split_primitive_instances:
+        split_instances_item = f"{' ' * 4}m_shouldSplitPrimitiveInstances = true;"
+
     return f"""\
 {class_name}::{class_name}()
 {{
@@ -252,6 +262,7 @@ def _generate_impl(
 {curve_mtl_indices_items}
     }};
 
+{split_instances_item}
 }}
 """
 
