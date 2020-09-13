@@ -276,15 +276,9 @@ __forceinline__ __device__ static void raygenBounce()
         p0, p1
     );
 
-    const int pixelIndex = 3 * (index.y * dim.x + index.x);
-    // params.outputBuffer[pixelIndex + 0] = origin.x;
-    // params.outputBuffer[pixelIndex + 1] = origin.y;
-    // params.outputBuffer[pixelIndex + 2] = origin.z;
-
     if (prd.isHit) {
-        params.outputBuffer[pixelIndex + 0] = 1.f;
-        params.outputBuffer[pixelIndex + 1] = 1.f;
-        params.outputBuffer[pixelIndex + 2] = 1.f;
+        const int occlusionIndex = 1 * (index.y * dim.x + index.x);
+        params.occlusionBuffer[occlusionIndex + 0] = 1.f;
     }
 }
 

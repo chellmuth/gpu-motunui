@@ -323,6 +323,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     const int width = 1024;
     const int height = 429;
 
+    std::vector<float> outputImage(width * height * 3, 0.f);
+
     Params params;
 
     const size_t outputBufferSizeInBytes = width * height * 3 * sizeof(float);
@@ -353,6 +355,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         sampleRecordBufferSizeInBytes
     ));
 
+    const size_t occlusionBufferSizeInBytes = width * height * 1 * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.occlusionBuffer),
+        occlusionBufferSizeInBytes
+    ));
+
     const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.barycentricBuffer),
@@ -377,15 +385,6 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         normalBufferSizeInBytes
     ));
 
-    // Camera camera(
-    //     Vec3(60.f, 0.f, 700.f),
-    //     Vec3(0.f, 80.f, 0.f),
-    //     Vec3(0.f, 1.f, 0.f),
-    //     33.f / 180.f * M_PI,
-    //     Resolution{ width, height },
-    //     false
-    // );
-
     Scene scene(cam);
     Camera camera = scene.getCamera(width, height);
 
@@ -393,7 +392,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
     std::vector<float> occlusionImage(width * height * 3, 0.f);
-    const int spp = 32;
+    const int spp = 4;
 
     for (int sample = 0; sample < spp; sample++) {
         std::cout << "Sample #" << sample << std::endl;
@@ -421,6 +420,11 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             reinterpret_cast<void *>(params.sampleRecordBuffer),
             0,
             sampleRecordBufferSizeInBytes
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.occlusionBuffer),
+            0,
+            occlusionBufferSizeInBytes
         ));
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.barycentricBuffer),
@@ -513,6 +517,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
 
+        std::vector<float> sampleIntermediates(width * height * 3, 0.f);
+
         ColorMap faceMap;
         ColorMap materialMap;
         std::vector<float> faceImage(width * height * 3, 0.f);
@@ -571,6 +577,10 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                     textureZ = colorBuffer[pixelIndex + 2];
                 }
 
+                sampleIntermediates[pixelIndex + 0] = textureX;
+                sampleIntermediates[pixelIndex + 1] = textureY;
+                sampleIntermediates[pixelIndex + 2] = textureZ;
+
                 textureImage[pixelIndex + 0] += (1.f / spp) * textureX * outputBuffer[pixelIndex + 0];
                 textureImage[pixelIndex + 1] += (1.f / spp) * textureY * outputBuffer[pixelIndex + 1];
                 textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * outputBuffer[pixelIndex + 2];
@@ -578,9 +588,9 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         }
 
         CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.outputBuffer),
+            reinterpret_cast<void *>(params.occlusionBuffer),
             0,
-            outputBufferSizeInBytes
+            occlusionBufferSizeInBytes
         ));
         for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
             m_state.arena.restoreSnapshot(geometry.snapshot);
@@ -608,23 +618,32 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             CHECK_CUDA(cudaDeviceSynchronize());
         }
 
+        std::vector<float> occlusionBuffer(width * height * 1);
         CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(outputBuffer.data()),
-            params.outputBuffer,
-            outputBufferSizeInBytes,
+            reinterpret_cast<void *>(occlusionBuffer.data()),
+            params.occlusionBuffer,
+            occlusionBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
-        for (int i = 0; i < outputBuffer.size(); i++) {
-            occlusionImage[i] += (1.f - outputBuffer[i]) * (1.f / spp);
+        CHECK_CUDA(cudaDeviceSynchronize());
+
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                const int pixelIndex = 3 * (row * width + col);
+                const int occlusionIndex = 1 * (row * width + col);
+                outputImage[pixelIndex + 0] += sampleIntermediates[pixelIndex + 0] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                outputImage[pixelIndex + 1] += sampleIntermediates[pixelIndex + 1] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+            }
         }
     }
 
-    // Image::save(
-    //     width,
-    //     height,
-    //     outputBuffer,
-    //     exrFilename
-    // );
+    Image::save(
+        width,
+        height,
+        outputImage,
+        exrFilename
+    );
 
     // Image::save(
     //     width,
