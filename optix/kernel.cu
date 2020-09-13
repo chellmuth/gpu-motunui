@@ -33,7 +33,14 @@ extern "C" {
 __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
     const PerRayData &prd
 ) {
-    const Vec3 wiLocal = Sample::uniformHemisphere(0.5f, 0.5f);
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    const int xiIndex = 2 * (index.y * dim.x + index.x);
+    float xi1 = params.xiBuffer[xiIndex + 0];
+    float xi2 = params.xiBuffer[xiIndex + 1];
+
+    const Vec3 wiLocal = Sample::uniformHemisphere(xi1, xi2);
     const Frame frame(prd.normal);
 
     const BSDFSampleRecord record = {
@@ -260,7 +267,7 @@ __forceinline__ __device__ static void raygenBounce()
         params.handle,
         origin,
         float3{ wiWorld.x(), wiWorld.y(), wiWorld.z() },
-        0.f,
+        1e-4,
         1e15,
         0.f,
         OptixVisibilityMask(255),

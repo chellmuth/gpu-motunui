@@ -392,7 +392,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     params.camera = camera;
 
     std::vector<float> textureImage(width * height * 3, 0.f);
-    const int spp = 1;
+    std::vector<float> occlusionImage(width * height * 3, 0.f);
+    const int spp = 32;
 
     for (int sample = 0; sample < spp; sample++) {
         std::cout << "Sample #" << sample << std::endl;
@@ -614,14 +615,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             cudaMemcpyDeviceToHost
         ));
         for (int i = 0; i < outputBuffer.size(); i++) {
-            outputBuffer[i] = 1.f - outputBuffer[i];
+            occlusionImage[i] += (1.f - outputBuffer[i]) * (1.f / spp);
         }
-        Image::save(
-            width,
-            height,
-            outputBuffer,
-            exrFilename
-        );
     }
 
     // Image::save(
@@ -637,6 +632,13 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     //     faceImage,
     //     "face-buffer_" + exrFilename
     // );
+
+    Image::save(
+        width,
+        height,
+        occlusionImage,
+        "occlusion-buffer_" + exrFilename
+    );
 
     Image::save(
         width,
@@ -659,8 +661,14 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     //     "uv-buffer_" + exrFilename
     // );
 
-    // CHECK_CUDA(cudaFree(reinterpret_cast<void *>(m_state.gasOutputBuffer)));
     CHECK_CUDA(cudaFree(params.outputBuffer));
+    CHECK_CUDA(cudaFree(params.depthBuffer));
+    CHECK_CUDA(cudaFree(params.xiBuffer));
+    CHECK_CUDA(cudaFree(params.sampleRecordBuffer));
+    CHECK_CUDA(cudaFree(params.barycentricBuffer));
+    CHECK_CUDA(cudaFree(params.idBuffer));
+    CHECK_CUDA(cudaFree(params.colorBuffer));
+    CHECK_CUDA(cudaFree(params.normalBuffer));
 }
 
 }
