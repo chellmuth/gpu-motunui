@@ -577,9 +577,9 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                     textureZ = colorBuffer[pixelIndex + 2];
                 }
 
-                sampleIntermediates[pixelIndex + 0] = textureX;
-                sampleIntermediates[pixelIndex + 1] = textureY;
-                sampleIntermediates[pixelIndex + 2] = textureZ;
+                sampleIntermediates[pixelIndex + 0] = textureX * outputBuffer[pixelIndex + 0];
+                sampleIntermediates[pixelIndex + 1] = textureY * outputBuffer[pixelIndex + 0];
+                sampleIntermediates[pixelIndex + 2] = textureZ * outputBuffer[pixelIndex + 0];
 
                 textureImage[pixelIndex + 0] += (1.f / spp) * textureX * outputBuffer[pixelIndex + 0];
                 textureImage[pixelIndex + 1] += (1.f / spp) * textureY * outputBuffer[pixelIndex + 1];

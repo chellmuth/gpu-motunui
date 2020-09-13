@@ -218,9 +218,9 @@ __forceinline__ __device__ static void raygenCamera()
 
         const float cosTheta = fabs(-dot(prd.normal, direction));
         const float3 baseColor = prd.baseColor;
-        params.outputBuffer[pixelIndex + 0] = cosTheta;
-        params.outputBuffer[pixelIndex + 1] = cosTheta;
-        params.outputBuffer[pixelIndex + 2] = cosTheta;
+        params.outputBuffer[pixelIndex + 0] = sampleRecord.wiLocal.z();
+        params.outputBuffer[pixelIndex + 1] = sampleRecord.wiLocal.z();
+        params.outputBuffer[pixelIndex + 2] = sampleRecord.wiLocal.z();
 
         const int colorIndex = 3 * (index.y * dim.x + index.x);
         params.colorBuffer[colorIndex + 0] = baseColor.x;
