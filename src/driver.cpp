@@ -21,6 +21,8 @@
 #include "scene/texture_offsets.hpp"
 #include "util/color_map.hpp"
 
+#include "texture.hpp" // fixme
+
 namespace moana {
 
 template <typename T>
@@ -294,7 +296,7 @@ void Driver::init()
     createContext(m_state);
 
     size_t gb = 1024 * 1024 * 1024;
-    m_state.arena.init(6.8 * gb);
+    m_state.arena.init(2 * gb);
 
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 
@@ -449,6 +451,10 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
         for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
             m_state.arena.restoreSnapshot(geometry.snapshot);
+
+            std::string moanaRoot = MOANA_ROOT;
+            Texture texture(moanaRoot + "/island/textures/islandsun.exr");
+            params.environment = texture.createTextureObject(m_state.arena);
 
             params.handle = geometry.handle;
             CHECK_CUDA(cudaMemcpy(

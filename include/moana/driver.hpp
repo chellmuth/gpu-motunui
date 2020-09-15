@@ -36,6 +36,7 @@ struct Params {
     float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
+    cudaTextureObject_t environment;
 
     Camera camera;
     int bounce;

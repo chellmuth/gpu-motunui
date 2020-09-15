@@ -248,6 +248,13 @@ __forceinline__ __device__ static void raygenBounce()
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
+    if (index.x == 0 && index.y == 0) {
+        {
+            float4 environment = tex2D<float4>(params.environment, 0.f, 0.f);
+            printf("%f %f %f %f\n", environment.x, environment.y, environment.z, environment.w);
+        }
+    }
+
     const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
 
     const BSDFSampleRecord &sampleRecord = params.sampleRecordBuffer[sampleRecordIndex];
