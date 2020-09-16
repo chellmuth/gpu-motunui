@@ -1,12 +1,13 @@
-#include "cuda/environment_light.hpp"
-
-#include <iostream> // fixme
+#include "moana/cuda/environment_light.hpp"
 
 #include "assert_macros.hpp"
 #include "moana/core/coordinates.hpp"
 #include "moana/core/vec3.hpp"
 
-namespace moana { namespace EnvironmentLight {
+namespace moana { namespace EnvironmentLighting {
+
+// fixme
+static constexpr float rotationOffset = 115.f / 180.f * M_PI;
 
 __global__ static void environmentLightKernel(
     int width,
@@ -30,8 +31,7 @@ __global__ static void environmentLightKernel(
     float phi, theta;
     Coordinates::cartesianToSpherical(direction, &phi, &theta);
 
-    // fixme
-    phi += 115.f / 180.f * M_PI;
+    phi += rotationOffset;
     if (phi > 2.f * M_PI) {
         phi -= 2.f * M_PI;
     }
@@ -94,3 +94,23 @@ void calculateEnvironmentLighting(
 }
 
 } }
+
+namespace moana {
+
+void EnvironmentLight::queryMemoryRequirements()
+{
+    std::string moanaRoot = MOANA_ROOT;
+    m_texturePtr = std::make_unique<Texture>(moanaRoot + "/island/textures/islandsun.exr");
+    m_texturePtr->determineAndSetPitch();
+}
+
+EnvironmentLightState EnvironmentLight::snapshotTextureObject(ASArena &arena)
+{
+    EnvironmentLightState environmentState;
+    environmentState.textureObject = m_texturePtr->createTextureObject(arena);
+    environmentState.snapshot = arena.createSnapshot();
+
+    return environmentState;
+}
+
+}

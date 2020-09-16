@@ -7,6 +7,7 @@
 
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
+#include "moana/cuda/environment_light.hpp"
 #include "moana/scene.hpp"
 #include "moana/scene/as_arena.hpp"
 #include "moana/scene/types.hpp"
@@ -42,11 +43,6 @@ struct Params {
     int bounce;
 
     int sampleCount;
-};
-
-struct EnvironmentLightState {
-    cudaTextureObject_t textureObject;
-    Snapshot snapshot;
 };
 
 struct OptixState {

@@ -12,7 +12,6 @@
 
 #include "assert_macros.hpp"
 #include "core/ptex_texture.hpp"
-#include "cuda/environment_light.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
@@ -21,8 +20,6 @@
 #include "scene/texture_offsets.hpp"
 #include "util/color_map.hpp"
 #include "util/enumerate.hpp"
-
-#include "texture.hpp" // fixme
 
 namespace moana {
 
@@ -296,18 +293,13 @@ void Driver::init()
 {
     createContext(m_state);
 
-    std::string moanaRoot = MOANA_ROOT;
-    Texture texture(moanaRoot + "/island/textures/islandsun.exr");
-    texture.determineAndSetPitch();
+    EnvironmentLight environmentLight;
+    environmentLight.queryMemoryRequirements();
 
     size_t gb = 1024 * 1024 * 1024;
     m_state.arena.init(6.8 * gb);
 
-    EnvironmentLightState environmentState;
-    environmentState.textureObject = texture.createTextureObject(m_state.arena);
-    environmentState.snapshot = m_state.arena.createSnapshot();
-
-    m_state.environmentState = environmentState;
+    m_state.environmentState = environmentLight.snapshotTextureObject(m_state.arena);
 
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 
@@ -411,7 +403,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
     std::vector<float> occlusionImage(width * height * 3, 0.f);
-    const int spp = 1;
+    const int spp = 4;
 
     for (int sample = 0; sample < spp; sample++) {
         std::cout << "Sample #" << sample << std::endl;
@@ -653,14 +645,13 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
         m_state.arena.restoreSnapshot(m_state.environmentState.snapshot);
         std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
-        EnvironmentLight::calculateEnvironmentLighting(
+        EnvironmentLighting::calculateEnvironmentLighting(
             width,
             height,
             m_state.environmentState.textureObject,
             params.missDirectionBuffer,
             environmentLightBuffer
         );
-
 
         std::vector<BSDFSampleRecord> sampleRecordBuffer(width * height);
         CHECK_CUDA(cudaMemcpy(

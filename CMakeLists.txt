@@ -17,10 +17,10 @@ ADD_SUBDIRECTORY(ext/ptex)
 add_library(moana
   src/driver.cpp
   src/scene.cpp
-  src/texture.cpp
 
   src/core/camera.cpp
   src/core/ptex_texture.cpp
+  src/core/texture.cpp
   src/core/transform.cpp
 
   src/cuda/environment_light.cu
