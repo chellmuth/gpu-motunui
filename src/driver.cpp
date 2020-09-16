@@ -683,9 +683,9 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                     outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
                 } else {
                     const int environmentIndex = 3 * (row * width + col);
-                    outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0];
-                    outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1];
-                    outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2];
+                    outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
+                    outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
+                    outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
                 }
             }
         }

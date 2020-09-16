@@ -73,7 +73,6 @@ void runAKernel(
     const dim3 blocks(width / blockWidth + 1, height / blockHeight + 1);
     const dim3 threads(blockWidth, blockHeight);
 
-    std::cout << "KERNEL" << std::endl;
     testKernel<<<blocks, threads>>>(
         width,
         height,
