@@ -374,6 +374,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         occlusionBufferSizeInBytes
     ));
 
+    const size_t missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.missDirectionBuffer),
+        missDirectionBufferSizeInBytes
+    ));
+
     const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.barycentricBuffer),
@@ -438,6 +444,11 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             reinterpret_cast<void *>(params.occlusionBuffer),
             0,
             occlusionBufferSizeInBytes
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.missDirectionBuffer),
+            0,
+            missDirectionBufferSizeInBytes
         ));
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.barycentricBuffer),
@@ -656,6 +667,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             width,
             height,
             m_state.environmentState.textureObject,
+            params.missDirectionBuffer,
             environmentLightImage
         );
 
@@ -714,6 +726,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));
     CHECK_CUDA(cudaFree(params.sampleRecordBuffer));
+    CHECK_CUDA(cudaFree(params.missDirectionBuffer));
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
     CHECK_CUDA(cudaFree(params.idBuffer));
     CHECK_CUDA(cudaFree(params.colorBuffer));

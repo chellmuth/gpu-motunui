@@ -1,9 +1,13 @@
 #pragma once
 
 #include "moana/core/vec3.hpp"
-#include "util.hpp"
 
 namespace moana { namespace Coordinates {
+
+__forceinline__ __device__ float clamp(float value, float lowest, float highest)
+{
+    return fminf(highest, fmaxf(value, lowest));
+}
 
 __device__ inline void cartesianToSpherical(const Vec3 &cartesian, float *phi, float *theta)
 {
@@ -15,7 +19,7 @@ __device__ inline void cartesianToSpherical(const Vec3 &cartesian, float *phi, f
     //     *phi = 0;
     // }
 
-    *theta = acosf(util::clamp(cartesian.y(), -1.f, 1.f));
+    *theta = acosf(clamp(cartesian.y(), -1.f, 1.f));
 }
 
 __device__ inline Vec3 sphericalToCartesian(float phi, float cosTheta, float sinTheta)
