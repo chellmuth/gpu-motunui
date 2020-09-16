@@ -296,11 +296,12 @@ void Driver::init()
 {
     createContext(m_state);
 
-    size_t gb = 1024 * 1024 * 1024;
-    m_state.arena.init(2 * gb);
-
     std::string moanaRoot = MOANA_ROOT;
     Texture texture(moanaRoot + "/island/textures/islandsun.exr");
+    texture.determineAndSetPitch();
+
+    size_t gb = 1024 * 1024 * 1024;
+    m_state.arena.init(6.8 * gb);
 
     EnvironmentLightState environmentState;
     environmentState.textureObject = texture.createTextureObject(m_state.arena);

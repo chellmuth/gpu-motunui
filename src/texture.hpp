@@ -15,10 +15,10 @@ public:
     ~Texture();
 
     cudaTextureObject_t createTextureObject(ASArena &arena);
+    void determineAndSetPitch();
 
 private:
     void loadImage();
-    void determineAndSetPitch();
 
     std::string m_filename;
     float *m_data = nullptr;

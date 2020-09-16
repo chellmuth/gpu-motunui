@@ -15,6 +15,8 @@ Texture::Texture(const std::string &filename)
 
 void Texture::determineAndSetPitch()
 {
+    loadImage();
+
     CUdeviceptr d_environment;
     const size_t bufferSizeInBytes = sizeof(float) * 4 * m_width * m_height;
 
@@ -48,8 +50,9 @@ void Texture::loadImage()
 
 cudaTextureObject_t Texture::createTextureObject(ASArena &arena)
 {
-    loadImage();
-    determineAndSetPitch();
+    if (!m_data) {
+        throw std::runtime_error("Must call determineAndSetPitch() before creating texture object");
+    }
 
     const int width = m_width;
     const int height = m_height;
