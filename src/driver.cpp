@@ -12,7 +12,7 @@
 
 #include "assert_macros.hpp"
 #include "core/ptex_texture.hpp"
-#include "util/enumerate.hpp"
+#include "cuda/environment_light.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
@@ -20,6 +20,9 @@
 #include "scene/materials.hpp"
 #include "scene/texture_offsets.hpp"
 #include "util/color_map.hpp"
+#include "util/enumerate.hpp"
+
+#include "texture.hpp" // fixme
 
 namespace moana {
 
@@ -293,8 +296,18 @@ void Driver::init()
 {
     createContext(m_state);
 
+    std::string moanaRoot = MOANA_ROOT;
+    Texture texture(moanaRoot + "/island/textures/islandsun.exr");
+    texture.determineAndSetPitch();
+
     size_t gb = 1024 * 1024 * 1024;
     m_state.arena.init(6.8 * gb);
+
+    EnvironmentLightState environmentState;
+    environmentState.textureObject = texture.createTextureObject(m_state.arena);
+    environmentState.snapshot = m_state.arena.createSnapshot();
+
+    m_state.environmentState = environmentState;
 
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 
@@ -361,6 +374,12 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         occlusionBufferSizeInBytes
     ));
 
+    const size_t missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.missDirectionBuffer),
+        missDirectionBufferSizeInBytes
+    ));
+
     const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.barycentricBuffer),
@@ -392,7 +411,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
     std::vector<float> occlusionImage(width * height * 3, 0.f);
-    const int spp = 4;
+    const int spp = 1;
 
     for (int sample = 0; sample < spp; sample++) {
         std::cout << "Sample #" << sample << std::endl;
@@ -425,6 +444,11 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             reinterpret_cast<void *>(params.occlusionBuffer),
             0,
             occlusionBufferSizeInBytes
+        ));
+        CHECK_CUDA(cudaMemset(
+            reinterpret_cast<void *>(params.missDirectionBuffer),
+            0,
+            missDirectionBufferSizeInBytes
         ));
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.barycentricBuffer),
@@ -627,13 +651,42 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
 
+        m_state.arena.restoreSnapshot(m_state.environmentState.snapshot);
+        std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
+        EnvironmentLight::calculateEnvironmentLighting(
+            width,
+            height,
+            m_state.environmentState.textureObject,
+            params.missDirectionBuffer,
+            environmentLightBuffer
+        );
+
+
+        std::vector<BSDFSampleRecord> sampleRecordBuffer(width * height);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(sampleRecordBuffer.data()),
+            params.sampleRecordBuffer,
+            sampleRecordBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 const int pixelIndex = 3 * (row * width + col);
-                const int occlusionIndex = 1 * (row * width + col);
-                outputImage[pixelIndex + 0] += sampleIntermediates[pixelIndex + 0] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-                outputImage[pixelIndex + 1] += sampleIntermediates[pixelIndex + 1] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-                outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+
+                const int sampleIndex = 1 * (row * width + col);
+                const BSDFSampleRecord sampleRecord = sampleRecordBuffer[sampleIndex];
+                if (sampleRecord.isValid) {
+                    const int occlusionIndex = 1 * (row * width + col);
+                    outputImage[pixelIndex + 0] += sampleIntermediates[pixelIndex + 0] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                    outputImage[pixelIndex + 1] += sampleIntermediates[pixelIndex + 1] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                    outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                } else {
+                    const int environmentIndex = 3 * (row * width + col);
+                    outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
+                    outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
+                    outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
+                }
             }
         }
     }
@@ -684,6 +737,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));
     CHECK_CUDA(cudaFree(params.sampleRecordBuffer));
+    CHECK_CUDA(cudaFree(params.missDirectionBuffer));
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
     CHECK_CUDA(cudaFree(params.idBuffer));
     CHECK_CUDA(cudaFree(params.colorBuffer));

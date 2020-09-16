@@ -32,6 +32,7 @@ struct Params {
     float *xiBuffer;
     BSDFSampleRecord *sampleRecordBuffer;
     float *occlusionBuffer;
+    float *missDirectionBuffer;
     float *colorBuffer;
     float *normalBuffer;
     float *barycentricBuffer;
@@ -41,6 +42,11 @@ struct Params {
     int bounce;
 
     int sampleCount;
+};
+
+struct EnvironmentLightState {
+    cudaTextureObject_t textureObject;
+    Snapshot snapshot;
 };
 
 struct OptixState {
@@ -56,6 +62,8 @@ struct OptixState {
 
     ASArena arena;
     std::vector<GeometryResult> geometries;
+
+    EnvironmentLightState environmentState;
 
     OptixModuleCompileOptions moduleCompileOptions = {};
 };

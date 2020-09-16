@@ -241,6 +241,11 @@ __forceinline__ __device__ static void raygenCamera()
         params.idBuffer[idIndex + 1] = prd.materialID;
         params.idBuffer[idIndex + 2] = prd.textureIndex;
     }
+
+    const int missDirectionIndex = 3 * (index.y * dim.x + index.x);
+    params.missDirectionBuffer[missDirectionIndex + 0] = direction.x();
+    params.missDirectionBuffer[missDirectionIndex + 1] = direction.y();
+    params.missDirectionBuffer[missDirectionIndex + 2] = direction.z();
 }
 
 __forceinline__ __device__ static void raygenBounce()
