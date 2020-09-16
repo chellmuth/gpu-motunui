@@ -19,4 +19,9 @@ __forceinline__ __device__ void packPointer(
     i1 = uptr & 0x00000000ffffffff;
 }
 
+__forceinline__ __device__ float clamp(float value, float lowest, float highest)
+{
+    return fminf(highest, fmaxf(value, lowest));
+}
+
 } }

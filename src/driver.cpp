@@ -394,7 +394,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
     std::vector<float> occlusionImage(width * height * 3, 0.f);
-    const int spp = 4;
+    const int spp = 1;
 
     for (int sample = 0; sample < spp; sample++) {
         std::cout << "Sample #" << sample << std::endl;
@@ -642,6 +642,14 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                 outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
             }
         }
+
+        // fixme
+        Image::save(
+            width,
+            height,
+            colorBuffer,
+            "color-buffer_" + exrFilename
+        );
     }
 
     Image::save(
