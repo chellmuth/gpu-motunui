@@ -653,7 +653,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
         m_state.arena.restoreSnapshot(m_state.environmentState.snapshot);
         std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
-        runAKernel(
+        EnvironmentLight::calculateEnvironmentLighting(
             width,
             height,
             m_state.environmentState.textureObject,

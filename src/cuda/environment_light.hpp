@@ -4,9 +4,9 @@
 
 #include <cuda.h>
 
-namespace moana {
+namespace moana { namespace EnvironmentLight {
 
-void runAKernel(
+void calculateEnvironmentLighting(
     int width,
     int height,
     cudaTextureObject_t textureObject,
@@ -14,4 +14,4 @@ void runAKernel(
     std::vector<float> &outputBuffer
 );
 
-}
+} }

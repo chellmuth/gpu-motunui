@@ -6,9 +6,9 @@
 #include "moana/core/coordinates.hpp"
 #include "moana/core/vec3.hpp"
 
-namespace moana {
+namespace moana { namespace EnvironmentLight {
 
-__global__ static void testKernel(
+__global__ static void environmentLightKernel(
     int width,
     int height,
     cudaTextureObject_t textureObject,
@@ -48,7 +48,7 @@ __global__ static void testKernel(
     outputBuffer[outputIndex + 2] = environment.z;
 }
 
-void runAKernel(
+void calculateEnvironmentLighting(
     int width,
     int height,
     cudaTextureObject_t textureObject,
@@ -73,7 +73,7 @@ void runAKernel(
     const dim3 blocks(width / blockWidth + 1, height / blockHeight + 1);
     const dim3 threads(blockWidth, blockHeight);
 
-    testKernel<<<blocks, threads>>>(
+    environmentLightKernel<<<blocks, threads>>>(
         width,
         height,
         textureObject,
@@ -93,4 +93,4 @@ void runAKernel(
     CHECK_CUDA(cudaDeviceSynchronize());
 }
 
-}
+} }
