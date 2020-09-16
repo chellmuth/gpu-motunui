@@ -651,33 +651,44 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
 
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                const int pixelIndex = 3 * (row * width + col);
-                const int occlusionIndex = 1 * (row * width + col);
-                outputImage[pixelIndex + 0] += sampleIntermediates[pixelIndex + 0] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-                outputImage[pixelIndex + 1] += sampleIntermediates[pixelIndex + 1] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-                outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-            }
-        }
-
         m_state.arena.restoreSnapshot(m_state.environmentState.snapshot);
-        std::vector<float> environmentLightImage(width * height * 3, 0.f);
+        std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
         runAKernel(
             width,
             height,
             m_state.environmentState.textureObject,
             params.missDirectionBuffer,
-            environmentLightImage
+            environmentLightBuffer
         );
 
-        // fixme
-        Image::save(
-            width,
-            height,
-            environmentLightImage,
-            "environment-buffer_" + exrFilename
-        );
+
+        std::vector<BSDFSampleRecord> sampleRecordBuffer(width * height);
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(sampleRecordBuffer.data()),
+            params.sampleRecordBuffer,
+            sampleRecordBufferSizeInBytes,
+            cudaMemcpyDeviceToHost
+        ));
+
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                const int pixelIndex = 3 * (row * width + col);
+
+                const int sampleIndex = 1 * (row * width + col);
+                const BSDFSampleRecord sampleRecord = sampleRecordBuffer[sampleIndex];
+                if (sampleRecord.isValid) {
+                    const int occlusionIndex = 1 * (row * width + col);
+                    outputImage[pixelIndex + 0] += sampleIntermediates[pixelIndex + 0] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                    outputImage[pixelIndex + 1] += sampleIntermediates[pixelIndex + 1] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                    outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+                } else {
+                    const int environmentIndex = 3 * (row * width + col);
+                    outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0];
+                    outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1];
+                    outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2];
+                }
+            }
+        }
     }
 
     Image::save(
