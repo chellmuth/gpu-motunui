@@ -241,25 +241,6 @@ __forceinline__ __device__ static void raygenCamera()
         params.idBuffer[idIndex + 0] = prd.primitiveID;
         params.idBuffer[idIndex + 1] = prd.materialID;
         params.idBuffer[idIndex + 2] = prd.textureIndex;
-    } else {
-        float phi, theta;
-        Coordinates::cartesianToSpherical(direction, &phi, &theta);
-
-        phi += 115.f / 180.f * M_PI;
-        if (phi > 2.f * M_PI) {
-            phi -= 2.f * M_PI;
-        }
-
-        float4 environment = tex2D<float4>(
-            params.environment,
-            phi / (M_PI * 2.f),
-            theta / M_PI
-        );
-
-        const int colorIndex = 3 * (index.y * dim.x + index.x);
-        params.colorBuffer[colorIndex + 0] = environment.x;
-        params.colorBuffer[colorIndex + 1] = environment.y;
-        params.colorBuffer[colorIndex + 2] = environment.z;
     }
 }
 
@@ -267,13 +248,6 @@ __forceinline__ __device__ static void raygenBounce()
 {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
-
-    if (index.x == 0 && index.y == 0) {
-        {
-            float4 environment = tex2D<float4>(params.environment, 0.f, 0.f);
-            printf("%f %f %f %f\n", environment.x, environment.y, environment.z, environment.w);
-        }
-    }
 
     const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
 

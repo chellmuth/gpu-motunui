@@ -23,6 +23,8 @@ add_library(moana
   src/core/ptex_texture.cpp
   src/core/transform.cpp
 
+  src/cuda/environment_light.cu
+
   src/io/image.cpp
 
   src/parsers/curve_parser.cpp

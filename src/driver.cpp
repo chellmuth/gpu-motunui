@@ -12,7 +12,7 @@
 
 #include "assert_macros.hpp"
 #include "core/ptex_texture.hpp"
-#include "util/enumerate.hpp"
+#include "cuda/environment_light.hpp"
 #include "kernel.hpp"
 #include "moana/core/vec3.hpp"
 #include "moana/io/image.hpp"
@@ -20,6 +20,7 @@
 #include "scene/materials.hpp"
 #include "scene/texture_offsets.hpp"
 #include "util/color_map.hpp"
+#include "util/enumerate.hpp"
 
 #include "texture.hpp" // fixme
 
@@ -298,6 +299,15 @@ void Driver::init()
     size_t gb = 1024 * 1024 * 1024;
     m_state.arena.init(2 * gb);
 
+    std::string moanaRoot = MOANA_ROOT;
+    Texture texture(moanaRoot + "/island/textures/islandsun.exr");
+
+    EnvironmentLightState environmentState;
+    environmentState.textureObject = texture.createTextureObject(m_state.arena);
+    environmentState.snapshot = m_state.arena.createSnapshot();
+
+    m_state.environmentState = environmentState;
+
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 
     createModule(m_state);
@@ -451,10 +461,6 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
         for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
             m_state.arena.restoreSnapshot(geometry.snapshot);
-
-            std::string moanaRoot = MOANA_ROOT;
-            Texture texture(moanaRoot + "/island/textures/islandsun.exr");
-            params.environment = texture.createTextureObject(m_state.arena);
 
             params.handle = geometry.handle;
             CHECK_CUDA(cudaMemcpy(
@@ -643,12 +649,21 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             }
         }
 
+        m_state.arena.restoreSnapshot(m_state.environmentState.snapshot);
+        std::vector<float> environmentLightImage(width * height * 3, 0.f);
+        runAKernel(
+            width,
+            height,
+            m_state.environmentState.textureObject,
+            environmentLightImage
+        );
+
         // fixme
         Image::save(
             width,
             height,
-            colorBuffer,
-            "color-buffer_" + exrFilename
+            environmentLightImage,
+            "environment-buffer_" + exrFilename
         );
     }
 
