@@ -312,6 +312,150 @@ void Driver::init()
     CHECK_CUDA(cudaDeviceSynchronize());
 }
 
+struct BufferManager {
+    size_t outputBufferSizeInBytes;
+    size_t depthBufferSizeInBytes;
+    size_t xiBufferSizeInBytes;
+    size_t sampleRecordBufferSizeInBytes;
+    size_t occlusionBufferSizeInBytes;
+    size_t missDirectionBufferSizeInBytes;
+    size_t barycentricBufferSizeInBytes;
+    size_t idBufferSizeInBytes;
+    size_t colorBufferSizeInBytes;
+    size_t normalBufferSizeInBytes;
+};
+
+static void resetBuffers(
+    BufferManager &buffers,
+    int width,
+    int height,
+    Params &params
+) {
+    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
+    std::vector<float> xiBuffer(width * height * 2, -1.f);
+
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.outputBuffer),
+        0,
+        buffers.outputBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.depthBuffer),
+        depthBuffer.data(),
+        buffers.depthBufferSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.xiBuffer),
+        xiBuffer.data(),
+        buffers.xiBufferSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.sampleRecordBuffer),
+        0,
+        buffers.sampleRecordBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.occlusionBuffer),
+        0,
+        buffers.occlusionBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.missDirectionBuffer),
+        0,
+        buffers.missDirectionBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.barycentricBuffer),
+        0,
+        buffers.barycentricBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.idBuffer),
+        0,
+        buffers.idBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.colorBuffer),
+        0,
+        buffers.colorBufferSizeInBytes
+    ));
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.normalBuffer),
+        0,
+        buffers.normalBufferSizeInBytes
+    ));
+}
+
+static void mallocBuffers(
+    BufferManager &buffers,
+    int width,
+    int height,
+    Params &params
+) {
+    buffers.outputBufferSizeInBytes = width * height * 3 * sizeof(float);
+    buffers.depthBufferSizeInBytes = width * height * sizeof(float);
+    buffers.xiBufferSizeInBytes = width * height * 2 * sizeof(float);
+    buffers.sampleRecordBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
+    buffers.occlusionBufferSizeInBytes = width * height * 1 * sizeof(float);
+    buffers.missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
+    buffers.barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
+    buffers.idBufferSizeInBytes = width * height * sizeof(int) * 3;
+    buffers.colorBufferSizeInBytes = width * height * sizeof(float) * 3;
+    buffers.normalBufferSizeInBytes = width * height * sizeof(float) * 3;
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.outputBuffer),
+        buffers.outputBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.depthBuffer),
+        buffers.depthBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.xiBuffer),
+        buffers.xiBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.sampleRecordBuffer),
+        buffers.sampleRecordBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.occlusionBuffer),
+        buffers.occlusionBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.missDirectionBuffer),
+        buffers.missDirectionBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.barycentricBuffer),
+        buffers.barycentricBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.idBuffer),
+        buffers.idBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.colorBuffer),
+        buffers.colorBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.normalBuffer),
+        buffers.normalBufferSizeInBytes
+    ));
+}
+
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
     std::cout << "Rendering: " << exrFilename << std::endl;
@@ -332,69 +476,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     Params params;
 
-    const size_t outputBufferSizeInBytes = width * height * 3 * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.outputBuffer),
-        outputBufferSizeInBytes
-    ));
-
-    const size_t depthBufferSizeInBytes = width * height * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.depthBuffer),
-        depthBufferSizeInBytes
-    ));
-
-    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
-
-    const size_t xiBufferSizeInBytes = width * height * 2 * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.xiBuffer),
-        xiBufferSizeInBytes
-    ));
-
-    std::vector<float> xiBuffer(width * height * 2, -1.f);
-
-    const size_t sampleRecordBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.sampleRecordBuffer),
-        sampleRecordBufferSizeInBytes
-    ));
-
-    const size_t occlusionBufferSizeInBytes = width * height * 1 * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.occlusionBuffer),
-        occlusionBufferSizeInBytes
-    ));
-
-    const size_t missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.missDirectionBuffer),
-        missDirectionBufferSizeInBytes
-    ));
-
-    const size_t barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.barycentricBuffer),
-        barycentricBufferSizeInBytes
-    ));
-
-    const size_t idBufferSizeInBytes = width * height * sizeof(int) * 3;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.idBuffer),
-        idBufferSizeInBytes
-    ));
-
-    const size_t colorBufferSizeInBytes = width * height * sizeof(float) * 3;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.colorBuffer),
-        colorBufferSizeInBytes
-    ));
-
-    const size_t normalBufferSizeInBytes = width * height * sizeof(float) * 3;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.normalBuffer),
-        normalBufferSizeInBytes
-    ));
+    BufferManager buffers;
+    mallocBuffers(buffers, width, height, params);
 
     Scene scene(cam);
     Camera camera = scene.getCamera(width, height);
@@ -403,6 +486,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
     std::vector<float> occlusionImage(width * height * 3, 0.f);
+
     const int spp = 4;
 
     for (int sample = 0; sample < spp; sample++) {
@@ -410,58 +494,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
         params.bounce = 0;
         params.sampleCount = sample;
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.outputBuffer),
-            0,
-            outputBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(params.depthBuffer),
-            depthBuffer.data(),
-            depthBufferSizeInBytes,
-            cudaMemcpyHostToDevice
-        ));
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(params.xiBuffer),
-            xiBuffer.data(),
-            xiBufferSizeInBytes,
-            cudaMemcpyHostToDevice
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.sampleRecordBuffer),
-            0,
-            sampleRecordBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.occlusionBuffer),
-            0,
-            occlusionBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.missDirectionBuffer),
-            0,
-            missDirectionBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.barycentricBuffer),
-            0,
-            barycentricBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.idBuffer),
-            0,
-            idBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.colorBuffer),
-            0,
-            colorBufferSizeInBytes
-        ));
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.normalBuffer),
-            0,
-            normalBufferSizeInBytes
-        ));
+
+        resetBuffers(buffers, width, height, params);
 
         for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
             m_state.arena.restoreSnapshot(geometry.snapshot);
@@ -492,7 +526,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(outputBuffer.data()),
             params.outputBuffer,
-            outputBufferSizeInBytes,
+            buffers.outputBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
@@ -501,7 +535,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(barycentricBuffer.data()),
             params.barycentricBuffer,
-            barycentricBufferSizeInBytes,
+            buffers.barycentricBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
@@ -510,7 +544,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(idBuffer.data()),
             params.idBuffer,
-            idBufferSizeInBytes,
+            buffers.idBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
@@ -519,7 +553,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(colorBuffer.data()),
             params.colorBuffer,
-            colorBufferSizeInBytes,
+            buffers.colorBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
@@ -528,7 +562,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(normalImage.data()),
             params.normalBuffer,
-            normalBufferSizeInBytes,
+            buffers.normalBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
@@ -606,7 +640,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.occlusionBuffer),
             0,
-            occlusionBufferSizeInBytes
+            buffers.occlusionBufferSizeInBytes
         ));
         for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
             m_state.arena.restoreSnapshot(geometry.snapshot);
@@ -638,7 +672,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(occlusionBuffer.data()),
             params.occlusionBuffer,
-            occlusionBufferSizeInBytes,
+            buffers.occlusionBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
         CHECK_CUDA(cudaDeviceSynchronize());
@@ -657,7 +691,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(sampleRecordBuffer.data()),
             params.sampleRecordBuffer,
-            sampleRecordBufferSizeInBytes,
+            buffers.sampleRecordBufferSizeInBytes,
             cudaMemcpyDeviceToHost
         ));
 
