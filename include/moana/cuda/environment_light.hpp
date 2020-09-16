@@ -20,20 +20,16 @@ public:
     void queryMemoryRequirements();
     EnvironmentLightState snapshotTextureObject(ASArena &arena);
 
+    static void calculateEnvironmentLighting(
+        int width,
+        int height,
+        cudaTextureObject_t textureObject,
+        float *devDirectionBuffer,
+        std::vector<float> &outputBuffer
+    );
+
 private:
     std::unique_ptr<Texture> m_texturePtr;
 };
 
 }
-
-namespace moana { namespace EnvironmentLighting {
-
-void calculateEnvironmentLighting(
-    int width,
-    int height,
-    cudaTextureObject_t textureObject,
-    float *devDirectionBuffer,
-    std::vector<float> &outputBuffer
-);
-
-} }

@@ -4,7 +4,7 @@
 #include "moana/core/coordinates.hpp"
 #include "moana/core/vec3.hpp"
 
-namespace moana { namespace EnvironmentLighting {
+namespace moana {
 
 // fixme
 static constexpr float rotationOffset = 115.f / 180.f * M_PI;
@@ -48,7 +48,7 @@ __global__ static void environmentLightKernel(
     outputBuffer[outputIndex + 2] = environment.z;
 }
 
-void calculateEnvironmentLighting(
+void EnvironmentLight::calculateEnvironmentLighting(
     int width,
     int height,
     cudaTextureObject_t textureObject,
@@ -92,10 +92,6 @@ void calculateEnvironmentLighting(
 
     CHECK_CUDA(cudaDeviceSynchronize());
 }
-
-} }
-
-namespace moana {
 
 void EnvironmentLight::queryMemoryRequirements()
 {
