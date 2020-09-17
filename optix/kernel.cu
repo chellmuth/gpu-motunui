@@ -159,7 +159,7 @@ extern "C" __global__ void __miss__ms()
     prd->materialID = -1;
 }
 
-__forceinline__ __device__ static void raygenCamera()
+__forceinline__ __device__ static Ray raygenCamera()
 {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
@@ -183,9 +183,48 @@ __forceinline__ __device__ static void raygenCamera()
         row, col,
         float2{ xi1, xi2 }
     );
+    return cameraRay;
+}
 
-    const Vec3 origin = cameraRay.origin();
-    const Vec3 direction = cameraRay.direction();
+__forceinline__ __device__ static Ray raygenBounce(bool *quit)
+{
+    *quit = false;
+
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+
+    const BSDFSampleRecord &sampleRecord = params.sampleRecordBuffer[sampleRecordIndex];
+    if (!sampleRecord.isValid) {
+        *quit = true;
+        return Ray();
+    }
+
+    const float3 origin = sampleRecord.point;
+
+    const Vec3 &wiLocal = sampleRecord.wiLocal;
+    const Vec3 wiWorld = sampleRecord.frame.toWorld(wiLocal);
+
+    const Ray bounceRay(Vec3(origin.x, origin.y, origin.z), normalized(wiWorld));
+    return bounceRay;
+}
+
+extern "C" __global__ void __raygen__rg()
+{
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    bool quit = false;
+    Ray ray = params.bounce == 0
+        ? raygenCamera()
+        : raygenBounce(&quit)
+    ;
+
+    if (quit) { return; }
+
+    const Vec3 origin = ray.origin();
+    const Vec3 direction = ray.direction();
 
     PerRayData prd;
     prd.isHit = false;
@@ -199,7 +238,7 @@ __forceinline__ __device__ static void raygenCamera()
         params.handle,
         float3{ origin.x(), origin.y(), origin.z() },
         float3{ direction.x(), direction.y(), direction.z() },
-        0.f,
+        1e-4,
         tMax,
         0.f,
         OptixVisibilityMask(255),
@@ -210,6 +249,9 @@ __forceinline__ __device__ static void raygenCamera()
 
     if (prd.isHit) {
         params.depthBuffer[depthIndex] = prd.t;
+
+        const int occlusionIndex = 1 * (index.y * dim.x + index.x);
+        params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
         const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
         const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
@@ -238,52 +280,5 @@ __forceinline__ __device__ static void raygenCamera()
     params.missDirectionBuffer[missDirectionIndex + 0] = direction.x();
     params.missDirectionBuffer[missDirectionIndex + 1] = direction.y();
     params.missDirectionBuffer[missDirectionIndex + 2] = direction.z();
-}
 
-__forceinline__ __device__ static void raygenBounce()
-{
-    const uint3 index = optixGetLaunchIndex();
-    const uint3 dim = optixGetLaunchDimensions();
-
-    const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
-
-    const BSDFSampleRecord &sampleRecord = params.sampleRecordBuffer[sampleRecordIndex];
-    if (!sampleRecord.isValid) { return; }
-
-    const float3 origin = sampleRecord.point;
-
-    const Vec3 &wiLocal = sampleRecord.wiLocal;
-    const Vec3 wiWorld = sampleRecord.frame.toWorld(wiLocal);
-
-    PerRayData prd;
-    prd.isHit = false;
-
-    unsigned int p0, p1;
-    util::packPointer(&prd, p0, p1);
-    optixTrace(
-        params.handle,
-        origin,
-        float3{ wiWorld.x(), wiWorld.y(), wiWorld.z() },
-        1e-4,
-        1e15,
-        0.f,
-        OptixVisibilityMask(255),
-        OPTIX_RAY_FLAG_NONE,
-        0, 1, 0, // SBT params
-        p0, p1
-    );
-
-    if (prd.isHit) {
-        const int occlusionIndex = 1 * (index.y * dim.x + index.x);
-        params.occlusionBuffer[occlusionIndex + 0] = 1.f;
-    }
-}
-
-extern "C" __global__ void __raygen__rg()
-{
-    if (params.bounce == 0) {
-        raygenCamera();
-    } else {
-        raygenBounce();
-    }
 }

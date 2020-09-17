@@ -387,7 +387,29 @@ static void copyOutputBuffers(
     ));
 }
 
-static void resetBuffers(
+static void resetBounceBuffers(
+    BufferManager &buffers,
+    int width,
+    int height,
+    Params &params
+) {
+    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.depthBuffer),
+        depthBuffer.data(),
+        buffers.depthBufferSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.occlusionBuffer),
+        0,
+        buffers.occlusionBufferSizeInBytes
+    ));
+}
+
+static void resetSampleBuffers(
     BufferManager &buffers,
     int width,
     int height,
@@ -400,15 +422,8 @@ static void resetBuffers(
         1.f
     );
 
-    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
     std::vector<float> xiBuffer(width * height * 2, -1.f);
 
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(params.depthBuffer),
-        depthBuffer.data(),
-        buffers.depthBufferSizeInBytes,
-        cudaMemcpyHostToDevice
-    ));
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(params.xiBuffer),
         xiBuffer.data(),
@@ -613,7 +628,8 @@ static void runSample(
     params.bounce = 0;
     params.sampleCount = sample;
 
-    resetBuffers(buffers, width, height, params);
+    resetSampleBuffers(buffers, width, height, params);
+    resetBounceBuffers(buffers, width, height, params);
 
     // Run intersection
     for (const auto &[i, geometry] : enumerate(state.geometries)) {
@@ -656,11 +672,8 @@ static void runSample(
     );
 
     // Bounce
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.occlusionBuffer),
-        0,
-        buffers.occlusionBufferSizeInBytes
-    ));
+    resetBounceBuffers(buffers, width, height, params);
+
     for (const auto &[i, geometry] : enumerate(state.geometries)) {
         state.arena.restoreSnapshot(geometry.snapshot);
 
