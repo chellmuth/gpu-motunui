@@ -405,6 +405,35 @@ static void copyOutputBuffers(
     ));
 }
 
+static void resetSampleBuffers(
+    BufferManager &buffers,
+    int width,
+    int height,
+    Params &params
+) {
+    buffers.host.betaBuffer.resize(width * height * 3);
+    std::fill(
+        buffers.host.betaBuffer.begin(),
+        buffers.host.betaBuffer.end(),
+        1.f
+    );
+
+    std::vector<float> xiBuffer(width * height * 2, -1.f);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.xiBuffer),
+        xiBuffer.data(),
+        buffers.xiBufferSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+
+    // fixme
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.sampleRecordBuffer),
+        0,
+        buffers.sampleRecordBufferSizeInBytes
+    ));
+}
+
 static void resetBounceBuffers(
     BufferManager &buffers,
     int width,
@@ -421,63 +450,41 @@ static void resetBounceBuffers(
     ));
 
     CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.occlusionBuffer),
-        0,
-        buffers.occlusionBufferSizeInBytes
-    ));
-}
-
-static void resetSampleBuffers(
-    BufferManager &buffers,
-    int width,
-    int height,
-    Params &params
-) {
-    buffers.host.betaBuffer.resize(width * height * 3);
-    std::fill(
-        buffers.host.betaBuffer.begin(),
-        buffers.host.betaBuffer.end(),
-        1.f
-    );
-
-    std::vector<float> xiBuffer(width * height * 2, -1.f);
-
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(params.xiBuffer),
-        xiBuffer.data(),
-        buffers.xiBufferSizeInBytes,
-        cudaMemcpyHostToDevice
-    ));
-    CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.cosThetaWiBuffer),
         0,
         buffers.cosThetaWiBufferSizeInBytes
     ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.sampleRecordBuffer),
-        0,
-        buffers.sampleRecordBufferSizeInBytes
-    ));
+
+    // CHECK_CUDA(cudaMemset(
+    //     reinterpret_cast<void *>(params.sampleRecordBuffer),
+    //     0,
+    //     buffers.sampleRecordBufferSizeInBytes
+    // ));
+
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.occlusionBuffer),
         0,
         buffers.occlusionBufferSizeInBytes
     ));
+
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.missDirectionBuffer),
         0,
         buffers.missDirectionBufferSizeInBytes
     ));
+
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.barycentricBuffer),
         0,
         buffers.barycentricBufferSizeInBytes
     ));
+
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.idBuffer),
         0,
         buffers.idBufferSizeInBytes
     ));
+
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.colorBuffer),
         0,
@@ -675,6 +682,18 @@ static void runSample(
         CHECK_CUDA(cudaDeviceSynchronize());
     }
 
+    // Lookup L for misses
+    state.arena.restoreSnapshot(state.environmentState.snapshot);
+    std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
+    EnvironmentLight::calculateEnvironmentLighting(
+        width,
+        height,
+        state.environmentState.textureObject,
+        params.occlusionBuffer,
+        params.missDirectionBuffer,
+        environmentLightBuffer
+    );
+
     // Copy buffers to host for texture calculations
     copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
@@ -722,18 +741,8 @@ static void runSample(
     copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    // Lookup L for misses
-    state.arena.restoreSnapshot(state.environmentState.snapshot);
-    std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
-    EnvironmentLight::calculateEnvironmentLighting(
-        width,
-        height,
-        state.environmentState.textureObject,
-        params.missDirectionBuffer,
-        environmentLightBuffer
-    );
-
     // Lookup L for direct lighting
+    state.arena.restoreSnapshot(state.environmentState.snapshot);
     EnvironmentLight::calculateEnvironmentLighting(
         width,
         height,
@@ -751,12 +760,12 @@ static void runSample(
             const BSDFSampleRecord sampleRecord = buffers.output.sampleRecordBuffer[sampleIndex];
             if (sampleRecord.isValid) {
                 const int occlusionIndex = 1 * (row * width + col);
+                if (buffers.output.occlusionBuffer[occlusionIndex] == 1.f) { continue; }
 
                 for (int i = 0; i < 3; i++) {
                     outputImage[pixelIndex + i] += 1.f
                         * buffers.host.betaBuffer[pixelIndex + i]
                         * environmentLightBuffer[pixelIndex + i]
-                        * (1.f - buffers.output.occlusionBuffer[occlusionIndex])
                         * (1.f / spp);
                 }
             } else {

@@ -25,6 +25,7 @@ public:
         int width,
         int height,
         cudaTextureObject_t textureObject,
+        float *devOcclusionBuffer,
         float *devDirectionBuffer,
         std::vector<float> &outputBuffer
     );

@@ -53,15 +53,19 @@ __global__ static void environmentLightKernel(
     int width,
     int height,
     cudaTextureObject_t textureObject,
+    float *occlusionBuffer,
     float *directionBuffer,
     float *outputBuffer
 ) {
     const int row = threadIdx.y + blockIdx.y * blockDim.y;
     const int col = threadIdx.x + blockIdx.x * blockDim.x;
 
-    if ((row >= height) || (col >= width)) return;
+    if ((row >= height) || (col >= width)) { return; }
 
     const int directionIndex = 3 * (row * width + col);
+    const int occlusionIndex = 1 * (row * width + col);
+    if (occlusionBuffer[occlusionIndex] != 0.f) { return; }
+
     Vec3 direction(
         directionBuffer[directionIndex + 0],
         directionBuffer[directionIndex + 1],
@@ -92,6 +96,7 @@ void EnvironmentLight::calculateEnvironmentLighting(
     int width,
     int height,
     cudaTextureObject_t textureObject,
+    float *devOcclusionBuffer,
     float *devDirectionBuffer,
     std::vector<float> &outputBuffer
 ) {
@@ -117,6 +122,7 @@ void EnvironmentLight::calculateEnvironmentLighting(
         width,
         height,
         textureObject,
+        devOcclusionBuffer,
         devDirectionBuffer,
         reinterpret_cast<float *>(d_outputBuffer)
     );
