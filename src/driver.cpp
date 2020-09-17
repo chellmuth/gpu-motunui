@@ -634,6 +634,43 @@ static void updateBetaWithTextureAlbedos(
    }
 }
 
+static void updateEnvironmentLighting(
+    OptixState &state,
+    BufferManager &buffers,
+    int width,
+    int height,
+    int spp,
+    Params &params,
+    std::vector<float> &outputImage
+) {
+    // Lookup L for misses
+    state.arena.restoreSnapshot(state.environmentState.snapshot);
+    std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
+    EnvironmentLight::calculateEnvironmentLighting(
+        width,
+        height,
+        state.environmentState.textureObject,
+        params.occlusionBuffer,
+        params.missDirectionBuffer,
+        environmentLightBuffer
+    );
+
+    // Calculate Li
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
+            const int environmentIndex = 3 * (row * width + col);
+
+            for (int i = 0; i < 3; i++) {
+                outputImage[pixelIndex + i] += 1.f
+                    * environmentLightBuffer[environmentIndex + i]
+                    * buffers.host.betaBuffer[pixelIndex + i]
+                    * (1.f / spp);
+            }
+        }
+    }
+}
+
 static void runSample(
     int sample,
     OptixState &state,
@@ -686,34 +723,15 @@ static void runSample(
     copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    // Lookup L for misses
-    state.arena.restoreSnapshot(state.environmentState.snapshot);
-    std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
-    EnvironmentLight::calculateEnvironmentLighting(
+    updateEnvironmentLighting(
+        state,
+        buffers,
         width,
         height,
-        state.environmentState.textureObject,
-        params.occlusionBuffer,
-        params.missDirectionBuffer,
-        environmentLightBuffer
+        spp,
+        params,
+        outputImage
     );
-
-    // Calculate Li
-    for (int row = 0; row < height; row++) {
-        for (int col = 0; col < width; col++) {
-            const int sampleIndex = 1 * (row * width + col);
-            const BSDFSampleRecord sampleRecord = buffers.output.sampleRecordBuffer[sampleIndex];
-
-            if (sampleRecord.isValid) { continue; }
-
-            const int pixelIndex = 3 * (row * width + col);
-            const int environmentIndex = 3 * (row * width + col);
-
-            outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
-            outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
-            outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
-        }
-    }
 
     // Lookup ptex textures
     updateBetaWithTextureAlbedos(
@@ -758,42 +776,15 @@ static void runSample(
     copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    // Lookup L for direct lighting
-    state.arena.restoreSnapshot(state.environmentState.snapshot);
-    EnvironmentLight::calculateEnvironmentLighting(
+    updateEnvironmentLighting(
+        state,
+        buffers,
         width,
         height,
-        state.environmentState.textureObject,
-        params.occlusionBuffer,
-        params.missDirectionBuffer,
-        environmentLightBuffer
+        spp,
+        params,
+        outputImage
     );
-
-    // Calculate Li
-    for (int row = 0; row < height; row++) {
-        for (int col = 0; col < width; col++) {
-            const int pixelIndex = 3 * (row * width + col);
-
-            const int sampleIndex = 1 * (row * width + col);
-            const BSDFSampleRecord sampleRecord = buffers.output.sampleRecordBuffer[sampleIndex];
-            if (sampleRecord.isValid) {
-                const int occlusionIndex = 1 * (row * width + col);
-                if (buffers.output.occlusionBuffer[occlusionIndex] == 1.f) { continue; }
-
-                for (int i = 0; i < 3; i++) {
-                    outputImage[pixelIndex + i] += 1.f
-                        * buffers.host.betaBuffer[pixelIndex + i]
-                        * environmentLightBuffer[pixelIndex + i]
-                        * (1.f / spp);
-                }
-            } else {
-                const int environmentIndex = 3 * (row * width + col);
-                outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
-                outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
-                outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
-            }
-        }
-    }
 }
 
 void Driver::launch(Cam cam, const std::string &exrFilename)
