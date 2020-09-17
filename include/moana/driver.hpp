@@ -31,6 +31,7 @@ struct Params {
     float *outputBuffer;
     float *depthBuffer;
     float *xiBuffer;
+    float *betaBuffer;
     BSDFSampleRecord *sampleRecordBuffer;
     float *occlusionBuffer;
     float *missDirectionBuffer;

@@ -314,6 +314,7 @@ void Driver::init()
 
 struct HostBuffers {
     std::vector<float> outputBuffer;
+    std::vector<float> betaBuffer;
     std::vector<float> barycentricBuffer;
     std::vector<int> idBuffer;
     std::vector<float> colorBuffer;
@@ -332,6 +333,7 @@ struct BufferManager {
     size_t outputBufferSizeInBytes;
     size_t depthBufferSizeInBytes;
     size_t xiBufferSizeInBytes;
+    size_t betaBufferSizeInBytes;
     size_t sampleRecordBufferSizeInBytes;
     size_t occlusionBufferSizeInBytes;
     size_t missDirectionBufferSizeInBytes;
@@ -349,6 +351,7 @@ static void copyBuffersToHost(
     Params &params
 ) {
     buffers.host.outputBuffer.resize(width * height * 3, 0.f);
+    buffers.host.betaBuffer.resize(width * height * 3, 1.f);
     buffers.host.barycentricBuffer.resize(width * height * 2, 0.f);
     buffers.host.idBuffer.resize(width * height * 3, 0);
     buffers.host.colorBuffer.resize(width * height * 3, 0.f);
@@ -357,6 +360,13 @@ static void copyBuffersToHost(
         reinterpret_cast<void *>(buffers.host.outputBuffer.data()),
         params.outputBuffer,
         buffers.outputBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(buffers.host.betaBuffer.data()),
+        params.betaBuffer,
+        buffers.betaBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 
@@ -390,6 +400,7 @@ static void resetBuffers(
 ) {
     std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
     std::vector<float> xiBuffer(width * height * 2, -1.f);
+    std::vector<float> betaBuffer(width * height * 3, 1.f);
 
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.outputBuffer),
@@ -406,6 +417,12 @@ static void resetBuffers(
         reinterpret_cast<void *>(params.xiBuffer),
         xiBuffer.data(),
         buffers.xiBufferSizeInBytes,
+        cudaMemcpyHostToDevice
+    ));
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.betaBuffer),
+        betaBuffer.data(),
+        buffers.betaBufferSizeInBytes,
         cudaMemcpyHostToDevice
     ));
     CHECK_CUDA(cudaMemset(
@@ -449,6 +466,7 @@ static void mallocBuffers(
     buffers.outputBufferSizeInBytes = width * height * 3 * sizeof(float);
     buffers.depthBufferSizeInBytes = width * height * sizeof(float);
     buffers.xiBufferSizeInBytes = width * height * 2 * sizeof(float);
+    buffers.betaBufferSizeInBytes = width * height * 3 * sizeof(float);
     buffers.sampleRecordBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
     buffers.occlusionBufferSizeInBytes = width * height * 1 * sizeof(float);
     buffers.missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
@@ -469,6 +487,11 @@ static void mallocBuffers(
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.xiBuffer),
         buffers.xiBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.betaBuffer),
+        buffers.betaBufferSizeInBytes
     ));
 
     CHECK_CUDA(cudaMalloc(
@@ -570,9 +593,9 @@ static void calculateSampleIntermediates(
                textureZ = buffers.host.colorBuffer[pixelIndex + 2];
            }
 
-           sampleIntermediates[pixelIndex + 0] = textureX * buffers.host.outputBuffer[pixelIndex + 0];
-           sampleIntermediates[pixelIndex + 1] = textureY * buffers.host.outputBuffer[pixelIndex + 0];
-           sampleIntermediates[pixelIndex + 2] = textureZ * buffers.host.outputBuffer[pixelIndex + 0];
+           sampleIntermediates[pixelIndex + 0] = textureX * buffers.host.betaBuffer[pixelIndex + 0];
+           sampleIntermediates[pixelIndex + 1] = textureY * buffers.host.betaBuffer[pixelIndex + 0];
+           sampleIntermediates[pixelIndex + 2] = textureZ * buffers.host.betaBuffer[pixelIndex + 0];
 
            textureImage[pixelIndex + 0] += (1.f / spp) * textureX * buffers.host.outputBuffer[pixelIndex + 0];
            textureImage[pixelIndex + 1] += (1.f / spp) * textureY * buffers.host.outputBuffer[pixelIndex + 1];
@@ -820,6 +843,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     CHECK_CUDA(cudaFree(params.outputBuffer));
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));
+    CHECK_CUDA(cudaFree(params.betaBuffer));
     CHECK_CUDA(cudaFree(params.sampleRecordBuffer));
     CHECK_CUDA(cudaFree(params.missDirectionBuffer));
     CHECK_CUDA(cudaFree(params.barycentricBuffer));

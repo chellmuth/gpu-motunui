@@ -222,6 +222,10 @@ __forceinline__ __device__ static void raygenCamera()
         params.outputBuffer[pixelIndex + 1] = sampleRecord.wiLocal.z();
         params.outputBuffer[pixelIndex + 2] = sampleRecord.wiLocal.z();
 
+        params.betaBuffer[pixelIndex + 0] = sampleRecord.wiLocal.z();
+        params.betaBuffer[pixelIndex + 1] = sampleRecord.wiLocal.z();
+        params.betaBuffer[pixelIndex + 2] = sampleRecord.wiLocal.z();
+
         const int colorIndex = 3 * (index.y * dim.x + index.x);
         params.colorBuffer[colorIndex + 0] = baseColor.x;
         params.colorBuffer[colorIndex + 1] = baseColor.y;
