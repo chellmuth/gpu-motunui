@@ -720,6 +720,14 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             cudaMemcpyDeviceToHost
         ));
 
+        EnvironmentLight::calculateEnvironmentLighting(
+            width,
+            height,
+            m_state.environmentState.textureObject,
+            params.sampleRecordBuffer,
+            environmentLightBuffer
+        );
+
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 const int pixelIndex = 3 * (row * width + col);
@@ -728,9 +736,14 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
                 const BSDFSampleRecord sampleRecord = sampleRecordBuffer[sampleIndex];
                 if (sampleRecord.isValid) {
                     const int occlusionIndex = 1 * (row * width + col);
-                    outputImage[pixelIndex + 0] += sampleIntermediates[pixelIndex + 0] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-                    outputImage[pixelIndex + 1] += sampleIntermediates[pixelIndex + 1] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
-                    outputImage[pixelIndex + 2] += sampleIntermediates[pixelIndex + 2] * (1.f - occlusionBuffer[occlusionIndex]) * (1.f / spp);
+
+                    for (int i = 0; i < 3; i++) {
+                        outputImage[pixelIndex + i] += 1.f
+                            * sampleIntermediates[pixelIndex + i]
+                            * environmentLightBuffer[pixelIndex + i]
+                            * (1.f - occlusionBuffer[occlusionIndex])
+                            * (1.f / spp);
+                    }
                 } else {
                     const int environmentIndex = 3 * (row * width + col);
                     outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);

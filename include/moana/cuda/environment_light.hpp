@@ -5,6 +5,7 @@
 
 #include <cuda.h>
 
+#include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/texture.hpp"
 #include "moana/scene/as_arena.hpp"
 
@@ -25,6 +26,15 @@ public:
         int height,
         cudaTextureObject_t textureObject,
         float *devDirectionBuffer,
+        std::vector<float> &outputBuffer
+    );
+
+    // fixme: duped
+    static void calculateEnvironmentLighting(
+        int width,
+        int height,
+        cudaTextureObject_t textureObject,
+        BSDFSampleRecord *devDirectionBuffer,
         std::vector<float> &outputBuffer
     );
 
