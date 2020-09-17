@@ -760,58 +760,60 @@ static void runSample(
         outputImage
     );
 
-    // Lookup ptex textures
-    updateBetaWithTextureAlbedos(
-        buffers,
-        textures,
-        width,
-        height,
-        spp,
-        textureImage
-    );
-
     // Bounce
-    resetBounceBuffers(buffers, width, height, params);
-
-    for (const auto &[i, geometry] : enumerate(state.geometries)) {
-        state.arena.restoreSnapshot(geometry.snapshot);
-
-        params.handle = geometry.handle;
-        params.bounce = 1;
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(d_params),
-            &params,
-            sizeof(params),
-            cudaMemcpyHostToDevice
-        ));
-
-        CHECK_OPTIX(optixLaunch(
-            state.pipeline,
-            stream,
-            d_params,
-            sizeof(Params),
-            &state.sbt,
+    for (int i = 0; i < 5; i++) {
+        // Lookup ptex textures at current intersection, and set beta
+        updateBetaWithTextureAlbedos(
+            buffers,
+            textures,
             width,
             height,
-            /*depth=*/1
-        ));
+            spp,
+            textureImage
+        );
 
+        resetBounceBuffers(buffers, width, height, params);
+
+        for (const auto &[i, geometry] : enumerate(state.geometries)) {
+            state.arena.restoreSnapshot(geometry.snapshot);
+
+            params.handle = geometry.handle;
+            params.bounce = 1 + i;
+            CHECK_CUDA(cudaMemcpy(
+                reinterpret_cast<void *>(d_params),
+                &params,
+                sizeof(params),
+                cudaMemcpyHostToDevice
+            ));
+
+            CHECK_OPTIX(optixLaunch(
+                state.pipeline,
+                stream,
+                d_params,
+                sizeof(Params),
+                &state.sbt,
+                width,
+                height,
+                /*depth=*/1
+            ));
+
+            CHECK_CUDA(cudaDeviceSynchronize());
+        }
+
+        // Copy buffers for occlusion and sample records
+        copyOutputBuffers(buffers, width, height, params);
         CHECK_CUDA(cudaDeviceSynchronize());
+
+        updateEnvironmentLighting(
+            state,
+            buffers,
+            width,
+            height,
+            spp,
+            params,
+            outputImage
+        );
     }
-
-    // Copy buffers for occlusion and sample records
-    copyOutputBuffers(buffers, width, height, params);
-    CHECK_CUDA(cudaDeviceSynchronize());
-
-    updateEnvironmentLighting(
-        state,
-        buffers,
-        width,
-        height,
-        spp,
-        params,
-        outputImage
-    );
 }
 
 void Driver::launch(Cam cam, const std::string &exrFilename)
