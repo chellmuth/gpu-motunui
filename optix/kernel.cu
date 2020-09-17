@@ -3,9 +3,13 @@
 #include <stdio.h>
 
 #include "moana/driver.hpp"
+#include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
+#include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
 #include "optix_sdk.hpp"
+#include "random.hpp"
+#include "sample.hpp"
 #include "util.hpp"
 
 using namespace moana;
@@ -13,6 +17,7 @@ using namespace moana;
 struct PerRayData {
     bool isHit;
     float t;
+    float3 point;
     Vec3 normal;
     float3 baseColor;
     int materialID;
@@ -23,6 +28,30 @@ struct PerRayData {
 
 extern "C" {
     __constant__ Params params;
+}
+
+__forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
+    const PerRayData &prd
+) {
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    const int xiIndex = 2 * (index.y * dim.x + index.x);
+    float xi1 = params.xiBuffer[xiIndex + 0];
+    float xi2 = params.xiBuffer[xiIndex + 1];
+
+    const Vec3 wiLocal = Sample::uniformHemisphere(xi1, xi2);
+    const Frame frame(prd.normal);
+
+    const BSDFSampleRecord record = {
+        .isValid = true,
+        .point = prd.point,
+        .wiLocal = wiLocal,
+        .normal = prd.normal,
+        .frame = frame,
+    };
+
+    return record;
 }
 
 __forceinline__ __device__ static PerRayData *getPRD()
@@ -37,6 +66,7 @@ extern "C" __global__ void __closesthit__ch()
     PerRayData *prd = getPRD();
     prd->isHit = true;
     prd->t = optixGetRayTmax();
+    prd->point = getHitPoint();
 
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
@@ -129,7 +159,7 @@ extern "C" __global__ void __miss__ms()
     prd->materialID = -1;
 }
 
-extern "C" __global__ void __raygen__rg()
+__forceinline__ __device__ static Ray raygenCamera()
 {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
@@ -137,13 +167,64 @@ extern "C" __global__ void __raygen__rg()
     const int row = index.y;
     const int col = index.x;
 
+    const int xiIndex = 2 * (index.y * dim.x + index.x);
+    float xi1 = params.xiBuffer[xiIndex + 0];
+    float xi2 = params.xiBuffer[xiIndex + 1];
+    if (xi1 < 0) {
+        unsigned int seed = tea<4>(index.y * dim.x + index.x, params.sampleCount);
+        xi1 = rnd(seed);
+        xi2 = rnd(seed);
+
+        params.xiBuffer[xiIndex + 0] = xi1;
+        params.xiBuffer[xiIndex + 1] = xi2;
+    }
+
     const Ray cameraRay = params.camera.generateRay(
         row, col,
-        float2{ 0.5f, 0.5f }
+        float2{ xi1, xi2 }
     );
+    return cameraRay;
+}
 
-    const Vec3 origin = cameraRay.origin();
-    const Vec3 direction = cameraRay.direction();
+__forceinline__ __device__ static Ray raygenBounce(bool *quit)
+{
+    *quit = false;
+
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+
+    const BSDFSampleRecord &sampleRecord = params.sampleRecordInBuffer[sampleRecordIndex];
+    if (!sampleRecord.isValid) {
+        *quit = true;
+        return Ray();
+    }
+
+    const float3 origin = sampleRecord.point;
+
+    const Vec3 &wiLocal = sampleRecord.wiLocal;
+    const Vec3 wiWorld = sampleRecord.frame.toWorld(wiLocal);
+
+    const Ray bounceRay(Vec3(origin.x, origin.y, origin.z), normalized(wiWorld));
+    return bounceRay;
+}
+
+extern "C" __global__ void __raygen__rg()
+{
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    bool quit = false;
+    Ray ray = params.bounce == 0
+        ? raygenCamera()
+        : raygenBounce(&quit)
+    ;
+
+    if (quit) { return; }
+
+    const Vec3 origin = ray.origin();
+    const Vec3 direction = ray.direction();
 
     PerRayData prd;
     prd.isHit = false;
@@ -157,7 +238,7 @@ extern "C" __global__ void __raygen__rg()
         params.handle,
         float3{ origin.x(), origin.y(), origin.z() },
         float3{ direction.x(), direction.y(), direction.z() },
-        0.f,
+        1e-4,
         tMax,
         0.f,
         OptixVisibilityMask(255),
@@ -167,24 +248,23 @@ extern "C" __global__ void __raygen__rg()
     );
 
     if (prd.isHit) {
-        const int pixelIndex = 3 * (index.y * dim.x + index.x);
         params.depthBuffer[depthIndex] = prd.t;
 
-        const float cosTheta = fabs(-dot(prd.normal, direction));
-        const float3 baseColor = prd.baseColor;
-        params.outputBuffer[pixelIndex + 0] = cosTheta;
-        params.outputBuffer[pixelIndex + 1] = cosTheta;
-        params.outputBuffer[pixelIndex + 2] = cosTheta;
+        const int occlusionIndex = 1 * (index.y * dim.x + index.x);
+        params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
+        const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+        params.sampleRecordOutBuffer[sampleRecordIndex] = sampleRecord;
+
+        const int cosThetaWiIndex = index.y * dim.x + index.x;
+        params.cosThetaWiBuffer[cosThetaWiIndex] = sampleRecord.wiLocal.z();
+
+        const float3 baseColor = prd.baseColor;
         const int colorIndex = 3 * (index.y * dim.x + index.x);
         params.colorBuffer[colorIndex + 0] = baseColor.x;
         params.colorBuffer[colorIndex + 1] = baseColor.y;
         params.colorBuffer[colorIndex + 2] = baseColor.z;
-
-        const int normalIndex = 3 * (index.y * dim.x + index.x);
-        params.normalBuffer[normalIndex + 0] = (1.f + prd.normal.x()) * 0.5f;
-        params.normalBuffer[normalIndex + 1] = (1.f + prd.normal.y()) * 0.5f;
-        params.normalBuffer[normalIndex + 2] = (1.f + prd.normal.z()) * 0.5f;
 
         const int barycentricIndex = 2 * (index.y * dim.x + index.x);
         params.barycentricBuffer[barycentricIndex + 0] = prd.barycentrics.x;
@@ -195,4 +275,9 @@ extern "C" __global__ void __raygen__rg()
         params.idBuffer[idIndex + 1] = prd.materialID;
         params.idBuffer[idIndex + 2] = prd.textureIndex;
     }
+
+    const int missDirectionIndex = 3 * (index.y * dim.x + index.x);
+    params.missDirectionBuffer[missDirectionIndex + 0] = direction.x();
+    params.missDirectionBuffer[missDirectionIndex + 1] = direction.y();
+    params.missDirectionBuffer[missDirectionIndex + 2] = direction.z();
 }

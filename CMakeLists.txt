@@ -20,7 +20,10 @@ add_library(moana
 
   src/core/camera.cpp
   src/core/ptex_texture.cpp
+  src/core/texture.cpp
   src/core/transform.cpp
+
+  src/cuda/environment_light.cu
 
   src/io/image.cpp
 

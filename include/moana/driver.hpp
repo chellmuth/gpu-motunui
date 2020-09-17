@@ -5,7 +5,9 @@
 
 #include <optix.h>
 
+#include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
+#include "moana/cuda/environment_light.hpp"
 #include "moana/scene.hpp"
 #include "moana/scene/as_arena.hpp"
 #include "moana/scene/types.hpp"
@@ -28,12 +30,21 @@ struct Params {
 
     float *outputBuffer;
     float *depthBuffer;
+    float *xiBuffer;
+    float *cosThetaWiBuffer;
+    BSDFSampleRecord *sampleRecordInBuffer;
+    BSDFSampleRecord *sampleRecordOutBuffer;
+    float *occlusionBuffer;
+    float *missDirectionBuffer;
     float *colorBuffer;
     float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
 
     Camera camera;
+    int bounce;
+
+    int sampleCount;
 };
 
 struct OptixState {
@@ -49,6 +60,8 @@ struct OptixState {
 
     ASArena arena;
     std::vector<GeometryResult> geometries;
+
+    EnvironmentLightState environmentState;
 
     OptixModuleCompileOptions moduleCompileOptions = {};
 };
