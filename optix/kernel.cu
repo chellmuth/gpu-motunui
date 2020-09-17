@@ -227,11 +227,6 @@ __forceinline__ __device__ static void raygenCamera()
         params.colorBuffer[colorIndex + 1] = baseColor.y;
         params.colorBuffer[colorIndex + 2] = baseColor.z;
 
-        const int normalIndex = 3 * (index.y * dim.x + index.x);
-        params.normalBuffer[normalIndex + 0] = (1.f + prd.normal.x()) * 0.5f;
-        params.normalBuffer[normalIndex + 1] = (1.f + prd.normal.y()) * 0.5f;
-        params.normalBuffer[normalIndex + 2] = (1.f + prd.normal.z()) * 0.5f;
-
         const int barycentricIndex = 2 * (index.y * dim.x + index.x);
         params.barycentricBuffer[barycentricIndex + 0] = prd.barycentrics.x;
         params.barycentricBuffer[barycentricIndex + 1] = prd.barycentrics.y;

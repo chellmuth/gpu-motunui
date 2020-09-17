@@ -338,7 +338,6 @@ struct BufferManager {
     size_t barycentricBufferSizeInBytes;
     size_t idBufferSizeInBytes;
     size_t colorBufferSizeInBytes;
-    size_t normalBufferSizeInBytes;
 
     HostBuffers host;
 };
@@ -439,11 +438,6 @@ static void resetBuffers(
         0,
         buffers.colorBufferSizeInBytes
     ));
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.normalBuffer),
-        0,
-        buffers.normalBufferSizeInBytes
-    ));
 }
 
 static void mallocBuffers(
@@ -461,7 +455,6 @@ static void mallocBuffers(
     buffers.barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     buffers.idBufferSizeInBytes = width * height * sizeof(int) * 3;
     buffers.colorBufferSizeInBytes = width * height * sizeof(float) * 3;
-    buffers.normalBufferSizeInBytes = width * height * sizeof(float) * 3;
 
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.outputBuffer),
@@ -508,10 +501,6 @@ static void mallocBuffers(
         buffers.colorBufferSizeInBytes
     ));
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.normalBuffer),
-        buffers.normalBufferSizeInBytes
-    ));
 }
 
 static void calculateSampleIntermediates(
@@ -836,7 +825,6 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
     CHECK_CUDA(cudaFree(params.idBuffer));
     CHECK_CUDA(cudaFree(params.colorBuffer));
-    CHECK_CUDA(cudaFree(params.normalBuffer));
 }
 
 }
