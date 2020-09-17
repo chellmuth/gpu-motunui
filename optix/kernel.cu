@@ -195,7 +195,7 @@ __forceinline__ __device__ static Ray raygenBounce(bool *quit)
 
     const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
 
-    const BSDFSampleRecord &sampleRecord = params.sampleRecordBuffer[sampleRecordIndex];
+    const BSDFSampleRecord &sampleRecord = params.sampleRecordInBuffer[sampleRecordIndex];
     if (!sampleRecord.isValid) {
         *quit = true;
         return Ray();
@@ -253,15 +253,12 @@ extern "C" __global__ void __raygen__rg()
         const int occlusionIndex = 1 * (index.y * dim.x + index.x);
         params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
-        // fixme
-        if (params.bounce == 0) {
-            const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
-            const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
-            params.sampleRecordBuffer[sampleRecordIndex] = sampleRecord;
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
+        const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+        params.sampleRecordOutBuffer[sampleRecordIndex] = sampleRecord;
 
-            const int cosThetaWiIndex = index.y * dim.x + index.x;
-            params.cosThetaWiBuffer[cosThetaWiIndex] = sampleRecord.wiLocal.z();
-        }
+        const int cosThetaWiIndex = index.y * dim.x + index.x;
+        params.cosThetaWiBuffer[cosThetaWiIndex] = sampleRecord.wiLocal.z();
 
         const float3 baseColor = prd.baseColor;
         const int colorIndex = 3 * (index.y * dim.x + index.x);

@@ -322,7 +322,8 @@ struct OutputBuffers {
     std::vector<int> idBuffer;
     std::vector<float> colorBuffer;
     std::vector<float> occlusionBuffer;
-    std::vector<BSDFSampleRecord> sampleRecordBuffer;
+    std::vector<BSDFSampleRecord> sampleRecordInBuffer;
+    std::vector<BSDFSampleRecord> sampleRecordOutBuffer;
 };
 
 // struct Images {
@@ -338,7 +339,8 @@ struct BufferManager {
     size_t depthBufferSizeInBytes;
     size_t xiBufferSizeInBytes;
     size_t cosThetaWiBufferSizeInBytes;
-    size_t sampleRecordBufferSizeInBytes;
+    size_t sampleRecordInBufferSizeInBytes;
+    size_t sampleRecordOutBufferSizeInBytes;
     size_t occlusionBufferSizeInBytes;
     size_t missDirectionBufferSizeInBytes;
     size_t barycentricBufferSizeInBytes;
@@ -360,7 +362,8 @@ static void copyOutputBuffers(
     buffers.output.idBuffer.resize(width * height * 3);
     buffers.output.colorBuffer.resize(width * height * 3);
     buffers.output.occlusionBuffer.resize(width * height);
-    buffers.output.sampleRecordBuffer.resize(width * height);
+    buffers.output.sampleRecordInBuffer.resize(width * height);
+    buffers.output.sampleRecordOutBuffer.resize(width * height);
 
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(buffers.output.cosThetaWiBuffer.data()),
@@ -398,9 +401,16 @@ static void copyOutputBuffers(
     ));
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.output.sampleRecordBuffer.data()),
-        params.sampleRecordBuffer,
-        buffers.sampleRecordBufferSizeInBytes,
+        reinterpret_cast<void *>(buffers.output.sampleRecordInBuffer.data()),
+        params.sampleRecordInBuffer,
+        buffers.sampleRecordInBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(buffers.output.sampleRecordOutBuffer.data()),
+        params.sampleRecordOutBuffer,
+        buffers.sampleRecordOutBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 }
@@ -426,11 +436,16 @@ static void resetSampleBuffers(
         cudaMemcpyHostToDevice
     ));
 
-    // fixme
     CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.sampleRecordBuffer),
+        reinterpret_cast<void *>(params.sampleRecordInBuffer),
         0,
-        buffers.sampleRecordBufferSizeInBytes
+        buffers.sampleRecordInBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.sampleRecordOutBuffer),
+        0,
+        buffers.sampleRecordOutBufferSizeInBytes
     ));
 }
 
@@ -440,8 +455,20 @@ static void resetBounceBuffers(
     int height,
     Params &params
 ) {
-    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(params.sampleRecordInBuffer),
+        reinterpret_cast<void *>(params.sampleRecordOutBuffer),
+        buffers.sampleRecordOutBufferSizeInBytes,
+        cudaMemcpyDeviceToDevice
+    ));
 
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.sampleRecordOutBuffer),
+        0,
+        buffers.sampleRecordOutBufferSizeInBytes
+    ));
+
+    std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(params.depthBuffer),
         depthBuffer.data(),
@@ -454,12 +481,6 @@ static void resetBounceBuffers(
         0,
         buffers.cosThetaWiBufferSizeInBytes
     ));
-
-    // CHECK_CUDA(cudaMemset(
-    //     reinterpret_cast<void *>(params.sampleRecordBuffer),
-    //     0,
-    //     buffers.sampleRecordBufferSizeInBytes
-    // ));
 
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.occlusionBuffer),
@@ -501,7 +522,8 @@ static void mallocBuffers(
     buffers.depthBufferSizeInBytes = width * height * sizeof(float);
     buffers.xiBufferSizeInBytes = width * height * 2 * sizeof(float);
     buffers.cosThetaWiBufferSizeInBytes = width * height * 1 * sizeof(float);
-    buffers.sampleRecordBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
+    buffers.sampleRecordInBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
+    buffers.sampleRecordOutBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
     buffers.occlusionBufferSizeInBytes = width * height * 1 * sizeof(float);
     buffers.missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
     buffers.barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
@@ -524,8 +546,13 @@ static void mallocBuffers(
     ));
 
     CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.sampleRecordBuffer),
-        buffers.sampleRecordBufferSizeInBytes
+        reinterpret_cast<void **>(&params.sampleRecordInBuffer),
+        buffers.sampleRecordInBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.sampleRecordOutBuffer),
+        buffers.sampleRecordOutBufferSizeInBytes
     ));
 
     CHECK_CUDA(cudaMalloc(
@@ -867,7 +894,8 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));
     CHECK_CUDA(cudaFree(params.cosThetaWiBuffer));
-    CHECK_CUDA(cudaFree(params.sampleRecordBuffer));
+    CHECK_CUDA(cudaFree(params.sampleRecordInBuffer));
+    CHECK_CUDA(cudaFree(params.sampleRecordOutBuffer));
     CHECK_CUDA(cudaFree(params.missDirectionBuffer));
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
     CHECK_CUDA(cudaFree(params.idBuffer));
