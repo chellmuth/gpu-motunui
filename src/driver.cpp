@@ -514,6 +514,84 @@ static void mallocBuffers(
     ));
 }
 
+static void calculateSampleIntermediates(
+    BufferManager &buffers,
+    std::vector<PtexTexture> &textures,
+    int width,
+    int height,
+    int spp,
+    std::vector<float> &sampleIntermediates,
+    std::vector<float> &textureImage
+) {
+   ColorMap faceMap;
+   ColorMap materialMap;
+   std::vector<float> faceImage(width * height * 3, 0.f);
+   std::vector<float> uvImage(width * height * 3, 0.f);
+   for (int row = 0; row < height; row++) {
+       for (int col = 0; col < width; col++) {
+           const int pixelIndex = 3 * (row * width + col);
+
+           const int idIndex = 3 * (row * width + col);
+           const int primitiveID = buffers.host.idBuffer[idIndex + 0];
+           const int materialID = buffers.host.idBuffer[idIndex + 1];
+           const int textureIndex = buffers.host.idBuffer[idIndex + 2];
+           const int faceID = primitiveID / 2;
+
+           const int barycentricIndex = 2 * (row * width + col);
+           const float alpha = buffers.host.barycentricBuffer[barycentricIndex + 0];
+           const float beta = buffers.host.barycentricBuffer[barycentricIndex + 1];
+
+           float u, v;
+           if (primitiveID % 2 == 0) {
+               u = alpha + beta;
+               v = beta;
+           } else {
+               u = alpha;
+               v = alpha + beta;
+           }
+           uvImage[pixelIndex + 0] = u;
+           uvImage[pixelIndex + 1] = v;
+           uvImage[pixelIndex + 2] = materialID;
+
+           if (materialID > 0) {
+               float3 color = faceMap.get(faceID);
+               faceImage[pixelIndex + 0] = color.x;
+               faceImage[pixelIndex + 1] = color.y;
+               faceImage[pixelIndex + 2] = color.z;
+           }
+
+           float textureX = 0;
+           float textureY = 0;
+           float textureZ = 0;
+           if (textureIndex >= 0) {
+               PtexTexture texture = textures[textureIndex];
+
+               Vec3 color = texture.lookup(
+                   float2{ u, v },
+                   faceID
+               );
+               textureX = color.x();
+               textureY = color.y();
+               textureZ = color.z();
+           } else if (materialID > 0) {
+               float3 color = materialMap.get(materialID);
+
+               textureX = buffers.host.colorBuffer[pixelIndex + 0];
+               textureY = buffers.host.colorBuffer[pixelIndex + 1];
+               textureZ = buffers.host.colorBuffer[pixelIndex + 2];
+           }
+
+           sampleIntermediates[pixelIndex + 0] = textureX * buffers.host.outputBuffer[pixelIndex + 0];
+           sampleIntermediates[pixelIndex + 1] = textureY * buffers.host.outputBuffer[pixelIndex + 0];
+           sampleIntermediates[pixelIndex + 2] = textureZ * buffers.host.outputBuffer[pixelIndex + 0];
+
+           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * buffers.host.outputBuffer[pixelIndex + 0];
+           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * buffers.host.outputBuffer[pixelIndex + 1];
+           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * buffers.host.outputBuffer[pixelIndex + 2];
+       }
+   }
+}
+
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
     std::cout << "Rendering: " << exrFilename << std::endl;
@@ -594,73 +672,15 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
         std::vector<float> sampleIntermediates(width * height * 3, 0.f);
 
-        ColorMap faceMap;
-        ColorMap materialMap;
-        std::vector<float> faceImage(width * height * 3, 0.f);
-        std::vector<float> uvImage(width * height * 3, 0.f);
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                const int pixelIndex = 3 * (row * width + col);
-
-                const int idIndex = 3 * (row * width + col);
-                const int primitiveID = buffers.host.idBuffer[idIndex + 0];
-                const int materialID = buffers.host.idBuffer[idIndex + 1];
-                const int textureIndex = buffers.host.idBuffer[idIndex + 2];
-                const int faceID = primitiveID / 2;
-
-                const int barycentricIndex = 2 * (row * width + col);
-                const float alpha = buffers.host.barycentricBuffer[barycentricIndex + 0];
-                const float beta = buffers.host.barycentricBuffer[barycentricIndex + 1];
-
-                float u, v;
-                if (primitiveID % 2 == 0) {
-                    u = alpha + beta;
-                    v = beta;
-                } else {
-                    u = alpha;
-                    v = alpha + beta;
-                }
-                uvImage[pixelIndex + 0] = u;
-                uvImage[pixelIndex + 1] = v;
-                uvImage[pixelIndex + 2] = materialID;
-
-                if (materialID > 0) {
-                    float3 color = faceMap.get(faceID);
-                    faceImage[pixelIndex + 0] = color.x;
-                    faceImage[pixelIndex + 1] = color.y;
-                    faceImage[pixelIndex + 2] = color.z;
-                }
-
-                float textureX = 0;
-                float textureY = 0;
-                float textureZ = 0;
-                if (textureIndex >= 0) {
-                    PtexTexture texture = textures[textureIndex];
-
-                    Vec3 color = texture.lookup(
-                        float2{ u, v },
-                        faceID
-                    );
-                    textureX = color.x();
-                    textureY = color.y();
-                    textureZ = color.z();
-                } else if (materialID > 0) {
-                    float3 color = materialMap.get(materialID);
-
-                    textureX = buffers.host.colorBuffer[pixelIndex + 0];
-                    textureY = buffers.host.colorBuffer[pixelIndex + 1];
-                    textureZ = buffers.host.colorBuffer[pixelIndex + 2];
-                }
-
-                sampleIntermediates[pixelIndex + 0] = textureX * buffers.host.outputBuffer[pixelIndex + 0];
-                sampleIntermediates[pixelIndex + 1] = textureY * buffers.host.outputBuffer[pixelIndex + 0];
-                sampleIntermediates[pixelIndex + 2] = textureZ * buffers.host.outputBuffer[pixelIndex + 0];
-
-                textureImage[pixelIndex + 0] += (1.f / spp) * textureX * buffers.host.outputBuffer[pixelIndex + 0];
-                textureImage[pixelIndex + 1] += (1.f / spp) * textureY * buffers.host.outputBuffer[pixelIndex + 1];
-                textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * buffers.host.outputBuffer[pixelIndex + 2];
-            }
-        }
+        calculateSampleIntermediates(
+            buffers,
+            textures,
+            width,
+            height,
+            spp,
+            sampleIntermediates,
+            textureImage
+        );
 
         CHECK_CUDA(cudaMemset(
             reinterpret_cast<void *>(params.occlusionBuffer),
