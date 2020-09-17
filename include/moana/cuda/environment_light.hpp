@@ -30,15 +30,6 @@ public:
         std::vector<float> &outputBuffer
     );
 
-    // fixme: duped
-    static void calculateEnvironmentLighting(
-        int width,
-        int height,
-        cudaTextureObject_t textureObject,
-        BSDFSampleRecord *devDirectionBuffer,
-        std::vector<float> &outputBuffer
-    );
-
 private:
     std::unique_ptr<Texture> m_texturePtr;
 };

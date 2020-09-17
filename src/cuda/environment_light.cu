@@ -13,46 +13,6 @@ __global__ static void environmentLightKernel(
     int width,
     int height,
     cudaTextureObject_t textureObject,
-    BSDFSampleRecord *sampleBuffer,
-    float *outputBuffer
-) {
-    const int row = threadIdx.y + blockIdx.y * blockDim.y;
-    const int col = threadIdx.x + blockIdx.x * blockDim.x;
-
-    if ((row >= height) || (col >= width)) return;
-
-    const int sampleIndex = row * width + col;
-    const BSDFSampleRecord sampleRecord = sampleBuffer[sampleIndex];
-    if (!sampleRecord.isValid) {
-        return;
-    }
-
-    const Vec3 wi(sampleRecord.frame.toWorld(sampleRecord.wiLocal));
-
-    float phi, theta;
-    Coordinates::cartesianToSpherical(wi, &phi, &theta);
-
-    phi += rotationOffset;
-    if (phi > 2.f * M_PI) {
-        phi -= 2.f * M_PI;
-    }
-
-    float4 environment = tex2D<float4>(
-        textureObject,
-        phi / (M_PI * 2.f),
-        theta / M_PI
-    );
-
-    const int outputIndex = 3 * (row * width + col);
-    outputBuffer[outputIndex + 0] = environment.x;
-    outputBuffer[outputIndex + 1] = environment.y;
-    outputBuffer[outputIndex + 2] = environment.z;
-}
-
-__global__ static void environmentLightKernel(
-    int width,
-    int height,
-    cudaTextureObject_t textureObject,
     float *occlusionBuffer,
     float *directionBuffer,
     float *outputBuffer
@@ -71,6 +31,9 @@ __global__ static void environmentLightKernel(
         directionBuffer[directionIndex + 1],
         directionBuffer[directionIndex + 2]
     );
+
+    // Pixels that have already been lit in previous bounces
+    if (direction.isZero()) { return; }
 
     float phi, theta;
     Coordinates::cartesianToSpherical(direction, &phi, &theta);
@@ -123,52 +86,6 @@ void EnvironmentLight::calculateEnvironmentLighting(
         height,
         textureObject,
         devOcclusionBuffer,
-        devDirectionBuffer,
-        reinterpret_cast<float *>(d_outputBuffer)
-    );
-
-    CHECK_CUDA(cudaMemcpy(
-        outputBuffer.data(),
-        reinterpret_cast<void *>(d_outputBuffer),
-        outputBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
-
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_outputBuffer)));
-
-    CHECK_CUDA(cudaDeviceSynchronize());
-}
-
-void EnvironmentLight::calculateEnvironmentLighting(
-    int width,
-    int height,
-    cudaTextureObject_t textureObject,
-    BSDFSampleRecord *devDirectionBuffer,
-    std::vector<float> &outputBuffer
-) {
-    const size_t outputBufferSizeInBytes = outputBuffer.size() * sizeof(float);
-    CUdeviceptr d_outputBuffer = 0;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_outputBuffer),
-        outputBufferSizeInBytes
-    ));
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(d_outputBuffer),
-        outputBuffer.data(),
-        outputBufferSizeInBytes,
-        cudaMemcpyHostToDevice
-    ));
-
-    const int blockWidth = 16;
-    const int blockHeight = 16;
-
-    const dim3 blocks(width / blockWidth + 1, height / blockHeight + 1);
-    const dim3 threads(blockWidth, blockHeight);
-
-    environmentLightKernel<<<blocks, threads>>>(
-        width,
-        height,
-        textureObject,
         devDirectionBuffer,
         reinterpret_cast<float *>(d_outputBuffer)
     );

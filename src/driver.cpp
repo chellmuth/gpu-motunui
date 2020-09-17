@@ -682,6 +682,10 @@ static void runSample(
         CHECK_CUDA(cudaDeviceSynchronize());
     }
 
+    // Copy buffers to host for lighting and texture calculations
+    copyOutputBuffers(buffers, width, height, params);
+    CHECK_CUDA(cudaDeviceSynchronize());
+
     // Lookup L for misses
     state.arena.restoreSnapshot(state.environmentState.snapshot);
     std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
@@ -694,9 +698,22 @@ static void runSample(
         environmentLightBuffer
     );
 
-    // Copy buffers to host for texture calculations
-    copyOutputBuffers(buffers, width, height, params);
-    CHECK_CUDA(cudaDeviceSynchronize());
+    // Calculate Li
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int sampleIndex = 1 * (row * width + col);
+            const BSDFSampleRecord sampleRecord = buffers.output.sampleRecordBuffer[sampleIndex];
+
+            if (sampleRecord.isValid) { continue; }
+
+            const int pixelIndex = 3 * (row * width + col);
+            const int environmentIndex = 3 * (row * width + col);
+
+            outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
+            outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
+            outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
+        }
+    }
 
     // Lookup ptex textures
     updateBetaWithTextureAlbedos(
@@ -747,7 +764,8 @@ static void runSample(
         width,
         height,
         state.environmentState.textureObject,
-        params.sampleRecordBuffer,
+        params.occlusionBuffer,
+        params.missDirectionBuffer,
         environmentLightBuffer
     );
 
