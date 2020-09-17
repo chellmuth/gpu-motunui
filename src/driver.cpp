@@ -313,8 +313,12 @@ void Driver::init()
 }
 
 struct HostBuffers {
-    std::vector<float> outputBuffer;
     std::vector<float> betaBuffer;
+};
+
+struct OutputBuffers {
+    std::vector<float> outputBuffer;
+    std::vector<float> cosThetaWiBuffer;
     std::vector<float> barycentricBuffer;
     std::vector<int> idBuffer;
     std::vector<float> colorBuffer;
@@ -333,7 +337,7 @@ struct BufferManager {
     size_t outputBufferSizeInBytes;
     size_t depthBufferSizeInBytes;
     size_t xiBufferSizeInBytes;
-    size_t betaBufferSizeInBytes;
+    size_t cosThetaWiBufferSizeInBytes;
     size_t sampleRecordBufferSizeInBytes;
     size_t occlusionBufferSizeInBytes;
     size_t missDirectionBufferSizeInBytes;
@@ -342,50 +346,51 @@ struct BufferManager {
     size_t colorBufferSizeInBytes;
 
     HostBuffers host;
+    OutputBuffers output;
 };
 
-static void copyBuffersToHost(
+static void copyOutputBuffers(
     BufferManager &buffers,
     int width,
     int height,
     Params &params
 ) {
-    buffers.host.outputBuffer.resize(width * height * 3, 0.f);
-    buffers.host.betaBuffer.resize(width * height * 3, 1.f);
-    buffers.host.barycentricBuffer.resize(width * height * 2, 0.f);
-    buffers.host.idBuffer.resize(width * height * 3, 0);
-    buffers.host.colorBuffer.resize(width * height * 3, 0.f);
+    buffers.output.outputBuffer.resize(width * height * 3, 0.f);
+    buffers.output.cosThetaWiBuffer.resize(width * height * 1, 0.f);
+    buffers.output.barycentricBuffer.resize(width * height * 2, 0.f);
+    buffers.output.idBuffer.resize(width * height * 3, 0);
+    buffers.output.colorBuffer.resize(width * height * 3, 0.f);
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.host.outputBuffer.data()),
+        reinterpret_cast<void *>(buffers.output.outputBuffer.data()),
         params.outputBuffer,
         buffers.outputBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.host.betaBuffer.data()),
-        params.betaBuffer,
-        buffers.betaBufferSizeInBytes,
+        reinterpret_cast<void *>(buffers.output.cosThetaWiBuffer.data()),
+        params.cosThetaWiBuffer,
+        buffers.cosThetaWiBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.host.barycentricBuffer.data()),
+        reinterpret_cast<void *>(buffers.output.barycentricBuffer.data()),
         params.barycentricBuffer,
         buffers.barycentricBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.host.idBuffer.data()),
+        reinterpret_cast<void *>(buffers.output.idBuffer.data()),
         params.idBuffer,
         buffers.idBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.host.colorBuffer.data()),
+        reinterpret_cast<void *>(buffers.output.colorBuffer.data()),
         params.colorBuffer,
         buffers.colorBufferSizeInBytes,
         cudaMemcpyDeviceToHost
@@ -398,9 +403,15 @@ static void resetBuffers(
     int height,
     Params &params
 ) {
+    buffers.host.betaBuffer.resize(width * height * 3);
+    std::fill(
+        buffers.host.betaBuffer.begin(),
+        buffers.host.betaBuffer.end(),
+        1.f
+    );
+
     std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
     std::vector<float> xiBuffer(width * height * 2, -1.f);
-    std::vector<float> betaBuffer(width * height * 3, 1.f);
 
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.outputBuffer),
@@ -419,11 +430,10 @@ static void resetBuffers(
         buffers.xiBufferSizeInBytes,
         cudaMemcpyHostToDevice
     ));
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(params.betaBuffer),
-        betaBuffer.data(),
-        buffers.betaBufferSizeInBytes,
-        cudaMemcpyHostToDevice
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.cosThetaWiBuffer),
+        0,
+        buffers.cosThetaWiBufferSizeInBytes
     ));
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(params.sampleRecordBuffer),
@@ -466,7 +476,7 @@ static void mallocBuffers(
     buffers.outputBufferSizeInBytes = width * height * 3 * sizeof(float);
     buffers.depthBufferSizeInBytes = width * height * sizeof(float);
     buffers.xiBufferSizeInBytes = width * height * 2 * sizeof(float);
-    buffers.betaBufferSizeInBytes = width * height * 3 * sizeof(float);
+    buffers.cosThetaWiBufferSizeInBytes = width * height * 1 * sizeof(float);
     buffers.sampleRecordBufferSizeInBytes = width * height * sizeof(BSDFSampleRecord);
     buffers.occlusionBufferSizeInBytes = width * height * 1 * sizeof(float);
     buffers.missDirectionBufferSizeInBytes = width * height * 3 * sizeof(float);
@@ -490,8 +500,8 @@ static void mallocBuffers(
     ));
 
     CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.betaBuffer),
-        buffers.betaBufferSizeInBytes
+        reinterpret_cast<void **>(&params.cosThetaWiBuffer),
+        buffers.cosThetaWiBufferSizeInBytes
     ));
 
     CHECK_CUDA(cudaMalloc(
@@ -526,13 +536,12 @@ static void mallocBuffers(
 
 }
 
-static void calculateSampleIntermediates(
+static void updateBetaWithTextureAlbedos(
     BufferManager &buffers,
     std::vector<PtexTexture> &textures,
     int width,
     int height,
     int spp,
-    std::vector<float> &sampleIntermediates,
     std::vector<float> &textureImage
 ) {
    ColorMap faceMap;
@@ -544,14 +553,14 @@ static void calculateSampleIntermediates(
            const int pixelIndex = 3 * (row * width + col);
 
            const int idIndex = 3 * (row * width + col);
-           const int primitiveID = buffers.host.idBuffer[idIndex + 0];
-           const int materialID = buffers.host.idBuffer[idIndex + 1];
-           const int textureIndex = buffers.host.idBuffer[idIndex + 2];
+           const int primitiveID = buffers.output.idBuffer[idIndex + 0];
+           const int materialID = buffers.output.idBuffer[idIndex + 1];
+           const int textureIndex = buffers.output.idBuffer[idIndex + 2];
            const int faceID = primitiveID / 2;
 
            const int barycentricIndex = 2 * (row * width + col);
-           const float alpha = buffers.host.barycentricBuffer[barycentricIndex + 0];
-           const float beta = buffers.host.barycentricBuffer[barycentricIndex + 1];
+           const float alpha = buffers.output.barycentricBuffer[barycentricIndex + 0];
+           const float beta = buffers.output.barycentricBuffer[barycentricIndex + 1];
 
            float u, v;
            if (primitiveID % 2 == 0) {
@@ -588,18 +597,20 @@ static void calculateSampleIntermediates(
            } else if (materialID > 0) {
                float3 color = materialMap.get(materialID);
 
-               textureX = buffers.host.colorBuffer[pixelIndex + 0];
-               textureY = buffers.host.colorBuffer[pixelIndex + 1];
-               textureZ = buffers.host.colorBuffer[pixelIndex + 2];
+               textureX = buffers.output.colorBuffer[pixelIndex + 0];
+               textureY = buffers.output.colorBuffer[pixelIndex + 1];
+               textureZ = buffers.output.colorBuffer[pixelIndex + 2];
            }
 
-           sampleIntermediates[pixelIndex + 0] = textureX * buffers.host.betaBuffer[pixelIndex + 0];
-           sampleIntermediates[pixelIndex + 1] = textureY * buffers.host.betaBuffer[pixelIndex + 0];
-           sampleIntermediates[pixelIndex + 2] = textureZ * buffers.host.betaBuffer[pixelIndex + 0];
+           const int cosThetaWiIndex = row * width + col;
+           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+           buffers.host.betaBuffer[pixelIndex + 0] *= cosThetaWi * textureX;
+           buffers.host.betaBuffer[pixelIndex + 1] *= cosThetaWi * textureY;
+           buffers.host.betaBuffer[pixelIndex + 2] *= cosThetaWi * textureZ;
 
-           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * buffers.host.outputBuffer[pixelIndex + 0];
-           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * buffers.host.outputBuffer[pixelIndex + 1];
-           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * buffers.host.outputBuffer[pixelIndex + 2];
+           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * buffers.output.outputBuffer[pixelIndex + 0];
+           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * buffers.output.outputBuffer[pixelIndex + 1];
+           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * buffers.output.outputBuffer[pixelIndex + 2];
        }
    }
 }
@@ -652,18 +663,16 @@ static void runSample(
     }
 
     // Copy buffers to host for texture calculations
-    copyBuffersToHost(buffers, width, height, params);
+    copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    // Sample intermediates represent beta term
-    std::vector<float> sampleIntermediates(width * height * 3, 0.f);
-    calculateSampleIntermediates(
+    // Lookup ptex textures
+    updateBetaWithTextureAlbedos(
         buffers,
         textures,
         width,
         height,
         spp,
-        sampleIntermediates,
         textureImage
     );
 
@@ -748,7 +757,7 @@ static void runSample(
 
                 for (int i = 0; i < 3; i++) {
                     outputImage[pixelIndex + i] += 1.f
-                        * sampleIntermediates[pixelIndex + i]
+                        * buffers.host.betaBuffer[pixelIndex + i]
                         * environmentLightBuffer[pixelIndex + i]
                         * (1.f - occlusionBuffer[occlusionIndex])
                         * (1.f / spp);
@@ -843,7 +852,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     CHECK_CUDA(cudaFree(params.outputBuffer));
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));
-    CHECK_CUDA(cudaFree(params.betaBuffer));
+    CHECK_CUDA(cudaFree(params.cosThetaWiBuffer));
     CHECK_CUDA(cudaFree(params.sampleRecordBuffer));
     CHECK_CUDA(cudaFree(params.missDirectionBuffer));
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
