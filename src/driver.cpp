@@ -321,6 +321,8 @@ struct OutputBuffers {
     std::vector<float> barycentricBuffer;
     std::vector<int> idBuffer;
     std::vector<float> colorBuffer;
+    std::vector<float> occlusionBuffer;
+    std::vector<BSDFSampleRecord> sampleRecordBuffer;
 };
 
 // struct Images {
@@ -353,10 +355,12 @@ static void copyOutputBuffers(
     int height,
     Params &params
 ) {
-    buffers.output.cosThetaWiBuffer.resize(width * height * 1, 0.f);
-    buffers.output.barycentricBuffer.resize(width * height * 2, 0.f);
-    buffers.output.idBuffer.resize(width * height * 3, 0);
-    buffers.output.colorBuffer.resize(width * height * 3, 0.f);
+    buffers.output.cosThetaWiBuffer.resize(width * height * 1);
+    buffers.output.barycentricBuffer.resize(width * height * 2);
+    buffers.output.idBuffer.resize(width * height * 3);
+    buffers.output.colorBuffer.resize(width * height * 3);
+    buffers.output.occlusionBuffer.resize(width * height);
+    buffers.output.sampleRecordBuffer.resize(width * height);
 
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(buffers.output.cosThetaWiBuffer.data()),
@@ -383,6 +387,20 @@ static void copyOutputBuffers(
         reinterpret_cast<void *>(buffers.output.colorBuffer.data()),
         params.colorBuffer,
         buffers.colorBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(buffers.output.occlusionBuffer.data()),
+        params.occlusionBuffer,
+        buffers.occlusionBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(buffers.output.sampleRecordBuffer.data()),
+        params.sampleRecordBuffer,
+        buffers.sampleRecordBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 }
@@ -700,13 +718,8 @@ static void runSample(
         CHECK_CUDA(cudaDeviceSynchronize());
     }
 
-    std::vector<float> occlusionBuffer(width * height * 1);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(occlusionBuffer.data()),
-        params.occlusionBuffer,
-        buffers.occlusionBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
+    // Copy buffers for occlusion and sample records
+    copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
 
     // Lookup L for misses
@@ -719,14 +732,6 @@ static void runSample(
         params.missDirectionBuffer,
         environmentLightBuffer
     );
-
-    std::vector<BSDFSampleRecord> sampleRecordBuffer(width * height);
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(sampleRecordBuffer.data()),
-        params.sampleRecordBuffer,
-        buffers.sampleRecordBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
 
     // Lookup L for direct lighting
     EnvironmentLight::calculateEnvironmentLighting(
@@ -743,7 +748,7 @@ static void runSample(
             const int pixelIndex = 3 * (row * width + col);
 
             const int sampleIndex = 1 * (row * width + col);
-            const BSDFSampleRecord sampleRecord = sampleRecordBuffer[sampleIndex];
+            const BSDFSampleRecord sampleRecord = buffers.output.sampleRecordBuffer[sampleIndex];
             if (sampleRecord.isValid) {
                 const int occlusionIndex = 1 * (row * width + col);
 
@@ -751,7 +756,7 @@ static void runSample(
                     outputImage[pixelIndex + i] += 1.f
                         * buffers.host.betaBuffer[pixelIndex + i]
                         * environmentLightBuffer[pixelIndex + i]
-                        * (1.f - occlusionBuffer[occlusionIndex])
+                        * (1.f - buffers.output.occlusionBuffer[occlusionIndex])
                         * (1.f / spp);
                 }
             } else {
