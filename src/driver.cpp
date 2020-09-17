@@ -317,7 +317,6 @@ struct HostBuffers {
 };
 
 struct OutputBuffers {
-    std::vector<float> outputBuffer;
     std::vector<float> cosThetaWiBuffer;
     std::vector<float> barycentricBuffer;
     std::vector<int> idBuffer;
@@ -334,7 +333,6 @@ struct OutputBuffers {
 // };
 
 struct BufferManager {
-    size_t outputBufferSizeInBytes;
     size_t depthBufferSizeInBytes;
     size_t xiBufferSizeInBytes;
     size_t cosThetaWiBufferSizeInBytes;
@@ -355,18 +353,10 @@ static void copyOutputBuffers(
     int height,
     Params &params
 ) {
-    buffers.output.outputBuffer.resize(width * height * 3, 0.f);
     buffers.output.cosThetaWiBuffer.resize(width * height * 1, 0.f);
     buffers.output.barycentricBuffer.resize(width * height * 2, 0.f);
     buffers.output.idBuffer.resize(width * height * 3, 0);
     buffers.output.colorBuffer.resize(width * height * 3, 0.f);
-
-    CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.output.outputBuffer.data()),
-        params.outputBuffer,
-        buffers.outputBufferSizeInBytes,
-        cudaMemcpyDeviceToHost
-    ));
 
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(buffers.output.cosThetaWiBuffer.data()),
@@ -413,11 +403,6 @@ static void resetBuffers(
     std::vector<float> depthBuffer(width * height, std::numeric_limits<float>::max());
     std::vector<float> xiBuffer(width * height * 2, -1.f);
 
-    CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.outputBuffer),
-        0,
-        buffers.outputBufferSizeInBytes
-    ));
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(params.depthBuffer),
         depthBuffer.data(),
@@ -473,7 +458,6 @@ static void mallocBuffers(
     int height,
     Params &params
 ) {
-    buffers.outputBufferSizeInBytes = width * height * 3 * sizeof(float);
     buffers.depthBufferSizeInBytes = width * height * sizeof(float);
     buffers.xiBufferSizeInBytes = width * height * 2 * sizeof(float);
     buffers.cosThetaWiBufferSizeInBytes = width * height * 1 * sizeof(float);
@@ -483,11 +467,6 @@ static void mallocBuffers(
     buffers.barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     buffers.idBufferSizeInBytes = width * height * sizeof(int) * 3;
     buffers.colorBufferSizeInBytes = width * height * sizeof(float) * 3;
-
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.outputBuffer),
-        buffers.outputBufferSizeInBytes
-    ));
 
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.depthBuffer),
@@ -608,9 +587,9 @@ static void updateBetaWithTextureAlbedos(
            buffers.host.betaBuffer[pixelIndex + 1] *= cosThetaWi * textureY;
            buffers.host.betaBuffer[pixelIndex + 2] *= cosThetaWi * textureZ;
 
-           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * buffers.output.outputBuffer[pixelIndex + 0];
-           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * buffers.output.outputBuffer[pixelIndex + 1];
-           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * buffers.output.outputBuffer[pixelIndex + 2];
+           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
+           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
+           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * cosThetaWi;
        }
    }
 }
@@ -849,7 +828,6 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     //     "uv-buffer_" + exrFilename
     // );
 
-    CHECK_CUDA(cudaFree(params.outputBuffer));
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));
     CHECK_CUDA(cudaFree(params.cosThetaWiBuffer));

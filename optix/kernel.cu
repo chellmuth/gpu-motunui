@@ -209,22 +209,16 @@ __forceinline__ __device__ static void raygenCamera()
     );
 
     if (prd.isHit) {
-        const int pixelIndex = 3 * (index.y * dim.x + index.x);
         params.depthBuffer[depthIndex] = prd.t;
 
         const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
         const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
         params.sampleRecordBuffer[sampleRecordIndex] = sampleRecord;
 
-        const float cosTheta = fabs(-dot(prd.normal, direction));
-        const float3 baseColor = prd.baseColor;
-        params.outputBuffer[pixelIndex + 0] = sampleRecord.wiLocal.z();
-        params.outputBuffer[pixelIndex + 1] = sampleRecord.wiLocal.z();
-        params.outputBuffer[pixelIndex + 2] = sampleRecord.wiLocal.z();
-
         const int cosThetaWiIndex = index.y * dim.x + index.x;
         params.cosThetaWiBuffer[cosThetaWiIndex] = sampleRecord.wiLocal.z();
 
+        const float3 baseColor = prd.baseColor;
         const int colorIndex = 3 * (index.y * dim.x + index.x);
         params.colorBuffer[colorIndex + 0] = baseColor.x;
         params.colorBuffer[colorIndex + 1] = baseColor.y;
