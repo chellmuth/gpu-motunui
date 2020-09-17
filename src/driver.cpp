@@ -592,6 +592,165 @@ static void calculateSampleIntermediates(
    }
 }
 
+static void runSample(
+    int sample,
+    OptixState &state,
+    BufferManager &buffers,
+    std::vector<PtexTexture> &textures,
+    CUstream stream,
+    int width,
+    int height,
+    int spp,
+    Params &params,
+    CUdeviceptr d_params,
+    std::vector<float> &outputImage,
+    std::vector<float> &textureImage
+) {
+    std::cout << "Sample #" << sample << std::endl;
+
+    params.bounce = 0;
+    params.sampleCount = sample;
+
+    resetBuffers(buffers, width, height, params);
+
+    // Run intersection
+    for (const auto &[i, geometry] : enumerate(state.geometries)) {
+        state.arena.restoreSnapshot(geometry.snapshot);
+
+        params.handle = geometry.handle;
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_params),
+            &params,
+            sizeof(params),
+            cudaMemcpyHostToDevice
+        ));
+
+        CHECK_OPTIX(optixLaunch(
+            state.pipeline,
+            stream,
+            d_params,
+            sizeof(Params),
+            &state.sbt,
+            width,
+            height,
+            /*depth=*/1
+        ));
+
+        CHECK_CUDA(cudaDeviceSynchronize());
+    }
+
+    // Copy buffers to host for texture calculations
+    copyBuffersToHost(buffers, width, height, params);
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    // Sample intermediates represent beta term
+    std::vector<float> sampleIntermediates(width * height * 3, 0.f);
+    calculateSampleIntermediates(
+        buffers,
+        textures,
+        width,
+        height,
+        spp,
+        sampleIntermediates,
+        textureImage
+    );
+
+    // Bounce
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.occlusionBuffer),
+        0,
+        buffers.occlusionBufferSizeInBytes
+    ));
+    for (const auto &[i, geometry] : enumerate(state.geometries)) {
+        state.arena.restoreSnapshot(geometry.snapshot);
+
+        params.handle = geometry.handle;
+        params.bounce = 1;
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_params),
+            &params,
+            sizeof(params),
+            cudaMemcpyHostToDevice
+        ));
+
+        CHECK_OPTIX(optixLaunch(
+            state.pipeline,
+            stream,
+            d_params,
+            sizeof(Params),
+            &state.sbt,
+            width,
+            height,
+            /*depth=*/1
+        ));
+
+        CHECK_CUDA(cudaDeviceSynchronize());
+    }
+
+    std::vector<float> occlusionBuffer(width * height * 1);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(occlusionBuffer.data()),
+        params.occlusionBuffer,
+        buffers.occlusionBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+    CHECK_CUDA(cudaDeviceSynchronize());
+
+    // Lookup L for misses
+    state.arena.restoreSnapshot(state.environmentState.snapshot);
+    std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
+    EnvironmentLight::calculateEnvironmentLighting(
+        width,
+        height,
+        state.environmentState.textureObject,
+        params.missDirectionBuffer,
+        environmentLightBuffer
+    );
+
+    std::vector<BSDFSampleRecord> sampleRecordBuffer(width * height);
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(sampleRecordBuffer.data()),
+        params.sampleRecordBuffer,
+        buffers.sampleRecordBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+
+    // Lookup L for direct lighting
+    EnvironmentLight::calculateEnvironmentLighting(
+        width,
+        height,
+        state.environmentState.textureObject,
+        params.sampleRecordBuffer,
+        environmentLightBuffer
+    );
+
+    // Calculate Li
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
+
+            const int sampleIndex = 1 * (row * width + col);
+            const BSDFSampleRecord sampleRecord = sampleRecordBuffer[sampleIndex];
+            if (sampleRecord.isValid) {
+                const int occlusionIndex = 1 * (row * width + col);
+
+                for (int i = 0; i < 3; i++) {
+                    outputImage[pixelIndex + i] += 1.f
+                        * sampleIntermediates[pixelIndex + i]
+                        * environmentLightBuffer[pixelIndex + i]
+                        * (1.f - occlusionBuffer[occlusionIndex])
+                        * (1.f / spp);
+                }
+            } else {
+                const int environmentIndex = 3 * (row * width + col);
+                outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
+                outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
+                outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
+            }
+        }
+    }
+}
+
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
     std::cout << "Rendering: " << exrFilename << std::endl;
@@ -621,157 +780,24 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     params.camera = camera;
 
     std::vector<float> textureImage(width * height * 3, 0.f);
-    std::vector<float> occlusionImage(width * height * 3, 0.f);
 
     const int spp = 4;
 
     for (int sample = 0; sample < spp; sample++) {
-        std::cout << "Sample #" << sample << std::endl;
-
-        params.bounce = 0;
-        params.sampleCount = sample;
-
-        resetBuffers(buffers, width, height, params);
-
-        for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
-            m_state.arena.restoreSnapshot(geometry.snapshot);
-
-            params.handle = geometry.handle;
-            CHECK_CUDA(cudaMemcpy(
-                reinterpret_cast<void *>(d_params),
-                &params,
-                sizeof(params),
-                cudaMemcpyHostToDevice
-            ));
-
-            CHECK_OPTIX(optixLaunch(
-                m_state.pipeline,
-                stream,
-                d_params,
-                sizeof(Params),
-                &m_state.sbt,
-                width,
-                height,
-                /*depth=*/1
-            ));
-
-            CHECK_CUDA(cudaDeviceSynchronize());
-        }
-
-        copyBuffersToHost(buffers, width, height, params);
-        CHECK_CUDA(cudaDeviceSynchronize());
-
-        std::vector<float> normalImage(width * height * 3);
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(normalImage.data()),
-            params.normalBuffer,
-            buffers.normalBufferSizeInBytes,
-            cudaMemcpyDeviceToHost
-        ));
-        CHECK_CUDA(cudaDeviceSynchronize());
-
-        std::vector<float> sampleIntermediates(width * height * 3, 0.f);
-
-        calculateSampleIntermediates(
+        runSample(
+            sample,
+            m_state,
             buffers,
             textures,
+            stream,
             width,
             height,
             spp,
-            sampleIntermediates,
+            params,
+            d_params,
+            outputImage,
             textureImage
         );
-
-        CHECK_CUDA(cudaMemset(
-            reinterpret_cast<void *>(params.occlusionBuffer),
-            0,
-            buffers.occlusionBufferSizeInBytes
-        ));
-        for (const auto &[i, geometry] : enumerate(m_state.geometries)) {
-            m_state.arena.restoreSnapshot(geometry.snapshot);
-
-            params.handle = geometry.handle;
-            params.bounce = 1;
-            CHECK_CUDA(cudaMemcpy(
-                reinterpret_cast<void *>(d_params),
-                &params,
-                sizeof(params),
-                cudaMemcpyHostToDevice
-            ));
-
-            CHECK_OPTIX(optixLaunch(
-                m_state.pipeline,
-                stream,
-                d_params,
-                sizeof(Params),
-                &m_state.sbt,
-                width,
-                height,
-                /*depth=*/1
-            ));
-
-            CHECK_CUDA(cudaDeviceSynchronize());
-        }
-
-        std::vector<float> occlusionBuffer(width * height * 1);
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(occlusionBuffer.data()),
-            params.occlusionBuffer,
-            buffers.occlusionBufferSizeInBytes,
-            cudaMemcpyDeviceToHost
-        ));
-        CHECK_CUDA(cudaDeviceSynchronize());
-
-        m_state.arena.restoreSnapshot(m_state.environmentState.snapshot);
-        std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
-        EnvironmentLight::calculateEnvironmentLighting(
-            width,
-            height,
-            m_state.environmentState.textureObject,
-            params.missDirectionBuffer,
-            environmentLightBuffer
-        );
-
-        std::vector<BSDFSampleRecord> sampleRecordBuffer(width * height);
-        CHECK_CUDA(cudaMemcpy(
-            reinterpret_cast<void *>(sampleRecordBuffer.data()),
-            params.sampleRecordBuffer,
-            buffers.sampleRecordBufferSizeInBytes,
-            cudaMemcpyDeviceToHost
-        ));
-
-        EnvironmentLight::calculateEnvironmentLighting(
-            width,
-            height,
-            m_state.environmentState.textureObject,
-            params.sampleRecordBuffer,
-            environmentLightBuffer
-        );
-
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                const int pixelIndex = 3 * (row * width + col);
-
-                const int sampleIndex = 1 * (row * width + col);
-                const BSDFSampleRecord sampleRecord = sampleRecordBuffer[sampleIndex];
-                if (sampleRecord.isValid) {
-                    const int occlusionIndex = 1 * (row * width + col);
-
-                    for (int i = 0; i < 3; i++) {
-                        outputImage[pixelIndex + i] += 1.f
-                            * sampleIntermediates[pixelIndex + i]
-                            * environmentLightBuffer[pixelIndex + i]
-                            * (1.f - occlusionBuffer[occlusionIndex])
-                            * (1.f / spp);
-                    }
-                } else {
-                    const int environmentIndex = 3 * (row * width + col);
-                    outputImage[pixelIndex + 0] += environmentLightBuffer[environmentIndex + 0] * (1.f / spp);
-                    outputImage[pixelIndex + 1] += environmentLightBuffer[environmentIndex + 1] * (1.f / spp);
-                    outputImage[pixelIndex + 2] += environmentLightBuffer[environmentIndex + 2] * (1.f / spp);
-                }
-            }
-        }
     }
 
     Image::save(
@@ -791,23 +817,9 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
     Image::save(
         width,
         height,
-        occlusionImage,
-        "occlusion-buffer_" + exrFilename
-    );
-
-    Image::save(
-        width,
-        height,
         textureImage,
         "texture-buffer_" + exrFilename
     );
-
-    // Image::save(
-    //     width,
-    //     height,
-    //     normalImage,
-    //     "normals-buffer_" + exrFilename
-    // );
 
     // Image::save(
     //     width,
