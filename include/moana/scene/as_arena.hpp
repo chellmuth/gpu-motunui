@@ -19,6 +19,7 @@ public:
     void init(size_t bytes);
 
     CUdeviceptr allocOutput(size_t bytes);
+    void returnCompactedOutput(size_t bytes);
 
     Snapshot createSnapshot();
     void restoreSnapshot(Snapshot snapshot);

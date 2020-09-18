@@ -297,7 +297,7 @@ void Driver::init()
     environmentLight.queryMemoryRequirements();
 
     size_t gb = 1024 * 1024 * 1024;
-    m_state.arena.init(6.8 * gb);
+    m_state.arena.init(6.7 * gb);
 
     m_state.environmentState = environmentLight.snapshotTextureObject(m_state.arena);
     m_state.arena.releaseAll();
