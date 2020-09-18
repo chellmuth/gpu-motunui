@@ -300,6 +300,7 @@ void Driver::init()
     m_state.arena.init(6.8 * gb);
 
     m_state.environmentState = environmentLight.snapshotTextureObject(m_state.arena);
+    m_state.arena.releaseAll();
 
     m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
 

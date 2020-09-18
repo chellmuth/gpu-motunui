@@ -111,6 +111,8 @@ void ASArena::restoreSnapshot(Snapshot snapshot)
 void ASArena::releaseAll()
 {
     m_outputOffset = 0;
+
+    assert(m_tempOffsetStack.empty());
 }
 
 }
