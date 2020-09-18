@@ -51,7 +51,6 @@ public:
 
 private:
     OptixState m_state;
-    CUdeviceptr d_params;
 };
 
 }

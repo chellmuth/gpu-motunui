@@ -306,14 +306,13 @@ void Driver::init()
     linkPipeline(m_state);
     createShaderBindingTable(m_state);
 
-    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_params), sizeof(Renderer::Params)));
     CHECK_CUDA(cudaDeviceSynchronize());
 }
 
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
     std::cout << "Rendering: " << exrFilename << std::endl;
-    Renderer::launch(m_state, d_params, cam, exrFilename);
+    Renderer::launch(m_state, cam, exrFilename);
 }
 
 }

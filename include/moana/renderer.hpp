@@ -31,7 +31,6 @@ struct Params {
 
 void launch(
     OptixState &state,
-    CUdeviceptr &d_params,
     Cam cam,
     const std::string &exrFilename
 );

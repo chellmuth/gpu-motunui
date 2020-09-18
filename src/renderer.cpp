@@ -552,10 +552,12 @@ static void runSample(
 
 void launch(
     OptixState &state,
-    CUdeviceptr &d_params,
     Cam cam,
     const std::string &exrFilename
 ) {
+    CUdeviceptr d_params;
+    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_params), sizeof(Params)));
+
     std::vector<PtexTexture> textures;
     for (const auto &filename : Textures::textureFilenames) {
         PtexTexture texture(MOANA_ROOT + std::string("/island/") + filename);
@@ -630,6 +632,8 @@ void launch(
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
     CHECK_CUDA(cudaFree(params.idBuffer));
     CHECK_CUDA(cudaFree(params.colorBuffer));
+
+    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_params)));
 }
 
 } }
