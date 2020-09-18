@@ -306,7 +306,7 @@ void Driver::init()
     linkPipeline(m_state);
     createShaderBindingTable(m_state);
 
-    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_params), sizeof(Params)));
+    CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&d_params), sizeof(Renderer::Params)));
     CHECK_CUDA(cudaDeviceSynchronize());
 }
 

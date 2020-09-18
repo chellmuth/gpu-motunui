@@ -2,11 +2,12 @@
 
 #include <stdio.h>
 
-#include "moana/driver.hpp"
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
+#include "moana/driver.hpp"
+#include "moana/renderer.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
 #include "sample.hpp"
@@ -27,7 +28,7 @@ struct PerRayData {
 };
 
 extern "C" {
-    __constant__ Params params;
+    __constant__ Renderer::Params params;
 }
 
 __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
