@@ -4,6 +4,7 @@
 
 #include "moana/driver.hpp"
 #include "moana/scene.hpp"
+#include "moana/scene/types.hpp"
 
 namespace moana { namespace Renderer {
 

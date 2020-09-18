@@ -5,8 +5,9 @@
 #include <optix.h>
 #include <cuda.h>
 
-#include "moana/scene/as_arena.hpp"
+#include "moana/cuda/environment_light.hpp"
 #include "moana/parsers/obj_parser.hpp"
+#include "moana/scene/as_arena.hpp"
 
 namespace moana {
 
@@ -26,6 +27,12 @@ struct GeometryResult {
 struct Instances {
     int count;
     float *transforms;
+};
+
+struct SceneState {
+    ASArena arena;
+    std::vector<GeometryResult> geometries;
+    EnvironmentLightState environmentState;
 };
 
 }
