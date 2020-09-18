@@ -25,6 +25,8 @@
 #include "scene/palm_rig_element.hpp"
 #include "scene/pandanus_a_element.hpp"
 
+#include "scene/fixme_light_element.hpp"
+
 #include <map>
 #include <utility>
 
@@ -59,6 +61,8 @@ std::vector<GeometryResult> createGeometryResults(
         std::make_unique<PalmRigElement>(),
         std::make_unique<PandanusAElement>(),
         std::make_unique<OceanElement>(),
+
+        std::make_unique<FixmeLightElement>(),
     };
 
     int elementSBTOffset = 0;

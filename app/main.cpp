@@ -13,13 +13,13 @@ int main(int argc, char *argv[])
     Driver driver;
     driver.init();
 
-    driver.launch(Cam::ShotCam, "shot.exr");
-    driver.launch(Cam::BeachCam, "beach.exr");
-    driver.launch(Cam::BirdseyeCam, "birdseye.exr");
+    // driver.launch(Cam::ShotCam, "shot.exr");
+    // driver.launch(Cam::BeachCam, "beach.exr");
+    // driver.launch(Cam::BirdseyeCam, "birdseye.exr");
     driver.launch(Cam::DunesACam, "dunesA.exr");
-    driver.launch(Cam::GrassCam, "grass.exr");
-    driver.launch(Cam::PalmsCam, "palms.exr");
-    driver.launch(Cam::RootsCam, "roots.exr");
+    // driver.launch(Cam::GrassCam, "grass.exr");
+    // driver.launch(Cam::PalmsCam, "palms.exr");
+    // driver.launch(Cam::RootsCam, "roots.exr");
 
     return 0;
 }

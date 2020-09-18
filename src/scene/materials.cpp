@@ -107,6 +107,7 @@ std::vector<float3> baseColors = {
     float3{ 0.78, 0.707, 0.604 }, // isPandanusA: leavesLower [101]
     float3{ 0.738, 0.676, 0.612 }, // isPandanusA: trunk [102]
     float3{ 1.0, 1.0, 1.0 }, // osOcean: water [103]
+    float3{ 0.f, 0.f, 1.f }, // FIXME LIGHT [104]
 };
 
 } }

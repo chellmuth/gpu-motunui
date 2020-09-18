@@ -675,12 +675,15 @@ static void updateEmitLighting(
             const int materialID = buffers.output.idBuffer[idIndex + 1];
 
             // fixme: Pandanus leavesLower are lights
-            if (materialID != 101) { continue; }
+            if (materialID != 104) { continue; }
 
+            float L[3] = { 891.443777, 505.928150, 154.625939 };
             const int pixelIndex = 3 * (row * width + col);
-            outputImage[pixelIndex + 0] += 1.f
-                * buffers.host.betaBuffer[pixelIndex]
-                * (1.f / spp);
+            for (int i = 0; i < 3; i++) {
+                outputImage[pixelIndex + i] += L[i]
+                    * buffers.host.betaBuffer[pixelIndex + i]
+                    * (1.f / spp);
+            }
         }
     }
 }
@@ -793,7 +796,7 @@ static void runSample(
     );
 
     // Bounce
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 5; i++) {
         // Lookup ptex textures at current intersection, and set beta
         updateBetaWithTextureAlbedos(
             buffers,
@@ -886,7 +889,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
 
-    const int spp = 1;
+    const int spp = 99999;
 
     for (int sample = 0; sample < spp; sample++) {
         runSample(
@@ -903,6 +906,27 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
             outputImage,
             textureImage
         );
+
+        int x = 1;
+        while (x <= (sample + 1)) {
+            if (x == (sample + 1)) {
+                const std::string prefix = std::to_string(sample + 1);
+                const std::string padding = std::string(6 - prefix.size(), '0');
+
+                // fixme
+                std::vector<float> adjustedImage(outputImage);
+                for (int i = 0; i < width * height * 3; i++) {
+                    adjustedImage[i] *= 1.f * spp / (sample + 1);
+                }
+                Image::save(
+                    width,
+                    height,
+                    adjustedImage,
+                    padding + prefix + "_" + exrFilename
+                );
+            }
+            x *= 2;
+        }
     }
 
     Image::save(
