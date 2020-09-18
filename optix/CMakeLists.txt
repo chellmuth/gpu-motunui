@@ -5,6 +5,7 @@ target_include_directories(ptx_files PRIVATE "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIREC
 target_include_directories(ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/ext/optix_sdk")
 set_property(TARGET ptx_files PROPERTY CUDA_PTX_COMPILATION ON)
 set_property(TARGET ptx_files PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_compile_options(ptx_files PRIVATE $<$<COMPILE_LANGUAGE:CUDA>: --use_fast_math>)
 
 add_custom_target(
   ptx_headers
