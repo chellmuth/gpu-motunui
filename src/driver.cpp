@@ -661,6 +661,30 @@ static void updateBetaWithTextureAlbedos(
    }
 }
 
+static void updateEmitLighting(
+    BufferManager &buffers,
+    int width,
+    int height,
+    int spp,
+    std::vector<float> &outputImage
+) {
+    // Calculate Le
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int idIndex = 3 * (row * width + col);
+            const int materialID = buffers.output.idBuffer[idIndex + 1];
+
+            // fixme: Pandanus leavesLower are lights
+            if (materialID != 101) { continue; }
+
+            const int pixelIndex = 3 * (row * width + col);
+            outputImage[pixelIndex + 0] += 1.f
+                * buffers.host.betaBuffer[pixelIndex]
+                * (1.f / spp);
+        }
+    }
+}
+
 static void updateEnvironmentLighting(
     OptixState &state,
     BufferManager &buffers,
@@ -760,8 +784,16 @@ static void runSample(
         outputImage
     );
 
+    updateEmitLighting(
+        buffers,
+        width,
+        height,
+        spp,
+        outputImage
+    );
+
     // Bounce
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 1; i++) {
         // Lookup ptex textures at current intersection, and set beta
         updateBetaWithTextureAlbedos(
             buffers,
@@ -813,6 +845,14 @@ static void runSample(
             params,
             outputImage
         );
+
+        updateEmitLighting(
+            buffers,
+            width,
+            height,
+            spp,
+            outputImage
+        );
     }
 }
 
@@ -846,7 +886,7 @@ void Driver::launch(Cam cam, const std::string &exrFilename)
 
     std::vector<float> textureImage(width * height * 3, 0.f);
 
-    const int spp = 4;
+    const int spp = 1;
 
     for (int sample = 0; sample < spp; sample++) {
         runSample(
