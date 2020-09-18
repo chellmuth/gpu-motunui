@@ -30,7 +30,8 @@ struct Params {
 };
 
 void launch(
-    OptixState &state,
+    OptixState &optixState,
+    SceneState &sceneState,
     Cam cam,
     const std::string &exrFilename
 );

@@ -218,14 +218,16 @@ static void linkPipeline(OptixState &state)
     ));
 }
 
-static void createShaderBindingTable(OptixState &state)
-{
+static void createShaderBindingTable(
+    OptixState &optixState,
+    SceneState &sceneState
+) {
     CUdeviceptr raygenRecord;
     const size_t raygenRecordSize = sizeof(RayGenSbtRecord);
     CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&raygenRecord), raygenRecordSize));
 
     RayGenSbtRecord raygenSbt;
-    CHECK_OPTIX(optixSbtRecordPackHeader(state.raygenProgramGroup, &raygenSbt));
+    CHECK_OPTIX(optixSbtRecordPackHeader(optixState.raygenProgramGroup, &raygenSbt));
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(raygenRecord),
         &raygenSbt,
@@ -238,7 +240,7 @@ static void createShaderBindingTable(OptixState &state)
     CHECK_CUDA(cudaMalloc(reinterpret_cast<void **>(&missRecord), missRecordSize));
 
     MissSbtRecord missSbt;
-    CHECK_OPTIX(optixSbtRecordPackHeader(state.missProgramGroup, &missSbt));
+    CHECK_OPTIX(optixSbtRecordPackHeader(optixState.missProgramGroup, &missSbt));
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(missRecord),
         &missSbt,
@@ -249,10 +251,10 @@ static void createShaderBindingTable(OptixState &state)
     CUdeviceptr d_hitgroupRecords;
 
     std::vector<HitGroupSbtRecord> hitgroupRecords;
-    for (const auto &geometryResult : state.geometries) {
+    for (const auto &geometryResult : sceneState.geometries) {
         for (const auto &record : geometryResult.hostSBTRecords) {
             HitGroupSbtRecord hitgroupSbt;
-            CHECK_OPTIX(optixSbtRecordPackHeader(state.hitgroupProgramGroup, &hitgroupSbt));
+            CHECK_OPTIX(optixSbtRecordPackHeader(optixState.hitgroupProgramGroup, &hitgroupSbt));
             hitgroupSbt.data.baseColor = Materials::baseColors[record.materialID];
             hitgroupSbt.data.textureIndex = record.textureIndex;
             hitgroupSbt.data.materialID = record.materialID;
@@ -277,34 +279,34 @@ static void createShaderBindingTable(OptixState &state)
         cudaMemcpyHostToDevice
     ));
 
-    state.sbt.raygenRecord = raygenRecord;
-    state.sbt.missRecordBase = missRecord;
-    state.sbt.missRecordStrideInBytes = sizeof(MissSbtRecord);
-    state.sbt.missRecordCount = 1;
-    state.sbt.hitgroupRecordBase = d_hitgroupRecords;
-    state.sbt.hitgroupRecordStrideInBytes = sizeof(HitGroupSbtRecord);
-    state.sbt.hitgroupRecordCount = hitgroupRecords.size();
+    optixState.sbt.raygenRecord = raygenRecord;
+    optixState.sbt.missRecordBase = missRecord;
+    optixState.sbt.missRecordStrideInBytes = sizeof(MissSbtRecord);
+    optixState.sbt.missRecordCount = 1;
+    optixState.sbt.hitgroupRecordBase = d_hitgroupRecords;
+    optixState.sbt.hitgroupRecordStrideInBytes = sizeof(HitGroupSbtRecord);
+    optixState.sbt.hitgroupRecordCount = hitgroupRecords.size();
 }
 
 void Driver::init()
 {
-    createContext(m_state);
+    createContext(m_optixState);
 
     EnvironmentLight environmentLight;
     environmentLight.queryMemoryRequirements();
 
     size_t gb = 1024 * 1024 * 1024;
-    m_state.arena.init(6.7 * gb);
+    m_sceneState.arena.init(6.7 * gb);
 
-    m_state.environmentState = environmentLight.snapshotTextureObject(m_state.arena);
-    m_state.arena.releaseAll();
+    m_sceneState.environmentState = environmentLight.snapshotTextureObject(m_sceneState.arena);
+    m_sceneState.arena.releaseAll();
 
-    m_state.geometries = Container::createGeometryResults(m_state.context, m_state.arena);
+    m_sceneState.geometries = Container::createGeometryResults(m_optixState.context, m_sceneState.arena);
 
-    createModule(m_state);
-    createProgramGroups(m_state);
-    linkPipeline(m_state);
-    createShaderBindingTable(m_state);
+    createModule(m_optixState);
+    createProgramGroups(m_optixState);
+    linkPipeline(m_optixState);
+    createShaderBindingTable(m_optixState, m_sceneState);
 
     CHECK_CUDA(cudaDeviceSynchronize());
 }
@@ -312,7 +314,7 @@ void Driver::init()
 void Driver::launch(Cam cam, const std::string &exrFilename)
 {
     std::cout << "Rendering: " << exrFilename << std::endl;
-    Renderer::launch(m_state, cam, exrFilename);
+    Renderer::launch(m_optixState, m_sceneState, cam, exrFilename);
 }
 
 }

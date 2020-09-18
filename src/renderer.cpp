@@ -380,7 +380,7 @@ static void updateEmitLighting(
 }
 
 static void updateEnvironmentLighting(
-    OptixState &state,
+    SceneState &sceneState,
     BufferManager &buffers,
     int width,
     int height,
@@ -389,12 +389,12 @@ static void updateEnvironmentLighting(
     std::vector<float> &outputImage
 ) {
     // Lookup L for misses
-    state.arena.restoreSnapshot(state.environmentState.snapshot);
+    sceneState.arena.restoreSnapshot(sceneState.environmentState.snapshot);
     std::vector<float> environmentLightBuffer(width * height * 3, 0.f);
     EnvironmentLight::calculateEnvironmentLighting(
         width,
         height,
-        state.environmentState.textureObject,
+        sceneState.environmentState.textureObject,
         params.occlusionBuffer,
         params.missDirectionBuffer,
         environmentLightBuffer
@@ -418,7 +418,8 @@ static void updateEnvironmentLighting(
 
 static void runSample(
     int sample,
-    OptixState &state,
+    OptixState &optixState,
+    SceneState &sceneState,
     BufferManager &buffers,
     std::vector<PtexTexture> &textures,
     CUstream stream,
@@ -439,8 +440,8 @@ static void runSample(
     resetBounceBuffers(buffers, width, height, params);
 
     // Run intersection
-    for (const auto &[i, geometry] : enumerate(state.geometries)) {
-        state.arena.restoreSnapshot(geometry.snapshot);
+    for (const auto &[i, geometry] : enumerate(sceneState.geometries)) {
+        sceneState.arena.restoreSnapshot(geometry.snapshot);
 
         params.handle = geometry.handle;
         CHECK_CUDA(cudaMemcpy(
@@ -451,11 +452,11 @@ static void runSample(
         ));
 
         CHECK_OPTIX(optixLaunch(
-            state.pipeline,
+            optixState.pipeline,
             stream,
             d_params,
             sizeof(Params),
-            &state.sbt,
+            &optixState.sbt,
             width,
             height,
             /*depth=*/1
@@ -469,7 +470,7 @@ static void runSample(
     CHECK_CUDA(cudaDeviceSynchronize());
 
     updateEnvironmentLighting(
-        state,
+        sceneState,
         buffers,
         width,
         height,
@@ -500,8 +501,8 @@ static void runSample(
 
         resetBounceBuffers(buffers, width, height, params);
 
-        for (const auto &[i, geometry] : enumerate(state.geometries)) {
-            state.arena.restoreSnapshot(geometry.snapshot);
+        for (const auto &[i, geometry] : enumerate(sceneState.geometries)) {
+            sceneState.arena.restoreSnapshot(geometry.snapshot);
 
             params.handle = geometry.handle;
             params.bounce = 1 + i;
@@ -513,11 +514,11 @@ static void runSample(
             ));
 
             CHECK_OPTIX(optixLaunch(
-                state.pipeline,
+                optixState.pipeline,
                 stream,
                 d_params,
                 sizeof(Params),
-                &state.sbt,
+                &optixState.sbt,
                 width,
                 height,
                 /*depth=*/1
@@ -531,7 +532,7 @@ static void runSample(
         CHECK_CUDA(cudaDeviceSynchronize());
 
         updateEnvironmentLighting(
-            state,
+            sceneState,
             buffers,
             width,
             height,
@@ -551,7 +552,8 @@ static void runSample(
 }
 
 void launch(
-    OptixState &state,
+    OptixState &optixState,
+    SceneState &sceneState,
     Cam cam,
     const std::string &exrFilename
 ) {
@@ -588,7 +590,8 @@ void launch(
     for (int sample = 0; sample < spp; sample++) {
         runSample(
             sample,
-            state,
+            optixState,
+            sceneState,
             buffers,
             textures,
             stream,

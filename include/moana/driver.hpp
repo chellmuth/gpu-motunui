@@ -29,19 +29,19 @@ struct OptixState {
     OptixDeviceContext context = 0;
     std::vector<OptixTraversableHandle> gasHandles = {};
     OptixPipelineCompileOptions pipelineCompileOptions = {};
+    OptixModuleCompileOptions moduleCompileOptions = {};
     OptixModule module = 0;
     OptixProgramGroup raygenProgramGroup;
     OptixProgramGroup missProgramGroup;
     OptixProgramGroup hitgroupProgramGroup;
     OptixPipeline pipeline = 0;
     OptixShaderBindingTable sbt = {};
+};
 
+struct SceneState {
     ASArena arena;
     std::vector<GeometryResult> geometries;
-
     EnvironmentLightState environmentState;
-
-    OptixModuleCompileOptions moduleCompileOptions = {};
 };
 
 class Driver {
@@ -50,7 +50,8 @@ public:
     void launch(Cam cam, const std::string &exrFilename);
 
 private:
-    OptixState m_state;
+    OptixState m_optixState;
+    SceneState m_sceneState;
 };
 
 }
