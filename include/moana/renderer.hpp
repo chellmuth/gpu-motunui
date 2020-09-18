@@ -11,7 +11,6 @@ namespace moana { namespace Renderer {
 struct Params {
     OptixTraversableHandle handle;
 
-    float *outputBuffer;
     float *depthBuffer;
     float *xiBuffer;
     float *cosThetaWiBuffer;
@@ -23,11 +22,13 @@ struct Params {
     float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
+    float *tempBuffer;
 
     Camera camera;
     int bounce;
 
     int sampleCount;
+    int rayType;
 };
 
 void launch(

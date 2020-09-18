@@ -211,7 +211,7 @@ __forceinline__ __device__ static Ray raygenBounce(bool *quit)
     return bounceRay;
 }
 
-extern "C" __global__ void __raygen__rg()
+__device__ static void raygenNormal()
 {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
@@ -281,4 +281,68 @@ extern "C" __global__ void __raygen__rg()
     params.missDirectionBuffer[missDirectionIndex + 0] = direction.x();
     params.missDirectionBuffer[missDirectionIndex + 1] = direction.y();
     params.missDirectionBuffer[missDirectionIndex + 2] = direction.z();
+}
+
+__device__ static void raygenShadow()
+{
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
+    const BSDFSampleRecord &sampleRecord = params.sampleRecordOutBuffer[sampleRecordIndex];
+    if (!sampleRecord.isValid) {
+        const int tempIndex = 3 * (index.y * dim.x + index.x);
+        params.tempBuffer[tempIndex + 0] = 1.f;
+        params.tempBuffer[tempIndex + 1] = 1.f;
+        params.tempBuffer[tempIndex + 2] = 1.f;
+
+        return;
+    }
+
+    const Vec3 origin(sampleRecord.point.x, sampleRecord.point.y, sampleRecord.point.z);
+    const Vec3 lightPoint(95000.f, 195000.f, 200000.f);
+    const Vec3 lightDirection = lightPoint - origin;
+    const Vec3 wi = normalized(lightDirection);
+    const float tMax = lightDirection.length();
+
+    PerRayData prd;
+    prd.isHit = false;
+
+    unsigned int p0, p1;
+    util::packPointer(&prd, p0, p1);
+    optixTrace(
+        params.handle,
+        float3{ origin.x(), origin.y(), origin.z() },
+        float3{ wi.x(), wi.y(), wi.z() },
+        1e-3,
+        tMax - 1e-4,
+        0.f,
+        OptixVisibilityMask(255),
+        OPTIX_RAY_FLAG_TERMINATE_ON_FIRST_HIT,
+        0, 1, 0, // SBT params
+        p0, p1
+    );
+
+    const int tempIndex = 3 * (index.y * dim.x + index.x);
+    if (prd.isHit) {
+        params.tempBuffer[tempIndex + 0] = 1.f;
+        params.tempBuffer[tempIndex + 1] = 1.f;
+    }
+    params.tempBuffer[tempIndex + 2] = 1.f
+        * fabsf(dot(wi, sampleRecord.normal))
+        * (20000.f * 20000.f) / (lightDirection.length() * lightDirection.length())
+    ;
+}
+
+extern "C" __global__ void __raygen__rg()
+{
+    const uint3 index = optixGetLaunchIndex();
+    const uint3 dim = optixGetLaunchDimensions();
+
+    // fixme: two pipelines or program groups
+    if (params.rayType == 0) {
+        raygenNormal();
+    } else {
+        raygenShadow();
+    }
 }

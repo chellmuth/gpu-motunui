@@ -14,6 +14,7 @@ namespace moana { namespace Renderer {
 
 struct HostBuffers {
     std::vector<float> betaBuffer;
+    std::vector<float> albedoBuffer;
 };
 
 struct OutputBuffers {
@@ -24,6 +25,7 @@ struct OutputBuffers {
     std::vector<float> occlusionBuffer;
     std::vector<BSDFSampleRecord> sampleRecordInBuffer;
     std::vector<BSDFSampleRecord> sampleRecordOutBuffer;
+    std::vector<float> tempBuffer;
 };
 
 struct BufferManager {
@@ -37,6 +39,7 @@ struct BufferManager {
     size_t barycentricBufferSizeInBytes;
     size_t idBufferSizeInBytes;
     size_t colorBufferSizeInBytes;
+    size_t tempBufferSizeInBytes;
 
     HostBuffers host;
     OutputBuffers output;
@@ -55,6 +58,7 @@ static void copyOutputBuffers(
     buffers.output.occlusionBuffer.resize(width * height);
     buffers.output.sampleRecordInBuffer.resize(width * height);
     buffers.output.sampleRecordOutBuffer.resize(width * height);
+    buffers.output.tempBuffer.resize(width * height * 3);
 
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(buffers.output.cosThetaWiBuffer.data()),
@@ -104,6 +108,13 @@ static void copyOutputBuffers(
         buffers.sampleRecordOutBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(buffers.output.tempBuffer.data()),
+        params.tempBuffer,
+        buffers.tempBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
 }
 
 static void resetSampleBuffers(
@@ -117,6 +128,13 @@ static void resetSampleBuffers(
         buffers.host.betaBuffer.begin(),
         buffers.host.betaBuffer.end(),
         1.f
+    );
+
+    buffers.host.albedoBuffer.resize(width * height * 3);
+    std::fill(
+        buffers.host.albedoBuffer.begin(),
+        buffers.host.albedoBuffer.end(),
+        0.f
     );
 
     std::vector<float> xiBuffer(width * height * 2, -1.f);
@@ -202,6 +220,13 @@ static void resetBounceBuffers(
         0,
         buffers.colorBufferSizeInBytes
     ));
+
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.tempBuffer),
+        0,
+        buffers.tempBufferSizeInBytes
+    ));
+
 }
 
 static void mallocBuffers(
@@ -220,6 +245,7 @@ static void mallocBuffers(
     buffers.barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     buffers.idBufferSizeInBytes = width * height * sizeof(int) * 3;
     buffers.colorBufferSizeInBytes = width * height * sizeof(float) * 3;
+    buffers.tempBufferSizeInBytes = width * height * sizeof(float) * 3;
 
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.depthBuffer),
@@ -271,6 +297,10 @@ static void mallocBuffers(
         buffers.colorBufferSizeInBytes
     ));
 
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.tempBuffer),
+        buffers.tempBufferSizeInBytes
+    ));
 }
 
 static void updateBetaWithTextureAlbedos(
@@ -344,6 +374,10 @@ static void updateBetaWithTextureAlbedos(
            buffers.host.betaBuffer[pixelIndex + 0] *= cosThetaWi * textureX;
            buffers.host.betaBuffer[pixelIndex + 1] *= cosThetaWi * textureY;
            buffers.host.betaBuffer[pixelIndex + 2] *= cosThetaWi * textureZ;
+
+           buffers.host.albedoBuffer[pixelIndex + 0] = textureX;
+           buffers.host.albedoBuffer[pixelIndex + 1] = textureY;
+           buffers.host.albedoBuffer[pixelIndex + 2] = textureZ;
 
            textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
            textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
@@ -444,6 +478,8 @@ static void runSample(
         sceneState.arena.restoreSnapshot(geometry.snapshot);
 
         params.handle = geometry.handle;
+        params.bounce = 0;
+        params.rayType = 0;
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_params),
             &params,
@@ -469,42 +505,90 @@ static void runSample(
     copyOutputBuffers(buffers, width, height, params);
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    updateEnvironmentLighting(
-        sceneState,
-        buffers,
-        width,
-        height,
-        spp,
-        params,
-        outputImage
-    );
+    // updateEnvironmentLighting(
+    //     sceneState,
+    //     buffers,
+    //     width,
+    //     height,
+    //     spp,
+    //     params,
+    //     outputImage
+    // );
 
-    updateEmitLighting(
-        buffers,
-        width,
-        height,
-        spp,
-        outputImage
-    );
+    // updateEmitLighting(
+    //     buffers,
+    //     width,
+    //     height,
+    //     spp,
+    //     outputImage
+    // );
+
 
     // Bounce
     for (int i = 0; i < 5; i++) {
-        // Lookup ptex textures at current intersection, and set beta
-        updateBetaWithTextureAlbedos(
-            buffers,
-            textures,
-            width,
-            height,
-            spp,
-            textureImage
-        );
+        {
+            for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
+                sceneState.arena.restoreSnapshot(geometry.snapshot);
+
+                params.handle = geometry.handle;
+                params.bounce = i;
+                params.rayType = 1;
+                CHECK_CUDA(cudaMemcpy(
+                    reinterpret_cast<void *>(d_params),
+                    &params,
+                    sizeof(params),
+                    cudaMemcpyHostToDevice
+                ));
+
+                CHECK_OPTIX(optixLaunch(
+                    optixState.pipeline,
+                    stream,
+                    d_params,
+                    sizeof(Params),
+                    &optixState.sbt,
+                    width,
+                    height,
+                    /*depth=*/1
+                ));
+
+                CHECK_CUDA(cudaDeviceSynchronize());
+            }
+            copyOutputBuffers(buffers, width, height, params);
+
+            updateBetaWithTextureAlbedos(
+                buffers,
+                textures,
+                width,
+                height,
+                spp,
+                textureImage
+            );
+
+            for (int row = 0; row < height; row++) {
+                for (int col = 0; col < width; col++) {
+                    const int pixelIndex = 3 * (row * width + col);
+                    if (buffers.output.tempBuffer[pixelIndex + 0] != 0.f) { continue; }
+
+                    float L[3] = { 891.443777, 505.928150, 154.625939 };
+                    for (int i = 0; i < 3; i++) {
+                        outputImage[pixelIndex + i] += 1.f
+                            * L[i]
+                            * buffers.host.albedoBuffer[pixelIndex + i]
+                            * buffers.host.betaBuffer[pixelIndex + i]
+                            * buffers.output.tempBuffer[pixelIndex + 2]
+                            * (1.f / spp);
+                    }
+                }
+            }
+        }
 
         resetBounceBuffers(buffers, width, height, params);
 
-        for (const auto &[i, geometry] : enumerate(sceneState.geometries)) {
+        for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
             sceneState.arena.restoreSnapshot(geometry.snapshot);
 
             params.handle = geometry.handle;
+            params.rayType = 0;
             params.bounce = 1 + i;
             CHECK_CUDA(cudaMemcpy(
                 reinterpret_cast<void *>(d_params),
@@ -531,23 +615,23 @@ static void runSample(
         copyOutputBuffers(buffers, width, height, params);
         CHECK_CUDA(cudaDeviceSynchronize());
 
-        updateEnvironmentLighting(
-            sceneState,
-            buffers,
-            width,
-            height,
-            spp,
-            params,
-            outputImage
-        );
+        // updateEnvironmentLighting(
+        //     sceneState,
+        //     buffers,
+        //     width,
+        //     height,
+        //     spp,
+        //     params,
+        //     outputImage
+        // );
 
-        updateEmitLighting(
-            buffers,
-            width,
-            height,
-            spp,
-            outputImage
-        );
+        // updateEmitLighting(
+        //     buffers,
+        //     width,
+        //     height,
+        //     spp,
+        //     outputImage
+        // );
     }
 }
 
@@ -586,7 +670,7 @@ void launch(
 
     std::vector<float> textureImage(width * height * 3, 0.f);
 
-    const int spp = 99999;
+    const int spp = 1;
     for (int sample = 0; sample < spp; sample++) {
         runSample(
             sample,
