@@ -397,6 +397,7 @@ static void updateBetaBuffer(
            for (int i = 0; i < 3; i++) {
                buffers.host.betaBuffer[pixelIndex + i] *= 1.f
                    * cosThetaWi
+                   * 2.f
                    * buffers.host.albedoBuffer[pixelIndex + i];
            }
        }

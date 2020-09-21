@@ -6,6 +6,7 @@
 #include "moana/core/camera.hpp"
 #include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
+#include "moana/cuda/triangle.hpp"
 #include "moana/driver.hpp"
 #include "moana/renderer.hpp"
 #include "optix_sdk.hpp"
@@ -299,8 +300,36 @@ __device__ static void raygenShadow()
         return;
     }
 
+    unsigned int seed = tea<4>(
+        index.y * dim.x + index.x,
+        params.sampleCount + (dim.x * dim.y * params.bounce)
+    );
+    const float xi1 = rnd(seed);
+    const float xi2 = rnd(seed);
+    const float xi3 = rnd(seed);
+
+    const Triangle t1(
+        Vec3(101346.539, 202660.438, 189948.188),
+        Vec3(106779.617, 187339.562, 201599.453),
+        Vec3(83220.3828, 202660.438, 198400.547)
+    );
+    const Triangle t2(
+        Vec3(101346.539, 202660.438, 189948.188),
+        Vec3(88653.4609, 187339.562, 210051.812),
+        Vec3(88653.4609, 187339.562, 210051.812)
+    );
+
+    const Triangle *sampleTriangle;
+    if (xi1 < 0.5f) {
+        sampleTriangle = &t1;
+    } else {
+        sampleTriangle = &t2;
+    }
+
+    const SurfaceSample lightSample = sampleTriangle->sample(xi2, xi3);
+
     const Vec3 origin(sampleRecord.point.x, sampleRecord.point.y, sampleRecord.point.z);
-    const Vec3 lightPoint(95000.f, 195000.f, 200000.f);
+    const Vec3 lightPoint = lightSample.point;
     const Vec3 lightDirection = lightPoint - origin;
     const Vec3 wi = normalized(lightDirection);
     const float tMax = lightDirection.length();
