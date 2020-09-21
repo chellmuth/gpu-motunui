@@ -323,12 +323,16 @@ __device__ static void raygenShadow()
         p0, p1
     );
 
+    const Vec3 lightNormal = Vec3(-0.323744, -0.642788, -0.694272);
+
     const int tempIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
         params.tempBuffer[tempIndex + 0] = 1.f;
         params.tempBuffer[tempIndex + 1] = 1.f;
     }
+
     params.tempBuffer[tempIndex + 2] = 1.f
+        * fabsf(dot(lightNormal, -wi))
         * fabsf(dot(wi, sampleRecord.normal))
         * (20000.f * 20000.f) / (lightDirection.length() * lightDirection.length())
     ;
