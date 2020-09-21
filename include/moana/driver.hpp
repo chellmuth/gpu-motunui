@@ -12,13 +12,18 @@
 #include "moana/scene/as_arena.hpp"
 #include "moana/scene/types.hpp"
 #include "moana/pipeline.hpp"
+#include "moana/types.hpp"
 
 namespace moana {
 
 class Driver {
 public:
     void init();
-    void launch(Cam cam, const std::string &exrFilename);
+    void launch(
+        RenderRequest renderRequest,
+        Cam cam,
+        const std::string &exrFilename
+    );
 
 private:
     OptixState m_optixState;

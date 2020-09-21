@@ -64,10 +64,13 @@ void Driver::init()
     CHECK_CUDA(cudaDeviceSynchronize());
 }
 
-void Driver::launch(Cam cam, const std::string &exrFilename)
-{
+void Driver::launch(
+    RenderRequest renderRequest,
+    Cam cam,
+    const std::string &exrFilename
+) {
     std::cout << "Rendering: " << exrFilename << std::endl;
-    Renderer::launch(m_optixState, m_sceneState, cam, exrFilename);
+    Renderer::launch(renderRequest, m_optixState, m_sceneState, cam, exrFilename);
 }
 
 }

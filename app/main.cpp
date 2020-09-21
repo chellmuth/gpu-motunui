@@ -3,6 +3,7 @@
 
 #include "moana/driver.hpp"
 #include "moana/scene.hpp"
+#include "moana/types.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +14,11 @@ int main(int argc, char *argv[])
     Driver driver;
     driver.init();
 
-    driver.launch(Cam::ShotCam, "shot.exr");
+    RenderRequest request;
+    request.spp = 1;
+    request.bounces = 1;
+
+    driver.launch(request, Cam::ShotCam, "shot.exr");
     // driver.launch(Cam::BeachCam, "beach.exr");
     // driver.launch(Cam::BirdseyeCam, "birdseye.exr");
     // driver.launch(Cam::DunesACam, "dunesA.exr");

@@ -5,6 +5,7 @@
 #include "moana/driver.hpp"
 #include "moana/scene.hpp"
 #include "moana/scene/types.hpp"
+#include "moana/types.hpp"
 
 namespace moana { namespace Renderer {
 
@@ -32,6 +33,7 @@ struct Params {
 };
 
 void launch(
+    RenderRequest request,
     OptixState &optixState,
     SceneState &sceneState,
     Cam cam,

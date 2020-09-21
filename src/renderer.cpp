@@ -452,6 +452,7 @@ static void updateEnvironmentLighting(
 
 static void runSample(
     int sample,
+    int bounces,
     OptixState &optixState,
     SceneState &sceneState,
     BufferManager &buffers,
@@ -525,13 +526,13 @@ static void runSample(
 
 
     // Bounce
-    for (int i = 0; i < 5; i++) {
+    for (int bounce = 0; bounce < bounces; bounce++) {
         {
             for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
                 sceneState.arena.restoreSnapshot(geometry.snapshot);
 
                 params.handle = geometry.handle;
-                params.bounce = i;
+                params.bounce = bounce;
                 params.rayType = 1;
                 CHECK_CUDA(cudaMemcpy(
                     reinterpret_cast<void *>(d_params),
@@ -589,7 +590,7 @@ static void runSample(
 
             params.handle = geometry.handle;
             params.rayType = 0;
-            params.bounce = 1 + i;
+            params.bounce = 1 + bounce;
             CHECK_CUDA(cudaMemcpy(
                 reinterpret_cast<void *>(d_params),
                 &params,
@@ -636,6 +637,7 @@ static void runSample(
 }
 
 void launch(
+    RenderRequest renderRequest,
     OptixState &optixState,
     SceneState &sceneState,
     Cam cam,
@@ -670,10 +672,11 @@ void launch(
 
     std::vector<float> textureImage(width * height * 3, 0.f);
 
-    const int spp = 1;
+    const int spp = renderRequest.spp;
     for (int sample = 0; sample < spp; sample++) {
         runSample(
             sample,
+            renderRequest.bounces,
             optixState,
             sceneState,
             buffers,
