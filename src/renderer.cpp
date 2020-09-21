@@ -303,7 +303,7 @@ static void mallocBuffers(
     ));
 }
 
-static void updateBetaWithTextureAlbedos(
+static void updateAlbedoBuffer(
     BufferManager &buffers,
     std::vector<PtexTexture> &textures,
     int width,
@@ -369,19 +369,36 @@ static void updateBetaWithTextureAlbedos(
                textureZ = buffers.output.colorBuffer[pixelIndex + 2];
            }
 
-           const int cosThetaWiIndex = row * width + col;
-           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
-           buffers.host.betaBuffer[pixelIndex + 0] *= cosThetaWi * textureX;
-           buffers.host.betaBuffer[pixelIndex + 1] *= cosThetaWi * textureY;
-           buffers.host.betaBuffer[pixelIndex + 2] *= cosThetaWi * textureZ;
-
            buffers.host.albedoBuffer[pixelIndex + 0] = textureX;
            buffers.host.albedoBuffer[pixelIndex + 1] = textureY;
            buffers.host.albedoBuffer[pixelIndex + 2] = textureZ;
 
+           const int cosThetaWiIndex = row * width + col;
+           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+
            textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
            textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
            textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * cosThetaWi;
+       }
+   }
+}
+
+static void updateBetaBuffer(
+    BufferManager &buffers,
+    int width,
+    int height
+) {
+   for (int row = 0; row < height; row++) {
+       for (int col = 0; col < width; col++) {
+           const int pixelIndex = 3 * (row * width + col);
+
+           const int cosThetaWiIndex = row * width + col;
+           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+           for (int i = 0; i < 3; i++) {
+               buffers.host.betaBuffer[pixelIndex + i] *= 1.f
+                   * cosThetaWi
+                   * buffers.host.albedoBuffer[pixelIndex + i];
+           }
        }
    }
 }
@@ -556,7 +573,7 @@ static void runSample(
             }
             copyOutputBuffers(buffers, width, height, params);
 
-            updateBetaWithTextureAlbedos(
+            updateAlbedoBuffer(
                 buffers,
                 textures,
                 width,
@@ -582,6 +599,12 @@ static void runSample(
                 }
             }
         }
+
+        updateBetaBuffer(
+            buffers,
+            width,
+            height
+        );
 
         resetBounceBuffers(buffers, width, height, params);
 

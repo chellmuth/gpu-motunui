@@ -33,7 +33,18 @@ Vec3 PtexTexture::lookup(float2 uv, int faceIndex) const
     Ptex::PtexFilter *filter = Ptex::PtexFilter::getFilter(texture, opts);
 
     float result[3];
-    filter->eval(result, 0, texture->numChannels(), faceIndex, uv.x, uv.y, 0.f, 0.f, 0.f, 0.f);
+    filter->eval(
+        result,
+        0,
+        texture->numChannels(),
+        faceIndex,
+        uv.x,
+        uv.y,
+        0.f,
+        0.f,
+        0.f,
+        0.f
+    );
 
     filter->release();
     texture->release();

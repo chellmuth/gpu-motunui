@@ -314,7 +314,7 @@ __device__ static void raygenShadow()
         params.handle,
         float3{ origin.x(), origin.y(), origin.z() },
         float3{ wi.x(), wi.y(), wi.z() },
-        1e-3,
+        2e-3,
         tMax - 1e-4,
         0.f,
         OptixVisibilityMask(255),
@@ -323,7 +323,7 @@ __device__ static void raygenShadow()
         p0, p1
     );
 
-    const Vec3 lightNormal = Vec3(-0.323744, -0.642788, -0.694272);
+    const Vec3 lightNormal = Vec3(-0.323744059f, -0.642787874f, -0.694271863f);
 
     const int tempIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
@@ -335,6 +335,7 @@ __device__ static void raygenShadow()
         * fabsf(dot(lightNormal, -wi))
         * fabsf(dot(wi, sampleRecord.normal))
         * (20000.f * 20000.f) / (lightDirection.length() * lightDirection.length())
+        * (1.f / M_PI)
     ;
 }
 
