@@ -404,33 +404,6 @@ static void updateBetaBuffer(
    }
 }
 
-static void updateEmitLighting(
-    BufferManager &buffers,
-    int width,
-    int height,
-    int spp,
-    std::vector<float> &outputImage
-) {
-    // Calculate Le
-    for (int row = 0; row < height; row++) {
-        for (int col = 0; col < width; col++) {
-            const int idIndex = 3 * (row * width + col);
-            const int materialID = buffers.output.idBuffer[idIndex + 1];
-
-            // fixme: Pandanus leavesLower are lights
-            if (materialID != 104) { continue; }
-
-            float L[3] = { 891.443777, 505.928150, 154.625939 };
-            const int pixelIndex = 3 * (row * width + col);
-            for (int i = 0; i < 3; i++) {
-                outputImage[pixelIndex + i] += L[i]
-                    * buffers.host.betaBuffer[pixelIndex + i]
-                    * (1.f / spp);
-            }
-        }
-    }
-}
-
 static void updateEnvironmentLighting(
     SceneState &sceneState,
     BufferManager &buffers,
@@ -522,26 +495,18 @@ static void runSample(
 
     // Copy buffers to host for lighting and texture calculations
     copyOutputBuffers(buffers, width, height, params);
+
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    // updateEnvironmentLighting(
-    //     sceneState,
-    //     buffers,
-    //     width,
-    //     height,
-    //     spp,
-    //     params,
-    //     outputImage
-    // );
-
-    // updateEmitLighting(
-    //     buffers,
-    //     width,
-    //     height,
-    //     spp,
-    //     outputImage
-    // );
-
+    updateEnvironmentLighting(
+        sceneState,
+        buffers,
+        width,
+        height,
+        spp,
+        params,
+        outputImage
+    );
 
     // Bounce
     for (int bounce = 0; bounce < bounces; bounce++) {
@@ -583,22 +548,22 @@ static void runSample(
                 textureImage
             );
 
-            for (int row = 0; row < height; row++) {
-                for (int col = 0; col < width; col++) {
-                    const int pixelIndex = 3 * (row * width + col);
-                    if (buffers.output.tempBuffer[pixelIndex + 0] != 0.f) { continue; }
+        //     for (int row = 0; row < height; row++) {
+        //         for (int col = 0; col < width; col++) {
+        //             const int pixelIndex = 3 * (row * width + col);
+        //             if (buffers.output.tempBuffer[pixelIndex + 0] != 0.f) { continue; }
 
-                    float L[3] = { 891.443777, 505.928150, 154.625939 };
-                    for (int i = 0; i < 3; i++) {
-                        outputImage[pixelIndex + i] += 1.f
-                            * L[i]
-                            * buffers.host.albedoBuffer[pixelIndex + i]
-                            * buffers.host.betaBuffer[pixelIndex + i]
-                            * buffers.output.tempBuffer[pixelIndex + 2]
-                            * (1.f / spp);
-                    }
-                }
-            }
+        //             float L[3] = { 891.443777, 505.928150, 154.625939 };
+        //             for (int i = 0; i < 3; i++) {
+        //                 outputImage[pixelIndex + i] += 1.f
+        //                     * L[i]
+        //                     * buffers.host.albedoBuffer[pixelIndex + i]
+        //                     * buffers.host.betaBuffer[pixelIndex + i]
+        //                     * buffers.output.tempBuffer[pixelIndex + 2]
+        //                     * (1.f / spp);
+        //             }
+        //         }
+        //     }
         }
 
         updateBetaBuffer(
@@ -640,23 +605,15 @@ static void runSample(
         copyOutputBuffers(buffers, width, height, params);
         CHECK_CUDA(cudaDeviceSynchronize());
 
-        // updateEnvironmentLighting(
-        //     sceneState,
-        //     buffers,
-        //     width,
-        //     height,
-        //     spp,
-        //     params,
-        //     outputImage
-        // );
-
-        // updateEmitLighting(
-        //     buffers,
-        //     width,
-        //     height,
-        //     spp,
-        //     outputImage
-        // );
+        updateEnvironmentLighting(
+            sceneState,
+            buffers,
+            width,
+            height,
+            spp,
+            params,
+            outputImage
+        );
     }
 }
 
@@ -736,6 +693,12 @@ void launch(
             x *= 2;
         }
     }
+    Image::save(
+        width,
+        height,
+        outputImage,
+        exrFilename
+    );
 
     CHECK_CUDA(cudaFree(params.depthBuffer));
     CHECK_CUDA(cudaFree(params.xiBuffer));

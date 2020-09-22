@@ -33,7 +33,8 @@ extern "C" {
 }
 
 __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
-    const PerRayData &prd
+    const PerRayData &prd,
+    const Vec3 &wo
 ) {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
@@ -151,6 +152,12 @@ extern "C" __global__ void __closesthit__ch()
         prd->normal = normalized(Vec3(normal.x, normal.y, normal.z));
         prd->barycentrics = float2{0.f, 0.f};
     }
+
+    const float3 optixDirection = optixGetWorldRayDirection();
+    const Vec3 direction(optixDirection.x, optixDirection.y, optixDirection.z);
+    if (dot(prd->normal, direction) > 0.f) {
+        prd->normal = -1.f * prd->normal;
+    }
 }
 
 extern "C" __global__ void __miss__ms()
@@ -255,7 +262,7 @@ __device__ static void raygenNormal()
         const int occlusionIndex = 1 * (index.y * dim.x + index.x);
         params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
-        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd, -direction);
         const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
         params.sampleRecordOutBuffer[sampleRecordIndex] = sampleRecord;
 

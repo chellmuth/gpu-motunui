@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     driver.init();
 
     RenderRequest request;
-    request.spp = 1;
+    request.spp = 128;
     request.bounces = 1;
 
     // driver.launch(request, Cam::ShotCam, "shot.exr");
