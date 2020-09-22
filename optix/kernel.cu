@@ -369,7 +369,7 @@ __device__ static void raygenShadow()
 
     params.tempBuffer[tempIndex + 2] = 1.f
         * fabsf(dot(lightNormal, -wi))
-        * fabsf(dot(wi, sampleRecord.normal))
+        * fmaxf(0.f, dot(wi, sampleRecord.normal))
         * (20000.f * 20000.f) / (lightDirection.length() * lightDirection.length())
         * (1.f / M_PI)
     ;

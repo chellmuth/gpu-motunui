@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     RenderRequest request;
     request.spp = 128;
-    request.bounces = 1;
+    request.bounces = 2;
 
     // driver.launch(request, Cam::ShotCam, "shot.exr");
     // driver.launch(request, Cam::BeachCam, "beach.exr");
