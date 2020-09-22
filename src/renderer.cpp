@@ -498,15 +498,15 @@ static void runSample(
 
     CHECK_CUDA(cudaDeviceSynchronize());
 
-    // updateEnvironmentLighting(
-    //     sceneState,
-    //     buffers,
-    //     width,
-    //     height,
-    //     spp,
-    //     params,
-    //     outputImage
-    // );
+    updateEnvironmentLighting(
+        sceneState,
+        buffers,
+        width,
+        height,
+        spp,
+        params,
+        outputImage
+    );
 
     // Bounce
     for (int bounce = 0; bounce < bounces; bounce++) {
@@ -605,15 +605,15 @@ static void runSample(
         copyOutputBuffers(buffers, width, height, params);
         CHECK_CUDA(cudaDeviceSynchronize());
 
-        // updateEnvironmentLighting(
-        //     sceneState,
-        //     buffers,
-        //     width,
-        //     height,
-        //     spp,
-        //     params,
-        //     outputImage
-        // );
+        updateEnvironmentLighting(
+            sceneState,
+            buffers,
+            width,
+            height,
+            spp,
+            params,
+            outputImage
+        );
     }
 }
 
