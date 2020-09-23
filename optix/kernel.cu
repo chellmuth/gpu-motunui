@@ -296,13 +296,11 @@ __device__ static void raygenShadow()
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
+    const int shadowOcclusionIndex = 1 * (index.y * dim.x + index.x);
     const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
     const BSDFSampleRecord &sampleRecord = params.sampleRecordOutBuffer[sampleRecordIndex];
     if (!sampleRecord.isValid) {
-        const int tempIndex = 3 * (index.y * dim.x + index.x);
-        params.tempBuffer[tempIndex + 0] = 1.f;
-        params.tempBuffer[tempIndex + 1] = 1.f;
-        params.tempBuffer[tempIndex + 2] = 1.f;
+        params.shadowOcclusionBuffer[shadowOcclusionIndex] = 1;
 
         return;
     }
@@ -361,13 +359,12 @@ __device__ static void raygenShadow()
 
     const Vec3 lightNormal = Vec3(-0.323744059f, -0.642787874f, -0.694271863f);
 
-    const int tempIndex = 3 * (index.y * dim.x + index.x);
     if (prd.isHit) {
-        params.tempBuffer[tempIndex + 0] = 1.f;
-        params.tempBuffer[tempIndex + 1] = 1.f;
+        params.shadowOcclusionBuffer[shadowOcclusionIndex] = 1;
     }
 
-    params.tempBuffer[tempIndex + 2] = 1.f
+    const int shadowWeightIndex = 1 * (index.y * dim.x + index.x);
+    params.shadowWeightBuffer[shadowWeightIndex] = 1.f
         * fabsf(dot(lightNormal, -wi))
         * fmaxf(0.f, dot(wi, sampleRecord.normal))
         * (20000.f * 20000.f) / (lightDirection.length() * lightDirection.length())

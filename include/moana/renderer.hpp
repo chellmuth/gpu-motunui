@@ -23,7 +23,8 @@ struct Params {
     float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
-    float *tempBuffer;
+    char *shadowOcclusionBuffer;
+    float *shadowWeightBuffer;
 
     Camera camera;
     int bounce;

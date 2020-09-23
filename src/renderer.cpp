@@ -25,7 +25,8 @@ struct OutputBuffers {
     std::vector<float> occlusionBuffer;
     std::vector<BSDFSampleRecord> sampleRecordInBuffer;
     std::vector<BSDFSampleRecord> sampleRecordOutBuffer;
-    std::vector<float> tempBuffer;
+    std::vector<char> shadowOcclusionBuffer;
+    std::vector<float> shadowWeightBuffer;
 };
 
 struct BufferManager {
@@ -39,7 +40,8 @@ struct BufferManager {
     size_t barycentricBufferSizeInBytes;
     size_t idBufferSizeInBytes;
     size_t colorBufferSizeInBytes;
-    size_t tempBufferSizeInBytes;
+    size_t shadowOcclusionBufferSizeInBytes;
+    size_t shadowWeightBufferSizeInBytes;
 
     HostBuffers host;
     OutputBuffers output;
@@ -58,7 +60,8 @@ static void copyOutputBuffers(
     buffers.output.occlusionBuffer.resize(width * height);
     buffers.output.sampleRecordInBuffer.resize(width * height);
     buffers.output.sampleRecordOutBuffer.resize(width * height);
-    buffers.output.tempBuffer.resize(width * height * 3);
+    buffers.output.shadowOcclusionBuffer.resize(width * height * 1);
+    buffers.output.shadowWeightBuffer.resize(width * height * 1);
 
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(buffers.output.cosThetaWiBuffer.data()),
@@ -110,9 +113,16 @@ static void copyOutputBuffers(
     ));
 
     CHECK_CUDA(cudaMemcpy(
-        reinterpret_cast<void *>(buffers.output.tempBuffer.data()),
-        params.tempBuffer,
-        buffers.tempBufferSizeInBytes,
+        reinterpret_cast<void *>(buffers.output.shadowOcclusionBuffer.data()),
+        params.shadowOcclusionBuffer,
+        buffers.shadowOcclusionBufferSizeInBytes,
+        cudaMemcpyDeviceToHost
+    ));
+
+    CHECK_CUDA(cudaMemcpy(
+        reinterpret_cast<void *>(buffers.output.shadowWeightBuffer.data()),
+        params.shadowWeightBuffer,
+        buffers.shadowWeightBufferSizeInBytes,
         cudaMemcpyDeviceToHost
     ));
 }
@@ -222,9 +232,15 @@ static void resetBounceBuffers(
     ));
 
     CHECK_CUDA(cudaMemset(
-        reinterpret_cast<void *>(params.tempBuffer),
+        reinterpret_cast<void *>(params.shadowOcclusionBuffer),
         0,
-        buffers.tempBufferSizeInBytes
+        buffers.shadowOcclusionBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMemset(
+        reinterpret_cast<void *>(params.shadowWeightBuffer),
+        0,
+        buffers.shadowWeightBufferSizeInBytes
     ));
 
 }
@@ -245,7 +261,8 @@ static void mallocBuffers(
     buffers.barycentricBufferSizeInBytes = width * height * 2 * sizeof(float);
     buffers.idBufferSizeInBytes = width * height * sizeof(int) * 3;
     buffers.colorBufferSizeInBytes = width * height * sizeof(float) * 3;
-    buffers.tempBufferSizeInBytes = width * height * sizeof(float) * 3;
+    buffers.shadowOcclusionBufferSizeInBytes = width * height * sizeof(char) * 1;
+    buffers.shadowWeightBufferSizeInBytes = width * height * sizeof(float) * 1;
 
     CHECK_CUDA(cudaMalloc(
         reinterpret_cast<void **>(&params.depthBuffer),
@@ -298,8 +315,13 @@ static void mallocBuffers(
     ));
 
     CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.tempBuffer),
-        buffers.tempBufferSizeInBytes
+        reinterpret_cast<void **>(&params.shadowOcclusionBuffer),
+        buffers.shadowOcclusionBufferSizeInBytes
+    ));
+
+    CHECK_CUDA(cudaMalloc(
+        reinterpret_cast<void **>(&params.shadowWeightBuffer),
+        buffers.shadowWeightBufferSizeInBytes
     ));
 }
 
@@ -550,16 +572,23 @@ static void runSample(
 
             for (int row = 0; row < height; row++) {
                 for (int col = 0; col < width; col++) {
+                    const int shadowOcclusionIndex = 1 * (row * width + col);
+                    if (buffers.output.shadowOcclusionBuffer[shadowOcclusionIndex] == 1) {
+                        continue;
+                    }
+
+                    const int shadowWeightIndex = 1 * (row * width + col);
+                    const float shadowRayWeight = buffers.output.shadowWeightBuffer[shadowWeightIndex];
+
                     const int pixelIndex = 3 * (row * width + col);
-                    if (buffers.output.tempBuffer[pixelIndex + 0] != 0.f) { continue; }
 
                     float L[3] = { 891.443777, 505.928150, 154.625939 };
                     for (int i = 0; i < 3; i++) {
                         outputImage[pixelIndex + i] += 1.f
                             * L[i]
+                            * shadowRayWeight
                             * buffers.host.albedoBuffer[pixelIndex + i]
                             * buffers.host.betaBuffer[pixelIndex + i]
-                            * buffers.output.tempBuffer[pixelIndex + 2]
                             * (1.f / spp);
                     }
                 }
