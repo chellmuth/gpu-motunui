@@ -752,10 +752,13 @@ void launch(
     CHECK_CUDA(cudaFree(params.cosThetaWiBuffer));
     CHECK_CUDA(cudaFree(params.sampleRecordInBuffer));
     CHECK_CUDA(cudaFree(params.sampleRecordOutBuffer));
+    CHECK_CUDA(cudaFree(params.occlusionBuffer));
     CHECK_CUDA(cudaFree(params.missDirectionBuffer));
+    CHECK_CUDA(cudaFree(params.colorBuffer));
     CHECK_CUDA(cudaFree(params.barycentricBuffer));
     CHECK_CUDA(cudaFree(params.idBuffer));
-    CHECK_CUDA(cudaFree(params.colorBuffer));
+    CHECK_CUDA(cudaFree(params.shadowOcclusionBuffer));
+    CHECK_CUDA(cudaFree(params.shadowWeightBuffer));
 
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_params)));
 }
