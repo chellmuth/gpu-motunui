@@ -64,9 +64,6 @@ add_library(moana
   src/scene/texture_lookup.cpp
   src/scene/texture_offsets.cpp
 
-  # fixme
-  src/scene/fixme_light_element.cpp
-
   src/util/color_map.cpp
 )
 target_include_directories(moana PUBLIC include)
