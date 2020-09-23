@@ -646,6 +646,35 @@ static void runSample(
     }
 }
 
+static void saveCheckpointImage(
+    int width,
+    int height,
+    int sample,
+    int spp,
+    const std::vector<float> &outputImage,
+    const std::string &exrFilename
+) {
+    int x = 1;
+    while (x <= (sample + 1)) {
+        if (x == (sample + 1)) {
+            const std::string prefix = std::to_string(sample + 1);
+            const std::string padding = std::string(6 - prefix.size(), '0');
+
+            std::vector<float> adjustedImage(outputImage);
+            for (int i = 0; i < width * height * 3; i++) {
+                adjustedImage[i] *= 1.f * spp / (sample + 1);
+            }
+            Image::save(
+                width,
+                height,
+                adjustedImage,
+                padding + prefix + "_" + exrFilename
+            );
+        }
+        x *= 2;
+    }
+}
+
 void launch(
     RenderRequest renderRequest,
     OptixState &optixState,
@@ -701,27 +730,16 @@ void launch(
             textureImage
         );
 
-        int x = 1;
-        while (x <= (sample + 1)) {
-            if (x == (sample + 1)) {
-                const std::string prefix = std::to_string(sample + 1);
-                const std::string padding = std::string(6 - prefix.size(), '0');
-
-                // fixme
-                std::vector<float> adjustedImage(outputImage);
-                for (int i = 0; i < width * height * 3; i++) {
-                    adjustedImage[i] *= 1.f * spp / (sample + 1);
-                }
-                Image::save(
-                    width,
-                    height,
-                    adjustedImage,
-                    padding + prefix + "_" + exrFilename
-                );
-            }
-            x *= 2;
-        }
+        saveCheckpointImage(
+            width,
+            height,
+            sample,
+            spp,
+            outputImage,
+            exrFilename
+        );
     }
+
     Image::save(
         width,
         height,

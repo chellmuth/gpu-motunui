@@ -29,25 +29,3 @@ def write_transforms(filename, transforms, skip_correction=False):
 
         transform_bin = struct.pack("12f", *transform)
         output_file.write(transform_bin)
-
-if __name__ == "__main__":
-    transform = [
-        0.9063077870366499,
-        0.0,
-        -0.4226182617406995,
-        0.0,
-        -0.2716537822741844,
-        0.7660444431189781,
-        -0.5825634160695854,
-        0.0,
-        0.32374437096706465,
-        0.6427876096865393,
-        0.694272044014884,
-        0.0,
-        95000.0,
-        195000.0,
-        200000.0,
-        1.0
-    ]
-
-    write_transforms("../scene/fixme-transform.bin", [transform])

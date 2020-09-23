@@ -377,7 +377,6 @@ extern "C" __global__ void __raygen__rg()
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
-    // fixme: two pipelines or program groups
     if (params.rayType == 0) {
         raygenNormal();
     } else {
