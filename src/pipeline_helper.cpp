@@ -8,6 +8,20 @@
 
 namespace moana { namespace PipelineHelper {
 
+struct OptixInternalState {
+    OptixDeviceContext context = 0;
+    std::vector<OptixTraversableHandle> gasHandles = {};
+    OptixPipelineCompileOptions pipelineCompileOptions = {};
+    OptixModuleCompileOptions moduleCompileOptions = {};
+    OptixModule module = 0;
+    OptixProgramGroup raygenProgramGroup;
+    OptixProgramGroup missProgramGroup;
+    OptixProgramGroup hitgroupProgramGroup;
+
+    OptixPipeline pipeline = 0;
+    OptixShaderBindingTable sbt = {};
+};
+
 template <typename T>
 struct SbtRecord
 {
@@ -20,7 +34,7 @@ typedef SbtRecord<MissData> MissSbtRecord;
 typedef SbtRecord<HitGroupData> HitGroupSbtRecord;
 
 static void createModule(
-    OptixState &state,
+    OptixInternalState &state,
     const std::string &ptxSource
 ) {
     state.moduleCompileOptions = {};
@@ -59,7 +73,7 @@ static void createModule(
     ));
 }
 
-static void createProgramGroups(OptixState &state)
+static void createProgramGroups(OptixInternalState &state)
 {
     OptixProgramGroupOptions programGroupOptions = {};
 
@@ -127,8 +141,8 @@ static void createProgramGroups(OptixState &state)
 }
 
 static void createShaderBindingTable(
-    OptixState &optixState,
-    SceneState &sceneState
+    OptixInternalState &optixState,
+    const SceneState &sceneState
 ) {
     CUdeviceptr raygenRecord;
     const size_t raygenRecordSize = sizeof(RayGenSbtRecord);
@@ -197,7 +211,7 @@ static void createShaderBindingTable(
 }
 
 void linkPipeline(
-    OptixState &state,
+    OptixInternalState &state,
     const std::vector<OptixProgramGroup> programGroups
 ) {
     const uint32_t maxTraceDepth = 1;
@@ -252,20 +266,24 @@ void linkPipeline(
 void initOptixState(
     OptixState &optixState,
     OptixDeviceContext context,
-    SceneState &sceneState,
+    const SceneState &sceneState,
     const std::string &ptxSource
 ) {
-    optixState.context = context;
+    OptixInternalState internalState;
+    internalState.context = context;
 
-    createModule(optixState, ptxSource);
-    createProgramGroups(optixState);
+    createModule(internalState, ptxSource);
+    createProgramGroups(internalState);
     std::vector<OptixProgramGroup> programGroups = {
-        optixState.raygenProgramGroup,
-        optixState.missProgramGroup,
-        optixState.hitgroupProgramGroup
+        internalState.raygenProgramGroup,
+        internalState.missProgramGroup,
+        internalState.hitgroupProgramGroup
     };
-    linkPipeline(optixState, programGroups);
-    createShaderBindingTable(optixState, sceneState);
+    linkPipeline(internalState, programGroups);
+    createShaderBindingTable(internalState, sceneState);
+
+    optixState.pipeline = internalState.pipeline;
+    optixState.sbt = internalState.sbt;
 }
 
 } }

@@ -18,14 +18,6 @@ struct HitGroupData {
 };
 
 struct OptixState {
-    OptixDeviceContext context = 0;
-    std::vector<OptixTraversableHandle> gasHandles = {};
-    OptixPipelineCompileOptions pipelineCompileOptions = {};
-    OptixModuleCompileOptions moduleCompileOptions = {};
-    OptixModule module = 0;
-    OptixProgramGroup raygenProgramGroup;
-    OptixProgramGroup missProgramGroup;
-    OptixProgramGroup hitgroupProgramGroup;
     OptixPipeline pipeline = 0;
     OptixShaderBindingTable sbt = {};
 };
