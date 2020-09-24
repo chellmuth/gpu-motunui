@@ -468,6 +468,74 @@ static void updateEnvironmentLighting(
     }
 }
 
+static void updateDirectLighting(
+    int sample,
+    int bounce,
+    std::map<PipelineType, OptixState> &optixStates,
+    SceneState &sceneState,
+    BufferManager &buffers,
+    std::vector<PtexTexture> &textures,
+    CUstream stream,
+    int width,
+    int height,
+    int spp,
+    Params &params,
+    CUdeviceptr d_params,
+    std::vector<float> &outputImage,
+    std::vector<float> &textureImage
+) {
+    for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
+        sceneState.arena.restoreSnapshot(geometry.snapshot);
+
+        params.handle = geometry.handle;
+        params.bounce = bounce;
+        CHECK_CUDA(cudaMemcpy(
+            reinterpret_cast<void *>(d_params),
+            &params,
+            sizeof(params),
+            cudaMemcpyHostToDevice
+        ));
+
+        CHECK_OPTIX(optixLaunch(
+            optixStates[PipelineType::ShadowRay].pipeline,
+            stream,
+            d_params,
+            sizeof(Params),
+            &optixStates[PipelineType::ShadowRay].sbt,
+            width,
+            height,
+            /*depth=*/1
+        ));
+
+        CHECK_CUDA(cudaDeviceSynchronize());
+    }
+    copyOutputBuffers(buffers, width, height, params);
+
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int shadowOcclusionIndex = 1 * (row * width + col);
+            if (buffers.output.shadowOcclusionBuffer[shadowOcclusionIndex] == 1) {
+                continue;
+            }
+
+            const int shadowWeightIndex = 1 * (row * width + col);
+            const float shadowRayWeight = buffers.output.shadowWeightBuffer[shadowWeightIndex];
+
+            const int pixelIndex = 3 * (row * width + col);
+
+            float L[3] = { 891.443777, 505.928150, 154.625939 };
+            for (int i = 0; i < 3; i++) {
+                outputImage[pixelIndex + i] += 1.f
+                    * L[i]
+                    * shadowRayWeight
+                    * buffers.host.albedoBuffer[pixelIndex + i]
+                    * buffers.host.betaBuffer[pixelIndex + i]
+                    * (1.f / spp);
+            }
+        }
+    }
+}
+
 static void runSample(
     int sample,
     int bounces,
@@ -536,67 +604,31 @@ static void runSample(
 
     // Bounce
     for (int bounce = 0; bounce < bounces; bounce++) {
-        {
-            for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
-                sceneState.arena.restoreSnapshot(geometry.snapshot);
+        updateAlbedoBuffer(
+            buffers,
+            textures,
+            width,
+            height,
+            spp,
+            textureImage
+        );
 
-                params.handle = geometry.handle;
-                params.bounce = bounce;
-                CHECK_CUDA(cudaMemcpy(
-                    reinterpret_cast<void *>(d_params),
-                    &params,
-                    sizeof(params),
-                    cudaMemcpyHostToDevice
-                ));
-
-                CHECK_OPTIX(optixLaunch(
-                    optixStates[PipelineType::ShadowRay].pipeline,
-                    stream,
-                    d_params,
-                    sizeof(Params),
-                    &optixStates[PipelineType::ShadowRay].sbt,
-                    width,
-                    height,
-                    /*depth=*/1
-                ));
-
-                CHECK_CUDA(cudaDeviceSynchronize());
-            }
-            copyOutputBuffers(buffers, width, height, params);
-
-            updateAlbedoBuffer(
-                buffers,
-                textures,
-                width,
-                height,
-                spp,
-                textureImage
-            );
-
-            for (int row = 0; row < height; row++) {
-                for (int col = 0; col < width; col++) {
-                    const int shadowOcclusionIndex = 1 * (row * width + col);
-                    if (buffers.output.shadowOcclusionBuffer[shadowOcclusionIndex] == 1) {
-                        continue;
-                    }
-
-                    const int shadowWeightIndex = 1 * (row * width + col);
-                    const float shadowRayWeight = buffers.output.shadowWeightBuffer[shadowWeightIndex];
-
-                    const int pixelIndex = 3 * (row * width + col);
-
-                    float L[3] = { 891.443777, 505.928150, 154.625939 };
-                    for (int i = 0; i < 3; i++) {
-                        outputImage[pixelIndex + i] += 1.f
-                            * L[i]
-                            * shadowRayWeight
-                            * buffers.host.albedoBuffer[pixelIndex + i]
-                            * buffers.host.betaBuffer[pixelIndex + i]
-                            * (1.f / spp);
-                    }
-                }
-            }
-        }
+        updateDirectLighting(
+            sample,
+            bounce,
+            optixStates,
+            sceneState,
+            buffers,
+            textures,
+            stream,
+            width,
+            height,
+            spp,
+            params,
+            d_params,
+            outputImage,
+            textureImage
+        );
 
         updateBetaBuffer(
             buffers,
