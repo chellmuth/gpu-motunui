@@ -728,8 +728,8 @@ void launch(
     CUstream stream;
     CHECK_CUDA(cudaStreamCreate(&stream));
 
-    const int width = 1024;
-    const int height = 429;
+    const int width = renderRequest.width;
+    const int height = renderRequest.height;
 
     std::vector<float> outputImage(width * height * 3, 0.f);
 
