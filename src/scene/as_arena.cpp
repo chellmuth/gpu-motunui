@@ -44,10 +44,20 @@ CUdeviceptr ASArena::allocOutput(size_t bytes)
 
     m_outputOffset += bytes;
     if (m_outputOffset >= m_tempOffset) {
+        std::cout << "Arena Memory:" << std::endl
+                  << "  Requested(mb): " << bytes / (1024. * 1024.) << std::endl
+                  << "  Output(mb): " << m_outputOffset / (1024. * 1024.) << std::endl
+                  << "  Temp(mb): " << (m_poolSizeInBytes - m_tempOffset) / (1024. * 1024.) << std::endl;
+
         throw std::runtime_error("Not enough arena memory");
     }
 
     return pointer;
+}
+
+void ASArena::returnCompactedOutput(size_t bytes)
+{
+    m_outputOffset -= bytes;
 }
 
 CUdeviceptr ASArena::pushTemp(size_t bytes)
@@ -58,6 +68,11 @@ CUdeviceptr ASArena::pushTemp(size_t bytes)
     m_tempOffsetStack.push_back(bytes);
 
     if (m_tempOffset <= m_outputOffset) {
+        std::cout << "Arena Memory:" << std::endl
+                  << "  Requested(mb): " << bytes / (1024. * 1024.) << std::endl
+                  << "  Output(mb): " << m_outputOffset / (1024. * 1024.) << std::endl
+                  << "  Temp(mb): " << (m_poolSizeInBytes - m_tempOffset) / (1024. * 1024.) << std::endl;
+
         throw std::runtime_error("Not enough arena memory");
     }
 
@@ -97,6 +112,9 @@ Snapshot ASArena::createSnapshot()
 void ASArena::restoreSnapshot(Snapshot snapshot)
 {
     assert(snapshot.sizeInBytes <= m_poolSizeInBytes);
+    if (snapshot.sizeInBytes > m_tempOffset) {
+        throw std::runtime_error("Not enough arena memory");
+    }
 
     m_outputOffset = snapshot.sizeInBytes;
     CHECK_CUDA(cudaMemcpy(
@@ -111,6 +129,8 @@ void ASArena::restoreSnapshot(Snapshot snapshot)
 void ASArena::releaseAll()
 {
     m_outputOffset = 0;
+
+    assert(m_tempOffsetStack.empty());
 }
 
 }

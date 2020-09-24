@@ -20,7 +20,8 @@ void createOptixInstanceRecords(
 OptixTraversableHandle iasFromInstanceRecords(
     OptixDeviceContext context,
     ASArena &arena,
-    const std::vector<OptixInstance> &records
+    const std::vector<OptixInstance> &records,
+    bool shouldCompact = false
 );
 
 } }

@@ -99,7 +99,12 @@ void createRecordsForElementInstances(
 
     {
         // Build IAS records for each instance with this geometry
-        auto iasObjectHandle = IAS::iasFromInstanceRecords(context, arena, records1);
+        auto iasObjectHandle = IAS::iasFromInstanceRecords(
+            context,
+            arena,
+            records1,
+            shouldSplitRecords
+        );
 
         std::cout << "  Processing element instances" << std::endl;
 

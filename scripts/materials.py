@@ -58,7 +58,11 @@ class SBTManager:
 
         return result
 
-    def get_base_colors_annotated(self):
+    def get_base_colors_annotated(self, gamma_correct=True):
+        exponent = 1
+        if gamma_correct:
+            exponent = 2.2
+
         result = [ ((0., 0., 0.), "missing material") ]
         for element_name in sorted(self.records_by_element.keys()):
             element_records = sorted(
@@ -68,7 +72,10 @@ class SBTManager:
 
             for i, record in enumerate(element_records):
                 comment = f"{element_name}: {record.name}"
-                result.append((record.base_color, comment))
+                result.append((
+                    [ c ** exponent for c in record.base_color ],
+                    comment
+                ))
 
         return result
 

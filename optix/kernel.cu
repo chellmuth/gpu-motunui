@@ -2,11 +2,12 @@
 
 #include <stdio.h>
 
-#include "moana/driver.hpp"
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
+#include "moana/driver.hpp"
+#include "moana/renderer.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
 #include "sample.hpp"
@@ -27,11 +28,12 @@ struct PerRayData {
 };
 
 extern "C" {
-    __constant__ Params params;
+    __constant__ Renderer::Params params;
 }
 
 __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
-    const PerRayData &prd
+    const PerRayData &prd,
+    const Vec3 &wo
 ) {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
@@ -149,6 +151,12 @@ extern "C" __global__ void __closesthit__ch()
         prd->normal = normalized(Vec3(normal.x, normal.y, normal.z));
         prd->barycentrics = float2{0.f, 0.f};
     }
+
+    const float3 optixDirection = optixGetWorldRayDirection();
+    const Vec3 direction(optixDirection.x, optixDirection.y, optixDirection.z);
+    if (dot(prd->normal, direction) > 0.f) {
+        prd->normal = -1.f * prd->normal;
+    }
 }
 
 extern "C" __global__ void __miss__ms()
@@ -253,7 +261,7 @@ extern "C" __global__ void __raygen__rg()
         const int occlusionIndex = 1 * (index.y * dim.x + index.x);
         params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
-        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd, -direction);
         const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
         params.sampleRecordOutBuffer[sampleRecordIndex] = sampleRecord;
 
