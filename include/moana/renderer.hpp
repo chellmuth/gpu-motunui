@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+
 #include <cuda.h>
 
 #include "moana/driver.hpp"
@@ -34,8 +36,7 @@ struct Params {
 
 void launch(
     RenderRequest request,
-    OptixState &optixState,
-    OptixState &optixStateShadow, // fixme
+    std::map<PipelineType, OptixState> &optixStates,
     SceneState &sceneState,
     Cam cam,
     const std::string &exrFilename

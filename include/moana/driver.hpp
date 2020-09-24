@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -16,6 +17,11 @@
 
 namespace moana {
 
+enum class PipelineType {
+    MainRay = 0,
+    ShadowRay = 1
+};
+
 class Driver {
 public:
     void init();
@@ -26,8 +32,7 @@ public:
     );
 
 private:
-    OptixState m_optixState;
-    OptixState m_optixStateShadow; // fixme
+    std::map<PipelineType, OptixState> m_optixStates;
     SceneState m_sceneState;
 };
 

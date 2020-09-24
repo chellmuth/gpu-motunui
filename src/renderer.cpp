@@ -471,8 +471,7 @@ static void updateEnvironmentLighting(
 static void runSample(
     int sample,
     int bounces,
-    OptixState &optixState,
-    OptixState &optixStateShadow,
+    std::map<PipelineType, OptixState> &optixStates,
     SceneState &sceneState,
     BufferManager &buffers,
     std::vector<PtexTexture> &textures,
@@ -508,11 +507,11 @@ static void runSample(
         ));
 
         CHECK_OPTIX(optixLaunch(
-            optixState.pipeline,
+            optixStates[PipelineType::MainRay].pipeline,
             stream,
             d_params,
             sizeof(Params),
-            &optixState.sbt,
+            &optixStates[PipelineType::MainRay].sbt,
             width,
             height,
             /*depth=*/1
@@ -553,11 +552,11 @@ static void runSample(
                 ));
 
                 CHECK_OPTIX(optixLaunch(
-                    optixStateShadow.pipeline,
+                    optixStates[PipelineType::ShadowRay].pipeline,
                     stream,
                     d_params,
                     sizeof(Params),
-                    &optixStateShadow.sbt,
+                    &optixStates[PipelineType::ShadowRay].sbt,
                     width,
                     height,
                     /*depth=*/1
@@ -623,11 +622,11 @@ static void runSample(
             ));
 
             CHECK_OPTIX(optixLaunch(
-                optixState.pipeline,
+                optixStates[PipelineType::MainRay].pipeline,
                 stream,
                 d_params,
                 sizeof(Params),
-                &optixState.sbt,
+                &optixStates[PipelineType::MainRay].sbt,
                 width,
                 height,
                 /*depth=*/1
@@ -683,8 +682,7 @@ static void saveCheckpointImage(
 
 void launch(
     RenderRequest renderRequest,
-    OptixState &optixState,
-    OptixState &optixStateShadow,
+    std::map<PipelineType, OptixState> &optixStates,
     SceneState &sceneState,
     Cam cam,
     const std::string &exrFilename
@@ -723,8 +721,7 @@ void launch(
         runSample(
             sample,
             renderRequest.bounces,
-            optixState,
-            optixStateShadow,
+            optixStates,
             sceneState,
             buffers,
             textures,

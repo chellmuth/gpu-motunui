@@ -1,4 +1,4 @@
-#include "moana/pipeline_helper.hpp"
+#include "pipeline_helper.hpp"
 
 #include <optix_stack_size.h>
 #include <optix_stubs.h>

@@ -2,7 +2,7 @@
 
 #include "kernel.hpp"
 #include "shadow_ray_kernel.hpp"
-#include "moana/pipeline_helper.hpp"
+#include "pipeline_helper.hpp"
 
 namespace moana { namespace Pipeline {
 
