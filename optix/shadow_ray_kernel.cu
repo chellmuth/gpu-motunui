@@ -37,7 +37,6 @@ extern "C" __global__ void __miss__ms()
     prd->isHit = false;
 }
 
-// fixme delete
 extern "C" __global__ void __closesthit__ch()
 {
 }

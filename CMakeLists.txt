@@ -17,10 +17,9 @@ ADD_SUBDIRECTORY(ext/ptex)
 add_library(moana
   src/driver.cpp
   src/pipeline.cpp
+  src/pipeline_helper.cpp
   src/renderer.cpp
   src/scene.cpp
-
-  src/pipeline_helper.cpp # fixme
 
   src/core/camera.cpp
   src/core/ptex_texture.cpp

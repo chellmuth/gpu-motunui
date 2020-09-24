@@ -29,9 +29,7 @@ struct Params {
 
     Camera camera;
     int bounce;
-
     int sampleCount;
-    int rayType;
 };
 
 void launch(

@@ -498,7 +498,6 @@ static void runSample(
 
         params.handle = geometry.handle;
         params.bounce = 0;
-        params.rayType = 0;
         CHECK_CUDA(cudaMemcpy(
             reinterpret_cast<void *>(d_params),
             &params,
@@ -543,7 +542,6 @@ static void runSample(
 
                 params.handle = geometry.handle;
                 params.bounce = bounce;
-                params.rayType = 1;
                 CHECK_CUDA(cudaMemcpy(
                     reinterpret_cast<void *>(d_params),
                     &params,
@@ -612,7 +610,6 @@ static void runSample(
             sceneState.arena.restoreSnapshot(geometry.snapshot);
 
             params.handle = geometry.handle;
-            params.rayType = 0;
             params.bounce = 1 + bounce;
             CHECK_CUDA(cudaMemcpy(
                 reinterpret_cast<void *>(d_params),
