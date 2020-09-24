@@ -245,8 +245,25 @@ static void resetBounceBuffers(
 
 }
 
+static void freeBuffers(ASArena &arena)
+{
+    arena.popTemp(); // depth
+    arena.popTemp(); // xi
+    arena.popTemp(); // cosThetaWi
+    arena.popTemp(); // sampleRecordIn
+    arena.popTemp(); // sampleRecordOut
+    arena.popTemp(); // occlusion
+    arena.popTemp(); // missDirection
+    arena.popTemp(); // colorBuffer
+    arena.popTemp(); // barycentric
+    arena.popTemp(); // id
+    arena.popTemp(); // shadowOcclusion
+    arena.popTemp(); // shadowWeight
+}
+
 static void mallocBuffers(
     BufferManager &buffers,
+    ASArena &arena,
     int width,
     int height,
     Params &params
@@ -264,65 +281,53 @@ static void mallocBuffers(
     buffers.shadowOcclusionBufferSizeInBytes = width * height * sizeof(char) * 1;
     buffers.shadowWeightBufferSizeInBytes = width * height * sizeof(float) * 1;
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.depthBuffer),
-        buffers.depthBufferSizeInBytes
-    ));
+    params.depthBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.depthBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.xiBuffer),
-        buffers.xiBufferSizeInBytes
-    ));
+    params.xiBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.xiBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.cosThetaWiBuffer),
-        buffers.cosThetaWiBufferSizeInBytes
-    ));
+    params.cosThetaWiBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.cosThetaWiBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.sampleRecordInBuffer),
-        buffers.sampleRecordInBufferSizeInBytes
-    ));
+    params.sampleRecordInBuffer = reinterpret_cast<BSDFSampleRecord *>(
+        arena.pushTemp(buffers.sampleRecordInBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.sampleRecordOutBuffer),
-        buffers.sampleRecordOutBufferSizeInBytes
-    ));
+    params.sampleRecordOutBuffer = reinterpret_cast<BSDFSampleRecord *>(
+        arena.pushTemp(buffers.sampleRecordOutBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.occlusionBuffer),
-        buffers.occlusionBufferSizeInBytes
-    ));
+    params.occlusionBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.occlusionBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.missDirectionBuffer),
-        buffers.missDirectionBufferSizeInBytes
-    ));
+    params.missDirectionBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.missDirectionBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.barycentricBuffer),
-        buffers.barycentricBufferSizeInBytes
-    ));
+    params.barycentricBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.barycentricBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.idBuffer),
-        buffers.idBufferSizeInBytes
-    ));
+    params.idBuffer = reinterpret_cast<int *>(
+        arena.pushTemp(buffers.idBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.colorBuffer),
-        buffers.colorBufferSizeInBytes
-    ));
+    params.colorBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.colorBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.shadowOcclusionBuffer),
-        buffers.shadowOcclusionBufferSizeInBytes
-    ));
+    params.shadowOcclusionBuffer = reinterpret_cast<char *>(
+        arena.pushTemp(buffers.shadowOcclusionBufferSizeInBytes)
+    );
 
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&params.shadowWeightBuffer),
-        buffers.shadowWeightBufferSizeInBytes
-    ));
+    params.shadowWeightBuffer = reinterpret_cast<float *>(
+        arena.pushTemp(buffers.shadowWeightBufferSizeInBytes)
+    );
 }
 
 static void updateAlbedoBuffer(
@@ -467,6 +472,7 @@ static void runSample(
     int sample,
     int bounces,
     OptixState &optixState,
+    OptixState &optixStateShadow,
     SceneState &sceneState,
     BufferManager &buffers,
     std::vector<PtexTexture> &textures,
@@ -547,11 +553,11 @@ static void runSample(
                 ));
 
                 CHECK_OPTIX(optixLaunch(
-                    optixState.pipeline,
+                    optixStateShadow.pipeline,
                     stream,
                     d_params,
                     sizeof(Params),
-                    &optixState.sbt,
+                    &optixStateShadow.sbt,
                     width,
                     height,
                     /*depth=*/1
@@ -678,6 +684,7 @@ static void saveCheckpointImage(
 void launch(
     RenderRequest renderRequest,
     OptixState &optixState,
+    OptixState &optixStateShadow,
     SceneState &sceneState,
     Cam cam,
     const std::string &exrFilename
@@ -702,7 +709,7 @@ void launch(
     Params params;
 
     BufferManager buffers;
-    mallocBuffers(buffers, width, height, params);
+    mallocBuffers(buffers, sceneState.arena, width, height, params);
 
     Scene scene(cam);
     Camera camera = scene.getCamera(width, height);
@@ -717,6 +724,7 @@ void launch(
             sample,
             renderRequest.bounces,
             optixState,
+            optixStateShadow,
             sceneState,
             buffers,
             textures,
@@ -747,18 +755,7 @@ void launch(
         exrFilename
     );
 
-    CHECK_CUDA(cudaFree(params.depthBuffer));
-    CHECK_CUDA(cudaFree(params.xiBuffer));
-    CHECK_CUDA(cudaFree(params.cosThetaWiBuffer));
-    CHECK_CUDA(cudaFree(params.sampleRecordInBuffer));
-    CHECK_CUDA(cudaFree(params.sampleRecordOutBuffer));
-    CHECK_CUDA(cudaFree(params.occlusionBuffer));
-    CHECK_CUDA(cudaFree(params.missDirectionBuffer));
-    CHECK_CUDA(cudaFree(params.colorBuffer));
-    CHECK_CUDA(cudaFree(params.barycentricBuffer));
-    CHECK_CUDA(cudaFree(params.idBuffer));
-    CHECK_CUDA(cudaFree(params.shadowOcclusionBuffer));
-    CHECK_CUDA(cudaFree(params.shadowWeightBuffer));
+    freeBuffers(sceneState.arena);
 
     CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_params)));
 }

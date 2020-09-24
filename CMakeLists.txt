@@ -20,6 +20,8 @@ add_library(moana
   src/renderer.cpp
   src/scene.cpp
 
+  src/pipeline_helper.cpp # fixme
+
   src/core/camera.cpp
   src/core/ptex_texture.cpp
   src/core/texture.cpp
@@ -75,7 +77,7 @@ target_compile_definitions(moana PRIVATE MOANA_ROOT="${MOANA_ROOT}")
 target_link_libraries(moana CUDA::cudart Ptex_static dl)
 
 add_subdirectory(optix)
-add_dependencies(moana ptx_headers)
+add_dependencies(moana ptx_headers shadow_ray_ptx_headers)
 
 add_subdirectory(app)
 add_subdirectory(test)

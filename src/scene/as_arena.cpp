@@ -112,6 +112,9 @@ Snapshot ASArena::createSnapshot()
 void ASArena::restoreSnapshot(Snapshot snapshot)
 {
     assert(snapshot.sizeInBytes <= m_poolSizeInBytes);
+    if (snapshot.sizeInBytes > m_tempOffset) {
+        throw std::runtime_error("Not enough arena memory");
+    }
 
     m_outputOffset = snapshot.sizeInBytes;
     CHECK_CUDA(cudaMemcpy(

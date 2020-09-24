@@ -60,6 +60,7 @@ void Driver::init()
     m_sceneState.geometries = Container::createGeometryResults(context, m_sceneState.arena);
 
     Pipeline::initOptixState(m_optixState, context, m_sceneState);
+    ShadowPipeline::initOptixState(m_optixStateShadow, context, m_sceneState);
 
     CHECK_CUDA(cudaDeviceSynchronize());
 }
@@ -70,7 +71,14 @@ void Driver::launch(
     const std::string &exrFilename
 ) {
     std::cout << "Rendering: " << exrFilename << std::endl;
-    Renderer::launch(renderRequest, m_optixState, m_sceneState, cam, exrFilename);
+    Renderer::launch(
+        renderRequest,
+        m_optixState,
+        m_optixStateShadow,
+        m_sceneState,
+        cam,
+        exrFilename
+    );
 }
 
 }

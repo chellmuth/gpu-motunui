@@ -41,3 +41,13 @@ void initOptixState(
 );
 
 } }
+
+namespace moana { namespace ShadowPipeline {
+
+void initOptixState(
+    OptixState &optixState,
+    OptixDeviceContext context,
+    SceneState &sceneState
+);
+
+} }

@@ -27,6 +27,7 @@ public:
 
 private:
     OptixState m_optixState;
+    OptixState m_optixStateShadow; // fixme
     SceneState m_sceneState;
 };
 

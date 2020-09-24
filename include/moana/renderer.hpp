@@ -20,7 +20,6 @@ struct Params {
     float *occlusionBuffer;
     float *missDirectionBuffer;
     float *colorBuffer;
-    float *normalBuffer;
     float *barycentricBuffer;
     int *idBuffer;
     char *shadowOcclusionBuffer;
@@ -36,6 +35,7 @@ struct Params {
 void launch(
     RenderRequest request,
     OptixState &optixState,
+    OptixState &optixStateShadow, // fixme
     SceneState &sceneState,
     Cam cam,
     const std::string &exrFilename

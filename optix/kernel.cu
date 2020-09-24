@@ -293,6 +293,7 @@ __device__ static void raygenNormal()
 
 __device__ static void raygenShadow()
 {
+    printf("SHOULDNT BE HERE\n");
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
