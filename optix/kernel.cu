@@ -6,6 +6,9 @@
 #include "moana/core/camera.hpp"
 #include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
+#include "moana/cuda/fresnel.hpp"
+#include "moana/cuda/tangent_frame.hpp"
+#include "moana/cuda/triangle.hpp"
 #include "moana/driver.hpp"
 #include "moana/renderer.hpp"
 #include "optix_sdk.hpp"
@@ -20,6 +23,7 @@ struct PerRayData {
     float t;
     float3 point;
     Vec3 normal;
+    Vec3 woWorld;
     float3 baseColor;
     int materialID;
     int primitiveID;
@@ -32,28 +36,109 @@ extern "C" {
 }
 
 __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
-    const PerRayData &prd,
-    const Vec3 &wo
+    const PerRayData &prd
 ) {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
-    const int xiIndex = 2 * (index.y * dim.x + index.x);
-    float xi1 = params.xiBuffer[xiIndex + 0];
-    float xi2 = params.xiBuffer[xiIndex + 1];
-
-    const Vec3 wiLocal = Sample::uniformHemisphere(xi1, xi2);
     const Frame frame(prd.normal);
 
-    const BSDFSampleRecord record = {
-        .isValid = true,
-        .point = prd.point,
-        .wiLocal = wiLocal,
-        .normal = prd.normal,
-        .frame = frame,
-    };
+    Vec3 wiLocal(0.f);
+    float weight;
+    if (prd.materialID == 103) {
+        const int xiIndex = 2 * (index.y * dim.x + index.x);
+        const float xi1 = params.xiBuffer[xiIndex + 0]; // fixme
 
-    return record;
+        const Vec3 wo = frame.toLocal(prd.woWorld);
+
+        float etaIncident = 1.f;
+        float etaTransmitted = 1.33f;
+
+        if (wo.z() < 0.f) {
+            const float temp = etaIncident;
+            etaIncident = etaTransmitted;
+            etaTransmitted = temp;
+        }
+
+        Vec3 wi(0.f);
+        const bool doesRefract = Snell::refract(
+            wo,
+            &wi,
+            etaIncident,
+            etaTransmitted
+        );
+
+        const float fresnelReflectance = Fresnel::dielectricReflectance(
+            TangentFrame::absCosTheta(wo),
+            etaIncident,
+            etaTransmitted
+        );
+
+        if (xi1 < fresnelReflectance) {
+            wi = wo.reflect(Vec3(0.f, 0.f, 1.f));
+
+            const float cosTheta = TangentFrame::absCosTheta(wi);
+            const float throughput = cosTheta == 0.f
+                ? 0.f
+                : fresnelReflectance / cosTheta
+            ;
+            const BSDFSampleRecord record = {
+                .isValid = true,
+                .point = prd.point,
+                .wiLocal = wi,
+                .normal = prd.normal,
+                .frame = frame,
+                .weight = throughput / fresnelReflectance
+            };
+
+            return record;
+        } else {
+            const float fresnelTransmittance = 1.f - fresnelReflectance;
+
+            const float cosTheta = TangentFrame::absCosTheta(wi);
+            const float throughput = cosTheta == 0.f
+                ? 0.f
+                : fresnelTransmittance / cosTheta
+            ;
+
+            // PBRT page 961 "Non-symmetry Due to Refraction"
+            // Always incident / transmitted because we swap at top of
+            // function if we're going inside-out
+            const float nonSymmetricEtaCorrection = util::square(
+                etaIncident / etaTransmitted
+            );
+
+            const BSDFSampleRecord record = {
+                .isValid = true,
+                .point = prd.point,
+                .wiLocal = wi,
+                .normal = prd.normal,
+                .frame = frame,
+                .weight = throughput * nonSymmetricEtaCorrection / fresnelTransmittance
+            };
+
+            return record;
+        }
+    } else {
+        const int xiIndex = 2 * (index.y * dim.x + index.x);
+        float xi1 = params.xiBuffer[xiIndex + 0];
+        float xi2 = params.xiBuffer[xiIndex + 1];
+
+        wiLocal = Sample::uniformHemisphere(xi1, xi2);
+        weight = 2.f;
+
+        const BSDFSampleRecord record = {
+            .isValid = true,
+            .point = prd.point,
+            .wiLocal = wiLocal,
+            .normal = prd.normal,
+            .frame = frame,
+            .weight = weight
+        };
+
+        return record;
+    }
+
 }
 
 __forceinline__ __device__ static PerRayData *getPRD()
@@ -69,6 +154,9 @@ extern "C" __global__ void __closesthit__ch()
     prd->isHit = true;
     prd->t = optixGetRayTmax();
     prd->point = getHitPoint();
+
+    const float3 rayDirection = optixGetWorldRayDirection();
+    prd->woWorld = -Vec3(rayDirection.x, rayDirection.y, rayDirection.z);
 
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
@@ -152,9 +240,7 @@ extern "C" __global__ void __closesthit__ch()
         prd->barycentrics = float2{0.f, 0.f};
     }
 
-    const float3 optixDirection = optixGetWorldRayDirection();
-    const Vec3 direction(optixDirection.x, optixDirection.y, optixDirection.z);
-    if (dot(prd->normal, direction) > 0.f) {
+    if (dot(prd->normal, prd->woWorld) < 0.f) {
         prd->normal = -1.f * prd->normal;
     }
 }
@@ -261,12 +347,12 @@ extern "C" __global__ void __raygen__rg()
         const int occlusionIndex = 1 * (index.y * dim.x + index.x);
         params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
-        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd, -direction);
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
         const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
         params.sampleRecordOutBuffer[sampleRecordIndex] = sampleRecord;
 
         const int cosThetaWiIndex = index.y * dim.x + index.x;
-        params.cosThetaWiBuffer[cosThetaWiIndex] = sampleRecord.wiLocal.z();
+        params.cosThetaWiBuffer[cosThetaWiIndex] = fabsf(sampleRecord.wiLocal.z());
 
         const float3 baseColor = prd.baseColor;
         const int colorIndex = 3 * (index.y * dim.x + index.x);

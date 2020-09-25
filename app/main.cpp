@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     driver.init();
 
     RenderRequest request;
-    request.spp = 128;
-    request.bounces = 2;
+    request.spp = 1024;
+    request.bounces = 3;
     request.width = 1024;
     request.height = 429;
 

@@ -19,4 +19,8 @@ __forceinline__ __device__ void packPointer(
     i1 = uptr & 0x00000000ffffffff;
 }
 
+__forceinline__ __device__ float square(float x) {
+    return x * x;
+}
+
 } }
