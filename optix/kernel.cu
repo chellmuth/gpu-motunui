@@ -29,6 +29,7 @@ struct PerRayData {
     int primitiveID;
     int textureIndex;
     float2 barycentrics;
+    bool isInside;
 };
 
 extern "C" {
@@ -54,7 +55,7 @@ __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
         float etaIncident = 1.f;
         float etaTransmitted = 1.33f;
 
-        if (wo.z() < 0.f) {
+        if (prd.isInside) {
             const float temp = etaIncident;
             etaIncident = etaTransmitted;
             etaTransmitted = temp;
@@ -242,6 +243,9 @@ extern "C" __global__ void __closesthit__ch()
 
     if (dot(prd->normal, prd->woWorld) < 0.f) {
         prd->normal = -1.f * prd->normal;
+        prd->isInside = true;
+    } else {
+        prd->isInside = false;
     }
 }
 
