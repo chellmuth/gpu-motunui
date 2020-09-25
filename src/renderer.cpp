@@ -449,6 +449,7 @@ static void updateEnvironmentLighting(
     EnvironmentLight::calculateEnvironmentLighting(
         width,
         height,
+        sceneState.arena,
         sceneState.environmentState.textureObject,
         params.occlusionBuffer,
         params.missDirectionBuffer,
