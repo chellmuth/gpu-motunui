@@ -1,5 +1,6 @@
 add_library(ptx_files OBJECT kernel.cu)
 target_include_directories(ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/include")
+target_include_directories(ptx_files PRIVATE "${PROJECT_CURRENT_SOURCE_DIR}")
 target_include_directories(ptx_files PRIVATE "${OptiX_INCLUDE}")
 target_include_directories(ptx_files PRIVATE "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
 target_include_directories(ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/ext/optix_sdk")
@@ -23,6 +24,7 @@ add_custom_target(
 # fixme: macro
 add_library(shadow_ptx_files OBJECT shadow_ray_kernel.cu)
 target_include_directories(shadow_ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/include")
+target_include_directories(shadow_ptx_files PRIVATE "${PROJECT_CURRENT_SOURCE_DIR}")
 target_include_directories(shadow_ptx_files PRIVATE "${OptiX_INCLUDE}")
 target_include_directories(shadow_ptx_files PRIVATE "${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
 target_include_directories(shadow_ptx_files PRIVATE "${PROJECT_SOURCE_DIR}/ext/optix_sdk")

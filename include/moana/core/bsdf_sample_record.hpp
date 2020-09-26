@@ -11,6 +11,8 @@ struct BSDFSampleRecord {
     Vec3 wiLocal;
     Vec3 normal;
     Frame frame;
+    float weight;
+    bool isDelta;
 };
 
 }

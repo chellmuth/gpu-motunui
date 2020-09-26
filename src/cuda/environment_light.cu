@@ -58,6 +58,7 @@ __global__ static void environmentLightKernel(
 void EnvironmentLight::calculateEnvironmentLighting(
     int width,
     int height,
+    ASArena &arena,
     cudaTextureObject_t textureObject,
     float *devOcclusionBuffer,
     float *devDirectionBuffer,
@@ -65,10 +66,9 @@ void EnvironmentLight::calculateEnvironmentLighting(
 ) {
     const size_t outputBufferSizeInBytes = outputBuffer.size() * sizeof(float);
     CUdeviceptr d_outputBuffer = 0;
-    CHECK_CUDA(cudaMalloc(
-        reinterpret_cast<void **>(&d_outputBuffer),
-        outputBufferSizeInBytes
-    ));
+
+    d_outputBuffer = arena.pushTemp(outputBufferSizeInBytes);
+
     CHECK_CUDA(cudaMemset(
         reinterpret_cast<void *>(d_outputBuffer),
         0,
@@ -97,7 +97,7 @@ void EnvironmentLight::calculateEnvironmentLighting(
         cudaMemcpyDeviceToHost
     ));
 
-    CHECK_CUDA(cudaFree(reinterpret_cast<void *>(d_outputBuffer)));
+    arena.popTemp(); // d_outputBuffer
 
     CHECK_CUDA(cudaDeviceSynchronize());
 }

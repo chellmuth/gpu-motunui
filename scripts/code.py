@@ -279,6 +279,19 @@ std::vector<float3> baseColors = {{
 }};
 """
 
+def generate_bsdf_types_array(sbt_manager):
+    bsdf_types_annotated = sbt_manager.get_bsdf_types_annotated()
+    bsdf_type_items = "\n".join(
+        f"{' '*4}{t}, // {comment} [{i}]"
+        for i, (t, comment) in enumerate(bsdf_types_annotated)
+    )
+
+    return f"""\
+std::vector<BSDFType> bsdfTypes = {{
+{bsdf_type_items}
+}};
+"""
+
 def generate_texture_filenames(ptx_files):
     texture_items = "\n".join(
         f"{' ' * 4}\"{ptx}\", // [{i}]"

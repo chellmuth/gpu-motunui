@@ -24,6 +24,7 @@ public:
     static void calculateEnvironmentLighting(
         int width,
         int height,
+        ASArena &arena,
         cudaTextureObject_t textureObject,
         float *devOcclusionBuffer,
         float *devDirectionBuffer,

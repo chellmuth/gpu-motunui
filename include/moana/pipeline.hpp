@@ -2,6 +2,7 @@
 
 #include <optix.h>
 
+#include "moana/cuda/bsdf.hpp"
 #include "moana/scene/types.hpp"
 
 namespace moana {
@@ -12,6 +13,7 @@ struct HitGroupData {
     float3 baseColor;
     int textureIndex;
     int materialID;
+    BSDFType bsdfType;
 
     float *normals;
     int *normalIndices;

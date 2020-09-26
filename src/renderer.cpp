@@ -421,10 +421,13 @@ static void updateBetaBuffer(
 
            const int cosThetaWiIndex = row * width + col;
            const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+
+           const int bsdfSampleIndex = 1 * (row * width + col);
+           const BSDFSampleRecord record = buffers.output.sampleRecordOutBuffer[bsdfSampleIndex];
            for (int i = 0; i < 3; i++) {
                buffers.host.betaBuffer[pixelIndex + i] *= 1.f
                    * cosThetaWi
-                   * 2.f
+                   * record.weight
                    * buffers.host.albedoBuffer[pixelIndex + i];
            }
        }
@@ -446,6 +449,7 @@ static void updateEnvironmentLighting(
     EnvironmentLight::calculateEnvironmentLighting(
         width,
         height,
+        sceneState.arena,
         sceneState.environmentState.textureObject,
         params.occlusionBuffer,
         params.missDirectionBuffer,
@@ -520,8 +524,12 @@ static void updateDirectLighting(
 
             const int shadowWeightIndex = 1 * (row * width + col);
             const float shadowRayWeight = buffers.output.shadowWeightBuffer[shadowWeightIndex];
+            if (shadowRayWeight == 0.f) { continue; }
 
             const int pixelIndex = 3 * (row * width + col);
+
+            const int idIndex = 3 * (row * width + col);
+            const int materialID = buffers.output.idBuffer[idIndex + 1];
 
             float L[3] = { 891.443777, 505.928150, 154.625939 };
             for (int i = 0; i < 3; i++) {

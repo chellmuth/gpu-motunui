@@ -4,56 +4,35 @@
 
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
-#include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
+#include "moana/cuda/bsdf.hpp"
 #include "moana/driver.hpp"
 #include "moana/renderer.hpp"
+#include "bsdfs/lambertian.hpp"
+#include "bsdfs/water.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
-#include "sample.hpp"
+#include "ray_data.hpp"
 #include "util.hpp"
 
 using namespace moana;
-
-struct PerRayData {
-    bool isHit;
-    float t;
-    float3 point;
-    Vec3 normal;
-    float3 baseColor;
-    int materialID;
-    int primitiveID;
-    int textureIndex;
-    float2 barycentrics;
-};
 
 extern "C" {
     __constant__ Renderer::Params params;
 }
 
 __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
-    const PerRayData &prd,
-    const Vec3 &wo
+    const PerRayData &prd
 ) {
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
-    const int xiIndex = 2 * (index.y * dim.x + index.x);
-    float xi1 = params.xiBuffer[xiIndex + 0];
-    float xi2 = params.xiBuffer[xiIndex + 1];
+    if (prd.bsdfType == BSDFType::Water) {
+        return Water::sample(index, dim, prd, params.xiBuffer);
+    } else { // prd.bsdfType == BSDFType::Diffuse
+        return Lambertian::sample(index, dim, prd, params.xiBuffer);
+    }
 
-    const Vec3 wiLocal = Sample::uniformHemisphere(xi1, xi2);
-    const Frame frame(prd.normal);
-
-    const BSDFSampleRecord record = {
-        .isValid = true,
-        .point = prd.point,
-        .wiLocal = wiLocal,
-        .normal = prd.normal,
-        .frame = frame,
-    };
-
-    return record;
 }
 
 __forceinline__ __device__ static PerRayData *getPRD()
@@ -70,9 +49,13 @@ extern "C" __global__ void __closesthit__ch()
     prd->t = optixGetRayTmax();
     prd->point = getHitPoint();
 
+    const float3 rayDirection = optixGetWorldRayDirection();
+    prd->woWorld = -Vec3(rayDirection.x, rayDirection.y, rayDirection.z);
+
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
     prd->materialID = hitgroupData->materialID;
+    prd->bsdfType = hitgroupData->bsdfType;
     prd->textureIndex = hitgroupData->textureIndex;
 
     const unsigned int primitiveIndex = optixGetPrimitiveIndex();
@@ -152,10 +135,11 @@ extern "C" __global__ void __closesthit__ch()
         prd->barycentrics = float2{0.f, 0.f};
     }
 
-    const float3 optixDirection = optixGetWorldRayDirection();
-    const Vec3 direction(optixDirection.x, optixDirection.y, optixDirection.z);
-    if (dot(prd->normal, direction) > 0.f) {
+    if (dot(prd->normal, prd->woWorld) < 0.f) {
         prd->normal = -1.f * prd->normal;
+        prd->isInside = true;
+    } else {
+        prd->isInside = false;
     }
 }
 
@@ -261,12 +245,12 @@ extern "C" __global__ void __raygen__rg()
         const int occlusionIndex = 1 * (index.y * dim.x + index.x);
         params.occlusionBuffer[occlusionIndex + 0] = 1.f;
 
-        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd, -direction);
+        const BSDFSampleRecord sampleRecord = createSamplingRecord(prd);
         const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
         params.sampleRecordOutBuffer[sampleRecordIndex] = sampleRecord;
 
         const int cosThetaWiIndex = index.y * dim.x + index.x;
-        params.cosThetaWiBuffer[cosThetaWiIndex] = sampleRecord.wiLocal.z();
+        params.cosThetaWiBuffer[cosThetaWiIndex] = fabsf(sampleRecord.wiLocal.z());
 
         const float3 baseColor = prd.baseColor;
         const int colorIndex = 3 * (index.y * dim.x + index.x);

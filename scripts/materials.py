@@ -79,6 +79,25 @@ class SBTManager:
 
         return result
 
+    def get_bsdf_types_annotated(self):
+        result = [ ("BSDFType::Diffuse", "missing material") ]
+        for element_name in sorted(self.records_by_element.keys()):
+            element_records = sorted(
+                self.records_by_element[element_name],
+                key=lambda r: r.name
+            )
+
+            for i, record in enumerate(element_records):
+                comment = f"{element_name}: {record.name}"
+                if record.name == "water":
+                    bsdf_type = "BSDFType::Water"
+                else:
+                    bsdf_type = "BSDFType::Diffuse"
+
+                result.append((bsdf_type, comment))
+
+        return result
+
     def get_names(self, search_element):
         records = self.records_by_element[search_element]
         return sorted(
