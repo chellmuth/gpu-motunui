@@ -559,8 +559,11 @@ static void runSample(
     Params &params,
     CUdeviceptr d_params,
     std::vector<float> &outputImage,
-    std::vector<float> &textureImage
+    std::vector<float> &textureImage,
+    Timing &timing
 ) {
+    timing.start(TimedSection::Sample);
+
     std::cout << "Sample #" << sample << std::endl;
 
     params.bounce = 0;
@@ -687,6 +690,8 @@ static void runSample(
             outputImage
         );
     }
+
+    timing.end(TimedSection::Sample);
 }
 
 static void saveCheckpointImage(
@@ -756,6 +761,8 @@ void launch(
 
     const int spp = renderRequest.spp;
     for (int sample = 0; sample < spp; sample++) {
+        Timing timing;
+
         runSample(
             sample,
             renderRequest.bounces,
@@ -770,7 +777,8 @@ void launch(
             params,
             d_params,
             outputImage,
-            textureImage
+            textureImage,
+            timing
         );
 
         saveCheckpointImage(
@@ -781,6 +789,9 @@ void launch(
             outputImage,
             exrFilename
         );
+
+        std::cout << "  Sample timing:" << std::endl;
+        std::cout << "    Total: " << timing.getMilliseconds(TimedSection::Sample) << std::endl;
     }
 
     Image::save(
