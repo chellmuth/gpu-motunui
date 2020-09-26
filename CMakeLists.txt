@@ -34,6 +34,7 @@ add_library(moana
   src/render/pipeline.cpp
   src/render/pipeline_helper.cpp
   src/render/renderer.cpp
+  src/render/timing.cpp
 
   src/scene/archive.cpp
   src/scene/as_arena.cpp

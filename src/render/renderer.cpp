@@ -6,6 +6,7 @@
 #include "assert_macros.hpp"
 #include "core/ptex_texture.hpp"
 #include "moana/io/image.hpp"
+#include "render/timing.hpp"
 #include "scene/texture_offsets.hpp"
 #include "util/color_map.hpp"
 #include "util/enumerate.hpp"
