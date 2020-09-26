@@ -5,7 +5,7 @@
 
 #include <optix.h>
 
-#include "moana/pipeline.hpp"
+#include "moana/render/pipeline.hpp"
 
 namespace moana { namespace PipelineHelper {
 

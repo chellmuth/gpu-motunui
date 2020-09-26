@@ -10,7 +10,7 @@
 #include <optix_stubs.h>
 
 #include "assert_macros.hpp"
-#include "moana/renderer.hpp"
+#include "moana/render/renderer.hpp"
 #include "scene/container.hpp"
 
 namespace moana {

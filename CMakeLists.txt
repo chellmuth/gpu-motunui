@@ -16,9 +16,6 @@ ADD_SUBDIRECTORY(ext/ptex)
 
 add_library(moana
   src/driver.cpp
-  src/pipeline.cpp
-  src/pipeline_helper.cpp
-  src/renderer.cpp
   src/scene.cpp
 
   src/core/camera.cpp
@@ -33,6 +30,10 @@ add_library(moana
   src/parsers/curve_parser.cpp
   src/parsers/obj_parser.cpp
   src/parsers/string_util.cpp
+
+  src/render/pipeline.cpp
+  src/render/pipeline_helper.cpp
+  src/render/renderer.cpp
 
   src/scene/archive.cpp
   src/scene/as_arena.cpp

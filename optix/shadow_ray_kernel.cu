@@ -2,13 +2,13 @@
 
 #include <stdio.h>
 
-#include "moana/driver.hpp"
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/core/frame.hpp"
 #include "moana/core/ray.hpp"
 #include "moana/cuda/triangle.hpp"
-#include "moana/renderer.hpp"
+#include "moana/driver.hpp"
+#include "moana/render/renderer.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
 #include "sample.hpp"

@@ -1,4 +1,4 @@
-#include "moana/renderer.hpp"
+#include "moana/render/renderer.hpp"
 
 #include <cuda_runtime.h>
 #include <optix_stubs.h>
