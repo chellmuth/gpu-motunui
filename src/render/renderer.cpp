@@ -337,78 +337,83 @@ static void updateAlbedoBuffer(
     int width,
     int height,
     int spp,
-    std::vector<float> &textureImage
+    std::vector<float> &textureImage,
+    Timing &timing
 ) {
-   ColorMap faceMap;
-   ColorMap materialMap;
-   std::vector<float> faceImage(width * height * 3, 0.f);
-   std::vector<float> uvImage(width * height * 3, 0.f);
-   for (int row = 0; row < height; row++) {
-       for (int col = 0; col < width; col++) {
-           const int pixelIndex = 3 * (row * width + col);
+    timing.start(TimedSection::PtexLookups);
 
-           const int idIndex = 3 * (row * width + col);
-           const int primitiveID = buffers.output.idBuffer[idIndex + 0];
-           const int materialID = buffers.output.idBuffer[idIndex + 1];
-           const int textureIndex = buffers.output.idBuffer[idIndex + 2];
-           const int faceID = primitiveID / 2;
+    ColorMap faceMap;
+    ColorMap materialMap;
+    std::vector<float> faceImage(width * height * 3, 0.f);
+    std::vector<float> uvImage(width * height * 3, 0.f);
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
 
-           const int barycentricIndex = 2 * (row * width + col);
-           const float alpha = buffers.output.barycentricBuffer[barycentricIndex + 0];
-           const float beta = buffers.output.barycentricBuffer[barycentricIndex + 1];
+            const int idIndex = 3 * (row * width + col);
+            const int primitiveID = buffers.output.idBuffer[idIndex + 0];
+            const int materialID = buffers.output.idBuffer[idIndex + 1];
+            const int textureIndex = buffers.output.idBuffer[idIndex + 2];
+            const int faceID = primitiveID / 2;
 
-           float u, v;
-           if (primitiveID % 2 == 0) {
-               u = alpha + beta;
-               v = beta;
-           } else {
-               u = alpha;
-               v = alpha + beta;
-           }
-           uvImage[pixelIndex + 0] = u;
-           uvImage[pixelIndex + 1] = v;
-           uvImage[pixelIndex + 2] = materialID;
+            const int barycentricIndex = 2 * (row * width + col);
+            const float alpha = buffers.output.barycentricBuffer[barycentricIndex + 0];
+            const float beta = buffers.output.barycentricBuffer[barycentricIndex + 1];
 
-           if (materialID > 0) {
-               float3 color = faceMap.get(faceID);
-               faceImage[pixelIndex + 0] = color.x;
-               faceImage[pixelIndex + 1] = color.y;
-               faceImage[pixelIndex + 2] = color.z;
-           }
+            float u, v;
+            if (primitiveID % 2 == 0) {
+                u = alpha + beta;
+                v = beta;
+            } else {
+                u = alpha;
+                v = alpha + beta;
+            }
+            uvImage[pixelIndex + 0] = u;
+            uvImage[pixelIndex + 1] = v;
+            uvImage[pixelIndex + 2] = materialID;
 
-           float textureX = 0;
-           float textureY = 0;
-           float textureZ = 0;
-           if (textureIndex >= 0) {
-               PtexTexture texture = textures[textureIndex];
+            if (materialID > 0) {
+                float3 color = faceMap.get(faceID);
+                faceImage[pixelIndex + 0] = color.x;
+                faceImage[pixelIndex + 1] = color.y;
+                faceImage[pixelIndex + 2] = color.z;
+            }
 
-               Vec3 color = texture.lookup(
-                   float2{ u, v },
-                   faceID
-               );
-               textureX = color.x();
-               textureY = color.y();
-               textureZ = color.z();
-           } else if (materialID > 0) {
-               float3 color = materialMap.get(materialID);
+            float textureX = 0;
+            float textureY = 0;
+            float textureZ = 0;
+            if (textureIndex >= 0) {
+                PtexTexture texture = textures[textureIndex];
 
-               textureX = buffers.output.colorBuffer[pixelIndex + 0];
-               textureY = buffers.output.colorBuffer[pixelIndex + 1];
-               textureZ = buffers.output.colorBuffer[pixelIndex + 2];
-           }
+                Vec3 color = texture.lookup(
+                    float2{ u, v },
+                    faceID
+                );
+                textureX = color.x();
+                textureY = color.y();
+                textureZ = color.z();
+            } else if (materialID > 0) {
+                float3 color = materialMap.get(materialID);
 
-           buffers.host.albedoBuffer[pixelIndex + 0] = textureX;
-           buffers.host.albedoBuffer[pixelIndex + 1] = textureY;
-           buffers.host.albedoBuffer[pixelIndex + 2] = textureZ;
+                textureX = buffers.output.colorBuffer[pixelIndex + 0];
+                textureY = buffers.output.colorBuffer[pixelIndex + 1];
+                textureZ = buffers.output.colorBuffer[pixelIndex + 2];
+            }
 
-           const int cosThetaWiIndex = row * width + col;
-           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+            buffers.host.albedoBuffer[pixelIndex + 0] = textureX;
+            buffers.host.albedoBuffer[pixelIndex + 1] = textureY;
+            buffers.host.albedoBuffer[pixelIndex + 2] = textureZ;
 
-           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
-           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
-           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * cosThetaWi;
-       }
-   }
+            const int cosThetaWiIndex = row * width + col;
+            const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+
+            textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
+            textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
+            textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * cosThetaWi;
+        }
+    }
+
+    timing.end(TimedSection::PtexLookups);
 }
 
 static void updateBetaBuffer(
@@ -487,8 +492,10 @@ static void updateDirectLighting(
     Params &params,
     CUdeviceptr d_params,
     std::vector<float> &outputImage,
-    std::vector<float> &textureImage
+    Timing &timing
 ) {
+    timing.start(TimedSection::DirectLighting);
+
     for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
         sceneState.arena.restoreSnapshot(geometry.snapshot);
 
@@ -543,6 +550,8 @@ static void updateDirectLighting(
             }
         }
     }
+
+    timing.end(TimedSection::DirectLighting);
 }
 
 static void runSample(
@@ -622,7 +631,8 @@ static void runSample(
             width,
             height,
             spp,
-            textureImage
+            textureImage,
+            timing
         );
 
         updateDirectLighting(
@@ -639,7 +649,7 @@ static void runSample(
             params,
             d_params,
             outputImage,
-            textureImage
+            timing
         );
 
         updateBetaBuffer(
@@ -792,6 +802,8 @@ void launch(
 
         std::cout << "  Sample timing:" << std::endl;
         std::cout << "    Total: " << timing.getMilliseconds(TimedSection::Sample) << std::endl;
+        std::cout << "    Textures: " << timing.getMilliseconds(TimedSection::PtexLookups) << std::endl;
+        std::cout << "    Direct lighting: " << timing.getMilliseconds(TimedSection::DirectLighting) << std::endl;
     }
 
     Image::save(

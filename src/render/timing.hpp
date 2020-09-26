@@ -6,7 +6,9 @@
 namespace moana {
 
 enum class TimedSection {
-    Sample
+    Sample,
+    PtexLookups,
+    DirectLighting
 };
 
 class Timing {
