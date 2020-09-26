@@ -12,6 +12,7 @@ struct BSDFSampleRecord {
     Vec3 normal;
     Frame frame;
     float weight;
+    bool isDelta;
 };
 
 }

@@ -59,7 +59,8 @@ __forceinline__ __device__ BSDFSampleRecord sample(
             .wiLocal = wi,
             .normal = prd.normal,
             .frame = frame,
-            .weight = throughput / fresnelReflectance
+            .weight = throughput / fresnelReflectance,
+            .isDelta = true,
         };
 
         return record;
@@ -85,7 +86,8 @@ __forceinline__ __device__ BSDFSampleRecord sample(
             .wiLocal = wi,
             .normal = prd.normal,
             .frame = frame,
-            .weight = throughput * nonSymmetricEtaCorrection / fresnelTransmittance
+            .weight = throughput * nonSymmetricEtaCorrection / fresnelTransmittance,
+            .isDelta = true,
         };
 
         return record;

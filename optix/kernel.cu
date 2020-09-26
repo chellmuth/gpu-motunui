@@ -5,6 +5,7 @@
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/core/ray.hpp"
+#include "moana/cuda/bsdf.hpp"
 #include "moana/driver.hpp"
 #include "moana/renderer.hpp"
 #include "bsdfs/lambertian.hpp"
@@ -26,9 +27,9 @@ __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
     const uint3 index = optixGetLaunchIndex();
     const uint3 dim = optixGetLaunchDimensions();
 
-    if (prd.materialID == 103) {
+    if (prd.bsdfType == BSDFType::Water) {
         return Water::sample(index, dim, prd, params.xiBuffer);
-    } else {
+    } else { // prd.bsdfType == BSDFType::Diffuse
         return Lambertian::sample(index, dim, prd, params.xiBuffer);
     }
 
@@ -54,6 +55,7 @@ extern "C" __global__ void __closesthit__ch()
     HitGroupData *hitgroupData = reinterpret_cast<HitGroupData *>(optixGetSbtDataPointer());
     prd->baseColor = hitgroupData->baseColor;
     prd->materialID = hitgroupData->materialID;
+    prd->bsdfType = hitgroupData->bsdfType;
     prd->textureIndex = hitgroupData->textureIndex;
 
     const unsigned int primitiveIndex = optixGetPrimitiveIndex();

@@ -47,10 +47,18 @@ extern "C" __global__ void __raygen__rg()
     const uint3 dim = optixGetLaunchDimensions();
 
     const int shadowOcclusionIndex = 1 * (index.y * dim.x + index.x);
+
     const int sampleRecordIndex = 1 * (index.y * dim.x + index.x);
     const BSDFSampleRecord &sampleRecord = params.sampleRecordOutBuffer[sampleRecordIndex];
     if (!sampleRecord.isValid) {
         params.shadowOcclusionBuffer[shadowOcclusionIndex] = 1;
+
+        return;
+    }
+
+    const int shadowWeightIndex = 1 * (index.y * dim.x + index.x);
+    if (sampleRecord.isDelta) {
+        params.shadowWeightBuffer[shadowWeightIndex] = 0.f;
 
         return;
     }
@@ -114,7 +122,6 @@ extern "C" __global__ void __raygen__rg()
         params.shadowOcclusionBuffer[shadowOcclusionIndex] = 1;
     }
 
-    const int shadowWeightIndex = 1 * (index.y * dim.x + index.x);
     params.shadowWeightBuffer[shadowWeightIndex] = 1.f
         * fabsf(dot(lightNormal, -wi))
         * fmaxf(0.f, dot(wi, sampleRecord.normal))

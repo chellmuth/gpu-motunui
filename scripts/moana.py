@@ -260,6 +260,7 @@ def run():
     sbt_manager = materials.build_sbt_manager(elements)
     if True:
         print(code.generate_sbt_array(sbt_manager))
+        print(code.generate_bsdf_types_array(sbt_manager))
 
     # process_element("isBeach", sbt_manager, output_cpp=True)
 

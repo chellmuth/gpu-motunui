@@ -180,6 +180,7 @@ static void createShaderBindingTable(
             hitgroupSbt.data.baseColor = Materials::baseColors[record.materialID];
             hitgroupSbt.data.textureIndex = record.textureIndex;
             hitgroupSbt.data.materialID = record.materialID;
+            hitgroupSbt.data.bsdfType = Materials::bsdfTypes[record.materialID];
             hitgroupSbt.data.normals = reinterpret_cast<float *>(record.d_normals);
             hitgroupSbt.data.normalIndices = reinterpret_cast<int *>(record.d_normalIndices);
 

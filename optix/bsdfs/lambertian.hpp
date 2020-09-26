@@ -27,7 +27,8 @@ __forceinline__ __device__ BSDFSampleRecord sample(
         .wiLocal = wiLocal,
         .normal = prd.normal,
         .frame = frame,
-        .weight = weight
+        .weight = weight,
+        .isDelta = false,
     };
 
     return record;

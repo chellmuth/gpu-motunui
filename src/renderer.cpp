@@ -524,12 +524,12 @@ static void updateDirectLighting(
 
             const int shadowWeightIndex = 1 * (row * width + col);
             const float shadowRayWeight = buffers.output.shadowWeightBuffer[shadowWeightIndex];
+            if (shadowRayWeight == 0.f) { continue; }
 
             const int pixelIndex = 3 * (row * width + col);
 
             const int idIndex = 3 * (row * width + col);
             const int materialID = buffers.output.idBuffer[idIndex + 1];
-            if (materialID == 103) { continue; }
 
             float L[3] = { 891.443777, 505.928150, 154.625939 };
             for (int i = 0; i < 3; i++) {
