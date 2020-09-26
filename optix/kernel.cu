@@ -8,29 +8,15 @@
 #include "moana/core/ray.hpp"
 #include "moana/cuda/fresnel.hpp"
 #include "moana/cuda/tangent_frame.hpp"
-#include "moana/cuda/triangle.hpp"
 #include "moana/driver.hpp"
 #include "moana/renderer.hpp"
+#include "bsdfs/lambertian.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
-#include "sample.hpp"
+#include "ray_data.hpp"
 #include "util.hpp"
 
 using namespace moana;
-
-struct PerRayData {
-    bool isHit;
-    float t;
-    float3 point;
-    Vec3 normal;
-    Vec3 woWorld;
-    float3 baseColor;
-    int materialID;
-    int primitiveID;
-    int textureIndex;
-    float2 barycentrics;
-    bool isInside;
-};
 
 extern "C" {
     __constant__ Renderer::Params params;
@@ -45,7 +31,6 @@ __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
     const Frame frame(prd.normal);
 
     Vec3 wiLocal(0.f);
-    float weight;
     if (prd.materialID == 103) {
         const int xiIndex = 2 * (index.y * dim.x + index.x);
         const float xi1 = params.xiBuffer[xiIndex + 0]; // fixme
@@ -121,23 +106,7 @@ __forceinline__ __device__ static BSDFSampleRecord createSamplingRecord(
             return record;
         }
     } else {
-        const int xiIndex = 2 * (index.y * dim.x + index.x);
-        float xi1 = params.xiBuffer[xiIndex + 0];
-        float xi2 = params.xiBuffer[xiIndex + 1];
-
-        wiLocal = Sample::uniformHemisphere(xi1, xi2);
-        weight = 2.f;
-
-        const BSDFSampleRecord record = {
-            .isValid = true,
-            .point = prd.point,
-            .wiLocal = wiLocal,
-            .normal = prd.normal,
-            .frame = frame,
-            .weight = weight
-        };
-
-        return record;
+        return Lambertian::sample(index, dim, prd, params.xiBuffer);
     }
 
 }
