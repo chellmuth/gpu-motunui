@@ -8,7 +8,6 @@
 #include "moana/io/image.hpp"
 #include "render/timing.hpp"
 #include "scene/texture_offsets.hpp"
-#include "util/color_map.hpp"
 #include "util/enumerate.hpp"
 
 namespace moana { namespace Renderer {
@@ -344,13 +343,13 @@ static void updateAlbedoBuffer(
 ) {
     timing.start(TimedSection::PtexLookups);
 
-    ColorMap faceMap;
-    ColorMap materialMap;
     std::vector<float> faceImage(width * height * 3, 0.f);
     std::vector<float> uvImage(width * height * 3, 0.f);
 
     int textureLookups = 0;
     int materialLookups = 0;
+
+    #pragma omp parallel for collapse(2)
     for (int row = 0; row < height; row++) {
         for (int col = 0; col < width; col++) {
             const int pixelIndex = 3 * (row * width + col);
@@ -377,13 +376,6 @@ static void updateAlbedoBuffer(
             uvImage[pixelIndex + 1] = v;
             uvImage[pixelIndex + 2] = materialID;
 
-            if (materialID > 0) {
-                float3 color = faceMap.get(faceID);
-                faceImage[pixelIndex + 0] = color.x;
-                faceImage[pixelIndex + 1] = color.y;
-                faceImage[pixelIndex + 2] = color.z;
-            }
-
             float textureX = 0;
             float textureY = 0;
             float textureZ = 0;
@@ -402,7 +394,6 @@ static void updateAlbedoBuffer(
                 textureZ = color.z();
             } else if (materialID > 0) {
                 materialLookups += 1;
-                float3 color = materialMap.get(materialID);
 
                 textureX = buffers.output.colorBuffer[pixelIndex + 0];
                 textureY = buffers.output.colorBuffer[pixelIndex + 1];

@@ -1,13 +1,16 @@
 #include "ptex_texture.hpp"
 
+#include <array>
 #include <cmath>
 #include <iostream>
 
+#include <omp.h>
 #include <Ptexture.h>
 
 namespace moana {
 
-static Ptex::PtexCache *cache;
+constexpr int cacheCount = 3;
+static std::array<Ptex::PtexCache *, cacheCount> caches;
 
 struct : public PtexErrorHandler {
     void reportError(const char *error) override { std::cout << error << std::endl; }
@@ -16,8 +19,10 @@ struct : public PtexErrorHandler {
 PtexTexture::PtexTexture(const std::string &texturePath)
     : m_texturePath(texturePath)
 {
-    if (!cache) {
-        cache = Ptex::PtexCache::create(100, 1ull << 32, true, nullptr, &errorHandler);
+    if (!caches[0]) {
+        for (int i = 0; i < cacheCount; i++) {
+            caches[i] = Ptex::PtexCache::create(100, 1ull << 32, true, nullptr, &errorHandler);
+        }
     }
 }
 
@@ -26,6 +31,9 @@ Vec3 PtexTexture::lookup(float2 uv, int faceIndex) const
     // Handle wrapping
     float u = uv.x - (int)floorf(uv.x);
     float v = uv.y - (int)floorf(uv.y);
+
+    const int threadNum = omp_get_thread_num();
+    Ptex::PtexCache *cache = caches[threadNum % cacheCount];
 
     Ptex::String error;
     Ptex::PtexTexture *texture = cache->get(m_texturePath.c_str(), error);
