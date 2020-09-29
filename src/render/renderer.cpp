@@ -220,10 +220,12 @@ static void resetBounceBuffers(
         buffers.barycentricBufferSizeInBytes
     ));
 
-    CHECK_CUDA(cudaMemset(
+    std::vector<float> idBuffer(width * height * 3, -1);
+    CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(params.idBuffer),
-        0,
-        buffers.idBufferSizeInBytes
+        idBuffer.data(),
+        buffers.idBufferSizeInBytes,
+        cudaMemcpyHostToDevice
     ));
 
     CHECK_CUDA(cudaMemset(
