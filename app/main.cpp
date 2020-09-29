@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     RenderRequest request;
     request.spp = 1024;
-    request.bounces = 3;
+    request.bounces = 5;
     request.width = 1024;
     request.height = 429;
 

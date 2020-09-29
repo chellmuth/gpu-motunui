@@ -9,6 +9,7 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 find_package(CUDAToolkit REQUIRED)
 find_package(OptiX REQUIRED)
+find_package(OpenMP REQUIRED)
 
 # ptex
 SET(PTEX_BUILD_SHARED_LIBS OFF CACHE BOOL " " FORCE)
@@ -75,8 +76,7 @@ target_include_directories(moana PRIVATE src)
 target_include_directories(moana PRIVATE ext/tinyexr)
 target_include_directories(moana PRIVATE ext/ptex/src/ptex)
 target_compile_definitions(moana PRIVATE MOANA_ROOT="${MOANA_ROOT}")
-target_link_libraries(moana CUDA::cudart Ptex_static dl)
-
+target_link_libraries(moana CUDA::cudart Ptex_static dl OpenMP::OpenMP_CXX)
 add_subdirectory(optix)
 add_dependencies(moana ptx_headers shadow_ray_ptx_headers)
 

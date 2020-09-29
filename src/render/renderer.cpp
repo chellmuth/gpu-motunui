@@ -348,6 +348,9 @@ static void updateAlbedoBuffer(
     ColorMap materialMap;
     std::vector<float> faceImage(width * height * 3, 0.f);
     std::vector<float> uvImage(width * height * 3, 0.f);
+
+    int textureLookups = 0;
+    int materialLookups = 0;
     for (int row = 0; row < height; row++) {
         for (int col = 0; col < width; col++) {
             const int pixelIndex = 3 * (row * width + col);
@@ -384,17 +387,21 @@ static void updateAlbedoBuffer(
             float textureX = 0;
             float textureY = 0;
             float textureZ = 0;
+
             if (textureIndex >= 0) {
+                textureLookups += 1;
                 PtexTexture texture = textures[textureIndex];
 
                 Vec3 color = texture.lookup(
                     float2{ u, v },
                     faceID
                 );
+
                 textureX = color.x();
                 textureY = color.y();
                 textureZ = color.z();
             } else if (materialID > 0) {
+                materialLookups += 1;
                 float3 color = materialMap.get(materialID);
 
                 textureX = buffers.output.colorBuffer[pixelIndex + 0];
@@ -415,6 +422,10 @@ static void updateAlbedoBuffer(
         }
     }
 
+    std::cout << "Total Lookups: " << (textureLookups + materialLookups)
+              << " (texture: " << textureLookups << ")"
+              << std::endl;
+
     timing.end(TimedSection::PtexLookups);
 }
 
@@ -423,23 +434,23 @@ static void updateBetaBuffer(
     int width,
     int height
 ) {
-   for (int row = 0; row < height; row++) {
-       for (int col = 0; col < width; col++) {
-           const int pixelIndex = 3 * (row * width + col);
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
 
-           const int cosThetaWiIndex = row * width + col;
-           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+            const int cosThetaWiIndex = row * width + col;
+            const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
 
-           const int bsdfSampleIndex = 1 * (row * width + col);
-           const BSDFSampleRecord record = buffers.output.sampleRecordOutBuffer[bsdfSampleIndex];
-           for (int i = 0; i < 3; i++) {
-               buffers.host.betaBuffer[pixelIndex + i] *= 1.f
-                   * cosThetaWi
-                   * record.weight
-                   * buffers.host.albedoBuffer[pixelIndex + i];
-           }
-       }
-   }
+            const int bsdfSampleIndex = 1 * (row * width + col);
+            const BSDFSampleRecord record = buffers.output.sampleRecordOutBuffer[bsdfSampleIndex];
+            for (int i = 0; i < 3; i++) {
+                buffers.host.betaBuffer[pixelIndex + i] *= 1.f
+                    * cosThetaWi
+                    * record.weight
+                    * buffers.host.albedoBuffer[pixelIndex + i];
+            }
+        }
+    }
 }
 
 static void updateEnvironmentLighting(
@@ -480,20 +491,15 @@ static void updateEnvironmentLighting(
     }
 }
 
-static void updateDirectLighting(
-    int sample,
+static void castShadowRays(
     int bounce,
     std::map<PipelineType, OptixState> &optixStates,
     SceneState &sceneState,
-    BufferManager &buffers,
-    std::vector<PtexTexture> &textures,
     CUstream stream,
     int width,
     int height,
-    int spp,
     Params &params,
     CUdeviceptr d_params,
-    std::vector<float> &outputImage,
     Timing &timing
 ) {
     timing.start(TimedSection::DirectLighting);
@@ -523,8 +529,21 @@ static void updateDirectLighting(
 
         CHECK_CUDA(cudaDeviceSynchronize());
     }
-    copyOutputBuffers(buffers, width, height, params);
 
+    // Do not call copyOutputBuffer, because it might overlap buffers needed
+    // in updateAlbedoBuffer
+
+    timing.end(TimedSection::DirectLighting);
+}
+
+static void updateDirectLighting(
+    BufferManager &buffers,
+    CUstream stream,
+    int width,
+    int height,
+    int spp,
+    std::vector<float> &outputImage
+) {
     for (int row = 0; row < height; row++) {
         for (int col = 0; col < width; col++) {
             const int shadowOcclusionIndex = 1 * (row * width + col);
@@ -552,8 +571,6 @@ static void updateDirectLighting(
             }
         }
     }
-
-    timing.end(TimedSection::DirectLighting);
 }
 
 static void runSample(
@@ -627,31 +644,48 @@ static void runSample(
 
     // Bounce
     for (int bounce = 0; bounce < bounces; bounce++) {
-        updateAlbedoBuffer(
-            buffers,
-            textures,
-            width,
-            height,
-            spp,
-            textureImage,
-            timing
-        );
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                updateAlbedoBuffer(
+                    buffers,
+                    textures,
+                    width,
+                    height,
+                    spp,
+                    textureImage,
+                    timing
+                );
+            }
+
+            #pragma omp section
+            {
+                castShadowRays(
+                    bounce,
+                    optixStates,
+                    sceneState,
+                    stream,
+                    width,
+                    height,
+                    params,
+                    d_params,
+                    timing
+                );
+            }
+        }
+
+        // Update buffers populated by castShadowRays after
+        // both blocks finish
+        copyOutputBuffers(buffers, width, height, params);
 
         updateDirectLighting(
-            sample,
-            bounce,
-            optixStates,
-            sceneState,
             buffers,
-            textures,
             stream,
             width,
             height,
             spp,
-            params,
-            d_params,
-            outputImage,
-            timing
+            outputImage
         );
 
         updateBetaBuffer(
