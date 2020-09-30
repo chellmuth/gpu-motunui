@@ -219,7 +219,7 @@ static void resetBounceBuffers(
         buffers.barycentricBufferSizeInBytes
     ));
 
-    std::vector<float> idBuffer(width * height * 3, -1);
+    std::vector<int> idBuffer(width * height * 3, -1);
     CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(params.idBuffer),
         idBuffer.data(),
@@ -413,9 +413,9 @@ static void updateAlbedoBuffer(
         }
     }
 
-    std::cout << "Total Lookups: " << (textureLookups + materialLookups)
-              << " (texture: " << textureLookups << ")"
-              << std::endl;
+    // std::cout << "Total Lookups: " << (textureLookups + materialLookups)
+    //           << " (texture: " << textureLookups << ")"
+    //           << std::endl;
 
     timing.end(TimedSection::PtexLookups);
 }
