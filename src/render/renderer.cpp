@@ -1,4 +1,4 @@
-#include "moana/renderer.hpp"
+#include "moana/render/renderer.hpp"
 
 #include <cuda_runtime.h>
 #include <optix_stubs.h>
@@ -6,8 +6,8 @@
 #include "assert_macros.hpp"
 #include "core/ptex_texture.hpp"
 #include "moana/io/image.hpp"
+#include "render/timing.hpp"
 #include "scene/texture_offsets.hpp"
-#include "util/color_map.hpp"
 #include "util/enumerate.hpp"
 
 namespace moana { namespace Renderer {
@@ -219,10 +219,12 @@ static void resetBounceBuffers(
         buffers.barycentricBufferSizeInBytes
     ));
 
-    CHECK_CUDA(cudaMemset(
+    std::vector<int> idBuffer(width * height * 3, -1);
+    CHECK_CUDA(cudaMemcpy(
         reinterpret_cast<void *>(params.idBuffer),
-        0,
-        buffers.idBufferSizeInBytes
+        idBuffer.data(),
+        buffers.idBufferSizeInBytes,
+        cudaMemcpyHostToDevice
     ));
 
     CHECK_CUDA(cudaMemset(
@@ -336,78 +338,86 @@ static void updateAlbedoBuffer(
     int width,
     int height,
     int spp,
-    std::vector<float> &textureImage
+    std::vector<float> &textureImage,
+    Timing &timing
 ) {
-   ColorMap faceMap;
-   ColorMap materialMap;
-   std::vector<float> faceImage(width * height * 3, 0.f);
-   std::vector<float> uvImage(width * height * 3, 0.f);
-   for (int row = 0; row < height; row++) {
-       for (int col = 0; col < width; col++) {
-           const int pixelIndex = 3 * (row * width + col);
+    timing.start(TimedSection::PtexLookups);
 
-           const int idIndex = 3 * (row * width + col);
-           const int primitiveID = buffers.output.idBuffer[idIndex + 0];
-           const int materialID = buffers.output.idBuffer[idIndex + 1];
-           const int textureIndex = buffers.output.idBuffer[idIndex + 2];
-           const int faceID = primitiveID / 2;
+    std::vector<float> faceImage(width * height * 3, 0.f);
+    std::vector<float> uvImage(width * height * 3, 0.f);
 
-           const int barycentricIndex = 2 * (row * width + col);
-           const float alpha = buffers.output.barycentricBuffer[barycentricIndex + 0];
-           const float beta = buffers.output.barycentricBuffer[barycentricIndex + 1];
+    int textureLookups = 0;
+    int materialLookups = 0;
 
-           float u, v;
-           if (primitiveID % 2 == 0) {
-               u = alpha + beta;
-               v = beta;
-           } else {
-               u = alpha;
-               v = alpha + beta;
-           }
-           uvImage[pixelIndex + 0] = u;
-           uvImage[pixelIndex + 1] = v;
-           uvImage[pixelIndex + 2] = materialID;
+    #pragma omp parallel for collapse(2)
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
 
-           if (materialID > 0) {
-               float3 color = faceMap.get(faceID);
-               faceImage[pixelIndex + 0] = color.x;
-               faceImage[pixelIndex + 1] = color.y;
-               faceImage[pixelIndex + 2] = color.z;
-           }
+            const int idIndex = 3 * (row * width + col);
+            const int primitiveID = buffers.output.idBuffer[idIndex + 0];
+            const int materialID = buffers.output.idBuffer[idIndex + 1];
+            const int textureIndex = buffers.output.idBuffer[idIndex + 2];
+            const int faceID = primitiveID / 2;
 
-           float textureX = 0;
-           float textureY = 0;
-           float textureZ = 0;
-           if (textureIndex >= 0) {
-               PtexTexture texture = textures[textureIndex];
+            const int barycentricIndex = 2 * (row * width + col);
+            const float alpha = buffers.output.barycentricBuffer[barycentricIndex + 0];
+            const float beta = buffers.output.barycentricBuffer[barycentricIndex + 1];
 
-               Vec3 color = texture.lookup(
-                   float2{ u, v },
-                   faceID
-               );
-               textureX = color.x();
-               textureY = color.y();
-               textureZ = color.z();
-           } else if (materialID > 0) {
-               float3 color = materialMap.get(materialID);
+            float u, v;
+            if (primitiveID % 2 == 0) {
+                u = alpha + beta;
+                v = beta;
+            } else {
+                u = alpha;
+                v = alpha + beta;
+            }
+            uvImage[pixelIndex + 0] = u;
+            uvImage[pixelIndex + 1] = v;
+            uvImage[pixelIndex + 2] = materialID;
 
-               textureX = buffers.output.colorBuffer[pixelIndex + 0];
-               textureY = buffers.output.colorBuffer[pixelIndex + 1];
-               textureZ = buffers.output.colorBuffer[pixelIndex + 2];
-           }
+            float textureX = 0;
+            float textureY = 0;
+            float textureZ = 0;
 
-           buffers.host.albedoBuffer[pixelIndex + 0] = textureX;
-           buffers.host.albedoBuffer[pixelIndex + 1] = textureY;
-           buffers.host.albedoBuffer[pixelIndex + 2] = textureZ;
+            if (textureIndex >= 0) {
+                textureLookups += 1;
+                PtexTexture texture = textures[textureIndex];
 
-           const int cosThetaWiIndex = row * width + col;
-           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+                Vec3 color = texture.lookup(
+                    float2{ u, v },
+                    faceID
+                );
 
-           textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
-           textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
-           textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * cosThetaWi;
-       }
-   }
+                textureX = color.x();
+                textureY = color.y();
+                textureZ = color.z();
+            } else if (materialID > 0) {
+                materialLookups += 1;
+
+                textureX = buffers.output.colorBuffer[pixelIndex + 0];
+                textureY = buffers.output.colorBuffer[pixelIndex + 1];
+                textureZ = buffers.output.colorBuffer[pixelIndex + 2];
+            }
+
+            buffers.host.albedoBuffer[pixelIndex + 0] = textureX;
+            buffers.host.albedoBuffer[pixelIndex + 1] = textureY;
+            buffers.host.albedoBuffer[pixelIndex + 2] = textureZ;
+
+            const int cosThetaWiIndex = row * width + col;
+            const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+
+            textureImage[pixelIndex + 0] += (1.f / spp) * textureX * cosThetaWi;
+            textureImage[pixelIndex + 1] += (1.f / spp) * textureY * cosThetaWi;
+            textureImage[pixelIndex + 2] += (1.f / spp) * textureZ * cosThetaWi;
+        }
+    }
+
+    // std::cout << "Total Lookups: " << (textureLookups + materialLookups)
+    //           << " (texture: " << textureLookups << ")"
+    //           << std::endl;
+
+    timing.end(TimedSection::PtexLookups);
 }
 
 static void updateBetaBuffer(
@@ -415,23 +425,23 @@ static void updateBetaBuffer(
     int width,
     int height
 ) {
-   for (int row = 0; row < height; row++) {
-       for (int col = 0; col < width; col++) {
-           const int pixelIndex = 3 * (row * width + col);
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            const int pixelIndex = 3 * (row * width + col);
 
-           const int cosThetaWiIndex = row * width + col;
-           const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
+            const int cosThetaWiIndex = row * width + col;
+            const float cosThetaWi = buffers.output.cosThetaWiBuffer[cosThetaWiIndex];
 
-           const int bsdfSampleIndex = 1 * (row * width + col);
-           const BSDFSampleRecord record = buffers.output.sampleRecordOutBuffer[bsdfSampleIndex];
-           for (int i = 0; i < 3; i++) {
-               buffers.host.betaBuffer[pixelIndex + i] *= 1.f
-                   * cosThetaWi
-                   * record.weight
-                   * buffers.host.albedoBuffer[pixelIndex + i];
-           }
-       }
-   }
+            const int bsdfSampleIndex = 1 * (row * width + col);
+            const BSDFSampleRecord record = buffers.output.sampleRecordOutBuffer[bsdfSampleIndex];
+            for (int i = 0; i < 3; i++) {
+                buffers.host.betaBuffer[pixelIndex + i] *= 1.f
+                    * cosThetaWi
+                    * record.weight
+                    * buffers.host.albedoBuffer[pixelIndex + i];
+            }
+        }
+    }
 }
 
 static void updateEnvironmentLighting(
@@ -472,22 +482,19 @@ static void updateEnvironmentLighting(
     }
 }
 
-static void updateDirectLighting(
-    int sample,
+static void castShadowRays(
     int bounce,
     std::map<PipelineType, OptixState> &optixStates,
     SceneState &sceneState,
-    BufferManager &buffers,
-    std::vector<PtexTexture> &textures,
     CUstream stream,
     int width,
     int height,
-    int spp,
     Params &params,
     CUdeviceptr d_params,
-    std::vector<float> &outputImage,
-    std::vector<float> &textureImage
+    Timing &timing
 ) {
+    timing.start(TimedSection::DirectLighting);
+
     for (const auto &[j, geometry] : enumerate(sceneState.geometries)) {
         sceneState.arena.restoreSnapshot(geometry.snapshot);
 
@@ -513,8 +520,21 @@ static void updateDirectLighting(
 
         CHECK_CUDA(cudaDeviceSynchronize());
     }
-    copyOutputBuffers(buffers, width, height, params);
 
+    // Do not call copyOutputBuffer, because it might overlap buffers needed
+    // in updateAlbedoBuffer
+
+    timing.end(TimedSection::DirectLighting);
+}
+
+static void updateDirectLighting(
+    BufferManager &buffers,
+    CUstream stream,
+    int width,
+    int height,
+    int spp,
+    std::vector<float> &outputImage
+) {
     for (int row = 0; row < height; row++) {
         for (int col = 0; col < width; col++) {
             const int shadowOcclusionIndex = 1 * (row * width + col);
@@ -558,8 +578,11 @@ static void runSample(
     Params &params,
     CUdeviceptr d_params,
     std::vector<float> &outputImage,
-    std::vector<float> &textureImage
+    std::vector<float> &textureImage,
+    Timing &timing
 ) {
+    timing.start(TimedSection::Sample);
+
     std::cout << "Sample #" << sample << std::endl;
 
     params.bounce = 0;
@@ -612,30 +635,48 @@ static void runSample(
 
     // Bounce
     for (int bounce = 0; bounce < bounces; bounce++) {
-        updateAlbedoBuffer(
-            buffers,
-            textures,
-            width,
-            height,
-            spp,
-            textureImage
-        );
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                updateAlbedoBuffer(
+                    buffers,
+                    textures,
+                    width,
+                    height,
+                    spp,
+                    textureImage,
+                    timing
+                );
+            }
+
+            #pragma omp section
+            {
+                castShadowRays(
+                    bounce,
+                    optixStates,
+                    sceneState,
+                    stream,
+                    width,
+                    height,
+                    params,
+                    d_params,
+                    timing
+                );
+            }
+        }
+
+        // Update buffers populated by castShadowRays after
+        // both blocks finish
+        copyOutputBuffers(buffers, width, height, params);
 
         updateDirectLighting(
-            sample,
-            bounce,
-            optixStates,
-            sceneState,
             buffers,
-            textures,
             stream,
             width,
             height,
             spp,
-            params,
-            d_params,
-            outputImage,
-            textureImage
+            outputImage
         );
 
         updateBetaBuffer(
@@ -686,6 +727,8 @@ static void runSample(
             outputImage
         );
     }
+
+    timing.end(TimedSection::Sample);
 }
 
 static void saveCheckpointImage(
@@ -755,6 +798,8 @@ void launch(
 
     const int spp = renderRequest.spp;
     for (int sample = 0; sample < spp; sample++) {
+        Timing timing;
+
         runSample(
             sample,
             renderRequest.bounces,
@@ -769,7 +814,8 @@ void launch(
             params,
             d_params,
             outputImage,
-            textureImage
+            textureImage,
+            timing
         );
 
         saveCheckpointImage(
@@ -780,6 +826,11 @@ void launch(
             outputImage,
             exrFilename
         );
+
+        std::cout << "  Sample timing:" << std::endl;
+        std::cout << "    Total: " << timing.getMilliseconds(TimedSection::Sample) << std::endl;
+        std::cout << "    Textures: " << timing.getMilliseconds(TimedSection::PtexLookups) << std::endl;
+        std::cout << "    Direct lighting: " << timing.getMilliseconds(TimedSection::DirectLighting) << std::endl;
     }
 
     Image::save(

@@ -11,7 +11,7 @@ target_compile_options(ptx_files PRIVATE $<$<COMPILE_LANGUAGE:CUDA>: --use_fast_
 add_custom_target(
   ptx_headers
   COMMAND ${CMAKE_COMMAND}
-  "-DCPP_FILE=${PROJECT_SOURCE_DIR}/src/kernel.hpp"
+  "-DCPP_FILE=${PROJECT_SOURCE_DIR}/src/render/kernel.hpp"
   "-DPTX_FILE=$<TARGET_OBJECTS:ptx_files>"
   "-DVARIABLE_NAME=mainRaySource"
   "-DNAMESPACE=PTX"
@@ -35,7 +35,7 @@ target_compile_options(shadow_ptx_files PRIVATE $<$<COMPILE_LANGUAGE:CUDA>: --us
 add_custom_target(
   shadow_ray_ptx_headers
   COMMAND ${CMAKE_COMMAND}
-  "-DCPP_FILE=${PROJECT_SOURCE_DIR}/src/shadow_ray_kernel.hpp"
+  "-DCPP_FILE=${PROJECT_SOURCE_DIR}/src/render/shadow_ray_kernel.hpp"
   "-DPTX_FILE=$<TARGET_OBJECTS:shadow_ptx_files>"
   "-DVARIABLE_NAME=shadowRaySource"
   "-DNAMESPACE=PTX"

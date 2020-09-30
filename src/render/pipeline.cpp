@@ -1,4 +1,4 @@
-#include "moana/pipeline.hpp"
+#include "moana/render/pipeline.hpp"
 
 #include "kernel.hpp"
 #include "shadow_ray_kernel.hpp"

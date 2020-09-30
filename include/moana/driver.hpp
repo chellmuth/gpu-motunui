@@ -12,7 +12,7 @@
 #include "moana/scene.hpp"
 #include "moana/scene/as_arena.hpp"
 #include "moana/scene/types.hpp"
-#include "moana/pipeline.hpp"
+#include "moana/render/pipeline.hpp"
 #include "moana/types.hpp"
 
 namespace moana {

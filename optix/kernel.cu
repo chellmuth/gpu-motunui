@@ -2,14 +2,14 @@
 
 #include <stdio.h>
 
+#include "bsdfs/lambertian.hpp"
+#include "bsdfs/water.hpp"
 #include "moana/core/bsdf_sample_record.hpp"
 #include "moana/core/camera.hpp"
 #include "moana/core/ray.hpp"
 #include "moana/cuda/bsdf.hpp"
 #include "moana/driver.hpp"
-#include "moana/renderer.hpp"
-#include "bsdfs/lambertian.hpp"
-#include "bsdfs/water.hpp"
+#include "moana/render/renderer.hpp"
 #include "optix_sdk.hpp"
 #include "random.hpp"
 #include "ray_data.hpp"

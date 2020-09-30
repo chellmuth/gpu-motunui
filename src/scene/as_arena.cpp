@@ -95,7 +95,7 @@ void ASArena::popTemp()
 Snapshot ASArena::createSnapshot()
 {
     Snapshot snapshot;
-    snapshot.dataPtr = malloc(m_outputOffset);
+    CHECK_CUDA(cudaMallocHost(&snapshot.dataPtr, m_outputOffset));
     snapshot.sizeInBytes = m_outputOffset;
 
     CHECK_CUDA(cudaMemcpy(
