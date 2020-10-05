@@ -6,6 +6,7 @@
 #include <limits>
 
 #include <cuda_runtime.h>
+#include <omp.h>
 #include <optix_function_table_definition.h>
 #include <optix_stubs.h>
 
@@ -28,10 +29,9 @@ static void contextLogCallback(
 
 static OptixDeviceContext createContext()
 {
-    // initialize CUDA
-    CHECK_CUDA(cudaFree(0));
-
+    CHECK_CUDA(cudaFree(0)); // initialize CUDA
     CHECK_OPTIX(optixInit());
+    omp_set_nested(1);
 
     OptixDeviceContextOptions options = {};
     options.logCallbackFunction = &contextLogCallback;
