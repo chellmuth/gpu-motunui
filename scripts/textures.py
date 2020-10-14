@@ -6,41 +6,13 @@ import code
 import files
 import params
 
-def generate_texture_lookup_src(texture_index_lookup):
+def generate_texture_lookup_data(texture_index_lookup):
     items = "\n".join(
-        f"{' ' * 4}{{ std::make_tuple(\"{element_name}\", \"{material}\", \"{mesh}\"), {index} }},"
+        f"X(\"{element_name}\", \"{material}\", \"{mesh}\", {index})"
         for (element_name, material, mesh), index
         in texture_index_lookup.items()
     )
-
-    return f"""\
-#include "scene/texture_lookup.hpp"
-
-#include <map>
-#include <utility>
-
-namespace moana {{ namespace TextureLookup {{
-
-using TextureIndexKey = std::tuple<std::string, std::string, std::string>;
-
-static const std::map<TextureIndexKey, int> lookup = {{
-{items}
-}};
-
-int indexForMesh(
-    const std::string &element,
-    const std::string &material,
-    const std::string &mesh
-) {{
-    const TextureIndexKey key = std::make_tuple(element, material, mesh);
-    if (lookup.count(key) > 0) {{
-        return lookup.at(key);
-    }}
-    return -1;
-}}
-
-}} }}
-"""
+    return items
 
 def generate_texture_lookup_code():
     master_ptx_file_list = []
@@ -76,12 +48,12 @@ def generate_texture_lookup_code():
             ptx_index = master_ptx_file_list.index(ptx_file)
             texture_index_lookup[(element, material, mesh_name)] = ptx_index
 
-    lookup_code = generate_texture_lookup_src(texture_index_lookup)
-    with open("../src/scene/texture_lookup.cpp", "w") as f:
+    lookup_code = generate_texture_lookup_data(texture_index_lookup)
+    with open("../src/scene/data/texture_lookup_data.cpp", "w") as f:
         f.write(lookup_code)
 
-    filenames_code = code.generate_texture_filenames(master_ptx_file_list)
-    with open("../src/scene/texture_offsets.cpp", "w") as f:
+    filenames_code = code.generate_texture_filenames_data(master_ptx_file_list)
+    with open("../src/scene/data/texture_offsets_data.cpp", "w") as f:
         f.write(filenames_code)
 
 if __name__ == "__main__":
