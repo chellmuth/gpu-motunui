@@ -292,21 +292,10 @@ std::vector<BSDFType> bsdfTypes = {{
 }};
 """
 
-def generate_texture_filenames(ptx_files):
-    texture_items = "\n".join(
-        f"{' ' * 4}\"{ptx}\", // [{i}]"
+def generate_texture_filenames_data(ptx_files):
+    texture_filenames = "\n".join(
+        f"X(\"{ptx}\") // [{i}]"
         for i, ptx in enumerate(ptx_files)
     )
 
-    code = f"""\
-#include "scene/texture_offsets.hpp"
-
-namespace moana {{ namespace Textures {{
-
-std::vector<std::string> textureFilenames = {{
-{texture_items}
-}};
-}} }}
-"""
-
-    return code
+    return texture_filenames
