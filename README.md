@@ -1,6 +1,6 @@
 # GPU-Motunui
 
-GPU-Motunui is a forward path tracer that renders Disney Animation's [Moana island scene](https://technology.disneyanimation.com/islandscene/). Using the OptiX 7 API and a custom out-of-core rendering solution, all ray tracing is done on the GPU. Read an introduction [here](https://www.render-blog.com/2020/10/03/gpu-motunui/).
+GPU-Motunui is a unidirectional path tracer that renders Disney Animation's [Moana island scene](https://technology.disneyanimation.com/islandscene/). Using the OptiX 7 API and a custom out-of-core rendering solution, all ray tracing is done on the GPU. Read an introduction [here](https://www.render-blog.com/2020/10/03/gpu-motunui/).
 
 ## Renders
 **shotCam:**
